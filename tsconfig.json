@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./build/",
     "sourceMap": true,
     "strictNullChecks": true,
-    "module": "ESNext",
-    "target": "ESNext",
+    "module": "commonjs",
+    "target": "es2017",
     "moduleResolution": "node"
   },
   "include": [
-    "./**/*"
+    "./generator/**/*"
   ]
 }
