@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as _ from 'underscore';
 import { OpenAPIObject, PathItemObject, ParameterObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
 import { lastPart, lcFirst, resolveSchemaType, DefInfo, getReferencedTypes } from './util';
-import { generateHeader } from './generate-common'
+import { generateHeader, generateImports, docComment, indent } from './generate-common'
 import { relative } from 'path';
 
 const httpClientType = `import { HttpClient } from '../http';`;
@@ -19,17 +19,7 @@ export function generateServiceDefinition(tag: string, paths: [string, PathItemO
 
   const filename = `dist/${tag.toLowerCase()}/api.ts`;
 
-  const imports = _.map(importFiles, (types, f) => {
-    const absImport = path.resolve('dist', f);
-    const absDest = path.resolve(filename);
-    let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '')
-    if (!relativePath.startsWith('.')) {
-      relativePath = './' + relativePath;
-    }
-    return `import {
-  ${[...types].sort().join(',\n  ')}
-} from '${relativePath}';`
-  }).sort().join("\n");
+  const imports = generateImports(filename, importFiles);
 
   const definition = [interfaceDefinition, httpClientType, imports, ...pathDefinitions].join('\n\n');
 
@@ -46,7 +36,8 @@ export function generateServiceDefinition(tag: string, paths: [string, PathItemO
 
 function generatePathDefinition(path: string, pathDef: PathItemObject, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
   const server = doc.servers![0].url;
-  const functionName = lcFirst(lastPart(pathDef.summary!));
+  const interfaceName = lastPart(pathDef.summary!)
+  const functionName = lcFirst(interfaceName);
 
   const method = pathDef.get ? 'GET' : 'POST';
   const methodDef = pathDef.get || pathDef.post!;
@@ -54,37 +45,45 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
 
   const queryParameterNames = params.filter((param) => param.in == 'query').map((param) => param.name);
 
-  const parameterArgs = ['http: HttpClient', ...params.map((param) => {
-    const paramType = resolveSchemaType(param.schema!, doc);
-    addImport(param.schema!, componentByDef, importFiles);
-    return `${param.name}: ${paramType}`;
-  })]
 
-  let parameterDocs = "\n *\n" + params.map((param) => {
-    const paramType = resolveSchemaType(param.schema!, doc);
-    return ` * @param ${param.name}: ${param.description}`;
-  }).join("\n");
+  const parameterArgs = ['http: HttpClient'];
+  let interfaceDefinition = '';
+  if (params.length) {
+    interfaceDefinition = generateInterfaceSchema(interfaceName + 'Params', params, doc, componentByDef, importFiles) + '\n\n';
+    parameterArgs.push(`params: ${interfaceName}Params`);
+  }
 
-  const templatizedPath = path.includes("{") ? `\`${server}${path.replace(/{/g, "${")}\`` : `'${server}${path}'`;
+  const templatizedPath = path.includes("{") ? `\`${server}${path.replace(/{/g, "${params.")}\`` : `'${server}${path}'`;
 
   let paramsObject = "";
   if (queryParameterNames.length) {
     paramsObject = `,
-  params: { ${queryParameterNames.join(', ')} }
-`
+    params: {
+${indent(queryParameterNames.map((p) => `${p}: params.${p}`).join(',\n'), 3)}
+    }`
   }
 
   const returnValue = resolveSchemaType(methodDef.responses['200'], doc);
   addImport(methodDef.responses['200'], componentByDef, importFiles);
 
-  return `/**
- * ${methodDef.description}${params.length ? parameterDocs : ''}
- */
+  return `${interfaceDefinition}${docComment(methodDef.description!)}
 export async function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
   return http({
     method: '${method}',
     url: ${templatizedPath}${paramsObject}
-  }) as Promise<${returnValue}>;
+  });
+}`;
+}
+
+function generateInterfaceSchema(interfaceName: string, params: ParameterObject[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+  const parameterArgs = params.map((param) => {
+    const paramType = resolveSchemaType(param.schema!, doc);
+    addImport(param.schema!, componentByDef, importFiles);
+    const docString = param.description ? docComment(param.description) + '\n' : '';
+    return `${docString}${param.name}${param.required ? '' : '?'}: ${paramType}`;
+  });
+return `export interface ${interfaceName} {
+${indent(parameterArgs.join('\n'), 1)}
 }`;
 }
 

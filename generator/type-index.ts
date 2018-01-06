@@ -38,19 +38,22 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
   return { componentsByFile, componentByDef };
 }
 
+// TODO: put responses in a separate file???
 function chooseFile(def: string, tags: string[], allTags: string[]) {
   const schemaName: string = _.last(def.split('/'))!;
   const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
+  const filename = def.includes('/responses/') ? '/responses.d.ts' : '/interfaces.d.ts';
   if (matchingTag) {
-    return matchingTag.toLowerCase() + '/interfaces.d.ts';
+    return matchingTag.toLowerCase() + filename;
   } else if (schemaName.startsWith('GroupsV2.')) {
-    return 'groupv2/interfaces.d.ts';
+    return 'groupv2' + filename;
   } else if (schemaName.startsWith('Destiny.')) {
-    return 'destiny2/interfaces.d.ts';
+    return 'destiny2' + filename;
   } else {
     if (tags.length === 1) {
-      return tags[0].toLowerCase() + '/interfaces.d.ts';
+      return tags[0].toLowerCase() + filename;
     } else if (!tags.includes('Destiny2')) {
+      // TODO: split out responses here too?
       return 'platform.d.ts';
     } else {
       return 'common.d.ts';

@@ -1,3 +1,5 @@
+import * as _ from 'underscore';
+import * as path from 'path';
 import { OpenAPIObject } from 'openapi3-ts';
 
 export function generateHeader(doc: OpenAPIObject): string {
@@ -13,4 +15,36 @@ export function generateHeader(doc: OpenAPIObject): string {
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */`;
+}
+
+export function generateImports(filename:string , importFiles: { [filename: string]: Set<string> }): string {
+  return _.map(importFiles, (types, f) => {
+    const absImport = path.resolve('dist', f);
+    const absDest = path.resolve(filename);
+    let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '')
+    if (!relativePath.startsWith('.')) {
+      relativePath = './' + relativePath;
+    }
+    return `import {
+  ${[...types].sort().join(',\n  ')}
+} from '${relativePath}';`
+  }).sort().join("\n");
+}
+
+export function docComment(text: string) {
+  const lines = _.flatten(text.trim().split('\n').map((l) => l.replace(/(.{1,80}(?:\W|$))/g, '$1\n').split('\n'))).map((s: string) => s.trim());
+  lines.pop();
+
+  if (lines.length === 1) {
+    return `/** ${lines} */`;
+  }
+
+  return `/**
+${lines.map((line) => ' * ' + line).join('\n')}
+ */`;
+}
+
+export function indent(text: string, indentLevel: number) {
+  const lines = text.split('\n');
+  return lines.map((line) => '  '.repeat(indentLevel) + line).join('\n');
 }
