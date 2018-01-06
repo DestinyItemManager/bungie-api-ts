@@ -4,7 +4,7 @@
   "description": "TypeScript mappings for the Bungie.net API",
   "types": "./types/index.d.ts",
   "scripts": {
-    "start": "mkdir -p dist && tsc -p tsconfig.json && node ./build/generate.js",
+    "start": "rm -rf ./dist && mkdir -p dist && cp generator/http.d.ts dist && tsc -p tsconfig.json && node ./build/generate.js",
     "install": "git submodule init && git submodule update"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/node": "^8.5.2",
     "@types/underscore": "^1.8.6",
+    "mkdirp": "^0.5.1",
     "openapi3-ts": "^0.6.2",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",

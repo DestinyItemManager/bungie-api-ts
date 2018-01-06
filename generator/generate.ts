@@ -6,6 +6,8 @@
 import * as fs from 'fs';
 import * as _ from 'underscore';
 import { OpenAPIObject, PathItemObject, ComponentsObject, ParameterObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
+import { getRef, lastPart, lcFirst, resolveSchemaType, DefInfo } from './util';
+import { generateServiceDefinition } from './generate-api';
 
 // TODO: for properties that have x-mapped-definition, typedef them?
 // TODO: readonly properties
@@ -23,14 +25,6 @@ import { OpenAPIObject, PathItemObject, ComponentsObject, ParameterObject, Schem
 
 // TODO: type manager with type, file location mapping, and maybe dependenies?
 
-// TODO: put this in a shared file
-const httpClientType = `interface HttpClientConfig {
-  method: 'GET' | 'POST',
-  path: string,
-  params?: any
-}
-type HttpClient = (config: HttpClientConfig) => Promise<any>`;
-
 const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
 
 const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
@@ -45,44 +39,41 @@ _.each(pathPairsByTag, (paths, tag) => {
   const defs = findReachableComponents(tag, paths, doc);
   addAll(allDefsEverywhere, defs);
   defsByTag[tag] = defs;
-  // TODO: put them all into one set, check uniqueness
-  // TODO: generate the list of components that share 1 or more tag
 });
-
-const interfaceNames = [...allDefsEverywhere].map((value) => {
-  return interfaceName(value);
-}).sort();
 
 const allTags = Object.keys(pathPairsByTag);
 
-const tagsByDef = [...allDefsEverywhere].map((def) => {
+const componentsByFile = {};
+const componentByDef = {};
+for (const def of allDefsEverywhere) {
   const tags: string[] = [];
   _.each(defsByTag, (defs: Set<string>, tag) => {
     if (defs.has(def)) {
       tags.push(tag);
     }
   });
-  const ret = {
-    ref: def,
-    tags: tags,
+  const info: DefInfo = {
+    def,
+    tags,
     filename: chooseFile(def, tags),
     interfaceName: interfaceName(def)
   };
-  console.log(ret);
-  return ret;
-});
 
-//console.log('allTags', allTags);
+  componentsByFile[info.filename] = componentsByFile[info.filename] || [];
+  componentsByFile[info.filename].push(info);
+  componentByDef[info.def] = info;
+  console.log(info);
+}
 
 function chooseFile(def: string, tags: string[]) {
   const schemaName: string = _.last(def.split('/'))!;
   const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
   if (matchingTag) {
-    return matchingTag.toLowerCase() + '.d.ts';
+    return matchingTag.toLowerCase() + '/interface.d.ts';
   } else if (schemaName.startsWith('GroupsV2.')) {
-    return 'groups.d.ts';
+    return 'groupv2/interface.d.ts';
   } else if (schemaName.startsWith('Destiny.')) {
-    return 'destiny2.d.ts';
+    return 'destiny2/interface.d.ts';
   } else {
     if (tags.length === 1) {
       return tags[0].toLowerCase() + '.d.ts';
@@ -94,12 +85,12 @@ function chooseFile(def: string, tags: string[]) {
   }
 }
 
-//console.log('common', tagsByDef);
-
-//console.log('all', interfaceNames, interfaceNames.length === allDefsEverywhere.size);
+_.each(componentsByFile, (components: DefInfo[], file: string) => {
+  generateInterfaceDefinitions(file, components, doc, componentByDef);
+});
 
 _.each(pathPairsByTag, (paths, tag) => {
-  generateServiceDefinition(tag, paths, doc);
+  generateServiceDefinition(tag, paths, doc, componentByDef);
 });
 
 function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject) {
@@ -185,114 +176,8 @@ function interfaceName(componentPath: string) {
   }
 }
 
-function generateServiceDefinition(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject): void {
-  let interfaceDefinition = generateHeader(doc);
+function generateInterfaceDefinitions(file: string, components: DefInfo[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }) {
 
-  const pathDefinitions = paths.map(([path, pathDef]) => generatePathDefinition(path, pathDef, doc));
-
-  const definition = [interfaceDefinition, httpClientType, ...pathDefinitions].join('\n\n');
-
-  fs.writeFile(`dist/${tag.toLowerCase()}.ts`, definition, null, (error) => {
-    console.log(error ? error : `Done with ${tag}!`);
-  });
-}
-
-function generatePathDefinition(path: string, pathDef: PathItemObject, doc: OpenAPIObject) {
-  const functionName = lcFirst(lastPart(pathDef.summary!));
-
-  const method = pathDef.get ? 'GET' : 'POST';
-  const methodDef = pathDef.get || pathDef.post!;
-  const params = (methodDef.parameters || []) as ParameterObject[];
-
-  const queryParameterNames = params.filter((param) => param.in == 'query').map((param) => param.name);
-
-  const parameterArgs = ['http: HttpClient', ...params.map((param) => {
-    const paramType = resolveSchemaType(param.schema!, doc);
-    return `${param.name}: ${paramType}`;
-  })]
-
-  let parameterDocs = "\n *\n" + params.map((param) => {
-    const paramType = resolveSchemaType(param.schema!, doc);
-    return ` * @param ${param.name}: ${param.description}`;
-  }).join("\n");
-
-  const templatizedPath = path.includes("{") ? `\`${path.replace(/{/g, "${")}\`` : `'${path}'`;
-
-  let paramsObject = "";
-  if (queryParameterNames.length) {
-    paramsObject = `,
-  params: { ${queryParameterNames.join(', ')} }
-`
-  }
-
-  const returnValue = resolveSchemaType(methodDef.responses['200'], doc);
-
-  return `/**
- * ${methodDef.description}${params.length ? parameterDocs : ''}
- */
-export async function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
-  return http({
-    method: '${method}',
-    path: ${templatizedPath}${paramsObject}
-  }) as Promise<${returnValue}>;
-}`;
-}
-
-function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: OpenAPIObject) {
-  if ((schema as ReferenceObject).$ref) {
-    return lastPart(lastPart((schema as ReferenceObject).$ref));
-  } else {
-    return typeMapping(schema as SchemaObject, doc);
-  }
-}
-
-function typeMapping(schema: SchemaObject, doc: OpenAPIObject) {
-  switch(schema.type) {
-    case "integer":
-      return "number";
-    case "array":
-      return `${resolveSchemaType(schema.items!, doc)}[]`;
-  }
-
-  return schema.type;
-}
-
-function lcFirst(name: string): string {
-  return name[0].toLowerCase() + name.substring(1);
-}
-
-function lastPart(name: string): string {
-  return _.last(name.split(/[\.\/]/))!;
-}
-
-function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
-  const path = ref.replace('#/', '').split('/');
-  let result = doc;
-  let pathSegment = path.shift()
-  while (pathSegment) {
-    result = result[pathSegment];
-    pathSegment = path.shift()
-  }
-  if (result.content) {
-    return result.content['application/json'].schema;
-  } else {
-    return result;
-  }
-}
-
-function generateHeader(doc: OpenAPIObject): string {
-  const { info } = doc;
-  return `/**
- * ${info.title}
- * ${info.description}
- *
- * OpenAPI spec version: ${info.version}
- * Contact: ${info.contact!.email}
- *
- * NOTE: This class is auto generated by the bungie-api-ts code generator program.
- * https://github.com/DestinyItemManager/bugie-api-ts
- * Do not edit these files manually.
- */`;
 }
 
 // group paths by service
