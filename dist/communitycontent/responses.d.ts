@@ -10,10 +10,28 @@
  * Do not edit these files manually.
  */
 
-
+import {
+  CommunityLiveStatus,
+  SearchResultOfCommunityLiveStatus
+} from './interfaces';
+import {
+  PlatformErrorCodes
+} from '../common';
 
 export interface SearchResultOfCommunityLiveStatusServerResponse {
+  Response?: SearchResultOfCommunityLiveStatus
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface CommunityLiveStatusServerResponse {
+  Response?: CommunityLiveStatus
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }

@@ -10,22 +10,67 @@
  * Do not edit these files manually.
  */
 
-
+import {
+  GeneralUser,
+  PublicPartnershipDetail,
+  UserAlias,
+  UserMembershipData,
+  UserTheme
+} from './interfaces';
+import {
+  PlatformErrorCodes
+} from '../common';
 
 export interface GeneralUserServerResponse {
+  Response?: GeneralUser
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface ListOfUserAliasServerResponse {
+  Response?: UserAlias[]
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface ListOfGeneralUserServerResponse {
+  Response?: GeneralUser[]
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface ListOfUserThemeServerResponse {
+  Response?: UserTheme[]
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface UserMembershipDataServerResponse {
+  Response?: UserMembershipData
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface CEListOfPublicPartnershipDetailServerResponse {
+  Response?: PublicPartnershipDetail[]
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }

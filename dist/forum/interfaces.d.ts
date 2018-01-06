@@ -10,7 +10,17 @@
  * Do not edit these files manually.
  */
 
-
+import {
+  GeneralUser
+} from '../user/interfaces';
+import {
+  GroupResponse
+} from '../groupv2/interfaces';
+import {
+  IgnoreResponse,
+  PagedQuery,
+  TagResponse
+} from '../platform';
 
 export const enum ForumTopicsCategoryFiltersEnum {
   None = 0,
@@ -49,9 +59,48 @@ export const enum ForumPostSortEnum {
 }
 
 export interface PostSearchResponse {
+  relatedPosts?: PostResponse[]
+  authors?: GeneralUser[]
+  groups?: GroupResponse[]
+  searchedTags?: TagResponse[]
+  polls?: PollResponse[]
+  recruitmentDetails?: ForumRecruitmentDetail[]
+  availablePages?: number
+  results?: PostResponse[]
+  totalResults?: number
+  hasMore?: boolean
+  query?: PagedQuery
+  replacementContinuationToken?: string
+  /**
+   * If useTotalResults is true, then totalResults represents an accurate count.
+   * 
+   * If False, it does not, and may be estimated/only the size of the current page.
+   * 
+   * Either way, you should probably always only trust hasMore.
+   * 
+   * This is a long-held historical throwback to when we used to do paging with known
+   * total results. Those queries toasted our database, and we were left to hastily
+   * alter our endpoints and create backward- compatible shims, of which
+   * useTotalResults is one.
+   */
+  useTotalResults?: boolean
 }
 
 export interface PostResponse {
+  lastReplyTimestamp?: string
+  IsPinned?: boolean
+  urlMediaType?: ForumMediaType
+  thumbnail?: string
+  popularity?: ForumPostPopularity
+  isActive?: boolean
+  isAnnouncement?: boolean
+  userRating?: number
+  userHasRated?: boolean
+  userHasMutedPost?: boolean
+  latestReplyPostId?: number
+  latestReplyAuthorId?: number
+  ignoreStatus?: IgnoreResponse
+  locale?: string
 }
 
 export const enum ForumMediaType {
@@ -71,12 +120,30 @@ export const enum ForumPostPopularity {
 }
 
 export interface PollResponse {
+  topicId?: number
+  results?: PollResult[]
+  totalVotes?: number
 }
 
 export interface PollResult {
+  answerText?: string
+  answerSlot?: number
+  lastVoteDate?: string
+  votes?: number
+  requestingUserVoted?: boolean
 }
 
 export interface ForumRecruitmentDetail {
+  topicId?: number
+  microphoneRequired?: boolean
+  intensity?: ForumRecruitmentIntensityLabel
+  tone?: ForumRecruitmentToneLabel
+  approved?: boolean
+  conversationId?: number
+  playerSlotsTotal?: number
+  playerSlotsRemaining?: number
+  Fireteam?: GeneralUser[]
+  kickedPlayerIds?: number[]
 }
 
 export const enum ForumRecruitmentIntensityLabel {
@@ -92,6 +159,8 @@ export const enum ForumRecruitmentToneLabel {
 }
 
 export interface SaveMessageResult {
+  conversationId?: number
+  messageId?: number
 }
 
 export const enum CommunityContentSortMode {

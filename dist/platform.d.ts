@@ -10,9 +10,13 @@
  * Do not edit these files manually.
  */
 
-
+import {
+  PlatformErrorCodes
+} from './common';
 
 export interface IgnoreResponse {
+  isIgnored?: boolean
+  ignoreFlags?: IgnoreStatus
 }
 
 export const enum IgnoreStatus {
@@ -31,10 +35,21 @@ export const enum PartnershipType {
 }
 
 export interface int64ServerResponse {
+  Response?: number
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface TagResponse {
+  tagText?: string
+  ignoreStatus?: IgnoreResponse
 }
 
 export interface PagedQuery {
+  itemsPerPage?: number
+  currentPage?: number
+  requestContinuationToken?: string
 }

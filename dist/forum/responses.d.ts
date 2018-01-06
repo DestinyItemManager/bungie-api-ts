@@ -10,19 +10,59 @@
  * Do not edit these files manually.
  */
 
-
+import {
+  ForumRecruitmentDetail,
+  PostSearchResponse,
+  SaveMessageResult
+} from './interfaces';
+import {
+  PlatformErrorCodes
+} from '../common';
+import {
+  TagResponse
+} from '../platform';
 
 export interface PostSearchResponseServerResponse {
+  Response?: PostSearchResponse
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface ListOfTagResponseServerResponse {
+  Response?: TagResponse[]
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface ForumRecruitmentDetailServerResponse {
+  Response?: ForumRecruitmentDetail
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface SaveMessageResultServerResponse {
+  Response?: SaveMessageResult
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
 
 export interface CEListOfForumRecruitmentDetailServerResponse {
+  Response?: ForumRecruitmentDetail[]
+  ErrorCode?: PlatformErrorCodes
+  ThrottleSeconds?: number
+  ErrorStatus?: string
+  Message?: string
+  MessageData?: { [key: string]: string }
 }
