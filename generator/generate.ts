@@ -13,6 +13,16 @@ import { OpenAPIObject, PathItemObject, ComponentsObject, ParameterObject, Schem
 // TODO: common chunk
 // TODO: break into more files
 
+// TODO: how to split them up? For example, Destiny.Definitions should probably be in its own file, etc.
+// maybe group requests and responses, etc?
+// mobile manifest entities (x-whatever) should probably be on their own?
+// TODO: need a type registry then
+// TODO: reexport types from each service?
+
+// TODO: OK split responses from schemas. Naming?
+
+// TODO: type manager with type, file location mapping, and maybe dependenies?
+
 // TODO: put this in a shared file
 const httpClientType = `interface HttpClientConfig {
   method: 'GET' | 'POST',
@@ -29,17 +39,70 @@ const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {
   return (desc.get || desc.post)!.tags![0];
 });
 
+const allDefsEverywhere = new Set();
+const defsByTag = {};
 _.each(pathPairsByTag, (paths, tag) => {
-  findReachableComponents(tag, paths, doc);
+  const defs = findReachableComponents(tag, paths, doc);
+  addAll(allDefsEverywhere, defs);
+  defsByTag[tag] = defs;
   // TODO: put them all into one set, check uniqueness
   // TODO: generate the list of components that share 1 or more tag
 });
+
+const interfaceNames = [...allDefsEverywhere].map((value) => {
+  return interfaceName(value);
+}).sort();
+
+const allTags = Object.keys(pathPairsByTag);
+
+const tagsByDef = [...allDefsEverywhere].map((def) => {
+  const tags: string[] = [];
+  _.each(defsByTag, (defs: Set<string>, tag) => {
+    if (defs.has(def)) {
+      tags.push(tag);
+    }
+  });
+  const ret = {
+    ref: def,
+    tags: tags,
+    filename: chooseFile(def, tags),
+    interfaceName: interfaceName(def)
+  };
+  console.log(ret);
+  return ret;
+});
+
+//console.log('allTags', allTags);
+
+function chooseFile(def: string, tags: string[]) {
+  const schemaName: string = _.last(def.split('/'))!;
+  const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
+  if (matchingTag) {
+    return matchingTag.toLowerCase() + '.d.ts';
+  } else if (schemaName.startsWith('GroupsV2.')) {
+    return 'groups.d.ts';
+  } else if (schemaName.startsWith('Destiny.')) {
+    return 'destiny2.d.ts';
+  } else {
+    if (tags.length === 1) {
+      return tags[0].toLowerCase() + '.d.ts';
+    } else if (!tags.includes('Destiny2')) {
+      return 'platform.d.ts';
+    } else {
+      return 'common.d.ts';
+    }
+  }
+}
+
+//console.log('common', tagsByDef);
+
+//console.log('all', interfaceNames, interfaceNames.length === allDefsEverywhere.size);
 
 _.each(pathPairsByTag, (paths, tag) => {
   generateServiceDefinition(tag, paths, doc);
 });
 
-function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject): void {
+function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject) {
   const pathDefinitions = paths.reduce((memo: Set<string>, [path, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef, doc)), new Set());
 
   // TODO: OK now find all components reachable from *that*
@@ -48,7 +111,8 @@ function findReachableComponents(tag: string, paths: [string, PathItemObject][],
 
   pathDefinitions.forEach((definition) => addReachableComponentsFromComponent(allDefinitions, definition, doc))
 
-  console.log(tag, allDefinitions);
+  //console.log(tag, allDefinitions);
+  return allDefinitions;
 }
 
 function addAll<T>(first: Set<T>, second: Set<T>): Set<T> {
@@ -94,6 +158,10 @@ function addDefinitions(allDefinitions: Set<string>, schema: SchemaObject | Refe
 }
 
 function addDefinitionsFromComponent(allDefinitions: Set<string>, definition: string, doc: OpenAPIObject) {
+  // TODO: ignore components like boolean and int32
+  //if (definition.endsWith('/boolean') || definition.endsWith('/int32')) {
+  //  return;
+  //}
   if (definition && !allDefinitions.has(definition)) {
     allDefinitions.add(definition);
     addReachableComponentsFromComponent(allDefinitions, definition, doc);
@@ -105,6 +173,15 @@ function getReferencedTypes(schema: SchemaObject | ReferenceObject) {
     return getReferencedTypes((schema as SchemaObject).items!);
   } else if ((schema as ReferenceObject).$ref) {
     return (schema as ReferenceObject).$ref
+  }
+}
+
+function interfaceName(componentPath: string) {
+  const name = lastPart(componentPath);
+  if (componentPath.includes('/responses/')) {
+    return name + 'ServerResponse';
+  } else {
+    return name;
   }
 }
 
