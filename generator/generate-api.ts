@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as _ from 'underscore';
 import { OpenAPIObject, PathItemObject, ParameterObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
 import { lastPart, lcFirst, resolveSchemaType, DefInfo, getReferencedTypes } from './util';
-import { generateHeader, generateImports, docComment, indent } from './generate-common'
+import { generateHeader, generateImports, docComment, indent, addImport } from './generate-common'
 import { relative } from 'path';
 
 const httpClientType = `import { HttpClient } from '../http';`;
@@ -43,8 +43,9 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
   const methodDef = pathDef.get || pathDef.post!;
   const params = (methodDef.parameters || []) as ParameterObject[];
 
-  const queryParameterNames = params.filter((param) => param.in == 'query').map((param) => param.name);
+  // TODO: methodDef.requestBody!
 
+  const queryParameterNames = params.filter((param) => param.in == 'query').map((param) => param.name);
 
   const parameterArgs = ['http: HttpClient'];
   let interfaceDefinition = '';
@@ -85,13 +86,4 @@ function generateInterfaceSchema(interfaceName: string, params: ParameterObject[
 return `export interface ${interfaceName} {
 ${indent(parameterArgs.join('\n'), 1)}
 }`;
-}
-
-function addImport(schema: SchemaObject | ReferenceObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
-  const typeRef = getReferencedTypes(schema);
-  if (typeRef && componentByDef[typeRef]) {
-    const filename = componentByDef[typeRef].filename;
-    importFiles[filename] = importFiles[filename] || new Set();
-    importFiles[filename].add(componentByDef[typeRef].interfaceName);
-  }
 }

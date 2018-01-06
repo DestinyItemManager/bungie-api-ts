@@ -1,6 +1,7 @@
+import { DefInfo, getReferencedTypes } from './util';
 import * as _ from 'underscore';
 import * as path from 'path';
-import { OpenAPIObject } from 'openapi3-ts';
+import { OpenAPIObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
 
 export function generateHeader(doc: OpenAPIObject): string {
   const { info } = doc;
@@ -17,10 +18,23 @@ export function generateHeader(doc: OpenAPIObject): string {
  */`;
 }
 
+export function addImport(schema: SchemaObject | ReferenceObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+  const typeRef = getReferencedTypes(schema);
+  if (typeRef && componentByDef[typeRef]) {
+    const filename = componentByDef[typeRef].filename;
+    importFiles[filename] = importFiles[filename] || new Set();
+    importFiles[filename].add(componentByDef[typeRef].interfaceName);
+  }
+}
+
+// TODO: skip imports from this file!
 export function generateImports(filename:string , importFiles: { [filename: string]: Set<string> }): string {
-  return _.map(importFiles, (types, f) => {
+  return _.compact(_.map(importFiles, (types, f) => {
     const absImport = path.resolve('dist', f);
     const absDest = path.resolve(filename);
+    if (absImport === absDest) {
+      return;
+    }
     let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '')
     if (!relativePath.startsWith('.')) {
       relativePath = './' + relativePath;
@@ -28,7 +42,7 @@ export function generateImports(filename:string , importFiles: { [filename: stri
     return `import {
   ${[...types].sort().join(',\n  ')}
 } from '${relativePath}';`
-  }).sort().join("\n");
+  })).sort().join("\n");
 }
 
 export function docComment(text: string) {

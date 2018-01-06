@@ -21,7 +21,15 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
     case "integer":
       return "number";
     case "array":
-      return `${resolveSchemaType(schema.items!, doc)}[]`;
+      return resolveSchemaType(schema.items!, doc) + '[]';
+    case "object":
+      if (schema.allOf) {
+        return resolveSchemaType(schema.allOf[0], doc);
+      } else if (schema.additionalProperties && schema['x-dictionary-key']) {
+        const key = typeMapping(schema['x-dictionary-key'], doc);
+        const val = typeMapping(schema.additionalProperties, doc);
+        return `{ [key: ${key}]: ${val} }`;
+      }
   }
 
   return schema.type!;

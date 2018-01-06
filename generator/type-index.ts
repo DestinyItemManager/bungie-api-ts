@@ -32,7 +32,7 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
     componentsByFile[info.filename] = componentsByFile[info.filename] || [];
     componentsByFile[info.filename].push(info);
     componentByDef[info.def] = info;
-    console.log(info);
+    //console.log(info);
   }
 
   return { componentsByFile, componentByDef };
