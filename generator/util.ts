@@ -8,15 +8,15 @@ export interface DefInfo {
   interfaceName: string;
 }
 
-export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: OpenAPIObject) {
+export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: OpenAPIObject): string {
   if ((schema as ReferenceObject).$ref) {
-    return lastPart(lastPart((schema as ReferenceObject).$ref));
+    return interfaceName((schema as ReferenceObject).$ref);
   } else {
     return typeMapping(schema as SchemaObject, doc);
   }
 }
 
-export function typeMapping(schema: SchemaObject, doc: OpenAPIObject) {
+export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
   switch(schema.type) {
     case "integer":
       return "number";
@@ -24,7 +24,15 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject) {
       return `${resolveSchemaType(schema.items!, doc)}[]`;
   }
 
-  return schema.type;
+  return schema.type!;
+}
+
+export function getReferencedTypes(schema: SchemaObject | ReferenceObject): string | undefined {
+  if ((schema as SchemaObject).items) {
+    return getReferencedTypes((schema as SchemaObject).items!);
+  } else if ((schema as ReferenceObject).$ref) {
+    return (schema as ReferenceObject).$ref
+  }
 }
 
 export function lcFirst(name: string): string {
@@ -47,5 +55,14 @@ export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
     return result.content['application/json'].schema;
   } else {
     return result;
+  }
+}
+
+export function interfaceName(componentPath: string) {
+  const name = lastPart(componentPath);
+  if (componentPath.includes('/responses/')) {
+    return name + 'ServerResponse';
+  } else {
+    return name;
   }
 }
