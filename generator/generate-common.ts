@@ -28,20 +28,20 @@ export function addImport(schema: SchemaObject | ReferenceObject, componentByDef
 }
 
 // TODO: skip imports from this file!
-export function generateImports(filename:string , importFiles: { [filename: string]: Set<string> }): string {
+export function generateImports(filename: string , importFiles: { [filename: string]: Set<string> }): string {
   return _.compact(_.map(importFiles, (types, f) => {
     const absImport = path.resolve('dist', f);
     const absDest = path.resolve(filename);
     if (absImport === absDest) {
       return;
     }
-    let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '')
+    let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '');
     if (!relativePath.startsWith('.')) {
       relativePath = './' + relativePath;
     }
     return `import {
   ${[...types].sort().join(',\n  ')}
-} from '${relativePath}';`
+} from '${relativePath}';`;
   })).sort().join("\n");
 }
 

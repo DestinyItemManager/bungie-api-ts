@@ -5,8 +5,8 @@
 
 import * as fs from 'fs';
 import * as _ from 'underscore';
-import { OpenAPIObject, PathItemObject, ComponentsObject, ParameterObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
-import { getRef, lastPart, lcFirst, resolveSchemaType, DefInfo } from './util';
+import { OpenAPIObject, PathItemObject } from 'openapi3-ts';
+import { DefInfo } from './util';
 import { generateServiceDefinition } from './generate-api';
 import { generateInterfaceDefinitions } from './generate-interfaces';
 import { computeTypeMaps } from './type-index';

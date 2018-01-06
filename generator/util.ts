@@ -1,4 +1,4 @@
-import { SchemaObject, ReferenceObject, OpenAPIObject } from 'openapi3-ts';
+import { SchemaObject, ReferenceObject, OpenAPIObject, RequestBodyObject } from 'openapi3-ts';
 import * as _ from 'underscore';
 
 export interface DefInfo {
@@ -17,7 +17,7 @@ export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: O
 }
 
 export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
-  switch(schema.type) {
+  switch (schema.type) {
     case "integer":
       return "number";
     case "array":
@@ -36,10 +36,10 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
 }
 
 export function getReferencedTypes(schema: SchemaObject | ReferenceObject): string | undefined {
-  if ((schema as SchemaObject).items) {
-    return getReferencedTypes((schema as SchemaObject).items!);
-  } else if ((schema as ReferenceObject).$ref) {
-    return (schema as ReferenceObject).$ref
+  if (isReferenceObject(schema)) {
+    return schema.$ref;
+  } else if (schema.items) {
+    return getReferencedTypes(schema.items!);
   }
 }
 
@@ -54,10 +54,10 @@ export function lastPart(name: string): string {
 export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
   const path = ref.replace('#/', '').split('/');
   let result = doc;
-  let pathSegment = path.shift()
+  let pathSegment = path.shift();
   while (pathSegment) {
     result = result[pathSegment];
-    pathSegment = path.shift()
+    pathSegment = path.shift();
   }
   if (result.content) {
     return result.content['application/json'].schema;
@@ -73,4 +73,12 @@ export function interfaceName(componentPath: string) {
   } else {
     return name;
   }
+}
+
+export function isRequestBodyObject(requestBody: RequestBodyObject | ReferenceObject): requestBody is RequestBodyObject {
+  return (requestBody as RequestBodyObject).content !== undefined;
+}
+
+export function isReferenceObject(schema: SchemaObject | ReferenceObject): schema is ReferenceObject {
+  return (schema as ReferenceObject).$ref !== undefined;
 }

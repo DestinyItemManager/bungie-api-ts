@@ -7,9 +7,6 @@ import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
 import { generateHeader, generateImports, docComment, indent, addImport } from './generate-common';
 
 export function generateInterfaceDefinitions(file: string, components: DefInfo[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }) {
-  let interfaceDefinition = generateHeader(doc);
-
-  // TODO: make this a map of file -> types, so we can do specific imports
   const importFiles: { [filename: string]: Set<string> } = {};
 
   const componentDefinitions = components.map((component) => generateComponentDefinition(component, doc, componentByDef, importFiles));
@@ -18,9 +15,9 @@ export function generateInterfaceDefinitions(file: string, components: DefInfo[]
 
   const imports = generateImports(filename, importFiles);
 
-  const definition = [interfaceDefinition, imports, ...componentDefinitions].join('\n\n');
+  const definition = [generateHeader(doc), imports, ...componentDefinitions].join('\n\n') + '\n';
 
-  mkdirp(path.dirname(filename), function (err) {
+  mkdirp(path.dirname(filename), (err) => {
     if (err) {
       console.error(err);
     } else {
@@ -65,10 +62,10 @@ function generateInterfaceSchema(interfaceName: string, component: SchemaObject,
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
     // TODO: we're always marking things as possibly being undefined. It'd be nice to narrow that!
     const nullable = schema.nullable || schema.type === 'object' || schema.type === 'array';
-    return `${docString}${param}${nullable ? '?' : '?'}: ${paramType}`;
+    return `${docString}${param}${nullable ? '?' : '?'}: ${paramType};`;
   });
   const docString = component.description ? docComment(component.description) + '\n' : '';
-return `${docString}export interface ${interfaceName} {
+  return `${docString}export interface ${interfaceName} {
 ${indent(parameterArgs.join('\n'), 1)}
 }`;
 }

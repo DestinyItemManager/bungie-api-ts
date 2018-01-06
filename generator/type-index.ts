@@ -1,6 +1,6 @@
 import * as _ from 'underscore';
 import { OpenAPIObject, PathItemObject, ParameterObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
-import { getRef, lastPart, getReferencedTypes, DefInfo, interfaceName } from './util';
+import { getRef, lastPart, getReferencedTypes, DefInfo, interfaceName, isRequestBodyObject } from './util';
 
 export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathItemObject][] }, doc: OpenAPIObject) {
   const allDefsEverywhere = new Set();
@@ -32,13 +32,13 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
     componentsByFile[info.filename] = componentsByFile[info.filename] || [];
     componentsByFile[info.filename].push(info);
     componentByDef[info.def] = info;
-    //console.log(info);
   }
 
   return { componentsByFile, componentByDef };
 }
 
-// TODO: put responses in a separate file???
+// TODO: put enums in a separate file???
+// TODO: put things ending in Request in a separate file?
 function chooseFile(def: string, tags: string[], allTags: string[]) {
   const schemaName: string = _.last(def.split('/'))!;
   const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
@@ -61,7 +61,6 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
   }
 }
 
-
 function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject) {
   const pathDefinitions = paths.reduce((memo: Set<string>, [path, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef, doc)), new Set());
 
@@ -69,9 +68,8 @@ function findReachableComponents(tag: string, paths: [string, PathItemObject][],
 
   const allDefinitions = new Set(pathDefinitions);
 
-  pathDefinitions.forEach((definition) => addReachableComponentsFromComponent(allDefinitions, definition, doc))
+  pathDefinitions.forEach((definition) => addReachableComponentsFromComponent(allDefinitions, definition, doc));
 
-  //console.log(tag, allDefinitions);
   return allDefinitions;
 }
 
@@ -87,6 +85,15 @@ function findReachableComponentsFromPath(pathDef: PathItemObject, doc: OpenAPIOb
   const params = (methodDef.parameters || []) as ParameterObject[];
   const paramTypes = new Set(params.map((param) => getReferencedTypes(param.schema!)).filter((p) => p)) as Set<string>;
 
+  const requestBody = methodDef.requestBody;
+  if (requestBody && isRequestBodyObject(requestBody)) {
+    const schema = requestBody.content['application/json'].schema!;
+    const paramType = getReferencedTypes(schema);
+    if (paramType) {
+      paramTypes.add(paramType);
+    }
+  }
+
   const returnType = getReferencedTypes(methodDef.responses['200']);
   if (returnType) {
     paramTypes.add(returnType);
@@ -98,11 +105,10 @@ function findReachableComponentsFromPath(pathDef: PathItemObject, doc: OpenAPIOb
 function addReachableComponentsFromComponent(allDefinitions: Set<string>, definition: string, doc: OpenAPIObject) {
   const component = getRef(doc, definition);
 
-  //console.log("Got ref", definition);
-
   if (component.type === 'array') {
     addDefinitions(allDefinitions, component.items!, doc);
   } else if (component.type === 'object') {
+    // TODO: lots more to do here
     Object.values(component.properties).forEach((schema: SchemaObject | ReferenceObject) => {
       addDefinitions(allDefinitions, schema, doc);
     });
@@ -119,12 +125,11 @@ function addDefinitions(allDefinitions: Set<string>, schema: SchemaObject | Refe
 
 function addDefinitionsFromComponent(allDefinitions: Set<string>, definition: string | undefined, doc: OpenAPIObject) {
   // TODO: ignore components like boolean and int32
-  //if (definition.endsWith('/boolean') || definition.endsWith('/int32')) {
+  // if (definition.endsWith('/boolean') || definition.endsWith('/int32')) {
   //  return;
-  //}
+  // }
   if (definition && !allDefinitions.has(definition)) {
     allDefinitions.add(definition);
     addReachableComponentsFromComponent(allDefinitions, definition, doc);
   }
 }
-

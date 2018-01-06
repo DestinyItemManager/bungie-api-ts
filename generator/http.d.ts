@@ -1,10 +1,10 @@
 export interface HttpClientConfig {
   method: 'GET' | 'POST',
   url: string,
-  /**
-   * Query string params
-   */
+  /** Query string params */
   params?: any
+  /** Request body */
+  body?: any
 }
 
 /**

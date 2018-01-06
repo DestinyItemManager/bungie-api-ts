@@ -1,15 +1,8 @@
 {
   "defaultSeverity": "error",
-  "linterOptions": {
-    "exclude": [
-      "src/app/bungie-api/enums.ts",
-      "src/app/bungie-api/interfaces.d.ts"
-    ]
-  },
   "extends": [
     "tslint:recommended",
-    "tslint-eslint-rules",
-    "tslint-react"
+    "tslint-eslint-rules"
   ],
   "jsRules": {},
   "rules": {
@@ -85,7 +78,7 @@
     "no-empty": [true, "allow-empty-catch"],
     "no-floating-promises": [true, "Thenable", "IPromise"],
     "no-for-in-array": true,
-    "no-implicit-dependencies": true,
+    "no-implicit-dependencies": [true, "dev"],
     "no-invalid-template-strings": true,
     "no-misused-new": true,
     "no-object-literal-type-assertion": true,
