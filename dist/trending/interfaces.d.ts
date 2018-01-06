@@ -37,21 +37,21 @@ export const enum TrendingEntryType {
 }
 
 export interface TrendingCategories {
-  categories?: TrendingCategory[]
+  categories?: TrendingCategory[];
 }
 
 export interface TrendingCategory {
-  categoryName?: string
-  entries?: SearchResultOfTrendingEntry
-  categoryId?: string
+  categoryName?: string;
+  entries?: SearchResultOfTrendingEntry;
+  categoryId?: string;
 }
 
 export interface SearchResultOfTrendingEntry {
-  results?: TrendingEntry[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: TrendingEntry[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -64,7 +64,7 @@ export interface SearchResultOfTrendingEntry {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 /**
@@ -73,87 +73,87 @@ export interface SearchResultOfTrendingEntry {
  */
 export interface TrendingEntry {
   /** The weighted score of this trending item. */
-  weight?: number
-  isFeatured?: boolean
+  weight?: number;
+  isFeatured?: boolean;
   /**
    * We don't know whether the identifier will be a string, a uint, or a long... so
    * we're going to cast it all to a string. But either way, we need any trending
    * item created to have a single unique identifier for its type.
    */
-  identifier?: string
+  identifier?: string;
   /**
    * An enum - unfortunately - dictating all of the possible kinds of trending items
    * that you might get in your result set, in case you want to do custom rendering
    * or call to get the details of the item.
    */
-  entityType?: TrendingEntryType
+  entityType?: TrendingEntryType;
   /**
    * The localized "display name/article title/'primary localized identifier'" of the
    * entity.
    */
-  displayName?: string
+  displayName?: string;
   /**
    * If the entity has a localized tagline/subtitle/motto/whatever, that is found
    * here.
    */
-  tagline?: string
-  image?: string
-  startDate?: string
-  endDate?: string
-  link?: string
+  tagline?: string;
+  image?: string;
+  startDate?: string;
+  endDate?: string;
+  link?: string;
   /**
    * If this is populated, the entry has a related WebM video to show. I am 100%
    * certain I am going to regret putting this directly on TrendingEntry, but it will
    * work so yolo
    */
-  webmVideo?: string
+  webmVideo?: string;
   /**
    * If this is populated, the entry has a related MP4 video to show. I am 100%
    * certain I am going to regret putting this directly on TrendingEntry, but it will
    * work so yolo
    */
-  mp4Video?: string
+  mp4Video?: string;
   /**
    * If isFeatured, this image will be populated with whatever the featured image is.
    * Note that this will likely be a very large image, so don't use it all the time.
    */
-  featureImage?: string
+  featureImage?: string;
   /**
    * If the item is of entityType TrendingEntryType.Container, it may have items -
    * also Trending Entries - contained within it. This is the ordered list of those
    * to display under the Container's header.
    */
-  items?: TrendingEntry[]
+  items?: TrendingEntry[];
 }
 
 export interface TrendingDetail {
-  identifier?: string
-  entityType?: TrendingEntryType
-  news?: TrendingEntryNews
-  support?: TrendingEntrySupportArticle
-  destinyItem?: TrendingEntryDestinyItem
-  destinyActivity?: TrendingEntryDestinyActivity
-  destinyRitual?: TrendingEntryDestinyRitual
-  creation?: TrendingEntryCommunityCreation
-  stream?: TrendingEntryCommunityStream
+  identifier?: string;
+  entityType?: TrendingEntryType;
+  news?: TrendingEntryNews;
+  support?: TrendingEntrySupportArticle;
+  destinyItem?: TrendingEntryDestinyItem;
+  destinyActivity?: TrendingEntryDestinyActivity;
+  destinyRitual?: TrendingEntryDestinyRitual;
+  creation?: TrendingEntryCommunityCreation;
+  stream?: TrendingEntryCommunityStream;
 }
 
 export interface TrendingEntryNews {
-  article?: ContentItemPublicContract
+  article?: ContentItemPublicContract;
 }
 
 export interface ContentItemPublicContract {
-  contentId?: number
-  cType?: string
-  cmsPath?: string
-  creationDate?: string
-  modifyDate?: string
-  allowComments?: boolean
-  hasAgeGate?: boolean
-  minimumAge?: number
-  ratingImagePath?: string
-  author?: GeneralUser
-  autoEnglishPropertyFallback?: boolean
+  contentId?: number;
+  cType?: string;
+  cmsPath?: string;
+  creationDate?: string;
+  modifyDate?: string;
+  allowComments?: boolean;
+  hasAgeGate?: boolean;
+  minimumAge?: number;
+  ratingImagePath?: string;
+  author?: GeneralUser;
+  autoEnglishPropertyFallback?: boolean;
   /**
    * Firehose content is really a collection of metadata and "properties", which are
    * the potentially-but-not-strictly localizable data that comprises the meat of
@@ -165,68 +165,68 @@ export interface ContentItemPublicContract {
    * Content Type of the item (cType) will describe the properties, and thus how they
    * ought to be deserialized.
    */
-  properties?: { [key: string]: object }
-  representations?: ContentRepresentation[]
-  tags?: string[]
-  commentSummary?: CommentSummary
+  properties?: { [key: string]: object };
+  representations?: ContentRepresentation[];
+  tags?: string[];
+  commentSummary?: CommentSummary;
 }
 
 export interface ContentRepresentation {
-  name?: string
-  path?: string
-  validationString?: string
+  name?: string;
+  path?: string;
+  validationString?: string;
 }
 
 export interface CommentSummary {
-  topicId?: number
-  commentCount?: number
+  topicId?: number;
+  commentCount?: number;
 }
 
 export interface TrendingEntrySupportArticle {
-  article?: ContentItemPublicContract
+  article?: ContentItemPublicContract;
 }
 
 export interface TrendingEntryDestinyItem {
-  itemHash?: number
+  itemHash?: number;
 }
 
 export interface TrendingEntryDestinyActivity {
-  activityHash?: number
-  status?: DestinyPublicActivityStatus
+  activityHash?: number;
+  status?: DestinyPublicActivityStatus;
 }
 
 export interface TrendingEntryDestinyRitual {
-  image?: string
-  icon?: string
-  title?: string
-  subtitle?: string
-  dateStart?: string
-  dateEnd?: string
+  image?: string;
+  icon?: string;
+  title?: string;
+  subtitle?: string;
+  dateStart?: string;
+  dateEnd?: string;
   /**
    * A destiny event does not necessarily have a related Milestone, but if it does
    * the details will be returned here.
    */
-  milestoneDetails?: DestinyPublicMilestone
+  milestoneDetails?: DestinyPublicMilestone;
   /**
    * A destiny event will not necessarily have milestone "custom content", but if it
    * does the details will be here.
    */
-  eventContent?: DestinyMilestoneContent
+  eventContent?: DestinyMilestoneContent;
 }
 
 export interface TrendingEntryCommunityCreation {
-  media?: string
-  title?: string
-  author?: string
-  authorMembershipId?: number
-  postId?: number
-  body?: string
-  upvotes?: number
+  media?: string;
+  title?: string;
+  author?: string;
+  authorMembershipId?: number;
+  postId?: number;
+  body?: string;
+  upvotes?: number;
 }
 
 export interface TrendingEntryCommunityStream {
-  image?: string
-  title?: string
-  partnershipIdentifier?: string
-  partnershipType?: PartnershipType
+  image?: string;
+  title?: string;
+  partnershipIdentifier?: string;
+  partnershipType?: PartnershipType;
 }

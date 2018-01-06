@@ -19,19 +19,19 @@ import {
 } from '../common';
 
 export interface SearchResultOfCommunityLiveStatusServerResponse {
-  Response?: SearchResultOfCommunityLiveStatus
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: SearchResultOfCommunityLiveStatus;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface CommunityLiveStatusServerResponse {
-  Response?: CommunityLiveStatus
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: CommunityLiveStatus;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }

@@ -59,18 +59,18 @@ export const enum ForumPostSortEnum {
 }
 
 export interface PostSearchResponse {
-  relatedPosts?: PostResponse[]
-  authors?: GeneralUser[]
-  groups?: GroupResponse[]
-  searchedTags?: TagResponse[]
-  polls?: PollResponse[]
-  recruitmentDetails?: ForumRecruitmentDetail[]
-  availablePages?: number
-  results?: PostResponse[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  relatedPosts?: PostResponse[];
+  authors?: GeneralUser[];
+  groups?: GroupResponse[];
+  searchedTags?: TagResponse[];
+  polls?: PollResponse[];
+  recruitmentDetails?: ForumRecruitmentDetail[];
+  availablePages?: number;
+  results?: PostResponse[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -83,24 +83,24 @@ export interface PostSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface PostResponse {
-  lastReplyTimestamp?: string
-  IsPinned?: boolean
-  urlMediaType?: ForumMediaType
-  thumbnail?: string
-  popularity?: ForumPostPopularity
-  isActive?: boolean
-  isAnnouncement?: boolean
-  userRating?: number
-  userHasRated?: boolean
-  userHasMutedPost?: boolean
-  latestReplyPostId?: number
-  latestReplyAuthorId?: number
-  ignoreStatus?: IgnoreResponse
-  locale?: string
+  lastReplyTimestamp?: string;
+  IsPinned?: boolean;
+  urlMediaType?: ForumMediaType;
+  thumbnail?: string;
+  popularity?: ForumPostPopularity;
+  isActive?: boolean;
+  isAnnouncement?: boolean;
+  userRating?: number;
+  userHasRated?: boolean;
+  userHasMutedPost?: boolean;
+  latestReplyPostId?: number;
+  latestReplyAuthorId?: number;
+  ignoreStatus?: IgnoreResponse;
+  locale?: string;
 }
 
 export const enum ForumMediaType {
@@ -120,30 +120,30 @@ export const enum ForumPostPopularity {
 }
 
 export interface PollResponse {
-  topicId?: number
-  results?: PollResult[]
-  totalVotes?: number
+  topicId?: number;
+  results?: PollResult[];
+  totalVotes?: number;
 }
 
 export interface PollResult {
-  answerText?: string
-  answerSlot?: number
-  lastVoteDate?: string
-  votes?: number
-  requestingUserVoted?: boolean
+  answerText?: string;
+  answerSlot?: number;
+  lastVoteDate?: string;
+  votes?: number;
+  requestingUserVoted?: boolean;
 }
 
 export interface ForumRecruitmentDetail {
-  topicId?: number
-  microphoneRequired?: boolean
-  intensity?: ForumRecruitmentIntensityLabel
-  tone?: ForumRecruitmentToneLabel
-  approved?: boolean
-  conversationId?: number
-  playerSlotsTotal?: number
-  playerSlotsRemaining?: number
-  Fireteam?: GeneralUser[]
-  kickedPlayerIds?: number[]
+  topicId?: number;
+  microphoneRequired?: boolean;
+  intensity?: ForumRecruitmentIntensityLabel;
+  tone?: ForumRecruitmentToneLabel;
+  approved?: boolean;
+  conversationId?: number;
+  playerSlotsTotal?: number;
+  playerSlotsRemaining?: number;
+  Fireteam?: GeneralUser[];
+  kickedPlayerIds?: number[];
 }
 
 export const enum ForumRecruitmentIntensityLabel {
@@ -159,8 +159,8 @@ export const enum ForumRecruitmentToneLabel {
 }
 
 export interface SaveMessageResult {
-  conversationId?: number
-  messageId?: number
+  conversationId?: number;
+  messageId?: number;
 }
 
 export const enum CommunityContentSortMode {

@@ -26,7 +26,7 @@ import {
 
 export interface GetBungieNetUserByIdParams {
   /** The requested Bungie.net membership id. */
-  id: number
+  id: number;
 }
 
 /** Loads a bungienet user by membership id. */
@@ -39,7 +39,7 @@ export async function getBungieNetUserById(http: HttpClient, params: GetBungieNe
 
 export interface GetUserAliasesParams {
   /** The requested Bungie.net membership id. */
-  id: number
+  id: number;
 }
 
 /** Loads aliases of a bungienet membership id. */
@@ -52,7 +52,7 @@ export async function getUserAliases(http: HttpClient, params: GetUserAliasesPar
 
 export interface SearchUsersParams {
   /** The search string. */
-  q?: string
+  q?: string;
 }
 
 /** Returns a list of possible users based on the search string */
@@ -76,9 +76,9 @@ export async function getAvailableThemes(http: HttpClient): Promise<ListOfUserTh
 
 export interface GetMembershipDataByIdParams {
   /** The membership ID of the target user. */
-  membershipId: number
+  membershipId: number;
   /** Type of the supplied membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -106,7 +106,7 @@ export async function getMembershipDataForCurrentUser(http: HttpClient): Promise
 
 export interface GetPartnershipsParams {
   /** The ID of the member for whom partnerships should be returned. */
-  membershipId: number
+  membershipId: number;
 }
 
 /** Returns a user's linked Partnerships. */

@@ -34,9 +34,9 @@ export async function getTrendingCategories(http: HttpClient): Promise<TrendingC
 
 export interface GetTrendingCategoryParams {
   /** The ID of the category for whom you want additional results. */
-  categoryId: string
+  categoryId: string;
   /** The page # of results to return. */
-  pageNumber: number
+  pageNumber: number;
 }
 
 /** Returns paginated lists of trending items for a category. */
@@ -49,9 +49,9 @@ export async function getTrendingCategory(http: HttpClient, params: GetTrendingC
 
 export interface GetTrendingEntryDetailParams {
   /** The identifier for the entity to be returned. */
-  identifier: string
+  identifier: string;
   /** The type of entity to be returned. */
-  trendingEntryType: TrendingEntryType
+  trendingEntryType: TrendingEntryType;
 }
 
 /**

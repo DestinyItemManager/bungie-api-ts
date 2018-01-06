@@ -656,20 +656,20 @@ export const enum PlatformErrorCodes {
 }
 
 export interface int32ServerResponse {
-  Response?: number
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: number;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface HyperlinkReference {
-  title?: string
-  url?: string
+  title?: string;
+  url?: string;
 }
 
 export interface DateRange {
-  start?: string
-  end?: string
+  start?: string;
+  end?: string;
 }

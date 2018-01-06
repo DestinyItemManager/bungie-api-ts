@@ -18,61 +18,62 @@ import {
   PagedQuery
 } from '../platform';
 import {
-  UserInfoCard
+  UserInfoCard,
+  UserMembership
 } from '../user/interfaces';
 
 export interface GroupResponse {
-  detail?: GroupV2
-  founder?: GroupMember
-  alliedIds?: number[]
-  parentGroup?: GroupV2
-  allianceStatus?: GroupAllianceStatus
-  groupJoinInviteCount?: number
+  detail?: GroupV2;
+  founder?: GroupMember;
+  alliedIds?: number[];
+  parentGroup?: GroupV2;
+  allianceStatus?: GroupAllianceStatus;
+  groupJoinInviteCount?: number;
   /**
    * This property will be populated if the authenticated user is a member of the
    * group. Note that because of account linking, a user can sometimes be part of a
    * clan more than once. As such, this returns the highest member type available.
    */
-  currentUserMemberMap?: { [key: undefined]: undefined }
+  currentUserMemberMap?: { [key: undefined]: undefined };
   /**
    * This property will be populated if the authenticated user is an applicant or has
    * an outstanding invitation to join. Note that because of account linking, a user
    * can sometimes be part of a clan more than once.
    */
-  currentUserPotentialMemberMap?: { [key: undefined]: undefined }
+  currentUserPotentialMemberMap?: { [key: undefined]: undefined };
 }
 
 export interface GroupV2 {
-  groupId?: number
-  name?: string
-  groupType?: GroupType
-  membershipIdCreated?: number
-  creationDate?: string
-  modificationDate?: string
-  about?: string
-  tags?: string[]
-  memberCount?: number
-  isPublic?: boolean
-  isPublicTopicAdminOnly?: boolean
-  primaryAlliedGroupId?: number
-  motto?: string
-  allowChat?: boolean
-  isDefaultPostPublic?: boolean
-  chatSecurity?: ChatSecuritySetting
-  locale?: string
-  avatarImageIndex?: number
-  homepage?: GroupHomepage
-  membershipOption?: MembershipOption
-  defaultPublicity?: GroupPostPublicity
-  theme?: string
-  bannerPath?: string
-  avatarPath?: string
-  isAllianceOwner?: boolean
-  conversationId?: number
-  enableInvitationMessagingForAdmins?: boolean
-  banExpireDate?: string
-  features?: GroupFeatures
-  clanInfo?: GroupV2ClanInfoAndInvestment
+  groupId?: number;
+  name?: string;
+  groupType?: GroupType;
+  membershipIdCreated?: number;
+  creationDate?: string;
+  modificationDate?: string;
+  about?: string;
+  tags?: string[];
+  memberCount?: number;
+  isPublic?: boolean;
+  isPublicTopicAdminOnly?: boolean;
+  primaryAlliedGroupId?: number;
+  motto?: string;
+  allowChat?: boolean;
+  isDefaultPostPublic?: boolean;
+  chatSecurity?: ChatSecuritySetting;
+  locale?: string;
+  avatarImageIndex?: number;
+  homepage?: GroupHomepage;
+  membershipOption?: MembershipOption;
+  defaultPublicity?: GroupPostPublicity;
+  theme?: string;
+  bannerPath?: string;
+  avatarPath?: string;
+  isAllianceOwner?: boolean;
+  conversationId?: number;
+  enableInvitationMessagingForAdmins?: boolean;
+  banExpireDate?: string;
+  features?: GroupFeatures;
+  clanInfo?: GroupV2ClanInfoAndInvestment;
 }
 
 export const enum GroupType {
@@ -104,15 +105,15 @@ export const enum GroupPostPublicity {
 }
 
 export interface GroupFeatures {
-  maximumMembers?: number
+  maximumMembers?: number;
   /**
    * Maximum number of groups of this type a typical membership may join. For example,
    * a user may join about 50 General groups with their Bungie.net account. They may
    * join one clan per Destiny membership.
    */
-  maximumMembershipsOfGroupType?: number
-  capabilities?: Capabilities
-  membershipTypes?: BungieMembershipType[]
+  maximumMembershipsOfGroupType?: number;
+  capabilities?: Capabilities;
+  membershipTypes?: BungieMembershipType[];
   /**
    * Minimum Member Level allowed to invite new members to group
    * 
@@ -122,7 +123,7 @@ export interface GroupFeatures {
    * 
    * Default is false for clans, true for groups.
    */
-  invitePermissionOverride?: boolean
+  invitePermissionOverride?: boolean;
   /**
    * Minimum Member Level allowed to update group culture
    * 
@@ -132,7 +133,7 @@ export interface GroupFeatures {
    * 
    * Default is false for clans, true for groups.
    */
-  updateCulturePermissionOverride?: boolean
+  updateCulturePermissionOverride?: boolean;
   /**
    * Minimum Member Level allowed to host guided games
    * 
@@ -143,7 +144,7 @@ export interface GroupFeatures {
    * Default is Member for clans, None for groups, although this means nothing for
    * groups.
    */
-  hostGuidedGamePermissionOverride?: HostGuidedGamesPermissionLevel
+  hostGuidedGamePermissionOverride?: HostGuidedGamesPermissionLevel;
   /**
    * Minimum Member Level allowed to update banner
    * 
@@ -153,14 +154,14 @@ export interface GroupFeatures {
    * 
    * Default is false for clans, true for groups.
    */
-  updateBannerPermissionOverride?: boolean
+  updateBannerPermissionOverride?: boolean;
   /**
    * Level to join a member at when accepting an invite, application, or joining an
    * open clan
    * 
    * Default is Beginner.
    */
-  joinLevel?: RuntimeGroupMemberType
+  joinLevel?: RuntimeGroupMemberType;
 }
 
 export const enum Capabilities {
@@ -176,28 +177,28 @@ export const enum Capabilities {
 
 /** The same as GroupV2ClanInfo, but includes any investment data. */
 export interface GroupV2ClanInfoAndInvestment {
-  d2ClanProgressions?: { [key: number]: undefined }
-  clanCallsign?: string
-  clanBannerData?: ClanBanner
+  d2ClanProgressions?: { [key: number]: undefined };
+  clanCallsign?: string;
+  clanBannerData?: ClanBanner;
 }
 
 export interface ClanBanner {
-  decalId?: number
-  decalColorId?: number
-  decalBackgroundColorId?: number
-  gonfalonId?: number
-  gonfalonColorId?: number
-  gonfalonDetailId?: number
-  gonfalonDetailColorId?: number
+  decalId?: number;
+  decalColorId?: number;
+  decalBackgroundColorId?: number;
+  gonfalonId?: number;
+  gonfalonColorId?: number;
+  gonfalonDetailId?: number;
+  gonfalonDetailColorId?: number;
 }
 
 export interface GroupMember {
-  memberType?: RuntimeGroupMemberType
-  isOnline?: boolean
-  groupId?: number
-  destinyUserInfo?: UserInfoCard
-  bungieNetUserInfo?: UserInfoCard
-  joinDate?: string
+  memberType?: RuntimeGroupMemberType;
+  isOnline?: boolean;
+  groupId?: number;
+  destinyUserInfo?: UserInfoCard;
+  bungieNetUserInfo?: UserInfoCard;
+  joinDate?: string;
 }
 
 export const enum RuntimeGroupMemberType {
@@ -223,6 +224,140 @@ export const enum GroupDateRange {
   PastYear = 4
 }
 
+export interface GroupQuery {
+  name?: string;
+  groupType?: GroupType;
+  creationDate?: GroupDateRange;
+  sortBy?: GroupSortBy;
+  groupMemberCountFilter?: number;
+  localeFilter?: string;
+  tagText?: string;
+  itemsPerPage?: number;
+  currentPage?: number;
+  requestContinuationToken?: string;
+}
+
+export interface GroupAction {
+  /** Type of group, either Bungie.net hosted group, or a game services hosted clan. */
+  groupType?: GroupType;
+  name?: string;
+  about?: string;
+  motto?: string;
+  theme?: string;
+  avatarImageIndex?: number;
+  tags?: string;
+  isPublic?: boolean;
+  membershipOption?: MembershipOption;
+  isPublicTopicAdminOnly?: boolean;
+  isDefaultPostPublic?: boolean;
+  allowChat?: boolean;
+  isDefaultPostAlliance?: boolean;
+  chatSecurity?: ChatSecuritySetting;
+  callsign?: string;
+  locale?: string;
+  homepage?: GroupHomepage;
+  /**
+   * When operation needs a platform specific account ID for the present user, use
+   * this property. In particular, groupType of Clan requires this value to be set.
+   */
+  platformMembershipType?: BungieMembershipType;
+}
+
+export interface GroupEditAction {
+  name?: string;
+  about?: string;
+  motto?: string;
+  theme?: string;
+  avatarImageIndex?: number;
+  tags?: string;
+  isPublic?: boolean;
+  membershipOption?: number;
+  isPublicTopicAdminOnly?: boolean;
+  allowChat?: boolean;
+  chatSecurity?: number;
+  callsign?: string;
+  locale?: string;
+  homepage?: number;
+  enableInvitationMessagingForAdmins?: boolean;
+  defaultPublicity?: number;
+}
+
+export interface GroupOptionsEditAction {
+  /**
+   * Minimum Member Level allowed to invite new members to group
+   * 
+   * Always Allowed: Founder, Acting Founder
+   * 
+   * True means admins have this power, false means they don't
+   * 
+   * Default is false for clans, true for groups.
+   */
+  InvitePermissionOverride?: boolean;
+  /**
+   * Minimum Member Level allowed to update group culture
+   * 
+   * Always Allowed: Founder, Acting Founder
+   * 
+   * True means admins have this power, false means they don't
+   * 
+   * Default is false for clans, true for groups.
+   */
+  UpdateCulturePermissionOverride?: boolean;
+  /**
+   * Minimum Member Level allowed to host guided games
+   * 
+   * Always Allowed: Founder, Acting Founder, Admin
+   * 
+   * Allowed Overrides: None, Member, Beginner
+   * 
+   * Default is Member for clans, None for groups, although this means nothing for
+   * groups.
+   */
+  HostGuidedGamePermissionOverride?: number;
+  /**
+   * Minimum Member Level allowed to update banner
+   * 
+   * Always Allowed: Founder, Acting Founder
+   * 
+   * True means admins have this power, false means they don't
+   * 
+   * Default is false for clans, true for groups.
+   */
+  UpdateBannerPermissionOverride?: boolean;
+  /**
+   * Level to join a member at when accepting an invite, application, or joining an
+   * open clan
+   * 
+   * Default is Beginner.
+   */
+  JoinLevel?: number;
+}
+
+export interface GroupOptionalConversationAddRequest {
+  chatName?: string;
+  chatSecurity?: ChatSecuritySetting;
+}
+
+export interface GroupOptionalConversationEditRequest {
+  chatEnabled?: boolean;
+  chatName?: string;
+  chatSecurity?: number;
+}
+
+export interface GroupBanRequest {
+  comment?: string;
+  length?: IgnoreLength;
+}
+
+export interface GroupApplicationRequest {
+  message?: string;
+}
+
+export interface GroupApplicationListRequest {
+  memberships?: UserMembership[];
+  message?: string;
+}
+
 export const enum GroupsForMemberFilter {
   All = 0,
   Founded = 1,
@@ -236,9 +371,9 @@ export const enum GroupPotentialMemberStatus {
 }
 
 export interface GroupTheme {
-  name?: string
-  folder?: string
-  description?: string
+  name?: string;
+  folder?: string;
+  description?: string;
 }
 
 /**
@@ -246,19 +381,19 @@ export interface GroupTheme {
  * are returned
  */
 export interface GroupV2Card {
-  groupId?: number
-  name?: string
-  groupType?: GroupType
-  creationDate?: string
-  about?: string
-  motto?: string
-  memberCount?: number
-  locale?: string
-  membershipOption?: MembershipOption
-  capabilities?: Capabilities
-  clanInfo?: GroupV2ClanInfo
-  avatarPath?: string
-  theme?: string
+  groupId?: number;
+  name?: string;
+  groupType?: GroupType;
+  creationDate?: string;
+  about?: string;
+  motto?: string;
+  memberCount?: number;
+  locale?: string;
+  membershipOption?: MembershipOption;
+  capabilities?: Capabilities;
+  clanInfo?: GroupV2ClanInfo;
+  avatarPath?: string;
+  theme?: string;
 }
 
 /**
@@ -266,16 +401,23 @@ export interface GroupV2Card {
  * investment data.
  */
 export interface GroupV2ClanInfo {
-  clanCallsign?: string
-  clanBannerData?: ClanBanner
+  clanCallsign?: string;
+  clanBannerData?: ClanBanner;
+}
+
+export const enum GroupSortBy {
+  Name = 0,
+  Date = 1,
+  Popularity = 2,
+  Id = 3
 }
 
 export interface GroupSearchResponse {
-  results?: GroupV2Card[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: GroupV2Card[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -288,27 +430,27 @@ export interface GroupSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface GroupOptionalConversation {
-  groupId?: number
-  conversationId?: number
-  chatEnabled?: boolean
-  chatName?: string
-  chatSecurity?: ChatSecuritySetting
+  groupId?: number;
+  conversationId?: number;
+  chatEnabled?: boolean;
+  chatName?: string;
+  chatSecurity?: ChatSecuritySetting;
 }
 
 export interface GroupCreationResponse {
-  groupId?: number
+  groupId?: number;
 }
 
 export interface SearchResultOfGroupMember {
-  results?: GroupMember[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: GroupMember[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -321,20 +463,35 @@ export interface SearchResultOfGroupMember {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface GroupMemberLeaveResult {
-  group?: GroupV2
-  groupDeleted?: boolean
+  group?: GroupV2;
+  groupDeleted?: boolean;
+}
+
+export const enum IgnoreLength {
+  None = 0,
+  Week = 1,
+  TwoWeeks = 2,
+  ThreeWeeks = 3,
+  Month = 4,
+  ThreeMonths = 5,
+  SixMonths = 6,
+  Year = 7,
+  Forever = 8,
+  ThreeMinutes = 9,
+  Hour = 10,
+  ThirtyDays = 11
 }
 
 export interface SearchResultOfGroupBan {
-  results?: GroupBan[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: GroupBan[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -347,22 +504,22 @@ export interface SearchResultOfGroupBan {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface GroupBan {
-  groupId?: number
-  lastModifiedBy?: UserInfoCard
-  createdBy?: UserInfoCard
-  dateBanned?: string
-  dateExpires?: string
-  comment?: string
-  bungieNetUserInfo?: UserInfoCard
-  destinyUserInfo?: UserInfoCard
+  groupId?: number;
+  lastModifiedBy?: UserInfoCard;
+  createdBy?: UserInfoCard;
+  dateBanned?: string;
+  dateExpires?: string;
+  comment?: string;
+  bungieNetUserInfo?: UserInfoCard;
+  destinyUserInfo?: UserInfoCard;
 }
 
 export interface GroupApplicationResponse {
-  resolution?: GroupApplicationResolveState
+  resolution?: GroupApplicationResolveState;
 }
 
 export const enum GroupApplicationResolveState {
@@ -373,11 +530,11 @@ export const enum GroupApplicationResolveState {
 }
 
 export interface SearchResultOfGroupMemberApplication {
-  results?: GroupMemberApplication[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: GroupMemberApplication[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -390,32 +547,32 @@ export interface SearchResultOfGroupMemberApplication {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface GroupMemberApplication {
-  groupId?: number
-  creationDate?: string
-  resolveState?: GroupApplicationResolveState
-  resolveDate?: string
-  resolvedByMembershipId?: number
-  requestMessage?: string
-  resolveMessage?: string
-  destinyUserInfo?: UserInfoCard
-  bungieNetUserInfo?: UserInfoCard
+  groupId?: number;
+  creationDate?: string;
+  resolveState?: GroupApplicationResolveState;
+  resolveDate?: string;
+  resolvedByMembershipId?: number;
+  requestMessage?: string;
+  resolveMessage?: string;
+  destinyUserInfo?: UserInfoCard;
+  bungieNetUserInfo?: UserInfoCard;
 }
 
 export interface EntityActionResult {
-  entityId?: number
-  result?: PlatformErrorCodes
+  entityId?: number;
+  result?: PlatformErrorCodes;
 }
 
 export interface GroupMembershipSearchResponse {
-  results?: GroupMembership[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: GroupMembership[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -428,20 +585,20 @@ export interface GroupMembershipSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface GroupMembership {
-  member?: GroupMember
-  group?: GroupV2
+  member?: GroupMember;
+  group?: GroupV2;
 }
 
 export interface GroupPotentialMembershipSearchResponse {
-  results?: GroupPotentialMembership[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: GroupPotentialMembership[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -454,18 +611,18 @@ export interface GroupPotentialMembershipSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface GroupPotentialMembership {
-  member?: GroupPotentialMember
-  group?: GroupV2
+  member?: GroupPotentialMember;
+  group?: GroupV2;
 }
 
 export interface GroupPotentialMember {
-  potentialStatus?: GroupPotentialMemberStatus
-  groupId?: number
-  destinyUserInfo?: UserInfoCard
-  bungieNetUserInfo?: UserInfoCard
-  joinDate?: string
+  potentialStatus?: GroupPotentialMemberStatus;
+  groupId?: number;
+  destinyUserInfo?: UserInfoCard;
+  bungieNetUserInfo?: UserInfoCard;
+  joinDate?: string;
 }

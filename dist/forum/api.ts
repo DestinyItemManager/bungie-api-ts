@@ -31,24 +31,24 @@ import {
 
 export interface GetTopicsPagedParams {
   /** A category filter */
-  categoryFilter: ForumTopicsCategoryFiltersEnum
+  categoryFilter: ForumTopicsCategoryFiltersEnum;
   /** The group, if any. */
-  group: number
+  group: number;
   /**
    * Comma seperated list of locales posts must match to return in the result list.
    * Default 'en'
    */
-  locales?: string
+  locales?: string;
   /** Zero paged page number */
-  page: number
+  page: number;
   /** Unused */
-  pageSize: number
+  pageSize: number;
   /** A date filter. */
-  quickDate: ForumTopicsQuickDateEnum
+  quickDate: ForumTopicsQuickDateEnum;
   /** The sort mode. */
-  sort: ForumTopicsSortEnum
+  sort: ForumTopicsSortEnum;
   /** The tags to search, if any. */
-  tagstring?: string
+  tagstring?: string;
 }
 
 /** Get topics from any forum. */
@@ -65,18 +65,18 @@ export async function getTopicsPaged(http: HttpClient, params: GetTopicsPagedPar
 
 export interface GetCoreTopicsPagedParams {
   /** The category filter. */
-  categoryFilter: ForumTopicsCategoryFiltersEnum
+  categoryFilter: ForumTopicsCategoryFiltersEnum;
   /**
    * Comma seperated list of locales posts must match to return in the result list.
    * Default 'en'
    */
-  locales?: string
+  locales?: string;
   /** Zero base page */
-  page: number
+  page: number;
   /** The date filter. */
-  quickDate: ForumTopicsQuickDateEnum
+  quickDate: ForumTopicsQuickDateEnum;
   /** The sort mode. */
-  sort: ForumTopicsSortEnum
+  sort: ForumTopicsSortEnum;
 }
 
 /** Gets a listing of all topics marked as part of the core group. */
@@ -91,15 +91,15 @@ export async function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopics
 }
 
 export interface GetPostsThreadedPagedParams {
-  getParentPost: boolean
-  page: number
-  pageSize: number
-  parentPostId: number
-  replySize: number
-  rootThreadMode: boolean
+  getParentPost: boolean;
+  page: number;
+  pageSize: number;
+  parentPostId: number;
+  replySize: number;
+  rootThreadMode: boolean;
   /** If this value is not null or empty, banned posts are requested to be returned */
-  showbanned?: string
-  sortMode: ForumPostSortEnum
+  showbanned?: string;
+  sortMode: ForumPostSortEnum;
 }
 
 /**
@@ -117,14 +117,14 @@ export async function getPostsThreadedPaged(http: HttpClient, params: GetPostsTh
 }
 
 export interface GetPostsThreadedPagedFromChildParams {
-  childPostId: number
-  page: number
-  pageSize: number
-  replySize: number
-  rootThreadMode: boolean
+  childPostId: number;
+  page: number;
+  pageSize: number;
+  replySize: number;
+  rootThreadMode: boolean;
   /** If this value is not null or empty, banned posts are requested to be returned */
-  showbanned?: string
-  sortMode: ForumPostSortEnum
+  showbanned?: string;
+  sortMode: ForumPostSortEnum;
 }
 
 /**
@@ -142,9 +142,9 @@ export async function getPostsThreadedPagedFromChild(http: HttpClient, params: G
 }
 
 export interface GetPostAndParentParams {
-  childPostId: number
+  childPostId: number;
   /** If this value is not null or empty, banned posts are requested to be returned */
-  showbanned?: string
+  showbanned?: string;
 }
 
 /** Returns the post specified and its immediate parent. */
@@ -159,9 +159,9 @@ export async function getPostAndParent(http: HttpClient, params: GetPostAndParen
 }
 
 export interface GetPostAndParentAwaitingApprovalParams {
-  childPostId: number
+  childPostId: number;
   /** If this value is not null or empty, banned posts are requested to be returned */
-  showbanned?: string
+  showbanned?: string;
 }
 
 /**
@@ -179,7 +179,7 @@ export async function getPostAndParentAwaitingApproval(http: HttpClient, params:
 }
 
 export interface GetTopicForContentParams {
-  contentId: number
+  contentId: number;
 }
 
 /** Gets the post Id for the given content item's comments, if it exists. */
@@ -192,7 +192,7 @@ export async function getTopicForContent(http: HttpClient, params: GetTopicForCo
 
 export interface GetForumTagSuggestionsParams {
   /** The partial tag input to generate suggestions from. */
-  partialtag?: string
+  partialtag?: string;
 }
 
 /**
@@ -211,7 +211,7 @@ export async function getForumTagSuggestions(http: HttpClient, params: GetForumT
 
 export interface GetPollParams {
   /** The post id of the topic that has the poll. */
-  topicId: number
+  topicId: number;
 }
 
 /** Gets the specified forum poll. */
@@ -224,7 +224,7 @@ export async function getPoll(http: HttpClient, params: GetPollParams): Promise<
 
 export interface JoinFireteamThreadParams {
   /** The post id of the recruitment topic you wish to join. */
-  topicId: number
+  topicId: number;
 }
 
 /**
@@ -240,7 +240,7 @@ export async function joinFireteamThread(http: HttpClient, params: JoinFireteamT
 
 export interface LeaveFireteamThreadParams {
   /** The post id of the recruitment topic you wish to leave. */
-  topicId: number
+  topicId: number;
 }
 
 /**
@@ -256,9 +256,9 @@ export async function leaveFireteamThread(http: HttpClient, params: LeaveFiretea
 
 export interface KickBanFireteamApplicantParams {
   /** The id of the user you wish to kick. */
-  targetMembershipId: number
+  targetMembershipId: number;
   /** The post id of the recruitment topic you wish to join. */
-  topicId: number
+  topicId: number;
 }
 
 /**
@@ -274,7 +274,7 @@ export async function kickBanFireteamApplicant(http: HttpClient, params: KickBan
 
 export interface ApproveFireteamThreadParams {
   /** The post id of the recruitment topic to approve. */
-  topicId: number
+  topicId: number;
 }
 
 /**
@@ -288,13 +288,18 @@ export async function approveFireteamThread(http: HttpClient, params: ApproveFir
   });
 }
 
+export interface GetRecruitmentThreadSummariesParams {
+  body: number[];
+}
+
 /**
  * Allows the caller to get a list of to 25 recruitment thread summary information
  * objects.
  */
-export async function getRecruitmentThreadSummaries(http: HttpClient): Promise<CEListOfForumRecruitmentDetailServerResponse> {
+export async function getRecruitmentThreadSummaries(http: HttpClient, params: GetRecruitmentThreadSummariesParams): Promise<CEListOfForumRecruitmentDetailServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Forum/Recruit/Summaries/'
+    url: 'https://www.bungie.net/Platform/Forum/Recruit/Summaries/',
+    body: params.body
   });
 }

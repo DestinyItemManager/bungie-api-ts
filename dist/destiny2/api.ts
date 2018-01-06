@@ -43,6 +43,12 @@ import {
 import {
   DestinyActivityModeType,
   DestinyComponentType,
+  DestinyItemActionRequest,
+  DestinyItemSetActionRequest,
+  DestinyItemStateRequest,
+  DestinyItemTransferRequest,
+  DestinyPostmasterTransferRequest,
+  DestinyReportOffensePgcrRequest,
   DestinyStatsGroupType,
   PeriodType
 } from './interfaces';
@@ -63,9 +69,9 @@ export interface GetDestinyEntityDefinitionParams {
    * is still in beta, and may experience rough edges. The schema is tentatively in
    * final form, but there may be bugs that prevent desirable operation.
    */
-  entityType: string
+  entityType: string;
   /** The hash identifier for the specific Entity you want returned. */
-  hashIdentifier: number
+  hashIdentifier: number;
 }
 
 /**
@@ -86,9 +92,9 @@ export async function getDestinyEntityDefinition(http: HttpClient, params: GetDe
 
 export interface SearchDestinyPlayerParams {
   /** The full gamertag or PSN id of the player. Spaces and case are ignored. */
-  displayName: string
+  displayName: string;
   /** A valid non-BungieNet membership type, or All. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Returns a list of Destiny memberships given a full Gamertag or PSN ID. */
@@ -105,11 +111,11 @@ export interface GetProfileParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[]
+  components?: DestinyComponentType[];
   /** Destiny membership ID. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Returns Destiny Profile information for the supplied membership. */
@@ -125,17 +131,17 @@ export async function getProfile(http: HttpClient, params: GetProfileParams): Pr
 
 export interface GetCharacterParams {
   /** ID of the character. */
-  characterId: number
+  characterId: number;
   /**
    * A comma separated list of components to return (as strings or numeric values).
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[]
+  components?: DestinyComponentType[];
   /** Destiny membership ID. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Returns character information for the supplied character. */
@@ -151,7 +157,7 @@ export async function getCharacter(http: HttpClient, params: GetCharacterParams)
 
 export interface GetClanWeeklyRewardStateParams {
   /** A valid group id of clan. */
-  groupId: number
+  groupId: number;
 }
 
 /**
@@ -171,13 +177,13 @@ export interface GetItemParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[]
+  components?: DestinyComponentType[];
   /** The membership ID of the destiny profile. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** The Instance ID of the destiny item. */
-  itemInstanceId: number
+  itemInstanceId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -197,17 +203,17 @@ export async function getItem(http: HttpClient, params: GetItemParams): Promise<
 
 export interface GetVendorsParams {
   /** The Destiny Character ID of the character for whom we're getting vendor info. */
-  characterId: number
+  characterId: number;
   /**
    * A comma separated list of components to return (as strings or numeric values).
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[]
+  components?: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -230,19 +236,19 @@ export async function getVendors(http: HttpClient, params: GetVendorsParams): Pr
 
 export interface GetVendorParams {
   /** The Destiny Character ID of the character for whom we're getting vendor info. */
-  characterId: number
+  characterId: number;
   /**
    * A comma separated list of components to return (as strings or numeric values).
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[]
+  components?: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /** The Hash identifier of the Vendor to be returned. */
-  vendorHash: number
+  vendorHash: number;
 }
 
 /**
@@ -260,16 +266,25 @@ export async function getVendor(http: HttpClient, params: GetVendorParams): Prom
   });
 }
 
+export interface TransferItemParams {
+  body: DestinyItemTransferRequest;
+}
+
 /**
  * Transfer an item to/from your vault. You must have a valid Destiny account. You
  * must also pass BOTH a reference AND an instance ID if it's an instanced item.
  * itshappening.gif
  */
-export async function transferItem(http: HttpClient): Promise<int32ServerResponse> {
+export async function transferItem(http: HttpClient, params: TransferItemParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/TransferItem/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/TransferItem/',
+    body: params.body
   });
+}
+
+export interface PullFromPostmasterParams {
+  body: DestinyPostmasterTransferRequest;
 }
 
 /**
@@ -277,22 +292,32 @@ export async function transferItem(http: HttpClient): Promise<int32ServerRespons
  * You must have a valid Destiny account. You must also pass BOTH a reference AND
  * an instance ID if it's an instanced item.
  */
-export async function pullFromPostmaster(http: HttpClient): Promise<int32ServerResponse> {
+export async function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/PullFromPostmaster/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/PullFromPostmaster/',
+    body: params.body
   });
+}
+
+export interface EquipItemParams {
+  body: DestinyItemActionRequest;
 }
 
 /**
  * Equip an item. You must have a valid Destiny Account, and either be in a social
  * space, in orbit, or offline.
  */
-export async function equipItem(http: HttpClient): Promise<int32ServerResponse> {
+export async function equipItem(http: HttpClient, params: EquipItemParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItem/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItem/',
+    body: params.body
   });
+}
+
+export interface EquipItemsParams {
+  body: DestinyItemSetActionRequest;
 }
 
 /**
@@ -300,19 +325,29 @@ export async function equipItem(http: HttpClient): Promise<int32ServerResponse> 
  * and either be in a social space, in orbit, or offline. Any items not found on
  * your character will be ignored.
  */
-export async function equipItems(http: HttpClient): Promise<DestinyEquipItemResultsServerResponse> {
+export async function equipItems(http: HttpClient, params: EquipItemsParams): Promise<DestinyEquipItemResultsServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItems/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItems/',
+    body: params.body
   });
 }
 
+export interface SetItemLockStateParams {
+  body: DestinyItemStateRequest;
+}
+
 /** Set the Lock State for an instanced item. You must have a valid Destiny Account. */
-export async function setItemLockState(http: HttpClient): Promise<int32ServerResponse> {
+export async function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/SetLockState/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/SetLockState/',
+    body: params.body
   });
+}
+
+export interface InsertSocketPlugParams {
+  body: DestinyItemActionRequest;
 }
 
 /**
@@ -325,11 +360,16 @@ export async function setItemLockState(http: HttpClient): Promise<int32ServerRes
  * planned schema of the endpoint for review, comment, and preparation for its
  * eventual implementation.
  */
-export async function insertSocketPlug(http: HttpClient): Promise<int32ServerResponse> {
+export async function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlug/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlug/',
+    body: params.body
   });
+}
+
+export interface ActivateTalentNodeParams {
+  body: DestinyItemActionRequest;
 }
 
 /**
@@ -341,16 +381,17 @@ export async function insertSocketPlug(http: HttpClient): Promise<int32ServerRes
  * schema of the endpoint for review, comment, and preparation for its eventual
  * implementation.
  */
-export async function activateTalentNode(http: HttpClient): Promise<int32ServerResponse> {
+export async function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/ActivateTalentNode/'
+    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/ActivateTalentNode/',
+    body: params.body
   });
 }
 
 export interface GetPostGameCarnageReportParams {
   /** The ID of the activity whose PGCR is requested. */
-  activityId: number
+  activityId: number;
 }
 
 /** Gets the available post game carnage report for the activity ID. */
@@ -363,7 +404,8 @@ export async function getPostGameCarnageReport(http: HttpClient, params: GetPost
 
 export interface ReportOffensivePostGameCarnageReportPlayerParams {
   /** The ID of the activity where you ran into the brigand that you're reporting. */
-  activityId: number
+  activityId: number;
+  body: DestinyReportOffensePgcrRequest;
 }
 
 /**
@@ -375,7 +417,8 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
 export async function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`
+    url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`,
+    body: params.body
   });
 }
 
@@ -389,20 +432,20 @@ export async function getHistoricalStatsDefinition(http: HttpClient): Promise<Re
 
 export interface GetClanLeaderboardsParams {
   /** Group ID of the clan whose leaderboards you wish to fetch. */
-  groupId: number
+  groupId: number;
   /**
    * Maximum number of top players to return. Use a large number to get entire
    * leaderboard.
    */
-  maxtop?: number
+  maxtop?: number;
   /**
    * List of game modes for which to get leaderboards. See the documentation for
    * DestinyActivityModeType for valid values, and pass in string representation,
    * comma delimited.
    */
-  modes?: string
+  modes?: string;
   /** ID of stat to return rather than returning all Leaderboard stats. */
-  statid?: string
+  statid?: string;
 }
 
 /**
@@ -425,13 +468,13 @@ export async function getClanLeaderboards(http: HttpClient, params: GetClanLeade
 
 export interface GetClanAggregateStatsParams {
   /** Group ID of the clan whose leaderboards you wish to fetch. */
-  groupId: number
+  groupId: number;
   /**
    * List of game modes for which to get leaderboards. See the documentation for
    * DestinyActivityModeType for valid values, and pass in string representation,
    * comma delimited.
    */
-  modes?: string
+  modes?: string;
 }
 
 /**
@@ -452,22 +495,22 @@ export async function getClanAggregateStats(http: HttpClient, params: GetClanAgg
 
 export interface GetLeaderboardsParams {
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /**
    * Maximum number of top players to return. Use a large number to get entire
    * leaderboard.
    */
-  maxtop?: number
+  maxtop?: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /**
    * List of game modes for which to get leaderboards. See the documentation for
    * DestinyActivityModeType for valid values, and pass in string representation,
    * comma delimited.
    */
-  modes?: string
+  modes?: string;
   /** ID of stat to return rather than returning all Leaderboard stats. */
-  statid?: string
+  statid?: string;
 }
 
 /**
@@ -493,24 +536,24 @@ export interface GetLeaderboardsForCharacterParams {
    * The specific character to build the leaderboard around for the provided Destiny
    * Membership.
    */
-  characterId: number
+  characterId: number;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /**
    * Maximum number of top players to return. Use a large number to get entire
    * leaderboard.
    */
-  maxtop?: number
+  maxtop?: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /**
    * List of game modes for which to get leaderboards. See the documentation for
    * DestinyActivityModeType for valid values, and pass in string representation,
    * comma delimited.
    */
-  modes?: string
+  modes?: string;
   /** ID of stat to return rather than returning all Leaderboard stats. */
-  statid?: string
+  statid?: string;
 }
 
 /**
@@ -533,15 +576,15 @@ export async function getLeaderboardsForCharacter(http: HttpClient, params: GetL
 
 export interface SearchDestinyEntitiesParams {
   /** Page number to return, starting with 0. */
-  page?: number
+  page?: number;
   /** The string to use when searching for Destiny entities. */
-  searchTerm: string
+  searchTerm: string;
   /**
    * The type of entity for whom you would like results. These correspond to the
    * entity's definition contract name. For instance, if you are looking for items,
    * this property should be 'DestinyInventoryItemDefinition'.
    */
-  type: string
+  type: string;
 }
 
 /** Gets a page list of Destiny items. */
@@ -560,30 +603,30 @@ export interface GetHistoricalStatsParams {
    * The id of the character to retrieve. You can omit this character ID or set it to
    * 0 to get aggregate stats across all characters.
    */
-  characterId: number
+  characterId: number;
   /** Last day to return when daily stats are requested. Use the format YYYY-MM-DD. */
-  dayend?: string
+  dayend?: string;
   /** First day to return when daily stats are requested. Use the format YYYY-MM-DD */
-  daystart?: string
+  daystart?: string;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /**
    * Group of stats to include, otherwise only general stats are returned. Comma
    * separated list is allowed. Values: General, Weapons, Medals
    */
-  groups?: DestinyStatsGroupType[]
+  groups?: DestinyStatsGroupType[];
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /**
    * Game modes to return. See the documentation for DestinyActivityModeType for
    * valid values, and pass in string representation, comma delimited.
    */
-  modes?: DestinyActivityModeType[]
+  modes?: DestinyActivityModeType[];
   /**
    * Indicates a specific period type to return. Optional. May be: Daily, AllTime, or
    * Activity
    */
-  periodType?: PeriodType
+  periodType?: PeriodType;
 }
 
 /** Gets historical stats for indicated character. */
@@ -603,14 +646,14 @@ export async function getHistoricalStats(http: HttpClient, params: GetHistorical
 
 export interface GetHistoricalStatsForAccountParams {
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /**
    * Groups of stats to include, otherwise only general stats are returned. Comma
    * separated list is allowed. Values: General, Weapons, Medals.
    */
-  groups?: DestinyStatsGroupType[]
+  groups?: DestinyStatsGroupType[];
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -629,21 +672,21 @@ export async function getHistoricalStatsForAccount(http: HttpClient, params: Get
 
 export interface GetActivityHistoryParams {
   /** The id of the character to retrieve. */
-  characterId: number
+  characterId: number;
   /** Number of rows to return */
-  count?: number
+  count?: number;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /**
    * A filter for the activity mode to be returned. None returns all activities. See
    * the documentation for DestinyActivityModeType for valid values, and pass in
    * string representation.
    */
-  mode?: DestinyActivityModeType
+  mode?: DestinyActivityModeType;
   /** Page number to return, starting with 0. */
-  page?: number
+  page?: number;
 }
 
 /** Gets activity history stats for indicated character. */
@@ -661,11 +704,11 @@ export async function getActivityHistory(http: HttpClient, params: GetActivityHi
 
 export interface GetUniqueWeaponHistoryParams {
   /** The id of the character to retrieve. */
-  characterId: number
+  characterId: number;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Gets details about unique weapon usage, including all exotic weapons. */
@@ -678,11 +721,11 @@ export async function getUniqueWeaponHistory(http: HttpClient, params: GetUnique
 
 export interface GetDestinyAggregateActivityStatsParams {
   /** The specific character whose activities should be returned. */
-  characterId: number
+  characterId: number;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number
+  destinyMembershipId: number;
   /** A valid non-BungieNet membership type. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -698,7 +741,7 @@ export async function getDestinyAggregateActivityStats(http: HttpClient, params:
 
 export interface GetPublicMilestoneContentParams {
   /** The identifier for the milestone to be returned. */
-  milestoneHash: number
+  milestoneHash: number;
 }
 
 /** Gets custom localized content for the milestone of the given hash, if it exists. */

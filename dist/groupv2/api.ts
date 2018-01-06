@@ -35,8 +35,18 @@ import {
   booleanServerResponse
 } from './responses';
 import {
+  ClanBanner,
+  GroupAction,
+  GroupApplicationListRequest,
+  GroupApplicationRequest,
+  GroupBanRequest,
   GroupDateRange,
+  GroupEditAction,
+  GroupOptionalConversationAddRequest,
+  GroupOptionalConversationEditRequest,
+  GroupOptionsEditAction,
   GroupPotentialMemberStatus,
+  GroupQuery,
   GroupType,
   GroupsForMemberFilter,
   RuntimeGroupMemberType
@@ -63,7 +73,7 @@ export async function getAvailableThemes(http: HttpClient): Promise<ListOfGroupT
 
 export interface GetUserClanInviteSettingParams {
   /** The Destiny membership type of the account we wish to access settings. */
-  mType: BungieMembershipType
+  mType: BungieMembershipType;
 }
 
 /**
@@ -79,9 +89,9 @@ export async function getUserClanInviteSetting(http: HttpClient, params: GetUser
 
 export interface SetUserClanInviteSettingParams {
   /** True to allow invites of this user to clans, false otherwise. */
-  allowInvites: boolean
+  allowInvites: boolean;
   /** The Destiny membership type of linked account we are manipulating. */
-  mType: BungieMembershipType
+  mType: BungieMembershipType;
 }
 
 /**
@@ -97,9 +107,9 @@ export async function setUserClanInviteSetting(http: HttpClient, params: SetUser
 
 export interface GetRecommendedGroupsParams {
   /** Requested range in which to pull recommended groups */
-  createDateRange: GroupDateRange
+  createDateRange: GroupDateRange;
   /** Type of groups requested */
-  groupType: GroupType
+  groupType: GroupType;
 }
 
 /**
@@ -113,17 +123,22 @@ export async function getRecommendedGroups(http: HttpClient, params: GetRecommen
   });
 }
 
+export interface GroupSearchParams {
+  body: GroupQuery;
+}
+
 /** Search for Groups. */
-export async function groupSearch(http: HttpClient): Promise<GroupSearchResponseServerResponse> {
+export async function groupSearch(http: HttpClient, params: GroupSearchParams): Promise<GroupSearchResponseServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/GroupV2/Search/'
+    url: 'https://www.bungie.net/Platform/GroupV2/Search/',
+    body: params.body
   });
 }
 
 export interface GetGroupParams {
   /** Requested group's id. */
-  groupId: number
+  groupId: number;
 }
 
 /** Get information about a specific group of the given ID. */
@@ -136,9 +151,9 @@ export async function getGroup(http: HttpClient, params: GetGroupParams): Promis
 
 export interface GetGroupByNameParams {
   /** Exact name of the group to find. */
-  groupName: string
+  groupName: string;
   /** Type of group to find. */
-  groupType: GroupType
+  groupType: GroupType;
 }
 
 /** Get information about a specific group with the given name and type. */
@@ -151,7 +166,7 @@ export async function getGroupByName(http: HttpClient, params: GetGroupByNamePar
 
 export interface GetGroupOptionalConversationsParams {
   /** Requested group's id. */
-  groupId: number
+  groupId: number;
 }
 
 /** Gets a list of available optional conversation channels and their settings. */
@@ -162,17 +177,23 @@ export async function getGroupOptionalConversations(http: HttpClient, params: Ge
   });
 }
 
+export interface CreateGroupParams {
+  body: GroupAction;
+}
+
 /** Create a new group. */
-export async function createGroup(http: HttpClient): Promise<GroupCreationResponseServerResponse> {
+export async function createGroup(http: HttpClient, params: CreateGroupParams): Promise<GroupCreationResponseServerResponse> {
   return http({
     method: 'POST',
-    url: 'https://www.bungie.net/Platform/GroupV2/Create/'
+    url: 'https://www.bungie.net/Platform/GroupV2/Create/',
+    body: params.body
   });
 }
 
 export interface EditGroupParams {
   /** Group ID of the group to edit. */
-  groupId: number
+  groupId: number;
+  body: GroupEditAction;
 }
 
 /**
@@ -183,13 +204,15 @@ export interface EditGroupParams {
 export async function editGroup(http: HttpClient, params: EditGroupParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Edit/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Edit/`,
+    body: params.body
   });
 }
 
 export interface EditClanBannerParams {
   /** Group ID of the group to edit. */
-  groupId: number
+  groupId: number;
+  body: ClanBanner;
 }
 
 /**
@@ -199,13 +222,15 @@ export interface EditClanBannerParams {
 export async function editClanBanner(http: HttpClient, params: EditClanBannerParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/EditClanBanner/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/EditClanBanner/`,
+    body: params.body
   });
 }
 
 export interface EditFounderOptionsParams {
   /** Group ID of the group to edit. */
-  groupId: number
+  groupId: number;
+  body: GroupOptionsEditAction;
 }
 
 /**
@@ -215,13 +240,15 @@ export interface EditFounderOptionsParams {
 export async function editFounderOptions(http: HttpClient, params: EditFounderOptionsParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/EditFounderOptions/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/EditFounderOptions/`,
+    body: params.body
   });
 }
 
 export interface AddOptionalConversationParams {
   /** Group ID of the group to edit. */
-  groupId: number
+  groupId: number;
+  body: GroupOptionalConversationAddRequest;
 }
 
 /**
@@ -231,15 +258,17 @@ export interface AddOptionalConversationParams {
 export async function addOptionalConversation(http: HttpClient, params: AddOptionalConversationParams): Promise<int64ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/Add/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/Add/`,
+    body: params.body
   });
 }
 
 export interface EditOptionalConversationParams {
   /** Conversation Id of the channel being edited. */
-  conversationId: number
+  conversationId: number;
   /** Group ID of the group to edit. */
-  groupId: number
+  groupId: number;
+  body: GroupOptionalConversationEditRequest;
 }
 
 /**
@@ -249,22 +278,23 @@ export interface EditOptionalConversationParams {
 export async function editOptionalConversation(http: HttpClient, params: EditOptionalConversationParams): Promise<int64ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/Edit/${params.conversationId}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/Edit/${params.conversationId}/`,
+    body: params.body
   });
 }
 
 export interface GetMembersOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
-  currentpage: number
+  currentpage: number;
   /** The ID of the group. */
-  groupId: number
+  groupId: number;
   /** Filter out other member types. Use None for all members. */
-  memberType?: RuntimeGroupMemberType
+  memberType?: RuntimeGroupMemberType;
   /**
    * The name fragment upon which a search should be executed for members with
    * matching display or unique names.
    */
-  nameSearch?: string
+  nameSearch?: string;
 }
 
 /** Get the list of members in a given group. */
@@ -281,9 +311,9 @@ export async function getMembersOfGroup(http: HttpClient, params: GetMembersOfGr
 
 export interface GetAdminsAndFounderOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
-  currentpage: number
+  currentpage: number;
   /** The ID of the group. */
-  groupId: number
+  groupId: number;
 }
 
 /** Get the list of members in a given group who are of admin level or higher. */
@@ -296,13 +326,13 @@ export async function getAdminsAndFounderOfGroup(http: HttpClient, params: GetAd
 
 export interface EditGroupMembershipParams {
   /** ID of the group to which the member belongs. */
-  groupId: number
+  groupId: number;
   /** Membership ID to modify. */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the provide membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /** New membertype for the specified member. */
-  memberType: RuntimeGroupMemberType
+  memberType: RuntimeGroupMemberType;
 }
 
 /**
@@ -318,11 +348,11 @@ export async function editGroupMembership(http: HttpClient, params: EditGroupMem
 
 export interface KickMemberParams {
   /** Group ID to kick the user from. */
-  groupId: number
+  groupId: number;
   /** Membership ID to kick. */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the provided membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -339,11 +369,12 @@ export async function kickMember(http: HttpClient, params: KickMemberParams): Pr
 
 export interface BanMemberParams {
   /** Group ID that has the member to ban. */
-  groupId: number
+  groupId: number;
   /** Membership ID of the member to ban from the group. */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the provided membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
+  body: GroupBanRequest;
 }
 
 /**
@@ -353,16 +384,17 @@ export interface BanMemberParams {
 export async function banMember(http: HttpClient, params: BanMemberParams): Promise<int32ServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Ban/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Ban/`,
+    body: params.body
   });
 }
 
 export interface UnbanMemberParams {
-  groupId: number
+  groupId: number;
   /** Membership ID of the member to unban from the group */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the provided membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Unbans the requested member, allowing them to re-apply for membership. */
@@ -375,9 +407,9 @@ export async function unbanMember(http: HttpClient, params: UnbanMemberParams): 
 
 export interface GetBannedMembersOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 entries. */
-  currentpage: number
+  currentpage: number;
   /** Group ID whose banned members you are fetching */
-  groupId: number
+  groupId: number;
 }
 
 /**
@@ -393,11 +425,11 @@ export async function getBannedMembersOfGroup(http: HttpClient, params: GetBanne
 
 export interface AbdicateFoundershipParams {
   /** The new founder for this group. Must already be a group admin. */
-  founderIdNew: number
+  founderIdNew: number;
   /** The target group id. */
-  groupId: number
+  groupId: number;
   /** Membership type of the provided founderIdNew. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -413,24 +445,26 @@ export async function abdicateFoundership(http: HttpClient, params: AbdicateFoun
 
 export interface RequestGroupMembershipParams {
   /** ID of the group you would like to join. */
-  groupId: number
+  groupId: number;
   /** MembershipType of the account to use when joining. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
+  body: GroupApplicationRequest;
 }
 
 /** Request permission to join the given group. */
 export async function requestGroupMembership(http: HttpClient, params: RequestGroupMembershipParams): Promise<GroupApplicationResponseServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/Apply/${params.membershipType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/Apply/${params.membershipType}/`,
+    body: params.body
   });
 }
 
 export interface GetPendingMembershipsParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
-  currentpage: number
+  currentpage: number;
   /** ID of the group. */
-  groupId: number
+  groupId: number;
 }
 
 /**
@@ -446,9 +480,9 @@ export async function getPendingMemberships(http: HttpClient, params: GetPending
 
 export interface GetInvitedIndividualsParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
-  currentpage: number
+  currentpage: number;
   /** ID of the group. */
-  groupId: number
+  groupId: number;
 }
 
 /** Get the list of users who have been invited into the group. */
@@ -461,9 +495,9 @@ export async function getInvitedIndividuals(http: HttpClient, params: GetInvited
 
 export interface RescindGroupMembershipParams {
   /** ID of the group. */
-  groupId: number
+  groupId: number;
   /** MembershipType of the account to leave. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -479,50 +513,57 @@ export async function rescindGroupMembership(http: HttpClient, params: RescindGr
 
 export interface ApproveAllPendingParams {
   /** ID of the group. */
-  groupId: number
+  groupId: number;
+  body: GroupApplicationRequest;
 }
 
 /** Approve all of the pending users for the given group. */
 export async function approveAllPending(http: HttpClient, params: ApproveAllPendingParams): Promise<ListOfEntityActionResultServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/ApproveAll/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/ApproveAll/`,
+    body: params.body
   });
 }
 
 export interface DenyAllPendingParams {
   /** ID of the group. */
-  groupId: number
+  groupId: number;
+  body: GroupApplicationRequest;
 }
 
 /** Deny all of the pending users for the given group. */
 export async function denyAllPending(http: HttpClient, params: DenyAllPendingParams): Promise<ListOfEntityActionResultServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/DenyAll/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/DenyAll/`,
+    body: params.body
   });
 }
 
 export interface ApprovePendingForListParams {
   /** ID of the group. */
-  groupId: number
+  groupId: number;
+  body: GroupApplicationListRequest;
 }
 
 /** Approve all of the pending users for the given group. */
 export async function approvePendingForList(http: HttpClient, params: ApprovePendingForListParams): Promise<ListOfEntityActionResultServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/ApproveList/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/ApproveList/`,
+    body: params.body
   });
 }
 
 export interface ApprovePendingParams {
   /** ID of the group. */
-  groupId: number
+  groupId: number;
   /** The membership id being approved. */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the supplied membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
+  body: GroupApplicationRequest;
 }
 
 /**
@@ -532,32 +573,35 @@ export interface ApprovePendingParams {
 export async function approvePending(http: HttpClient, params: ApprovePendingParams): Promise<booleanServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/Approve/${params.membershipType}/${params.membershipId}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/Approve/${params.membershipType}/${params.membershipId}/`,
+    body: params.body
   });
 }
 
 export interface DenyPendingForListParams {
   /** ID of the group. */
-  groupId: number
+  groupId: number;
+  body: GroupApplicationListRequest;
 }
 
 /** Deny all of the pending users for the given group that match the passed-in . */
 export async function denyPendingForList(http: HttpClient, params: DenyPendingForListParams): Promise<ListOfEntityActionResultServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/DenyList/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/DenyList/`,
+    body: params.body
   });
 }
 
 export interface GetGroupsForMemberParams {
   /** Filter apply to list of joined groups. */
-  filter: GroupsForMemberFilter
+  filter: GroupsForMemberFilter;
   /** Type of group the supplied member founded. */
-  groupType: GroupType
+  groupType: GroupType;
   /** Membership ID to for which to find founded groups. */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the supplied membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Get information about the groups that a given member has joined. */
@@ -570,13 +614,13 @@ export async function getGroupsForMember(http: HttpClient, params: GetGroupsForM
 
 export interface GetPotentialGroupsForMemberParams {
   /** Filter apply to list of potential joined groups. */
-  filter: GroupPotentialMemberStatus
+  filter: GroupPotentialMemberStatus;
   /** Type of group the supplied member applied. */
-  groupType: GroupType
+  groupType: GroupType;
   /** Membership ID to for which to find applied groups. */
-  membershipId: number
+  membershipId: number;
   /** Membership type of the supplied membership ID. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /**
@@ -592,28 +636,30 @@ export async function getPotentialGroupsForMember(http: HttpClient, params: GetP
 
 export interface IndividualGroupInviteParams {
   /** ID of the group you would like to join. */
-  groupId: number
+  groupId: number;
   /** Membership id of the account being invited. */
-  membershipId: number
+  membershipId: number;
   /** MembershipType of the account being invited. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
+  body: GroupApplicationRequest;
 }
 
 /** Invite a user to join this group. */
 export async function individualGroupInvite(http: HttpClient, params: IndividualGroupInviteParams): Promise<GroupApplicationResponseServerResponse> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/IndividualInvite/${params.membershipType}/${params.membershipId}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/IndividualInvite/${params.membershipType}/${params.membershipId}/`,
+    body: params.body
   });
 }
 
 export interface IndividualGroupInviteCancelParams {
   /** ID of the group you would like to join. */
-  groupId: number
+  groupId: number;
   /** Membership id of the account being cancelled. */
-  membershipId: number
+  membershipId: number;
   /** MembershipType of the account being cancelled. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
 }
 
 /** Cancels a pending invitation to join a group. */

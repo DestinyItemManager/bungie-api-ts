@@ -35,11 +35,11 @@ import {
 
 export interface GetCommunityContentParams {
   /** The type of media to get */
-  mediaFilter: ForumTopicsCategoryFiltersEnum
+  mediaFilter: ForumTopicsCategoryFiltersEnum;
   /** Zero based page */
-  page: number
+  page: number;
   /** The sort mode. */
-  sort: CommunityContentSortMode
+  sort: CommunityContentSortMode;
 }
 
 /** Returns community content. */
@@ -55,18 +55,18 @@ export interface GetCommunityLiveStatusesParams {
    * The hash of the Activity Mode for which streams should be retrieved. Don't pass
    * it in or pass 0 to not filter by mode.
    */
-  modeHash?: number
+  modeHash?: number;
   /** Zero based page. */
-  page: number
+  page: number;
   /** The type of partnership for which the status should be returned. */
-  partnershipType: PartnershipType
+  partnershipType: PartnershipType;
   /** The sort mode. */
-  sort: CommunityStatusSort
+  sort: CommunityStatusSort;
   /**
    * The locale for streams you'd like to see. Don't pass this to fall back on your
    * BNet locale. Pass 'ALL' to not filter by locale.
    */
-  streamLocale?: string
+  streamLocale?: string;
 }
 
 /** Returns info about community members who are live streaming. */
@@ -83,11 +83,11 @@ export async function getCommunityLiveStatuses(http: HttpClient, params: GetComm
 
 export interface GetCommunityLiveStatusesForClanmatesParams {
   /** Zero based page. */
-  page: number
+  page: number;
   /** The type of partnership for which the status should be returned. */
-  partnershipType: PartnershipType
+  partnershipType: PartnershipType;
   /** The sort mode. */
-  sort: CommunityStatusSort
+  sort: CommunityStatusSort;
 }
 
 /** Returns info about community members who are live streaming in your clans. */
@@ -100,11 +100,11 @@ export async function getCommunityLiveStatusesForClanmates(http: HttpClient, par
 
 export interface GetCommunityLiveStatusesForFriendsParams {
   /** Zero based page. */
-  page: number
+  page: number;
   /** The type of partnership for which the status should be returned. */
-  partnershipType: PartnershipType
+  partnershipType: PartnershipType;
   /** The sort mode. */
-  sort: CommunityStatusSort
+  sort: CommunityStatusSort;
 }
 
 /** Returns info about community members who are live streaming among your friends. */
@@ -117,16 +117,16 @@ export async function getCommunityLiveStatusesForFriends(http: HttpClient, param
 
 export interface GetFeaturedCommunityLiveStatusesParams {
   /** Zero based page. */
-  page: number
+  page: number;
   /** The type of partnership for which the status should be returned. */
-  partnershipType: PartnershipType
+  partnershipType: PartnershipType;
   /** The sort mode. */
-  sort: CommunityStatusSort
+  sort: CommunityStatusSort;
   /**
    * The locale for streams you'd like to see. Don't pass this to fall back on your
    * BNet locale. Pass 'ALL' to not filter by locale.
    */
-  streamLocale?: string
+  streamLocale?: string;
 }
 
 /** Returns info about Featured live streams. */
@@ -142,11 +142,11 @@ export async function getFeaturedCommunityLiveStatuses(http: HttpClient, params:
 
 export interface GetStreamingStatusForMemberParams {
   /** The membershipId related to that type. */
-  membershipId: number
+  membershipId: number;
   /** The type of account for which info will be extracted. */
-  membershipType: BungieMembershipType
+  membershipType: BungieMembershipType;
   /** The type of partnership for which info will be extracted. */
-  partnershipType: PartnershipType
+  partnershipType: PartnershipType;
 }
 
 /** Gets the Live Streaming status of a particular Account and Membership Type. */

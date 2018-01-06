@@ -20,28 +20,28 @@ import {
 } from './interfaces';
 
 export interface TrendingCategoriesServerResponse {
-  Response?: TrendingCategories
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: TrendingCategories;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface SearchResultOfTrendingEntryServerResponse {
-  Response?: SearchResultOfTrendingEntry
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: SearchResultOfTrendingEntry;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface TrendingDetailServerResponse {
-  Response?: TrendingDetail
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: TrendingDetail;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }

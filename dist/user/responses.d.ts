@@ -22,55 +22,55 @@ import {
 } from '../common';
 
 export interface GeneralUserServerResponse {
-  Response?: GeneralUser
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: GeneralUser;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface ListOfUserAliasServerResponse {
-  Response?: UserAlias[]
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: UserAlias[];
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface ListOfGeneralUserServerResponse {
-  Response?: GeneralUser[]
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: GeneralUser[];
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface ListOfUserThemeServerResponse {
-  Response?: UserTheme[]
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: UserTheme[];
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface UserMembershipDataServerResponse {
-  Response?: UserMembershipData
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: UserMembershipData;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface CEListOfPublicPartnershipDetailServerResponse {
-  Response?: PublicPartnershipDetail[]
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: PublicPartnershipDetail[];
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }

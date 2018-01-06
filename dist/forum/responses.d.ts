@@ -23,46 +23,46 @@ import {
 } from '../platform';
 
 export interface PostSearchResponseServerResponse {
-  Response?: PostSearchResponse
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: PostSearchResponse;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface ListOfTagResponseServerResponse {
-  Response?: TagResponse[]
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: TagResponse[];
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface ForumRecruitmentDetailServerResponse {
-  Response?: ForumRecruitmentDetail
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: ForumRecruitmentDetail;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface SaveMessageResultServerResponse {
-  Response?: SaveMessageResult
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: SaveMessageResult;
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }
 
 export interface CEListOfForumRecruitmentDetailServerResponse {
-  Response?: ForumRecruitmentDetail[]
-  ErrorCode?: PlatformErrorCodes
-  ThrottleSeconds?: number
-  ErrorStatus?: string
-  Message?: string
-  MessageData?: { [key: string]: string }
+  Response?: ForumRecruitmentDetail[];
+  ErrorCode?: PlatformErrorCodes;
+  ThrottleSeconds?: number;
+  ErrorStatus?: string;
+  Message?: string;
+  MessageData?: { [key: string]: string };
 }

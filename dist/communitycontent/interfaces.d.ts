@@ -26,11 +26,11 @@ export const enum CommunityStatusSort {
 }
 
 export interface SearchResultOfCommunityLiveStatus {
-  results?: CommunityLiveStatus[]
-  totalResults?: number
-  hasMore?: boolean
-  query?: PagedQuery
-  replacementContinuationToken?: string
+  results?: CommunityLiveStatus[];
+  totalResults?: number;
+  hasMore?: boolean;
+  query?: PagedQuery;
+  replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -43,30 +43,30 @@ export interface SearchResultOfCommunityLiveStatus {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean
+  useTotalResults?: boolean;
 }
 
 export interface CommunityLiveStatus {
-  dateStatusUpdated?: string
-  url?: string
-  partnershipIdentifier?: string
-  partnershipType?: PartnershipType
-  thumbnail?: string
-  thumbnailSmall?: string
-  thumbnailLarge?: string
-  destinyCharacterId?: number
-  userInfo?: UserInfoCard
-  currentActivityHash?: number
-  dateLastPlayed?: string
-  dateStreamStarted?: string
-  locale?: string
-  currentViewers?: number
-  followers?: number
-  overallViewers?: number
-  isFeatured?: boolean
-  title?: string
-  activityModeHash?: number
-  dateFeatured?: string
-  trendingValue?: number
-  isSubscribable?: boolean
+  dateStatusUpdated?: string;
+  url?: string;
+  partnershipIdentifier?: string;
+  partnershipType?: PartnershipType;
+  thumbnail?: string;
+  thumbnailSmall?: string;
+  thumbnailLarge?: string;
+  destinyCharacterId?: number;
+  userInfo?: UserInfoCard;
+  currentActivityHash?: number;
+  dateLastPlayed?: string;
+  dateStreamStarted?: string;
+  locale?: string;
+  currentViewers?: number;
+  followers?: number;
+  overallViewers?: number;
+  isFeatured?: boolean;
+  title?: string;
+  activityModeHash?: number;
+  dateFeatured?: string;
+  trendingValue?: number;
+  isSubscribable?: boolean;
 }

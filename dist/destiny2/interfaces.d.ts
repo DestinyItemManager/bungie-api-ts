@@ -11,6 +11,7 @@
  */
 
 import {
+  BungieMembershipType,
   DateRange,
   HyperlinkReference
 } from '../common';
@@ -152,6 +153,81 @@ export const enum DestinyComponentType {
   Kiosks = 500
 }
 
+export interface DestinyItemTransferRequest {
+  itemReferenceHash?: number;
+  stackSize?: number;
+  transferToVault?: boolean;
+  itemId?: number;
+  characterId?: number;
+  membershipType?: BungieMembershipType;
+}
+
+export interface DestinyPostmasterTransferRequest {
+  itemReferenceHash?: number;
+  stackSize?: number;
+  itemId?: number;
+  characterId?: number;
+  membershipType?: BungieMembershipType;
+}
+
+export interface DestinyItemActionRequest {
+  itemId?: number;
+  characterId?: number;
+  membershipType?: BungieMembershipType;
+}
+
+export interface DestinyItemSetActionRequest {
+  itemIds?: number[];
+  characterId?: number;
+  membershipType?: BungieMembershipType;
+}
+
+export interface DestinyItemStateRequest {
+  state?: boolean;
+  itemId?: number;
+  characterId?: number;
+  membershipType?: BungieMembershipType;
+}
+
+/**
+ * If you want to report a player causing trouble in a game, this request will let
+ * you report that player and the specific PGCR in which the trouble was caused,
+ * along with why.
+ * 
+ * Please don't do this just because you dislike the person! I mean, I know people
+ * will do it anyways, but can you like take a good walk, or put a curse on them or
+ * something? Do me a solid and reconsider.
+ * 
+ * Note that this request object doesn't have the actual PGCR ID nor your Account/
+ * Character ID in it. We will infer that information from your authentication
+ * information and the PGCR ID that you pass into the URL of the reporting endpoint
+ * itself.
+ */
+export interface DestinyReportOffensePgcrRequest {
+  /**
+   * So you've decided to report someone instead of cursing them and their
+   * descendants. Well, okay then. This is the category or categorie(s) of
+   * infractions for which you are reporting the user. These are hash identifiers
+   * that map to DestinyReportReasonCategoryDefinition entries.
+   * 
+   * Mapped to DestinyReportReasonCategoryDefinition in the manifest.
+   */
+  reasonCategoryHashes?: number[];
+  /**
+   * If applicable, provide a more specific reason(s) within the general category of
+   * problems provided by the reasonHash. This is also an identifier for a reason.
+   * All reasonHashes provided must be children of at least one the
+   * reasonCategoryHashes provided.
+   */
+  reasonHashes?: number[];
+  /**
+   * Within the PGCR provided when calling the Reporting endpoint, this should be the
+   * character ID of the user that you thought was violating terms of use. They must
+   * exist in the PGCR provided.
+   */
+  offendingCharacterId?: number;
+}
+
 export const enum DestinyStatsGroupType {
   None = 0,
   General = 1,
@@ -229,17 +305,17 @@ export const enum PeriodType {
  * by those calling the Destiny Platform.
  */
 export interface DestinyManifest {
-  version?: string
-  mobileAssetContentPath?: string
-  mobileGearAssetDataBases?: GearAssetDataBaseDefinition[]
-  mobileWorldContentPaths?: { [key: string]: string }
-  mobileClanBannerDatabasePath?: string
-  mobileGearCDN?: { [key: string]: string }
+  version?: string;
+  mobileAssetContentPath?: string;
+  mobileGearAssetDataBases?: GearAssetDataBaseDefinition[];
+  mobileWorldContentPaths?: { [key: string]: string };
+  mobileClanBannerDatabasePath?: string;
+  mobileGearCDN?: { [key: string]: string };
 }
 
 export interface GearAssetDataBaseDefinition {
-  version?: number
-  path?: string
+  version?: number;
+  path?: string;
 }
 
 /** Provides common properties for destiny definitions. */
@@ -251,14 +327,14 @@ export interface DestinyDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -272,25 +348,25 @@ export interface DestinyProfileResponse {
    * 
    * COMPONENT TYPE: VendorReceipts
    */
-  vendorReceipts?: SingleComponentResponseOfDestinyVendorReceiptsComponent
+  vendorReceipts?: SingleComponentResponseOfDestinyVendorReceiptsComponent;
   /**
    * The profile-level inventory of the Destiny Profile.
    * 
    * COMPONENT TYPE: ProfileInventories
    */
-  profileInventory?: SingleComponentResponseOfDestinyInventoryComponent
+  profileInventory?: SingleComponentResponseOfDestinyInventoryComponent;
   /**
    * The profile-level currencies owned by the Destiny Profile.
    * 
    * COMPONENT TYPE: ProfileCurrencies
    */
-  profileCurrencies?: SingleComponentResponseOfDestinyInventoryComponent
+  profileCurrencies?: SingleComponentResponseOfDestinyInventoryComponent;
   /**
    * The basic information about the Destiny Profile (formerly "Account").
    * 
    * COMPONENT TYPE: Profiles
    */
-  profile?: SingleComponentResponseOfDestinyProfileComponent
+  profile?: SingleComponentResponseOfDestinyProfileComponent;
   /**
    * Items available from Kiosks that are available Profile-wide (i.e. across all
    * characters)
@@ -302,45 +378,45 @@ export interface DestinyProfileResponse {
    * 
    * COMPONENT TYPE: Kiosks
    */
-  profileKiosks?: SingleComponentResponseOfDestinyKiosksComponent
+  profileKiosks?: SingleComponentResponseOfDestinyKiosksComponent;
   /**
    * Basic information about each character, keyed by the CharacterId.
    * 
    * COMPONENT TYPE: Characters
    */
-  characters?: DictionaryComponentResponseOfint64AndDestinyCharacterComponent
+  characters?: DictionaryComponentResponseOfint64AndDestinyCharacterComponent;
   /**
    * The character-level non-equipped inventory items, keyed by the Character's Id.
    * 
    * COMPONENT TYPE: CharacterInventories
    */
-  characterInventories?: DictionaryComponentResponseOfint64AndDestinyInventoryComponent
+  characterInventories?: DictionaryComponentResponseOfint64AndDestinyInventoryComponent;
   /**
    * Character-level progression data, keyed by the Character's Id.
    * 
    * COMPONENT TYPE: CharacterProgressions
    */
-  characterProgressions?: DictionaryComponentResponseOfint64AndDestinyCharacterProgressionComponent
+  characterProgressions?: DictionaryComponentResponseOfint64AndDestinyCharacterProgressionComponent;
   /**
    * Character rendering data - a minimal set of info needed to render a character in
    * 3D - keyed by the Character's Id.
    * 
    * COMPONENT TYPE: CharacterRenderData
    */
-  characterRenderData?: DictionaryComponentResponseOfint64AndDestinyCharacterRenderComponent
+  characterRenderData?: DictionaryComponentResponseOfint64AndDestinyCharacterRenderComponent;
   /**
    * Character activity data - the activities available to this character and its
    * status, keyed by the Character's Id.
    * 
    * COMPONENT TYPE: CharacterActivities
    */
-  characterActivities?: DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent
+  characterActivities?: DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent;
   /**
    * The character's equipped items, keyed by the Character's Id.
    * 
    * COMPONENT TYPE: CharacterEquipment
    */
-  characterEquipment?: DictionaryComponentResponseOfint64AndDestinyInventoryComponent
+  characterEquipment?: DictionaryComponentResponseOfint64AndDestinyInventoryComponent;
   /**
    * Items available from Kiosks that are available to a specific character as
    * opposed to the account as a whole. It must be combined with data from the
@@ -354,7 +430,7 @@ export interface DestinyProfileResponse {
    * 
    * COMPONENT TYPE: Kiosks
    */
-  characterKiosks?: DictionaryComponentResponseOfint64AndDestinyKiosksComponent
+  characterKiosks?: DictionaryComponentResponseOfint64AndDestinyKiosksComponent;
   /**
    * Information about instanced items across all returned characters, keyed by the
    * item's instance ID.
@@ -362,7 +438,7 @@ export interface DestinyProfileResponse {
    * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
    * types.]
    */
-  itemComponents?: DestinyItemComponentSetOfint64
+  itemComponents?: DestinyItemComponentSetOfint64;
 }
 
 /**
@@ -375,51 +451,51 @@ export interface DestinyCharacterResponse {
    * 
    * COMPONENT TYPE: CharacterInventories
    */
-  inventory?: SingleComponentResponseOfDestinyInventoryComponent
+  inventory?: SingleComponentResponseOfDestinyInventoryComponent;
   /**
    * Base information about the character in question.
    * 
    * COMPONENT TYPE: Characters
    */
-  character?: SingleComponentResponseOfDestinyCharacterComponent
+  character?: SingleComponentResponseOfDestinyCharacterComponent;
   /**
    * Character progression data, including Milestones.
    * 
    * COMPONENT TYPE: CharacterProgressions
    */
-  progressions?: SingleComponentResponseOfDestinyCharacterProgressionComponent
+  progressions?: SingleComponentResponseOfDestinyCharacterProgressionComponent;
   /**
    * Character rendering data - a minimal set of information about equipment and dyes
    * used for rendering.
    * 
    * COMPONENT TYPE: CharacterRenderData
    */
-  renderData?: SingleComponentResponseOfDestinyCharacterRenderComponent
+  renderData?: SingleComponentResponseOfDestinyCharacterRenderComponent;
   /**
    * Activity data - info about current activities available to the player.
    * 
    * COMPONENT TYPE: CharacterActivities
    */
-  activities?: SingleComponentResponseOfDestinyCharacterActivitiesComponent
+  activities?: SingleComponentResponseOfDestinyCharacterActivitiesComponent;
   /**
    * Equipped items on the character.
    * 
    * COMPONENT TYPE: CharacterEquipment
    */
-  equipment?: SingleComponentResponseOfDestinyInventoryComponent
+  equipment?: SingleComponentResponseOfDestinyInventoryComponent;
   /**
    * Items available from Kiosks that are available to this specific character.
    * 
    * COMPONENT TYPE: Kiosks
    */
-  kiosks?: SingleComponentResponseOfDestinyKiosksComponent
+  kiosks?: SingleComponentResponseOfDestinyKiosksComponent;
   /**
    * The set of components belonging to the player's instanced items.
    * 
    * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
    * types.]
    */
-  itemComponents?: DestinyItemComponentSetOfint64
+  itemComponents?: DestinyItemComponentSetOfint64;
 }
 
 /**
@@ -437,7 +513,7 @@ export interface DestinyMilestone {
    * 
    * Mapped to DestinyMilestoneDefinition in the manifest.
    */
-  milestoneHash?: number
+  milestoneHash?: number;
   /**
    * Indicates what quests are available for this Milestone. Usually this will be
    * only a single Quest, but some quests have multiple available that you can choose
@@ -446,7 +522,7 @@ export interface DestinyMilestone {
    * determine which one(s) are actually active right now. It is possible for
    * Milestones to not have any quests.
    */
-  availableQuests?: DestinyMilestoneQuest[]
+  availableQuests?: DestinyMilestoneQuest[];
   /**
    * Milestones may have arbitrary key/value pairs associated with them, for data
    * that users will want to know about but that doesn't fit neatly into any of the
@@ -458,7 +534,7 @@ export interface DestinyMilestone {
    * is the floating point number. The definition will tell you how to format this
    * number.
    */
-  values?: { [key: string]: number }
+  values?: { [key: string]: number };
   /**
    * A milestone may have one or more active vendors that are "related" to it (that
    * provide rewards, or that are the initiators of the Milestone). I already regret
@@ -474,7 +550,7 @@ export interface DestinyMilestone {
    * 
    * Mapped to DestinyVendorDefinition in the manifest.
    */
-  vendorHashes?: number[]
+  vendorHashes?: number[];
   /**
    * Replaces vendorHashes, which I knew was going to be trouble the day it walked in
    * the door. This will return not only what Vendors are active and relevant to the
@@ -482,7 +558,7 @@ export interface DestinyMilestone {
    * data - for example, if the Vendor is featuring a specific item relevant to this
    * event that you should show with them.
    */
-  vendors?: DestinyMilestoneVendor[]
+  vendors?: DestinyMilestoneVendor[];
   /**
    * If the entity to which this component is attached has known active Rewards for
    * the player, this will detail information about those rewards, keyed by the
@@ -492,17 +568,17 @@ export interface DestinyMilestone {
    * for Milestones that may provide rewards for performing a variety of tasks that
    * aren't under a specific Quest.
    */
-  rewards?: DestinyMilestoneRewardCategory[]
+  rewards?: DestinyMilestoneRewardCategory[];
   /**
    * If known, this is the date when the event last began or refreshed. It will only
    * be populated for events with fixed and repeating start and end dates.
    */
-  startDate?: string
+  startDate?: string;
   /**
    * If known, this is the date when the event will next end or repeat. It will only
    * be populated for events with fixed and repeating start and end dates.
    */
-  endDate?: string
+  endDate?: string;
 }
 
 /**
@@ -552,23 +628,23 @@ export interface DestinyMilestone {
  * sometimes nonexistant) milestone-level names and descriptions.
  */
 export interface DestinyMilestoneDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /** A custom image someone made just for the milestone. Isn't that special? */
-  image?: string
+  image?: string;
   /**
    * An enumeration listing one of the possible types of milestones. Check out the
    * DestinyMilestoneType enum for more info!
    */
-  milestoneType?: DestinyMilestoneType
+  milestoneType?: DestinyMilestoneType;
   /** If True, then the Milestone has been integrated with BNet's recruiting feature. */
-  recruitable?: boolean
+  recruitable?: boolean;
   /**
    * If the milestone has a friendly identifier for association with other features -
    * such as Recruiting - that identifier can be found here. This is "friendly" in
    * that it looks better in a URL than whatever the identifier for the Milestone
    * actually is.
    */
-  friendlyName?: string
+  friendlyName?: string;
   /**
    * If TRUE, this entry should be returned in the list of milestones for the "
    * Explore Destiny" (i.e. new BNet homepage) features of Bungie.net (as long as the
@@ -576,13 +652,13 @@ export interface DestinyMilestoneDefinition {
    * BNet and the companion app for the "Live Events" feature of the front page/
    * welcome view: it's not a reflection of what you see in-game.
    */
-  showInExplorer?: boolean
+  showInExplorer?: boolean;
   /**
    * If TRUE, "Explore Destiny" (the front page of BNet and the companion app)
    * prioritize using the activity image over any overriding Quest or Milestone image
    * provided. This unfortunate hack is brought to you by Trials of The Nine.
    */
-  explorePrioritizesActivityImage?: boolean
+  explorePrioritizesActivityImage?: boolean;
   /**
    * A shortcut for clients - and the server - to understand whether we can predict
    * the start and end dates for this event. In practice, there are multiple ways
@@ -590,7 +666,7 @@ export interface DestinyMilestoneDefinition {
    * able to be predicted via any mechanism (for instance, events that are manually
    * triggered on and off)
    */
-  hasPredictableDates?: boolean
+  hasPredictableDates?: boolean;
   /**
    * The full set of possible Quests that give the overview of the Milestone event/
    * activity in question. Only one of these can be active at a time for a given
@@ -598,33 +674,33 @@ export interface DestinyMilestoneDefinition {
    * from. (for instance, with Milestones you can choose from the three available
    * Quests, but only one can be active at a time) Keyed by the quest item.
    */
-  quests?: { [key: number]: undefined }
+  quests?: { [key: number]: undefined };
   /**
    * If this milestone can provide rewards, this will define the categories into
    * which the individual reward entries are placed.
    */
-  rewards?: { [key: number]: undefined }
+  rewards?: { [key: number]: undefined };
   /**
    * If you're going to show Vendors for the Milestone, you can use this as a
    * localized "header" for the section where you show that vendor data. It'll
    * provide a more context-relevant clue about what the vendor's role is in the
    * Milestone.
    */
-  vendorsDisplayTitle?: string
+  vendorsDisplayTitle?: string;
   /**
    * Sometimes, milestones will have rewards provided by Vendors. This definition
    * gives the information needed to understand which vendors are relevant, the order
    * in which they should be returned if order matters, and the conditions under
    * which the Vendor is relevant to the user.
    */
-  vendors?: DestinyMilestoneVendorDefinition[]
+  vendors?: DestinyMilestoneVendorDefinition[];
   /**
    * Sometimes, milestones will have arbitrary values associated with them that are
    * of interest to us or to third party developers. This is the collection of those
    * values' definitions, keyed by the identifier of the value and providing useful
    * definition information such as localizable names and descriptions for the value.
    */
-  values?: { [key: string]: undefined }
+  values?: { [key: string]: undefined };
   /**
    * Some milestones are explicit objectives that you can see and interact with in
    * the game. Some milestones are more conceptual, built by BNet to help advise you
@@ -633,7 +709,7 @@ export interface DestinyMilestoneDefinition {
    * If this is FALSE, it's an event or activity you can participate in, but you won'
    * t see it as a Milestone in the game's UI.
    */
-  isInGameMilestone?: boolean
+  isInGameMilestone?: boolean;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -641,14 +717,14 @@ export interface DestinyMilestoneDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -657,8 +733,8 @@ export interface DestinyMilestoneDefinition {
  * information. This is the base class for that display information.
  */
 export interface DestinyDisplayPropertiesDefinition {
-  description?: string
-  name?: string
+  description?: string;
+  name?: string;
   /**
    * Note that "icon" is sometimes misleading, and should be interpreted in the
    * context of the entity. For instance, in Destiny 1 the
@@ -667,8 +743,8 @@ export interface DestinyDisplayPropertiesDefinition {
    * But usually, it will be a small square image that you can use as... well, an
    * icon.
    */
-  icon?: string
-  hasIcon?: boolean
+  icon?: string;
+  hasIcon?: boolean;
 }
 
 /**
@@ -685,7 +761,7 @@ export interface DestinyMilestoneVendorDefinition {
    * 
    * Mapped to DestinyVendorDefinition in the manifest.
    */
-  vendorHash?: number
+  vendorHash?: number;
 }
 
 /**
@@ -728,17 +804,17 @@ export interface DestinyMilestoneVendorDefinition {
  * information from the API when it is available.
  */
 export interface DestinyVendorDefinition {
-  displayProperties?: DestinyVendorDisplayPropertiesDefinition
+  displayProperties?: DestinyVendorDisplayPropertiesDefinition;
   /**
    * If the vendor has a custom localized string describing the "buy" action, that is
    * returned here.
    */
-  buyString?: string
+  buyString?: string;
   /**
    * Ditto for selling. Not that you can sell items to a vendor anymore. Will it come
    * back? Who knows. The string's still there.
    */
-  sellString?: string
+  sellString?: string;
   /**
    * If the vendor has an item that should be displayed as the "featured" item, this
    * is the hash identifier for that DestinyVendorItemDefinition.
@@ -748,11 +824,11 @@ export interface DestinyVendorDefinition {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  displayItemHash?: number
+  displayItemHash?: number;
   /** If this is true, you aren't allowed to buy whatever the vendor is selling. */
-  inhibitBuying?: boolean
+  inhibitBuying?: boolean;
   /** If this is true, you're not allowed to sell whatever the vendor is buying. */
-  inhibitSelling?: boolean
+  inhibitSelling?: boolean;
   /**
    * If the Vendor has a faction, this hash will be valid and point to a
    * DestinyFactionDefinition.
@@ -763,7 +839,7 @@ export interface DestinyVendorDefinition {
    * 
    * Mapped to DestinyFactionDefinition in the manifest.
    */
-  factionHash?: number
+  factionHash?: number;
   /**
    * A number used for calculating the frequency of a vendor's inventory resetting/
    * refreshing.
@@ -771,12 +847,12 @@ export interface DestinyVendorDefinition {
    * Don't worry about calculating this - we do it on the server side and send you
    * the next refresh date with the live data.
    */
-  resetIntervalMinutes?: number
+  resetIntervalMinutes?: number;
   /**
    * Again, used for reset/refreshing of inventory. Don't worry too much about it.
    * Unless you want to.
    */
-  resetOffsetMinutes?: number
+  resetOffsetMinutes?: number;
   /**
    * If an item can't be purchased from the vendor, there may be many "custom"/game
    * state specific reasons why not.
@@ -786,47 +862,47 @@ export interface DestinyVendorDefinition {
    * purchased: using those values to index into this array, you can show the user
    * the appropriate failure message for the item that can't be bought.
    */
-  failureStrings?: string[]
+  failureStrings?: string[];
   /**
    * If we were able to predict the dates when this Vendor will be visible/available,
    * this will be the list of those date ranges. Sadly, we're not able to predict
    * this very frequently, so this will often be useless data.
    */
-  unlockRanges?: DateRange[]
+  unlockRanges?: DateRange[];
   /**
    * The internal identifier for the Vendor. A holdover from the old days of Vendors,
    * but we don't have time to refactor it away.
    */
-  vendorIdentifier?: string
+  vendorIdentifier?: string;
   /** A portrait of the Vendor's smiling mug. Or frothing tentacles. */
-  vendorPortrait?: string
+  vendorPortrait?: string;
   /** If the vendor has a custom banner image, that can be found here. */
-  vendorBanner?: string
+  vendorBanner?: string;
   /**
    * If a vendor is not enabled, we won't even save the vendor's definition, and we
    * won't return any items or info about them. It's as if they don't exist.
    */
-  enabled?: boolean
+  enabled?: boolean;
   /**
    * If a vendor is not visible, we still have and will give vendor definition info,
    * but we won't use them for things like Advisors or UI.
    */
-  visible?: boolean
+  visible?: boolean;
   /** The identifier of the VendorCategoryDefinition for this vendor. */
-  vendorCategoryIdentifier?: string
+  vendorCategoryIdentifier?: string;
   /** The identifier of the VendorCategoryDefinition for this vendor's subcategory. */
-  vendorSubcategoryIdentifier?: string
+  vendorSubcategoryIdentifier?: string;
   /**
    * If TRUE, consolidate categories that only differ by trivial properties (such as
    * having minor differences in name)
    */
-  consolidateCategories?: boolean
+  consolidateCategories?: boolean;
   /**
    * Describes "actions" that can be performed on a vendor. Currently, none of these
    * exist. But theoretically a Vendor could let you interact with it by performing
    * actions. We'll see what these end up looking like if they ever get used.
    */
-  actions?: DestinyVendorActionDefinition[]
+  actions?: DestinyVendorActionDefinition[];
   /**
    * These are the headers for sections of items that the vendor is selling. When you
    * see items organized by category in the header, it is these categories that it is
@@ -839,12 +915,12 @@ export interface DestinyVendorDefinition {
    * These are the categories post-concatenation, if the vendor had concatenation
    * applied. If you want the pre-aggregated category data, use originalCategories.
    */
-  categories?: DestinyVendorCategoryEntryDefinition[]
+  categories?: DestinyVendorCategoryEntryDefinition[];
   /**
    * See the categories property for a description of categories and why
    * originalCategories exists.
    */
-  originalCategories?: DestinyVendorCategoryEntryDefinition[]
+  originalCategories?: DestinyVendorCategoryEntryDefinition[];
   /**
    * Display Categories are different from "categories" in that these are
    * specifically for visual grouping and display of categories in Vendor UI.
@@ -853,19 +929,19 @@ export interface DestinyVendorDefinition {
    * categorized entirely separately from "Display Categories", there need be and
    * often will be no meaningful relationship between the two.
    */
-  displayCategories?: DestinyDisplayCategoryDefinition[]
+  displayCategories?: DestinyDisplayCategoryDefinition[];
   /**
    * In addition to selling items, vendors can have "interactions": UI where you "
    * talk" with the vendor and they offer you a reward, some item, or merely
    * acknowledge via dialog that you did something cool.
    */
-  interactions?: DestinyVendorInteractionDefinition[]
+  interactions?: DestinyVendorInteractionDefinition[];
   /**
    * If the vendor shows you items from your own inventory - such as the Vault vendor
    * does - this data describes the UI around showing those inventory buckets and
    * which ones get shown.
    */
-  inventoryFlyouts?: DestinyVendorInventoryFlyoutDefinition[]
+  inventoryFlyouts?: DestinyVendorInventoryFlyoutDefinition[];
   /**
    * If the vendor sells items (or merely has a list of items to show like the "Sack"
    * vendors do), this is the list of those items that the vendor can sell. From this
@@ -876,18 +952,18 @@ export interface DestinyVendorDefinition {
    * stops a vendor from selling you some specific weapon but using two different
    * currencies, or the same weapon at multiple "item levels".
    */
-  itemList?: DestinyVendorItemDefinition[]
+  itemList?: DestinyVendorItemDefinition[];
   /**
    * BNet doesn't use this data yet, but it appears to be an optional list of flavor
    * text about services that the Vendor can provide.
    */
-  services?: DestinyVendorServiceDefinition[]
+  services?: DestinyVendorServiceDefinition[];
   /**
    * If the Vendor is actually a vehicle for the transferring of items (like the
    * Vault and Postmaster vendors), this defines the list of source->destination
    * buckets for transferring.
    */
-  acceptedItems?: DestinyVendorAcceptedItemDefinition[]
+  acceptedItems?: DestinyVendorAcceptedItemDefinition[];
   /**
    * As many of you know, Vendor data has historically been pretty brutal on the BNet
    * servers. In an effort to reduce this workload, only Vendors with this flag set
@@ -896,7 +972,7 @@ export interface DestinyVendorDefinition {
    * vendors, for example, that you can usually suss out the details for using just
    * the definitions themselves.
    */
-  returnWithVendorRequest?: boolean
+  returnWithVendorRequest?: boolean;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -904,14 +980,14 @@ export interface DestinyVendorDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 export interface DestinyVendorDisplayPropertiesDefinition {
@@ -920,14 +996,14 @@ export interface DestinyVendorDisplayPropertiesDefinition {
    * picture of the vendor's mug on it, trying their best to look cool. Not what one
    * would call an icon.
    */
-  largeIcon?: string
-  subtitle?: string
+  largeIcon?: string;
+  subtitle?: string;
   /**
    * If we replaced the icon with something more glitzy, this is the original icon
    * that the vendor had according to the game's content. It may be more lame and/or
    * have less razzle-dazzle. But who am I to tell you which icon to use.
    */
-  originalIcon?: string
+  originalIcon?: string;
   /**
    * Vendors, in addition to expected display property data, may also show some "
    * common requirements" as statically defined definition data. This might be when a
@@ -935,9 +1011,9 @@ export interface DestinyVendorDisplayPropertiesDefinition {
    * vendor and the designers wanted to show that currency when you interact with the
    * vendor.
    */
-  requirementsDisplay?: DestinyVendorRequirementDisplayEntryDefinition[]
-  description?: string
-  name?: string
+  requirementsDisplay?: DestinyVendorRequirementDisplayEntryDefinition[];
+  description?: string;
+  name?: string;
   /**
    * Note that "icon" is sometimes misleading, and should be interpreted in the
    * context of the entity. For instance, in Destiny 1 the
@@ -946,8 +1022,8 @@ export interface DestinyVendorDisplayPropertiesDefinition {
    * But usually, it will be a small square image that you can use as... well, an
    * icon.
    */
-  icon?: string
-  hasIcon?: boolean
+  icon?: string;
+  hasIcon?: boolean;
 }
 
 /**
@@ -955,10 +1031,10 @@ export interface DestinyVendorDisplayPropertiesDefinition {
  * the requirement or item being featured to be seen.
  */
 export interface DestinyVendorRequirementDisplayEntryDefinition {
-  icon?: string
-  name?: string
-  source?: string
-  type?: string
+  icon?: string;
+  name?: string;
+  source?: string;
+  type?: string;
 }
 
 /**
@@ -973,12 +1049,12 @@ export interface DestinyVendorRequirementDisplayEntryDefinition {
  * generic definitions.
  */
 export interface DestinyInventoryItemDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * A secondary icon associated with the item. Currently this is used in very
    * context specific applications, such as Emblem Nameplates.
    */
-  secondaryIcon?: string
+  secondaryIcon?: string;
   /**
    * Pulled from the secondary icon, this is the "secondary background" of the
    * secondary icon. Confusing? Sure, that's why I call it "overlay" here: because as
@@ -986,13 +1062,13 @@ export interface DestinyInventoryItemDefinition {
    * see if that holds up, but at least for now it explains what this image is a bit
    * better.
    */
-  secondaryOverlay?: string
+  secondaryOverlay?: string;
   /**
    * Pulled from the Secondary Icon, this is the "special" background for the item.
    * For Emblems, this is the background image used on the Details view: but it need
    * not be limited to that for other types of items.
    */
-  secondarySpecial?: string
+  secondarySpecial?: string;
   /**
    * Sometimes, an item will have a background color. Most notably this occurs with
    * Emblems, who use the Background Color for small character nameplates such as the
@@ -1000,18 +1076,18 @@ export interface DestinyInventoryItemDefinition {
    * background color as well, though I have not bothered to investigate what items
    * have it nor what purposes they serve: use it as you will.
    */
-  backgroundColor?: DestinyColor
+  backgroundColor?: DestinyColor;
   /**
    * If we were able to acquire an in-game screenshot for the item, the path to that
    * screenshot will be returned here. Note that not all items have screenshots:
    * particularly not any non-equippable items.
    */
-  screenshot?: string
+  screenshot?: string;
   /**
    * The localized title/name of the item's type. This can be whatever the designers
    * want, and has no guarantee of consistency between items.
    */
-  itemTypeDisplayName?: string
+  itemTypeDisplayName?: string;
   /**
    * A string identifier that the game's UI uses to determine how the item should be
    * rendered in inventory screens and the like. This could really be anything - at
@@ -1020,13 +1096,13 @@ export interface DestinyInventoryItemDefinition {
    * But if you want to use it to dictate your own UI, or look for items with a
    * certain display style, go for it!
    */
-  uiItemDisplayStyle?: string
+  uiItemDisplayStyle?: string;
   /**
    * It became a common enough pattern in our UI to show Item Type and Tier combined
    * into a single localized string that I'm just going to go ahead and start pre-
    * creating these for items.
    */
-  itemTypeAndTierDisplayName?: string
+  itemTypeAndTierDisplayName?: string;
   /**
    * In theory, it is a localized string telling you about how you can find the item.
    * I really wish this was more consistent. Many times, it has nothing. Sometimes,
@@ -1034,26 +1110,26 @@ export interface DestinyInventoryItemDefinition {
    * and I wish all properties had that data, but it should really be its own
    * property.
    */
-  displaySource?: string
+  displaySource?: string;
   /**
    * An identifier that the game UI uses to determine what type of tooltip to show
    * for the item. These have no corresponding definitions that BNet can link to: so
    * it'll be up to you to interpret and display your UI differently according to
    * these styles (or ignore it).
    */
-  tooltipStyle?: string
+  tooltipStyle?: string;
   /**
    * If the item can be "used", this block will be non-null, and will have data
    * related to the action performed when using the item. (Guess what? 99% of the
    * time, this action is "dismantle". Shocker)
    */
-  action?: DestinyItemActionBlockDefinition
+  action?: DestinyItemActionBlockDefinition;
   /**
    * If this item can exist in an inventory, this block will be non-null. In practice,
    * every item that currently exists has one of these blocks. But note that it is
    * not necessarily guaranteed.
    */
-  inventory?: DestinyItemInventoryBlockDefinition
+  inventory?: DestinyItemInventoryBlockDefinition;
   /**
    * If this item is a quest, this block will be non-null. In practice, I wish I had
    * called this the Quest block, but at the time it wasn't clear to me whether it
@@ -1061,12 +1137,12 @@ export interface DestinyInventoryItemDefinition {
    * about the steps in the quest, and mechanics we can use for displaying and
    * tracking the quest.
    */
-  setData?: DestinyItemSetBlockDefinition
+  setData?: DestinyItemSetBlockDefinition;
   /**
    * If this item can have stats (such as a weapon, armor, or vehicle), this block
    * will be non-null and populated with the stats found on the item.
    */
-  stats?: DestinyItemStatBlockDefinition
+  stats?: DestinyItemStatBlockDefinition;
   /**
    * If the item is an emblem that has a special Objective attached to it - for
    * instance, if the emblem tracks PVP Kills, or what-have-you. This is a bit
@@ -1075,23 +1151,23 @@ export interface DestinyInventoryItemDefinition {
    * so you can get at the values they expose without having to care about what they'
    * re being used for and how they are wired up, but for now here's the raw data.
    */
-  emblemObjectiveHash?: number
+  emblemObjectiveHash?: number;
   /**
    * If this item can be equipped, this block will be non-null and will be populated
    * with the conditions under which it can be equipped.
    */
-  equippingBlock?: DestinyEquippingBlockDefinition
+  equippingBlock?: DestinyEquippingBlockDefinition;
   /**
    * If this item can be rendered, this block will be non-null and will be populated
    * with rendering information.
    */
-  translationBlock?: DestinyItemTranslationBlockDefinition
+  translationBlock?: DestinyItemTranslationBlockDefinition;
   /**
    * If this item can be Used or Acquired to gain other items (for instance, how
    * Eververse Boxes can be consumed to get items from the box), this block will be
    * non-null and will give summary information for the items that can be acquired.
    */
-  preview?: DestinyItemPreviewBlockDefinition
+  preview?: DestinyItemPreviewBlockDefinition;
   /**
    * If this item can have a level or stats, this block will be non-null and will be
    * populated with default quality (item level, "quality", and infusion) data. See
@@ -1099,54 +1175,54 @@ export interface DestinyInventoryItemDefinition {
    * ll want to be aware of how you use quality and item level on the definition
    * level now.
    */
-  quality?: DestinyItemQualityBlockDefinition
+  quality?: DestinyItemQualityBlockDefinition;
   /**
    * The conceptual "Value" of an item, if any was defined. See the
    * DestinyItemValueBlockDefinition for more details.
    */
-  value?: DestinyItemValueBlockDefinition
+  value?: DestinyItemValueBlockDefinition;
   /**
    * If this item has a known source, this block will be non-null and populated with
    * source information. Unfortunately, at this time we are not generating sources:
    * that is some aggressively manual work which we didn't have time for, and I'm
    * hoping to get back to at some point in the future.
    */
-  sourceData?: DestinyItemSourceBlockDefinition
+  sourceData?: DestinyItemSourceBlockDefinition;
   /**
    * If this item has Objectives (extra tasks that can be accomplished related to the
    * item... most frequently when the item is a Quest Step and the Objectives need to
    * be completed to move on to the next Quest Step), this block will be non-null and
    * the objectives defined herein.
    */
-  objectives?: DestinyItemObjectiveBlockDefinition
+  objectives?: DestinyItemObjectiveBlockDefinition;
   /**
    * If this item *is* a Plug, this will be non-null and the info defined herein. See
    * DestinyItemPlugDefinition for more information.
    */
-  plug?: DestinyItemPlugDefinition
+  plug?: DestinyItemPlugDefinition;
   /**
    * If this item has related items in a "Gear Set", this will be non-null and the
    * relationships defined herein.
    */
-  gearset?: DestinyItemGearsetBlockDefinition
+  gearset?: DestinyItemGearsetBlockDefinition;
   /**
    * If this item is a "reward sack" that can be opened to provide other items, this
    * will be non-null and the properties of the sack contained herein.
    */
-  sack?: DestinyItemSackBlockDefinition
+  sack?: DestinyItemSackBlockDefinition;
   /**
    * If this item has any Sockets, this will be non-null and the individual sockets
    * on the item will be defined herein.
    */
-  sockets?: DestinyItemSocketBlockDefinition
+  sockets?: DestinyItemSocketBlockDefinition;
   /** Summary data about the item. */
-  summary?: DestinyItemSummaryBlockDefinition
+  summary?: DestinyItemSummaryBlockDefinition;
   /**
    * If the item has a Talent Grid, this will be non-null and the properties of the
    * grid defined herein. Note that, while many items still have talent grids, the
    * only ones with meaningful Nodes still on them will be Subclass/"Build" items.
    */
-  talentGrid?: DestinyItemTalentGridBlockDefinition
+  talentGrid?: DestinyItemTalentGridBlockDefinition;
   /**
    * If the item has stats, this block will be defined. It has the "raw" investment
    * stats for the item. These investment stats don't take into account the ways that
@@ -1154,19 +1230,19 @@ export interface DestinyInventoryItemDefinition {
    * transformations. I have retained them for debugging purposes, but I do not know
    * how useful people will find them.
    */
-  investmentStats?: DestinyItemInvestmentStatDefinition[]
+  investmentStats?: DestinyItemInvestmentStatDefinition[];
   /**
    * If the item has any *intrinsic* Perks (Perks that it will provide regardless of
    * Sockets, Talent Grid, and other transitory state), they will be defined here.
    */
-  perks?: DestinyItemPerkEntryDefinition[]
+  perks?: DestinyItemPerkEntryDefinition[];
   /**
    * If the item has any related Lore (DestinyLoreDefinition), this will be the hash
    * identifier you can use to look up the lore definition.
    * 
    * Mapped to DestinyLoreDefinition in the manifest.
    */
-  loreHash?: number
+  loreHash?: number;
   /**
    * There are times when the game will show you a "summary/vague" version of an item
    * - such as a description of its type represented as a
@@ -1177,22 +1253,22 @@ export interface DestinyInventoryItemDefinition {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  summaryItemHash?: number
+  summaryItemHash?: number;
   /**
    * If any animations were extracted from game content for this item, these will be
    * the definitions of those animations.
    */
-  animations?: DestinyAnimationReference[]
+  animations?: DestinyAnimationReference[];
   /**
    * BNet may forbid the execution of actions on this item via the API. If that is
    * occurring, allowActions will be set to false.
    */
-  allowActions?: boolean
+  allowActions?: boolean;
   /**
    * If we added any help or informational URLs about this item, these will be those
    * links.
    */
-  links?: HyperlinkReference[]
+  links?: HyperlinkReference[];
   /**
    * The boolean will indicate to us (and you!) whether something *could* happen when
    * you transfer this item from the Postmaster that might be considered a "
@@ -1205,7 +1281,7 @@ export interface DestinyInventoryItemDefinition {
    * transferring an item from the Postmaster, or else you'll end up receiving an
    * error.
    */
-  doesPostmasterPullHaveSideEffects?: boolean
+  doesPostmasterPullHaveSideEffects?: boolean;
   /**
    * The intrinsic transferability of an item.
    * 
@@ -1215,7 +1291,7 @@ export interface DestinyInventoryItemDefinition {
    * transferred, and we don't want to imply that this is the only source of that
    * transferability.
    */
-  nonTransferrable?: boolean
+  nonTransferrable?: boolean;
   /**
    * BNet attempts to make a more formal definition of item "Categories", as defined
    * by DestinyItemCategoryDefinition. This is a list of all Categories that we were
@@ -1227,14 +1303,14 @@ export interface DestinyInventoryItemDefinition {
    * 
    * Mapped to DestinyItemCategoryDefinition in the manifest.
    */
-  itemCategoryHashes?: number[]
+  itemCategoryHashes?: number[];
   /**
    * In Destiny 1, we identified some items as having particular categories that we'd
    * like to know about for various internal logic purposes. These are defined in
    * SpecialItemType, and while these days the itemCategoryHashes are the preferred
    * way of identifying types, we have retained this enum for its convenience.
    */
-  specialItemType?: SpecialItemType
+  specialItemType?: SpecialItemType;
   /**
    * A value indicating the "base" the of the item. This enum is a useful but
    * dramatic oversimplification of what it means for an item to have a "Type". Still,
@@ -1243,7 +1319,7 @@ export interface DestinyInventoryItemDefinition {
    * itemCategoryHashes are the preferred way of identifying types, we have retained
    * this enum for its convenience.
    */
-  itemType?: DestinyItemType
+  itemType?: DestinyItemType;
   /**
    * A value indicating the "sub-type" of the item. For instance, where an item might
    * have an itemType value "Weapon", this will be something more specific like "Auto
@@ -1252,7 +1328,7 @@ export interface DestinyInventoryItemDefinition {
    * itemCategoryHashes are the preferred way of identifying types, we have retained
    * this enum for its convenience.
    */
-  itemSubType?: DestinyItemSubType
+  itemSubType?: DestinyItemSubType;
   /**
    * We run a similarly weak-sauce algorithm to try and determine whether an item is
    * restricted to a specific class. If we find it to be restricted in such a way, we
@@ -1262,14 +1338,14 @@ export interface DestinyInventoryItemDefinition {
    * If you see a mis-classed item, please inform the developers in the Bungie API
    * forum.
    */
-  classType?: DestinyClass
+  classType?: DestinyClass;
   /**
    * If true, then you will be allowed to equip the item if you pass its other
    * requirements.
    * 
    * This being false means that you cannot equip the item under any circumstances.
    */
-  equippable?: boolean
+  equippable?: boolean;
   /**
    * Theoretically, an item can have many possible damage types. In *practice*, this
    * is not true, but just in case weapons start being made that have multiple (for
@@ -1279,7 +1355,7 @@ export interface DestinyInventoryItemDefinition {
    * 
    * Mapped to DestinyDamageTypeDefinition in the manifest.
    */
-  damageTypeHashes?: number[]
+  damageTypeHashes?: number[];
   /**
    * This is the list of all damage types that we know ahead of time the item can
    * take on. Unfortunately, this does not preclude the possibility of something
@@ -1296,7 +1372,7 @@ export interface DestinyInventoryItemDefinition {
    * 
    * - Known, reusable plugs for sockets
    */
-  damageTypes?: DamageType[]
+  damageTypes?: DamageType[];
   /**
    * If the item has a damage type that could be considered to be default, it will be
    * populated here.
@@ -1304,7 +1380,7 @@ export interface DestinyInventoryItemDefinition {
    * For various upsetting reasons, it's surprisingly cumbersome to figure this out.
    * I hope you're happy.
    */
-  defaultDamageType?: DamageType
+  defaultDamageType?: DamageType;
   /**
    * Similar to defaultDamageType, but represented as the hash identifier for a
    * DestinyDamageTypeDefinition.
@@ -1314,7 +1390,7 @@ export interface DestinyInventoryItemDefinition {
    * 
    * Mapped to DestinyDamageTypeDefinition in the manifest.
    */
-  defaultDamageTypeHash?: number
+  defaultDamageTypeHash?: number;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1322,14 +1398,14 @@ export interface DestinyInventoryItemDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -1347,12 +1423,12 @@ export interface DestinyItemInvestmentStatDefinition {
    * 
    * Mapped to DestinyStatDefinition in the manifest.
    */
-  statTypeHash?: number
+  statTypeHash?: number;
   /**
    * The raw "Investment" value for the stat, before transformations are performed to
    * turn this raw stat into stats that are displayed in the game UI.
    */
-  value?: number
+  value?: number;
 }
 
 /**
@@ -1410,19 +1486,19 @@ export interface DestinyItemInvestmentStatDefinition {
  * is then piped back to the UI for display in-game, but not to BNet.)
  */
 export interface DestinyStatDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * Stats can exist on a character or an item, and they may potentially be
    * aggregated in different ways. The DestinyStatAggregationType enum value
    * indicates the way that this stat is being aggregated.
    */
-  aggregationType?: DestinyStatAggregationType
+  aggregationType?: DestinyStatAggregationType;
   /**
    * True if the stat is computed rather than being delivered as a raw value on items.
    * 
    * For instance, the Light stat in Destiny 1 was a computed stat.
    */
-  hasComputedBlock?: boolean
+  hasComputedBlock?: boolean;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1430,14 +1506,14 @@ export interface DestinyStatDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /** An intrinsic perk on an item, and the requirements for it to be activated. */
@@ -1446,14 +1522,14 @@ export interface DestinyItemPerkEntryDefinition {
    * If this perk is not active, this is the string to show for why it's not
    * providing its benefits.
    */
-  requirementDisplayString?: string
+  requirementDisplayString?: string;
   /**
    * A hash identifier for the DestinySandboxPerkDefinition being provided on the
    * item.
    * 
    * Mapped to DestinySandboxPerkDefinition in the manifest.
    */
-  perkHash?: number
+  perkHash?: number;
 }
 
 /**
@@ -1482,14 +1558,14 @@ export interface DestinySandboxPerkDefinition {
    * when it is, it's only because we back-filled them with the displayProperties of
    * some Talent Node or Plug item that happened to be uniquely providing that perk.
    */
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /** The string identifier for the perk. */
-  perkIdentifier?: string
+  perkIdentifier?: string;
   /**
    * If true, you can actually show the perk in the UI. Otherwise, it doesn't have
    * useful player-facing information.
    */
-  isDisplayable?: boolean
+  isDisplayable?: boolean;
   /**
    * If this perk grants a damage type to a weapon, the damage type will be defined
    * here.
@@ -1497,7 +1573,7 @@ export interface DestinySandboxPerkDefinition {
    * Unless you have a compelling reason to use this enum value, use the
    * damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.
    */
-  damageType?: DamageType
+  damageType?: DamageType;
   /**
    * The hash identifier for looking up the DestinyDamageTypeDefinition, if this perk
    * has a damage type.
@@ -1505,7 +1581,7 @@ export interface DestinySandboxPerkDefinition {
    * This is preferred over using the damageType enumeration value, which has been
    * left purely because it is occasionally convenient.
    */
-  damageTypeHash?: number
+  damageTypeHash?: number;
   /**
    * An old holdover from the original Armory, this was an attempt to group perks by
    * functionality.
@@ -1513,7 +1589,7 @@ export interface DestinySandboxPerkDefinition {
    * It is as yet unpopulated, and there will be quite a bit of work needed to
    * restore it to its former working order.
    */
-  perkGroups?: DestinyTalentNodeStepGroups
+  perkGroups?: DestinyTalentNodeStepGroups;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1521,14 +1597,14 @@ export interface DestinySandboxPerkDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -1540,8 +1616,8 @@ export interface DestinySandboxPerkDefinition {
  * with them. If they end up having cool data.
  */
 export interface DestinyLoreDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
-  subtitle?: string
+  displayProperties?: DestinyDisplayPropertiesDefinition;
+  subtitle?: string;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1549,20 +1625,20 @@ export interface DestinyLoreDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 export interface DestinyAnimationReference {
-  animName?: string
-  animIdentifier?: string
-  path?: string
+  animName?: string;
+  animIdentifier?: string;
+  path?: string;
 }
 
 /**
@@ -1581,35 +1657,35 @@ export interface DestinyAnimationReference {
  * And let us know if you see more categories that you wish would be added!
  */
 export interface DestinyItemCategoryDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * If True, this category should be visible in UI. Sometimes we make categories
    * that we don't think are interesting externally. It's up to you if you want to
    * skip on showing them.
    */
-  visible?: boolean
+  visible?: boolean;
   /**
    * A shortened version of the title. The reason why we have this is because the
    * Armory in German had titles that were too long to display in our UI, so these
    * were localized abbreviated versions of those categories. The property still
    * exists today, even though the Armory doesn't exist for D2... yet.
    */
-  shortTitle?: string
+  shortTitle?: string;
   /**
    * The janky regular expression we used against the item type to try and discern
    * whether the item belongs to this category.
    */
-  itemTypeRegex?: string
+  itemTypeRegex?: string;
   /** If the item type matches this janky regex, it does *not* belong to this category. */
-  itemTypeRegexNot?: string
+  itemTypeRegexNot?: string;
   /** If the item belongs to this bucket, it does belong to this category. */
-  originBucketIdentifier?: string
+  originBucketIdentifier?: string;
   /**
    * If an item belongs to this category, it will also receive this item type. This
    * is now how DestinyItemType is populated for items: it used to be an even jankier
    * process, but that's a story that requires more alcohol.
    */
-  grantDestinyItemType?: DestinyItemType
+  grantDestinyItemType?: DestinyItemType;
   /**
    * If an item belongs to this category, it will also receive this subtype enum
    * value.
@@ -1621,7 +1697,7 @@ export interface DestinyItemCategoryDefinition {
    * you can see one reason why we moved away from these enums... but they're so
    * convenient when they work, aren't they?
    */
-  grantDestinySubType?: DestinyItemSubType
+  grantDestinySubType?: DestinyItemSubType;
   /**
    * If an item belongs to this category, it will also get this class restriction
    * enum value.
@@ -1629,7 +1705,7 @@ export interface DestinyItemCategoryDefinition {
    * See the other "grant"-prefixed properties on this definition for my color
    * commentary.
    */
-  grantDestinyClass?: DestinyClass
+  grantDestinyClass?: DestinyClass;
   /**
    * If this category is a "parent" category of other categories, those children will
    * have their hashes listed in rendering order here, and can be looked up using
@@ -1642,9 +1718,9 @@ export interface DestinyItemCategoryDefinition {
    * 
    * Mapped to DestinyItemCategoryDefinition in the manifest.
    */
-  groupedCategoryHashes?: number[]
-  parentCategoryHashes?: number[]
-  groupCategoryOnly?: boolean
+  groupedCategoryHashes?: number[];
+  parentCategoryHashes?: number[];
+  groupCategoryOnly?: boolean;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1652,14 +1728,14 @@ export interface DestinyItemCategoryDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -1668,19 +1744,19 @@ export interface DestinyItemCategoryDefinition {
  */
 export interface DestinyDamageTypeDefinition {
   /** The description of the damage type, icon etc... */
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /** A variant of the icon that is transparent and colorless. */
-  transparentIconPath?: string
+  transparentIconPath?: string;
   /**
    * If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether
    * you show it or not is up to you.
    */
-  showIcon?: boolean
+  showIcon?: boolean;
   /**
    * We have an enumeration for damage types for quick reference. This is the current
    * definition's damage type enum value.
    */
-  enumValue?: DamageType
+  enumValue?: DamageType;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1688,14 +1764,14 @@ export interface DestinyDamageTypeDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 export const enum DamageType {
@@ -1719,33 +1795,33 @@ export const enum DamageType {
  * Orbit could theoretically exist without the Vendor that provides rewards.
  */
 export interface DestinyFactionDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * The hash identifier for the DestinyProgressionDefinition that indicates the
    * character's relationship with this faction in terms of experience and levels.
    * 
    * Mapped to DestinyProgressionDefinition in the manifest.
    */
-  progressionHash?: number
+  progressionHash?: number;
   /** The faction token item hashes, and their respective progression values. */
-  tokenValues?: { [key: number]: number }
+  tokenValues?: { [key: number]: number };
   /**
    * The faction reward item hash, usually an engram.
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  rewardItemHash?: number
+  rewardItemHash?: number;
   /**
    * The faction reward vendor hash, used for faction engram previews.
    * 
    * Mapped to DestinyVendorDefinition in the manifest.
    */
-  rewardVendorHash?: number
+  rewardVendorHash?: number;
   /**
    * List of vendors that are associated with this faction. The last vendor that
    * passes the unlock flag checks is the one that should be shown.
    */
-  vendors?: DestinyFactionVendorDefinition[]
+  vendors?: DestinyFactionVendorDefinition[];
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1753,14 +1829,14 @@ export interface DestinyFactionDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -1790,7 +1866,7 @@ export interface DestinyFactionDefinition {
  * about those.
  */
 export interface DestinyProgressionDefinition {
-  displayProperties?: DestinyProgressionDisplayPropertiesDefinition
+  displayProperties?: DestinyProgressionDisplayPropertiesDefinition;
   /**
    * The "Scope" of the progression indicates the source of the progression's live
    * data.
@@ -1799,14 +1875,14 @@ export interface DestinyProgressionDefinition {
    * Progression can either be backed by a stored value, or it can be a calculated
    * derivative of other values.
    */
-  scope?: DestinyProgressionScope
+  scope?: DestinyProgressionScope;
   /** If this is True, then the progression doesn't have a maximum level. */
-  repeatLastStep?: boolean
+  repeatLastStep?: boolean;
   /**
    * If there's a description of how to earn this progression in the local config,
    * this will be that localized description.
    */
-  source?: string
+  source?: string;
   /**
    * Progressions are divided into Steps, which roughly equate to "Levels" in the
    * traditional sense of a Progression. Notably, the last step can be repeated
@@ -1817,14 +1893,14 @@ export interface DestinyProgressionDefinition {
    * These and more calculations are done for you if you grab live character
    * progression data, such as in the DestinyCharacterProgressionComponent.
    */
-  steps?: DestinyProgressionStepDefinition[]
+  steps?: DestinyProgressionStepDefinition[];
   /**
    * If true, the Progression is something worth showing to users.
    * 
    * If false, BNet isn't going to show it. But that doesn't mean you can't. We're
    * all friends here.
    */
-  visible?: boolean
+  visible?: boolean;
   /**
    * If the value exists, this is the hash identifier for the Faction that owns this
    * Progression.
@@ -1834,7 +1910,7 @@ export interface DestinyProgressionDefinition {
    * 
    * Mapped to DestinyFactionDefinition in the manifest.
    */
-  factionHash?: number
+  factionHash?: number;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -1842,14 +1918,14 @@ export interface DestinyProgressionDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 export interface DestinyProgressionDisplayPropertiesDefinition {
@@ -1858,9 +1934,9 @@ export interface DestinyProgressionDisplayPropertiesDefinition {
    * Experience", "Bad Dudes Snuffed Out", whatever). This is the localized string
    * for that unit of measurement.
    */
-  displayUnitsName?: string
-  description?: string
-  name?: string
+  displayUnitsName?: string;
+  description?: string;
+  name?: string;
   /**
    * Note that "icon" is sometimes misleading, and should be interpreted in the
    * context of the entity. For instance, in Destiny 1 the
@@ -1869,8 +1945,8 @@ export interface DestinyProgressionDisplayPropertiesDefinition {
    * But usually, it will be a small square image that you can use as... well, an
    * icon.
    */
-  icon?: string
-  hasIcon?: boolean
+  icon?: string;
+  hasIcon?: boolean;
 }
 
 /**
@@ -1883,22 +1959,22 @@ export interface DestinyProgressionStepDefinition {
    * progression. This will be that localized text, if it exists. Otherwise, the
    * standard appears to be to simply show the level numerically.
    */
-  stepName?: string
+  stepName?: string;
   /**
    * This appears to be, when you "level up", whether a visual effect will display
    * and on what entity. See DestinyProgressionStepDisplayEffect for slightly more
    * info.
    */
-  displayEffectType?: DestinyProgressionStepDisplayEffect
+  displayEffectType?: DestinyProgressionStepDisplayEffect;
   /**
    * The total amount of progression points/"experience" you will need to initially
    * reach this step. If this is the last step and the progression is repeating
    * indefinitely (DestinyProgressionDefinition.repeatLastStep), this will also be
    * the progress needed to level it up further by repeating this step again.
    */
-  progressTotal?: number
+  progressTotal?: number;
   /** A listing of items rewarded as a result of reaching this level. */
-  rewardItems?: DestinyItemQuantity[]
+  rewardItems?: DestinyItemQuantity[];
 }
 
 /**
@@ -1914,17 +1990,17 @@ export interface DestinyItemQuantity {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  itemHash?: number
+  itemHash?: number;
   /**
    * If this quantity is referring to a specific instance of an item, this will have
    * the item's instance ID. Normally, this will be null.
    */
-  itemInstanceId?: number
+  itemInstanceId?: number;
   /**
    * The amount of the item needed/available depending on the context of where
    * DestinyItemQuantity is being used.
    */
-  quantity?: number
+  quantity?: number;
 }
 
 /**
@@ -1939,15 +2015,15 @@ export interface DestinyFactionVendorDefinition {
    * 
    * Mapped to DestinyVendorDefinition in the manifest.
    */
-  vendorHash?: number
+  vendorHash?: number;
   /**
    * The faction vendor destination hash.
    * 
    * Mapped to DestinyDestinationDefinition in the manifest.
    */
-  destinationHash?: number
+  destinationHash?: number;
   /** The relative path to the background image, for use in a banner. */
-  backgroundImagePath?: string
+  backgroundImagePath?: string;
 }
 
 /**
@@ -1959,21 +2035,21 @@ export interface DestinyFactionVendorDefinition {
  * Please, pick a more interesting destination if you come to visit Earth).
  */
 export interface DestinyDestinationDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * The place that "owns" this Destination. Use this hash to look up the
    * DestinyPlaceDefinition.
    * 
    * Mapped to DestinyPlaceDefinition in the manifest.
    */
-  placeHash?: number
+  placeHash?: number;
   /**
    * If this Destination has a default Free-Roam activity, this is the hash for that
    * Activity. Use it to look up the DestinyActivityDefintion.
    * 
    * Mapped to DestinyActivityDefinition in the manifest.
    */
-  defaultFreeroamActivityHash?: number
+  defaultFreeroamActivityHash?: number;
   /**
    * If the Destination has default Activity Graphs (i.e. "Map") that should be shown
    * in the director, this is the list of those Graphs. At most, only one should be
@@ -1981,7 +2057,7 @@ export interface DestinyDestinationDefinition {
    * different variants on a Map if the Destination is changing on a macro level
    * based on game state.
    */
-  activityGraphEntries?: DestinyActivityGraphListEntryDefinition[]
+  activityGraphEntries?: DestinyActivityGraphListEntryDefinition[];
   /**
    * A Destination may have many "Bubbles" zones with human readable properties.
    * 
@@ -1991,7 +2067,7 @@ export interface DestinyDestinationDefinition {
    * entries, and you should match up their indexes to provide matching bubble and
    * bubbleSettings data.
    */
-  bubbleSettings?: DestinyDestinationBubbleSettingDefinition[]
+  bubbleSettings?: DestinyDestinationBubbleSettingDefinition[];
   /**
    * This provides the unique identifiers for every bubble in the destination (only
    * guaranteed unique within the destination), and any intrinsic properties of the
@@ -2000,7 +2076,7 @@ export interface DestinyDestinationDefinition {
    * bubbleSettings and bubbles both have the identical number of entries, and you
    * should match up their indexes to provide matching bubble and bubbleSettings data.
    */
-  bubbles?: DestinyBubbleDefinition[]
+  bubbles?: DestinyBubbleDefinition[];
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2008,14 +2084,14 @@ export interface DestinyDestinationDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2026,7 +2102,7 @@ export interface DestinyDestinationDefinition {
  * Places are more on the planetary scale, like "Earth" and "Your Mom."
  */
 export interface DestinyPlaceDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2034,14 +2110,14 @@ export interface DestinyPlaceDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2071,21 +2147,21 @@ export interface DestinyPlaceDefinition {
  */
 export interface DestinyActivityDefinition {
   /** The title, subtitle, and icon for the activity. */
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * If the activity has an icon associated with a specific release (such as a DLC),
    * this is the path to that release's icon.
    */
-  releaseIcon?: string
+  releaseIcon?: string;
   /**
    * If the activity will not be visible until a specific and known time, this will
    * be the seconds since the Epoch when it will become visible.
    */
-  releaseTime?: number
+  releaseTime?: number;
   /** The difficulty level of the activity. */
-  activityLevel?: number
+  activityLevel?: number;
   /** The recommended light level for this activity. */
-  activityLightLevel?: number
+  activityLightLevel?: number;
   /**
    * The hash identifier for the Destination on which this Activity is played. Use it
    * to look up the DestinyDestinationDefinition for human readable info about the
@@ -2095,7 +2171,7 @@ export interface DestinyActivityDefinition {
    * 
    * Mapped to DestinyDestinationDefinition in the manifest.
    */
-  destinationHash?: number
+  destinationHash?: number;
   /**
    * The hash identifier for the "Place" on which this Activity is played. Use it to
    * look up the DestinyPlaceDefinition for human readable info about the Place. A
@@ -2105,7 +2181,7 @@ export interface DestinyActivityDefinition {
    * 
    * Mapped to DestinyPlaceDefinition in the manifest.
    */
-  placeHash?: number
+  placeHash?: number;
   /**
    * The hash identifier for the Activity Type of this Activity. You may use it to
    * look up the DestinyActivityTypeDefinition for human readable info, but be
@@ -2115,16 +2191,16 @@ export interface DestinyActivityDefinition {
    * 
    * Mapped to DestinyActivityTypeDefinition in the manifest.
    */
-  activityTypeHash?: number
+  activityTypeHash?: number;
   /** The difficulty tier of the activity. */
-  tier?: number
+  tier?: number;
   /**
    * When Activities are completed, we generate a "Post-Game Carnage Report", or PGCR,
    * with details about what happened in that activity (how many kills someone got,
    * which team won, etc...) We use this image as the background when displaying PGCR
    * information, and often use it when we refer to the Activity in general.
    */
-  pgcrImage?: string
+  pgcrImage?: string;
   /**
    * The expected possible rewards for the activity. These rewards may or may not be
    * accessible for an individual player based on their character state, the account
@@ -2136,14 +2212,14 @@ export interface DestinyActivityDefinition {
    * game doesn't even know what you'll earn specifically until you roll for it at
    * the end)
    */
-  rewards?: DestinyActivityRewardDefinition[]
+  rewards?: DestinyActivityRewardDefinition[];
   /**
    * Activities can have Modifiers, as defined in DestinyActivityModifierDefinition.
    * These are references to the modifiers that *can* be applied to that activity,
    * along with data that we use to determine if that modifier is actually active at
    * any given point in time.
    */
-  modifiers?: DestinyActivityModifierReferenceDefinition[]
+  modifiers?: DestinyActivityModifierReferenceDefinition[];
   /**
    * If True, this Activity is actually a Playlist that refers to multiple possible
    * specific Activities and Activity Modes. For instance, a Crucible Playlist may
@@ -2151,7 +2227,7 @@ export interface DestinyActivityDefinition {
    * specific PvP gameplay modes). If this is true, refer to the playlistItems
    * property for the specific entries in the playlist.
    */
-  isPlaylist?: boolean
+  isPlaylist?: boolean;
   /**
    * An activity can have many Challenges, of which any subset of them may be active
    * for play at any given period of time. This gives the information about the
@@ -2162,48 +2238,48 @@ export interface DestinyActivityDefinition {
    * the Destiny 2 ecosystem. I have it in mind to centralize these in a future
    * revision of the API, but we are out of time.
    */
-  challenges?: DestinyActivityChallengeDefinition[]
+  challenges?: DestinyActivityChallengeDefinition[];
   /**
    * If there are status strings related to the activity and based on internal state
    * of the game, account, or character, then this will be the definition of those
    * strings and the states needed in order for the strings to be shown.
    */
-  optionalUnlockStrings?: DestinyActivityUnlockStringDefinition[]
+  optionalUnlockStrings?: DestinyActivityUnlockStringDefinition[];
   /**
    * Represents all of the possible activities that could be played in the Playlist,
    * along with information that we can use to determine if they are active at the
    * present time.
    */
-  playlistItems?: DestinyActivityPlaylistItemDefinition[]
+  playlistItems?: DestinyActivityPlaylistItemDefinition[];
   /**
    * Unfortunately, in practice this is almost never populated. In theory, this is
    * supposed to tell which Activity Graph to show if you bring up the director while
    * in this activity.
    */
-  activityGraphList?: DestinyActivityGraphListEntryDefinition[]
+  activityGraphList?: DestinyActivityGraphListEntryDefinition[];
   /**
    * This block of data provides information about the Activity's matchmaking
    * attributes: how many people can join and such.
    */
-  matchmaking?: DestinyActivityMatchmakingBlockDefinition
+  matchmaking?: DestinyActivityMatchmakingBlockDefinition;
   /**
    * This block of data, if it exists, provides information about the guided game
    * experience and restrictions for this activity. If it doesn't exist, the game is
    * not able to be played as a guided game.
    */
-  guidedGame?: DestinyActivityGuidedBlockDefinition
+  guidedGame?: DestinyActivityGuidedBlockDefinition;
   /**
    * If this activity had an activity mode directly defined on it, this will be the
    * hash of that mode.
    * 
    * Mapped to DestinyActivityModeDefinition in the manifest.
    */
-  directActivityModeHash?: number
+  directActivityModeHash?: number;
   /**
    * If the activity had an activity mode directly defined on it, this will be the
    * enum value of that mode.
    */
-  directActivityModeType?: number
+  directActivityModeType?: number;
   /**
    * The hash identifiers for Activity Modes relevant to this activity.  Note that if
    * this is a playlist, the specific playlist entry chosen will determine the actual
@@ -2211,14 +2287,14 @@ export interface DestinyActivityDefinition {
    * 
    * Mapped to DestinyActivityModeDefinition in the manifest.
    */
-  activityModeHashes?: number[]
+  activityModeHashes?: number[];
   /**
    * The activity modes - if any - in enum form. Because we can't seem to escape the
    * enums.
    */
-  activityModeTypes?: DestinyActivityModeType[]
+  activityModeTypes?: DestinyActivityModeType[];
   /** If true, this activity is a PVP activity or playlist. */
-  isPvP?: boolean
+  isPvP?: boolean;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2226,14 +2302,14 @@ export interface DestinyActivityDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2255,7 +2331,7 @@ export interface DestinyActivityDefinition {
  * in many places across our codebase.
  */
 export interface DestinyActivityTypeDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2263,14 +2339,14 @@ export interface DestinyActivityTypeDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2279,7 +2355,7 @@ export interface DestinyActivityTypeDefinition {
  */
 export interface DestinyActivityRewardDefinition {
   /** The header for the reward set, if any. */
-  rewardText?: string
+  rewardText?: string;
   /**
    * The "Items provided" in the reward. This is almost always a pointer to a
    * DestinyInventoryItemDefintion for an item that you can't actually earn in-game,
@@ -2295,7 +2371,7 @@ export interface DestinyActivityRewardDefinition {
    * your profile-level inventory through the BNet API! Who said reading
    * documentation is a waste of time?
    */
-  rewardItems?: DestinyItemQuantity[]
+  rewardItems?: DestinyItemQuantity[];
 }
 
 /**
@@ -2311,7 +2387,7 @@ export interface DestinyActivityModifierReferenceDefinition {
    * 
    * Mapped to DestinyActivityModifierDefinition in the manifest.
    */
-  activityModifierHash?: number
+  activityModifierHash?: number;
 }
 
 /**
@@ -2319,7 +2395,7 @@ export interface DestinyActivityModifierReferenceDefinition {
  * can be applied to an Activity.
  */
 export interface DestinyActivityModifierDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2327,14 +2403,14 @@ export interface DestinyActivityModifierDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /** Represents a reference to a Challenge, which for now is just an Objective. */
@@ -2345,7 +2421,7 @@ export interface DestinyActivityChallengeDefinition {
    * 
    * Mapped to DestinyObjectiveDefinition in the manifest.
    */
-  objectiveHash?: number
+  objectiveHash?: number;
 }
 
 /**
@@ -2373,13 +2449,13 @@ export interface DestinyObjectiveDefinition {
    * though. Sometimes this doesn't have useful information at all. Which sucks, but
    * there's nothing either of us can do about it.
    */
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * The value that the unlock value defined in unlockValueHash must reach in order
    * for the objective to be considered Completed. Used in calculating progress and
    * completion status.
    */
-  completionValue?: number
+  completionValue?: number;
   /**
    * OPTIONAL: a hash identifier for the location at which this objective must be
    * accomplished, if there is a location defined. Look up the
@@ -2387,9 +2463,9 @@ export interface DestinyObjectiveDefinition {
    * 
    * Mapped to DestinyLocationDefinition in the manifest.
    */
-  locationHash?: number
+  locationHash?: number;
   /** If true, the value is allowed to go negative. */
-  allowNegativeValue?: boolean
+  allowNegativeValue?: boolean;
   /**
    * If true, you can effectively "un-complete" this objective if you lose progress
    * after crossing the completion threshold.
@@ -2397,7 +2473,7 @@ export interface DestinyObjectiveDefinition {
    * If False, once you complete the task it will remain completed forever by locking
    * the value.
    */
-  allowValueChangeWhenCompleted?: boolean
+  allowValueChangeWhenCompleted?: boolean;
   /**
    * If true, completion means having an unlock value less than or equal to the
    * completionValue.
@@ -2405,25 +2481,25 @@ export interface DestinyObjectiveDefinition {
    * If False, completion means having an unlock value greater than or equal to the
    * completionValue.
    */
-  isCountingDownward?: boolean
+  isCountingDownward?: boolean;
   /**
    * The UI style applied to the objective. It's an enum, take a look at
    * DestinyUnlockValueUIStyle for details of the possible styles. Use this info as
    * you wish to customize your UI.
    */
-  valueStyle?: DestinyUnlockValueUIStyle
+  valueStyle?: DestinyUnlockValueUIStyle;
   /** Text to describe the progress bar. */
-  progressDescription?: string
+  progressDescription?: string;
   /**
    * If this objective enables Perks intrinsically, the conditions for that enabling
    * are defined here.
    */
-  perks?: DestinyObjectivePerkEntryDefinition
+  perks?: DestinyObjectivePerkEntryDefinition;
   /**
    * If this objective enables modifications on a player's stats intrinsically, the
    * conditions are defined here.
    */
-  stats?: DestinyObjectiveStatEntryDefinition
+  stats?: DestinyObjectiveStatEntryDefinition;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2431,14 +2507,14 @@ export interface DestinyObjectiveDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2456,13 +2532,13 @@ export interface DestinyLocationDefinition {
    * 
    * Mapped to DestinyVendorDefinition in the manifest.
    */
-  vendorHash?: number
+  vendorHash?: number;
   /**
    * A Location may refer to different specific spots in the world based on the world'
    * s current state. This is a list of those potential spots, and the data we can
    * use at runtime to determine which one of the spots is the currently valid one.
    */
-  locationReleases?: DestinyLocationReleaseDefinition[]
+  locationReleases?: DestinyLocationReleaseDefinition[];
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2470,14 +2546,14 @@ export interface DestinyLocationDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2486,55 +2562,55 @@ export interface DestinyLocationDefinition {
  */
 export interface DestinyLocationReleaseDefinition {
   /** Sadly, these don't appear to be populated anymore (ever?) */
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * If we had map information, this spawnPoint would be interesting. But sadly, we
    * don't have that info.
    */
-  spawnPoint?: number
+  spawnPoint?: number;
   /**
    * The Destination being pointed to by this location.
    * 
    * Mapped to DestinyDestinationDefinition in the manifest.
    */
-  destinationHash?: number
+  destinationHash?: number;
   /**
    * The Activity being pointed to by this location.
    * 
    * Mapped to DestinyActivityDefinition in the manifest.
    */
-  activityHash?: number
+  activityHash?: number;
   /** The Activity Graph being pointed to by this location. */
-  activityGraphHash?: number
+  activityGraphHash?: number;
   /**
    * The Activity Graph Node being pointed to by this location. (Remember that
    * Activity Graph Node hashes are only unique within an Activity Graph: so use the
    * combination to find the node being spoken of)
    */
-  activityGraphNodeHash?: number
+  activityGraphNodeHash?: number;
   /**
    * The Activity Bubble within the Destination. Look this up in the
    * DestinyDestinationDefinition's bubbles and bubbleSettings properties.
    */
-  activityBubbleName?: number
+  activityBubbleName?: number;
   /**
    * If we had map information, this would tell us something cool about the path this
    * location wants you to take. I wish we had map information.
    */
-  activityPathBundle?: number
+  activityPathBundle?: number;
   /**
    * If we had map information, this would tell us about path information related to
    * destination on the map. Sad. Maybe you can do something cool with it. Go to town
    * man.
    */
-  activityPathDestination?: number
+  activityPathDestination?: number;
   /** The type of Nav Point that this represents. See the enumeration for more info. */
-  navPointType?: DestinyActivityNavPointType
+  navPointType?: DestinyActivityNavPointType;
   /**
    * Looks like it should be the position on the map, but sadly it does not look
    * populated... yet?
    */
-  worldPosition?: number[]
+  worldPosition?: number[];
 }
 
 /**
@@ -2545,7 +2621,7 @@ export interface DestinyLocationReleaseDefinition {
  */
 export interface DestinyActivityUnlockStringDefinition {
   /** The string to be displayed if the conditions are met. */
-  displayString?: string
+  displayString?: string;
 }
 
 /**
@@ -2560,30 +2636,30 @@ export interface DestinyActivityPlaylistItemDefinition {
    * 
    * Mapped to DestinyActivityDefinition in the manifest.
    */
-  activityHash?: number
+  activityHash?: number;
   /**
    * If this playlist entry had an activity mode directly defined on it, this will be
    * the hash of that mode.
    * 
    * Mapped to DestinyActivityModeDefinition in the manifest.
    */
-  directActivityModeHash?: number
+  directActivityModeHash?: number;
   /**
    * If the playlist entry had an activity mode directly defined on it, this will be
    * the enum value of that mode.
    */
-  directActivityModeType?: number
+  directActivityModeType?: number;
   /**
    * The hash identifiers for Activity Modes relevant to this entry.
    * 
    * Mapped to DestinyActivityModeDefinition in the manifest.
    */
-  activityModeHashes?: number[]
+  activityModeHashes?: number[];
   /**
    * The activity modes - if any - in enum form. Because we can't seem to escape the
    * enums.
    */
-  activityModeTypes?: DestinyActivityModeType[]
+  activityModeTypes?: DestinyActivityModeType[];
 }
 
 /**
@@ -2598,19 +2674,19 @@ export interface DestinyActivityPlaylistItemDefinition {
  * played, regardless of what specific PVP mode was being played.
  */
 export interface DestinyActivityModeDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /**
    * If this activity mode has a related PGCR image, this will be the path to said
    * image.
    */
-  pgcrImage?: string
+  pgcrImage?: string;
   /**
    * The Enumeration value for this Activity Mode. Pass this identifier into Stats
    * endpoints to get aggregate stats for this mode.
    */
-  modeType?: DestinyActivityModeType
+  modeType?: DestinyActivityModeType;
   /** The type of play being performed in broad terms (PVP, PVE) */
-  activityModeCategory?: DestinyActivityModeCategory
+  activityModeCategory?: DestinyActivityModeCategory;
   /**
    * If True, this mode has oppositional teams fighting against each other rather
    * than "Free-For-All" or Co-operative modes of play.
@@ -2621,7 +2697,7 @@ export interface DestinyActivityModeDefinition {
    * this boolean won't make much sense (the aggregation would become "sometimes team
    * based"). Let's not deal with that right now.
    */
-  isTeamBased?: boolean
+  isTeamBased?: boolean;
   /**
    * If true, this mode is an aggregation of other, more specific modes rather than
    * being a mode in itself. This includes modes that group Features/Events rather
@@ -2629,32 +2705,32 @@ export interface DestinyActivityModeDefinition {
    * that is interesting to see aggregate data for, but when you play the activities
    * within Trials of the Nine they are more specific activity modes such as Clash.
    */
-  isAggregateMode?: boolean
+  isAggregateMode?: boolean;
   /**
    * The hash identifiers of the DestinyActivityModeDefinitions that represent all of
    * the "parent" modes for this mode. For instance, the Nightfall Mode is also a
    * member of AllStrikes and AllPvE.
    */
-  parentHashes?: number[]
+  parentHashes?: number[];
   /**
    * A Friendly identifier you can use for referring to this Activity Mode. We really
    * only used this in our URLs, so... you know, take that for whatever it's worth.
    */
-  friendlyName?: string
+  friendlyName?: string;
   /**
    * If this exists, the mode has specific Activities (referred to by the Key) that
    * should instead map to other Activity Modes when they are played. This was useful
    * in D1 for Private Matches, where we wanted to have Private Matches as an
    * activity mode while still referring to the specific mode being played.
    */
-  activityModeMappings?: { [key: number]: undefined }
+  activityModeMappings?: { [key: number]: undefined };
   /**
    * If FALSE, we want to ignore this type when we're showing activity modes in BNet
    * UI. It will still be returned in case 3rd parties want to use it for any purpose.
    */
-  display?: boolean
+  display?: boolean;
   /** The relative ordering of activity modes. */
-  order?: number
+  order?: number;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2662,14 +2738,14 @@ export interface DestinyActivityModeDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2686,7 +2762,7 @@ export interface DestinyActivityGraphListEntryDefinition {
    * 
    * Mapped to DestinyActivityGraphDefinition in the manifest.
    */
-  activityGraphHash?: number
+  activityGraphHash?: number;
 }
 
 /**
@@ -2713,29 +2789,29 @@ export interface DestinyActivityGraphDefinition {
    * These represent the visual "nodes" on the map's view. These are the activities
    * you can click on in the map.
    */
-  nodes?: DestinyActivityGraphNodeDefinition[]
+  nodes?: DestinyActivityGraphNodeDefinition[];
   /** Represents one-off/special UI elements that appear on the map. */
-  artElements?: DestinyActivityGraphArtElementDefinition[]
+  artElements?: DestinyActivityGraphArtElementDefinition[];
   /**
    * Represents connections between graph nodes. However, it lacks context that we'd
    * need to make good use of it.
    */
-  connections?: DestinyActivityGraphConnectionDefinition[]
+  connections?: DestinyActivityGraphConnectionDefinition[];
   /**
    * Objectives can display on maps, and this is supposedly metadata for that. I have
    * not had the time to analyze the details of what is useful within however: we
    * could be missing important data to make this work. Expect this property to be
    * expanded on later if possible.
    */
-  displayObjectives?: DestinyActivityGraphDisplayObjectiveDefinition[]
+  displayObjectives?: DestinyActivityGraphDisplayObjectiveDefinition[];
   /**
    * Progressions can also display on maps, but similarly to displayObjectives we
    * appear to lack some required information and context right now. We will have to
    * look into it later and add more data if possible.
    */
-  displayProgressions?: DestinyActivityGraphDisplayProgressionDefinition[]
+  displayProgressions?: DestinyActivityGraphDisplayProgressionDefinition[];
   /** Represents links between this Activity Graph and other ones. */
-  linkedGraphs?: DestinyLinkedGraphDefinition[]
+  linkedGraphs?: DestinyLinkedGraphDefinition[];
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -2743,14 +2819,14 @@ export interface DestinyActivityGraphDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /**
@@ -2765,14 +2841,14 @@ export interface DestinyActivityGraphNodeDefinition {
    * An identifier for the Activity Graph Node, only guaranteed to be unique within
    * its parent Activity Graph.
    */
-  nodeId?: number
+  nodeId?: number;
   /**
    * The node *may* have display properties that override the active Activity's
    * display properties.
    */
-  overrideDisplay?: DestinyDisplayPropertiesDefinition
+  overrideDisplay?: DestinyDisplayPropertiesDefinition;
   /** The position on the map for this node. */
-  position?: DestinyPositionDefinition
+  position?: DestinyPositionDefinition;
   /**
    * The node may have various visual accents placed on it, or styles applied. These
    * are the list of possible styles that the Node can have. The game iterates
@@ -2780,13 +2856,13 @@ export interface DestinyActivityGraphNodeDefinition {
    * character/account state in order to show that style, and then renders the node
    * in that style.
    */
-  featuringStates?: DestinyActivityGraphNodeFeaturingStateDefinition[]
+  featuringStates?: DestinyActivityGraphNodeFeaturingStateDefinition[];
   /**
    * The node may have various possible activities that could be active for it,
    * however only one may be active at a time. See the
    * DestinyActivityGraphNodeActivityDefinition for details.
    */
-  activities?: DestinyActivityGraphNodeActivityDefinition[]
+  activities?: DestinyActivityGraphNodeActivityDefinition[];
 }
 
 /**
@@ -2801,7 +2877,7 @@ export interface DestinyActivityGraphNodeFeaturingStateDefinition {
    * given the Game, Account, and Character state, and renders the node in that state.
    * See the ActivityGraphNodeHighlightType enum for possible values.
    */
-  highlightType?: ActivityGraphNodeHighlightType
+  highlightType?: ActivityGraphNodeHighlightType;
 }
 
 /**
@@ -2818,7 +2894,7 @@ export interface DestinyActivityGraphNodeActivityDefinition {
    * An identifier for this node activity. It is only guaranteed to be unique within
    * the Activity Graph.
    */
-  nodeActivityId?: number
+  nodeActivityId?: number;
   /**
    * The activity that will be activated if the user clicks on this node. Controls
    * all activity-related information displayed on the node if it is active (the text
@@ -2826,7 +2902,7 @@ export interface DestinyActivityGraphNodeActivityDefinition {
    * 
    * Mapped to DestinyActivityDefinition in the manifest.
    */
-  activityHash?: number
+  activityHash?: number;
 }
 
 /**
@@ -2837,7 +2913,7 @@ export interface DestinyActivityGraphNodeActivityDefinition {
  */
 export interface DestinyActivityGraphArtElementDefinition {
   /** The position on the map of the art element. */
-  position?: DestinyPositionDefinition
+  position?: DestinyPositionDefinition;
 }
 
 /**
@@ -2846,8 +2922,8 @@ export interface DestinyActivityGraphArtElementDefinition {
  * the path for that linking.
  */
 export interface DestinyActivityGraphConnectionDefinition {
-  sourceNodeHash?: number
-  destNodeHash?: number
+  sourceNodeHash?: number;
+  destNodeHash?: number;
 }
 
 /**
@@ -2859,13 +2935,13 @@ export interface DestinyActivityGraphDisplayObjectiveDefinition {
    * $NOTE $amola 2017-01-19 This field is apparently something that CUI uses to
    * manually wire up objectives to display info. I am unsure how it works.
    */
-  id?: number
+  id?: number;
   /**
    * The objective being shown on the map.
    * 
    * Mapped to DestinyObjectiveDefinition in the manifest.
    */
-  objectiveHash?: number
+  objectiveHash?: number;
 }
 
 /**
@@ -2873,8 +2949,8 @@ export interface DestinyActivityGraphDisplayObjectiveDefinition {
  * well as an identifier.
  */
 export interface DestinyActivityGraphDisplayProgressionDefinition {
-  id?: number
-  progressionHash?: number
+  id?: number;
+  progressionHash?: number;
 }
 
 /**
@@ -2882,12 +2958,12 @@ export interface DestinyActivityGraphDisplayProgressionDefinition {
  * link is relevant.
  */
 export interface DestinyLinkedGraphDefinition {
-  description?: string
-  name?: string
-  unlockExpression?: DestinyUnlockExpressionDefinition
-  linkedGraphId?: number
-  linkedGraphs?: DestinyLinkedGraphEntryDefinition[]
-  overview?: string
+  description?: string;
+  name?: string;
+  unlockExpression?: DestinyUnlockExpressionDefinition;
+  linkedGraphId?: number;
+  linkedGraphs?: DestinyLinkedGraphEntryDefinition[];
+  overview?: string;
 }
 
 /**
@@ -2904,11 +2980,11 @@ export interface DestinyUnlockExpressionDefinition {
    * A shortcut for determining the most restrictive gating that this expression
    * performs. See the DestinyGatingScope enum's documentation for more details.
    */
-  scope?: DestinyGatingScope
+  scope?: DestinyGatingScope;
 }
 
 export interface DestinyLinkedGraphEntryDefinition {
-  activityGraphHash?: number
+  activityGraphHash?: number;
 }
 
 /**
@@ -2916,7 +2992,7 @@ export interface DestinyLinkedGraphEntryDefinition {
  * DestinyDestinationDefinition.bubbleSettings for more information.
  */
 export interface DestinyDestinationBubbleSettingDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
 }
 
 /**
@@ -2929,7 +3005,7 @@ export interface DestinyBubbleDefinition {
    * The identifier for the bubble: only guaranteed to be unique within the
    * Destination.
    */
-  hash?: number
+  hash?: number;
 }
 
 /**
@@ -2939,15 +3015,15 @@ export interface DestinyBubbleDefinition {
  * populated and someone finds it useful, it is defined here.
  */
 export interface DestinyVendorActionDefinition {
-  description?: string
-  executeSeconds?: number
-  icon?: string
-  name?: string
-  verb?: string
-  isPositive?: boolean
-  actionId?: string
-  actionHash?: number
-  autoPerformAction?: boolean
+  description?: string;
+  executeSeconds?: number;
+  icon?: string;
+  name?: string;
+  verb?: string;
+  isPositive?: boolean;
+  actionId?: string;
+  actionHash?: number;
+  autoPerformAction?: boolean;
 }
 
 /**
@@ -2956,48 +3032,48 @@ export interface DestinyVendorActionDefinition {
  */
 export interface DestinyVendorCategoryEntryDefinition {
   /** The index of the category in the original category definitions for the vendor. */
-  categoryIndex?: number
+  categoryIndex?: number;
   /** The string identifier of the category. */
-  categoryId?: string
+  categoryId?: string;
   /**
    * The hashed identifier for the category. (note that this is NOT pointing to a
    * DestinyVendorCategoryDefinition, it's confusing but this is a sale item category
    * in a vendor, not a categorization of vendors themselves)
    */
-  categoryHash?: number
+  categoryHash?: number;
   /** The amount of items that will be available when this category is shown. */
-  quantityAvailable?: number
+  quantityAvailable?: number;
   /**
    * If items aren't up for sale in this category, should we still show them (greyed
    * out)?
    */
-  showUnavailableItems?: boolean
+  showUnavailableItems?: boolean;
   /**
    * If you don't have the currency required to buy items from this category, should
    * the items be hidden?
    */
-  hideIfNoCurrency?: boolean
+  hideIfNoCurrency?: boolean;
   /** True if this category doesn't allow purchases. */
-  hideFromRegularPurchase?: boolean
+  hideFromRegularPurchase?: boolean;
   /**
    * The localized string for making purchases from this category, if it is different
    * from the vendor's string for purchasing.
    */
-  buyStringOverride?: string
+  buyStringOverride?: string;
   /** If the category is disabled, this is the localized description to show. */
-  disabledDescription?: string
+  disabledDescription?: string;
   /** The localized title of the category. */
-  displayTitle?: string
+  displayTitle?: string;
   /**
    * If this category has an overlay prompt that should appear, this contains the
    * details of that prompt.
    */
-  overlay?: DestinyVendorCategoryOverlayDefinition
+  overlay?: DestinyVendorCategoryOverlayDefinition;
   /**
    * A shortcut for the vendor item indexes sold under this category. Saves us from
    * some expensive reorganization at runtime.
    */
-  vendorItemIndexes?: number[]
+  vendorItemIndexes?: number[];
 }
 
 /**
@@ -3009,8 +3085,8 @@ export interface DestinyVendorCategoryEntryDefinition {
  */
 export interface DestinyDisplayCategoryDefinition {
   /** A string identifier for the display category. */
-  identifier?: string
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  identifier?: string;
+  displayProperties?: DestinyDisplayPropertiesDefinition;
 }
 
 /**
@@ -3020,12 +3096,12 @@ export interface DestinyDisplayCategoryDefinition {
  */
 export interface DestinyVendorInteractionDefinition {
   /** The potential replies that the user can make to the interaction. */
-  replies?: DestinyVendorInteractionReplyDefinition[]
+  replies?: DestinyVendorInteractionReplyDefinition[];
   /**
    * If >= 0, this is the category of sale items to show along with this interaction
    * dialog.
    */
-  vendorCategoryIndex?: number
+  vendorCategoryIndex?: number;
   /**
    * If this interaction dialog is about a quest, this is the questline related to
    * the interaction. You can use this to show the quest overview, or even the
@@ -3035,35 +3111,35 @@ export interface DestinyVendorInteractionDefinition {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  questlineItemHash?: number
+  questlineItemHash?: number;
   /**
    * If this interaction is meant to show you sacks, this is the list of types of
    * sacks to be shown. If empty, the interaction is not meant to show sacks.
    */
-  sackInteractionList?: DestinyVendorInteractionSackEntryDefinition[]
+  sackInteractionList?: DestinyVendorInteractionSackEntryDefinition[];
   /**
    * A UI hint for the behavior of the interaction screen. BNet doesn't use this, but
    * you can choose to.
    */
-  uiInteractionType?: number
+  uiInteractionType?: number;
   /**
    * If this interaction is displaying rewards, this is the text to use for the
    * header of the reward-displaying section of the interaction.
    */
-  rewardBlockLabel?: string
+  rewardBlockLabel?: string;
   /**
    * If the vendor's reward list is sourced from one of his categories, this is the
    * index into the category array of items to show.
    */
-  rewardVendorCategoryIndex?: number
+  rewardVendorCategoryIndex?: number;
   /** If the vendor interaction has flavor text, this is some of it. */
-  flavorLineOne?: string
+  flavorLineOne?: string;
   /** If the vendor interaction has flavor text, this is the rest of it. */
-  flavorLineTwo?: string
+  flavorLineTwo?: string;
   /** The header for the interaction dialog. */
-  headerDisplayProperties?: DestinyDisplayPropertiesDefinition
+  headerDisplayProperties?: DestinyDisplayPropertiesDefinition;
   /** The localized text telling the player what to do when they see this dialog. */
-  instructions?: string
+  instructions?: string;
 }
 
 /**
@@ -3075,11 +3151,11 @@ export interface DestinyVendorInteractionDefinition {
  */
 export interface DestinyVendorInteractionReplyDefinition {
   /** The rewards granted upon responding to the vendor. */
-  itemRewardsSelection?: DestinyVendorInteractionRewardSelection
+  itemRewardsSelection?: DestinyVendorInteractionRewardSelection;
   /** The localized text for the reply. */
-  reply?: string
+  reply?: string;
   /** An enum indicating the type of reply being made. */
-  replyType?: DestinyVendorReplyType
+  replyType?: DestinyVendorReplyType;
 }
 
 /**
@@ -3088,7 +3164,7 @@ export interface DestinyVendorInteractionReplyDefinition {
  * show this sack with this interaction.
  */
 export interface DestinyVendorInteractionSackEntryDefinition {
-  sackType?: number
+  sackType?: number;
 }
 
 /**
@@ -3097,18 +3173,18 @@ export interface DestinyVendorInteractionSackEntryDefinition {
  */
 export interface DestinyVendorInventoryFlyoutDefinition {
   /** If the flyout is locked, this is the reason why. */
-  lockedDescription?: string
+  lockedDescription?: string;
   /** The title and other common properties of the flyout. */
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /** A list of inventory buckets and other metadata to show on the screen. */
-  buckets?: DestinyVendorInventoryFlyoutBucketDefinition[]
+  buckets?: DestinyVendorInventoryFlyoutBucketDefinition[];
   /** An identifier for the flyout, in case anything else needs to refer to them. */
-  flyoutId?: number
+  flyoutId?: number;
   /**
    * If this is true, don't show any of the glistening "this is a new item" UI
    * elements, like we show on the inventory items themselves in in-game UI.
    */
-  suppressNewness?: boolean
+  suppressNewness?: boolean;
 }
 
 /**
@@ -3117,15 +3193,15 @@ export interface DestinyVendorInventoryFlyoutDefinition {
  */
 export interface DestinyVendorInventoryFlyoutBucketDefinition {
   /** If true, the inventory bucket should be able to be collapsed visually. */
-  collapsible?: boolean
+  collapsible?: boolean;
   /**
    * The inventory bucket whose contents should be shown.
    * 
    * Mapped to DestinyInventoryBucketDefinition in the manifest.
    */
-  inventoryBucketHash?: number
+  inventoryBucketHash?: number;
   /** The methodology to use for sorting items from the flyout. */
-  sortItemsBy?: DestinyItemSortType
+  sortItemsBy?: DestinyItemSortType;
 }
 
 /**
@@ -3147,20 +3223,20 @@ export interface DestinyVendorInventoryFlyoutBucketDefinition {
  * of a Vendor. See the vendor's acceptedItems property for more details.
  */
 export interface DestinyInventoryBucketDefinition {
-  displayProperties?: DestinyDisplayPropertiesDefinition
+  displayProperties?: DestinyDisplayPropertiesDefinition;
   /** Where the bucket is found. 0 = Character, 1 = Account */
-  scope?: BucketScope
+  scope?: BucketScope;
   /**
    * An enum value for what items can be found in the bucket. See the BucketCategory
    * enum for more details.
    */
-  category?: BucketCategory
+  category?: BucketCategory;
   /**
    * Use this property to provide a quick-and-dirty recommended ordering for buckets
    * in the UI. Most UIs will likely want to forsake this for something more custom
    * and manual.
    */
-  bucketOrder?: number
+  bucketOrder?: number;
   /**
    * The maximum # of item "slots" in a bucket. A slot is a given combination of item
    * + quantity.
@@ -3169,7 +3245,7 @@ export interface DestinyInventoryBucketDefinition {
    * quantity of 1. But a material could take up only a single slot with hundreds of
    * quantity.
    */
-  itemCount?: number
+  itemCount?: number;
   /**
    * Sometimes, inventory buckets represent conceptual "locations" in the game that
    * might not be expected. This value indicates the conceptual location of the
@@ -3181,26 +3257,26 @@ export interface DestinyInventoryBucketDefinition {
    * just inventory buckets with additional actions that can be performed on them
    * through a Vendor)
    */
-  location?: ItemLocation
+  location?: ItemLocation;
   /**
    * If TRUE, there is at least one Vendor that can transfer items to/from this
    * bucket. See the DestinyVendorDefinition's acceptedItems property for more
    * information on how transferring works.
    */
-  hasTransferDestination?: boolean
+  hasTransferDestination?: boolean;
   /**
    * If True, this bucket is enabled. Disabled buckets may include buckets that were
    * included for test purposes, or that were going to be used but then were
    * abandoned but never removed from content *cough*.
    */
-  enabled?: boolean
+  enabled?: boolean;
   /**
    * if a FIFO bucket fills up, it will delete the oldest item from said bucket when
    * a new item tries to be added to it. If this is FALSE, the bucket will not allow
    * new items to be placed in it until room is made by the user manually deleting
    * items from it. You can see an example of this with the Postmaster's bucket.
    */
-  fifo?: boolean
+  fifo?: boolean;
   /**
    * The unique identifier for this entity. Guaranteed to be unique for the type of
    * entity, but not globally.
@@ -3208,14 +3284,14 @@ export interface DestinyInventoryBucketDefinition {
    * When entities refer to each other in Destiny content, it is this hash that they
    * are referring to.
    */
-  hash?: number
+  hash?: number;
   /** The index of the entity as it was found in the investment tables. */
-  index?: number
+  index?: number;
   /**
    * If this is true, then there is an entity with this identifier/type combination,
    * but BNet is not yet allowed to show it. Sorry!
    */
-  redacted?: boolean
+  redacted?: boolean;
 }
 
 /** This represents an item being sold by the vendor. */
@@ -3224,7 +3300,7 @@ export interface DestinyVendorItemDefinition {
    * The index into the DestinyVendorDefinition.saleList. This is what we use to
    * refer to items being sold throughout live and definition data.
    */
-  vendorItemIndex?: number
+  vendorItemIndex?: number;
   /**
    * The hash identifier of the item being sold (DestinyInventoryItemDefinition).
    * 
@@ -3233,17 +3309,17 @@ export interface DestinyVendorItemDefinition {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  itemHash?: number
+  itemHash?: number;
   /**
    * The amount you will recieve of the item described in itemHash if you make the
    * purchase.
    */
-  quantity?: number
+  quantity?: number;
   /**
    * An list of indexes into the DestinyVendorDefinition.failureStrings array,
    * indicating the possible failure strings that can be relevant for this item.
    */
-  failureIndexes?: number[]
+  failureIndexes?: number[];
   /**
    * This is a pre-compiled aggregation of item value and priceOverrideList, so that
    * we have one place to check for what the purchaser must pay for the item. Use
@@ -3252,44 +3328,44 @@ export interface DestinyVendorItemDefinition {
    * JUST KIDDING HA this never got populated, who's the idiot now? Hint: Me. Now
    * they'll actually be populated [amola, 2017-11-12]
    */
-  currencies?: DestinyItemQuantity[]
+  currencies?: DestinyItemQuantity[];
   /**
    * If this item can be refunded, this is the policy for what will be refundd, how,
    * and in what time period.
    */
-  refundPolicy?: DestinyVendorItemRefundPolicy
+  refundPolicy?: DestinyVendorItemRefundPolicy;
   /** The amount of time before refundability of the newly purchased item will expire. */
-  refundTimeLimit?: number
+  refundTimeLimit?: number;
   /**
    * The Default level at which the item will spawn. Almost always driven by an
    * adjusto these days. Ideally should be singular. It's a long story how this ended
    * up as a list, but there is always either going to be 0:1 of these entities.
    */
-  creationLevels?: DestinyItemCreationEntryLevelDefinition[]
+  creationLevels?: DestinyItemCreationEntryLevelDefinition[];
   /**
    * This is an index specifically into the display category, as opposed to the
    * server-side Categories (which do not need to match or pair with each other in
    * any way: server side categories are really just structures for common validation.
    * Display Category will let us more easily categorize items visually)
    */
-  displayCategoryIndex?: number
+  displayCategoryIndex?: number;
   /**
    * The index into the DestinyVendorDefinition.categories array, so you can find the
    * category associated with this item.
    */
-  categoryIndex?: number
+  categoryIndex?: number;
   /** Same as above, but for the original category indexes. */
-  originalCategoryIndex?: number
+  originalCategoryIndex?: number;
   /** The minimum character level at which this item is available for sale. */
-  minimumLevel?: number
+  minimumLevel?: number;
   /** The maximum character level at which this item is available for sale. */
-  maximumLevel?: number
+  maximumLevel?: number;
   /** The action to be performed when purchasing the item, if it's not just "buy". */
-  action?: DestinyVendorSaleItemActionBlockDefinition
+  action?: DestinyVendorSaleItemActionBlockDefinition;
   /** The string identifier for the category selling this item. */
-  displayCategory?: string
+  displayCategory?: string;
   /** The inventory bucket into which this item will be placed upon purchase. */
-  inventoryBucketHash?: number
+  inventoryBucketHash?: number;
   /**
    * The most restrictive scope that determines whether the item is available in the
    * Vendor's inventory. See DestinyGatingScope's documentation for more information.
@@ -3297,7 +3373,7 @@ export interface DestinyVendorItemDefinition {
    * This can be determined by Unlock gating, or by whether or not the item has
    * purchase level requirements (minimumLevel and maximumLevel properties).
    */
-  visibilityScope?: DestinyGatingScope
+  visibilityScope?: DestinyGatingScope;
   /**
    * Similar to visibilityScope, it represents the most restrictive scope that
    * determines whether the item can be purchased. It will at least be as restrictive
@@ -3306,30 +3382,30 @@ export interface DestinyVendorItemDefinition {
    * 
    * See DestinyGatingScope's documentation for more information.
    */
-  purchasableScope?: DestinyGatingScope
+  purchasableScope?: DestinyGatingScope;
   /**
    * If this item can only be purchased by a given platform, this indicates the
    * platform to which it is restricted.
    */
-  exclusivity?: BungieMembershipType
+  exclusivity?: BungieMembershipType;
   /** If this sale can only be performed as the result of an offer check, this is true. */
-  isOffer?: boolean
+  isOffer?: boolean;
   /**
    * If this sale can only be performed as the result of receiving a CRM offer, this
    * is true.
    */
-  isCrm?: boolean
+  isCrm?: boolean;
 }
 
 /** An overly complicated wrapper for the item level at which the item should spawn. */
 export interface DestinyItemCreationEntryLevelDefinition {
-  level?: number
+  level?: number;
 }
 
 /** When a vendor provides services, this is the localized name of those services. */
 export interface DestinyVendorServiceDefinition {
   /** The localized name of a service provided. */
-  name?: string
+  name?: string;
 }
 
 /**
@@ -3354,14 +3430,14 @@ export interface DestinyVendorAcceptedItemDefinition {
    * 
    * Mapped to DestinyInventoryBucketDefinition in the manifest.
    */
-  acceptedInventoryBucketHash?: number
+  acceptedInventoryBucketHash?: number;
   /**
    * This is the bucket where the item being transferred will be put, given that it
    * was being transferred *from* the bucket defined in acceptedInventoryBucketHash.
    * 
    * Mapped to DestinyInventoryBucketDefinition in the manifest.
    */
-  destinationInventoryBucketHash?: number
+  destinationInventoryBucketHash?: number;
 }
 
 /**
@@ -3379,9 +3455,9 @@ export interface DestinyMilestoneQuest {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  questItemHash?: number
+  questItemHash?: number;
   /** The current status of the quest for the character making the request. */
-  status?: DestinyQuestStatus
+  status?: DestinyQuestStatus;
   /**
    * *IF* the Milestone has an active Activity that can give you greater details
    * about what you need to do, it will be returned here. Remember to associate this
@@ -3389,7 +3465,7 @@ export interface DestinyMilestoneQuest {
    * activity, including what specific quest it is related to if you have multiple
    * quests to choose from.
    */
-  activity?: DestinyMilestoneActivity
+  activity?: DestinyMilestoneActivity;
   /**
    * The activities referred to by this quest can have many associated challenges.
    * They are all contained here, with activityHashes so that you can associate them
@@ -3400,7 +3476,7 @@ export interface DestinyMilestoneQuest {
    * but it probably should have been in both places. That may come as a later
    * revision.
    */
-  challenges?: DestinyChallengeStatus[]
+  challenges?: DestinyChallengeStatus[];
 }
 
 /**
@@ -3412,7 +3488,7 @@ export interface DestinyMilestoneQuest {
  */
 export interface DestinyChallengeStatus {
   /** The progress - including completion status - of the active challenge. */
-  objective?: DestinyObjectiveProgress
+  objective?: DestinyObjectiveProgress;
 }
 
 /**
@@ -3426,7 +3502,7 @@ export interface DestinyMilestoneVendor {
    * 
    * Mapped to DestinyVendorDefinition in the manifest.
    */
-  vendorHash?: number
+  vendorHash?: number;
   /**
    * If this vendor is featuring a specific item for this event, this will be the
    * hash identifier of that item. I'm taking bets now on how long we go before this
@@ -3436,7 +3512,7 @@ export interface DestinyMilestoneVendor {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  previewItemHash?: number
+  previewItemHash?: number;
 }
 
 /**
@@ -3448,9 +3524,9 @@ export interface DestinyMilestoneRewardCategory {
    * Look up the relevant DestinyMilestoneDefinition, and then use rewardCategoryHash
    * to look up the category info in DestinyMilestoneDefinition.rewards.
    */
-  rewardCategoryHash?: number
+  rewardCategoryHash?: number;
   /** The individual reward entries for this category, and their status. */
-  entries?: DestinyMilestoneRewardEntry[]
+  entries?: DestinyMilestoneRewardEntry[];
 }
 
 /**
@@ -3465,14 +3541,14 @@ export interface DestinyMilestoneRewardEntry {
    * DestinyMilestoneDefinition and examining the DestinyMilestoneDefinition.rewards[
    * rewardCategoryHash].rewardEntries[rewardEntryHash] data.
    */
-  rewardEntryHash?: number
+  rewardEntryHash?: number;
   /** If TRUE, the player has earned this reward. */
-  earned?: boolean
+  earned?: boolean;
   /**
    * If TRUE, the player has redeemed/picked up/obtained this reward. Feel free to
    * alias this to "gotTheShinyBauble" in your own codebase.
    */
-  redeemed?: boolean
+  redeemed?: boolean;
 }
 
 /**
@@ -3485,43 +3561,43 @@ export interface DestinyItemResponse {
    * If the item is on a character, this will return the ID of the character that is
    * holding the item.
    */
-  characterId?: number
+  characterId?: number;
   /**
    * Common data for the item relevant to its non-instanced properties.
    * 
    * COMPONENT TYPE: ItemCommonData
    */
-  item?: SingleComponentResponseOfDestinyItemComponent
+  item?: SingleComponentResponseOfDestinyItemComponent;
   /**
    * Basic instance data for the item.
    * 
    * COMPONENT TYPE: ItemInstances
    */
-  instance?: SingleComponentResponseOfDestinyItemInstanceComponent
+  instance?: SingleComponentResponseOfDestinyItemInstanceComponent;
   /**
    * Information specifically about the item's objectives.
    * 
    * COMPONENT TYPE: ItemObjectives
    */
-  objectives?: SingleComponentResponseOfDestinyItemObjectivesComponent
+  objectives?: SingleComponentResponseOfDestinyItemObjectivesComponent;
   /**
    * Information specifically about the perks currently active on the item.
    * 
    * COMPONENT TYPE: ItemPerks
    */
-  perks?: SingleComponentResponseOfDestinyItemPerksComponent
+  perks?: SingleComponentResponseOfDestinyItemPerksComponent;
   /**
    * Information about how to render the item in 3D.
    * 
    * COMPONENT TYPE: ItemRenderData
    */
-  renderData?: SingleComponentResponseOfDestinyItemRenderComponent
+  renderData?: SingleComponentResponseOfDestinyItemRenderComponent;
   /**
    * Information about the computed stats of the item: power, defense, etc...
    * 
    * COMPONENT TYPE: ItemStats
    */
-  stats?: SingleComponentResponseOfDestinyItemStatsComponent
+  stats?: SingleComponentResponseOfDestinyItemStatsComponent;
   /**
    * Information about the talent grid attached to the item. Talent nodes can provide
    * a variety of benefits and abilities, and in Destiny 2 are used almost
@@ -3529,7 +3605,7 @@ export interface DestinyItemResponse {
    * 
    * COMPONENT TYPE: ItemTalentGrids
    */
-  talentGrid?: SingleComponentResponseOfDestinyItemTalentGridComponent
+  talentGrid?: SingleComponentResponseOfDestinyItemTalentGridComponent;
   /**
    * Information about the sockets of the item: which are currently active, what
    * potential sockets you could have and the stats/abilities/perks you can gain from
@@ -3537,7 +3613,7 @@ export interface DestinyItemResponse {
    * 
    * COMPONENT TYPE: ItemSockets
    */
-  sockets?: SingleComponentResponseOfDestinyItemSocketsComponent
+  sockets?: SingleComponentResponseOfDestinyItemSocketsComponent;
 }
 
 /** A response containing all of the components for all requested vendors. */
@@ -3547,20 +3623,20 @@ export interface DestinyVendorsResponse {
    * 
    * COMPONENT TYPE: Vendors
    */
-  vendors?: DictionaryComponentResponseOfuint32AndDestinyVendorComponent
+  vendors?: DictionaryComponentResponseOfuint32AndDestinyVendorComponent;
   /**
    * Categories that the vendor has available, and references to the sales therein.
    * 
    * COMPONENT TYPE: VendorCategories
    */
-  categories?: DictionaryComponentResponseOfuint32AndDestinyVendorCategoriesComponent
+  categories?: DictionaryComponentResponseOfuint32AndDestinyVendorCategoriesComponent;
   /**
    * Sales, keyed by the vendorItemIndex of the item being sold.
    * 
    * COMPONENT TYPE: VendorSales
    */
-  sales?: DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent
-  itemComponents?: { [key: number]: undefined }
+  sales?: DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent;
+  itemComponents?: { [key: number]: undefined };
 }
 
 /** A response containing all of the components for a vendor. */
@@ -3570,31 +3646,31 @@ export interface DestinyVendorResponse {
    * 
    * COMPONENT TYPE: Vendors
    */
-  vendor?: SingleComponentResponseOfDestinyVendorComponent
+  vendor?: SingleComponentResponseOfDestinyVendorComponent;
   /**
    * Categories that the vendor has available, and references to the sales therein.
    * 
    * COMPONENT TYPE: VendorCategories
    */
-  categories?: SingleComponentResponseOfDestinyVendorCategoriesComponent
+  categories?: SingleComponentResponseOfDestinyVendorCategoriesComponent;
   /**
    * Sales, keyed by the vendorItemIndex of the item being sold.
    * 
    * COMPONENT TYPE: VendorSales
    */
-  sales?: DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent
+  sales?: DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent;
   /**
    * Item components, keyed by the vendorItemIndex of the active sale items.
    * 
    * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
    * types.]
    */
-  itemComponents?: DestinyItemComponentSetOfint32
+  itemComponents?: DestinyItemComponentSetOfint32;
 }
 
 /** The results of a bulk Equipping operation performed through the Destiny API. */
 export interface DestinyEquipItemResults {
-  equipResults?: DestinyEquipItemResult[]
+  equipResults?: DestinyEquipItemResult[];
 }
 
 /** The results of an Equipping operation performed through the Destiny API. */
@@ -3604,55 +3680,86 @@ export interface DestinyEquipItemResult {
    * but definition, be Instanced and thus have an Instance ID that you can use to
    * refer to them)
    */
-  itemInstanceId?: number
+  itemInstanceId?: number;
   /** A PlatformErrorCodes enum indicating whether it succeeded, and if it failed why. */
-  equipStatus?: PlatformErrorCodes
+  equipStatus?: PlatformErrorCodes;
 }
 
 export interface DestinyPostGameCarnageReportData {
   /** Date and time for the activity. */
-  period?: string
+  period?: string;
   /** Details about the activity. */
-  activityDetails?: DestinyHistoricalStatsActivity
+  activityDetails?: DestinyHistoricalStatsActivity;
   /** Collection of players and their data for this activity. */
-  entries?: DestinyPostGameCarnageReportEntry[]
+  entries?: DestinyPostGameCarnageReportEntry[];
   /** Collection of stats for the player in this activity. */
-  teams?: DestinyPostGameCarnageReportTeamEntry[]
+  teams?: DestinyPostGameCarnageReportTeamEntry[];
 }
 
 export interface DestinyPostGameCarnageReportEntry {
   /** Standing of the player */
-  standing?: number
+  standing?: number;
   /** Score of the player if available */
-  score?: DestinyHistoricalStatsValue
+  score?: DestinyHistoricalStatsValue;
   /** Identity details of the player */
-  player?: DestinyPlayer
+  player?: DestinyPlayer;
   /** ID of the player's character used in the activity. */
-  characterId?: number
+  characterId?: number;
   /** Collection of stats for the player in this activity. */
-  values?: { [key: string]: undefined }
+  values?: { [key: string]: undefined };
   /** Extended data extracted from the activity blob. */
-  extended?: DestinyPostGameCarnageReportExtendedData
+  extended?: DestinyPostGameCarnageReportExtendedData;
 }
 
 export interface DestinyPostGameCarnageReportTeamEntry {
   /** Integer ID for the team. */
-  teamId?: number
+  teamId?: number;
   /** Team's standing relative to other teams. */
-  standing?: DestinyHistoricalStatsValue
+  standing?: DestinyHistoricalStatsValue;
   /** Score earned by the team */
-  score?: DestinyHistoricalStatsValue
+  score?: DestinyHistoricalStatsValue;
   /** Alpha or Bravo */
-  teamName?: string
+  teamName?: string;
+}
+
+/**
+ * If you're going to report someone for a Terms of Service violation, you need to
+ * choose a category and reason for the report. This definition holds both the
+ * categories and the reasons within those categories, for simplicity and my own
+ * laziness' sake.
+ * 
+ * Note tha this means that, to refer to a Reason by reasonHash, you need a
+ * combination of the reasonHash *and* the associated ReasonCategory's hash: there
+ * are some reasons defined under multiple categories.
+ */
+export interface DestinyReportReasonCategoryDefinition {
+  displayProperties?: DestinyDisplayPropertiesDefinition;
+  /** The specific reasons for the report under this category. */
+  reasons?: { [key: number]: undefined };
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   * 
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  hash?: number;
+  /** The index of the entity as it was found in the investment tables. */
+  index?: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  redacted?: boolean;
 }
 
 export interface DestinyClanAggregateStat {
   /** The id of the mode of stats (allPvp, allPvE, etc) */
-  mode?: DestinyActivityModeType
+  mode?: DestinyActivityModeType;
   /** The id of the stat */
-  statId?: string
+  statId?: string;
   /** Value of the stat for this player */
-  value?: DestinyHistoricalStatsValue
+  value?: DestinyHistoricalStatsValue;
 }
 
 /**
@@ -3664,33 +3771,33 @@ export interface DestinyEntitySearchResult {
    * A list of suggested words that might make for better search results, based on
    * the text searched for.
    */
-  suggestedWords?: string[]
+  suggestedWords?: string[];
   /**
    * The items found that are matches/near matches for the searched-for term, sorted
    * by something vaguely resembling "relevance". Hopefully this will get better in
    * the future.
    */
-  results?: SearchResultOfDestinyEntitySearchResultItem
+  results?: SearchResultOfDestinyEntitySearchResultItem;
 }
 
 export interface DestinyHistoricalStatsAccountResult {
-  mergedDeletedCharacters?: DestinyHistoricalStatsWithMerged
-  mergedAllCharacters?: DestinyHistoricalStatsWithMerged
-  characters?: DestinyHistoricalStatsPerCharacter[]
+  mergedDeletedCharacters?: DestinyHistoricalStatsWithMerged;
+  mergedAllCharacters?: DestinyHistoricalStatsWithMerged;
+  characters?: DestinyHistoricalStatsPerCharacter[];
 }
 
 export interface DestinyHistoricalStatsWithMerged {
-  results?: { [key: string]: undefined }
-  merged?: DestinyHistoricalStatsByPeriod
+  results?: { [key: string]: undefined };
+  merged?: DestinyHistoricalStatsByPeriod;
 }
 
 export interface DestinyHistoricalStatsByPeriod {
-  allTime?: { [key: string]: undefined }
-  allTimeTier1?: { [key: string]: undefined }
-  allTimeTier2?: { [key: string]: undefined }
-  allTimeTier3?: { [key: string]: undefined }
-  daily?: DestinyHistoricalStatsPeriodGroup[]
-  monthly?: DestinyHistoricalStatsPeriodGroup[]
+  allTime?: { [key: string]: undefined };
+  allTimeTier1?: { [key: string]: undefined };
+  allTimeTier2?: { [key: string]: undefined };
+  allTimeTier3?: { [key: string]: undefined };
+  daily?: DestinyHistoricalStatsPeriodGroup[];
+  monthly?: DestinyHistoricalStatsPeriodGroup[];
 }
 
 export interface DestinyHistoricalStatsPeriodGroup {
@@ -3699,28 +3806,28 @@ export interface DestinyHistoricalStatsPeriodGroup {
    * specific day. If the type is monthly, then this value will be the first day of
    * the applicable month. This value is not set when the periodType is 'all time'.
    */
-  period?: string
+  period?: string;
   /** If the period group is for a specific activity, this property will be set. */
-  activityDetails?: DestinyHistoricalStatsActivity
+  activityDetails?: DestinyHistoricalStatsActivity;
   /** Collection of stats for the period. */
-  values?: { [key: string]: undefined }
+  values?: { [key: string]: undefined };
 }
 
 export interface DestinyHistoricalStatsPerCharacter {
-  characterId?: number
-  deleted?: boolean
-  results?: { [key: string]: undefined }
-  merged?: DestinyHistoricalStatsByPeriod
+  characterId?: number;
+  deleted?: boolean;
+  results?: { [key: string]: undefined };
+  merged?: DestinyHistoricalStatsByPeriod;
 }
 
 export interface DestinyActivityHistoryResults {
   /** List of activities, the most recent activity first. */
-  activities?: DestinyHistoricalStatsPeriodGroup[]
+  activities?: DestinyHistoricalStatsPeriodGroup[];
 }
 
 export interface DestinyHistoricalWeaponStatsData {
   /** List of weapons and their perspective values. */
-  weapons?: DestinyHistoricalWeaponStats[]
+  weapons?: DestinyHistoricalWeaponStats[];
 }
 
 export interface DestinyHistoricalWeaponStats {
@@ -3729,14 +3836,14 @@ export interface DestinyHistoricalWeaponStats {
    * 
    * Mapped to DestinyInventoryItemDefinition in the manifest.
    */
-  referenceId?: number
+  referenceId?: number;
   /** Collection of stats for the period. */
-  values?: { [key: string]: undefined }
+  values?: { [key: string]: undefined };
 }
 
 export interface DestinyAggregateActivityResults {
   /** List of all activities the player has participated in. */
-  activities?: DestinyAggregateActivityStats[]
+  activities?: DestinyAggregateActivityStats[];
 }
 
 export interface DestinyAggregateActivityStats {
@@ -3745,9 +3852,9 @@ export interface DestinyAggregateActivityStats {
    * 
    * Mapped to DestinyActivityDefinition in the manifest.
    */
-  activityHash?: number
+  activityHash?: number;
   /** Collection of stats for the player in this activity. */
-  values?: { [key: string]: undefined }
+  values?: { [key: string]: undefined };
 }
 
 /**
@@ -3759,16 +3866,16 @@ export interface DestinyAggregateActivityStats {
  */
 export interface DestinyMilestoneContent {
   /** The "About this Milestone" text from the Firehose. */
-  about?: string
+  about?: string;
   /** The Current Status of the Milestone, as driven by the Firehose. */
-  status?: string
+  status?: string;
   /** A list of tips, provided by the Firehose. */
-  tips?: string[]
+  tips?: string[];
   /**
    * If DPS has defined items related to this Milestone, they can categorize those
    * items in the Firehose. That data will then be returned as item categories here.
    */
-  itemCategories?: DestinyMilestoneContentItemCategory[]
+  itemCategories?: DestinyMilestoneContentItemCategory[];
 }
 
 /**
@@ -3777,9 +3884,9 @@ export interface DestinyMilestoneContent {
  * same as programmatically generated rewards.
  */
 export interface DestinyMilestoneContentItemCategory {
-  title?: string
+  title?: string;
   /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-  itemHashes?: number[]
+  itemHashes?: number[];
 }
 
 /**
@@ -3794,14 +3901,14 @@ export interface DestinyPublicActivityStatus {
    * 
    * Mapped to DestinyObjectiveDefinition in the manifest.
    */
-  challengeObjectiveHashes?: number[]
+  challengeObjectiveHashes?: number[];
   /**
    * The active modifiers on this activity, if any - represented as hashes for
    * DestinyActivityModifierDefinitions.
    * 
    * Mapped to DestinyActivityModifierDefinition in the manifest.
    */
-  modifierHashes?: number[]
+  modifierHashes?: number[];
   /**
    * If the activity itself provides any specific "mock" rewards, this will be the
    * items and their quantity.
@@ -3813,5 +3920,5 @@ export interface DestinyPublicActivityStatus {
    * represent an abstract concept of what you will get for a reward rather than the
    * specific items you may obtain.
    */
-  rewardTooltipItems?: DestinyItemQuantity[]
+  rewardTooltipItems?: DestinyItemQuantity[];
 }
