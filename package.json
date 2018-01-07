@@ -9,7 +9,7 @@
     "bungie-api-LICENSE"
   ],
   "scripts": {
-    "start": "rm -rf ./generated-src && mkdir -p generated-src && cp generator/http.d.ts generated-src && tsc -p tsconfig.json && node ./build/generate.js && rm -rf ./lib && mkdir -p lib && tsc -p tsconfig-commonjs.json",
+    "start": "./build.sh",
     "install": "git submodule init && git submodule update",
     "lint": "tslint --fix -p tsconfig.json"
   },

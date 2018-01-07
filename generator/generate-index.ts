@@ -7,6 +7,7 @@ export function generateIndex(tag: string, doc: OpenAPIObject) {
 
   const imports = `export * from '../common';${tag !== 'Destiny2' ? "\nexport * from '../platform';" : ''}
 export * from '../http';
+export * from './enums';
 export * from './interfaces';
 export * from './responses';
 export * from './api';`;

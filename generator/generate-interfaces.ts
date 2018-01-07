@@ -10,12 +10,13 @@ export function generateInterfaceDefinitions(file: string, components: DefInfo[]
 
   const filename = `generated-src/${file}`;
 
-  const imports = generateImports(filename, importFiles);
-
   let specialDefinitions;
-  if (file === 'destiny2/interfaces.ts') {
+  if (file === 'destiny2/interfaces.d.ts') {
     specialDefinitions = generateSpecialDefinitions();
+    importFiles['destiny2/enums.ts'].add('ComponentPrivacySetting');
   }
+
+  const imports = generateImports(filename, importFiles);
 
   const definition = _.compact([generateHeader(doc), imports, specialDefinitions, ...componentDefinitions]).join('\n\n') + '\n';
 
