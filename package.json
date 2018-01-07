@@ -5,7 +5,8 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "start": "rm -rf ./dist && mkdir -p dist && cp generator/http.d.ts dist && tsc -p tsconfig.json && node ./build/generate.js",
-    "install": "git submodule init && git submodule update"
+    "install": "git submodule init && git submodule update",
+    "lint": "tslint --fix -p tsconfig.json"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,8 @@
 import { DefInfo, getReferencedTypes } from './util';
 import * as _ from 'underscore';
 import * as path from 'path';
+import * as fs from 'fs';
+import * as mkdirp from 'mkdirp';
 import { OpenAPIObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
 
 export function generateHeader(doc: OpenAPIObject): string {
@@ -33,7 +35,7 @@ export function generateImports(filename: string , importFiles: { [filename: str
     const absImport = path.resolve('dist', f);
     const absDest = path.resolve(filename);
     if (absImport === absDest) {
-      return;
+      return undefined;
     }
     let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '');
     if (!relativePath.startsWith('.')) {
@@ -61,4 +63,16 @@ ${lines.map((line) => ' * ' + line).join('\n')}
 export function indent(text: string, indentLevel: number) {
   const lines = text.split('\n');
   return lines.map((line) => '  '.repeat(indentLevel) + line).join('\n');
+}
+
+export function writeOutFile(filename: string, contents: string) {
+  mkdirp(path.dirname(filename), (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      fs.writeFile(filename, contents, null, (error) => {
+        console.log(error ? error : `Done with ${filename}!`);
+      });
+    }
+  });
 }

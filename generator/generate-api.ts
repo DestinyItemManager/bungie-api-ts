@@ -1,10 +1,7 @@
-import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
-import * as path from 'path';
 import * as _ from 'underscore';
-import { OpenAPIObject, PathItemObject, ParameterObject, SchemaObject, ReferenceObject, RequestBodyObject } from 'openapi3-ts';
-import { lastPart, lcFirst, resolveSchemaType, DefInfo, getReferencedTypes, getRef, isReferenceObject, isRequestBodyObject } from './util';
-import { generateHeader, generateImports, docComment, indent, addImport } from './generate-common';
+import { OpenAPIObject, PathItemObject, ParameterObject, ReferenceObject, RequestBodyObject } from 'openapi3-ts';
+import { lastPart, lcFirst, resolveSchemaType, DefInfo, isReferenceObject, isRequestBodyObject } from './util';
+import { generateHeader, generateImports, docComment, indent, addImport, writeOutFile } from './generate-common';
 
 const httpClientType = `import { HttpClient } from '../http';`;
 
@@ -19,15 +16,7 @@ export function generateServiceDefinition(tag: string, paths: [string, PathItemO
 
   const definition = [generateHeader(doc), httpClientType, imports, ...pathDefinitions].join('\n\n') + '\n';
 
-  mkdirp(path.dirname(filename), (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      fs.writeFile(filename, definition, null, (error) => {
-        console.log(error ? error : `Done with ${tag}!`);
-      });
-    }
-  });
+  writeOutFile(filename, definition);
 }
 
 function generatePathDefinition(path: string, pathDef: PathItemObject, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
