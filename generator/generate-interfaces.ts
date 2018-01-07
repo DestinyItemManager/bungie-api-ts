@@ -12,7 +12,12 @@ export function generateInterfaceDefinitions(file: string, components: DefInfo[]
 
   const imports = generateImports(filename, importFiles);
 
-  const definition = [generateHeader(doc), imports, ...componentDefinitions].join('\n\n') + '\n';
+  let specialDefinitions;
+  if (file === 'destiny2/interfaces.ts') {
+    specialDefinitions = generateSpecialDefinitions();
+  }
+
+  const definition = _.compact([generateHeader(doc), imports, specialDefinitions, ...componentDefinitions]).join('\n\n') + '\n';
 
   writeOutFile(filename, definition);
 }
@@ -22,6 +27,8 @@ function generateComponentDefinition(defInfo: DefInfo, doc: OpenAPIObject, compo
 
   if (component.enum) {
     return generateEnum(defInfo, component);
+  } else if (isSpecialType(defInfo.interfaceName)) {
+    return undefined;
   } else {
     return generateInterfaceSchema(defInfo.interfaceName, component, doc, componentByDef, importFiles);
   }
@@ -56,5 +63,21 @@ function generateInterfaceSchema(interfaceName: string, component: SchemaObject,
   const docString = component.description ? docComment(component.description) + '\n' : '';
   return `${docString}export interface ${interfaceName} {
 ${indent(parameterArgs.join('\n'), 1)}
+}`;
+}
+
+function isSpecialType(name: string) {
+  return name.includes('>');
+}
+
+function generateSpecialDefinitions() {
+  return `export interface SingleComponentResponse<T> {
+  readonly data?: T;
+  readonly privacy?: ComponentPrivacySetting;
+}
+
+export interface DictionaryComponentResponse<T> {
+  readonly data?: { [key: number]: T };
+  readonly privacy?: ComponentPrivacySetting;
 }`;
 }

@@ -76,6 +76,17 @@ export function interfaceName(componentPath: string) {
   // TODO: maybe here is the place to do: SingleComponentResponseOfDestinyProfileComponent
   // But how to prevent it from going into the type index, too?
   const name = lastPart(componentPath);
+
+  const singleResponse = name.match(/SingleComponentResponseOf(.*)/);
+  if (singleResponse) {
+    return `SingleComponentResponse<${singleResponse[1]}>`;
+  }
+
+  const dictionaryResponse = name.match(/DictionaryComponentResponseOfu?int(?:64|32)And(.*)/);
+  if (dictionaryResponse) {
+    return `DictionaryComponentResponse<${dictionaryResponse[1]}>`;
+  }
+
   if (componentPath.includes('/responses/')) {
     return name + 'ServerResponse';
   } else {

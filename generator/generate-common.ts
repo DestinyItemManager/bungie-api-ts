@@ -56,7 +56,7 @@ export function docComment(text: string) {
   }
 
   return `/**
-${lines.map((line) => ' * ' + line).join('\n')}
+${lines.map((line) => line.length ? ' * ' + line : ' *').join('\n')}
  */`;
 }
 
