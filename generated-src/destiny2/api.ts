@@ -18,39 +18,37 @@ import {
 } from '../common';
 import {
   DestinyActivityHistoryResultsServerResponse,
+  DestinyActivityModeType,
   DestinyAggregateActivityResultsServerResponse,
   DestinyCharacterResponseServerResponse,
+  DestinyComponentType,
   DestinyDefinitionServerResponse,
   DestinyEntitySearchResultServerResponse,
   DestinyEquipItemResultsServerResponse,
   DestinyHistoricalStatsAccountResultServerResponse,
   DestinyHistoricalStatsResultsServerResponse,
   DestinyHistoricalWeaponStatsDataServerResponse,
+  DestinyItemActionRequest,
   DestinyItemResponseServerResponse,
+  DestinyItemSetActionRequest,
+  DestinyItemStateRequest,
+  DestinyItemTransferRequest,
   DestinyLeaderboardResultsServerResponse,
   DestinyManifestServerResponse,
   DestinyMilestoneContentServerResponse,
   DestinyMilestoneServerResponse,
   DestinyPostGameCarnageReportDataServerResponse,
+  DestinyPostmasterTransferRequest,
   DestinyProfileResponseServerResponse,
+  DestinyReportOffensePgcrRequest,
+  DestinyStatsGroupType,
   DestinyVendorResponseServerResponse,
   DestinyVendorsResponseServerResponse,
   DictionaryOfuint32AndDestinyPublicMilestoneServerResponse,
   IEnumerableOfUserInfoCardServerResponse,
   ListOfDestinyClanAggregateStatServerResponse,
+  PeriodType,
   ReadOnlyDictionaryOfstringAndDestinyHistoricalStatsDefinitionServerResponse
-} from './responses';
-import {
-  DestinyActivityModeType,
-  DestinyComponentType,
-  DestinyItemActionRequest,
-  DestinyItemSetActionRequest,
-  DestinyItemStateRequest,
-  DestinyItemTransferRequest,
-  DestinyPostmasterTransferRequest,
-  DestinyReportOffensePgcrRequest,
-  DestinyStatsGroupType,
-  PeriodType
 } from './interfaces';
 
 /** Returns the current version of the manifest as a json object. */

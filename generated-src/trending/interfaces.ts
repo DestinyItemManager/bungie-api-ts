@@ -19,11 +19,30 @@ import {
   GeneralUser
 } from '../user/interfaces';
 import {
-  PagedQuery
+  PagedQuery,
+  PlatformErrorCodes
 } from '../common';
 import {
   PartnershipType
 } from '../platform';
+
+export interface TrendingCategoriesServerResponse {
+  readonly Response?: TrendingCategories;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
+}
+
+export interface SearchResultOfTrendingEntryServerResponse {
+  readonly Response?: SearchResultOfTrendingEntry;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
+}
 
 export const enum TrendingEntryType {
   News = 0,
@@ -38,6 +57,15 @@ export const enum TrendingEntryType {
   ForumTag = 9,
   Container = 10,
   Release = 11
+}
+
+export interface TrendingDetailServerResponse {
+  readonly Response?: TrendingDetail;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface TrendingCategories {

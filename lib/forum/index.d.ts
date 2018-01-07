@@ -13,5 +13,4 @@ export * from '../common';
 export * from '../platform';
 export * from '../http';
 export * from './interfaces';
-export * from './responses';
 export * from './api';

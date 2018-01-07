@@ -12,7 +12,7 @@
 import { GeneralUser } from '../user/interfaces';
 import { GroupResponse } from '../groupv2/interfaces';
 import { IgnoreResponse, TagResponse } from '../platform';
-import { PagedQuery } from '../common';
+import { PagedQuery, PlatformErrorCodes } from '../common';
 export declare const enum ForumTopicsCategoryFiltersEnum {
     None = 0,
     Links = 1,
@@ -41,9 +41,59 @@ export declare const enum ForumTopicsSortEnum {
     HighestRated = 6,
     MostUpvoted = 7,
 }
+export interface PostSearchResponseServerResponse {
+    readonly Response?: PostSearchResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
 export declare const enum ForumPostSortEnum {
     Default = 0,
     OldestFirst = 1,
+}
+export interface ListOfTagResponseServerResponse {
+    readonly Response?: TagResponse[];
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface ForumRecruitmentDetailServerResponse {
+    readonly Response?: ForumRecruitmentDetail;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface SaveMessageResultServerResponse {
+    readonly Response?: SaveMessageResult;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface CEListOfForumRecruitmentDetailServerResponse {
+    readonly Response?: ForumRecruitmentDetail[];
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface PostSearchResponse {
     readonly relatedPosts?: PostResponse[];

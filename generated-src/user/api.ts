@@ -22,7 +22,7 @@ import {
   ListOfUserAliasServerResponse,
   ListOfUserThemeServerResponse,
   UserMembershipDataServerResponse
-} from './responses';
+} from './interfaces';
 
 export interface GetBungieNetUserByIdParams {
   /** The requested Bungie.net membership id. */

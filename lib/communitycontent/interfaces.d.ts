@@ -9,7 +9,7 @@
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */
-import { PagedQuery } from '../common';
+import { PagedQuery, PlatformErrorCodes } from '../common';
 import { PartnershipType } from '../platform';
 import { UserInfoCard } from '../user/interfaces';
 export declare const enum CommunityStatusSort {
@@ -17,6 +17,26 @@ export declare const enum CommunityStatusSort {
     Trending = 1,
     OverallViewers = 2,
     Followers = 3,
+}
+export interface SearchResultOfCommunityLiveStatusServerResponse {
+    readonly Response?: SearchResultOfCommunityLiveStatus;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface CommunityLiveStatusServerResponse {
+    readonly Response?: CommunityLiveStatus;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface SearchResultOfCommunityLiveStatus {
     readonly results?: CommunityLiveStatus[];

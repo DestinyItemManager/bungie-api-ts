@@ -17,21 +17,17 @@ import {
 } from '../common';
 import {
   CommunityContentSortMode,
-  ForumTopicsCategoryFiltersEnum
+  ForumTopicsCategoryFiltersEnum,
+  PostSearchResponseServerResponse
 } from '../forum/interfaces';
 import {
   CommunityLiveStatusServerResponse,
+  CommunityStatusSort,
   SearchResultOfCommunityLiveStatusServerResponse
-} from './responses';
-import {
-  CommunityStatusSort
 } from './interfaces';
 import {
   PartnershipType
 } from '../platform';
-import {
-  PostSearchResponseServerResponse
-} from '../forum/responses';
 
 export interface GetCommunityContentParams {
   /** The type of media to get */

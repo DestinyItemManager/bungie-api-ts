@@ -15,9 +15,7 @@ import { HttpClient } from '../http';
 import {
   SearchResultOfTrendingEntryServerResponse,
   TrendingCategoriesServerResponse,
-  TrendingDetailServerResponse
-} from './responses';
-import {
+  TrendingDetailServerResponse,
   TrendingEntryType
 } from './interfaces';
 

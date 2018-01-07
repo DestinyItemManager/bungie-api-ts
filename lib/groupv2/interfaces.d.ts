@@ -215,12 +215,54 @@ export declare const enum GroupPotentialMemberStatus {
     Applicant = 1,
     Invitee = 2,
 }
+export interface DictionaryOfint32AndstringServerResponse {
+    readonly Response?: {
+        [key: number]: string;
+    };
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface ListOfGroupThemeServerResponse {
+    readonly Response?: GroupTheme[];
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface booleanServerResponse {
+    readonly Response?: boolean;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
 export declare const enum GroupDateRange {
     All = 0,
     PastDay = 1,
     PastWeek = 2,
     PastMonth = 3,
     PastYear = 4,
+}
+export interface ListOfGroupV2CardServerResponse {
+    readonly Response?: GroupV2Card[];
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface GroupQuery {
     readonly name?: string;
@@ -233,6 +275,36 @@ export interface GroupQuery {
     readonly itemsPerPage?: number;
     readonly currentPage?: number;
     readonly requestContinuationToken?: string;
+}
+export interface GroupSearchResponseServerResponse {
+    readonly Response?: GroupSearchResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface GroupResponseServerResponse {
+    readonly Response?: GroupResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface CEListOfGroupOptionalConversationServerResponse {
+    readonly Response?: GroupOptionalConversation[];
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface GroupAction {
     /** Type of group, either Bungie.net hosted group, or a game services hosted clan. */
@@ -258,6 +330,16 @@ export interface GroupAction {
      * this property. In particular, groupType of Clan requires this value to be set.
      */
     readonly platformMembershipType?: BungieMembershipType;
+}
+export interface GroupCreationResponseServerResponse {
+    readonly Response?: GroupCreationResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface GroupEditAction {
     readonly name?: string;
@@ -336,12 +418,72 @@ export interface GroupOptionalConversationEditRequest {
     readonly chatName?: string;
     readonly chatSecurity?: number;
 }
+export interface SearchResultOfGroupMemberServerResponse {
+    readonly Response?: SearchResultOfGroupMember;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface GroupMemberLeaveResultServerResponse {
+    readonly Response?: GroupMemberLeaveResult;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
 export interface GroupBanRequest {
     readonly comment?: string;
     readonly length?: IgnoreLength;
 }
+export interface SearchResultOfGroupBanServerResponse {
+    readonly Response?: SearchResultOfGroupBan;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
 export interface GroupApplicationRequest {
     readonly message?: string;
+}
+export interface GroupApplicationResponseServerResponse {
+    readonly Response?: GroupApplicationResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface SearchResultOfGroupMemberApplicationServerResponse {
+    readonly Response?: SearchResultOfGroupMemberApplication;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface ListOfEntityActionResultServerResponse {
+    readonly Response?: EntityActionResult[];
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface GroupApplicationListRequest {
     readonly memberships?: UserMembership[];
@@ -351,6 +493,26 @@ export declare const enum GroupsForMemberFilter {
     All = 0,
     Founded = 1,
     NonFounded = 2,
+}
+export interface GroupMembershipSearchResponseServerResponse {
+    readonly Response?: GroupMembershipSearchResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
+}
+export interface GroupPotentialMembershipSearchResponseServerResponse {
+    readonly Response?: GroupPotentialMembershipSearchResponse;
+    readonly ErrorCode?: PlatformErrorCodes;
+    readonly ThrottleSeconds?: number;
+    readonly ErrorStatus?: string;
+    readonly Message?: string;
+    readonly MessageData?: {
+        [key: string]: string;
+    };
 }
 export interface GroupTheme {
     readonly name?: string;

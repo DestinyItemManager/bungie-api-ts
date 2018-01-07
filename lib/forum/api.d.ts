@@ -10,8 +10,7 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { CEListOfForumRecruitmentDetailServerResponse, ForumRecruitmentDetailServerResponse, ListOfTagResponseServerResponse, PostSearchResponseServerResponse, SaveMessageResultServerResponse } from './responses';
-import { ForumPostSortEnum, ForumTopicsCategoryFiltersEnum, ForumTopicsQuickDateEnum, ForumTopicsSortEnum } from './interfaces';
+import { CEListOfForumRecruitmentDetailServerResponse, ForumPostSortEnum, ForumRecruitmentDetailServerResponse, ForumTopicsCategoryFiltersEnum, ForumTopicsQuickDateEnum, ForumTopicsSortEnum, ListOfTagResponseServerResponse, PostSearchResponseServerResponse, SaveMessageResultServerResponse } from './interfaces';
 import { int64ServerResponse } from '../platform';
 export interface GetTopicsPagedParams {
     /** A category filter */

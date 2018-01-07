@@ -10,8 +10,7 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { SearchResultOfTrendingEntryServerResponse, TrendingCategoriesServerResponse, TrendingDetailServerResponse } from './responses';
-import { TrendingEntryType } from './interfaces';
+import { SearchResultOfTrendingEntryServerResponse, TrendingCategoriesServerResponse, TrendingDetailServerResponse, TrendingEntryType } from './interfaces';
 /**
  * Returns trending items for Bungie.net, collapsed into the first page of items
  * per category. For pagination within a category, call GetTrendingCategory.

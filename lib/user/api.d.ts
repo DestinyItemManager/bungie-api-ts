@@ -11,7 +11,7 @@
  */
 import { HttpClient } from '../http';
 import { BungieMembershipType } from '../common';
-import { CEListOfPublicPartnershipDetailServerResponse, GeneralUserServerResponse, ListOfGeneralUserServerResponse, ListOfUserAliasServerResponse, ListOfUserThemeServerResponse, UserMembershipDataServerResponse } from './responses';
+import { CEListOfPublicPartnershipDetailServerResponse, GeneralUserServerResponse, ListOfGeneralUserServerResponse, ListOfUserAliasServerResponse, ListOfUserThemeServerResponse, UserMembershipDataServerResponse } from './interfaces';
 export interface GetBungieNetUserByIdParams {
     /** The requested Bungie.net membership id. */
     id: number;

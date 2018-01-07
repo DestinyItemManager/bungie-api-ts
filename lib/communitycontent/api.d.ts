@@ -11,11 +11,9 @@
  */
 import { HttpClient } from '../http';
 import { BungieMembershipType } from '../common';
-import { CommunityContentSortMode, ForumTopicsCategoryFiltersEnum } from '../forum/interfaces';
-import { CommunityLiveStatusServerResponse, SearchResultOfCommunityLiveStatusServerResponse } from './responses';
-import { CommunityStatusSort } from './interfaces';
+import { CommunityContentSortMode, ForumTopicsCategoryFiltersEnum, PostSearchResponseServerResponse } from '../forum/interfaces';
+import { CommunityLiveStatusServerResponse, CommunityStatusSort, SearchResultOfCommunityLiveStatusServerResponse } from './interfaces';
 import { PartnershipType } from '../platform';
-import { PostSearchResponseServerResponse } from '../forum/responses';
 export interface GetCommunityContentParams {
     /** The type of media to get */
     mediaFilter: ForumTopicsCategoryFiltersEnum;

@@ -14,16 +14,14 @@ import { HttpClient } from '../http';
 
 import {
   CEListOfForumRecruitmentDetailServerResponse,
+  ForumPostSortEnum,
   ForumRecruitmentDetailServerResponse,
+  ForumTopicsCategoryFiltersEnum,
+  ForumTopicsQuickDateEnum,
+  ForumTopicsSortEnum,
   ListOfTagResponseServerResponse,
   PostSearchResponseServerResponse,
   SaveMessageResultServerResponse
-} from './responses';
-import {
-  ForumPostSortEnum,
-  ForumTopicsCategoryFiltersEnum,
-  ForumTopicsQuickDateEnum,
-  ForumTopicsSortEnum
 } from './interfaces';
 import {
   int64ServerResponse

@@ -18,38 +18,36 @@ import {
 } from '../common';
 import {
   CEListOfGroupOptionalConversationServerResponse,
-  DictionaryOfint32AndstringServerResponse,
-  GroupApplicationResponseServerResponse,
-  GroupCreationResponseServerResponse,
-  GroupMemberLeaveResultServerResponse,
-  GroupMembershipSearchResponseServerResponse,
-  GroupPotentialMembershipSearchResponseServerResponse,
-  GroupResponseServerResponse,
-  GroupSearchResponseServerResponse,
-  ListOfEntityActionResultServerResponse,
-  ListOfGroupThemeServerResponse,
-  ListOfGroupV2CardServerResponse,
-  SearchResultOfGroupBanServerResponse,
-  SearchResultOfGroupMemberApplicationServerResponse,
-  SearchResultOfGroupMemberServerResponse,
-  booleanServerResponse
-} from './responses';
-import {
   ClanBanner,
+  DictionaryOfint32AndstringServerResponse,
   GroupAction,
   GroupApplicationListRequest,
   GroupApplicationRequest,
+  GroupApplicationResponseServerResponse,
   GroupBanRequest,
+  GroupCreationResponseServerResponse,
   GroupDateRange,
   GroupEditAction,
+  GroupMemberLeaveResultServerResponse,
+  GroupMembershipSearchResponseServerResponse,
   GroupOptionalConversationAddRequest,
   GroupOptionalConversationEditRequest,
   GroupOptionsEditAction,
   GroupPotentialMemberStatus,
+  GroupPotentialMembershipSearchResponseServerResponse,
   GroupQuery,
+  GroupResponseServerResponse,
+  GroupSearchResponseServerResponse,
   GroupType,
   GroupsForMemberFilter,
-  RuntimeGroupMemberType
+  ListOfEntityActionResultServerResponse,
+  ListOfGroupThemeServerResponse,
+  ListOfGroupV2CardServerResponse,
+  RuntimeGroupMemberType,
+  SearchResultOfGroupBanServerResponse,
+  SearchResultOfGroupMemberApplicationServerResponse,
+  SearchResultOfGroupMemberServerResponse,
+  booleanServerResponse
 } from './interfaces';
 import {
   int64ServerResponse

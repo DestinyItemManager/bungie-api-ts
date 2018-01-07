@@ -9,3 +9,17 @@
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */
+
+import * as UserImport from './user';
+import * as ForumImport from './forum';
+import * as GroupV2Import from './groupv2';
+import * as Destiny2Import from './destiny2';
+import * as CommunityContentImport from './communitycontent';
+import * as TrendingImport from './trending';
+
+export const User = UserImport;
+export const Forum = ForumImport;
+export const GroupV2 = GroupV2Import;
+export const Destiny2 = Destiny2Import;
+export const CommunityContent = CommunityContentImport;
+export const Trending = TrendingImport;
