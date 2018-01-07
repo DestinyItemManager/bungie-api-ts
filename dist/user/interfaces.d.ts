@@ -11,57 +11,60 @@
  */
 
 import {
+  BungieMembershipType
+} from '../common';
+import {
   IgnoreResponse,
   PartnershipType
 } from '../platform';
 
 export interface GeneralUser {
-  membershipId?: number;
-  uniqueName?: string;
-  normalizedName?: string;
-  displayName?: string;
-  profilePicture?: number;
-  profileTheme?: number;
-  userTitle?: number;
-  successMessageFlags?: number;
-  isDeleted?: boolean;
-  about?: string;
-  firstAccess?: string;
-  lastUpdate?: string;
-  legacyPortalUID?: number;
-  context?: UserToUserContext;
-  psnDisplayName?: string;
-  xboxDisplayName?: string;
-  fbDisplayName?: string;
-  showActivity?: boolean;
-  locale?: string;
-  localeInheritDefault?: boolean;
-  lastBanReportId?: number;
-  showGroupMessaging?: boolean;
-  profilePicturePath?: string;
-  profilePictureWidePath?: string;
-  profileThemeName?: string;
-  userTitleDisplay?: string;
-  statusText?: string;
-  statusDate?: string;
-  profileBanExpire?: string;
-  blizzardDisplayName?: string;
+  readonly membershipId?: number;
+  readonly uniqueName?: string;
+  readonly normalizedName?: string;
+  readonly displayName?: string;
+  readonly profilePicture?: number;
+  readonly profileTheme?: number;
+  readonly userTitle?: number;
+  readonly successMessageFlags?: number;
+  readonly isDeleted?: boolean;
+  readonly about?: string;
+  readonly firstAccess?: string;
+  readonly lastUpdate?: string;
+  readonly legacyPortalUID?: number;
+  readonly context?: UserToUserContext;
+  readonly psnDisplayName?: string;
+  readonly xboxDisplayName?: string;
+  readonly fbDisplayName?: string;
+  readonly showActivity?: boolean;
+  readonly locale?: string;
+  readonly localeInheritDefault?: boolean;
+  readonly lastBanReportId?: number;
+  readonly showGroupMessaging?: boolean;
+  readonly profilePicturePath?: string;
+  readonly profilePictureWidePath?: string;
+  readonly profileThemeName?: string;
+  readonly userTitleDisplay?: string;
+  readonly statusText?: string;
+  readonly statusDate?: string;
+  readonly profileBanExpire?: string;
+  readonly blizzardDisplayName?: string;
 }
 
 export interface UserToUserContext {
-  isFollowing?: boolean;
-  ignoreStatus?: IgnoreResponse;
-  globalIgnoreEndDate?: string;
+  readonly isFollowing?: boolean;
+  readonly ignoreStatus?: IgnoreResponse;
+  readonly globalIgnoreEndDate?: string;
 }
 
 export interface UserAlias {
-  cachePrefix?: string;
+  readonly cachePrefix?: string;
 }
 
 export interface UserTheme {
-  userThemeId?: number;
-  userThemeName?: string;
-  userThemeDescription?: string;
+  readonly userThemeId?: number;
+  readonly userThemeName?: string;
+  readonly userThemeDescription?: string;
 }
 
 export interface UserMembershipData {
@@ -69,8 +72,8 @@ export interface UserMembershipData {
    * this allows you to see destiny memberships that are visible and linked to this
    * account (regardless of whether or not they have characters on the world server)
    */
-  destinyMemberships?: UserInfoCard[];
-  bungieNetUser?: GeneralUser;
+  readonly destinyMemberships?: UserInfoCard[];
+  readonly bungieNetUser?: GeneralUser;
 }
 
 /**
@@ -86,37 +89,37 @@ export interface UserInfoCard {
    * A platform specific additional display name - ex: psn Real Name, bnet Unique
    * Name, etc.
    */
-  supplementalDisplayName?: string;
+  readonly supplementalDisplayName?: string;
   /** URL the Icon if available. */
-  iconPath?: string;
+  readonly iconPath?: string;
   /** Type of the membership. */
-  membershipType?: BungieMembershipType;
+  readonly membershipType?: BungieMembershipType;
   /** Membership ID as they user is known in the Accounts service */
-  membershipId?: number;
+  readonly membershipId?: number;
   /**
    * Display Name the player has chosen for themselves. The display name is optional
    * when the data type is used as input to a platform API.
    */
-  displayName?: string;
+  readonly displayName?: string;
 }
 
 /** All the partnership info that's fit to expose externally, if we care to do so. */
 export interface PublicPartnershipDetail {
-  partnerType?: PartnershipType;
-  identifier?: string;
-  name?: string;
-  icon?: string;
+  readonly partnerType?: PartnershipType;
+  readonly identifier?: string;
+  readonly name?: string;
+  readonly icon?: string;
 }
 
 /** Very basic info about a user as returned by the Account server. */
 export interface UserMembership {
   /** Type of the membership. */
-  membershipType?: BungieMembershipType;
+  readonly membershipType?: BungieMembershipType;
   /** Membership ID as they user is known in the Accounts service */
-  membershipId?: number;
+  readonly membershipId?: number;
   /**
    * Display Name the player has chosen for themselves. The display name is optional
    * when the data type is used as input to a platform API.
    */
-  displayName?: string;
+  readonly displayName?: string;
 }

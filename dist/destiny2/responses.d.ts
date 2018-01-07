@@ -19,13 +19,17 @@ import {
   DestinyEntitySearchResult,
   DestinyEquipItemResults,
   DestinyHistoricalStatsAccountResult,
+  DestinyHistoricalStatsByPeriod,
+  DestinyHistoricalStatsDefinition,
   DestinyHistoricalWeaponStatsData,
   DestinyItemResponse,
+  DestinyLeaderboard,
   DestinyManifest,
   DestinyMilestone,
   DestinyMilestoneContent,
   DestinyPostGameCarnageReportData,
   DestinyProfileResponse,
+  DestinyPublicMilestone,
   DestinyVendorResponse,
   DestinyVendorsResponse
 } from './interfaces';
@@ -37,199 +41,199 @@ import {
 } from '../user/interfaces';
 
 export interface DestinyManifestServerResponse {
-  Response?: DestinyManifest;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyManifest;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyDefinitionServerResponse {
-  Response?: DestinyDefinition;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyDefinition;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface IEnumerableOfUserInfoCardServerResponse {
-  Response?: UserInfoCard[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: UserInfoCard[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyProfileResponseServerResponse {
-  Response?: DestinyProfileResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyProfileResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyCharacterResponseServerResponse {
-  Response?: DestinyCharacterResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyCharacterResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyMilestoneServerResponse {
-  Response?: DestinyMilestone;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyMilestone;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyItemResponseServerResponse {
-  Response?: DestinyItemResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyItemResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyVendorsResponseServerResponse {
-  Response?: DestinyVendorsResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyVendorsResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyVendorResponseServerResponse {
-  Response?: DestinyVendorResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyVendorResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyEquipItemResultsServerResponse {
-  Response?: DestinyEquipItemResults;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyEquipItemResults;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyPostGameCarnageReportDataServerResponse {
-  Response?: DestinyPostGameCarnageReportData;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyPostGameCarnageReportData;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ReadOnlyDictionaryOfstringAndDestinyHistoricalStatsDefinitionServerResponse {
-  Response?: { [key: string]: undefined };
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: { [key: string]: DestinyHistoricalStatsDefinition };
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyLeaderboardResultsServerResponse {
-  Response?: { [key: string]: { [key: string]: undefined } };
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: { [key: string]: { [key: string]: DestinyLeaderboard } };
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfDestinyClanAggregateStatServerResponse {
-  Response?: DestinyClanAggregateStat[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyClanAggregateStat[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyEntitySearchResultServerResponse {
-  Response?: DestinyEntitySearchResult;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyEntitySearchResult;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyHistoricalStatsResultsServerResponse {
-  Response?: { [key: string]: undefined };
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: { [key: string]: DestinyHistoricalStatsByPeriod };
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyHistoricalStatsAccountResultServerResponse {
-  Response?: DestinyHistoricalStatsAccountResult;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyHistoricalStatsAccountResult;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyActivityHistoryResultsServerResponse {
-  Response?: DestinyActivityHistoryResults;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyActivityHistoryResults;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyHistoricalWeaponStatsDataServerResponse {
-  Response?: DestinyHistoricalWeaponStatsData;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyHistoricalWeaponStatsData;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyAggregateActivityResultsServerResponse {
-  Response?: DestinyAggregateActivityResults;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyAggregateActivityResults;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DestinyMilestoneContentServerResponse {
-  Response?: DestinyMilestoneContent;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: DestinyMilestoneContent;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface DictionaryOfuint32AndDestinyPublicMilestoneServerResponse {
-  Response?: { [key: number]: undefined };
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: { [key: number]: DestinyPublicMilestone };
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }

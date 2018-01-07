@@ -655,21 +655,37 @@ export const enum PlatformErrorCodes {
   ReportCannotReportSelf = 2703
 }
 
-export interface int32ServerResponse {
-  Response?: number;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
-}
-
-export interface HyperlinkReference {
-  title?: string;
-  url?: string;
+export interface InterpolationPoint {
+  readonly value?: number;
+  readonly weight?: number;
 }
 
 export interface DateRange {
-  start?: string;
-  end?: string;
+  readonly start?: string;
+  readonly end?: string;
+}
+
+export interface InterpolationPointFloat {
+  readonly value?: number;
+  readonly weight?: number;
+}
+
+export interface HyperlinkReference {
+  readonly title?: string;
+  readonly url?: string;
+}
+
+export interface PagedQuery {
+  readonly itemsPerPage?: number;
+  readonly currentPage?: number;
+  readonly requestContinuationToken?: string;
+}
+
+export interface int32ServerResponse {
+  readonly Response?: number;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }

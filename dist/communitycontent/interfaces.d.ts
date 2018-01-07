@@ -11,7 +11,9 @@
  */
 
 import {
-  PagedQuery,
+  PagedQuery
+} from '../common';
+import {
   PartnershipType
 } from '../platform';
 import {
@@ -26,11 +28,11 @@ export const enum CommunityStatusSort {
 }
 
 export interface SearchResultOfCommunityLiveStatus {
-  results?: CommunityLiveStatus[];
-  totalResults?: number;
-  hasMore?: boolean;
-  query?: PagedQuery;
-  replacementContinuationToken?: string;
+  readonly results?: CommunityLiveStatus[];
+  readonly totalResults?: number;
+  readonly hasMore?: boolean;
+  readonly query?: PagedQuery;
+  readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -43,30 +45,30 @@ export interface SearchResultOfCommunityLiveStatus {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean;
+  readonly useTotalResults?: boolean;
 }
 
 export interface CommunityLiveStatus {
-  dateStatusUpdated?: string;
-  url?: string;
-  partnershipIdentifier?: string;
-  partnershipType?: PartnershipType;
-  thumbnail?: string;
-  thumbnailSmall?: string;
-  thumbnailLarge?: string;
-  destinyCharacterId?: number;
-  userInfo?: UserInfoCard;
-  currentActivityHash?: number;
-  dateLastPlayed?: string;
-  dateStreamStarted?: string;
-  locale?: string;
-  currentViewers?: number;
-  followers?: number;
-  overallViewers?: number;
-  isFeatured?: boolean;
-  title?: string;
-  activityModeHash?: number;
-  dateFeatured?: string;
-  trendingValue?: number;
-  isSubscribable?: boolean;
+  readonly dateStatusUpdated?: string;
+  readonly url?: string;
+  readonly partnershipIdentifier?: string;
+  readonly partnershipType?: PartnershipType;
+  readonly thumbnail?: string;
+  readonly thumbnailSmall?: string;
+  readonly thumbnailLarge?: string;
+  readonly destinyCharacterId?: number;
+  readonly userInfo?: UserInfoCard;
+  readonly currentActivityHash?: number;
+  readonly dateLastPlayed?: string;
+  readonly dateStreamStarted?: string;
+  readonly locale?: string;
+  readonly currentViewers?: number;
+  readonly followers?: number;
+  readonly overallViewers?: number;
+  readonly isFeatured?: boolean;
+  readonly title?: string;
+  readonly activityModeHash?: number;
+  readonly dateFeatured?: string;
+  readonly trendingValue?: number;
+  readonly isSubscribable?: boolean;
 }

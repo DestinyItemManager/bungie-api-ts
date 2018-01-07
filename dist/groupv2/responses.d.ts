@@ -31,145 +31,145 @@ import {
 } from '../common';
 
 export interface DictionaryOfint32AndstringServerResponse {
-  Response?: { [key: number]: string };
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: { [key: number]: string };
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfGroupThemeServerResponse {
-  Response?: GroupTheme[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupTheme[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface booleanServerResponse {
-  Response?: boolean;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: boolean;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfGroupV2CardServerResponse {
-  Response?: GroupV2Card[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupV2Card[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupSearchResponseServerResponse {
-  Response?: GroupSearchResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupSearchResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupResponseServerResponse {
-  Response?: GroupResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface CEListOfGroupOptionalConversationServerResponse {
-  Response?: GroupOptionalConversation[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupOptionalConversation[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupCreationResponseServerResponse {
-  Response?: GroupCreationResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupCreationResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface SearchResultOfGroupMemberServerResponse {
-  Response?: SearchResultOfGroupMember;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: SearchResultOfGroupMember;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupMemberLeaveResultServerResponse {
-  Response?: GroupMemberLeaveResult;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupMemberLeaveResult;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface SearchResultOfGroupBanServerResponse {
-  Response?: SearchResultOfGroupBan;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: SearchResultOfGroupBan;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupApplicationResponseServerResponse {
-  Response?: GroupApplicationResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupApplicationResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface SearchResultOfGroupMemberApplicationServerResponse {
-  Response?: SearchResultOfGroupMemberApplication;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: SearchResultOfGroupMemberApplication;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfEntityActionResultServerResponse {
-  Response?: EntityActionResult[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: EntityActionResult[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupMembershipSearchResponseServerResponse {
-  Response?: GroupMembershipSearchResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupMembershipSearchResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface GroupPotentialMembershipSearchResponseServerResponse {
-  Response?: GroupPotentialMembershipSearchResponse;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GroupPotentialMembershipSearchResponse;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }

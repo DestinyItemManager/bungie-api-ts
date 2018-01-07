@@ -15,8 +15,8 @@ import {
 } from './common';
 
 export interface IgnoreResponse {
-  isIgnored?: boolean;
-  ignoreFlags?: IgnoreStatus;
+  readonly isIgnored?: boolean;
+  readonly ignoreFlags?: IgnoreStatus;
 }
 
 export const enum IgnoreStatus {
@@ -35,21 +35,15 @@ export const enum PartnershipType {
 }
 
 export interface int64ServerResponse {
-  Response?: number;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: number;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface TagResponse {
-  tagText?: string;
-  ignoreStatus?: IgnoreResponse;
-}
-
-export interface PagedQuery {
-  itemsPerPage?: number;
-  currentPage?: number;
-  requestContinuationToken?: string;
+  readonly tagText?: string;
+  readonly ignoreStatus?: IgnoreResponse;
 }

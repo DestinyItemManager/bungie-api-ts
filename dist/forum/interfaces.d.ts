@@ -18,9 +18,11 @@ import {
 } from '../groupv2/interfaces';
 import {
   IgnoreResponse,
-  PagedQuery,
   TagResponse
 } from '../platform';
+import {
+  PagedQuery
+} from '../common';
 
 export const enum ForumTopicsCategoryFiltersEnum {
   None = 0,
@@ -59,18 +61,18 @@ export const enum ForumPostSortEnum {
 }
 
 export interface PostSearchResponse {
-  relatedPosts?: PostResponse[];
-  authors?: GeneralUser[];
-  groups?: GroupResponse[];
-  searchedTags?: TagResponse[];
-  polls?: PollResponse[];
-  recruitmentDetails?: ForumRecruitmentDetail[];
-  availablePages?: number;
-  results?: PostResponse[];
-  totalResults?: number;
-  hasMore?: boolean;
-  query?: PagedQuery;
-  replacementContinuationToken?: string;
+  readonly relatedPosts?: PostResponse[];
+  readonly authors?: GeneralUser[];
+  readonly groups?: GroupResponse[];
+  readonly searchedTags?: TagResponse[];
+  readonly polls?: PollResponse[];
+  readonly recruitmentDetails?: ForumRecruitmentDetail[];
+  readonly availablePages?: number;
+  readonly results?: PostResponse[];
+  readonly totalResults?: number;
+  readonly hasMore?: boolean;
+  readonly query?: PagedQuery;
+  readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    * 
@@ -83,24 +85,24 @@ export interface PostSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  useTotalResults?: boolean;
+  readonly useTotalResults?: boolean;
 }
 
 export interface PostResponse {
-  lastReplyTimestamp?: string;
-  IsPinned?: boolean;
-  urlMediaType?: ForumMediaType;
-  thumbnail?: string;
-  popularity?: ForumPostPopularity;
-  isActive?: boolean;
-  isAnnouncement?: boolean;
-  userRating?: number;
-  userHasRated?: boolean;
-  userHasMutedPost?: boolean;
-  latestReplyPostId?: number;
-  latestReplyAuthorId?: number;
-  ignoreStatus?: IgnoreResponse;
-  locale?: string;
+  readonly lastReplyTimestamp?: string;
+  readonly IsPinned?: boolean;
+  readonly urlMediaType?: ForumMediaType;
+  readonly thumbnail?: string;
+  readonly popularity?: ForumPostPopularity;
+  readonly isActive?: boolean;
+  readonly isAnnouncement?: boolean;
+  readonly userRating?: number;
+  readonly userHasRated?: boolean;
+  readonly userHasMutedPost?: boolean;
+  readonly latestReplyPostId?: number;
+  readonly latestReplyAuthorId?: number;
+  readonly ignoreStatus?: IgnoreResponse;
+  readonly locale?: string;
 }
 
 export const enum ForumMediaType {
@@ -120,30 +122,30 @@ export const enum ForumPostPopularity {
 }
 
 export interface PollResponse {
-  topicId?: number;
-  results?: PollResult[];
-  totalVotes?: number;
+  readonly topicId?: number;
+  readonly results?: PollResult[];
+  readonly totalVotes?: number;
 }
 
 export interface PollResult {
-  answerText?: string;
-  answerSlot?: number;
-  lastVoteDate?: string;
-  votes?: number;
-  requestingUserVoted?: boolean;
+  readonly answerText?: string;
+  readonly answerSlot?: number;
+  readonly lastVoteDate?: string;
+  readonly votes?: number;
+  readonly requestingUserVoted?: boolean;
 }
 
 export interface ForumRecruitmentDetail {
-  topicId?: number;
-  microphoneRequired?: boolean;
-  intensity?: ForumRecruitmentIntensityLabel;
-  tone?: ForumRecruitmentToneLabel;
-  approved?: boolean;
-  conversationId?: number;
-  playerSlotsTotal?: number;
-  playerSlotsRemaining?: number;
-  Fireteam?: GeneralUser[];
-  kickedPlayerIds?: number[];
+  readonly topicId?: number;
+  readonly microphoneRequired?: boolean;
+  readonly intensity?: ForumRecruitmentIntensityLabel;
+  readonly tone?: ForumRecruitmentToneLabel;
+  readonly approved?: boolean;
+  readonly conversationId?: number;
+  readonly playerSlotsTotal?: number;
+  readonly playerSlotsRemaining?: number;
+  readonly Fireteam?: GeneralUser[];
+  readonly kickedPlayerIds?: number[];
 }
 
 export const enum ForumRecruitmentIntensityLabel {
@@ -159,8 +161,8 @@ export const enum ForumRecruitmentToneLabel {
 }
 
 export interface SaveMessageResult {
-  conversationId?: number;
-  messageId?: number;
+  readonly conversationId?: number;
+  readonly messageId?: number;
 }
 
 export const enum CommunityContentSortMode {

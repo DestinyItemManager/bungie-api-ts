@@ -22,55 +22,55 @@ import {
 } from '../common';
 
 export interface GeneralUserServerResponse {
-  Response?: GeneralUser;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GeneralUser;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfUserAliasServerResponse {
-  Response?: UserAlias[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: UserAlias[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfGeneralUserServerResponse {
-  Response?: GeneralUser[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: GeneralUser[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface ListOfUserThemeServerResponse {
-  Response?: UserTheme[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: UserTheme[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface UserMembershipDataServerResponse {
-  Response?: UserMembershipData;
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: UserMembershipData;
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
 
 export interface CEListOfPublicPartnershipDetailServerResponse {
-  Response?: PublicPartnershipDetail[];
-  ErrorCode?: PlatformErrorCodes;
-  ThrottleSeconds?: number;
-  ErrorStatus?: string;
-  Message?: string;
-  MessageData?: { [key: string]: string };
+  readonly Response?: PublicPartnershipDetail[];
+  readonly ErrorCode?: PlatformErrorCodes;
+  readonly ThrottleSeconds?: number;
+  readonly ErrorStatus?: string;
+  readonly Message?: string;
+  readonly MessageData?: { [key: string]: string };
 }
