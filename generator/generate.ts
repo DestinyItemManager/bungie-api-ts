@@ -11,21 +11,7 @@ import { generateServiceDefinition } from './generate-api';
 import { generateInterfaceDefinitions } from './generate-interfaces';
 import { computeTypeMaps } from './type-index';
 
-// TODO: for properties that have x-mapped-definition, typedef them?
-// TODO: readonly properties
-// TODO: test that the last part of the name is unique
-// TODO: common chunk
-// TODO: break into more files
-
-// TODO: how to split them up? For example, Destiny.Definitions should probably be in its own file, etc.
-// maybe group requests and responses, etc?
-// mobile manifest entities (x-whatever) should probably be on their own?
-// TODO: need a type registry then
-// TODO: reexport types from each service?
-
 // TODO: OK split responses from schemas. Naming?
-
-// TODO: type manager with type, file location mapping, and maybe dependenies?
 
 const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
 
@@ -45,14 +31,6 @@ _.each(pathPairsByTag, (paths, tag) => {
   generateServiceDefinition(tag, paths, doc, componentByDef);
 });
 
-// group paths by service
-// get trees of components for each service
-// find overlapping components for a common file
-// generate input/output types for each path
-// map components to interfaces / enums
-// make sure to include documentation
-// generate functions from hash to definition? use type aliases?
-// match docs as much as possible
-// export constants/functions for paths? request objects?
+// TODO: generate index reexports
+
 // some way to mark "preview" stuff
-// need a function to look up refs?

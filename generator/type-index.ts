@@ -39,6 +39,7 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
 
 // TODO: put enums in a separate file???
 // TODO: put things ending in Request in a separate file?
+// TODO: put manifest stuff in a separate file?
 function chooseFile(def: string, tags: string[], allTags: string[]) {
   const schemaName: string = _.last(def.split('/'))!;
   const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
@@ -53,7 +54,6 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
     if (tags.length === 1) {
       return tags[0].toLowerCase() + filename;
     } else if (!tags.includes('Destiny2')) {
-      // TODO: split out responses here too?
       return 'platform.d.ts';
     } else {
       return 'common.d.ts';
