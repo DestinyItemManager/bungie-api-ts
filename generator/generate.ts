@@ -12,8 +12,6 @@ import { generateInterfaceDefinitions } from './generate-interfaces';
 import { computeTypeMaps } from './type-index';
 import { generateIndex, generateSuperIndex } from './generate-index';
 
-// TODO: OK split responses from schemas. Naming?
-
 const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
 
 const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
@@ -37,7 +35,5 @@ _.each(pathPairsByTag, (paths, tag) => {
 });
 
 generateSuperIndex(Object.keys(pathPairsByTag), doc);
-
-// TODO: generate index reexports
 
 // some way to mark "preview" stuff

@@ -27,8 +27,6 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
   const methodDef = pathDef.get || pathDef.post!;
   const params = (methodDef.parameters || []) as ParameterObject[];
 
-  // TODO: methodDef.requestBody!
-
   const queryParameterNames = params.filter((param) => param.in === 'query').map((param) => param.name);
 
   const parameterArgs = ['http: HttpClient'];
@@ -82,7 +80,6 @@ function generateInterfaceSchema(interfaceName: string, params: ParameterObject[
 
       const paramType = resolveSchemaType(schema, doc);
       addImport(schema, componentByDef, importFiles);
-      console.log(interfaceName, schema, paramType);
       const docString = requestBody.description ? docComment(requestBody.description) + '\n' : '';
       parameterArgs.push(`${docString}body${requestBody.required ? '' : '?'}: ${paramType};`);
     } else if (isReferenceObject(requestBody)) {

@@ -37,7 +37,6 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
 }
 
 export function getReferencedTypes(schema: SchemaObject | ReferenceObject): string | undefined {
-  console.log(schema);
   if (isReferenceObject(schema)) {
     return schema.$ref;
   } else if (schema.items) {
@@ -73,8 +72,6 @@ export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
 }
 
 export function interfaceName(componentPath: string) {
-  // TODO: maybe here is the place to do: SingleComponentResponseOfDestinyProfileComponent
-  // But how to prevent it from going into the type index, too?
   const name = lastPart(componentPath);
 
   const singleResponse = name.match(/SingleComponentResponseOf(.*)/);

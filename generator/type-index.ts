@@ -64,12 +64,8 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
 function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject) {
   const pathDefinitions = paths.reduce((memo: Set<string>, [path, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef, doc)), new Set());
 
-  // TODO: OK now find all components reachable from *that*
-
   const allDefinitions = new Set(pathDefinitions);
-
   pathDefinitions.forEach((definition) => addReachableComponentsFromComponent(allDefinitions, definition, doc));
-
   return allDefinitions;
 }
 
@@ -108,7 +104,6 @@ function addReachableComponentsFromComponent(allDefinitions: Set<string>, defini
   if (component.type === 'array') {
     addDefinitions(allDefinitions, component.items!, doc);
   } else if (component.type === 'object') {
-    // TODO: lots more to do here
     Object.values(component.properties).forEach((schema: SchemaObject | ReferenceObject) => {
       addDefinitions(allDefinitions, schema, doc);
     });
@@ -130,13 +125,6 @@ function addDefinitions(allDefinitions: Set<string>, schema: SchemaObject | Refe
 }
 
 function addDefinitionsFromComponent(allDefinitions: Set<string>, definition: string | undefined, doc: OpenAPIObject) {
-  // TODO: ignore components like boolean and int32
-  // if (definition.endsWith('/boolean') || definition.endsWith('/int32')) {
-  //  return;
-  // }
-
-  // TODO: SingleComponentResponseOfDestinyKiosksComponent could be expressed better! Check out the other TS lib
-
   if (definition && !allDefinitions.has(definition)) {
     allDefinitions.add(definition);
     addReachableComponentsFromComponent(allDefinitions, definition, doc);
