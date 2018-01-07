@@ -25,7 +25,7 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
     const info: DefInfo = {
       def,
       tags,
-      filename: chooseFile(def, tags, allTags, doc),
+      filename: chooseFile(def, tags, allTags),
       interfaceName: interfaceName(def)
     };
 
@@ -40,13 +40,11 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
 // TODO: put enums in a separate file???
 // TODO: put things ending in Request in a separate file?
 // TODO: put manifest stuff in a separate file?
-function chooseFile(def: string, tags: string[], allTags: string[], doc: OpenAPIObject) {
+function chooseFile(def: string, tags: string[], allTags: string[]) {
   const schemaName: string = _.last(def.split('/'))!;
   const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
 
-  const component = getRef(doc, def);
-
-  const filename = component.enum ? '/enums.ts' : def.includes('/responses/') ? '/responses.d.ts' : '/interfaces.d.ts';
+  const filename = '/interfaces.ts';
   if (matchingTag) {
     return matchingTag.toLowerCase() + filename;
   } else if (schemaName.startsWith('GroupsV2.')) {

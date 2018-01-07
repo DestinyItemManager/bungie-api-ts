@@ -3,7 +3,7 @@
     "outDir": "./lib/",
     "sourceMap": true,
     "strictNullChecks": true,
-    "module": "commonjs",
+    "module": "es2015",
     "target": "es2017",
     "moduleResolution": "node",
     "declaration": true
