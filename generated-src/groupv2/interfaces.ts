@@ -117,49 +117,49 @@ export interface GroupFeatures {
   readonly membershipTypes?: BungieMembershipType[];
   /**
    * Minimum Member Level allowed to invite new members to group
-   * 
+   *
    * Always Allowed: Founder, Acting Founder
-   * 
+   *
    * True means admins have this power, false means they don't
-   * 
+   *
    * Default is false for clans, true for groups.
    */
   readonly invitePermissionOverride?: boolean;
   /**
    * Minimum Member Level allowed to update group culture
-   * 
+   *
    * Always Allowed: Founder, Acting Founder
-   * 
+   *
    * True means admins have this power, false means they don't
-   * 
+   *
    * Default is false for clans, true for groups.
    */
   readonly updateCulturePermissionOverride?: boolean;
   /**
    * Minimum Member Level allowed to host guided games
-   * 
+   *
    * Always Allowed: Founder, Acting Founder, Admin
-   * 
+   *
    * Allowed Overrides: None, Member, Beginner
-   * 
+   *
    * Default is Member for clans, None for groups, although this means nothing for
    * groups.
    */
   readonly hostGuidedGamePermissionOverride?: HostGuidedGamesPermissionLevel;
   /**
    * Minimum Member Level allowed to update banner
-   * 
+   *
    * Always Allowed: Founder, Acting Founder
-   * 
+   *
    * True means admins have this power, false means they don't
-   * 
+   *
    * Default is false for clans, true for groups.
    */
   readonly updateBannerPermissionOverride?: boolean;
   /**
    * Level to join a member at when accepting an invite, application, or joining an
    * open clan
-   * 
+   *
    * Default is Beginner.
    */
   readonly joinLevel?: RuntimeGroupMemberType;
@@ -306,49 +306,49 @@ export interface GroupEditAction {
 export interface GroupOptionsEditAction {
   /**
    * Minimum Member Level allowed to invite new members to group
-   * 
+   *
    * Always Allowed: Founder, Acting Founder
-   * 
+   *
    * True means admins have this power, false means they don't
-   * 
+   *
    * Default is false for clans, true for groups.
    */
   readonly InvitePermissionOverride?: boolean;
   /**
    * Minimum Member Level allowed to update group culture
-   * 
+   *
    * Always Allowed: Founder, Acting Founder
-   * 
+   *
    * True means admins have this power, false means they don't
-   * 
+   *
    * Default is false for clans, true for groups.
    */
   readonly UpdateCulturePermissionOverride?: boolean;
   /**
    * Minimum Member Level allowed to host guided games
-   * 
+   *
    * Always Allowed: Founder, Acting Founder, Admin
-   * 
+   *
    * Allowed Overrides: None, Member, Beginner
-   * 
+   *
    * Default is Member for clans, None for groups, although this means nothing for
    * groups.
    */
   readonly HostGuidedGamePermissionOverride?: number;
   /**
    * Minimum Member Level allowed to update banner
-   * 
+   *
    * Always Allowed: Founder, Acting Founder
-   * 
+   *
    * True means admins have this power, false means they don't
-   * 
+   *
    * Default is false for clans, true for groups.
    */
   readonly UpdateBannerPermissionOverride?: boolean;
   /**
    * Level to join a member at when accepting an invite, application, or joining an
    * open clan
-   * 
+   *
    * Default is Beginner.
    */
   readonly JoinLevel?: number;
@@ -435,11 +435,11 @@ export interface GroupSearchResponse {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which
@@ -468,11 +468,11 @@ export interface SearchResultOfGroupMember {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which
@@ -509,11 +509,11 @@ export interface SearchResultOfGroupBan {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which
@@ -552,11 +552,11 @@ export interface SearchResultOfGroupMemberApplication {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which
@@ -590,11 +590,11 @@ export interface GroupMembershipSearchResponse {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which
@@ -616,11 +616,11 @@ export interface GroupPotentialMembershipSearchResponse {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which

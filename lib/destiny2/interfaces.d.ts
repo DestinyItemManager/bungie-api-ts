@@ -11,6 +11,16 @@
  */
 import { BungieMembershipType, DateRange, HyperlinkReference, InterpolationPoint, InterpolationPointFloat, PagedQuery, PlatformErrorCodes } from '../common';
 import { UserInfoCard } from '../user/interfaces';
+export interface SingleComponentResponse<T> {
+    readonly data?: T;
+    readonly privacy?: ComponentPrivacySetting;
+}
+export interface DictionaryComponentResponse<T> {
+    readonly data?: {
+        [key: number]: T;
+    };
+    readonly privacy?: ComponentPrivacySetting;
+}
 /**
  * Information about a current character's status with a Progression. A progression
  * is a value that can increase with activity and has levels. Think Character Level
@@ -5516,25 +5526,25 @@ export interface DestinyProfileResponse {
      *
      * COMPONENT TYPE: VendorReceipts
      */
-    readonly vendorReceipts?: SingleComponentResponseOfDestinyVendorReceiptsComponent;
+    readonly vendorReceipts?: SingleComponentResponse<DestinyVendorReceiptsComponent>;
     /**
      * The profile-level inventory of the Destiny Profile.
      *
      * COMPONENT TYPE: ProfileInventories
      */
-    readonly profileInventory?: SingleComponentResponseOfDestinyInventoryComponent;
+    readonly profileInventory?: SingleComponentResponse<DestinyInventoryComponent>;
     /**
      * The profile-level currencies owned by the Destiny Profile.
      *
      * COMPONENT TYPE: ProfileCurrencies
      */
-    readonly profileCurrencies?: SingleComponentResponseOfDestinyInventoryComponent;
+    readonly profileCurrencies?: SingleComponentResponse<DestinyInventoryComponent>;
     /**
      * The basic information about the Destiny Profile (formerly "Account").
      *
      * COMPONENT TYPE: Profiles
      */
-    readonly profile?: SingleComponentResponseOfDestinyProfileComponent;
+    readonly profile?: SingleComponentResponse<DestinyProfileComponent>;
     /**
      * Items available from Kiosks that are available Profile-wide (i.e. across all
      * characters)
@@ -5546,45 +5556,45 @@ export interface DestinyProfileResponse {
      *
      * COMPONENT TYPE: Kiosks
      */
-    readonly profileKiosks?: SingleComponentResponseOfDestinyKiosksComponent;
+    readonly profileKiosks?: SingleComponentResponse<DestinyKiosksComponent>;
     /**
      * Basic information about each character, keyed by the CharacterId.
      *
      * COMPONENT TYPE: Characters
      */
-    readonly characters?: DictionaryComponentResponseOfint64AndDestinyCharacterComponent;
+    readonly characters?: DictionaryComponentResponse<DestinyCharacterComponent>;
     /**
      * The character-level non-equipped inventory items, keyed by the Character's Id.
      *
      * COMPONENT TYPE: CharacterInventories
      */
-    readonly characterInventories?: DictionaryComponentResponseOfint64AndDestinyInventoryComponent;
+    readonly characterInventories?: DictionaryComponentResponse<DestinyInventoryComponent>;
     /**
      * Character-level progression data, keyed by the Character's Id.
      *
      * COMPONENT TYPE: CharacterProgressions
      */
-    readonly characterProgressions?: DictionaryComponentResponseOfint64AndDestinyCharacterProgressionComponent;
+    readonly characterProgressions?: DictionaryComponentResponse<DestinyCharacterProgressionComponent>;
     /**
      * Character rendering data - a minimal set of info needed to render a character in
      * 3D - keyed by the Character's Id.
      *
      * COMPONENT TYPE: CharacterRenderData
      */
-    readonly characterRenderData?: DictionaryComponentResponseOfint64AndDestinyCharacterRenderComponent;
+    readonly characterRenderData?: DictionaryComponentResponse<DestinyCharacterRenderComponent>;
     /**
      * Character activity data - the activities available to this character and its
      * status, keyed by the Character's Id.
      *
      * COMPONENT TYPE: CharacterActivities
      */
-    readonly characterActivities?: DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent;
+    readonly characterActivities?: DictionaryComponentResponse<DestinyCharacterActivitiesComponent>;
     /**
      * The character's equipped items, keyed by the Character's Id.
      *
      * COMPONENT TYPE: CharacterEquipment
      */
-    readonly characterEquipment?: DictionaryComponentResponseOfint64AndDestinyInventoryComponent;
+    readonly characterEquipment?: DictionaryComponentResponse<DestinyInventoryComponent>;
     /**
      * Items available from Kiosks that are available to a specific character as
      * opposed to the account as a whole. It must be combined with data from the
@@ -5598,7 +5608,7 @@ export interface DestinyProfileResponse {
      *
      * COMPONENT TYPE: Kiosks
      */
-    readonly characterKiosks?: DictionaryComponentResponseOfint64AndDestinyKiosksComponent;
+    readonly characterKiosks?: DictionaryComponentResponse<DestinyKiosksComponent>;
     /**
      * Information about instanced items across all returned characters, keyed by the
      * item's instance ID.
@@ -5607,10 +5617,6 @@ export interface DestinyProfileResponse {
      * types.]
      */
     readonly itemComponents?: DestinyItemComponentSetOfint64;
-}
-export interface SingleComponentResponseOfDestinyVendorReceiptsComponent {
-    readonly data?: DestinyVendorReceiptsComponent;
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * For now, this isn't used for much: it's a record of the recent refundable
@@ -5655,10 +5661,6 @@ export declare const enum ComponentPrivacySetting {
     None = 0,
     Public = 1,
     Private = 2,
-}
-export interface SingleComponentResponseOfDestinyInventoryComponent {
-    readonly data?: DestinyInventoryComponent;
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * A list of minimal information for items in an inventory: be it a character's
@@ -5771,10 +5773,6 @@ export declare const enum ItemState {
      */
     Masterwork = 4,
 }
-export interface SingleComponentResponseOfDestinyProfileComponent {
-    readonly data?: DestinyProfileComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
 /**
  * The most essential summary information about a Profile (in Destiny 1, we called
  * these "Accounts").
@@ -5796,10 +5794,6 @@ export declare const enum DestinyGameVersions {
     None = 0,
     Destiny2 = 1,
     DLC1 = 2,
-}
-export interface SingleComponentResponseOfDestinyKiosksComponent {
-    readonly data?: DestinyKiosksComponent;
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * A Kiosk is a Vendor (DestinyVendorDefinition) that sells items based on whether
@@ -5894,12 +5888,6 @@ export interface DestinyObjectiveProgress {
     readonly progress?: number;
     /** Whether or not the Objective is completed. */
     readonly complete?: boolean;
-}
-export interface DictionaryComponentResponseOfint64AndDestinyCharacterComponent {
-    readonly data?: {
-        [key: number]: DestinyCharacterComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * This component contains base properties of the character. You'll probably want
@@ -6141,18 +6129,6 @@ export interface DestinyClassDefinition {
      * but BNet is not yet allowed to show it. Sorry!
      */
     readonly redacted?: boolean;
-}
-export interface DictionaryComponentResponseOfint64AndDestinyInventoryComponent {
-    readonly data?: {
-        [key: number]: DestinyInventoryComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint64AndDestinyCharacterProgressionComponent {
-    readonly data?: {
-        [key: number]: DestinyCharacterProgressionComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * This component returns anything that could be considered "Progression" on a user:
@@ -7075,12 +7051,6 @@ export interface DestinyMilestoneRewardEntry {
      */
     readonly redeemed?: boolean;
 }
-export interface DictionaryComponentResponseOfint64AndDestinyCharacterRenderComponent {
-    readonly data?: {
-        [key: number]: DestinyCharacterRenderComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
 /**
  * Only really useful if you're attempting to render the character's current
  * appearance in 3D, this returns a bare minimum of information, pre-aggregated,
@@ -7163,12 +7133,6 @@ export interface DestinyItemPeerView {
     readonly itemHash?: number;
     /** The list of dyes that have been applied to this item. */
     readonly dyes?: DyeReference[];
-}
-export interface DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent {
-    readonly data?: {
-        [key: number]: DestinyCharacterActivitiesComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * This component holds activity data for a character. It will tell you about the
@@ -7280,27 +7244,15 @@ export declare const enum DestinyActivityDifficultyTier {
     AlmostImpossible = 6,
     Impossible = 7,
 }
-export interface DictionaryComponentResponseOfint64AndDestinyKiosksComponent {
-    readonly data?: {
-        [key: number]: DestinyKiosksComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
 export interface DestinyItemComponentSetOfint64 {
-    readonly instances?: DictionaryComponentResponseOfint64AndDestinyItemInstanceComponent;
-    readonly objectives?: DictionaryComponentResponseOfint64AndDestinyItemObjectivesComponent;
-    readonly perks?: DictionaryComponentResponseOfint64AndDestinyItemPerksComponent;
-    readonly renderData?: DictionaryComponentResponseOfint64AndDestinyItemRenderComponent;
-    readonly stats?: DictionaryComponentResponseOfint64AndDestinyItemStatsComponent;
-    readonly sockets?: DictionaryComponentResponseOfint64AndDestinyItemSocketsComponent;
-    readonly talentGrids?: DictionaryComponentResponseOfint64AndDestinyItemTalentGridComponent;
-    readonly plugStates?: DictionaryComponentResponseOfuint32AndDestinyItemPlugComponent;
-}
-export interface DictionaryComponentResponseOfint64AndDestinyItemInstanceComponent {
-    readonly data?: {
-        [key: number]: DestinyItemInstanceComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
+    readonly instances?: DictionaryComponentResponse<DestinyItemInstanceComponent>;
+    readonly objectives?: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
+    readonly perks?: DictionaryComponentResponse<DestinyItemPerksComponent>;
+    readonly renderData?: DictionaryComponentResponse<DestinyItemRenderComponent>;
+    readonly stats?: DictionaryComponentResponse<DestinyItemStatsComponent>;
+    readonly sockets?: DictionaryComponentResponse<DestinyItemSocketsComponent>;
+    readonly talentGrids?: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
+    readonly plugStates?: DictionaryComponentResponse<DestinyItemPlugComponent>;
 }
 /**
  * If an item is "instanced", this will contain information about the item's
@@ -7459,12 +7411,6 @@ export declare const enum EquipFailureReason {
      */
     ItemNotOnCharacter = 16,
 }
-export interface DictionaryComponentResponseOfint64AndDestinyItemObjectivesComponent {
-    readonly data?: {
-        [key: number]: DestinyItemObjectivesComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
 /**
  * Items can have objectives and progression. When you request this block, you will
  * obtain information about any Objectives and progression tied to this item.
@@ -7485,12 +7431,6 @@ export interface DestinyItemObjectivesComponent {
      * stats, those stats are represented as Objectives on the item.
      */
     readonly flavorObjective?: DestinyObjectiveProgress;
-}
-export interface DictionaryComponentResponseOfint64AndDestinyItemPerksComponent {
-    readonly data?: {
-        [key: number]: DestinyItemPerksComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * Instanced items can have perks: benefits that the item bestows.
@@ -7540,12 +7480,6 @@ export interface DestinyPerkReference {
      */
     readonly visible?: boolean;
 }
-export interface DictionaryComponentResponseOfint64AndDestinyItemRenderComponent {
-    readonly data?: {
-        [key: number]: DestinyItemRenderComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
 /**
  * Many items can be rendered in 3D. When you request this block, you will obtain
  * the custom data needed to render this specific instance of the item.
@@ -7564,12 +7498,6 @@ export interface DestinyItemRenderComponent {
     readonly artRegions?: {
         [key: number]: number;
     };
-}
-export interface DictionaryComponentResponseOfint64AndDestinyItemStatsComponent {
-    readonly data?: {
-        [key: number]: DestinyItemStatsComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * If you want the stats on an item's instanced data, get this component.
@@ -7590,12 +7518,6 @@ export interface DestinyItemStatsComponent {
     readonly stats?: {
         [key: number]: DestinyStat;
     };
-}
-export interface DictionaryComponentResponseOfint64AndDestinyItemSocketsComponent {
-    readonly data?: {
-        [key: number]: DestinyItemSocketsComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * Instanced items can have sockets, which are slots on the item where plugs can be
@@ -7673,12 +7595,6 @@ export interface DestinyItemPlug {
     readonly enabled?: boolean;
     readonly insertFailIndexes?: number[];
     readonly enableFailIndexes?: number[];
-}
-export interface DictionaryComponentResponseOfint64AndDestinyItemTalentGridComponent {
-    readonly data?: {
-        [key: number]: DestinyItemTalentGridComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * Well, we're here in Destiny 2, and Talent Grids are unfortunately still around.
@@ -7855,12 +7771,6 @@ export interface DestinyTalentNodeStatBlock {
      */
     readonly nextStepStats?: DestinyStat[];
 }
-export interface DictionaryComponentResponseOfuint32AndDestinyItemPlugComponent {
-    readonly data?: {
-        [key: number]: DestinyItemPlugComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
 /**
  * Plugs are non-instanced items that can provide Stat and Perk benefits when
  * socketed into an instanced item. Items have Sockets, and Plugs are inserted into
@@ -7889,44 +7799,44 @@ export interface DestinyCharacterResponse {
      *
      * COMPONENT TYPE: CharacterInventories
      */
-    readonly inventory?: SingleComponentResponseOfDestinyInventoryComponent;
+    readonly inventory?: SingleComponentResponse<DestinyInventoryComponent>;
     /**
      * Base information about the character in question.
      *
      * COMPONENT TYPE: Characters
      */
-    readonly character?: SingleComponentResponseOfDestinyCharacterComponent;
+    readonly character?: SingleComponentResponse<DestinyCharacterComponent>;
     /**
      * Character progression data, including Milestones.
      *
      * COMPONENT TYPE: CharacterProgressions
      */
-    readonly progressions?: SingleComponentResponseOfDestinyCharacterProgressionComponent;
+    readonly progressions?: SingleComponentResponse<DestinyCharacterProgressionComponent>;
     /**
      * Character rendering data - a minimal set of information about equipment and dyes
      * used for rendering.
      *
      * COMPONENT TYPE: CharacterRenderData
      */
-    readonly renderData?: SingleComponentResponseOfDestinyCharacterRenderComponent;
+    readonly renderData?: SingleComponentResponse<DestinyCharacterRenderComponent>;
     /**
      * Activity data - info about current activities available to the player.
      *
      * COMPONENT TYPE: CharacterActivities
      */
-    readonly activities?: SingleComponentResponseOfDestinyCharacterActivitiesComponent;
+    readonly activities?: SingleComponentResponse<DestinyCharacterActivitiesComponent>;
     /**
      * Equipped items on the character.
      *
      * COMPONENT TYPE: CharacterEquipment
      */
-    readonly equipment?: SingleComponentResponseOfDestinyInventoryComponent;
+    readonly equipment?: SingleComponentResponse<DestinyInventoryComponent>;
     /**
      * Items available from Kiosks that are available to this specific character.
      *
      * COMPONENT TYPE: Kiosks
      */
-    readonly kiosks?: SingleComponentResponseOfDestinyKiosksComponent;
+    readonly kiosks?: SingleComponentResponse<DestinyKiosksComponent>;
     /**
      * The set of components belonging to the player's instanced items.
      *
@@ -7934,22 +7844,6 @@ export interface DestinyCharacterResponse {
      * types.]
      */
     readonly itemComponents?: DestinyItemComponentSetOfint64;
-}
-export interface SingleComponentResponseOfDestinyCharacterComponent {
-    readonly data?: DestinyCharacterComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyCharacterProgressionComponent {
-    readonly data?: DestinyCharacterProgressionComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyCharacterRenderComponent {
-    readonly data?: DestinyCharacterRenderComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyCharacterActivitiesComponent {
-    readonly data?: DestinyCharacterActivitiesComponent;
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * The response object for retrieving an individual instanced item. None of these
@@ -7967,37 +7861,37 @@ export interface DestinyItemResponse {
      *
      * COMPONENT TYPE: ItemCommonData
      */
-    readonly item?: SingleComponentResponseOfDestinyItemComponent;
+    readonly item?: SingleComponentResponse<DestinyItemComponent>;
     /**
      * Basic instance data for the item.
      *
      * COMPONENT TYPE: ItemInstances
      */
-    readonly instance?: SingleComponentResponseOfDestinyItemInstanceComponent;
+    readonly instance?: SingleComponentResponse<DestinyItemInstanceComponent>;
     /**
      * Information specifically about the item's objectives.
      *
      * COMPONENT TYPE: ItemObjectives
      */
-    readonly objectives?: SingleComponentResponseOfDestinyItemObjectivesComponent;
+    readonly objectives?: SingleComponentResponse<DestinyItemObjectivesComponent>;
     /**
      * Information specifically about the perks currently active on the item.
      *
      * COMPONENT TYPE: ItemPerks
      */
-    readonly perks?: SingleComponentResponseOfDestinyItemPerksComponent;
+    readonly perks?: SingleComponentResponse<DestinyItemPerksComponent>;
     /**
      * Information about how to render the item in 3D.
      *
      * COMPONENT TYPE: ItemRenderData
      */
-    readonly renderData?: SingleComponentResponseOfDestinyItemRenderComponent;
+    readonly renderData?: SingleComponentResponse<DestinyItemRenderComponent>;
     /**
      * Information about the computed stats of the item: power, defense, etc...
      *
      * COMPONENT TYPE: ItemStats
      */
-    readonly stats?: SingleComponentResponseOfDestinyItemStatsComponent;
+    readonly stats?: SingleComponentResponse<DestinyItemStatsComponent>;
     /**
      * Information about the talent grid attached to the item. Talent nodes can provide
      * a variety of benefits and abilities, and in Destiny 2 are used almost
@@ -8005,7 +7899,7 @@ export interface DestinyItemResponse {
      *
      * COMPONENT TYPE: ItemTalentGrids
      */
-    readonly talentGrid?: SingleComponentResponseOfDestinyItemTalentGridComponent;
+    readonly talentGrid?: SingleComponentResponse<DestinyItemTalentGridComponent>;
     /**
      * Information about the sockets of the item: which are currently active, what
      * potential sockets you could have and the stats/abilities/perks you can gain from
@@ -8013,39 +7907,7 @@ export interface DestinyItemResponse {
      *
      * COMPONENT TYPE: ItemSockets
      */
-    readonly sockets?: SingleComponentResponseOfDestinyItemSocketsComponent;
-}
-export interface SingleComponentResponseOfDestinyItemComponent {
-    readonly data?: DestinyItemComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemInstanceComponent {
-    readonly data?: DestinyItemInstanceComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemObjectivesComponent {
-    readonly data?: DestinyItemObjectivesComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemPerksComponent {
-    readonly data?: DestinyItemPerksComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemRenderComponent {
-    readonly data?: DestinyItemRenderComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemStatsComponent {
-    readonly data?: DestinyItemStatsComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemTalentGridComponent {
-    readonly data?: DestinyItemTalentGridComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyItemSocketsComponent {
-    readonly data?: DestinyItemSocketsComponent;
-    readonly privacy?: ComponentPrivacySetting;
+    readonly sockets?: SingleComponentResponse<DestinyItemSocketsComponent>;
 }
 /** A response containing all of the components for all requested vendors. */
 export interface DestinyVendorsResponse {
@@ -8054,28 +7916,22 @@ export interface DestinyVendorsResponse {
      *
      * COMPONENT TYPE: Vendors
      */
-    readonly vendors?: DictionaryComponentResponseOfuint32AndDestinyVendorComponent;
+    readonly vendors?: DictionaryComponentResponse<DestinyVendorComponent>;
     /**
      * Categories that the vendor has available, and references to the sales therein.
      *
      * COMPONENT TYPE: VendorCategories
      */
-    readonly categories?: DictionaryComponentResponseOfuint32AndDestinyVendorCategoriesComponent;
+    readonly categories?: DictionaryComponentResponse<DestinyVendorCategoriesComponent>;
     /**
      * Sales, keyed by the vendorItemIndex of the item being sold.
      *
      * COMPONENT TYPE: VendorSales
      */
-    readonly sales?: DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent;
+    readonly sales?: DictionaryComponentResponse<DestinyVendorSaleItemSetComponent>;
     readonly itemComponents?: {
         [key: number]: DestinyItemComponentSetOfint32;
     };
-}
-export interface DictionaryComponentResponseOfuint32AndDestinyVendorComponent {
-    readonly data?: {
-        [key: number]: DestinyVendorComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /** This component contains essential/summary information about the vendor. */
 export interface DestinyVendorComponent {
@@ -8107,12 +7963,6 @@ export interface DestinyVendorComponent {
      */
     readonly progression?: DestinyProgression;
 }
-export interface DictionaryComponentResponseOfuint32AndDestinyVendorCategoriesComponent {
-    readonly data?: {
-        [key: number]: DestinyVendorCategoriesComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
 /**
  * A vendor can have many categories of items that they sell. This component will
  * return the category information for available items, as well as the index into
@@ -8140,12 +7990,6 @@ export interface DestinyVendorCategory {
      * DestinyVendorSaleItemComponent data, if you asked for that data to be returned.
      */
     readonly itemIndexes?: number[];
-}
-export interface DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent {
-    readonly data?: {
-        [key: number]: DestinyVendorSaleItemSetComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /**
  * The collection of all items currently being sold by a specific Vendor and
@@ -8267,56 +8111,14 @@ export interface DestinyUnlockStatus {
     readonly isSet?: boolean;
 }
 export interface DestinyItemComponentSetOfint32 {
-    readonly instances?: DictionaryComponentResponseOfint32AndDestinyItemInstanceComponent;
-    readonly objectives?: DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent;
-    readonly perks?: DictionaryComponentResponseOfint32AndDestinyItemPerksComponent;
-    readonly renderData?: DictionaryComponentResponseOfint32AndDestinyItemRenderComponent;
-    readonly stats?: DictionaryComponentResponseOfint32AndDestinyItemStatsComponent;
-    readonly sockets?: DictionaryComponentResponseOfint32AndDestinyItemSocketsComponent;
-    readonly talentGrids?: DictionaryComponentResponseOfint32AndDestinyItemTalentGridComponent;
-    readonly plugStates?: DictionaryComponentResponseOfuint32AndDestinyItemPlugComponent;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemInstanceComponent {
-    readonly data?: {
-        [key: number]: DestinyItemInstanceComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent {
-    readonly data?: {
-        [key: number]: DestinyItemObjectivesComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemPerksComponent {
-    readonly data?: {
-        [key: number]: DestinyItemPerksComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemRenderComponent {
-    readonly data?: {
-        [key: number]: DestinyItemRenderComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemStatsComponent {
-    readonly data?: {
-        [key: number]: DestinyItemStatsComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemSocketsComponent {
-    readonly data?: {
-        [key: number]: DestinyItemSocketsComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyItemTalentGridComponent {
-    readonly data?: {
-        [key: number]: DestinyItemTalentGridComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
+    readonly instances?: DictionaryComponentResponse<DestinyItemInstanceComponent>;
+    readonly objectives?: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
+    readonly perks?: DictionaryComponentResponse<DestinyItemPerksComponent>;
+    readonly renderData?: DictionaryComponentResponse<DestinyItemRenderComponent>;
+    readonly stats?: DictionaryComponentResponse<DestinyItemStatsComponent>;
+    readonly sockets?: DictionaryComponentResponse<DestinyItemSocketsComponent>;
+    readonly talentGrids?: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
+    readonly plugStates?: DictionaryComponentResponse<DestinyItemPlugComponent>;
 }
 /** A response containing all of the components for a vendor. */
 export interface DestinyVendorResponse {
@@ -8325,19 +8127,19 @@ export interface DestinyVendorResponse {
      *
      * COMPONENT TYPE: Vendors
      */
-    readonly vendor?: SingleComponentResponseOfDestinyVendorComponent;
+    readonly vendor?: SingleComponentResponse<DestinyVendorComponent>;
     /**
      * Categories that the vendor has available, and references to the sales therein.
      *
      * COMPONENT TYPE: VendorCategories
      */
-    readonly categories?: SingleComponentResponseOfDestinyVendorCategoriesComponent;
+    readonly categories?: SingleComponentResponse<DestinyVendorCategoriesComponent>;
     /**
      * Sales, keyed by the vendorItemIndex of the item being sold.
      *
      * COMPONENT TYPE: VendorSales
      */
-    readonly sales?: DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent;
+    readonly sales?: DictionaryComponentResponse<DestinyVendorSaleItemComponent>;
     /**
      * Item components, keyed by the vendorItemIndex of the active sale items.
      *
@@ -8345,20 +8147,6 @@ export interface DestinyVendorResponse {
      * types.]
      */
     readonly itemComponents?: DestinyItemComponentSetOfint32;
-}
-export interface SingleComponentResponseOfDestinyVendorComponent {
-    readonly data?: DestinyVendorComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface SingleComponentResponseOfDestinyVendorCategoriesComponent {
-    readonly data?: DestinyVendorCategoriesComponent;
-    readonly privacy?: ComponentPrivacySetting;
-}
-export interface DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent {
-    readonly data?: {
-        [key: number]: DestinyVendorSaleItemComponent;
-    };
-    readonly privacy?: ComponentPrivacySetting;
 }
 /** The results of a bulk Equipping operation performed through the Destiny API. */
 export interface DestinyEquipItemResults {

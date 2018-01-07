@@ -10,8 +10,6 @@
  * Do not edit these files manually.
  */
 
-
-
 export const enum BungieMembershipType {
   None = 0,
   TigerXbox = 1,

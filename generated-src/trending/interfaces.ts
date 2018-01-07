@@ -58,11 +58,11 @@ export interface SearchResultOfTrendingEntry {
   readonly replacementContinuationToken?: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
-   * 
+   *
    * If False, it does not, and may be estimated/only the size of the current page.
-   * 
+   *
    * Either way, you should probably always only trust hasMore.
-   * 
+   *
    * This is a long-held historical throwback to when we used to do paging with known
    * total results. Those queries toasted our database, and we were left to hastily
    * alter our endpoints and create backward- compatible shims, of which
@@ -162,7 +162,7 @@ export interface ContentItemPublicContract {
    * Firehose content is really a collection of metadata and "properties", which are
    * the potentially-but-not-strictly localizable data that comprises the meat of
    * whatever content is being shown.
-   * 
+   *
    * As Cole Porter would have crooned, "Anything Goes" with Firehose properties.
    * They are most often strings, but they can theoretically be anything. They are
    * JSON encoded, and could be JSON structures, simple strings, numbers etc... The
