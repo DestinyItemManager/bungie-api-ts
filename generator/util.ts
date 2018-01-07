@@ -9,10 +9,10 @@ export interface DefInfo {
 }
 
 export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: OpenAPIObject): string {
-  if ((schema as ReferenceObject).$ref) {
-    return interfaceName((schema as ReferenceObject).$ref);
+  if (isReferenceObject(schema)) {
+    return interfaceName(schema.$ref);
   } else {
-    return typeMapping(schema as SchemaObject, doc);
+    return typeMapping(schema, doc);
   }
 }
 
@@ -26,8 +26,9 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
       if (schema.allOf) {
         return resolveSchemaType(schema.allOf[0], doc);
       } else if (schema.additionalProperties && schema['x-dictionary-key']) {
-        const key = typeMapping(schema['x-dictionary-key'], doc);
-        const val = typeMapping(schema.additionalProperties, doc);
+        const keySchema: SchemaObject | ReferenceObject = schema['x-dictionary-key'];
+        const key = isReferenceObject(keySchema) ? 'number' : resolveSchemaType(keySchema, doc);
+        const val = resolveSchemaType(schema.additionalProperties, doc);
         return `{ [key: ${key}]: ${val} }`;
       }
   }
@@ -36,10 +37,15 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
 }
 
 export function getReferencedTypes(schema: SchemaObject | ReferenceObject): string | undefined {
+  console.log(schema);
   if (isReferenceObject(schema)) {
     return schema.$ref;
   } else if (schema.items) {
     return getReferencedTypes(schema.items!);
+  } else if (schema.allOf) {
+    return getReferencedTypes(schema.allOf[0]);
+  } else if (schema.additionalProperties) {
+    return getReferencedTypes(schema.additionalProperties);
   }
 }
 
@@ -67,6 +73,8 @@ export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
 }
 
 export function interfaceName(componentPath: string) {
+  // TODO: maybe here is the place to do: SingleComponentResponseOfDestinyProfileComponent
+  // But how to prevent it from going into the type index, too?
   const name = lastPart(componentPath);
   if (componentPath.includes('/responses/')) {
     return name + 'ServerResponse';

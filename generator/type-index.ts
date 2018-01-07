@@ -112,6 +112,12 @@ function addReachableComponentsFromComponent(allDefinitions: Set<string>, defini
     Object.values(component.properties).forEach((schema: SchemaObject | ReferenceObject) => {
       addDefinitions(allDefinitions, schema, doc);
     });
+    (component.allOf || []).forEach((schema: SchemaObject | ReferenceObject) => {
+      addDefinitions(allDefinitions, schema, doc);
+    });
+    (component.additionalProperties || []).forEach((schema: SchemaObject | ReferenceObject) => {
+      addDefinitions(allDefinitions, schema, doc);
+    });
   }
 }
 
@@ -128,6 +134,9 @@ function addDefinitionsFromComponent(allDefinitions: Set<string>, definition: st
   // if (definition.endsWith('/boolean') || definition.endsWith('/int32')) {
   //  return;
   // }
+
+  // TODO: SingleComponentResponseOfDestinyKiosksComponent could be expressed better! Check out the other TS lib
+
   if (definition && !allDefinitions.has(definition)) {
     allDefinitions.add(definition);
     addReachableComponentsFromComponent(allDefinitions, definition, doc);

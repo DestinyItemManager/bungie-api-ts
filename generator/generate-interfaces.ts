@@ -62,7 +62,7 @@ function generateInterfaceSchema(interfaceName: string, component: SchemaObject,
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
     // TODO: we're always marking things as possibly being undefined. It'd be nice to narrow that!
     const nullable = schema.nullable || schema.type === 'object' || schema.type === 'array';
-    return `${docString}${param}${nullable ? '?' : '?'}: ${paramType};`;
+    return `${docString}readonly ${param}${nullable ? '?' : '?'}: ${paramType};`;
   });
   const docString = component.description ? docComment(component.description) + '\n' : '';
   return `${docString}export interface ${interfaceName} {
