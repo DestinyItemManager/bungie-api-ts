@@ -1,4 +1,3 @@
-import * as _ from 'underscore';
 import { OpenAPIObject, PathItemObject, ParameterObject, ReferenceObject, RequestBodyObject } from 'openapi3-ts';
 import { lastPart, lcFirst, resolveSchemaType, DefInfo, isReferenceObject, isRequestBodyObject } from './util';
 import { generateHeader, generateImports, docComment, indent, addImport, writeOutFile } from './generate-common';
@@ -10,7 +9,7 @@ export function generateServiceDefinition(tag: string, paths: [string, PathItemO
 
   const pathDefinitions = paths.map(([path, pathDef]) => generatePathDefinition(path, pathDef, doc, componentByDef, importFiles));
 
-  const filename = `dist/${tag.toLowerCase()}/api.ts`;
+  const filename = `generated-src/${tag.toLowerCase()}/api.ts`;
 
   const imports = generateImports(filename, importFiles);
 

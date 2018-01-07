@@ -43,7 +43,7 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
 function chooseFile(def: string, tags: string[], allTags: string[]) {
   const schemaName: string = _.last(def.split('/'))!;
   const matchingTag = allTags.find((tag) => schemaName.startsWith(tag + '.'));
-  const filename = def.includes('/responses/') ? '/responses.d.ts' : '/interfaces.d.ts';
+  const filename = def.includes('/responses/') ? '/responses.ts' : '/interfaces.ts';
   if (matchingTag) {
     return matchingTag.toLowerCase() + filename;
   } else if (schemaName.startsWith('GroupsV2.')) {
@@ -54,9 +54,9 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
     if (tags.length === 1) {
       return tags[0].toLowerCase() + filename;
     } else if (!tags.includes('Destiny2')) {
-      return 'platform.d.ts';
+      return 'platform.ts';
     } else {
-      return 'common.d.ts';
+      return 'common.ts';
     }
   }
 }

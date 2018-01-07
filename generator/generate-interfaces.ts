@@ -1,31 +1,20 @@
 import * as _ from 'underscore';
-import * as path from 'path';
-import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
-import { DefInfo, getRef, resolveSchemaType, getReferencedTypes } from './util';
+import { DefInfo, getRef, resolveSchemaType } from './util';
 import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
-import { generateHeader, generateImports, docComment, indent, addImport } from './generate-common';
+import { generateHeader, generateImports, docComment, indent, addImport, writeOutFile } from './generate-common';
 
 export function generateInterfaceDefinitions(file: string, components: DefInfo[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }) {
   const importFiles: { [filename: string]: Set<string> } = {};
 
   const componentDefinitions = components.map((component) => generateComponentDefinition(component, doc, componentByDef, importFiles));
 
-  const filename = `dist/${file}`;
+  const filename = `generated-src/${file}`;
 
   const imports = generateImports(filename, importFiles);
 
   const definition = [generateHeader(doc), imports, ...componentDefinitions].join('\n\n') + '\n';
 
-  mkdirp(path.dirname(filename), (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      fs.writeFile(filename, definition, null, (error) => {
-        console.log(error ? error : `Done with ${file}!`);
-      });
-    }
-  });
+  writeOutFile(filename, definition);
 }
 
 function generateComponentDefinition(defInfo: DefInfo, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {

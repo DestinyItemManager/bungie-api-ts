@@ -10,6 +10,7 @@ import { DefInfo } from './util';
 import { generateServiceDefinition } from './generate-api';
 import { generateInterfaceDefinitions } from './generate-interfaces';
 import { computeTypeMaps } from './type-index';
+import { generateIndex, generateSuperIndex } from './generate-index';
 
 // TODO: OK split responses from schemas. Naming?
 
@@ -30,6 +31,12 @@ _.each(componentsByFile, (components: DefInfo[], file: string) => {
 _.each(pathPairsByTag, (paths, tag) => {
   generateServiceDefinition(tag, paths, doc, componentByDef);
 });
+
+_.each(pathPairsByTag, (paths, tag) => {
+  generateIndex(tag, doc);
+});
+
+generateSuperIndex(Object.keys(pathPairsByTag), doc);
 
 // TODO: generate index reexports
 

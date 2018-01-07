@@ -32,7 +32,7 @@ export function addImport(schema: SchemaObject | ReferenceObject, componentByDef
 // TODO: skip imports from this file!
 export function generateImports(filename: string , importFiles: { [filename: string]: Set<string> }): string {
   return _.compact(_.map(importFiles, (types, f) => {
-    const absImport = path.resolve('dist', f);
+    const absImport = path.resolve('generated-src', f);
     const absDest = path.resolve(filename);
     if (absImport === absDest) {
       return undefined;

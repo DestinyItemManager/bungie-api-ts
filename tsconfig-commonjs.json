@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "declaration": true
+  },
+  "include": [
+    "./generated-src/**/*"
+  ]
+}
