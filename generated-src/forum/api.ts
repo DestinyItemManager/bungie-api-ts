@@ -31,7 +31,7 @@ export interface GetTopicsPagedParams {
   /** A category filter */
   categoryFilter: ForumTopicsCategoryFiltersEnum;
   /** The group, if any. */
-  group: number;
+  group: string;
   /**
    * Comma seperated list of locales posts must match to return in the result list.
    * Default 'en'
@@ -177,7 +177,7 @@ export async function getPostAndParentAwaitingApproval(http: HttpClient, params:
 }
 
 export interface GetTopicForContentParams {
-  contentId: number;
+  contentId: string;
 }
 
 /** Gets the post Id for the given content item's comments, if it exists. */
@@ -209,7 +209,7 @@ export async function getForumTagSuggestions(http: HttpClient, params: GetForumT
 
 export interface GetPollParams {
   /** The post id of the topic that has the poll. */
-  topicId: number;
+  topicId: string;
 }
 
 /** Gets the specified forum poll. */
@@ -222,7 +222,7 @@ export async function getPoll(http: HttpClient, params: GetPollParams): Promise<
 
 export interface JoinFireteamThreadParams {
   /** The post id of the recruitment topic you wish to join. */
-  topicId: number;
+  topicId: string;
 }
 
 /**
@@ -238,7 +238,7 @@ export async function joinFireteamThread(http: HttpClient, params: JoinFireteamT
 
 export interface LeaveFireteamThreadParams {
   /** The post id of the recruitment topic you wish to leave. */
-  topicId: number;
+  topicId: string;
 }
 
 /**
@@ -254,9 +254,9 @@ export async function leaveFireteamThread(http: HttpClient, params: LeaveFiretea
 
 export interface KickBanFireteamApplicantParams {
   /** The id of the user you wish to kick. */
-  targetMembershipId: number;
+  targetMembershipId: string;
   /** The post id of the recruitment topic you wish to join. */
-  topicId: number;
+  topicId: string;
 }
 
 /**
@@ -272,7 +272,7 @@ export async function kickBanFireteamApplicant(http: HttpClient, params: KickBan
 
 export interface ApproveFireteamThreadParams {
   /** The post id of the recruitment topic to approve. */
-  topicId: number;
+  topicId: string;
 }
 
 /**
@@ -287,7 +287,7 @@ export async function approveFireteamThread(http: HttpClient, params: ApproveFir
 }
 
 export interface GetRecruitmentThreadSummariesParams {
-  body: number[];
+  body: string[];
 }
 
 /**

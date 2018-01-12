@@ -16,7 +16,7 @@ export interface GetTopicsPagedParams {
     /** A category filter */
     categoryFilter: ForumTopicsCategoryFiltersEnum;
     /** The group, if any. */
-    group: number;
+    group: string;
     /**
      * Comma seperated list of locales posts must match to return in the result list.
      * Default 'en'
@@ -101,7 +101,7 @@ export interface GetPostAndParentAwaitingApprovalParams {
  */
 export declare function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<PostSearchResponseServerResponse>;
 export interface GetTopicForContentParams {
-    contentId: number;
+    contentId: string;
 }
 /** Gets the post Id for the given content item's comments, if it exists. */
 export declare function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<int64ServerResponse>;
@@ -116,13 +116,13 @@ export interface GetForumTagSuggestionsParams {
 export declare function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ListOfTagResponseServerResponse>;
 export interface GetPollParams {
     /** The post id of the topic that has the poll. */
-    topicId: number;
+    topicId: string;
 }
 /** Gets the specified forum poll. */
 export declare function getPoll(http: HttpClient, params: GetPollParams): Promise<PostSearchResponseServerResponse>;
 export interface JoinFireteamThreadParams {
     /** The post id of the recruitment topic you wish to join. */
-    topicId: number;
+    topicId: string;
 }
 /**
  * Allows a user to slot themselves into a recruitment thread fireteam slot.
@@ -131,7 +131,7 @@ export interface JoinFireteamThreadParams {
 export declare function joinFireteamThread(http: HttpClient, params: JoinFireteamThreadParams): Promise<ForumRecruitmentDetailServerResponse>;
 export interface LeaveFireteamThreadParams {
     /** The post id of the recruitment topic you wish to leave. */
-    topicId: number;
+    topicId: string;
 }
 /**
  * Allows a user to remove themselves from a recruitment thread fireteam slot.
@@ -140,9 +140,9 @@ export interface LeaveFireteamThreadParams {
 export declare function leaveFireteamThread(http: HttpClient, params: LeaveFireteamThreadParams): Promise<ForumRecruitmentDetailServerResponse>;
 export interface KickBanFireteamApplicantParams {
     /** The id of the user you wish to kick. */
-    targetMembershipId: number;
+    targetMembershipId: string;
     /** The post id of the recruitment topic you wish to join. */
-    topicId: number;
+    topicId: string;
 }
 /**
  * Allows a recruitment thread owner to kick a join user from the fireteam. Returns
@@ -151,7 +151,7 @@ export interface KickBanFireteamApplicantParams {
 export declare function kickBanFireteamApplicant(http: HttpClient, params: KickBanFireteamApplicantParams): Promise<ForumRecruitmentDetailServerResponse>;
 export interface ApproveFireteamThreadParams {
     /** The post id of the recruitment topic to approve. */
-    topicId: number;
+    topicId: string;
 }
 /**
  * Allows the owner of a fireteam thread to approve all joined members and start a
@@ -159,7 +159,7 @@ export interface ApproveFireteamThreadParams {
  */
 export declare function approveFireteamThread(http: HttpClient, params: ApproveFireteamThreadParams): Promise<SaveMessageResultServerResponse>;
 export interface GetRecruitmentThreadSummariesParams {
-    body: number[];
+    body: string[];
 }
 /**
  * Allows the caller to get a list of to 25 recruitment thread summary information

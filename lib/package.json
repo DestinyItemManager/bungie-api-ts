@@ -1,6 +1,6 @@
 {
   "name": "bungie-api-ts",
-  "version": "2.1.1",
+  "version": "1.0.0",
   "description": "TypeScript mappings for the Bungie.net API",
   "main": "./dist/index.ts",
   "types": "./dist/index.d.ts",

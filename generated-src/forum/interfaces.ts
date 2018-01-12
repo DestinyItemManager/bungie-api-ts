@@ -57,12 +57,12 @@ export const enum ForumTopicsSortEnum {
 }
 
 export interface PostSearchResponseServerResponse {
-  readonly Response?: PostSearchResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: PostSearchResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export const enum ForumPostSortEnum {
@@ -71,54 +71,54 @@ export const enum ForumPostSortEnum {
 }
 
 export interface ListOfTagResponseServerResponse {
-  readonly Response?: TagResponse[];
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: TagResponse[];
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface ForumRecruitmentDetailServerResponse {
-  readonly Response?: ForumRecruitmentDetail;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: ForumRecruitmentDetail;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface SaveMessageResultServerResponse {
-  readonly Response?: SaveMessageResult;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: SaveMessageResult;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface CEListOfForumRecruitmentDetailServerResponse {
-  readonly Response?: ForumRecruitmentDetail[];
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: ForumRecruitmentDetail[];
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface PostSearchResponse {
-  readonly relatedPosts?: PostResponse[];
-  readonly authors?: GeneralUser[];
-  readonly groups?: GroupResponse[];
-  readonly searchedTags?: TagResponse[];
-  readonly polls?: PollResponse[];
-  readonly recruitmentDetails?: ForumRecruitmentDetail[];
+  readonly relatedPosts: PostResponse[];
+  readonly authors: GeneralUser[];
+  readonly groups: GroupResponse[];
+  readonly searchedTags: TagResponse[];
+  readonly polls: PollResponse[];
+  readonly recruitmentDetails: ForumRecruitmentDetail[];
   readonly availablePages?: number;
-  readonly results?: PostResponse[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: PostResponse[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -131,24 +131,24 @@ export interface PostSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface PostResponse {
-  readonly lastReplyTimestamp?: string;
-  readonly IsPinned?: boolean;
-  readonly urlMediaType?: ForumMediaType;
-  readonly thumbnail?: string;
-  readonly popularity?: ForumPostPopularity;
-  readonly isActive?: boolean;
-  readonly isAnnouncement?: boolean;
-  readonly userRating?: number;
-  readonly userHasRated?: boolean;
-  readonly userHasMutedPost?: boolean;
-  readonly latestReplyPostId?: number;
-  readonly latestReplyAuthorId?: number;
-  readonly ignoreStatus?: IgnoreResponse;
-  readonly locale?: string;
+  readonly lastReplyTimestamp: string;
+  readonly IsPinned: boolean;
+  readonly urlMediaType: ForumMediaType;
+  readonly thumbnail: string;
+  readonly popularity: ForumPostPopularity;
+  readonly isActive: boolean;
+  readonly isAnnouncement: boolean;
+  readonly userRating: number;
+  readonly userHasRated: boolean;
+  readonly userHasMutedPost: boolean;
+  readonly latestReplyPostId: string;
+  readonly latestReplyAuthorId: string;
+  readonly ignoreStatus: IgnoreResponse;
+  readonly locale: string;
 }
 
 export const enum ForumMediaType {
@@ -168,30 +168,30 @@ export const enum ForumPostPopularity {
 }
 
 export interface PollResponse {
-  readonly topicId?: number;
-  readonly results?: PollResult[];
-  readonly totalVotes?: number;
+  readonly topicId: string;
+  readonly results: PollResult[];
+  readonly totalVotes: number;
 }
 
 export interface PollResult {
-  readonly answerText?: string;
-  readonly answerSlot?: number;
-  readonly lastVoteDate?: string;
-  readonly votes?: number;
-  readonly requestingUserVoted?: boolean;
+  readonly answerText: string;
+  readonly answerSlot: number;
+  readonly lastVoteDate: string;
+  readonly votes: number;
+  readonly requestingUserVoted: boolean;
 }
 
 export interface ForumRecruitmentDetail {
-  readonly topicId?: number;
-  readonly microphoneRequired?: boolean;
-  readonly intensity?: ForumRecruitmentIntensityLabel;
-  readonly tone?: ForumRecruitmentToneLabel;
-  readonly approved?: boolean;
-  readonly conversationId?: number;
-  readonly playerSlotsTotal?: number;
-  readonly playerSlotsRemaining?: number;
-  readonly Fireteam?: GeneralUser[];
-  readonly kickedPlayerIds?: number[];
+  readonly topicId: string;
+  readonly microphoneRequired: boolean;
+  readonly intensity: ForumRecruitmentIntensityLabel;
+  readonly tone: ForumRecruitmentToneLabel;
+  readonly approved: boolean;
+  readonly conversationId?: string;
+  readonly playerSlotsTotal: number;
+  readonly playerSlotsRemaining: number;
+  readonly Fireteam: GeneralUser[];
+  readonly kickedPlayerIds: string[];
 }
 
 export const enum ForumRecruitmentIntensityLabel {
@@ -207,8 +207,8 @@ export const enum ForumRecruitmentToneLabel {
 }
 
 export interface SaveMessageResult {
-  readonly conversationId?: number;
-  readonly messageId?: number;
+  readonly conversationId: string;
+  readonly messageId: string;
 }
 
 export const enum CommunityContentSortMode {

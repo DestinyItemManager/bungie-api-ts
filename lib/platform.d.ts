@@ -11,8 +11,8 @@
  */
 import { PlatformErrorCodes } from './common';
 export interface IgnoreResponse {
-    readonly isIgnored?: boolean;
-    readonly ignoreFlags?: IgnoreStatus;
+    readonly isIgnored: boolean;
+    readonly ignoreFlags: IgnoreStatus;
 }
 export declare const enum IgnoreStatus {
     NotIgnored = 0,
@@ -28,16 +28,16 @@ export declare const enum PartnershipType {
     Twitch = 1,
 }
 export interface int64ServerResponse {
-    readonly Response?: number;
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: string;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface TagResponse {
-    readonly tagText?: string;
-    readonly ignoreStatus?: IgnoreResponse;
+    readonly tagText: string;
+    readonly ignoreStatus: IgnoreResponse;
 }

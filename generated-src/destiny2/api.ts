@@ -111,7 +111,7 @@ export interface GetProfileParams {
    */
   components?: DestinyComponentType[];
   /** Destiny membership ID. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
 }
@@ -129,7 +129,7 @@ export async function getProfile(http: HttpClient, params: GetProfileParams): Pr
 
 export interface GetCharacterParams {
   /** ID of the character. */
-  characterId: number;
+  characterId: string;
   /**
    * A comma separated list of components to return (as strings or numeric values).
    * See the DestinyComponentType enum for valid components to request. You must
@@ -137,7 +137,7 @@ export interface GetCharacterParams {
    */
   components?: DestinyComponentType[];
   /** Destiny membership ID. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
 }
@@ -155,7 +155,7 @@ export async function getCharacter(http: HttpClient, params: GetCharacterParams)
 
 export interface GetClanWeeklyRewardStateParams {
   /** A valid group id of clan. */
-  groupId: number;
+  groupId: string;
 }
 
 /**
@@ -177,9 +177,9 @@ export interface GetItemParams {
    */
   components?: DestinyComponentType[];
   /** The membership ID of the destiny profile. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** The Instance ID of the destiny item. */
-  itemInstanceId: number;
+  itemInstanceId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
 }
@@ -201,7 +201,7 @@ export async function getItem(http: HttpClient, params: GetItemParams): Promise<
 
 export interface GetVendorsParams {
   /** The Destiny Character ID of the character for whom we're getting vendor info. */
-  characterId: number;
+  characterId: string;
   /**
    * A comma separated list of components to return (as strings or numeric values).
    * See the DestinyComponentType enum for valid components to request. You must
@@ -209,7 +209,7 @@ export interface GetVendorsParams {
    */
   components?: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
 }
@@ -234,7 +234,7 @@ export async function getVendors(http: HttpClient, params: GetVendorsParams): Pr
 
 export interface GetVendorParams {
   /** The Destiny Character ID of the character for whom we're getting vendor info. */
-  characterId: number;
+  characterId: string;
   /**
    * A comma separated list of components to return (as strings or numeric values).
    * See the DestinyComponentType enum for valid components to request. You must
@@ -242,7 +242,7 @@ export interface GetVendorParams {
    */
   components?: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
   /** The Hash identifier of the Vendor to be returned. */
@@ -389,7 +389,7 @@ export async function activateTalentNode(http: HttpClient, params: ActivateTalen
 
 export interface GetPostGameCarnageReportParams {
   /** The ID of the activity whose PGCR is requested. */
-  activityId: number;
+  activityId: string;
 }
 
 /** Gets the available post game carnage report for the activity ID. */
@@ -402,7 +402,7 @@ export async function getPostGameCarnageReport(http: HttpClient, params: GetPost
 
 export interface ReportOffensivePostGameCarnageReportPlayerParams {
   /** The ID of the activity where you ran into the brigand that you're reporting. */
-  activityId: number;
+  activityId: string;
   body: DestinyReportOffensePgcrRequest;
 }
 
@@ -430,7 +430,7 @@ export async function getHistoricalStatsDefinition(http: HttpClient): Promise<Re
 
 export interface GetClanLeaderboardsParams {
   /** Group ID of the clan whose leaderboards you wish to fetch. */
-  groupId: number;
+  groupId: string;
   /**
    * Maximum number of top players to return. Use a large number to get entire
    * leaderboard.
@@ -466,7 +466,7 @@ export async function getClanLeaderboards(http: HttpClient, params: GetClanLeade
 
 export interface GetClanAggregateStatsParams {
   /** Group ID of the clan whose leaderboards you wish to fetch. */
-  groupId: number;
+  groupId: string;
   /**
    * List of game modes for which to get leaderboards. See the documentation for
    * DestinyActivityModeType for valid values, and pass in string representation,
@@ -493,7 +493,7 @@ export async function getClanAggregateStats(http: HttpClient, params: GetClanAgg
 
 export interface GetLeaderboardsParams {
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /**
    * Maximum number of top players to return. Use a large number to get entire
    * leaderboard.
@@ -534,9 +534,9 @@ export interface GetLeaderboardsForCharacterParams {
    * The specific character to build the leaderboard around for the provided Destiny
    * Membership.
    */
-  characterId: number;
+  characterId: string;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /**
    * Maximum number of top players to return. Use a large number to get entire
    * leaderboard.
@@ -601,13 +601,13 @@ export interface GetHistoricalStatsParams {
    * The id of the character to retrieve. You can omit this character ID or set it to
    * 0 to get aggregate stats across all characters.
    */
-  characterId: number;
+  characterId: string;
   /** Last day to return when daily stats are requested. Use the format YYYY-MM-DD. */
   dayend?: string;
   /** First day to return when daily stats are requested. Use the format YYYY-MM-DD */
   daystart?: string;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /**
    * Group of stats to include, otherwise only general stats are returned. Comma
    * separated list is allowed. Values: General, Weapons, Medals
@@ -644,7 +644,7 @@ export async function getHistoricalStats(http: HttpClient, params: GetHistorical
 
 export interface GetHistoricalStatsForAccountParams {
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /**
    * Groups of stats to include, otherwise only general stats are returned. Comma
    * separated list is allowed. Values: General, Weapons, Medals.
@@ -670,11 +670,11 @@ export async function getHistoricalStatsForAccount(http: HttpClient, params: Get
 
 export interface GetActivityHistoryParams {
   /** The id of the character to retrieve. */
-  characterId: number;
+  characterId: string;
   /** Number of rows to return */
   count?: number;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
   /**
@@ -702,9 +702,9 @@ export async function getActivityHistory(http: HttpClient, params: GetActivityHi
 
 export interface GetUniqueWeaponHistoryParams {
   /** The id of the character to retrieve. */
-  characterId: number;
+  characterId: string;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
 }
@@ -719,9 +719,9 @@ export async function getUniqueWeaponHistory(http: HttpClient, params: GetUnique
 
 export interface GetDestinyAggregateActivityStatsParams {
   /** The specific character whose activities should be returned. */
-  characterId: number;
+  characterId: string;
   /** The Destiny membershipId of the user to retrieve. */
-  destinyMembershipId: number;
+  destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
   membershipType: BungieMembershipType;
 }

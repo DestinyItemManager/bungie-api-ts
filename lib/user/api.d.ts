@@ -14,13 +14,13 @@ import { BungieMembershipType } from '../common';
 import { CEListOfPublicPartnershipDetailServerResponse, GeneralUserServerResponse, ListOfGeneralUserServerResponse, ListOfUserAliasServerResponse, ListOfUserThemeServerResponse, UserMembershipDataServerResponse } from './interfaces';
 export interface GetBungieNetUserByIdParams {
     /** The requested Bungie.net membership id. */
-    id: number;
+    id: string;
 }
 /** Loads a bungienet user by membership id. */
 export declare function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<GeneralUserServerResponse>;
 export interface GetUserAliasesParams {
     /** The requested Bungie.net membership id. */
-    id: number;
+    id: string;
 }
 /** Loads aliases of a bungienet membership id. */
 export declare function getUserAliases(http: HttpClient, params: GetUserAliasesParams): Promise<ListOfUserAliasServerResponse>;
@@ -34,7 +34,7 @@ export declare function searchUsers(http: HttpClient, params: SearchUsersParams)
 export declare function getAvailableThemes(http: HttpClient): Promise<ListOfUserThemeServerResponse>;
 export interface GetMembershipDataByIdParams {
     /** The membership ID of the target user. */
-    membershipId: number;
+    membershipId: string;
     /** Type of the supplied membership ID. */
     membershipType: BungieMembershipType;
 }
@@ -51,7 +51,7 @@ export declare function getMembershipDataById(http: HttpClient, params: GetMembe
 export declare function getMembershipDataForCurrentUser(http: HttpClient): Promise<UserMembershipDataServerResponse>;
 export interface GetPartnershipsParams {
     /** The ID of the member for whom partnerships should be returned. */
-    membershipId: number;
+    membershipId: string;
 }
 /** Returns a user's linked Partnerships. */
 export declare function getPartnerships(http: HttpClient, params: GetPartnershipsParams): Promise<CEListOfPublicPartnershipDetailServerResponse>;

@@ -14,22 +14,22 @@ import { GeneralUser } from '../user/interfaces';
 import { PagedQuery, PlatformErrorCodes } from '../common';
 import { PartnershipType } from '../platform';
 export interface TrendingCategoriesServerResponse {
-    readonly Response?: TrendingCategories;
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: TrendingCategories;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface SearchResultOfTrendingEntryServerResponse {
-    readonly Response?: SearchResultOfTrendingEntry;
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: SearchResultOfTrendingEntry;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
@@ -48,29 +48,29 @@ export declare const enum TrendingEntryType {
     Release = 11,
 }
 export interface TrendingDetailServerResponse {
-    readonly Response?: TrendingDetail;
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: TrendingDetail;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface TrendingCategories {
-    readonly categories?: TrendingCategory[];
+    readonly categories: TrendingCategory[];
 }
 export interface TrendingCategory {
-    readonly categoryName?: string;
-    readonly entries?: SearchResultOfTrendingEntry;
-    readonly categoryId?: string;
+    readonly categoryName: string;
+    readonly entries: SearchResultOfTrendingEntry;
+    readonly categoryId: string;
 }
 export interface SearchResultOfTrendingEntry {
-    readonly results?: TrendingEntry[];
-    readonly totalResults?: number;
-    readonly hasMore?: boolean;
-    readonly query?: PagedQuery;
-    readonly replacementContinuationToken?: string;
+    readonly results: TrendingEntry[];
+    readonly totalResults: number;
+    readonly hasMore: boolean;
+    readonly query: PagedQuery;
+    readonly replacementContinuationToken: string;
     /**
      * If useTotalResults is true, then totalResults represents an accurate count.
      *
@@ -83,7 +83,7 @@ export interface SearchResultOfTrendingEntry {
      * alter our endpoints and create backward- compatible shims, of which
      * useTotalResults is one.
      */
-    readonly useTotalResults?: boolean;
+    readonly useTotalResults: boolean;
 }
 /**
  * The list entry view for trending items. Returns just enough to show the item on
@@ -91,84 +91,84 @@ export interface SearchResultOfTrendingEntry {
  */
 export interface TrendingEntry {
     /** The weighted score of this trending item. */
-    readonly weight?: number;
-    readonly isFeatured?: boolean;
+    readonly weight: number;
+    readonly isFeatured: boolean;
     /**
      * We don't know whether the identifier will be a string, a uint, or a long... so
      * we're going to cast it all to a string. But either way, we need any trending
      * item created to have a single unique identifier for its type.
      */
-    readonly identifier?: string;
+    readonly identifier: string;
     /**
      * An enum - unfortunately - dictating all of the possible kinds of trending items
      * that you might get in your result set, in case you want to do custom rendering
      * or call to get the details of the item.
      */
-    readonly entityType?: TrendingEntryType;
+    readonly entityType: TrendingEntryType;
     /**
      * The localized "display name/article title/'primary localized identifier'" of the
      * entity.
      */
-    readonly displayName?: string;
+    readonly displayName: string;
     /**
      * If the entity has a localized tagline/subtitle/motto/whatever, that is found
      * here.
      */
-    readonly tagline?: string;
-    readonly image?: string;
+    readonly tagline: string;
+    readonly image: string;
     readonly startDate?: string;
     readonly endDate?: string;
-    readonly link?: string;
+    readonly link: string;
     /**
      * If this is populated, the entry has a related WebM video to show. I am 100%
      * certain I am going to regret putting this directly on TrendingEntry, but it will
      * work so yolo
      */
-    readonly webmVideo?: string;
+    readonly webmVideo: string;
     /**
      * If this is populated, the entry has a related MP4 video to show. I am 100%
      * certain I am going to regret putting this directly on TrendingEntry, but it will
      * work so yolo
      */
-    readonly mp4Video?: string;
+    readonly mp4Video: string;
     /**
      * If isFeatured, this image will be populated with whatever the featured image is.
      * Note that this will likely be a very large image, so don't use it all the time.
      */
-    readonly featureImage?: string;
+    readonly featureImage: string;
     /**
      * If the item is of entityType TrendingEntryType.Container, it may have items -
      * also Trending Entries - contained within it. This is the ordered list of those
      * to display under the Container's header.
      */
-    readonly items?: TrendingEntry[];
+    readonly items: TrendingEntry[];
 }
 export interface TrendingDetail {
-    readonly identifier?: string;
-    readonly entityType?: TrendingEntryType;
-    readonly news?: TrendingEntryNews;
-    readonly support?: TrendingEntrySupportArticle;
-    readonly destinyItem?: TrendingEntryDestinyItem;
-    readonly destinyActivity?: TrendingEntryDestinyActivity;
-    readonly destinyRitual?: TrendingEntryDestinyRitual;
-    readonly creation?: TrendingEntryCommunityCreation;
-    readonly stream?: TrendingEntryCommunityStream;
+    readonly identifier: string;
+    readonly entityType: TrendingEntryType;
+    readonly news: TrendingEntryNews;
+    readonly support: TrendingEntrySupportArticle;
+    readonly destinyItem: TrendingEntryDestinyItem;
+    readonly destinyActivity: TrendingEntryDestinyActivity;
+    readonly destinyRitual: TrendingEntryDestinyRitual;
+    readonly creation: TrendingEntryCommunityCreation;
+    readonly stream: TrendingEntryCommunityStream;
 }
 export interface TrendingEntryNews {
-    readonly article?: ContentItemPublicContract;
+    readonly article: ContentItemPublicContract;
 }
 export interface ContentItemPublicContract {
-    readonly contentId?: number;
-    readonly cType?: string;
-    readonly cmsPath?: string;
-    readonly creationDate?: string;
-    readonly modifyDate?: string;
-    readonly allowComments?: boolean;
-    readonly hasAgeGate?: boolean;
-    readonly minimumAge?: number;
-    readonly ratingImagePath?: string;
-    readonly author?: GeneralUser;
-    readonly autoEnglishPropertyFallback?: boolean;
+    readonly contentId: string;
+    readonly cType: string;
+    readonly cmsPath: string;
+    readonly creationDate: string;
+    readonly modifyDate: string;
+    readonly allowComments: boolean;
+    readonly hasAgeGate: boolean;
+    readonly minimumAge: number;
+    readonly ratingImagePath: string;
+    readonly author: GeneralUser;
+    readonly autoEnglishPropertyFallback: boolean;
     /**
      * Firehose content is really a collection of metadata and "properties", which are
      * the potentially-but-not-strictly localizable data that comprises the meat of
@@ -180,62 +180,62 @@ export interface ContentItemPublicContract {
      * Content Type of the item (cType) will describe the properties, and thus how they
      * ought to be deserialized.
      */
-    readonly properties?: {
+    readonly properties: {
         [key: string]: object;
     };
-    readonly representations?: ContentRepresentation[];
-    readonly tags?: string[];
-    readonly commentSummary?: CommentSummary;
+    readonly representations: ContentRepresentation[];
+    readonly tags: string[];
+    readonly commentSummary: CommentSummary;
 }
 export interface ContentRepresentation {
-    readonly name?: string;
-    readonly path?: string;
-    readonly validationString?: string;
+    readonly name: string;
+    readonly path: string;
+    readonly validationString: string;
 }
 export interface CommentSummary {
-    readonly topicId?: number;
-    readonly commentCount?: number;
+    readonly topicId: string;
+    readonly commentCount: number;
 }
 export interface TrendingEntrySupportArticle {
-    readonly article?: ContentItemPublicContract;
+    readonly article: ContentItemPublicContract;
 }
 export interface TrendingEntryDestinyItem {
-    readonly itemHash?: number;
+    readonly itemHash: number;
 }
 export interface TrendingEntryDestinyActivity {
-    readonly activityHash?: number;
-    readonly status?: DestinyPublicActivityStatus;
+    readonly activityHash: number;
+    readonly status: DestinyPublicActivityStatus;
 }
 export interface TrendingEntryDestinyRitual {
-    readonly image?: string;
-    readonly icon?: string;
-    readonly title?: string;
-    readonly subtitle?: string;
+    readonly image: string;
+    readonly icon: string;
+    readonly title: string;
+    readonly subtitle: string;
     readonly dateStart?: string;
     readonly dateEnd?: string;
     /**
      * A destiny event does not necessarily have a related Milestone, but if it does
      * the details will be returned here.
      */
-    readonly milestoneDetails?: DestinyPublicMilestone;
+    readonly milestoneDetails: DestinyPublicMilestone;
     /**
      * A destiny event will not necessarily have milestone "custom content", but if it
      * does the details will be here.
      */
-    readonly eventContent?: DestinyMilestoneContent;
+    readonly eventContent: DestinyMilestoneContent;
 }
 export interface TrendingEntryCommunityCreation {
-    readonly media?: string;
-    readonly title?: string;
-    readonly author?: string;
-    readonly authorMembershipId?: number;
-    readonly postId?: number;
-    readonly body?: string;
-    readonly upvotes?: number;
+    readonly media: string;
+    readonly title: string;
+    readonly author: string;
+    readonly authorMembershipId: string;
+    readonly postId: number;
+    readonly body: string;
+    readonly upvotes: number;
 }
 export interface TrendingEntryCommunityStream {
-    readonly image?: string;
-    readonly title?: string;
-    readonly partnershipIdentifier?: string;
-    readonly partnershipType?: PartnershipType;
+    readonly image: string;
+    readonly title: string;
+    readonly partnershipIdentifier: string;
+    readonly partnershipType: PartnershipType;
 }

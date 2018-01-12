@@ -654,36 +654,36 @@ export const enum PlatformErrorCodes {
 }
 
 export interface InterpolationPoint {
-  readonly value?: number;
-  readonly weight?: number;
+  readonly value: number;
+  readonly weight: number;
 }
 
 export interface DateRange {
-  readonly start?: string;
-  readonly end?: string;
+  readonly start: string;
+  readonly end: string;
 }
 
 export interface InterpolationPointFloat {
-  readonly value?: number;
-  readonly weight?: number;
+  readonly value: number;
+  readonly weight: number;
 }
 
 export interface HyperlinkReference {
-  readonly title?: string;
-  readonly url?: string;
+  readonly title: string;
+  readonly url: string;
 }
 
 export interface PagedQuery {
-  readonly itemsPerPage?: number;
-  readonly currentPage?: number;
-  readonly requestContinuationToken?: string;
+  readonly itemsPerPage: number;
+  readonly currentPage: number;
+  readonly requestContinuationToken: string;
 }
 
 export interface int32ServerResponse {
-  readonly Response?: number;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: number;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }

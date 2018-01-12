@@ -24,57 +24,57 @@ import {
 } from '../user/interfaces';
 
 export interface GroupResponse {
-  readonly detail?: GroupV2;
-  readonly founder?: GroupMember;
-  readonly alliedIds?: number[];
-  readonly parentGroup?: GroupV2;
-  readonly allianceStatus?: GroupAllianceStatus;
-  readonly groupJoinInviteCount?: number;
+  readonly detail: GroupV2;
+  readonly founder: GroupMember;
+  readonly alliedIds: string[];
+  readonly parentGroup: GroupV2;
+  readonly allianceStatus: GroupAllianceStatus;
+  readonly groupJoinInviteCount: number;
   /**
    * This property will be populated if the authenticated user is a member of the
    * group. Note that because of account linking, a user can sometimes be part of a
    * clan more than once. As such, this returns the highest member type available.
    */
-  readonly currentUserMemberMap?: { [key: number]: GroupMember };
+  readonly currentUserMemberMap: { [key: number]: GroupMember };
   /**
    * This property will be populated if the authenticated user is an applicant or has
    * an outstanding invitation to join. Note that because of account linking, a user
    * can sometimes be part of a clan more than once.
    */
-  readonly currentUserPotentialMemberMap?: { [key: number]: GroupPotentialMember };
+  readonly currentUserPotentialMemberMap: { [key: number]: GroupPotentialMember };
 }
 
 export interface GroupV2 {
-  readonly groupId?: number;
-  readonly name?: string;
-  readonly groupType?: GroupType;
-  readonly membershipIdCreated?: number;
-  readonly creationDate?: string;
-  readonly modificationDate?: string;
-  readonly about?: string;
-  readonly tags?: string[];
-  readonly memberCount?: number;
-  readonly isPublic?: boolean;
-  readonly isPublicTopicAdminOnly?: boolean;
-  readonly primaryAlliedGroupId?: number;
-  readonly motto?: string;
-  readonly allowChat?: boolean;
-  readonly isDefaultPostPublic?: boolean;
-  readonly chatSecurity?: ChatSecuritySetting;
-  readonly locale?: string;
-  readonly avatarImageIndex?: number;
-  readonly homepage?: GroupHomepage;
-  readonly membershipOption?: MembershipOption;
-  readonly defaultPublicity?: GroupPostPublicity;
-  readonly theme?: string;
-  readonly bannerPath?: string;
-  readonly avatarPath?: string;
-  readonly isAllianceOwner?: boolean;
-  readonly conversationId?: number;
-  readonly enableInvitationMessagingForAdmins?: boolean;
+  readonly groupId: string;
+  readonly name: string;
+  readonly groupType: GroupType;
+  readonly membershipIdCreated: string;
+  readonly creationDate: string;
+  readonly modificationDate: string;
+  readonly about: string;
+  readonly tags: string[];
+  readonly memberCount: number;
+  readonly isPublic: boolean;
+  readonly isPublicTopicAdminOnly: boolean;
+  readonly primaryAlliedGroupId: string;
+  readonly motto: string;
+  readonly allowChat: boolean;
+  readonly isDefaultPostPublic: boolean;
+  readonly chatSecurity: ChatSecuritySetting;
+  readonly locale: string;
+  readonly avatarImageIndex: number;
+  readonly homepage: GroupHomepage;
+  readonly membershipOption: MembershipOption;
+  readonly defaultPublicity: GroupPostPublicity;
+  readonly theme: string;
+  readonly bannerPath: string;
+  readonly avatarPath: string;
+  readonly isAllianceOwner: boolean;
+  readonly conversationId: string;
+  readonly enableInvitationMessagingForAdmins: boolean;
   readonly banExpireDate?: string;
-  readonly features?: GroupFeatures;
-  readonly clanInfo?: GroupV2ClanInfoAndInvestment;
+  readonly features: GroupFeatures;
+  readonly clanInfo: GroupV2ClanInfoAndInvestment;
 }
 
 export const enum GroupType {
@@ -106,15 +106,15 @@ export const enum GroupPostPublicity {
 }
 
 export interface GroupFeatures {
-  readonly maximumMembers?: number;
+  readonly maximumMembers: number;
   /**
    * Maximum number of groups of this type a typical membership may join. For example,
    * a user may join about 50 General groups with their Bungie.net account. They may
    * join one clan per Destiny membership.
    */
-  readonly maximumMembershipsOfGroupType?: number;
-  readonly capabilities?: Capabilities;
-  readonly membershipTypes?: BungieMembershipType[];
+  readonly maximumMembershipsOfGroupType: number;
+  readonly capabilities: Capabilities;
+  readonly membershipTypes: BungieMembershipType[];
   /**
    * Minimum Member Level allowed to invite new members to group
    *
@@ -124,7 +124,7 @@ export interface GroupFeatures {
    *
    * Default is false for clans, true for groups.
    */
-  readonly invitePermissionOverride?: boolean;
+  readonly invitePermissionOverride: boolean;
   /**
    * Minimum Member Level allowed to update group culture
    *
@@ -134,7 +134,7 @@ export interface GroupFeatures {
    *
    * Default is false for clans, true for groups.
    */
-  readonly updateCulturePermissionOverride?: boolean;
+  readonly updateCulturePermissionOverride: boolean;
   /**
    * Minimum Member Level allowed to host guided games
    *
@@ -145,7 +145,7 @@ export interface GroupFeatures {
    * Default is Member for clans, None for groups, although this means nothing for
    * groups.
    */
-  readonly hostGuidedGamePermissionOverride?: HostGuidedGamesPermissionLevel;
+  readonly hostGuidedGamePermissionOverride: HostGuidedGamesPermissionLevel;
   /**
    * Minimum Member Level allowed to update banner
    *
@@ -155,14 +155,14 @@ export interface GroupFeatures {
    *
    * Default is false for clans, true for groups.
    */
-  readonly updateBannerPermissionOverride?: boolean;
+  readonly updateBannerPermissionOverride: boolean;
   /**
    * Level to join a member at when accepting an invite, application, or joining an
    * open clan
    *
    * Default is Beginner.
    */
-  readonly joinLevel?: RuntimeGroupMemberType;
+  readonly joinLevel: RuntimeGroupMemberType;
 }
 
 export const enum Capabilities {
@@ -193,28 +193,28 @@ export const enum RuntimeGroupMemberType {
 
 /** The same as GroupV2ClanInfo, but includes any investment data. */
 export interface GroupV2ClanInfoAndInvestment {
-  readonly d2ClanProgressions?: { [key: number]: DestinyProgression };
-  readonly clanCallsign?: string;
-  readonly clanBannerData?: ClanBanner;
+  readonly d2ClanProgressions: { [key: number]: DestinyProgression };
+  readonly clanCallsign: string;
+  readonly clanBannerData: ClanBanner;
 }
 
 export interface ClanBanner {
-  readonly decalId?: number;
-  readonly decalColorId?: number;
-  readonly decalBackgroundColorId?: number;
-  readonly gonfalonId?: number;
-  readonly gonfalonColorId?: number;
-  readonly gonfalonDetailId?: number;
-  readonly gonfalonDetailColorId?: number;
+  readonly decalId: number;
+  readonly decalColorId: number;
+  readonly decalBackgroundColorId: number;
+  readonly gonfalonId: number;
+  readonly gonfalonColorId: number;
+  readonly gonfalonDetailId: number;
+  readonly gonfalonDetailColorId: number;
 }
 
 export interface GroupMember {
-  readonly memberType?: RuntimeGroupMemberType;
-  readonly isOnline?: boolean;
-  readonly groupId?: number;
-  readonly destinyUserInfo?: UserInfoCard;
-  readonly bungieNetUserInfo?: UserInfoCard;
-  readonly joinDate?: string;
+  readonly memberType: RuntimeGroupMemberType;
+  readonly isOnline: boolean;
+  readonly groupId: string;
+  readonly destinyUserInfo: UserInfoCard;
+  readonly bungieNetUserInfo: UserInfoCard;
+  readonly joinDate: string;
 }
 
 export const enum GroupAllianceStatus {
@@ -224,11 +224,11 @@ export const enum GroupAllianceStatus {
 }
 
 export interface GroupPotentialMember {
-  readonly potentialStatus?: GroupPotentialMemberStatus;
-  readonly groupId?: number;
-  readonly destinyUserInfo?: UserInfoCard;
-  readonly bungieNetUserInfo?: UserInfoCard;
-  readonly joinDate?: string;
+  readonly potentialStatus: GroupPotentialMemberStatus;
+  readonly groupId: string;
+  readonly destinyUserInfo: UserInfoCard;
+  readonly bungieNetUserInfo: UserInfoCard;
+  readonly joinDate: string;
 }
 
 export const enum GroupPotentialMemberStatus {
@@ -238,30 +238,30 @@ export const enum GroupPotentialMemberStatus {
 }
 
 export interface DictionaryOfint32AndstringServerResponse {
-  readonly Response?: { [key: number]: string };
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: { [key: number]: string };
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface ListOfGroupThemeServerResponse {
-  readonly Response?: GroupTheme[];
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupTheme[];
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface booleanServerResponse {
-  readonly Response?: boolean;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: boolean;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export const enum GroupDateRange {
@@ -273,103 +273,103 @@ export const enum GroupDateRange {
 }
 
 export interface ListOfGroupV2CardServerResponse {
-  readonly Response?: GroupV2Card[];
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupV2Card[];
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupQuery {
-  readonly name?: string;
-  readonly groupType?: GroupType;
-  readonly creationDate?: GroupDateRange;
-  readonly sortBy?: GroupSortBy;
+  readonly name: string;
+  readonly groupType: GroupType;
+  readonly creationDate: GroupDateRange;
+  readonly sortBy: GroupSortBy;
   readonly groupMemberCountFilter?: number;
-  readonly localeFilter?: string;
-  readonly tagText?: string;
-  readonly itemsPerPage?: number;
-  readonly currentPage?: number;
-  readonly requestContinuationToken?: string;
+  readonly localeFilter: string;
+  readonly tagText: string;
+  readonly itemsPerPage: number;
+  readonly currentPage: number;
+  readonly requestContinuationToken: string;
 }
 
 export interface GroupSearchResponseServerResponse {
-  readonly Response?: GroupSearchResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupSearchResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupResponseServerResponse {
-  readonly Response?: GroupResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface CEListOfGroupOptionalConversationServerResponse {
-  readonly Response?: GroupOptionalConversation[];
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupOptionalConversation[];
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupAction {
   /** Type of group, either Bungie.net hosted group, or a game services hosted clan. */
-  readonly groupType?: GroupType;
-  readonly name?: string;
-  readonly about?: string;
-  readonly motto?: string;
-  readonly theme?: string;
-  readonly avatarImageIndex?: number;
-  readonly tags?: string;
-  readonly isPublic?: boolean;
-  readonly membershipOption?: MembershipOption;
-  readonly isPublicTopicAdminOnly?: boolean;
-  readonly isDefaultPostPublic?: boolean;
-  readonly allowChat?: boolean;
-  readonly isDefaultPostAlliance?: boolean;
-  readonly chatSecurity?: ChatSecuritySetting;
-  readonly callsign?: string;
-  readonly locale?: string;
-  readonly homepage?: GroupHomepage;
+  readonly groupType: GroupType;
+  readonly name: string;
+  readonly about: string;
+  readonly motto: string;
+  readonly theme: string;
+  readonly avatarImageIndex: number;
+  readonly tags: string;
+  readonly isPublic: boolean;
+  readonly membershipOption: MembershipOption;
+  readonly isPublicTopicAdminOnly: boolean;
+  readonly isDefaultPostPublic: boolean;
+  readonly allowChat: boolean;
+  readonly isDefaultPostAlliance: boolean;
+  readonly chatSecurity: ChatSecuritySetting;
+  readonly callsign: string;
+  readonly locale: string;
+  readonly homepage: GroupHomepage;
   /**
    * When operation needs a platform specific account ID for the present user, use
    * this property. In particular, groupType of Clan requires this value to be set.
    */
-  readonly platformMembershipType?: BungieMembershipType;
+  readonly platformMembershipType: BungieMembershipType;
 }
 
 export interface GroupCreationResponseServerResponse {
-  readonly Response?: GroupCreationResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupCreationResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupEditAction {
-  readonly name?: string;
-  readonly about?: string;
-  readonly motto?: string;
-  readonly theme?: string;
+  readonly name: string;
+  readonly about: string;
+  readonly motto: string;
+  readonly theme: string;
   readonly avatarImageIndex?: number;
-  readonly tags?: string;
+  readonly tags: string;
   readonly isPublic?: boolean;
   readonly membershipOption?: number;
   readonly isPublicTopicAdminOnly?: boolean;
   readonly allowChat?: boolean;
   readonly chatSecurity?: number;
-  readonly callsign?: string;
-  readonly locale?: string;
+  readonly callsign: string;
+  readonly locale: string;
   readonly homepage?: number;
   readonly enableInvitationMessagingForAdmins?: boolean;
   readonly defaultPublicity?: number;
@@ -427,82 +427,82 @@ export interface GroupOptionsEditAction {
 }
 
 export interface GroupOptionalConversationAddRequest {
-  readonly chatName?: string;
-  readonly chatSecurity?: ChatSecuritySetting;
+  readonly chatName: string;
+  readonly chatSecurity: ChatSecuritySetting;
 }
 
 export interface GroupOptionalConversationEditRequest {
   readonly chatEnabled?: boolean;
-  readonly chatName?: string;
+  readonly chatName: string;
   readonly chatSecurity?: number;
 }
 
 export interface SearchResultOfGroupMemberServerResponse {
-  readonly Response?: SearchResultOfGroupMember;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: SearchResultOfGroupMember;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupMemberLeaveResultServerResponse {
-  readonly Response?: GroupMemberLeaveResult;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupMemberLeaveResult;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupBanRequest {
-  readonly comment?: string;
-  readonly length?: IgnoreLength;
+  readonly comment: string;
+  readonly length: IgnoreLength;
 }
 
 export interface SearchResultOfGroupBanServerResponse {
-  readonly Response?: SearchResultOfGroupBan;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: SearchResultOfGroupBan;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupApplicationRequest {
-  readonly message?: string;
+  readonly message: string;
 }
 
 export interface GroupApplicationResponseServerResponse {
-  readonly Response?: GroupApplicationResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupApplicationResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface SearchResultOfGroupMemberApplicationServerResponse {
-  readonly Response?: SearchResultOfGroupMemberApplication;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: SearchResultOfGroupMemberApplication;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface ListOfEntityActionResultServerResponse {
-  readonly Response?: EntityActionResult[];
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: EntityActionResult[];
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupApplicationListRequest {
-  readonly memberships?: UserMembership[];
-  readonly message?: string;
+  readonly memberships: UserMembership[];
+  readonly message: string;
 }
 
 export const enum GroupsForMemberFilter {
@@ -512,27 +512,27 @@ export const enum GroupsForMemberFilter {
 }
 
 export interface GroupMembershipSearchResponseServerResponse {
-  readonly Response?: GroupMembershipSearchResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupMembershipSearchResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupPotentialMembershipSearchResponseServerResponse {
-  readonly Response?: GroupPotentialMembershipSearchResponse;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: GroupPotentialMembershipSearchResponse;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface GroupTheme {
-  readonly name?: string;
-  readonly folder?: string;
-  readonly description?: string;
+  readonly name: string;
+  readonly folder: string;
+  readonly description: string;
 }
 
 /**
@@ -540,19 +540,19 @@ export interface GroupTheme {
  * are returned
  */
 export interface GroupV2Card {
-  readonly groupId?: number;
-  readonly name?: string;
-  readonly groupType?: GroupType;
-  readonly creationDate?: string;
-  readonly about?: string;
-  readonly motto?: string;
-  readonly memberCount?: number;
-  readonly locale?: string;
-  readonly membershipOption?: MembershipOption;
-  readonly capabilities?: Capabilities;
-  readonly clanInfo?: GroupV2ClanInfo;
-  readonly avatarPath?: string;
-  readonly theme?: string;
+  readonly groupId: string;
+  readonly name: string;
+  readonly groupType: GroupType;
+  readonly creationDate: string;
+  readonly about: string;
+  readonly motto: string;
+  readonly memberCount: number;
+  readonly locale: string;
+  readonly membershipOption: MembershipOption;
+  readonly capabilities: Capabilities;
+  readonly clanInfo: GroupV2ClanInfo;
+  readonly avatarPath: string;
+  readonly theme: string;
 }
 
 /**
@@ -560,8 +560,8 @@ export interface GroupV2Card {
  * investment data.
  */
 export interface GroupV2ClanInfo {
-  readonly clanCallsign?: string;
-  readonly clanBannerData?: ClanBanner;
+  readonly clanCallsign: string;
+  readonly clanBannerData: ClanBanner;
 }
 
 export const enum GroupSortBy {
@@ -572,11 +572,11 @@ export const enum GroupSortBy {
 }
 
 export interface GroupSearchResponse {
-  readonly results?: GroupV2Card[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: GroupV2Card[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -589,27 +589,27 @@ export interface GroupSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface GroupOptionalConversation {
-  readonly groupId?: number;
-  readonly conversationId?: number;
-  readonly chatEnabled?: boolean;
-  readonly chatName?: string;
-  readonly chatSecurity?: ChatSecuritySetting;
+  readonly groupId: string;
+  readonly conversationId: string;
+  readonly chatEnabled: boolean;
+  readonly chatName: string;
+  readonly chatSecurity: ChatSecuritySetting;
 }
 
 export interface GroupCreationResponse {
-  readonly groupId?: number;
+  readonly groupId: string;
 }
 
 export interface SearchResultOfGroupMember {
-  readonly results?: GroupMember[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: GroupMember[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -622,12 +622,12 @@ export interface SearchResultOfGroupMember {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface GroupMemberLeaveResult {
-  readonly group?: GroupV2;
-  readonly groupDeleted?: boolean;
+  readonly group: GroupV2;
+  readonly groupDeleted: boolean;
 }
 
 export const enum IgnoreLength {
@@ -646,11 +646,11 @@ export const enum IgnoreLength {
 }
 
 export interface SearchResultOfGroupBan {
-  readonly results?: GroupBan[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: GroupBan[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -663,22 +663,22 @@ export interface SearchResultOfGroupBan {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface GroupBan {
-  readonly groupId?: number;
-  readonly lastModifiedBy?: UserInfoCard;
-  readonly createdBy?: UserInfoCard;
-  readonly dateBanned?: string;
-  readonly dateExpires?: string;
-  readonly comment?: string;
-  readonly bungieNetUserInfo?: UserInfoCard;
-  readonly destinyUserInfo?: UserInfoCard;
+  readonly groupId: string;
+  readonly lastModifiedBy: UserInfoCard;
+  readonly createdBy: UserInfoCard;
+  readonly dateBanned: string;
+  readonly dateExpires: string;
+  readonly comment: string;
+  readonly bungieNetUserInfo: UserInfoCard;
+  readonly destinyUserInfo: UserInfoCard;
 }
 
 export interface GroupApplicationResponse {
-  readonly resolution?: GroupApplicationResolveState;
+  readonly resolution: GroupApplicationResolveState;
 }
 
 export const enum GroupApplicationResolveState {
@@ -689,11 +689,11 @@ export const enum GroupApplicationResolveState {
 }
 
 export interface SearchResultOfGroupMemberApplication {
-  readonly results?: GroupMemberApplication[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: GroupMemberApplication[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -706,32 +706,32 @@ export interface SearchResultOfGroupMemberApplication {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface GroupMemberApplication {
-  readonly groupId?: number;
-  readonly creationDate?: string;
-  readonly resolveState?: GroupApplicationResolveState;
+  readonly groupId: string;
+  readonly creationDate: string;
+  readonly resolveState: GroupApplicationResolveState;
   readonly resolveDate?: string;
-  readonly resolvedByMembershipId?: number;
-  readonly requestMessage?: string;
-  readonly resolveMessage?: string;
-  readonly destinyUserInfo?: UserInfoCard;
-  readonly bungieNetUserInfo?: UserInfoCard;
+  readonly resolvedByMembershipId?: string;
+  readonly requestMessage: string;
+  readonly resolveMessage: string;
+  readonly destinyUserInfo: UserInfoCard;
+  readonly bungieNetUserInfo: UserInfoCard;
 }
 
 export interface EntityActionResult {
-  readonly entityId?: number;
-  readonly result?: PlatformErrorCodes;
+  readonly entityId: string;
+  readonly result: PlatformErrorCodes;
 }
 
 export interface GroupMembershipSearchResponse {
-  readonly results?: GroupMembership[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: GroupMembership[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -744,20 +744,20 @@ export interface GroupMembershipSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface GroupMembership {
-  readonly member?: GroupMember;
-  readonly group?: GroupV2;
+  readonly member: GroupMember;
+  readonly group: GroupV2;
 }
 
 export interface GroupPotentialMembershipSearchResponse {
-  readonly results?: GroupPotentialMembership[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: GroupPotentialMembership[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -770,10 +770,10 @@ export interface GroupPotentialMembershipSearchResponse {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface GroupPotentialMembership {
-  readonly member?: GroupPotentialMember;
-  readonly group?: GroupV2;
+  readonly member: GroupPotentialMember;
+  readonly group: GroupV2;
 }

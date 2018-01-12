@@ -81,7 +81,7 @@ export interface GetFeaturedCommunityLiveStatusesParams {
 export declare function getFeaturedCommunityLiveStatuses(http: HttpClient, params: GetFeaturedCommunityLiveStatusesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse>;
 export interface GetStreamingStatusForMemberParams {
     /** The membershipId related to that type. */
-    membershipId: number;
+    membershipId: string;
     /** The type of account for which info will be extracted. */
     membershipType: BungieMembershipType;
     /** The type of partnership for which info will be extracted. */

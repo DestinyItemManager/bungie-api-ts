@@ -136,7 +136,7 @@ export async function groupSearch(http: HttpClient, params: GroupSearchParams): 
 
 export interface GetGroupParams {
   /** Requested group's id. */
-  groupId: number;
+  groupId: string;
 }
 
 /** Get information about a specific group of the given ID. */
@@ -164,7 +164,7 @@ export async function getGroupByName(http: HttpClient, params: GetGroupByNamePar
 
 export interface GetGroupOptionalConversationsParams {
   /** Requested group's id. */
-  groupId: number;
+  groupId: string;
 }
 
 /** Gets a list of available optional conversation channels and their settings. */
@@ -190,7 +190,7 @@ export async function createGroup(http: HttpClient, params: CreateGroupParams): 
 
 export interface EditGroupParams {
   /** Group ID of the group to edit. */
-  groupId: number;
+  groupId: string;
   body: GroupEditAction;
 }
 
@@ -209,7 +209,7 @@ export async function editGroup(http: HttpClient, params: EditGroupParams): Prom
 
 export interface EditClanBannerParams {
   /** Group ID of the group to edit. */
-  groupId: number;
+  groupId: string;
   body: ClanBanner;
 }
 
@@ -227,7 +227,7 @@ export async function editClanBanner(http: HttpClient, params: EditClanBannerPar
 
 export interface EditFounderOptionsParams {
   /** Group ID of the group to edit. */
-  groupId: number;
+  groupId: string;
   body: GroupOptionsEditAction;
 }
 
@@ -245,7 +245,7 @@ export async function editFounderOptions(http: HttpClient, params: EditFounderOp
 
 export interface AddOptionalConversationParams {
   /** Group ID of the group to edit. */
-  groupId: number;
+  groupId: string;
   body: GroupOptionalConversationAddRequest;
 }
 
@@ -263,9 +263,9 @@ export async function addOptionalConversation(http: HttpClient, params: AddOptio
 
 export interface EditOptionalConversationParams {
   /** Conversation Id of the channel being edited. */
-  conversationId: number;
+  conversationId: string;
   /** Group ID of the group to edit. */
-  groupId: number;
+  groupId: string;
   body: GroupOptionalConversationEditRequest;
 }
 
@@ -285,7 +285,7 @@ export interface GetMembersOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
   currentpage: number;
   /** The ID of the group. */
-  groupId: number;
+  groupId: string;
   /** Filter out other member types. Use None for all members. */
   memberType?: RuntimeGroupMemberType;
   /**
@@ -311,7 +311,7 @@ export interface GetAdminsAndFounderOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
   currentpage: number;
   /** The ID of the group. */
-  groupId: number;
+  groupId: string;
 }
 
 /** Get the list of members in a given group who are of admin level or higher. */
@@ -324,9 +324,9 @@ export async function getAdminsAndFounderOfGroup(http: HttpClient, params: GetAd
 
 export interface EditGroupMembershipParams {
   /** ID of the group to which the member belongs. */
-  groupId: number;
+  groupId: string;
   /** Membership ID to modify. */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the provide membership ID. */
   membershipType: BungieMembershipType;
   /** New membertype for the specified member. */
@@ -346,9 +346,9 @@ export async function editGroupMembership(http: HttpClient, params: EditGroupMem
 
 export interface KickMemberParams {
   /** Group ID to kick the user from. */
-  groupId: number;
+  groupId: string;
   /** Membership ID to kick. */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the provided membership ID. */
   membershipType: BungieMembershipType;
 }
@@ -367,9 +367,9 @@ export async function kickMember(http: HttpClient, params: KickMemberParams): Pr
 
 export interface BanMemberParams {
   /** Group ID that has the member to ban. */
-  groupId: number;
+  groupId: string;
   /** Membership ID of the member to ban from the group. */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the provided membership ID. */
   membershipType: BungieMembershipType;
   body: GroupBanRequest;
@@ -388,9 +388,9 @@ export async function banMember(http: HttpClient, params: BanMemberParams): Prom
 }
 
 export interface UnbanMemberParams {
-  groupId: number;
+  groupId: string;
   /** Membership ID of the member to unban from the group */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the provided membership ID. */
   membershipType: BungieMembershipType;
 }
@@ -407,7 +407,7 @@ export interface GetBannedMembersOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 entries. */
   currentpage: number;
   /** Group ID whose banned members you are fetching */
-  groupId: number;
+  groupId: string;
 }
 
 /**
@@ -423,9 +423,9 @@ export async function getBannedMembersOfGroup(http: HttpClient, params: GetBanne
 
 export interface AbdicateFoundershipParams {
   /** The new founder for this group. Must already be a group admin. */
-  founderIdNew: number;
+  founderIdNew: string;
   /** The target group id. */
-  groupId: number;
+  groupId: string;
   /** Membership type of the provided founderIdNew. */
   membershipType: BungieMembershipType;
 }
@@ -443,7 +443,7 @@ export async function abdicateFoundership(http: HttpClient, params: AbdicateFoun
 
 export interface RequestGroupMembershipParams {
   /** ID of the group you would like to join. */
-  groupId: number;
+  groupId: string;
   /** MembershipType of the account to use when joining. */
   membershipType: BungieMembershipType;
   body: GroupApplicationRequest;
@@ -462,7 +462,7 @@ export interface GetPendingMembershipsParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
   currentpage: number;
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
 }
 
 /**
@@ -480,7 +480,7 @@ export interface GetInvitedIndividualsParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
   currentpage: number;
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
 }
 
 /** Get the list of users who have been invited into the group. */
@@ -493,7 +493,7 @@ export async function getInvitedIndividuals(http: HttpClient, params: GetInvited
 
 export interface RescindGroupMembershipParams {
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
   /** MembershipType of the account to leave. */
   membershipType: BungieMembershipType;
 }
@@ -511,7 +511,7 @@ export async function rescindGroupMembership(http: HttpClient, params: RescindGr
 
 export interface ApproveAllPendingParams {
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
   body: GroupApplicationRequest;
 }
 
@@ -526,7 +526,7 @@ export async function approveAllPending(http: HttpClient, params: ApproveAllPend
 
 export interface DenyAllPendingParams {
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
   body: GroupApplicationRequest;
 }
 
@@ -541,7 +541,7 @@ export async function denyAllPending(http: HttpClient, params: DenyAllPendingPar
 
 export interface ApprovePendingForListParams {
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
   body: GroupApplicationListRequest;
 }
 
@@ -556,9 +556,9 @@ export async function approvePendingForList(http: HttpClient, params: ApprovePen
 
 export interface ApprovePendingParams {
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
   /** The membership id being approved. */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the supplied membership ID. */
   membershipType: BungieMembershipType;
   body: GroupApplicationRequest;
@@ -578,7 +578,7 @@ export async function approvePending(http: HttpClient, params: ApprovePendingPar
 
 export interface DenyPendingForListParams {
   /** ID of the group. */
-  groupId: number;
+  groupId: string;
   body: GroupApplicationListRequest;
 }
 
@@ -597,7 +597,7 @@ export interface GetGroupsForMemberParams {
   /** Type of group the supplied member founded. */
   groupType: GroupType;
   /** Membership ID to for which to find founded groups. */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the supplied membership ID. */
   membershipType: BungieMembershipType;
 }
@@ -616,7 +616,7 @@ export interface GetPotentialGroupsForMemberParams {
   /** Type of group the supplied member applied. */
   groupType: GroupType;
   /** Membership ID to for which to find applied groups. */
-  membershipId: number;
+  membershipId: string;
   /** Membership type of the supplied membership ID. */
   membershipType: BungieMembershipType;
 }
@@ -634,9 +634,9 @@ export async function getPotentialGroupsForMember(http: HttpClient, params: GetP
 
 export interface IndividualGroupInviteParams {
   /** ID of the group you would like to join. */
-  groupId: number;
+  groupId: string;
   /** Membership id of the account being invited. */
-  membershipId: number;
+  membershipId: string;
   /** MembershipType of the account being invited. */
   membershipType: BungieMembershipType;
   body: GroupApplicationRequest;
@@ -653,9 +653,9 @@ export async function individualGroupInvite(http: HttpClient, params: Individual
 
 export interface IndividualGroupInviteCancelParams {
   /** ID of the group you would like to join. */
-  groupId: number;
+  groupId: string;
   /** Membership id of the account being cancelled. */
-  membershipId: number;
+  membershipId: string;
   /** MembershipType of the account being cancelled. */
   membershipType: BungieMembershipType;
 }

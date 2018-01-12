@@ -12,117 +12,117 @@
 import { BungieMembershipType, PlatformErrorCodes } from '../common';
 import { IgnoreResponse, PartnershipType } from '../platform';
 export interface GeneralUserServerResponse {
-    readonly Response?: GeneralUser;
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: GeneralUser;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface ListOfUserAliasServerResponse {
-    readonly Response?: UserAlias[];
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: UserAlias[];
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface ListOfGeneralUserServerResponse {
-    readonly Response?: GeneralUser[];
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: GeneralUser[];
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface ListOfUserThemeServerResponse {
-    readonly Response?: UserTheme[];
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: UserTheme[];
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface UserMembershipDataServerResponse {
-    readonly Response?: UserMembershipData;
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: UserMembershipData;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface CEListOfPublicPartnershipDetailServerResponse {
-    readonly Response?: PublicPartnershipDetail[];
-    readonly ErrorCode?: PlatformErrorCodes;
-    readonly ThrottleSeconds?: number;
-    readonly ErrorStatus?: string;
-    readonly Message?: string;
-    readonly MessageData?: {
+    readonly Response: PublicPartnershipDetail[];
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
         [key: string]: string;
     };
 }
 export interface GeneralUser {
-    readonly membershipId?: number;
-    readonly uniqueName?: string;
-    readonly normalizedName?: string;
-    readonly displayName?: string;
-    readonly profilePicture?: number;
-    readonly profileTheme?: number;
-    readonly userTitle?: number;
-    readonly successMessageFlags?: number;
-    readonly isDeleted?: boolean;
-    readonly about?: string;
+    readonly membershipId: string;
+    readonly uniqueName: string;
+    readonly normalizedName: string;
+    readonly displayName: string;
+    readonly profilePicture: number;
+    readonly profileTheme: number;
+    readonly userTitle: number;
+    readonly successMessageFlags: string;
+    readonly isDeleted: boolean;
+    readonly about: string;
     readonly firstAccess?: string;
     readonly lastUpdate?: string;
-    readonly legacyPortalUID?: number;
-    readonly context?: UserToUserContext;
-    readonly psnDisplayName?: string;
-    readonly xboxDisplayName?: string;
-    readonly fbDisplayName?: string;
+    readonly legacyPortalUID?: string;
+    readonly context: UserToUserContext;
+    readonly psnDisplayName: string;
+    readonly xboxDisplayName: string;
+    readonly fbDisplayName: string;
     readonly showActivity?: boolean;
-    readonly locale?: string;
-    readonly localeInheritDefault?: boolean;
-    readonly lastBanReportId?: number;
-    readonly showGroupMessaging?: boolean;
-    readonly profilePicturePath?: string;
-    readonly profilePictureWidePath?: string;
-    readonly profileThemeName?: string;
-    readonly userTitleDisplay?: string;
-    readonly statusText?: string;
-    readonly statusDate?: string;
+    readonly locale: string;
+    readonly localeInheritDefault: boolean;
+    readonly lastBanReportId?: string;
+    readonly showGroupMessaging: boolean;
+    readonly profilePicturePath: string;
+    readonly profilePictureWidePath: string;
+    readonly profileThemeName: string;
+    readonly userTitleDisplay: string;
+    readonly statusText: string;
+    readonly statusDate: string;
     readonly profileBanExpire?: string;
-    readonly blizzardDisplayName?: string;
+    readonly blizzardDisplayName: string;
 }
 export interface UserToUserContext {
-    readonly isFollowing?: boolean;
-    readonly ignoreStatus?: IgnoreResponse;
+    readonly isFollowing: boolean;
+    readonly ignoreStatus: IgnoreResponse;
     readonly globalIgnoreEndDate?: string;
 }
 export interface UserAlias {
-    readonly cachePrefix?: string;
+    readonly cachePrefix: string;
 }
 export interface UserTheme {
-    readonly userThemeId?: number;
-    readonly userThemeName?: string;
-    readonly userThemeDescription?: string;
+    readonly userThemeId: number;
+    readonly userThemeName: string;
+    readonly userThemeDescription: string;
 }
 export interface UserMembershipData {
     /**
      * this allows you to see destiny memberships that are visible and linked to this
      * account (regardless of whether or not they have characters on the world server)
      */
-    readonly destinyMemberships?: UserInfoCard[];
-    readonly bungieNetUser?: GeneralUser;
+    readonly destinyMemberships: UserInfoCard[];
+    readonly bungieNetUser: GeneralUser;
 }
 /**
  * This contract supplies basic information commonly used to display a minimal
@@ -137,35 +137,35 @@ export interface UserInfoCard {
      * A platform specific additional display name - ex: psn Real Name, bnet Unique
      * Name, etc.
      */
-    readonly supplementalDisplayName?: string;
+    readonly supplementalDisplayName: string;
     /** URL the Icon if available. */
-    readonly iconPath?: string;
+    readonly iconPath: string;
     /** Type of the membership. */
-    readonly membershipType?: BungieMembershipType;
+    readonly membershipType: BungieMembershipType;
     /** Membership ID as they user is known in the Accounts service */
-    readonly membershipId?: number;
+    readonly membershipId: string;
     /**
      * Display Name the player has chosen for themselves. The display name is optional
      * when the data type is used as input to a platform API.
      */
-    readonly displayName?: string;
+    readonly displayName: string;
 }
 /** All the partnership info that's fit to expose externally, if we care to do so. */
 export interface PublicPartnershipDetail {
-    readonly partnerType?: PartnershipType;
-    readonly identifier?: string;
-    readonly name?: string;
-    readonly icon?: string;
+    readonly partnerType: PartnershipType;
+    readonly identifier: string;
+    readonly name: string;
+    readonly icon: string;
 }
 /** Very basic info about a user as returned by the Account server. */
 export interface UserMembership {
     /** Type of the membership. */
-    readonly membershipType?: BungieMembershipType;
+    readonly membershipType: BungieMembershipType;
     /** Membership ID as they user is known in the Accounts service */
-    readonly membershipId?: number;
+    readonly membershipId: string;
     /**
      * Display Name the player has chosen for themselves. The display name is optional
      * when the data type is used as input to a platform API.
      */
-    readonly displayName?: string;
+    readonly displayName: string;
 }

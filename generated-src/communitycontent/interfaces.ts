@@ -29,29 +29,29 @@ export const enum CommunityStatusSort {
 }
 
 export interface SearchResultOfCommunityLiveStatusServerResponse {
-  readonly Response?: SearchResultOfCommunityLiveStatus;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: SearchResultOfCommunityLiveStatus;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface CommunityLiveStatusServerResponse {
-  readonly Response?: CommunityLiveStatus;
-  readonly ErrorCode?: PlatformErrorCodes;
-  readonly ThrottleSeconds?: number;
-  readonly ErrorStatus?: string;
-  readonly Message?: string;
-  readonly MessageData?: { [key: string]: string };
+  readonly Response: CommunityLiveStatus;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }
 
 export interface SearchResultOfCommunityLiveStatus {
-  readonly results?: CommunityLiveStatus[];
-  readonly totalResults?: number;
-  readonly hasMore?: boolean;
-  readonly query?: PagedQuery;
-  readonly replacementContinuationToken?: string;
+  readonly results: CommunityLiveStatus[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
   /**
    * If useTotalResults is true, then totalResults represents an accurate count.
    *
@@ -64,30 +64,30 @@ export interface SearchResultOfCommunityLiveStatus {
    * alter our endpoints and create backward- compatible shims, of which
    * useTotalResults is one.
    */
-  readonly useTotalResults?: boolean;
+  readonly useTotalResults: boolean;
 }
 
 export interface CommunityLiveStatus {
-  readonly dateStatusUpdated?: string;
-  readonly url?: string;
-  readonly partnershipIdentifier?: string;
-  readonly partnershipType?: PartnershipType;
-  readonly thumbnail?: string;
-  readonly thumbnailSmall?: string;
-  readonly thumbnailLarge?: string;
-  readonly destinyCharacterId?: number;
-  readonly userInfo?: UserInfoCard;
-  readonly currentActivityHash?: number;
-  readonly dateLastPlayed?: string;
-  readonly dateStreamStarted?: string;
-  readonly locale?: string;
-  readonly currentViewers?: number;
-  readonly followers?: number;
-  readonly overallViewers?: number;
-  readonly isFeatured?: boolean;
-  readonly title?: string;
-  readonly activityModeHash?: number;
+  readonly dateStatusUpdated: string;
+  readonly url: string;
+  readonly partnershipIdentifier: string;
+  readonly partnershipType: PartnershipType;
+  readonly thumbnail: string;
+  readonly thumbnailSmall: string;
+  readonly thumbnailLarge: string;
+  readonly destinyCharacterId: string;
+  readonly userInfo: UserInfoCard;
+  readonly currentActivityHash: number;
+  readonly dateLastPlayed: string;
+  readonly dateStreamStarted: string;
+  readonly locale: string;
+  readonly currentViewers: number;
+  readonly followers: number;
+  readonly overallViewers: number;
+  readonly isFeatured: boolean;
+  readonly title: string;
+  readonly activityModeHash: number;
   readonly dateFeatured?: string;
-  readonly trendingValue?: number;
-  readonly isSubscribable?: boolean;
+  readonly trendingValue: number;
+  readonly isSubscribable: boolean;
 }

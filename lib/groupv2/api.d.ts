@@ -55,7 +55,7 @@ export interface GroupSearchParams {
 export declare function groupSearch(http: HttpClient, params: GroupSearchParams): Promise<GroupSearchResponseServerResponse>;
 export interface GetGroupParams {
     /** Requested group's id. */
-    groupId: number;
+    groupId: string;
 }
 /** Get information about a specific group of the given ID. */
 export declare function getGroup(http: HttpClient, params: GetGroupParams): Promise<GroupResponseServerResponse>;
@@ -69,7 +69,7 @@ export interface GetGroupByNameParams {
 export declare function getGroupByName(http: HttpClient, params: GetGroupByNameParams): Promise<GroupResponseServerResponse>;
 export interface GetGroupOptionalConversationsParams {
     /** Requested group's id. */
-    groupId: number;
+    groupId: string;
 }
 /** Gets a list of available optional conversation channels and their settings. */
 export declare function getGroupOptionalConversations(http: HttpClient, params: GetGroupOptionalConversationsParams): Promise<CEListOfGroupOptionalConversationServerResponse>;
@@ -80,7 +80,7 @@ export interface CreateGroupParams {
 export declare function createGroup(http: HttpClient, params: CreateGroupParams): Promise<GroupCreationResponseServerResponse>;
 export interface EditGroupParams {
     /** Group ID of the group to edit. */
-    groupId: number;
+    groupId: string;
     body: GroupEditAction;
 }
 /**
@@ -91,7 +91,7 @@ export interface EditGroupParams {
 export declare function editGroup(http: HttpClient, params: EditGroupParams): Promise<int32ServerResponse>;
 export interface EditClanBannerParams {
     /** Group ID of the group to edit. */
-    groupId: number;
+    groupId: string;
     body: ClanBanner;
 }
 /**
@@ -101,7 +101,7 @@ export interface EditClanBannerParams {
 export declare function editClanBanner(http: HttpClient, params: EditClanBannerParams): Promise<int32ServerResponse>;
 export interface EditFounderOptionsParams {
     /** Group ID of the group to edit. */
-    groupId: number;
+    groupId: string;
     body: GroupOptionsEditAction;
 }
 /**
@@ -111,7 +111,7 @@ export interface EditFounderOptionsParams {
 export declare function editFounderOptions(http: HttpClient, params: EditFounderOptionsParams): Promise<int32ServerResponse>;
 export interface AddOptionalConversationParams {
     /** Group ID of the group to edit. */
-    groupId: number;
+    groupId: string;
     body: GroupOptionalConversationAddRequest;
 }
 /**
@@ -121,9 +121,9 @@ export interface AddOptionalConversationParams {
 export declare function addOptionalConversation(http: HttpClient, params: AddOptionalConversationParams): Promise<int64ServerResponse>;
 export interface EditOptionalConversationParams {
     /** Conversation Id of the channel being edited. */
-    conversationId: number;
+    conversationId: string;
     /** Group ID of the group to edit. */
-    groupId: number;
+    groupId: string;
     body: GroupOptionalConversationEditRequest;
 }
 /**
@@ -135,7 +135,7 @@ export interface GetMembersOfGroupParams {
     /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
     currentpage: number;
     /** The ID of the group. */
-    groupId: number;
+    groupId: string;
     /** Filter out other member types. Use None for all members. */
     memberType?: RuntimeGroupMemberType;
     /**
@@ -150,15 +150,15 @@ export interface GetAdminsAndFounderOfGroupParams {
     /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
     currentpage: number;
     /** The ID of the group. */
-    groupId: number;
+    groupId: string;
 }
 /** Get the list of members in a given group who are of admin level or higher. */
 export declare function getAdminsAndFounderOfGroup(http: HttpClient, params: GetAdminsAndFounderOfGroupParams): Promise<SearchResultOfGroupMemberServerResponse>;
 export interface EditGroupMembershipParams {
     /** ID of the group to which the member belongs. */
-    groupId: number;
+    groupId: string;
     /** Membership ID to modify. */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the provide membership ID. */
     membershipType: BungieMembershipType;
     /** New membertype for the specified member. */
@@ -171,9 +171,9 @@ export interface EditGroupMembershipParams {
 export declare function editGroupMembership(http: HttpClient, params: EditGroupMembershipParams): Promise<int32ServerResponse>;
 export interface KickMemberParams {
     /** Group ID to kick the user from. */
-    groupId: number;
+    groupId: string;
     /** Membership ID to kick. */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the provided membership ID. */
     membershipType: BungieMembershipType;
 }
@@ -185,9 +185,9 @@ export interface KickMemberParams {
 export declare function kickMember(http: HttpClient, params: KickMemberParams): Promise<GroupMemberLeaveResultServerResponse>;
 export interface BanMemberParams {
     /** Group ID that has the member to ban. */
-    groupId: number;
+    groupId: string;
     /** Membership ID of the member to ban from the group. */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the provided membership ID. */
     membershipType: BungieMembershipType;
     body: GroupBanRequest;
@@ -198,9 +198,9 @@ export interface BanMemberParams {
  */
 export declare function banMember(http: HttpClient, params: BanMemberParams): Promise<int32ServerResponse>;
 export interface UnbanMemberParams {
-    groupId: number;
+    groupId: string;
     /** Membership ID of the member to unban from the group */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the provided membership ID. */
     membershipType: BungieMembershipType;
 }
@@ -210,7 +210,7 @@ export interface GetBannedMembersOfGroupParams {
     /** Page number (starting with 1). Each page has a fixed size of 50 entries. */
     currentpage: number;
     /** Group ID whose banned members you are fetching */
-    groupId: number;
+    groupId: string;
 }
 /**
  * Get the list of banned members in a given group. Only accessible to group Admins
@@ -219,9 +219,9 @@ export interface GetBannedMembersOfGroupParams {
 export declare function getBannedMembersOfGroup(http: HttpClient, params: GetBannedMembersOfGroupParams): Promise<SearchResultOfGroupBanServerResponse>;
 export interface AbdicateFoundershipParams {
     /** The new founder for this group. Must already be a group admin. */
-    founderIdNew: number;
+    founderIdNew: string;
     /** The target group id. */
-    groupId: number;
+    groupId: string;
     /** Membership type of the provided founderIdNew. */
     membershipType: BungieMembershipType;
 }
@@ -232,7 +232,7 @@ export interface AbdicateFoundershipParams {
 export declare function abdicateFoundership(http: HttpClient, params: AbdicateFoundershipParams): Promise<booleanServerResponse>;
 export interface RequestGroupMembershipParams {
     /** ID of the group you would like to join. */
-    groupId: number;
+    groupId: string;
     /** MembershipType of the account to use when joining. */
     membershipType: BungieMembershipType;
     body: GroupApplicationRequest;
@@ -243,7 +243,7 @@ export interface GetPendingMembershipsParams {
     /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
     currentpage: number;
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
 }
 /**
  * Get the list of users who are awaiting a decision on their application to join a
@@ -254,13 +254,13 @@ export interface GetInvitedIndividualsParams {
     /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
     currentpage: number;
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
 }
 /** Get the list of users who have been invited into the group. */
 export declare function getInvitedIndividuals(http: HttpClient, params: GetInvitedIndividualsParams): Promise<SearchResultOfGroupMemberApplicationServerResponse>;
 export interface RescindGroupMembershipParams {
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
     /** MembershipType of the account to leave. */
     membershipType: BungieMembershipType;
 }
@@ -271,30 +271,30 @@ export interface RescindGroupMembershipParams {
 export declare function rescindGroupMembership(http: HttpClient, params: RescindGroupMembershipParams): Promise<GroupMemberLeaveResultServerResponse>;
 export interface ApproveAllPendingParams {
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
     body: GroupApplicationRequest;
 }
 /** Approve all of the pending users for the given group. */
 export declare function approveAllPending(http: HttpClient, params: ApproveAllPendingParams): Promise<ListOfEntityActionResultServerResponse>;
 export interface DenyAllPendingParams {
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
     body: GroupApplicationRequest;
 }
 /** Deny all of the pending users for the given group. */
 export declare function denyAllPending(http: HttpClient, params: DenyAllPendingParams): Promise<ListOfEntityActionResultServerResponse>;
 export interface ApprovePendingForListParams {
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
     body: GroupApplicationListRequest;
 }
 /** Approve all of the pending users for the given group. */
 export declare function approvePendingForList(http: HttpClient, params: ApprovePendingForListParams): Promise<ListOfEntityActionResultServerResponse>;
 export interface ApprovePendingParams {
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
     /** The membership id being approved. */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the supplied membership ID. */
     membershipType: BungieMembershipType;
     body: GroupApplicationRequest;
@@ -306,7 +306,7 @@ export interface ApprovePendingParams {
 export declare function approvePending(http: HttpClient, params: ApprovePendingParams): Promise<booleanServerResponse>;
 export interface DenyPendingForListParams {
     /** ID of the group. */
-    groupId: number;
+    groupId: string;
     body: GroupApplicationListRequest;
 }
 /** Deny all of the pending users for the given group that match the passed-in . */
@@ -317,7 +317,7 @@ export interface GetGroupsForMemberParams {
     /** Type of group the supplied member founded. */
     groupType: GroupType;
     /** Membership ID to for which to find founded groups. */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the supplied membership ID. */
     membershipType: BungieMembershipType;
 }
@@ -329,7 +329,7 @@ export interface GetPotentialGroupsForMemberParams {
     /** Type of group the supplied member applied. */
     groupType: GroupType;
     /** Membership ID to for which to find applied groups. */
-    membershipId: number;
+    membershipId: string;
     /** Membership type of the supplied membership ID. */
     membershipType: BungieMembershipType;
 }
@@ -340,9 +340,9 @@ export interface GetPotentialGroupsForMemberParams {
 export declare function getPotentialGroupsForMember(http: HttpClient, params: GetPotentialGroupsForMemberParams): Promise<GroupPotentialMembershipSearchResponseServerResponse>;
 export interface IndividualGroupInviteParams {
     /** ID of the group you would like to join. */
-    groupId: number;
+    groupId: string;
     /** Membership id of the account being invited. */
-    membershipId: number;
+    membershipId: string;
     /** MembershipType of the account being invited. */
     membershipType: BungieMembershipType;
     body: GroupApplicationRequest;
@@ -351,9 +351,9 @@ export interface IndividualGroupInviteParams {
 export declare function individualGroupInvite(http: HttpClient, params: IndividualGroupInviteParams): Promise<GroupApplicationResponseServerResponse>;
 export interface IndividualGroupInviteCancelParams {
     /** ID of the group you would like to join. */
-    groupId: number;
+    groupId: string;
     /** Membership id of the account being cancelled. */
-    membershipId: number;
+    membershipId: string;
     /** MembershipType of the account being cancelled. */
     membershipType: BungieMembershipType;
 }
