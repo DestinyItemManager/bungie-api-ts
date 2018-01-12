@@ -1,4 +1,4 @@
-import { DefInfo, getReferencedTypes } from './util';
+import { DefInfo, getReferencedTypes, getRef } from './util';
 import * as _ from 'underscore';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -20,9 +20,25 @@ export function generateHeader(doc: OpenAPIObject): string {
  */`;
 }
 
-export function addImport(schema: SchemaObject | ReferenceObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+export function addImport(
+  doc: OpenAPIObject,
+  schema: SchemaObject | ReferenceObject,
+  componentByDef: {[def: string]: DefInfo },
+  importFiles: { [filename: string]: Set<string> }
+) {
   const typeRef = getReferencedTypes(schema);
   if (typeRef && componentByDef[typeRef]) {
+    if (typeRef.includes('/responses/')) {
+      const component = getRef(doc, typeRef);
+      const property = component.properties!.Response;
+      if (property) {
+        importFiles['common.ts'] = importFiles['common.ts'] || new Set();
+        importFiles['common.ts'].add('ServerResponse');
+        addImport(doc, property, componentByDef, importFiles);
+        return;
+      }
+    }
+
     const filename = componentByDef[typeRef].filename;
     importFiles[filename] = importFiles[filename] || new Set();
     importFiles[filename].add(componentByDef[typeRef].interfaceName);

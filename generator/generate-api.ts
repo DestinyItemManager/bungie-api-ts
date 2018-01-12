@@ -54,7 +54,7 @@ ${indent(queryParameterNames.map((p) => `${p}: params.${p}`).join(',\n'), 3)}
   }
 
   const returnValue = resolveSchemaType(methodDef.responses['200'], doc);
-  addImport(methodDef.responses['200'], componentByDef, importFiles);
+  addImport(doc, methodDef.responses['200'], componentByDef, importFiles);
 
   return `${interfaceDefinition}${docComment(methodDef.description!)}
 export async function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
@@ -69,7 +69,7 @@ function generateInterfaceSchema(interfaceName: string, params: ParameterObject[
   const parameterArgs = params.map((param) => {
     // TODO: in general, need something that returns a type object
     const paramType = resolveSchemaType(param.schema!, doc);
-    addImport(param.schema!, componentByDef, importFiles);
+    addImport(doc, param.schema!, componentByDef, importFiles);
     const docString = param.description ? docComment(param.description) + '\n' : '';
     return `${docString}${param.name}${param.required ? '' : '?'}: ${paramType};`;
   });
@@ -79,7 +79,7 @@ function generateInterfaceSchema(interfaceName: string, params: ParameterObject[
       const schema = requestBody.content['application/json'].schema!;
 
       const paramType = resolveSchemaType(schema, doc);
-      addImport(schema, componentByDef, importFiles);
+      addImport(doc, schema, componentByDef, importFiles);
       const docString = requestBody.description ? docComment(requestBody.description) + '\n' : '';
       parameterArgs.push(`${docString}body${requestBody.required ? '' : '?'}: ${paramType};`);
     } else if (isReferenceObject(requestBody)) {

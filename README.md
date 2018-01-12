@@ -2,6 +2,12 @@
 
 This project implements TypeScript definitions and API helpers for the [Bungie.net API](https://github.com/Bungie-net/api). It's meant for use in [Destiny Item Manager](https://destinyitemmanager.com), but should be general enough to use in any project. The code is completely generated from Bungie's documentation - I considered using something like Swagger Codegen, but instead opted for a custom generator so we could make the result as nice as possible.
 
+# Install
+
+```
+npm install bungie-api-ts
+```
+
 # Interfaces and Enums
 
 All the interface type definitions and enums are for type info only - everything will compile out. Only the API helpers produce real JavaScript output. You can import types from each service defined on Bungie.net:
@@ -10,7 +16,7 @@ All the interface type definitions and enums are for type info only - everything
 import { DestinyInventoryComponent, DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 ```
 
-There are definitions for every type defined in the Bungie.net services. See [their documentation](https://bungie-net.github.io/multi/) for a list - the interface names are the last part of the full name (for example, `Destiny.Definitions.DestinyVendorActionDefinition` becomes `DestinyVendorActionDefinition`).he only exception is some types like `SingleComponentResponseOfDestinyInventoryComponent`, which have been mapped into nicer forms like `SingleComponentResponse<DestinyInventoryComponent>`.
+There are definitions for every type defined in the Bungie.net services. See [their documentation](https://bungie-net.github.io/multi/) for a list - the interface names are the last part of the full name (for example, `Destiny.Definitions.DestinyVendorActionDefinition` becomes `DestinyVendorActionDefinition`). There are a few exceptions, like `SingleComponentResponseOfDestinyInventoryComponent`, which have been mapped into nicer forms like `SingleComponentResponse<DestinyInventoryComponent>`, and the server responses, which are now `ServerResponse<T>` instead of something like `DestinyCharacterResponse`.
 
 # API Helpers
 
@@ -24,8 +30,7 @@ async function $http(config: HttpClientConfig) {
   return fetch(config.url, ...);
 }
 
-// ProfileInfo is a DestinyProfileResponseServerResponse
-const proileInfo = await getProfile($http, {
+const profileInfo: ServerResponse<DestinyProfileResponse> = await getProfile($http, {
   components: [DestinyComponentType.Profiles, DestinyComponentType.Characters],
   destinyMembershipId: 12345,
   membershipType: BungieMembershipType.TigerPsn

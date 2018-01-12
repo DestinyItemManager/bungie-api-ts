@@ -14,6 +14,9 @@ export function generateInterfaceDefinitions(file: string, components: DefInfo[]
   if (file === 'destiny2/interfaces.ts') {
     specialDefinitions = generateSpecialDefinitions();
   }
+  if (file === 'common.ts') {
+    specialDefinitions = generateServerResponseDefinitions();
+  }
 
   const imports = generateImports(filename, importFiles);
 
@@ -50,7 +53,7 @@ ${indent(values, 1)}
 function generateInterfaceSchema(interfaceName: string, component: SchemaObject, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
   const parameterArgs = _.map(component.properties!, (schema: SchemaObject, param) => {
     const paramType = resolveSchemaType(schema!, doc);
-    addImport(schema!, componentByDef, importFiles);
+    addImport(doc, schema!, componentByDef, importFiles);
     const docs = schema.description ? [schema.description] : [];
     if (schema['x-mapped-definition']) {
       docs.push(`Mapped to ${componentByDef[schema['x-mapped-definition'].$ref].interfaceName} in the manifest.`);
@@ -77,5 +80,16 @@ function generateSpecialDefinitions() {
 export interface DictionaryComponentResponse<T> {
   readonly data: { [key: string]: T };
   readonly privacy: ComponentPrivacySetting;
+}`;
+}
+
+function generateServerResponseDefinitions() {
+  return `export interface ServerResponse<T> {
+  readonly Response: T;
+  readonly ErrorCode: PlatformErrorCodes;
+  readonly ThrottleSeconds: number;
+  readonly ErrorStatus: string;
+  readonly Message: string;
+  readonly MessageData: { [key: string]: string };
 }`;
 }

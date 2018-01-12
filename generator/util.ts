@@ -10,7 +10,7 @@ export interface DefInfo {
 
 export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: OpenAPIObject): string {
   if (isReferenceObject(schema)) {
-    return interfaceName(schema.$ref);
+    return interfaceName(schema.$ref, doc);
   } else {
     return typeMapping(schema, doc);
   }
@@ -74,7 +74,7 @@ export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
   }
 }
 
-export function interfaceName(componentPath: string) {
+export function interfaceName(componentPath: string, doc: OpenAPIObject) {
   const name = lastPart(componentPath);
 
   const singleResponse = name.match(/SingleComponentResponseOf(.*)/);
@@ -88,10 +88,15 @@ export function interfaceName(componentPath: string) {
   }
 
   if (componentPath.includes('/responses/')) {
-    return name + 'ServerResponse';
-  } else {
-    return name;
+    const component = getRef(doc, componentPath);
+    const property = component.properties!.Response;
+    if (property) {
+      const paramType = resolveSchemaType(property, doc);
+      return `ServerResponse<${paramType}>`;
+    }
   }
+
+  return name;
 }
 
 export function isRequestBodyObject(requestBody: RequestBodyObject | ReferenceObject): requestBody is RequestBodyObject {

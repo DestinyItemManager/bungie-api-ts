@@ -26,7 +26,7 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
       def,
       tags,
       filename: chooseFile(def, tags, allTags),
-      interfaceName: interfaceName(def)
+      interfaceName: interfaceName(def, doc)
     };
 
     componentsByFile[info.filename] = componentsByFile[info.filename] || [];
