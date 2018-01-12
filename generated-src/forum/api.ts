@@ -287,18 +287,14 @@ export async function approveFireteamThread(http: HttpClient, params: ApproveFir
   });
 }
 
-export interface GetRecruitmentThreadSummariesParams {
-  body: string[];
-}
-
 /**
  * Allows the caller to get a list of to 25 recruitment thread summary information
  * objects.
  */
-export async function getRecruitmentThreadSummaries(http: HttpClient, params: GetRecruitmentThreadSummariesParams): Promise<ServerResponse<ForumRecruitmentDetail[]>> {
+export async function getRecruitmentThreadSummaries(http: HttpClient, body: string[]): Promise<ServerResponse<ForumRecruitmentDetail[]>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Forum/Recruit/Summaries/',
-    body: params.body
+    body
   });
 }

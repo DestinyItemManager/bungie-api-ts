@@ -159,11 +159,8 @@ export interface ApproveFireteamThreadParams {
  * private message conversation with them.
  */
 export declare function approveFireteamThread(http: HttpClient, params: ApproveFireteamThreadParams): Promise<ServerResponse<SaveMessageResult>>;
-export interface GetRecruitmentThreadSummariesParams {
-    body: string[];
-}
 /**
  * Allows the caller to get a list of to 25 recruitment thread summary information
  * objects.
  */
-export declare function getRecruitmentThreadSummaries(http: HttpClient, params: GetRecruitmentThreadSummariesParams): Promise<ServerResponse<ForumRecruitmentDetail[]>>;
+export declare function getRecruitmentThreadSummaries(http: HttpClient, body: string[]): Promise<ServerResponse<ForumRecruitmentDetail[]>>;

@@ -149,49 +149,31 @@ export interface GetVendorParams {
  * preparation for its eventual implementation.
  */
 export declare function getVendor(http: HttpClient, params: GetVendorParams): Promise<ServerResponse<DestinyVendorResponse>>;
-export interface TransferItemParams {
-    body: DestinyItemTransferRequest;
-}
 /**
  * Transfer an item to/from your vault. You must have a valid Destiny account. You
  * must also pass BOTH a reference AND an instance ID if it's an instanced item.
  * itshappening.gif
  */
-export declare function transferItem(http: HttpClient, params: TransferItemParams): Promise<ServerResponse<number>>;
-export interface PullFromPostmasterParams {
-    body: DestinyPostmasterTransferRequest;
-}
+export declare function transferItem(http: HttpClient, body: DestinyItemTransferRequest): Promise<ServerResponse<number>>;
 /**
  * Extract an item from the Postmaster, with whatever implications that may entail.
  * You must have a valid Destiny account. You must also pass BOTH a reference AND
  * an instance ID if it's an instanced item.
  */
-export declare function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<ServerResponse<number>>;
-export interface EquipItemParams {
-    body: DestinyItemActionRequest;
-}
+export declare function pullFromPostmaster(http: HttpClient, body: DestinyPostmasterTransferRequest): Promise<ServerResponse<number>>;
 /**
  * Equip an item. You must have a valid Destiny Account, and either be in a social
  * space, in orbit, or offline.
  */
-export declare function equipItem(http: HttpClient, params: EquipItemParams): Promise<ServerResponse<number>>;
-export interface EquipItemsParams {
-    body: DestinyItemSetActionRequest;
-}
+export declare function equipItem(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>>;
 /**
  * Equip a list of items by itemInstanceIds. You must have a valid Destiny Account,
  * and either be in a social space, in orbit, or offline. Any items not found on
  * your character will be ignored.
  */
-export declare function equipItems(http: HttpClient, params: EquipItemsParams): Promise<ServerResponse<DestinyEquipItemResults>>;
-export interface SetItemLockStateParams {
-    body: DestinyItemStateRequest;
-}
+export declare function equipItems(http: HttpClient, body: DestinyItemSetActionRequest): Promise<ServerResponse<DestinyEquipItemResults>>;
 /** Set the Lock State for an instanced item. You must have a valid Destiny Account. */
-export declare function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<ServerResponse<number>>;
-export interface InsertSocketPlugParams {
-    body: DestinyItemActionRequest;
-}
+export declare function setItemLockState(http: HttpClient, body: DestinyItemStateRequest): Promise<ServerResponse<number>>;
 /**
  * Insert a plug into a socketed item. I know how it sounds, but I assure you it's
  * much more G-rated than you might be guessing. We haven't decided yet whether
@@ -202,10 +184,7 @@ export interface InsertSocketPlugParams {
  * planned schema of the endpoint for review, comment, and preparation for its
  * eventual implementation.
  */
-export declare function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<ServerResponse<number>>;
-export interface ActivateTalentNodeParams {
-    body: DestinyItemActionRequest;
-}
+export declare function insertSocketPlug(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>>;
 /**
  * Activate a Talent Node. Chill out, everyone: we haven't decided yet whether this
  * will be able to activate nodes with costs, but if we do it will require special
@@ -215,7 +194,7 @@ export interface ActivateTalentNodeParams {
  * schema of the endpoint for review, comment, and preparation for its eventual
  * implementation.
  */
-export declare function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<ServerResponse<number>>;
+export declare function activateTalentNode(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>>;
 export interface GetPostGameCarnageReportParams {
     /** The ID of the activity whose PGCR is requested. */
     activityId: string;
@@ -225,7 +204,6 @@ export declare function getPostGameCarnageReport(http: HttpClient, params: GetPo
 export interface ReportOffensivePostGameCarnageReportPlayerParams {
     /** The ID of the activity where you ran into the brigand that you're reporting. */
     activityId: string;
-    body: DestinyReportOffensePgcrRequest;
 }
 /**
  * Report a player that you met in an activity that was engaging in ToS-violating
@@ -233,7 +211,7 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
  * passed in. Please use this judiciously and only when you have strong suspicions
  * of violation, pretty please.
  */
-export declare function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<ServerResponse<number>>;
+export declare function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams, body: DestinyReportOffensePgcrRequest): Promise<ServerResponse<number>>;
 /** Gets historical stats definitions. */
 export declare function getHistoricalStatsDefinition(http: HttpClient): Promise<ServerResponse<{
     [key: string]: DestinyHistoricalStatsDefinition;

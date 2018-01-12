@@ -124,7 +124,7 @@ export async function getProfile(http: HttpClient, params: GetProfileParams): Pr
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/`,
     params: {
-      components: params.components
+      components: params.components ? params.components.join(',') : undefined
     }
   });
 }
@@ -150,7 +150,7 @@ export async function getCharacter(http: HttpClient, params: GetCharacterParams)
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/`,
     params: {
-      components: params.components
+      components: params.components ? params.components.join(',') : undefined
     }
   });
 }
@@ -196,7 +196,7 @@ export async function getItem(http: HttpClient, params: GetItemParams): Promise<
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Item/${params.itemInstanceId}/`,
     params: {
-      components: params.components
+      components: params.components ? params.components.join(',') : undefined
     }
   });
 }
@@ -229,7 +229,7 @@ export async function getVendors(http: HttpClient, params: GetVendorsParams): Pr
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/`,
     params: {
-      components: params.components
+      components: params.components ? params.components.join(',') : undefined
     }
   });
 }
@@ -261,13 +261,9 @@ export async function getVendor(http: HttpClient, params: GetVendorParams): Prom
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/${params.vendorHash}/`,
     params: {
-      components: params.components
+      components: params.components ? params.components.join(',') : undefined
     }
   });
-}
-
-export interface TransferItemParams {
-  body: DestinyItemTransferRequest;
 }
 
 /**
@@ -275,16 +271,12 @@ export interface TransferItemParams {
  * must also pass BOTH a reference AND an instance ID if it's an instanced item.
  * itshappening.gif
  */
-export async function transferItem(http: HttpClient, params: TransferItemParams): Promise<ServerResponse<number>> {
+export async function transferItem(http: HttpClient, body: DestinyItemTransferRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/TransferItem/',
-    body: params.body
+    body
   });
-}
-
-export interface PullFromPostmasterParams {
-  body: DestinyPostmasterTransferRequest;
 }
 
 /**
@@ -292,32 +284,24 @@ export interface PullFromPostmasterParams {
  * You must have a valid Destiny account. You must also pass BOTH a reference AND
  * an instance ID if it's an instanced item.
  */
-export async function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<ServerResponse<number>> {
+export async function pullFromPostmaster(http: HttpClient, body: DestinyPostmasterTransferRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/PullFromPostmaster/',
-    body: params.body
+    body
   });
-}
-
-export interface EquipItemParams {
-  body: DestinyItemActionRequest;
 }
 
 /**
  * Equip an item. You must have a valid Destiny Account, and either be in a social
  * space, in orbit, or offline.
  */
-export async function equipItem(http: HttpClient, params: EquipItemParams): Promise<ServerResponse<number>> {
+export async function equipItem(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItem/',
-    body: params.body
+    body
   });
-}
-
-export interface EquipItemsParams {
-  body: DestinyItemSetActionRequest;
 }
 
 /**
@@ -325,29 +309,21 @@ export interface EquipItemsParams {
  * and either be in a social space, in orbit, or offline. Any items not found on
  * your character will be ignored.
  */
-export async function equipItems(http: HttpClient, params: EquipItemsParams): Promise<ServerResponse<DestinyEquipItemResults>> {
+export async function equipItems(http: HttpClient, body: DestinyItemSetActionRequest): Promise<ServerResponse<DestinyEquipItemResults>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItems/',
-    body: params.body
+    body
   });
-}
-
-export interface SetItemLockStateParams {
-  body: DestinyItemStateRequest;
 }
 
 /** Set the Lock State for an instanced item. You must have a valid Destiny Account. */
-export async function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<ServerResponse<number>> {
+export async function setItemLockState(http: HttpClient, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/SetLockState/',
-    body: params.body
+    body
   });
-}
-
-export interface InsertSocketPlugParams {
-  body: DestinyItemActionRequest;
 }
 
 /**
@@ -360,16 +336,12 @@ export interface InsertSocketPlugParams {
  * planned schema of the endpoint for review, comment, and preparation for its
  * eventual implementation.
  */
-export async function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<ServerResponse<number>> {
+export async function insertSocketPlug(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlug/',
-    body: params.body
+    body
   });
-}
-
-export interface ActivateTalentNodeParams {
-  body: DestinyItemActionRequest;
 }
 
 /**
@@ -381,11 +353,11 @@ export interface ActivateTalentNodeParams {
  * schema of the endpoint for review, comment, and preparation for its eventual
  * implementation.
  */
-export async function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<ServerResponse<number>> {
+export async function activateTalentNode(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/ActivateTalentNode/',
-    body: params.body
+    body
   });
 }
 
@@ -405,7 +377,6 @@ export async function getPostGameCarnageReport(http: HttpClient, params: GetPost
 export interface ReportOffensivePostGameCarnageReportPlayerParams {
   /** The ID of the activity where you ran into the brigand that you're reporting. */
   activityId: string;
-  body: DestinyReportOffensePgcrRequest;
 }
 
 /**
@@ -414,11 +385,11 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
  * passed in. Please use this judiciously and only when you have strong suspicions
  * of violation, pretty please.
  */
-export async function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<ServerResponse<number>> {
+export async function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams, body: DestinyReportOffensePgcrRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`,
-    body: params.body
+    body
   });
 }
 
@@ -637,8 +608,8 @@ export async function getHistoricalStats(http: HttpClient, params: GetHistorical
     params: {
       dayend: params.dayend,
       daystart: params.daystart,
-      groups: params.groups,
-      modes: params.modes,
+      groups: params.groups ? params.groups.join(',') : undefined,
+      modes: params.modes ? params.modes.join(',') : undefined,
       periodType: params.periodType
     }
   });
@@ -665,7 +636,7 @@ export async function getHistoricalStatsForAccount(http: HttpClient, params: Get
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Stats/`,
     params: {
-      groups: params.groups
+      groups: params.groups ? params.groups.join(',') : undefined
     }
   });
 }
