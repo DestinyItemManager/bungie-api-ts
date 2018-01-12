@@ -1,5 +1,5 @@
 import { OpenAPIObject, PathItemObject, ParameterObject, ReferenceObject, RequestBodyObject } from 'openapi3-ts';
-import { lastPart, lcFirst, resolveSchemaType, DefInfo, isReferenceObject, isRequestBodyObject } from './util';
+import { lastPart, lcFirst, resolveSchemaType, DefInfo, isReferenceObject, isRequestBodyObject, getRef } from './util';
 import { generateHeader, generateImports, docComment, indent, addImport, writeOutFile } from './generate-common';
 
 const httpClientType = `import { HttpClient } from '../http';`;
@@ -31,9 +31,22 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
 
   const parameterArgs = ['http: HttpClient'];
   let interfaceDefinition = '';
-  if (params.length || methodDef.requestBody) {
-    interfaceDefinition = generateInterfaceSchema(interfaceName + 'Params', params, methodDef.requestBody, doc, componentByDef, importFiles) + '\n\n';
+  if (params.length) {
+    interfaceDefinition = generateInterfaceSchema(interfaceName + 'Params', params, doc, componentByDef, importFiles) + '\n\n';
     parameterArgs.push(`params: ${interfaceName}Params`);
+  }
+
+  if (methodDef.requestBody) {
+    if (isRequestBodyObject(methodDef.requestBody)) {
+      const schema = methodDef.requestBody.content['application/json'].schema!;
+
+      const paramType = resolveSchemaType(schema, doc);
+      addImport(doc, schema, componentByDef, importFiles);
+      const docString = methodDef.requestBody.description ? docComment(methodDef.requestBody.description) + '\n' : '';
+      parameterArgs.push(`${docString}body${methodDef.requestBody.required ? '' : '?'}: ${paramType}`);
+    } else if (isReferenceObject(methodDef.requestBody)) {
+      throw new Error("didn't expect this");
+    }
   }
 
   // tslint:disable-next-line:no-invalid-template-strings
@@ -41,16 +54,30 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
 
   let paramsObject = "";
   if (queryParameterNames.length) {
+    const paramInitializers = queryParameterNames.map((p) => {
+      const param = params.find((pa) => pa.name === p)!;
+      const paramType = resolveSchemaType(param.schema!, doc);
+
+      if (paramType.endsWith('[]')) {
+        if (!param.required) {
+          return `${p}: params.${p} ? params.${p}.join(',') : undefined`;
+        }
+        return `${p}: params.${p}.join(',')`;
+      }
+
+      return `${p}: params.${p}`;
+    });
+
     paramsObject = `,
     params: {
-${indent(queryParameterNames.map((p) => `${p}: params.${p}`).join(',\n'), 3)}
+${indent(paramInitializers.join(',\n'), 3)}
     }`;
   }
 
   let requestBodyParam = '';
   if (methodDef.requestBody && isRequestBodyObject(methodDef.requestBody)) {
     requestBodyParam = `,
-    body: params.body`;
+    body`;
   }
 
   const returnValue = resolveSchemaType(methodDef.responses['200'], doc);
@@ -65,7 +92,7 @@ export async function ${functionName}(${parameterArgs.join(', ')}): Promise<${re
 }`;
 }
 
-function generateInterfaceSchema(interfaceName: string, params: ParameterObject[], requestBody: RequestBodyObject | ReferenceObject | undefined, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+function generateInterfaceSchema(interfaceName: string, params: ParameterObject[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
   const parameterArgs = params.map((param) => {
     // TODO: in general, need something that returns a type object
     const paramType = resolveSchemaType(param.schema!, doc);
@@ -74,18 +101,6 @@ function generateInterfaceSchema(interfaceName: string, params: ParameterObject[
     return `${docString}${param.name}${param.required ? '' : '?'}: ${paramType};`;
   });
 
-  if (requestBody) {
-    if (isRequestBodyObject(requestBody)) {
-      const schema = requestBody.content['application/json'].schema!;
-
-      const paramType = resolveSchemaType(schema, doc);
-      addImport(doc, schema, componentByDef, importFiles);
-      const docString = requestBody.description ? docComment(requestBody.description) + '\n' : '';
-      parameterArgs.push(`${docString}body${requestBody.required ? '' : '?'}: ${paramType};`);
-    } else if (isReferenceObject(requestBody)) {
-      throw new Error("didn't expect this");
-    }
-  }
   return `export interface ${interfaceName} {
 ${indent(parameterArgs.join('\n'), 1)}
 }`;
