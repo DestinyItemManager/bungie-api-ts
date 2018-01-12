@@ -18,8 +18,11 @@ export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: O
 
 export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
   switch (schema.type) {
+    case "string":
+      return schema.format === 'byte' ? 'number' : 'string';
     case "integer":
-      return "number";
+      // JS can't represent a 64-bit int as a number, so bungie.net returns it as a string in JSON
+      return schema.format === 'int64' ? 'string' : 'number';
     case "array":
       return resolveSchemaType(schema.items!, doc) + '[]';
     case "object":

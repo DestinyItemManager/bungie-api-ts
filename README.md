@@ -7,7 +7,7 @@ This project implements TypeScript definitions and API helpers for the [Bungie.n
 All the interface type definitions and enums are for type info only - everything will compile out. Only the API helpers produce real JavaScript output. You can import types from each service defined on Bungie.net:
 
 ```typescript
-import { DestinyInventoryComponent, DestinyInventoryItemDefinition } from 'bungie-api-ts/lib/destiny2';
+import { DestinyInventoryComponent, DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 ```
 
 There are definitions for every type defined in the Bungie.net services. See [their documentation](https://bungie-net.github.io/multi/) for a list - the interface names are the last part of the full name (for example, `Destiny.Definitions.DestinyVendorActionDefinition` becomes `DestinyVendorActionDefinition`).he only exception is some types like `SingleComponentResponseOfDestinyInventoryComponent`, which have been mapped into nicer forms like `SingleComponentResponse<DestinyInventoryComponent>`.
@@ -17,7 +17,7 @@ There are definitions for every type defined in the Bungie.net services. See [th
 In addition to the types, there are also simple helper functions for each API endpoint. They define the inputs and outputs to that endpoint, and will call a user-provided function with HTTP request info that you can then use to make an HTTP request. This pattern was used so the API helpers could provide full type information. These helpers are not a full API client - they assist in building one. An example:
 
 ```typescript
-import { getProfile, HttpClientConfig } from 'bungie-api-ts/lib/destiny2';
+import { getProfile, HttpClientConfig } from 'bungie-api-ts/destiny2';
 
 async function $http(config: HttpClientConfig) {
   // fill in the API key, handle OAuth, etc., then make an HTTP request using the config.
@@ -34,11 +34,11 @@ const proileInfo = await getProfile($http, {
 
 # Imports
 
-It is possible to import all services from `bungie-api-ts` directly, but it's better to import the specific service and pick out what you want. Don't forget to include `lib` in the path:
+It is possible to import all services from `bungie-api-ts` directly, but it's better to import the specific service and pick out what you want:
 
 ```typescript
 // good
-import { getProfile, HttpClientConfig } from 'bungie-api-ts/lib/destiny2';
+import { getProfile, HttpClientConfig } from 'bungie-api-ts/destiny2';
 getProfile(...);
 
 // works, but not as good

@@ -56,9 +56,7 @@ function generateInterfaceSchema(interfaceName: string, component: SchemaObject,
       docs.push(`Mapped to ${componentByDef[schema['x-mapped-definition'].$ref].interfaceName} in the manifest.`);
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
-    // TODO: we're always marking things as possibly being undefined. It'd be nice to narrow that!
-    const nullable = schema.nullable || schema.type === 'object' || schema.type === 'array';
-    return `${docString}readonly ${param}${nullable ? '?' : '?'}: ${paramType};`;
+    return `${docString}readonly ${param}${schema.nullable ? '?' : ''}: ${paramType};`;
   });
   const docString = component.description ? docComment(component.description) + '\n' : '';
   return `${docString}export interface ${interfaceName} {
@@ -72,12 +70,12 @@ function isSpecialType(name: string) {
 
 function generateSpecialDefinitions() {
   return `export interface SingleComponentResponse<T> {
-  readonly data?: T;
-  readonly privacy?: ComponentPrivacySetting;
+  readonly data: T;
+  readonly privacy: ComponentPrivacySetting;
 }
 
 export interface DictionaryComponentResponse<T> {
-  readonly data?: { [key: number]: T };
-  readonly privacy?: ComponentPrivacySetting;
+  readonly data: { [key: string]: T };
+  readonly privacy: ComponentPrivacySetting;
 }`;
 }
