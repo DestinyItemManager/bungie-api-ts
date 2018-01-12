@@ -10,12 +10,13 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { SearchResultOfTrendingEntryServerResponse, TrendingCategoriesServerResponse, TrendingDetailServerResponse, TrendingEntryType } from './interfaces';
+import { SearchResultOfTrendingEntry, TrendingCategories, TrendingDetail, TrendingEntryType } from './interfaces';
+import { ServerResponse } from '../common';
 /**
  * Returns trending items for Bungie.net, collapsed into the first page of items
  * per category. For pagination within a category, call GetTrendingCategory.
  */
-export declare function getTrendingCategories(http: HttpClient): Promise<TrendingCategoriesServerResponse>;
+export declare function getTrendingCategories(http: HttpClient): Promise<ServerResponse<TrendingCategories>>;
 export interface GetTrendingCategoryParams {
     /** The ID of the category for whom you want additional results. */
     categoryId: string;
@@ -23,7 +24,7 @@ export interface GetTrendingCategoryParams {
     pageNumber: number;
 }
 /** Returns paginated lists of trending items for a category. */
-export declare function getTrendingCategory(http: HttpClient, params: GetTrendingCategoryParams): Promise<SearchResultOfTrendingEntryServerResponse>;
+export declare function getTrendingCategory(http: HttpClient, params: GetTrendingCategoryParams): Promise<ServerResponse<SearchResultOfTrendingEntry>>;
 export interface GetTrendingEntryDetailParams {
     /** The identifier for the entity to be returned. */
     identifier: string;
@@ -36,4 +37,4 @@ export interface GetTrendingEntryDetailParams {
  * *and* the identifier: the identifier alone is not guaranteed to be globally
  * unique.
  */
-export declare function getTrendingEntryDetail(http: HttpClient, params: GetTrendingEntryDetailParams): Promise<TrendingDetailServerResponse>;
+export declare function getTrendingEntryDetail(http: HttpClient, params: GetTrendingEntryDetailParams): Promise<ServerResponse<TrendingDetail>>;

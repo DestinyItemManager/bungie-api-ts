@@ -9,6 +9,16 @@
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */
+export interface ServerResponse<T> {
+    readonly Response: T;
+    readonly ErrorCode: PlatformErrorCodes;
+    readonly ThrottleSeconds: number;
+    readonly ErrorStatus: string;
+    readonly Message: string;
+    readonly MessageData: {
+        [key: string]: string;
+    };
+}
 export declare const enum BungieMembershipType {
     None = 0,
     TigerXbox = 1,
@@ -670,14 +680,4 @@ export interface PagedQuery {
     readonly itemsPerPage: number;
     readonly currentPage: number;
     readonly requestContinuationToken: string;
-}
-export interface int32ServerResponse {
-    readonly Response: number;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
 }

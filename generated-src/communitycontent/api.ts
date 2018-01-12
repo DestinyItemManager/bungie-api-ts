@@ -13,17 +13,18 @@
 import { HttpClient } from '../http';
 
 import {
-  BungieMembershipType
+  BungieMembershipType,
+  ServerResponse
 } from '../common';
 import {
   CommunityContentSortMode,
   ForumTopicsCategoryFiltersEnum,
-  PostSearchResponseServerResponse
+  PostSearchResponse
 } from '../forum/interfaces';
 import {
-  CommunityLiveStatusServerResponse,
+  CommunityLiveStatus,
   CommunityStatusSort,
-  SearchResultOfCommunityLiveStatusServerResponse
+  SearchResultOfCommunityLiveStatus
 } from './interfaces';
 import {
   PartnershipType
@@ -39,7 +40,7 @@ export interface GetCommunityContentParams {
 }
 
 /** Returns community content. */
-export async function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<PostSearchResponseServerResponse> {
+export async function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/CommunityContent/Get/${params.sort}/${params.mediaFilter}/${params.page}/`
@@ -66,7 +67,7 @@ export interface GetCommunityLiveStatusesParams {
 }
 
 /** Returns info about community members who are live streaming. */
-export async function getCommunityLiveStatuses(http: HttpClient, params: GetCommunityLiveStatusesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse> {
+export async function getCommunityLiveStatuses(http: HttpClient, params: GetCommunityLiveStatusesParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/CommunityContent/Live/All/${params.partnershipType}/${params.sort}/${params.page}/`,
@@ -87,7 +88,7 @@ export interface GetCommunityLiveStatusesForClanmatesParams {
 }
 
 /** Returns info about community members who are live streaming in your clans. */
-export async function getCommunityLiveStatusesForClanmates(http: HttpClient, params: GetCommunityLiveStatusesForClanmatesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse> {
+export async function getCommunityLiveStatusesForClanmates(http: HttpClient, params: GetCommunityLiveStatusesForClanmatesParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/CommunityContent/Live/Clan/${params.partnershipType}/${params.sort}/${params.page}/`
@@ -104,7 +105,7 @@ export interface GetCommunityLiveStatusesForFriendsParams {
 }
 
 /** Returns info about community members who are live streaming among your friends. */
-export async function getCommunityLiveStatusesForFriends(http: HttpClient, params: GetCommunityLiveStatusesForFriendsParams): Promise<SearchResultOfCommunityLiveStatusServerResponse> {
+export async function getCommunityLiveStatusesForFriends(http: HttpClient, params: GetCommunityLiveStatusesForFriendsParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/CommunityContent/Live/Friends/${params.partnershipType}/${params.sort}/${params.page}/`
@@ -126,7 +127,7 @@ export interface GetFeaturedCommunityLiveStatusesParams {
 }
 
 /** Returns info about Featured live streams. */
-export async function getFeaturedCommunityLiveStatuses(http: HttpClient, params: GetFeaturedCommunityLiveStatusesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse> {
+export async function getFeaturedCommunityLiveStatuses(http: HttpClient, params: GetFeaturedCommunityLiveStatusesParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/CommunityContent/Live/Featured/${params.partnershipType}/${params.sort}/${params.page}/`,
@@ -146,7 +147,7 @@ export interface GetStreamingStatusForMemberParams {
 }
 
 /** Gets the Live Streaming status of a particular Account and Membership Type. */
-export async function getStreamingStatusForMember(http: HttpClient, params: GetStreamingStatusForMemberParams): Promise<CommunityLiveStatusServerResponse> {
+export async function getStreamingStatusForMember(http: HttpClient, params: GetStreamingStatusForMemberParams): Promise<ServerResponse<CommunityLiveStatus>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/CommunityContent/Live/Users/${params.partnershipType}/${params.membershipType}/${params.membershipId}/`

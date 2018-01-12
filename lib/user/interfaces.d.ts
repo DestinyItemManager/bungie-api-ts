@@ -9,68 +9,8 @@
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */
-import { BungieMembershipType, PlatformErrorCodes } from '../common';
+import { BungieMembershipType } from '../common';
 import { IgnoreResponse, PartnershipType } from '../platform';
-export interface GeneralUserServerResponse {
-    readonly Response: GeneralUser;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
-export interface ListOfUserAliasServerResponse {
-    readonly Response: UserAlias[];
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
-export interface ListOfGeneralUserServerResponse {
-    readonly Response: GeneralUser[];
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
-export interface ListOfUserThemeServerResponse {
-    readonly Response: UserTheme[];
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
-export interface UserMembershipDataServerResponse {
-    readonly Response: UserMembershipData;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
-export interface CEListOfPublicPartnershipDetailServerResponse {
-    readonly Response: PublicPartnershipDetail[];
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
 export interface GeneralUser {
     readonly membershipId: string;
     readonly uniqueName: string;

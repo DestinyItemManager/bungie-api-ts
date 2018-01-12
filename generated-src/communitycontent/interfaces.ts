@@ -11,8 +11,7 @@
  */
 
 import {
-  PagedQuery,
-  PlatformErrorCodes
+  PagedQuery
 } from '../common';
 import {
   PartnershipType
@@ -26,24 +25,6 @@ export const enum CommunityStatusSort {
   Trending = 1,
   OverallViewers = 2,
   Followers = 3
-}
-
-export interface SearchResultOfCommunityLiveStatusServerResponse {
-  readonly Response: SearchResultOfCommunityLiveStatus;
-  readonly ErrorCode: PlatformErrorCodes;
-  readonly ThrottleSeconds: number;
-  readonly ErrorStatus: string;
-  readonly Message: string;
-  readonly MessageData: { [key: string]: string };
-}
-
-export interface CommunityLiveStatusServerResponse {
-  readonly Response: CommunityLiveStatus;
-  readonly ErrorCode: PlatformErrorCodes;
-  readonly ThrottleSeconds: number;
-  readonly ErrorStatus: string;
-  readonly Message: string;
-  readonly MessageData: { [key: string]: string };
 }
 
 export interface SearchResultOfCommunityLiveStatus {

@@ -10,10 +10,11 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { BungieMembershipType, int32ServerResponse } from '../common';
-import { DestinyActivityHistoryResultsServerResponse, DestinyActivityModeType, DestinyAggregateActivityResultsServerResponse, DestinyCharacterResponseServerResponse, DestinyComponentType, DestinyDefinitionServerResponse, DestinyEntitySearchResultServerResponse, DestinyEquipItemResultsServerResponse, DestinyHistoricalStatsAccountResultServerResponse, DestinyHistoricalStatsResultsServerResponse, DestinyHistoricalWeaponStatsDataServerResponse, DestinyItemActionRequest, DestinyItemResponseServerResponse, DestinyItemSetActionRequest, DestinyItemStateRequest, DestinyItemTransferRequest, DestinyLeaderboardResultsServerResponse, DestinyManifestServerResponse, DestinyMilestoneContentServerResponse, DestinyMilestoneServerResponse, DestinyPostGameCarnageReportDataServerResponse, DestinyPostmasterTransferRequest, DestinyProfileResponseServerResponse, DestinyReportOffensePgcrRequest, DestinyStatsGroupType, DestinyVendorResponseServerResponse, DestinyVendorsResponseServerResponse, DictionaryOfuint32AndDestinyPublicMilestoneServerResponse, IEnumerableOfUserInfoCardServerResponse, ListOfDestinyClanAggregateStatServerResponse, PeriodType, ReadOnlyDictionaryOfstringAndDestinyHistoricalStatsDefinitionServerResponse } from './interfaces';
+import { BungieMembershipType, ServerResponse } from '../common';
+import { DestinyActivityHistoryResults, DestinyActivityModeType, DestinyAggregateActivityResults, DestinyCharacterResponse, DestinyClanAggregateStat, DestinyComponentType, DestinyDefinition, DestinyEntitySearchResult, DestinyEquipItemResults, DestinyHistoricalStatsAccountResult, DestinyHistoricalStatsByPeriod, DestinyHistoricalStatsDefinition, DestinyHistoricalWeaponStatsData, DestinyItemActionRequest, DestinyItemResponse, DestinyItemSetActionRequest, DestinyItemStateRequest, DestinyItemTransferRequest, DestinyLeaderboard, DestinyManifest, DestinyMilestone, DestinyMilestoneContent, DestinyPostGameCarnageReportData, DestinyPostmasterTransferRequest, DestinyProfileResponse, DestinyPublicMilestone, DestinyReportOffensePgcrRequest, DestinyStatsGroupType, DestinyVendorResponse, DestinyVendorsResponse, PeriodType } from './interfaces';
+import { UserInfoCard } from '../user/interfaces';
 /** Returns the current version of the manifest as a json object. */
-export declare function getDestinyManifest(http: HttpClient): Promise<DestinyManifestServerResponse>;
+export declare function getDestinyManifest(http: HttpClient): Promise<ServerResponse<DestinyManifest>>;
 export interface GetDestinyEntityDefinitionParams {
     /**
      * The type of entity for whom you would like results. These correspond to the
@@ -35,7 +36,7 @@ export interface GetDestinyEntityDefinitionParams {
  * Manifest database if you require large sets of data, but for simple and one-off
  * accesses this should be handy.
  */
-export declare function getDestinyEntityDefinition(http: HttpClient, params: GetDestinyEntityDefinitionParams): Promise<DestinyDefinitionServerResponse>;
+export declare function getDestinyEntityDefinition(http: HttpClient, params: GetDestinyEntityDefinitionParams): Promise<ServerResponse<DestinyDefinition>>;
 export interface SearchDestinyPlayerParams {
     /** The full gamertag or PSN id of the player. Spaces and case are ignored. */
     displayName: string;
@@ -43,7 +44,7 @@ export interface SearchDestinyPlayerParams {
     membershipType: BungieMembershipType;
 }
 /** Returns a list of Destiny memberships given a full Gamertag or PSN ID. */
-export declare function searchDestinyPlayer(http: HttpClient, params: SearchDestinyPlayerParams): Promise<IEnumerableOfUserInfoCardServerResponse>;
+export declare function searchDestinyPlayer(http: HttpClient, params: SearchDestinyPlayerParams): Promise<ServerResponse<UserInfoCard[]>>;
 export interface GetProfileParams {
     /**
      * A comma separated list of components to return (as strings or numeric values).
@@ -57,7 +58,7 @@ export interface GetProfileParams {
     membershipType: BungieMembershipType;
 }
 /** Returns Destiny Profile information for the supplied membership. */
-export declare function getProfile(http: HttpClient, params: GetProfileParams): Promise<DestinyProfileResponseServerResponse>;
+export declare function getProfile(http: HttpClient, params: GetProfileParams): Promise<ServerResponse<DestinyProfileResponse>>;
 export interface GetCharacterParams {
     /** ID of the character. */
     characterId: string;
@@ -73,7 +74,7 @@ export interface GetCharacterParams {
     membershipType: BungieMembershipType;
 }
 /** Returns character information for the supplied character. */
-export declare function getCharacter(http: HttpClient, params: GetCharacterParams): Promise<DestinyCharacterResponseServerResponse>;
+export declare function getCharacter(http: HttpClient, params: GetCharacterParams): Promise<ServerResponse<DestinyCharacterResponse>>;
 export interface GetClanWeeklyRewardStateParams {
     /** A valid group id of clan. */
     groupId: string;
@@ -82,7 +83,7 @@ export interface GetClanWeeklyRewardStateParams {
  * Returns information on the weekly clan rewards and if the clan has earned them
  * or not. Note that this will always report rewards as not redeemed.
  */
-export declare function getClanWeeklyRewardState(http: HttpClient, params: GetClanWeeklyRewardStateParams): Promise<DestinyMilestoneServerResponse>;
+export declare function getClanWeeklyRewardState(http: HttpClient, params: GetClanWeeklyRewardStateParams): Promise<ServerResponse<DestinyMilestone>>;
 export interface GetItemParams {
     /**
      * A comma separated list of components to return (as strings or numeric values).
@@ -102,7 +103,7 @@ export interface GetItemParams {
  * one with an ItemInstanceId. Non-instanced items, such as materials, have no
  * useful instance-specific details and thus are not queryable here.
  */
-export declare function getItem(http: HttpClient, params: GetItemParams): Promise<DestinyItemResponseServerResponse>;
+export declare function getItem(http: HttpClient, params: GetItemParams): Promise<ServerResponse<DestinyItemResponse>>;
 export interface GetVendorsParams {
     /** The Destiny Character ID of the character for whom we're getting vendor info. */
     characterId: string;
@@ -125,7 +126,7 @@ export interface GetVendorsParams {
  * we are returning the planned schema of the endpoint for review, comment, and
  * preparation for its eventual implementation.
  */
-export declare function getVendors(http: HttpClient, params: GetVendorsParams): Promise<DestinyVendorsResponseServerResponse>;
+export declare function getVendors(http: HttpClient, params: GetVendorsParams): Promise<ServerResponse<DestinyVendorsResponse>>;
 export interface GetVendorParams {
     /** The Destiny Character ID of the character for whom we're getting vendor info. */
     characterId: string;
@@ -147,7 +148,7 @@ export interface GetVendorParams {
  * but we are returning the planned schema of the endpoint for review, comment, and
  * preparation for its eventual implementation.
  */
-export declare function getVendor(http: HttpClient, params: GetVendorParams): Promise<DestinyVendorResponseServerResponse>;
+export declare function getVendor(http: HttpClient, params: GetVendorParams): Promise<ServerResponse<DestinyVendorResponse>>;
 export interface TransferItemParams {
     body: DestinyItemTransferRequest;
 }
@@ -156,7 +157,7 @@ export interface TransferItemParams {
  * must also pass BOTH a reference AND an instance ID if it's an instanced item.
  * itshappening.gif
  */
-export declare function transferItem(http: HttpClient, params: TransferItemParams): Promise<int32ServerResponse>;
+export declare function transferItem(http: HttpClient, params: TransferItemParams): Promise<ServerResponse<number>>;
 export interface PullFromPostmasterParams {
     body: DestinyPostmasterTransferRequest;
 }
@@ -165,7 +166,7 @@ export interface PullFromPostmasterParams {
  * You must have a valid Destiny account. You must also pass BOTH a reference AND
  * an instance ID if it's an instanced item.
  */
-export declare function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<int32ServerResponse>;
+export declare function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<ServerResponse<number>>;
 export interface EquipItemParams {
     body: DestinyItemActionRequest;
 }
@@ -173,7 +174,7 @@ export interface EquipItemParams {
  * Equip an item. You must have a valid Destiny Account, and either be in a social
  * space, in orbit, or offline.
  */
-export declare function equipItem(http: HttpClient, params: EquipItemParams): Promise<int32ServerResponse>;
+export declare function equipItem(http: HttpClient, params: EquipItemParams): Promise<ServerResponse<number>>;
 export interface EquipItemsParams {
     body: DestinyItemSetActionRequest;
 }
@@ -182,12 +183,12 @@ export interface EquipItemsParams {
  * and either be in a social space, in orbit, or offline. Any items not found on
  * your character will be ignored.
  */
-export declare function equipItems(http: HttpClient, params: EquipItemsParams): Promise<DestinyEquipItemResultsServerResponse>;
+export declare function equipItems(http: HttpClient, params: EquipItemsParams): Promise<ServerResponse<DestinyEquipItemResults>>;
 export interface SetItemLockStateParams {
     body: DestinyItemStateRequest;
 }
 /** Set the Lock State for an instanced item. You must have a valid Destiny Account. */
-export declare function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<int32ServerResponse>;
+export declare function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<ServerResponse<number>>;
 export interface InsertSocketPlugParams {
     body: DestinyItemActionRequest;
 }
@@ -201,7 +202,7 @@ export interface InsertSocketPlugParams {
  * planned schema of the endpoint for review, comment, and preparation for its
  * eventual implementation.
  */
-export declare function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<int32ServerResponse>;
+export declare function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<ServerResponse<number>>;
 export interface ActivateTalentNodeParams {
     body: DestinyItemActionRequest;
 }
@@ -214,13 +215,13 @@ export interface ActivateTalentNodeParams {
  * schema of the endpoint for review, comment, and preparation for its eventual
  * implementation.
  */
-export declare function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<int32ServerResponse>;
+export declare function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<ServerResponse<number>>;
 export interface GetPostGameCarnageReportParams {
     /** The ID of the activity whose PGCR is requested. */
     activityId: string;
 }
 /** Gets the available post game carnage report for the activity ID. */
-export declare function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<DestinyPostGameCarnageReportDataServerResponse>;
+export declare function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<ServerResponse<DestinyPostGameCarnageReportData>>;
 export interface ReportOffensivePostGameCarnageReportPlayerParams {
     /** The ID of the activity where you ran into the brigand that you're reporting. */
     activityId: string;
@@ -232,9 +233,11 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
  * passed in. Please use this judiciously and only when you have strong suspicions
  * of violation, pretty please.
  */
-export declare function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<int32ServerResponse>;
+export declare function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<ServerResponse<number>>;
 /** Gets historical stats definitions. */
-export declare function getHistoricalStatsDefinition(http: HttpClient): Promise<ReadOnlyDictionaryOfstringAndDestinyHistoricalStatsDefinitionServerResponse>;
+export declare function getHistoricalStatsDefinition(http: HttpClient): Promise<ServerResponse<{
+    [key: string]: DestinyHistoricalStatsDefinition;
+}>>;
 export interface GetClanLeaderboardsParams {
     /** Group ID of the clan whose leaderboards you wish to fetch. */
     groupId: string;
@@ -258,7 +261,11 @@ export interface GetClanLeaderboardsParams {
  * may experience rough edges. The schema is in final form, but there may be bugs
  * that prevent desirable operation.
  */
-export declare function getClanLeaderboards(http: HttpClient, params: GetClanLeaderboardsParams): Promise<DestinyLeaderboardResultsServerResponse>;
+export declare function getClanLeaderboards(http: HttpClient, params: GetClanLeaderboardsParams): Promise<ServerResponse<{
+    [key: string]: {
+        [key: string]: DestinyLeaderboard;
+    };
+}>>;
 export interface GetClanAggregateStatsParams {
     /** Group ID of the clan whose leaderboards you wish to fetch. */
     groupId: string;
@@ -275,7 +282,7 @@ export interface GetClanAggregateStatsParams {
  * edges. The schema is in final form, but there may be bugs that prevent desirable
  * operation.
  */
-export declare function getClanAggregateStats(http: HttpClient, params: GetClanAggregateStatsParams): Promise<ListOfDestinyClanAggregateStatServerResponse>;
+export declare function getClanAggregateStats(http: HttpClient, params: GetClanAggregateStatsParams): Promise<ServerResponse<DestinyClanAggregateStat[]>>;
 export interface GetLeaderboardsParams {
     /** The Destiny membershipId of the user to retrieve. */
     destinyMembershipId: string;
@@ -301,7 +308,11 @@ export interface GetLeaderboardsParams {
  * implemented. It is being returned for a preview of future functionality, and for
  * public comment/suggestion/preparation.
  */
-export declare function getLeaderboards(http: HttpClient, params: GetLeaderboardsParams): Promise<DestinyLeaderboardResultsServerResponse>;
+export declare function getLeaderboards(http: HttpClient, params: GetLeaderboardsParams): Promise<ServerResponse<{
+    [key: string]: {
+        [key: string]: DestinyLeaderboard;
+    };
+}>>;
 export interface GetLeaderboardsForCharacterParams {
     /**
      * The specific character to build the leaderboard around for the provided Destiny
@@ -332,7 +343,11 @@ export interface GetLeaderboardsForCharacterParams {
  * may experience rough edges. The schema is in final form, but there may be bugs
  * that prevent desirable operation.
  */
-export declare function getLeaderboardsForCharacter(http: HttpClient, params: GetLeaderboardsForCharacterParams): Promise<DestinyLeaderboardResultsServerResponse>;
+export declare function getLeaderboardsForCharacter(http: HttpClient, params: GetLeaderboardsForCharacterParams): Promise<ServerResponse<{
+    [key: string]: {
+        [key: string]: DestinyLeaderboard;
+    };
+}>>;
 export interface SearchDestinyEntitiesParams {
     /** Page number to return, starting with 0. */
     page?: number;
@@ -346,7 +361,7 @@ export interface SearchDestinyEntitiesParams {
     type: string;
 }
 /** Gets a page list of Destiny items. */
-export declare function searchDestinyEntities(http: HttpClient, params: SearchDestinyEntitiesParams): Promise<DestinyEntitySearchResultServerResponse>;
+export declare function searchDestinyEntities(http: HttpClient, params: SearchDestinyEntitiesParams): Promise<ServerResponse<DestinyEntitySearchResult>>;
 export interface GetHistoricalStatsParams {
     /**
      * The id of the character to retrieve. You can omit this character ID or set it to
@@ -378,7 +393,9 @@ export interface GetHistoricalStatsParams {
     periodType?: PeriodType;
 }
 /** Gets historical stats for indicated character. */
-export declare function getHistoricalStats(http: HttpClient, params: GetHistoricalStatsParams): Promise<DestinyHistoricalStatsResultsServerResponse>;
+export declare function getHistoricalStats(http: HttpClient, params: GetHistoricalStatsParams): Promise<ServerResponse<{
+    [key: string]: DestinyHistoricalStatsByPeriod;
+}>>;
 export interface GetHistoricalStatsForAccountParams {
     /** The Destiny membershipId of the user to retrieve. */
     destinyMembershipId: string;
@@ -394,7 +411,7 @@ export interface GetHistoricalStatsForAccountParams {
  * Gets aggregate historical stats organized around each character for a given
  * account.
  */
-export declare function getHistoricalStatsForAccount(http: HttpClient, params: GetHistoricalStatsForAccountParams): Promise<DestinyHistoricalStatsAccountResultServerResponse>;
+export declare function getHistoricalStatsForAccount(http: HttpClient, params: GetHistoricalStatsForAccountParams): Promise<ServerResponse<DestinyHistoricalStatsAccountResult>>;
 export interface GetActivityHistoryParams {
     /** The id of the character to retrieve. */
     characterId: string;
@@ -414,7 +431,7 @@ export interface GetActivityHistoryParams {
     page?: number;
 }
 /** Gets activity history stats for indicated character. */
-export declare function getActivityHistory(http: HttpClient, params: GetActivityHistoryParams): Promise<DestinyActivityHistoryResultsServerResponse>;
+export declare function getActivityHistory(http: HttpClient, params: GetActivityHistoryParams): Promise<ServerResponse<DestinyActivityHistoryResults>>;
 export interface GetUniqueWeaponHistoryParams {
     /** The id of the character to retrieve. */
     characterId: string;
@@ -424,7 +441,7 @@ export interface GetUniqueWeaponHistoryParams {
     membershipType: BungieMembershipType;
 }
 /** Gets details about unique weapon usage, including all exotic weapons. */
-export declare function getUniqueWeaponHistory(http: HttpClient, params: GetUniqueWeaponHistoryParams): Promise<DestinyHistoricalWeaponStatsDataServerResponse>;
+export declare function getUniqueWeaponHistory(http: HttpClient, params: GetUniqueWeaponHistoryParams): Promise<ServerResponse<DestinyHistoricalWeaponStatsData>>;
 export interface GetDestinyAggregateActivityStatsParams {
     /** The specific character whose activities should be returned. */
     characterId: string;
@@ -437,12 +454,14 @@ export interface GetDestinyAggregateActivityStatsParams {
  * Gets all activities the character has participated in together with aggregate
  * statistics for those activities.
  */
-export declare function getDestinyAggregateActivityStats(http: HttpClient, params: GetDestinyAggregateActivityStatsParams): Promise<DestinyAggregateActivityResultsServerResponse>;
+export declare function getDestinyAggregateActivityStats(http: HttpClient, params: GetDestinyAggregateActivityStatsParams): Promise<ServerResponse<DestinyAggregateActivityResults>>;
 export interface GetPublicMilestoneContentParams {
     /** The identifier for the milestone to be returned. */
     milestoneHash: number;
 }
 /** Gets custom localized content for the milestone of the given hash, if it exists. */
-export declare function getPublicMilestoneContent(http: HttpClient, params: GetPublicMilestoneContentParams): Promise<DestinyMilestoneContentServerResponse>;
+export declare function getPublicMilestoneContent(http: HttpClient, params: GetPublicMilestoneContentParams): Promise<ServerResponse<DestinyMilestoneContent>>;
 /** Gets public information about currently available Milestones. */
-export declare function getPublicMilestones(http: HttpClient): Promise<DictionaryOfuint32AndDestinyPublicMilestoneServerResponse>;
+export declare function getPublicMilestones(http: HttpClient): Promise<ServerResponse<{
+    [key: number]: DestinyPublicMilestone;
+}>>;

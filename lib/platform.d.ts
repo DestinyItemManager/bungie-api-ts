@@ -9,7 +9,6 @@
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */
-import { PlatformErrorCodes } from './common';
 export interface IgnoreResponse {
     readonly isIgnored: boolean;
     readonly ignoreFlags: IgnoreStatus;
@@ -26,16 +25,6 @@ export declare const enum IgnoreStatus {
 export declare const enum PartnershipType {
     None = 0,
     Twitch = 1,
-}
-export interface int64ServerResponse {
-    readonly Response: string;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
 }
 export interface TagResponse {
     readonly tagText: string;

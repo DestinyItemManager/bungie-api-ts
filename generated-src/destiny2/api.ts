@@ -14,45 +14,47 @@ import { HttpClient } from '../http';
 
 import {
   BungieMembershipType,
-  int32ServerResponse
+  ServerResponse
 } from '../common';
 import {
-  DestinyActivityHistoryResultsServerResponse,
+  DestinyActivityHistoryResults,
   DestinyActivityModeType,
-  DestinyAggregateActivityResultsServerResponse,
-  DestinyCharacterResponseServerResponse,
+  DestinyAggregateActivityResults,
+  DestinyCharacterResponse,
+  DestinyClanAggregateStat,
   DestinyComponentType,
-  DestinyDefinitionServerResponse,
-  DestinyEntitySearchResultServerResponse,
-  DestinyEquipItemResultsServerResponse,
-  DestinyHistoricalStatsAccountResultServerResponse,
-  DestinyHistoricalStatsResultsServerResponse,
-  DestinyHistoricalWeaponStatsDataServerResponse,
+  DestinyDefinition,
+  DestinyEntitySearchResult,
+  DestinyEquipItemResults,
+  DestinyHistoricalStatsAccountResult,
+  DestinyHistoricalStatsByPeriod,
+  DestinyHistoricalStatsDefinition,
+  DestinyHistoricalWeaponStatsData,
   DestinyItemActionRequest,
-  DestinyItemResponseServerResponse,
+  DestinyItemResponse,
   DestinyItemSetActionRequest,
   DestinyItemStateRequest,
   DestinyItemTransferRequest,
-  DestinyLeaderboardResultsServerResponse,
-  DestinyManifestServerResponse,
-  DestinyMilestoneContentServerResponse,
-  DestinyMilestoneServerResponse,
-  DestinyPostGameCarnageReportDataServerResponse,
+  DestinyLeaderboard,
+  DestinyManifest,
+  DestinyMilestone,
+  DestinyMilestoneContent,
+  DestinyPostGameCarnageReportData,
   DestinyPostmasterTransferRequest,
-  DestinyProfileResponseServerResponse,
+  DestinyProfileResponse,
+  DestinyPublicMilestone,
   DestinyReportOffensePgcrRequest,
   DestinyStatsGroupType,
-  DestinyVendorResponseServerResponse,
-  DestinyVendorsResponseServerResponse,
-  DictionaryOfuint32AndDestinyPublicMilestoneServerResponse,
-  IEnumerableOfUserInfoCardServerResponse,
-  ListOfDestinyClanAggregateStatServerResponse,
-  PeriodType,
-  ReadOnlyDictionaryOfstringAndDestinyHistoricalStatsDefinitionServerResponse
+  DestinyVendorResponse,
+  DestinyVendorsResponse,
+  PeriodType
 } from './interfaces';
+import {
+  UserInfoCard
+} from '../user/interfaces';
 
 /** Returns the current version of the manifest as a json object. */
-export async function getDestinyManifest(http: HttpClient): Promise<DestinyManifestServerResponse> {
+export async function getDestinyManifest(http: HttpClient): Promise<ServerResponse<DestinyManifest>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/Destiny2/Manifest/'
@@ -81,7 +83,7 @@ export interface GetDestinyEntityDefinitionParams {
  * Manifest database if you require large sets of data, but for simple and one-off
  * accesses this should be handy.
  */
-export async function getDestinyEntityDefinition(http: HttpClient, params: GetDestinyEntityDefinitionParams): Promise<DestinyDefinitionServerResponse> {
+export async function getDestinyEntityDefinition(http: HttpClient, params: GetDestinyEntityDefinitionParams): Promise<ServerResponse<DestinyDefinition>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Manifest/${params.entityType}/${params.hashIdentifier}/`
@@ -96,7 +98,7 @@ export interface SearchDestinyPlayerParams {
 }
 
 /** Returns a list of Destiny memberships given a full Gamertag or PSN ID. */
-export async function searchDestinyPlayer(http: HttpClient, params: SearchDestinyPlayerParams): Promise<IEnumerableOfUserInfoCardServerResponse> {
+export async function searchDestinyPlayer(http: HttpClient, params: SearchDestinyPlayerParams): Promise<ServerResponse<UserInfoCard[]>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${params.membershipType}/${params.displayName}/`
@@ -117,7 +119,7 @@ export interface GetProfileParams {
 }
 
 /** Returns Destiny Profile information for the supplied membership. */
-export async function getProfile(http: HttpClient, params: GetProfileParams): Promise<DestinyProfileResponseServerResponse> {
+export async function getProfile(http: HttpClient, params: GetProfileParams): Promise<ServerResponse<DestinyProfileResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/`,
@@ -143,7 +145,7 @@ export interface GetCharacterParams {
 }
 
 /** Returns character information for the supplied character. */
-export async function getCharacter(http: HttpClient, params: GetCharacterParams): Promise<DestinyCharacterResponseServerResponse> {
+export async function getCharacter(http: HttpClient, params: GetCharacterParams): Promise<ServerResponse<DestinyCharacterResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/`,
@@ -162,7 +164,7 @@ export interface GetClanWeeklyRewardStateParams {
  * Returns information on the weekly clan rewards and if the clan has earned them
  * or not. Note that this will always report rewards as not redeemed.
  */
-export async function getClanWeeklyRewardState(http: HttpClient, params: GetClanWeeklyRewardStateParams): Promise<DestinyMilestoneServerResponse> {
+export async function getClanWeeklyRewardState(http: HttpClient, params: GetClanWeeklyRewardStateParams): Promise<ServerResponse<DestinyMilestone>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Clan/${params.groupId}/WeeklyRewardState/`
@@ -189,7 +191,7 @@ export interface GetItemParams {
  * one with an ItemInstanceId. Non-instanced items, such as materials, have no
  * useful instance-specific details and thus are not queryable here.
  */
-export async function getItem(http: HttpClient, params: GetItemParams): Promise<DestinyItemResponseServerResponse> {
+export async function getItem(http: HttpClient, params: GetItemParams): Promise<ServerResponse<DestinyItemResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Item/${params.itemInstanceId}/`,
@@ -222,7 +224,7 @@ export interface GetVendorsParams {
  * we are returning the planned schema of the endpoint for review, comment, and
  * preparation for its eventual implementation.
  */
-export async function getVendors(http: HttpClient, params: GetVendorsParams): Promise<DestinyVendorsResponseServerResponse> {
+export async function getVendors(http: HttpClient, params: GetVendorsParams): Promise<ServerResponse<DestinyVendorsResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/`,
@@ -254,7 +256,7 @@ export interface GetVendorParams {
  * but we are returning the planned schema of the endpoint for review, comment, and
  * preparation for its eventual implementation.
  */
-export async function getVendor(http: HttpClient, params: GetVendorParams): Promise<DestinyVendorResponseServerResponse> {
+export async function getVendor(http: HttpClient, params: GetVendorParams): Promise<ServerResponse<DestinyVendorResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/${params.vendorHash}/`,
@@ -273,7 +275,7 @@ export interface TransferItemParams {
  * must also pass BOTH a reference AND an instance ID if it's an instanced item.
  * itshappening.gif
  */
-export async function transferItem(http: HttpClient, params: TransferItemParams): Promise<int32ServerResponse> {
+export async function transferItem(http: HttpClient, params: TransferItemParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/TransferItem/',
@@ -290,7 +292,7 @@ export interface PullFromPostmasterParams {
  * You must have a valid Destiny account. You must also pass BOTH a reference AND
  * an instance ID if it's an instanced item.
  */
-export async function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<int32ServerResponse> {
+export async function pullFromPostmaster(http: HttpClient, params: PullFromPostmasterParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/PullFromPostmaster/',
@@ -306,7 +308,7 @@ export interface EquipItemParams {
  * Equip an item. You must have a valid Destiny Account, and either be in a social
  * space, in orbit, or offline.
  */
-export async function equipItem(http: HttpClient, params: EquipItemParams): Promise<int32ServerResponse> {
+export async function equipItem(http: HttpClient, params: EquipItemParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItem/',
@@ -323,7 +325,7 @@ export interface EquipItemsParams {
  * and either be in a social space, in orbit, or offline. Any items not found on
  * your character will be ignored.
  */
-export async function equipItems(http: HttpClient, params: EquipItemsParams): Promise<DestinyEquipItemResultsServerResponse> {
+export async function equipItems(http: HttpClient, params: EquipItemsParams): Promise<ServerResponse<DestinyEquipItemResults>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItems/',
@@ -336,7 +338,7 @@ export interface SetItemLockStateParams {
 }
 
 /** Set the Lock State for an instanced item. You must have a valid Destiny Account. */
-export async function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<int32ServerResponse> {
+export async function setItemLockState(http: HttpClient, params: SetItemLockStateParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/SetLockState/',
@@ -358,7 +360,7 @@ export interface InsertSocketPlugParams {
  * planned schema of the endpoint for review, comment, and preparation for its
  * eventual implementation.
  */
-export async function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<int32ServerResponse> {
+export async function insertSocketPlug(http: HttpClient, params: InsertSocketPlugParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlug/',
@@ -379,7 +381,7 @@ export interface ActivateTalentNodeParams {
  * schema of the endpoint for review, comment, and preparation for its eventual
  * implementation.
  */
-export async function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<int32ServerResponse> {
+export async function activateTalentNode(http: HttpClient, params: ActivateTalentNodeParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/ActivateTalentNode/',
@@ -393,7 +395,7 @@ export interface GetPostGameCarnageReportParams {
 }
 
 /** Gets the available post game carnage report for the activity ID. */
-export async function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<DestinyPostGameCarnageReportDataServerResponse> {
+export async function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<ServerResponse<DestinyPostGameCarnageReportData>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/`
@@ -412,7 +414,7 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
  * passed in. Please use this judiciously and only when you have strong suspicions
  * of violation, pretty please.
  */
-export async function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<int32ServerResponse> {
+export async function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
     url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`,
@@ -421,7 +423,7 @@ export async function reportOffensivePostGameCarnageReportPlayer(http: HttpClien
 }
 
 /** Gets historical stats definitions. */
-export async function getHistoricalStatsDefinition(http: HttpClient): Promise<ReadOnlyDictionaryOfstringAndDestinyHistoricalStatsDefinitionServerResponse> {
+export async function getHistoricalStatsDefinition(http: HttpClient): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsDefinition }>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/Destiny2/Stats/Definition/'
@@ -452,7 +454,7 @@ export interface GetClanLeaderboardsParams {
  * may experience rough edges. The schema is in final form, but there may be bugs
  * that prevent desirable operation.
  */
-export async function getClanLeaderboards(http: HttpClient, params: GetClanLeaderboardsParams): Promise<DestinyLeaderboardResultsServerResponse> {
+export async function getClanLeaderboards(http: HttpClient, params: GetClanLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Stats/Leaderboards/Clans/${params.groupId}/`,
@@ -481,7 +483,7 @@ export interface GetClanAggregateStatsParams {
  * edges. The schema is in final form, but there may be bugs that prevent desirable
  * operation.
  */
-export async function getClanAggregateStats(http: HttpClient, params: GetClanAggregateStatsParams): Promise<ListOfDestinyClanAggregateStatServerResponse> {
+export async function getClanAggregateStats(http: HttpClient, params: GetClanAggregateStatsParams): Promise<ServerResponse<DestinyClanAggregateStat[]>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Stats/AggregateClanStats/${params.groupId}/`,
@@ -517,7 +519,7 @@ export interface GetLeaderboardsParams {
  * implemented. It is being returned for a preview of future functionality, and for
  * public comment/suggestion/preparation.
  */
-export async function getLeaderboards(http: HttpClient, params: GetLeaderboardsParams): Promise<DestinyLeaderboardResultsServerResponse> {
+export async function getLeaderboards(http: HttpClient, params: GetLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Stats/Leaderboards/`,
@@ -560,7 +562,7 @@ export interface GetLeaderboardsForCharacterParams {
  * may experience rough edges. The schema is in final form, but there may be bugs
  * that prevent desirable operation.
  */
-export async function getLeaderboardsForCharacter(http: HttpClient, params: GetLeaderboardsForCharacterParams): Promise<DestinyLeaderboardResultsServerResponse> {
+export async function getLeaderboardsForCharacter(http: HttpClient, params: GetLeaderboardsForCharacterParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Stats/Leaderboards/${params.membershipType}/${params.destinyMembershipId}/${params.characterId}/`,
@@ -586,7 +588,7 @@ export interface SearchDestinyEntitiesParams {
 }
 
 /** Gets a page list of Destiny items. */
-export async function searchDestinyEntities(http: HttpClient, params: SearchDestinyEntitiesParams): Promise<DestinyEntitySearchResultServerResponse> {
+export async function searchDestinyEntities(http: HttpClient, params: SearchDestinyEntitiesParams): Promise<ServerResponse<DestinyEntitySearchResult>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Armory/Search/${params.type}/${params.searchTerm}/`,
@@ -628,7 +630,7 @@ export interface GetHistoricalStatsParams {
 }
 
 /** Gets historical stats for indicated character. */
-export async function getHistoricalStats(http: HttpClient, params: GetHistoricalStatsParams): Promise<DestinyHistoricalStatsResultsServerResponse> {
+export async function getHistoricalStats(http: HttpClient, params: GetHistoricalStatsParams): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsByPeriod }>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/`,
@@ -658,7 +660,7 @@ export interface GetHistoricalStatsForAccountParams {
  * Gets aggregate historical stats organized around each character for a given
  * account.
  */
-export async function getHistoricalStatsForAccount(http: HttpClient, params: GetHistoricalStatsForAccountParams): Promise<DestinyHistoricalStatsAccountResultServerResponse> {
+export async function getHistoricalStatsForAccount(http: HttpClient, params: GetHistoricalStatsForAccountParams): Promise<ServerResponse<DestinyHistoricalStatsAccountResult>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Stats/`,
@@ -688,7 +690,7 @@ export interface GetActivityHistoryParams {
 }
 
 /** Gets activity history stats for indicated character. */
-export async function getActivityHistory(http: HttpClient, params: GetActivityHistoryParams): Promise<DestinyActivityHistoryResultsServerResponse> {
+export async function getActivityHistory(http: HttpClient, params: GetActivityHistoryParams): Promise<ServerResponse<DestinyActivityHistoryResults>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/Activities/`,
@@ -710,7 +712,7 @@ export interface GetUniqueWeaponHistoryParams {
 }
 
 /** Gets details about unique weapon usage, including all exotic weapons. */
-export async function getUniqueWeaponHistory(http: HttpClient, params: GetUniqueWeaponHistoryParams): Promise<DestinyHistoricalWeaponStatsDataServerResponse> {
+export async function getUniqueWeaponHistory(http: HttpClient, params: GetUniqueWeaponHistoryParams): Promise<ServerResponse<DestinyHistoricalWeaponStatsData>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/UniqueWeapons/`
@@ -730,7 +732,7 @@ export interface GetDestinyAggregateActivityStatsParams {
  * Gets all activities the character has participated in together with aggregate
  * statistics for those activities.
  */
-export async function getDestinyAggregateActivityStats(http: HttpClient, params: GetDestinyAggregateActivityStatsParams): Promise<DestinyAggregateActivityResultsServerResponse> {
+export async function getDestinyAggregateActivityStats(http: HttpClient, params: GetDestinyAggregateActivityStatsParams): Promise<ServerResponse<DestinyAggregateActivityResults>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/AggregateActivityStats/`
@@ -743,7 +745,7 @@ export interface GetPublicMilestoneContentParams {
 }
 
 /** Gets custom localized content for the milestone of the given hash, if it exists. */
-export async function getPublicMilestoneContent(http: HttpClient, params: GetPublicMilestoneContentParams): Promise<DestinyMilestoneContentServerResponse> {
+export async function getPublicMilestoneContent(http: HttpClient, params: GetPublicMilestoneContentParams): Promise<ServerResponse<DestinyMilestoneContent>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Destiny2/Milestones/${params.milestoneHash}/Content/`
@@ -751,7 +753,7 @@ export async function getPublicMilestoneContent(http: HttpClient, params: GetPub
 }
 
 /** Gets public information about currently available Milestones. */
-export async function getPublicMilestones(http: HttpClient): Promise<DictionaryOfuint32AndDestinyPublicMilestoneServerResponse> {
+export async function getPublicMilestones(http: HttpClient): Promise<ServerResponse<{ [key: number]: DestinyPublicMilestone }>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/Destiny2/Milestones/'

@@ -13,15 +13,15 @@
 import { HttpClient } from '../http';
 
 import {
-  BungieMembershipType
+  BungieMembershipType,
+  ServerResponse
 } from '../common';
 import {
-  CEListOfPublicPartnershipDetailServerResponse,
-  GeneralUserServerResponse,
-  ListOfGeneralUserServerResponse,
-  ListOfUserAliasServerResponse,
-  ListOfUserThemeServerResponse,
-  UserMembershipDataServerResponse
+  GeneralUser,
+  PublicPartnershipDetail,
+  UserAlias,
+  UserMembershipData,
+  UserTheme
 } from './interfaces';
 
 export interface GetBungieNetUserByIdParams {
@@ -30,7 +30,7 @@ export interface GetBungieNetUserByIdParams {
 }
 
 /** Loads a bungienet user by membership id. */
-export async function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<GeneralUserServerResponse> {
+export async function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/User/GetBungieNetUserById/${params.id}/`
@@ -43,7 +43,7 @@ export interface GetUserAliasesParams {
 }
 
 /** Loads aliases of a bungienet membership id. */
-export async function getUserAliases(http: HttpClient, params: GetUserAliasesParams): Promise<ListOfUserAliasServerResponse> {
+export async function getUserAliases(http: HttpClient, params: GetUserAliasesParams): Promise<ServerResponse<UserAlias[]>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/User/GetUserAliases/${params.id}/`
@@ -56,7 +56,7 @@ export interface SearchUsersParams {
 }
 
 /** Returns a list of possible users based on the search string */
-export async function searchUsers(http: HttpClient, params: SearchUsersParams): Promise<ListOfGeneralUserServerResponse> {
+export async function searchUsers(http: HttpClient, params: SearchUsersParams): Promise<ServerResponse<GeneralUser[]>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/User/SearchUsers/',
@@ -67,7 +67,7 @@ export async function searchUsers(http: HttpClient, params: SearchUsersParams): 
 }
 
 /** Returns a list of all available user themes. */
-export async function getAvailableThemes(http: HttpClient): Promise<ListOfUserThemeServerResponse> {
+export async function getAvailableThemes(http: HttpClient): Promise<ServerResponse<UserTheme[]>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/User/GetAvailableThemes/'
@@ -86,7 +86,7 @@ export interface GetMembershipDataByIdParams {
  * membership type. This will include all linked accounts (even when hidden) if
  * supplied credentials permit it.
  */
-export async function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<UserMembershipDataServerResponse> {
+export async function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/User/GetMembershipsById/${params.membershipId}/${params.membershipType}/`
@@ -97,7 +97,7 @@ export async function getMembershipDataById(http: HttpClient, params: GetMembers
  * Returns a list of accounts associated with signed in user. This is useful for
  * OAuth implementations that do not give you access to the token response.
  */
-export async function getMembershipDataForCurrentUser(http: HttpClient): Promise<UserMembershipDataServerResponse> {
+export async function getMembershipDataForCurrentUser(http: HttpClient): Promise<ServerResponse<UserMembershipData>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/'
@@ -110,7 +110,7 @@ export interface GetPartnershipsParams {
 }
 
 /** Returns a user's linked Partnerships. */
-export async function getPartnerships(http: HttpClient, params: GetPartnershipsParams): Promise<CEListOfPublicPartnershipDetailServerResponse> {
+export async function getPartnerships(http: HttpClient, params: GetPartnershipsParams): Promise<ServerResponse<PublicPartnershipDetail[]>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/User/${params.membershipId}/Partnerships/`

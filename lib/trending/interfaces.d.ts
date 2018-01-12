@@ -11,28 +11,8 @@
  */
 import { DestinyMilestoneContent, DestinyPublicActivityStatus, DestinyPublicMilestone } from '../destiny2/interfaces';
 import { GeneralUser } from '../user/interfaces';
-import { PagedQuery, PlatformErrorCodes } from '../common';
+import { PagedQuery } from '../common';
 import { PartnershipType } from '../platform';
-export interface TrendingCategoriesServerResponse {
-    readonly Response: TrendingCategories;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
-export interface SearchResultOfTrendingEntryServerResponse {
-    readonly Response: SearchResultOfTrendingEntry;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
-}
 export declare const enum TrendingEntryType {
     News = 0,
     DestinyItem = 1,
@@ -46,16 +26,6 @@ export declare const enum TrendingEntryType {
     ForumTag = 9,
     Container = 10,
     Release = 11,
-}
-export interface TrendingDetailServerResponse {
-    readonly Response: TrendingDetail;
-    readonly ErrorCode: PlatformErrorCodes;
-    readonly ThrottleSeconds: number;
-    readonly ErrorStatus: string;
-    readonly Message: string;
-    readonly MessageData: {
-        [key: string]: string;
-    };
 }
 export interface TrendingCategories {
     readonly categories: TrendingCategory[];

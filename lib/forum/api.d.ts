@@ -10,8 +10,9 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { CEListOfForumRecruitmentDetailServerResponse, ForumPostSortEnum, ForumRecruitmentDetailServerResponse, ForumTopicsCategoryFiltersEnum, ForumTopicsQuickDateEnum, ForumTopicsSortEnum, ListOfTagResponseServerResponse, PostSearchResponseServerResponse, SaveMessageResultServerResponse } from './interfaces';
-import { int64ServerResponse } from '../platform';
+import { ForumPostSortEnum, ForumRecruitmentDetail, ForumTopicsCategoryFiltersEnum, ForumTopicsQuickDateEnum, ForumTopicsSortEnum, PostSearchResponse, SaveMessageResult } from './interfaces';
+import { ServerResponse } from '../common';
+import { TagResponse } from '../platform';
 export interface GetTopicsPagedParams {
     /** A category filter */
     categoryFilter: ForumTopicsCategoryFiltersEnum;
@@ -34,7 +35,7 @@ export interface GetTopicsPagedParams {
     tagstring?: string;
 }
 /** Get topics from any forum. */
-export declare function getTopicsPaged(http: HttpClient, params: GetTopicsPagedParams): Promise<PostSearchResponseServerResponse>;
+export declare function getTopicsPaged(http: HttpClient, params: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetCoreTopicsPagedParams {
     /** The category filter. */
     categoryFilter: ForumTopicsCategoryFiltersEnum;
@@ -51,7 +52,7 @@ export interface GetCoreTopicsPagedParams {
     sort: ForumTopicsSortEnum;
 }
 /** Gets a listing of all topics marked as part of the core group. */
-export declare function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopicsPagedParams): Promise<PostSearchResponseServerResponse>;
+export declare function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostsThreadedPagedParams {
     getParentPost: boolean;
     page: number;
@@ -67,7 +68,7 @@ export interface GetPostsThreadedPagedParams {
  * Returns a thread of posts at the given parent, optionally returning replies to
  * those posts as well as the original parent.
  */
-export declare function getPostsThreadedPaged(http: HttpClient, params: GetPostsThreadedPagedParams): Promise<PostSearchResponseServerResponse>;
+export declare function getPostsThreadedPaged(http: HttpClient, params: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostsThreadedPagedFromChildParams {
     childPostId: number;
     page: number;
@@ -82,14 +83,14 @@ export interface GetPostsThreadedPagedFromChildParams {
  * Returns a thread of posts starting at the topicId of the input childPostId,
  * optionally returning replies to those posts as well as the original parent.
  */
-export declare function getPostsThreadedPagedFromChild(http: HttpClient, params: GetPostsThreadedPagedFromChildParams): Promise<PostSearchResponseServerResponse>;
+export declare function getPostsThreadedPagedFromChild(http: HttpClient, params: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostAndParentParams {
     childPostId: number;
     /** If this value is not null or empty, banned posts are requested to be returned */
     showbanned?: string;
 }
 /** Returns the post specified and its immediate parent. */
-export declare function getPostAndParent(http: HttpClient, params: GetPostAndParentParams): Promise<PostSearchResponseServerResponse>;
+export declare function getPostAndParent(http: HttpClient, params: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostAndParentAwaitingApprovalParams {
     childPostId: number;
     /** If this value is not null or empty, banned posts are requested to be returned */
@@ -99,12 +100,12 @@ export interface GetPostAndParentAwaitingApprovalParams {
  * Returns the post specified and its immediate parent of posts that are awaiting
  * approval.
  */
-export declare function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<PostSearchResponseServerResponse>;
+export declare function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetTopicForContentParams {
     contentId: string;
 }
 /** Gets the post Id for the given content item's comments, if it exists. */
-export declare function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<int64ServerResponse>;
+export declare function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<ServerResponse<string>>;
 export interface GetForumTagSuggestionsParams {
     /** The partial tag input to generate suggestions from. */
     partialtag?: string;
@@ -113,13 +114,13 @@ export interface GetForumTagSuggestionsParams {
  * Gets tag suggestions based on partial text entry, matching them with other tags
  * previously used in the forums.
  */
-export declare function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ListOfTagResponseServerResponse>;
+export declare function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>>;
 export interface GetPollParams {
     /** The post id of the topic that has the poll. */
     topicId: string;
 }
 /** Gets the specified forum poll. */
-export declare function getPoll(http: HttpClient, params: GetPollParams): Promise<PostSearchResponseServerResponse>;
+export declare function getPoll(http: HttpClient, params: GetPollParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface JoinFireteamThreadParams {
     /** The post id of the recruitment topic you wish to join. */
     topicId: string;
@@ -128,7 +129,7 @@ export interface JoinFireteamThreadParams {
  * Allows a user to slot themselves into a recruitment thread fireteam slot.
  * Returns the new state of the fireteam.
  */
-export declare function joinFireteamThread(http: HttpClient, params: JoinFireteamThreadParams): Promise<ForumRecruitmentDetailServerResponse>;
+export declare function joinFireteamThread(http: HttpClient, params: JoinFireteamThreadParams): Promise<ServerResponse<ForumRecruitmentDetail>>;
 export interface LeaveFireteamThreadParams {
     /** The post id of the recruitment topic you wish to leave. */
     topicId: string;
@@ -137,7 +138,7 @@ export interface LeaveFireteamThreadParams {
  * Allows a user to remove themselves from a recruitment thread fireteam slot.
  * Returns the new state of the fireteam.
  */
-export declare function leaveFireteamThread(http: HttpClient, params: LeaveFireteamThreadParams): Promise<ForumRecruitmentDetailServerResponse>;
+export declare function leaveFireteamThread(http: HttpClient, params: LeaveFireteamThreadParams): Promise<ServerResponse<ForumRecruitmentDetail>>;
 export interface KickBanFireteamApplicantParams {
     /** The id of the user you wish to kick. */
     targetMembershipId: string;
@@ -148,7 +149,7 @@ export interface KickBanFireteamApplicantParams {
  * Allows a recruitment thread owner to kick a join user from the fireteam. Returns
  * the new state of the fireteam.
  */
-export declare function kickBanFireteamApplicant(http: HttpClient, params: KickBanFireteamApplicantParams): Promise<ForumRecruitmentDetailServerResponse>;
+export declare function kickBanFireteamApplicant(http: HttpClient, params: KickBanFireteamApplicantParams): Promise<ServerResponse<ForumRecruitmentDetail>>;
 export interface ApproveFireteamThreadParams {
     /** The post id of the recruitment topic to approve. */
     topicId: string;
@@ -157,7 +158,7 @@ export interface ApproveFireteamThreadParams {
  * Allows the owner of a fireteam thread to approve all joined members and start a
  * private message conversation with them.
  */
-export declare function approveFireteamThread(http: HttpClient, params: ApproveFireteamThreadParams): Promise<SaveMessageResultServerResponse>;
+export declare function approveFireteamThread(http: HttpClient, params: ApproveFireteamThreadParams): Promise<ServerResponse<SaveMessageResult>>;
 export interface GetRecruitmentThreadSummariesParams {
     body: string[];
 }
@@ -165,4 +166,4 @@ export interface GetRecruitmentThreadSummariesParams {
  * Allows the caller to get a list of to 25 recruitment thread summary information
  * objects.
  */
-export declare function getRecruitmentThreadSummaries(http: HttpClient, params: GetRecruitmentThreadSummariesParams): Promise<CEListOfForumRecruitmentDetailServerResponse>;
+export declare function getRecruitmentThreadSummaries(http: HttpClient, params: GetRecruitmentThreadSummariesParams): Promise<ServerResponse<ForumRecruitmentDetail[]>>;

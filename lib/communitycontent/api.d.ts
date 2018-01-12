@@ -10,9 +10,9 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { BungieMembershipType } from '../common';
-import { CommunityContentSortMode, ForumTopicsCategoryFiltersEnum, PostSearchResponseServerResponse } from '../forum/interfaces';
-import { CommunityLiveStatusServerResponse, CommunityStatusSort, SearchResultOfCommunityLiveStatusServerResponse } from './interfaces';
+import { BungieMembershipType, ServerResponse } from '../common';
+import { CommunityContentSortMode, ForumTopicsCategoryFiltersEnum, PostSearchResponse } from '../forum/interfaces';
+import { CommunityLiveStatus, CommunityStatusSort, SearchResultOfCommunityLiveStatus } from './interfaces';
 import { PartnershipType } from '../platform';
 export interface GetCommunityContentParams {
     /** The type of media to get */
@@ -23,7 +23,7 @@ export interface GetCommunityContentParams {
     sort: CommunityContentSortMode;
 }
 /** Returns community content. */
-export declare function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<PostSearchResponseServerResponse>;
+export declare function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetCommunityLiveStatusesParams {
     /**
      * The hash of the Activity Mode for which streams should be retrieved. Don't pass
@@ -43,7 +43,7 @@ export interface GetCommunityLiveStatusesParams {
     streamLocale?: string;
 }
 /** Returns info about community members who are live streaming. */
-export declare function getCommunityLiveStatuses(http: HttpClient, params: GetCommunityLiveStatusesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse>;
+export declare function getCommunityLiveStatuses(http: HttpClient, params: GetCommunityLiveStatusesParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>>;
 export interface GetCommunityLiveStatusesForClanmatesParams {
     /** Zero based page. */
     page: number;
@@ -53,7 +53,7 @@ export interface GetCommunityLiveStatusesForClanmatesParams {
     sort: CommunityStatusSort;
 }
 /** Returns info about community members who are live streaming in your clans. */
-export declare function getCommunityLiveStatusesForClanmates(http: HttpClient, params: GetCommunityLiveStatusesForClanmatesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse>;
+export declare function getCommunityLiveStatusesForClanmates(http: HttpClient, params: GetCommunityLiveStatusesForClanmatesParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>>;
 export interface GetCommunityLiveStatusesForFriendsParams {
     /** Zero based page. */
     page: number;
@@ -63,7 +63,7 @@ export interface GetCommunityLiveStatusesForFriendsParams {
     sort: CommunityStatusSort;
 }
 /** Returns info about community members who are live streaming among your friends. */
-export declare function getCommunityLiveStatusesForFriends(http: HttpClient, params: GetCommunityLiveStatusesForFriendsParams): Promise<SearchResultOfCommunityLiveStatusServerResponse>;
+export declare function getCommunityLiveStatusesForFriends(http: HttpClient, params: GetCommunityLiveStatusesForFriendsParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>>;
 export interface GetFeaturedCommunityLiveStatusesParams {
     /** Zero based page. */
     page: number;
@@ -78,7 +78,7 @@ export interface GetFeaturedCommunityLiveStatusesParams {
     streamLocale?: string;
 }
 /** Returns info about Featured live streams. */
-export declare function getFeaturedCommunityLiveStatuses(http: HttpClient, params: GetFeaturedCommunityLiveStatusesParams): Promise<SearchResultOfCommunityLiveStatusServerResponse>;
+export declare function getFeaturedCommunityLiveStatuses(http: HttpClient, params: GetFeaturedCommunityLiveStatusesParams): Promise<ServerResponse<SearchResultOfCommunityLiveStatus>>;
 export interface GetStreamingStatusForMemberParams {
     /** The membershipId related to that type. */
     membershipId: string;
@@ -88,4 +88,4 @@ export interface GetStreamingStatusForMemberParams {
     partnershipType: PartnershipType;
 }
 /** Gets the Live Streaming status of a particular Account and Membership Type. */
-export declare function getStreamingStatusForMember(http: HttpClient, params: GetStreamingStatusForMemberParams): Promise<CommunityLiveStatusServerResponse>;
+export declare function getStreamingStatusForMember(http: HttpClient, params: GetStreamingStatusForMemberParams): Promise<ServerResponse<CommunityLiveStatus>>;

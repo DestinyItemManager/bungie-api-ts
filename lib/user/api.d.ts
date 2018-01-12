@@ -10,28 +10,28 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { BungieMembershipType } from '../common';
-import { CEListOfPublicPartnershipDetailServerResponse, GeneralUserServerResponse, ListOfGeneralUserServerResponse, ListOfUserAliasServerResponse, ListOfUserThemeServerResponse, UserMembershipDataServerResponse } from './interfaces';
+import { BungieMembershipType, ServerResponse } from '../common';
+import { GeneralUser, PublicPartnershipDetail, UserAlias, UserMembershipData, UserTheme } from './interfaces';
 export interface GetBungieNetUserByIdParams {
     /** The requested Bungie.net membership id. */
     id: string;
 }
 /** Loads a bungienet user by membership id. */
-export declare function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<GeneralUserServerResponse>;
+export declare function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>>;
 export interface GetUserAliasesParams {
     /** The requested Bungie.net membership id. */
     id: string;
 }
 /** Loads aliases of a bungienet membership id. */
-export declare function getUserAliases(http: HttpClient, params: GetUserAliasesParams): Promise<ListOfUserAliasServerResponse>;
+export declare function getUserAliases(http: HttpClient, params: GetUserAliasesParams): Promise<ServerResponse<UserAlias[]>>;
 export interface SearchUsersParams {
     /** The search string. */
     q?: string;
 }
 /** Returns a list of possible users based on the search string */
-export declare function searchUsers(http: HttpClient, params: SearchUsersParams): Promise<ListOfGeneralUserServerResponse>;
+export declare function searchUsers(http: HttpClient, params: SearchUsersParams): Promise<ServerResponse<GeneralUser[]>>;
 /** Returns a list of all available user themes. */
-export declare function getAvailableThemes(http: HttpClient): Promise<ListOfUserThemeServerResponse>;
+export declare function getAvailableThemes(http: HttpClient): Promise<ServerResponse<UserTheme[]>>;
 export interface GetMembershipDataByIdParams {
     /** The membership ID of the target user. */
     membershipId: string;
@@ -43,15 +43,15 @@ export interface GetMembershipDataByIdParams {
  * membership type. This will include all linked accounts (even when hidden) if
  * supplied credentials permit it.
  */
-export declare function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<UserMembershipDataServerResponse>;
+export declare function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>>;
 /**
  * Returns a list of accounts associated with signed in user. This is useful for
  * OAuth implementations that do not give you access to the token response.
  */
-export declare function getMembershipDataForCurrentUser(http: HttpClient): Promise<UserMembershipDataServerResponse>;
+export declare function getMembershipDataForCurrentUser(http: HttpClient): Promise<ServerResponse<UserMembershipData>>;
 export interface GetPartnershipsParams {
     /** The ID of the member for whom partnerships should be returned. */
     membershipId: string;
 }
 /** Returns a user's linked Partnerships. */
-export declare function getPartnerships(http: HttpClient, params: GetPartnershipsParams): Promise<CEListOfPublicPartnershipDetailServerResponse>;
+export declare function getPartnerships(http: HttpClient, params: GetPartnershipsParams): Promise<ServerResponse<PublicPartnershipDetail[]>>;
