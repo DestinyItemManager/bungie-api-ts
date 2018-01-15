@@ -84,7 +84,7 @@ ${indent(paramInitializers.join(',\n'), 3)}
   addImport(doc, methodDef.responses['200'], componentByDef, importFiles);
 
   return `${interfaceDefinition}${docComment(methodDef.description!)}
-export async function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
+export function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
   return http({
     method: '${method}',
     url: ${templatizedPath}${paramsObject}${requestBodyParam}

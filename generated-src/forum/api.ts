@@ -51,7 +51,7 @@ export interface GetTopicsPagedParams {
 }
 
 /** Get topics from any forum. */
-export async function getTopicsPaged(http: HttpClient, params: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getTopicsPaged(http: HttpClient, params: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetTopicsPaged/${params.page}/${params.pageSize}/${params.group}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`,
@@ -79,7 +79,7 @@ export interface GetCoreTopicsPagedParams {
 }
 
 /** Gets a listing of all topics marked as part of the core group. */
-export async function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetCoreTopicsPaged/${params.page}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`,
@@ -105,7 +105,7 @@ export interface GetPostsThreadedPagedParams {
  * Returns a thread of posts at the given parent, optionally returning replies to
  * those posts as well as the original parent.
  */
-export async function getPostsThreadedPaged(http: HttpClient, params: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostsThreadedPaged(http: HttpClient, params: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetPostsThreadedPaged/${params.parentPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.getParentPost}/${params.rootThreadMode}/${params.sortMode}/`,
@@ -130,7 +130,7 @@ export interface GetPostsThreadedPagedFromChildParams {
  * Returns a thread of posts starting at the topicId of the input childPostId,
  * optionally returning replies to those posts as well as the original parent.
  */
-export async function getPostsThreadedPagedFromChild(http: HttpClient, params: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostsThreadedPagedFromChild(http: HttpClient, params: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetPostsThreadedPagedFromChild/${params.childPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.rootThreadMode}/${params.sortMode}/`,
@@ -147,7 +147,7 @@ export interface GetPostAndParentParams {
 }
 
 /** Returns the post specified and its immediate parent. */
-export async function getPostAndParent(http: HttpClient, params: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostAndParent(http: HttpClient, params: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetPostAndParent/${params.childPostId}/`,
@@ -167,7 +167,7 @@ export interface GetPostAndParentAwaitingApprovalParams {
  * Returns the post specified and its immediate parent of posts that are awaiting
  * approval.
  */
-export async function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetPostAndParentAwaitingApproval/${params.childPostId}/`,
@@ -182,7 +182,7 @@ export interface GetTopicForContentParams {
 }
 
 /** Gets the post Id for the given content item's comments, if it exists. */
-export async function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<ServerResponse<string>> {
+export function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<ServerResponse<string>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/GetTopicForContent/${params.contentId}/`
@@ -198,7 +198,7 @@ export interface GetForumTagSuggestionsParams {
  * Gets tag suggestions based on partial text entry, matching them with other tags
  * previously used in the forums.
  */
-export async function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>> {
+export function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/Forum/GetForumTagSuggestions/',
@@ -214,7 +214,7 @@ export interface GetPollParams {
 }
 
 /** Gets the specified forum poll. */
-export async function getPoll(http: HttpClient, params: GetPollParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPoll(http: HttpClient, params: GetPollParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Forum/Poll/${params.topicId}/`
@@ -230,7 +230,7 @@ export interface JoinFireteamThreadParams {
  * Allows a user to slot themselves into a recruitment thread fireteam slot.
  * Returns the new state of the fireteam.
  */
-export async function joinFireteamThread(http: HttpClient, params: JoinFireteamThreadParams): Promise<ServerResponse<ForumRecruitmentDetail>> {
+export function joinFireteamThread(http: HttpClient, params: JoinFireteamThreadParams): Promise<ServerResponse<ForumRecruitmentDetail>> {
   return http({
     method: 'POST',
     url: `https://www.bungie.net/Platform/Forum/Recruit/Join/${params.topicId}/`
@@ -246,7 +246,7 @@ export interface LeaveFireteamThreadParams {
  * Allows a user to remove themselves from a recruitment thread fireteam slot.
  * Returns the new state of the fireteam.
  */
-export async function leaveFireteamThread(http: HttpClient, params: LeaveFireteamThreadParams): Promise<ServerResponse<ForumRecruitmentDetail>> {
+export function leaveFireteamThread(http: HttpClient, params: LeaveFireteamThreadParams): Promise<ServerResponse<ForumRecruitmentDetail>> {
   return http({
     method: 'POST',
     url: `https://www.bungie.net/Platform/Forum/Recruit/Leave/${params.topicId}/`
@@ -264,7 +264,7 @@ export interface KickBanFireteamApplicantParams {
  * Allows a recruitment thread owner to kick a join user from the fireteam. Returns
  * the new state of the fireteam.
  */
-export async function kickBanFireteamApplicant(http: HttpClient, params: KickBanFireteamApplicantParams): Promise<ServerResponse<ForumRecruitmentDetail>> {
+export function kickBanFireteamApplicant(http: HttpClient, params: KickBanFireteamApplicantParams): Promise<ServerResponse<ForumRecruitmentDetail>> {
   return http({
     method: 'POST',
     url: `https://www.bungie.net/Platform/Forum/Recruit/KickBan/${params.topicId}/${params.targetMembershipId}/`
@@ -280,7 +280,7 @@ export interface ApproveFireteamThreadParams {
  * Allows the owner of a fireteam thread to approve all joined members and start a
  * private message conversation with them.
  */
-export async function approveFireteamThread(http: HttpClient, params: ApproveFireteamThreadParams): Promise<ServerResponse<SaveMessageResult>> {
+export function approveFireteamThread(http: HttpClient, params: ApproveFireteamThreadParams): Promise<ServerResponse<SaveMessageResult>> {
   return http({
     method: 'POST',
     url: `https://www.bungie.net/Platform/Forum/Recruit/Approve/${params.topicId}/`
@@ -291,7 +291,7 @@ export async function approveFireteamThread(http: HttpClient, params: ApproveFir
  * Allows the caller to get a list of to 25 recruitment thread summary information
  * objects.
  */
-export async function getRecruitmentThreadSummaries(http: HttpClient, body: string[]): Promise<ServerResponse<ForumRecruitmentDetail[]>> {
+export function getRecruitmentThreadSummaries(http: HttpClient, body: string[]): Promise<ServerResponse<ForumRecruitmentDetail[]>> {
   return http({
     method: 'POST',
     url: 'https://www.bungie.net/Platform/Forum/Recruit/Summaries/',

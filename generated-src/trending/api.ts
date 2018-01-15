@@ -26,7 +26,7 @@ import {
  * Returns trending items for Bungie.net, collapsed into the first page of items
  * per category. For pagination within a category, call GetTrendingCategory.
  */
-export async function getTrendingCategories(http: HttpClient): Promise<ServerResponse<TrendingCategories>> {
+export function getTrendingCategories(http: HttpClient): Promise<ServerResponse<TrendingCategories>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/Trending/Categories/'
@@ -41,7 +41,7 @@ export interface GetTrendingCategoryParams {
 }
 
 /** Returns paginated lists of trending items for a category. */
-export async function getTrendingCategory(http: HttpClient, params: GetTrendingCategoryParams): Promise<ServerResponse<SearchResultOfTrendingEntry>> {
+export function getTrendingCategory(http: HttpClient, params: GetTrendingCategoryParams): Promise<ServerResponse<SearchResultOfTrendingEntry>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Trending/Categories/${params.categoryId}/${params.pageNumber}/`
@@ -61,7 +61,7 @@ export interface GetTrendingEntryDetailParams {
  * *and* the identifier: the identifier alone is not guaranteed to be globally
  * unique.
  */
-export async function getTrendingEntryDetail(http: HttpClient, params: GetTrendingEntryDetailParams): Promise<ServerResponse<TrendingDetail>> {
+export function getTrendingEntryDetail(http: HttpClient, params: GetTrendingEntryDetailParams): Promise<ServerResponse<TrendingDetail>> {
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/Trending/Details/${params.trendingEntryType}/${params.identifier}/`
