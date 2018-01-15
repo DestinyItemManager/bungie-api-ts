@@ -4,10 +4,6 @@
   "description": "TypeScript mappings for the Bungie.net API",
   "main": "./dist/index.ts",
   "types": "./dist/index.d.ts",
-  "files": [
-    "./dist/",
-    "bungie-api-LICENSE"
-  ],
   "scripts": {
     "start": "./build.sh",
     "install": "git submodule init && git submodule update",
