@@ -22,6 +22,12 @@
   "bugs": {
     "url": "https://github.com/DestinyItemManager/bungie-api-ts/issues"
   },
+  "keywords": [
+    "Destiny",
+    "Bungie",
+    "Bungie.net",
+    "TypeScript"
+  ],
   "homepage": "https://github.com/DestinyItemManager/bungie-api-ts",
   "devDependencies": {
     "@types/node": "^8.5.2",
