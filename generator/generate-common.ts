@@ -30,12 +30,14 @@ export function addImport(
   if (typeRef && componentByDef[typeRef]) {
     if (typeRef.includes('/responses/')) {
       const component = getRef(doc, typeRef);
-      const property = component.properties!.Response;
-      if (property) {
-        importFiles['common.ts'] = importFiles['common.ts'] || new Set();
-        importFiles['common.ts'].add('ServerResponse');
-        addImport(doc, property, componentByDef, importFiles);
-        return;
+      if (component) {
+        const property = component.properties!.Response;
+        if (property) {
+          importFiles['common.ts'] = importFiles['common.ts'] || new Set();
+          importFiles['common.ts'].add('ServerResponse');
+          addImport(doc, property, componentByDef, importFiles);
+          return;
+        }
       }
     }
 

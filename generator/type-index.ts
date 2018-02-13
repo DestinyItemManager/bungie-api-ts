@@ -101,8 +101,11 @@ function findReachableComponentsFromPath(pathDef: PathItemObject, doc: OpenAPIOb
 
 function addReachableComponentsFromComponent(allDefinitions: Set<string>, definition: string, doc: OpenAPIObject) {
   const component = getRef(doc, definition);
+  if (!component) {
+    return;
+  }
 
-  if (component.type === 'array') {
+  if (component && component.type === 'array') {
     addDefinitions(allDefinitions, component.items!, doc);
   } else if (component.type === 'object') {
     Object.values(component.properties).forEach((schema: SchemaObject | ReferenceObject) => {

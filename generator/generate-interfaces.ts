@@ -27,6 +27,9 @@ export function generateInterfaceDefinitions(file: string, components: DefInfo[]
 
 function generateComponentDefinition(defInfo: DefInfo, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
   const component = getRef(doc, defInfo.def);
+  if (!component) {
+    return undefined;
+  }
 
   if (component.enum) {
     return generateEnum(defInfo, component);

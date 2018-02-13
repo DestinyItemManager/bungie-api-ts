@@ -59,13 +59,16 @@ export function lastPart(name: string): string {
   return _.last(name.split(/[\.\/]/))!;
 }
 
-export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
+export function getRef(doc: OpenAPIObject, ref: string): SchemaObject | undefined {
   const path = ref.replace('#/', '').split('/');
   let result = doc;
   let pathSegment = path.shift();
   while (pathSegment) {
     result = result[pathSegment];
     pathSegment = path.shift();
+  }
+  if (!result) {
+    return undefined;
   }
   if (result.content) {
     return result.content['application/json'].schema;
@@ -76,6 +79,10 @@ export function getRef(doc: OpenAPIObject, ref: string): SchemaObject {
 
 export function interfaceName(componentPath: string, doc: OpenAPIObject) {
   const name = lastPart(componentPath);
+  const component = getRef(doc, componentPath);
+  if (!component) {
+    return 'any';
+  }
 
   const singleResponse = name.match(/SingleComponentResponseOf(.*)/);
   if (singleResponse) {
@@ -88,7 +95,6 @@ export function interfaceName(componentPath: string, doc: OpenAPIObject) {
   }
 
   if (componentPath.includes('/responses/')) {
-    const component = getRef(doc, componentPath);
     const property = component.properties!.Response;
     if (property) {
       const paramType = resolveSchemaType(property, doc);
