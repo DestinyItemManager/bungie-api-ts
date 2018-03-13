@@ -9,28 +9,8 @@
  * https://github.com/DestinyItemManager/bugie-api-ts
  * Do not edit these files manually.
  */
-
-export interface IgnoreResponse {
-  readonly isIgnored: boolean;
-  readonly ignoreFlags: IgnoreStatus;
-}
-
-export const enum IgnoreStatus {
-  NotIgnored = 0,
-  IgnoredUser = 1,
-  IgnoredGroup = 2,
-  IgnoredByGroup = 4,
-  IgnoredPost = 8,
-  IgnoredTag = 16,
-  IgnoredGlobal = 32
-}
-
-export const enum PartnershipType {
-  None = 0,
-  Twitch = 1
-}
-
-export interface TagResponse {
-  readonly tagText: string;
-  readonly ignoreStatus: IgnoreResponse;
-}
+import { HttpClient } from '../http';
+import { Application } from './interfaces';
+import { ServerResponse } from '../common';
+/** Get of applications created by Bungie. */
+export declare function getBungieApplications(http: HttpClient): Promise<ServerResponse<Application[]>>;
