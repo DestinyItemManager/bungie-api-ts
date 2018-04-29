@@ -1,0 +1,918 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DestinyVendorDefinition | bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_destiny2_interfaces_.destinyvendordefinition.html">DestinyVendorDefinition</a>
+				</li>
+			</ul>
+			<h1>Interface DestinyVendorDefinition</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>These are the definitions for Vendors.</p>
+					</div>
+					<p>In Destiny, a Vendor can be a lot of things - some things that you wouldn&#39;t
+						expect, and some things that you don&#39;t even see directly in the game. Vendors
+					are the Dolly Levi of the Destiny universe.</p>
+					<ul>
+						<li><p>Traditional Vendors as you see in game: people who you come up to and who give
+							you quests, rewards, or who you can buy things from.</p>
+						</li>
+						<li><p>Kiosks/Collections, which are really just Vendors that don&#39;t charge currency (
+								or charge some pittance of a currency) and whose gating for purchases revolves
+							more around your character&#39;s state.</p>
+						</li>
+						<li><p>Previews for rewards or the contents of sacks. These are implemented as
+								Vendors, where you can&#39;t actually purchase from them but the items that they
+								have for sale and the categories of sale items reflect the rewards or contents
+								of the sack. This is so that the game could reuse the existing Vendor display UI
+							for rewards and save a bunch of wheel reinvention.</p>
+						</li>
+						<li><p>Item Transfer capabilities, like the Vault and Postmaster. Vendors can have &quot;
+								acceptedItem&quot; buckets that determine the source and destination buckets for
+								transfers. When you interact with such a vendor, these buckets are what gets
+								shown in the UI instead of any items that the Vendor would have for sale. Yep,
+							the Vault is a vendor.</p>
+						</li>
+					</ul>
+					<p>It is pretty much guaranteed that they&#39;ll be used for even more features in the
+						future. They have come to be seen more as generic categorized containers for
+					items than &quot;vendors&quot; in a traditional sense, for better or worse.</p>
+					<p>Where possible and time allows, we&#39;ll attempt to split those out into their own
+						more digestible derived &quot;Definitions&quot;: but often time does not allow that, as
+						you can see from the above ways that vendors are used which we never split off
+					from Vendor Definitions externally.</p>
+					<p>Since Vendors are so many things to so many parts of the game, the definition is
+						understandably complex. You will want to combine this data with live Vendor
+					information from the API when it is available.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DestinyVendorDefinition</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#accepteditems" class="tsd-kind-icon">accepted<wbr>Items</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#actions" class="tsd-kind-icon">actions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#buystring" class="tsd-kind-icon">buy<wbr>String</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#categories" class="tsd-kind-icon">categories</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#consolidatecategories" class="tsd-kind-icon">consolidate<wbr>Categories</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#displaycategories" class="tsd-kind-icon">display<wbr>Categories</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#displayitemhash" class="tsd-kind-icon">display<wbr>Item<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#enabled" class="tsd-kind-icon">enabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#factionhash" class="tsd-kind-icon">faction<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#failurestrings" class="tsd-kind-icon">failure<wbr>Strings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#groups" class="tsd-kind-icon">groups</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#hash" class="tsd-kind-icon">hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#inhibitbuying" class="tsd-kind-icon">inhibit<wbr>Buying</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#inhibitselling" class="tsd-kind-icon">inhibit<wbr>Selling</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#interactions" class="tsd-kind-icon">interactions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#inventoryflyouts" class="tsd-kind-icon">inventory<wbr>Flyouts</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#itemlist" class="tsd-kind-icon">item<wbr>List</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#locations" class="tsd-kind-icon">locations</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#originalcategories" class="tsd-kind-icon">original<wbr>Categories</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#redacted" class="tsd-kind-icon">redacted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#resetintervalminutes" class="tsd-kind-icon">reset<wbr>Interval<wbr>Minutes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#resetoffsetminutes" class="tsd-kind-icon">reset<wbr>Offset<wbr>Minutes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#returnwithvendorrequest" class="tsd-kind-icon">return<wbr>With<wbr>Vendor<wbr>Request</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#sellstring" class="tsd-kind-icon">sell<wbr>String</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#services" class="tsd-kind-icon">services</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#unlockranges" class="tsd-kind-icon">unlock<wbr>Ranges</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#vendorbanner" class="tsd-kind-icon">vendor<wbr>Banner</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#vendoridentifier" class="tsd-kind-icon">vendor<wbr>Identifier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#vendorportrait" class="tsd-kind-icon">vendor<wbr>Portrait</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#vendorsubcategoryidentifier" class="tsd-kind-icon">vendor<wbr>Subcategory<wbr>Identifier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendordefinition.html#visible" class="tsd-kind-icon">visible</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="accepteditems" class="tsd-anchor"></a>
+					<h3>accepted<wbr>Items</h3>
+					<div class="tsd-signature tsd-kind-icon">accepted<wbr>Items<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendoraccepteditemdefinition.html" class="tsd-signature-type">DestinyVendorAcceptedItemDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1762">destiny2/interfaces.ts:1762</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the Vendor is actually a vehicle for the transferring of items (like the
+								Vault and Postmaster vendors), this defines the list of source-&gt;destination
+							buckets for transferring.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="actions" class="tsd-anchor"></a>
+					<h3>actions</h3>
+					<div class="tsd-signature tsd-kind-icon">actions<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendoractiondefinition.html" class="tsd-signature-type">DestinyVendorActionDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1701">destiny2/interfaces.ts:1701</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Describes &quot;actions&quot; that can be performed on a vendor. Currently, none of these
+								exist. But theoretically a Vendor could let you interact with it by performing
+							actions. We&#39;ll see what these end up looking like if they ever get used.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="buystring" class="tsd-anchor"></a>
+					<h3>buy<wbr>String</h3>
+					<div class="tsd-signature tsd-kind-icon">buy<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1610">destiny2/interfaces.ts:1610</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the vendor has a custom localized string describing the &quot;buy&quot; action, that is
+							returned here.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="categories" class="tsd-anchor"></a>
+					<h3>categories</h3>
+					<div class="tsd-signature tsd-kind-icon">categories<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorcategoryentrydefinition.html" class="tsd-signature-type">DestinyVendorCategoryEntryDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1714">destiny2/interfaces.ts:1714</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>These are the headers for sections of items that the vendor is selling. When you
+								see items organized by category in the header, it is these categories that it is
+							showing.</p>
+						</div>
+						<p>Well, technically not <em>exactly</em> these. On BNet, it doesn&#39;t make sense to have
+							categories be &quot;paged&quot; as we do in Destiny, so we run some heuristics to attempt
+						to aggregate pages of categories together.</p>
+						<p>These are the categories post-concatenation, if the vendor had concatenation
+						applied. If you want the pre-aggregated category data, use originalCategories.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="consolidatecategories" class="tsd-anchor"></a>
+					<h3>consolidate<wbr>Categories</h3>
+					<div class="tsd-signature tsd-kind-icon">consolidate<wbr>Categories<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1695">destiny2/interfaces.ts:1695</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If TRUE, consolidate categories that only differ by trivial properties (such as
+							having minor differences in name)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displaycategories" class="tsd-anchor"></a>
+					<h3>display<wbr>Categories</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Categories<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html" class="tsd-signature-type">DestinyDisplayCategoryDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1728">destiny2/interfaces.ts:1728</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Display Categories are different from &quot;categories&quot; in that these are
+							specifically for visual grouping and display of categories in Vendor UI.</p>
+						</div>
+						<p>The &quot;categories&quot; structure is for validation of the contained items, and can be
+							categorized entirely separately from &quot;Display Categories&quot;, there need be and
+						often will be no meaningful relationship between the two.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displayitemhash" class="tsd-anchor"></a>
+					<h3>display<wbr>Item<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Item<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1625">destiny2/interfaces.ts:1625</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the vendor has an item that should be displayed as the &quot;featured&quot; item, this
+							is the hash identifier for that DestinyVendorItemDefinition.</p>
+						</div>
+						<p>Apparently this is usually a related currency, like a reputation token. But it
+						need not be restricted to that.</p>
+						<p>Mapped to DestinyInventoryItemDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displayproperties" class="tsd-anchor"></a>
+					<h3>display<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendordisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyVendorDisplayPropertiesDefinition</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1605">destiny2/interfaces.ts:1605</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enabled" class="tsd-anchor"></a>
+					<h3>enabled</h3>
+					<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1683">destiny2/interfaces.ts:1683</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If a vendor is not enabled, we won&#39;t even save the vendor&#39;s definition, and we
+							won&#39;t return any items or info about them. It&#39;s as if they don&#39;t exist.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="factionhash" class="tsd-anchor"></a>
+					<h3>faction<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">faction<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1640">destiny2/interfaces.ts:1640</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the Vendor has a faction, this hash will be valid and point to a
+							DestinyFactionDefinition.</p>
+						</div>
+						<p>The game UI and BNet often mine the faction definition for additional elements
+							and details to place on the screen, such as the faction&#39;s Progression status (
+						aka &quot;Reputation&quot;).</p>
+						<p>Mapped to DestinyFactionDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="failurestrings" class="tsd-anchor"></a>
+					<h3>failure<wbr>Strings</h3>
+					<div class="tsd-signature tsd-kind-icon">failure<wbr>Strings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1663">destiny2/interfaces.ts:1663</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If an item can&#39;t be purchased from the vendor, there may be many &quot;custom&quot;/game
+							state specific reasons why not.</p>
+						</div>
+						<p>This is a list of localized strings with messages for those custom failures. The
+							live BNet data will return a failureIndexes property for items that can&#39;t be
+							purchased: using those values to index into this array, you can show the user
+						the appropriate failure message for the item that can&#39;t be bought.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="groups" class="tsd-anchor"></a>
+					<h3>groups</h3>
+					<div class="tsd-signature tsd-kind-icon">groups<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorgroupreference.html" class="tsd-signature-type">DestinyVendorGroupReference</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1783">destiny2/interfaces.ts:1783</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A vendor can be a part of 0 or 1 &quot;groups&quot; at a time: a group being a collection
+								of Vendors related by either location or function/purpose. It&#39;s used for our our
+							Companion Vendor UI. Only one of these can be active for a Vendor at a time.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hash" class="tsd-anchor"></a>
+					<h3>hash</h3>
+					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1791">destiny2/interfaces.ts:1791</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The unique identifier for this entity. Guaranteed to be unique for the type of
+							entity, but not globally.</p>
+						</div>
+						<p>When entities refer to each other in Destiny content, it is this hash that they
+						are referring to.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1793">destiny2/interfaces.ts:1793</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The index of the entity as it was found in the investment tables.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="inhibitbuying" class="tsd-anchor"></a>
+					<h3>inhibit<wbr>Buying</h3>
+					<div class="tsd-signature tsd-kind-icon">inhibit<wbr>Buying<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1627">destiny2/interfaces.ts:1627</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, you aren&#39;t allowed to buy whatever the vendor is selling.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="inhibitselling" class="tsd-anchor"></a>
+					<h3>inhibit<wbr>Selling</h3>
+					<div class="tsd-signature tsd-kind-icon">inhibit<wbr>Selling<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1629">destiny2/interfaces.ts:1629</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, you&#39;re not allowed to sell whatever the vendor is buying.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="interactions" class="tsd-anchor"></a>
+					<h3>interactions</h3>
+					<div class="tsd-signature tsd-kind-icon">interactions<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorinteractiondefinition.html" class="tsd-signature-type">DestinyVendorInteractionDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1734">destiny2/interfaces.ts:1734</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>In addition to selling items, vendors can have &quot;interactions&quot;: UI where you &quot;
+								talk&quot; with the vendor and they offer you a reward, some item, or merely
+							acknowledge via dialog that you did something cool.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="inventoryflyouts" class="tsd-anchor"></a>
+					<h3>inventory<wbr>Flyouts</h3>
+					<div class="tsd-signature tsd-kind-icon">inventory<wbr>Flyouts<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorinventoryflyoutdefinition.html" class="tsd-signature-type">DestinyVendorInventoryFlyoutDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1740">destiny2/interfaces.ts:1740</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the vendor shows you items from your own inventory - such as the Vault vendor
+								does - this data describes the UI around showing those inventory buckets and
+							which ones get shown.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="itemlist" class="tsd-anchor"></a>
+					<h3>item<wbr>List</h3>
+					<div class="tsd-signature tsd-kind-icon">item<wbr>List<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendoritemdefinition.html" class="tsd-signature-type">DestinyVendorItemDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1751">destiny2/interfaces.ts:1751</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the vendor sells items (or merely has a list of items to show like the &quot;Sack&quot;
+								vendors do), this is the list of those items that the vendor can sell. From this
+								list, only a subset will be available from the vendor at any given time,
+							selected randomly and reset on the vendor&#39;s refresh interval.</p>
+						</div>
+						<p>Note that a vendor can sell the same item multiple ways: for instance, nothing
+							stops a vendor from selling you some specific weapon but using two different
+						currencies, or the same weapon at multiple &quot;item levels&quot;.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="locations" class="tsd-anchor"></a>
+					<h3>locations</h3>
+					<div class="tsd-signature tsd-kind-icon">locations<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorlocationdefinition.html" class="tsd-signature-type">DestinyVendorLocationDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1777">destiny2/interfaces.ts:1777</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A vendor can be at different places in the world depending on the game/character/
+								account state. This is the list of possible locations for the vendor, along with
+							conditions we use to determine which one is currently active.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="originalcategories" class="tsd-anchor"></a>
+					<h3>original<wbr>Categories</h3>
+					<div class="tsd-signature tsd-kind-icon">original<wbr>Categories<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorcategoryentrydefinition.html" class="tsd-signature-type">DestinyVendorCategoryEntryDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1719">destiny2/interfaces.ts:1719</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>See the categories property for a description of categories and why
+							originalCategories exists.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="redacted" class="tsd-anchor"></a>
+					<h3>redacted</h3>
+					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1798">destiny2/interfaces.ts:1798</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, then there is an entity with this identifier/type combination,
+							but BNet is not yet allowed to show it. Sorry!</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="resetintervalminutes" class="tsd-anchor"></a>
+					<h3>reset<wbr>Interval<wbr>Minutes</h3>
+					<div class="tsd-signature tsd-kind-icon">reset<wbr>Interval<wbr>Minutes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1648">destiny2/interfaces.ts:1648</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number used for calculating the frequency of a vendor&#39;s inventory resetting/
+							refreshing.</p>
+						</div>
+						<p>Don&#39;t worry about calculating this - we do it on the server side and send you
+						the next refresh date with the live data.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="resetoffsetminutes" class="tsd-anchor"></a>
+					<h3>reset<wbr>Offset<wbr>Minutes</h3>
+					<div class="tsd-signature tsd-kind-icon">reset<wbr>Offset<wbr>Minutes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1653">destiny2/interfaces.ts:1653</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Again, used for reset/refreshing of inventory. Don&#39;t worry too much about it.
+							Unless you want to.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="returnwithvendorrequest" class="tsd-anchor"></a>
+					<h3>return<wbr>With<wbr>Vendor<wbr>Request</h3>
+					<div class="tsd-signature tsd-kind-icon">return<wbr>With<wbr>Vendor<wbr>Request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1771">destiny2/interfaces.ts:1771</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>As many of you know, Vendor data has historically been pretty brutal on the BNet
+								servers. In an effort to reduce this workload, only Vendors with this flag set
+								will be returned on Vendor requests. This allows us to filter out Vendors that
+								don&#39;t dynamic data that&#39;s particularly useful: things like &quot;Preview/Sack&quot;
+								vendors, for example, that you can usually suss out the details for using just
+							the definitions themselves.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sellstring" class="tsd-anchor"></a>
+					<h3>sell<wbr>String</h3>
+					<div class="tsd-signature tsd-kind-icon">sell<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1615">destiny2/interfaces.ts:1615</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Ditto for selling. Not that you can sell items to a vendor anymore. Will it come
+							back? Who knows. The string&#39;s still there.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="services" class="tsd-anchor"></a>
+					<h3>services</h3>
+					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyvendorservicedefinition.html" class="tsd-signature-type">DestinyVendorServiceDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1756">destiny2/interfaces.ts:1756</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>BNet doesn&#39;t use this data yet, but it appears to be an optional list of flavor
+							text about services that the Vendor can provide.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="unlockranges" class="tsd-anchor"></a>
+					<h3>unlock<wbr>Ranges</h3>
+					<div class="tsd-signature tsd-kind-icon">unlock<wbr>Ranges<span class="tsd-signature-symbol">:</span> <a href="_common_.daterange.html" class="tsd-signature-type">DateRange</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1669">destiny2/interfaces.ts:1669</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If we were able to predict the dates when this Vendor will be visible/available,
+								this will be the list of those date ranges. Sadly, we&#39;re not able to predict
+							this very frequently, so this will often be useless data.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vendorbanner" class="tsd-anchor"></a>
+					<h3>vendor<wbr>Banner</h3>
+					<div class="tsd-signature tsd-kind-icon">vendor<wbr>Banner<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1678">destiny2/interfaces.ts:1678</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the vendor has a custom banner image, that can be found here.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vendoridentifier" class="tsd-anchor"></a>
+					<h3>vendor<wbr>Identifier</h3>
+					<div class="tsd-signature tsd-kind-icon">vendor<wbr>Identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1674">destiny2/interfaces.ts:1674</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The internal identifier for the Vendor. A holdover from the old days of Vendors,
+							but we don&#39;t have time to refactor it away.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vendorportrait" class="tsd-anchor"></a>
+					<h3>vendor<wbr>Portrait</h3>
+					<div class="tsd-signature tsd-kind-icon">vendor<wbr>Portrait<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1676">destiny2/interfaces.ts:1676</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A portrait of the Vendor&#39;s smiling mug. Or frothing tentacles.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vendorsubcategoryidentifier" class="tsd-anchor"></a>
+					<h3>vendor<wbr>Subcategory<wbr>Identifier</h3>
+					<div class="tsd-signature tsd-kind-icon">vendor<wbr>Subcategory<wbr>Identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1690">destiny2/interfaces.ts:1690</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The identifier of the VendorCategoryDefinition for this vendor&#39;s subcategory.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="visible" class="tsd-anchor"></a>
+					<h3>visible</h3>
+					<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L1688">destiny2/interfaces.ts:1688</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If a vendor is not visible, we still have and will give vendor definition info,
+							but we won&#39;t use them for things like Advisors or UI.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_destiny2_interfaces_.destinyvendordefinition.html" class="tsd-kind-icon">Destiny<wbr>Vendor<wbr>Definition</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#accepteditems" class="tsd-kind-icon">accepted<wbr>Items</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#actions" class="tsd-kind-icon">actions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#buystring" class="tsd-kind-icon">buy<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#categories" class="tsd-kind-icon">categories</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#consolidatecategories" class="tsd-kind-icon">consolidate<wbr>Categories</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#displaycategories" class="tsd-kind-icon">display<wbr>Categories</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#displayitemhash" class="tsd-kind-icon">display<wbr>Item<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#enabled" class="tsd-kind-icon">enabled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#factionhash" class="tsd-kind-icon">faction<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#failurestrings" class="tsd-kind-icon">failure<wbr>Strings</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#groups" class="tsd-kind-icon">groups</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#hash" class="tsd-kind-icon">hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#index" class="tsd-kind-icon">index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#inhibitbuying" class="tsd-kind-icon">inhibit<wbr>Buying</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#inhibitselling" class="tsd-kind-icon">inhibit<wbr>Selling</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#interactions" class="tsd-kind-icon">interactions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#inventoryflyouts" class="tsd-kind-icon">inventory<wbr>Flyouts</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#itemlist" class="tsd-kind-icon">item<wbr>List</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#locations" class="tsd-kind-icon">locations</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#originalcategories" class="tsd-kind-icon">original<wbr>Categories</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#redacted" class="tsd-kind-icon">redacted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#resetintervalminutes" class="tsd-kind-icon">reset<wbr>Interval<wbr>Minutes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#resetoffsetminutes" class="tsd-kind-icon">reset<wbr>Offset<wbr>Minutes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#returnwithvendorrequest" class="tsd-kind-icon">return<wbr>With<wbr>Vendor<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#sellstring" class="tsd-kind-icon">sell<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#services" class="tsd-kind-icon">services</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#unlockranges" class="tsd-kind-icon">unlock<wbr>Ranges</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#vendorbanner" class="tsd-kind-icon">vendor<wbr>Banner</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#vendoridentifier" class="tsd-kind-icon">vendor<wbr>Identifier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#vendorportrait" class="tsd-kind-icon">vendor<wbr>Portrait</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#vendorsubcategoryidentifier" class="tsd-kind-icon">vendor<wbr>Subcategory<wbr>Identifier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendordefinition.html#visible" class="tsd-kind-icon">visible</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

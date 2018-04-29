@@ -1,0 +1,411 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DestinyItemInstanceComponent | bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html">DestinyItemInstanceComponent</a>
+				</li>
+			</ul>
+			<h1>Interface DestinyItemInstanceComponent</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>If an item is &quot;instanced&quot;, this will contain information about the item&#39;s
+							instance that doesn&#39;t fit easily into other components. One might say this is
+						the &quot;essential&quot; instance data for the item.</p>
+					</div>
+					<p>Items are instanced if they require information or state that can vary. For
+						instance, weapons are Instanced: they are given a unique identifier, uniquely
+						generated stats, and can have their properties altered. Non-instanced items have
+						none of these things: for instance, Glimmer has no unique properties aside from
+					how much of it you own.</p>
+					<p>You can tell from an item&#39;s definition whether it will be instanced or not by
+						looking at the DestinyInventoryItemDefinition&#39;s definition.inventory.
+					isInstanceItem property.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DestinyItemInstanceComponent</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#canequip" class="tsd-kind-icon">can<wbr>Equip</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#cannotequipreason" class="tsd-kind-icon">cannot<wbr>Equip<wbr>Reason</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetype" class="tsd-kind-icon">damage<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetypehash" class="tsd-kind-icon">damage<wbr>Type<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#equiprequiredlevel" class="tsd-kind-icon">equip<wbr>Required<wbr>Level</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#isequipped" class="tsd-kind-icon">is<wbr>Equipped</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#itemlevel" class="tsd-kind-icon">item<wbr>Level</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#primarystat" class="tsd-kind-icon">primary<wbr>Stat</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#quality" class="tsd-kind-icon">quality</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#unlockhashesrequiredtoequip" class="tsd-kind-icon">unlock<wbr>Hashes<wbr>Required<wbr>ToEquip</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="canequip" class="tsd-anchor"></a>
+					<h3>can<wbr>Equip</h3>
+					<div class="tsd-signature tsd-kind-icon">can<wbr>Equip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7740">destiny2/interfaces.ts:7740</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is an equippable item, you can check it here. There are permanent as
+								well as transitory reasons why an item might not be able to be equipped: check
+							cannotEquipReason for details.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="cannotequipreason" class="tsd-anchor"></a>
+					<h3>cannot<wbr>Equip<wbr>Reason</h3>
+					<div class="tsd-signature tsd-kind-icon">cannot<wbr>Equip<wbr>Reason<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.equipfailurereason.html" class="tsd-signature-type">EquipFailureReason</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7762">destiny2/interfaces.ts:7762</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If you cannot equip the item, this is a flags enum that enumerates all of the
+								reasons why you couldn&#39;t equip the item. You may need to refine your UI further
+							by using unlockHashesRequiredToEquip and equipRequiredLevel.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="damagetype" class="tsd-anchor"></a>
+					<h3>damage<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">damage<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.damagetype.html" class="tsd-signature-type">DamageType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7710">destiny2/interfaces.ts:7710</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the item has a damage type, this is the item&#39;s current damage type.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="damagetypehash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> damage<wbr>Type<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">damage<wbr>Type<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7717">destiny2/interfaces.ts:7717</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The current damage type&#39;s hash, so you can look up localized info and icons for
+							it.</p>
+						</div>
+						<p>Mapped to DestinyDamageTypeDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="equiprequiredlevel" class="tsd-anchor"></a>
+					<h3>equip<wbr>Required<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">equip<wbr>Required<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7745">destiny2/interfaces.ts:7745</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the item cannot be equipped until you reach a certain level, that level will
+							be reflected here.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isequipped" class="tsd-anchor"></a>
+					<h3>is<wbr>Equipped</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Equipped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7734">destiny2/interfaces.ts:7734</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the item currently equipped on the given character?</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="itemlevel" class="tsd-anchor"></a>
+					<h3>item<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">item<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7727">destiny2/interfaces.ts:7727</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The Item&#39;s &quot;Level&quot; has the most significant bearing on its stats, such as Light
+							and Power.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="primarystat" class="tsd-anchor"></a>
+					<h3>primary<wbr>Stat</h3>
+					<div class="tsd-signature tsd-kind-icon">primary<wbr>Stat<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinystat.html" class="tsd-signature-type">DestinyStat</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7722">destiny2/interfaces.ts:7722</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The item stat that we consider to be &quot;primary&quot; for the item. For instance, this
+							would be &quot;Attack&quot; for Weapons or &quot;Defense&quot; for armor.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="quality" class="tsd-anchor"></a>
+					<h3>quality</h3>
+					<div class="tsd-signature tsd-kind-icon">quality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7732">destiny2/interfaces.ts:7732</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The &quot;Quality&quot; of the item has a lesser - but still impactful - bearing on stats
+							like Light and Power.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="unlockhashesrequiredtoequip" class="tsd-anchor"></a>
+					<h3>unlock<wbr>Hashes<wbr>Required<wbr>ToEquip</h3>
+					<div class="tsd-signature tsd-kind-icon">unlock<wbr>Hashes<wbr>Required<wbr>ToEquip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L7756">destiny2/interfaces.ts:7756</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Sometimes, there are limitations to equipping that are represented by character-
+							level flags called &quot;unlocks&quot;.</p>
+						</div>
+						<p>This is a list of flags that they need in order to equip the item that the
+							character has not met. Use these to look up the descriptions to show in your UI
+						by looking up the relevant DestinyUnlockDefinitions for the hashes.</p>
+						<p>Mapped to DestinyUnlockDefinition in the manifest.</p>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html" class="tsd-kind-icon">Destiny<wbr>Item<wbr>Instance<wbr>Component</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#canequip" class="tsd-kind-icon">can<wbr>Equip</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#cannotequipreason" class="tsd-kind-icon">cannot<wbr>Equip<wbr>Reason</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetype" class="tsd-kind-icon">damage<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetypehash" class="tsd-kind-icon">damage<wbr>Type<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#equiprequiredlevel" class="tsd-kind-icon">equip<wbr>Required<wbr>Level</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#isequipped" class="tsd-kind-icon">is<wbr>Equipped</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#itemlevel" class="tsd-kind-icon">item<wbr>Level</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#primarystat" class="tsd-kind-icon">primary<wbr>Stat</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#quality" class="tsd-kind-icon">quality</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#unlockhashesrequiredtoequip" class="tsd-kind-icon">unlock<wbr>Hashes<wbr>Required<wbr>ToEquip</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

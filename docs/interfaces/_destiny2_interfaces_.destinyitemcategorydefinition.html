@@ -1,0 +1,538 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DestinyItemCategoryDefinition | bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html">DestinyItemCategoryDefinition</a>
+				</li>
+			</ul>
+			<h1>Interface DestinyItemCategoryDefinition</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>In an attempt to categorize items by type, usage, and other interesting
+							properties, we created DestinyItemCategoryDefinition: information about types
+							that is assembled using a set of heuristics that examine the properties of an
+							item such as what inventory bucket it&#39;s in, its item type name, and whether it
+						has or is missing certain blocks of data.</p>
+					</div>
+					<p>This heuristic is imperfect, however. If you find an item miscategorized, let us
+					know on the Bungie API forums!</p>
+					<p>We then populate all of the categories that we think an item belongs to in its
+						DestinyInventoryItemDefinition.itemCategoryHashes property. You can use that to
+						provide your own custom item filtering, sorting, aggregating... go nuts on it!
+					And let us know if you see more categories that you wish would be added!</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DestinyItemCategoryDefinition</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#deprecated" class="tsd-kind-icon">deprecated</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#grantdestinyclass" class="tsd-kind-icon">grant<wbr>Destiny<wbr>Class</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#grantdestinyitemtype" class="tsd-kind-icon">grant<wbr>Destiny<wbr>Item<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#grantdestinysubtype" class="tsd-kind-icon">grant<wbr>Destiny<wbr>Sub<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#groupcategoryonly" class="tsd-kind-icon">group<wbr>Category<wbr>Only</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#groupedcategoryhashes" class="tsd-kind-icon">grouped<wbr>Category<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#hash" class="tsd-kind-icon">hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#itemtyperegex" class="tsd-kind-icon">item<wbr>Type<wbr>Regex</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#itemtyperegexnot" class="tsd-kind-icon">item<wbr>Type<wbr>Regex<wbr>Not</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#originbucketidentifier" class="tsd-kind-icon">origin<wbr>Bucket<wbr>Identifier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#parentcategoryhashes" class="tsd-kind-icon">parent<wbr>Category<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#redacted" class="tsd-kind-icon">redacted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#shorttitle" class="tsd-kind-icon">short<wbr>Title</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#visible" class="tsd-kind-icon">visible</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="deprecated" class="tsd-anchor"></a>
+					<h3>deprecated</h3>
+					<div class="tsd-signature tsd-kind-icon">deprecated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5438">destiny2/interfaces.ts:5438</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If True, this category has been deprecated: it may have no items left, or there
+								may be only legacy items that remain in it which are no longer relevant to the
+							game.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displayproperties" class="tsd-anchor"></a>
+					<h3>display<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5426">destiny2/interfaces.ts:5426</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="grantdestinyclass" class="tsd-anchor"></a>
+					<h3>grant<wbr>Destiny<wbr>Class</h3>
+					<div class="tsd-signature tsd-kind-icon">grant<wbr>Destiny<wbr>Class<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinyclass.html" class="tsd-signature-type">DestinyClass</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5480">destiny2/interfaces.ts:5480</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If an item belongs to this category, it will also get this class restriction
+							enum value.</p>
+						</div>
+						<p>See the other &quot;grant&quot;-prefixed properties on this definition for my color
+						commentary.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="grantdestinyitemtype" class="tsd-anchor"></a>
+					<h3>grant<wbr>Destiny<wbr>Item<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">grant<wbr>Destiny<wbr>Item<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinyitemtype.html" class="tsd-signature-type">DestinyItemType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5460">destiny2/interfaces.ts:5460</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If an item belongs to this category, it will also receive this item type. This
+								is now how DestinyItemType is populated for items: it used to be an even jankier
+							process, but that&#39;s a story that requires more alcohol.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="grantdestinysubtype" class="tsd-anchor"></a>
+					<h3>grant<wbr>Destiny<wbr>Sub<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">grant<wbr>Destiny<wbr>Sub<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinyitemsubtype.html" class="tsd-signature-type">DestinyItemSubType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5472">destiny2/interfaces.ts:5472</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If an item belongs to this category, it will also receive this subtype enum
+							value.</p>
+						</div>
+						<p>I know what you&#39;re thinking - what if it belongs to multiple categories that
+						provide sub-types?</p>
+						<p>The last one processed wins, as is the case with all of these &quot;grant&quot; enums. Now
+							you can see one reason why we moved away from these enums... but they&#39;re so
+						convenient when they work, aren&#39;t they?</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="groupcategoryonly" class="tsd-anchor"></a>
+					<h3>group<wbr>Category<wbr>Only</h3>
+					<div class="tsd-signature tsd-kind-icon">group<wbr>Category<wbr>Only<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5505">destiny2/interfaces.ts:5505</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true, this category is only used for grouping, and should not be evaluated
+								with its own checks. Rather, the item only has this category if it has one of
+							its child categories.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="groupedcategoryhashes" class="tsd-anchor"></a>
+					<h3>grouped<wbr>Category<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">grouped<wbr>Category<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5493">destiny2/interfaces.ts:5493</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this category is a &quot;parent&quot; category of other categories, those children will
+								have their hashes listed in rendering order here, and can be looked up using
+							these hashes against DestinyItemCategoryDefinition.</p>
+						</div>
+						<p>In this way, you can build up a visual hierarchy of item categories. That&#39;s what
+						we did, and you can do it too. I believe in you. Yes, you, Carl.</p>
+						<p>(I hope someone named Carl reads this someday)</p>
+						<p>Mapped to DestinyItemCategoryDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hash" class="tsd-anchor"></a>
+					<h3>hash</h3>
+					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5513">destiny2/interfaces.ts:5513</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The unique identifier for this entity. Guaranteed to be unique for the type of
+							entity, but not globally.</p>
+						</div>
+						<p>When entities refer to each other in Destiny content, it is this hash that they
+						are referring to.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5515">destiny2/interfaces.ts:5515</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The index of the entity as it was found in the investment tables.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="itemtyperegex" class="tsd-anchor"></a>
+					<h3>item<wbr>Type<wbr>Regex</h3>
+					<div class="tsd-signature tsd-kind-icon">item<wbr>Type<wbr>Regex<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5450">destiny2/interfaces.ts:5450</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The janky regular expression we used against the item type to try and discern
+							whether the item belongs to this category.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="itemtyperegexnot" class="tsd-anchor"></a>
+					<h3>item<wbr>Type<wbr>Regex<wbr>Not</h3>
+					<div class="tsd-signature tsd-kind-icon">item<wbr>Type<wbr>Regex<wbr>Not<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5452">destiny2/interfaces.ts:5452</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the item type matches this janky regex, it does <em>not</em> belong to this category.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="originbucketidentifier" class="tsd-anchor"></a>
+					<h3>origin<wbr>Bucket<wbr>Identifier</h3>
+					<div class="tsd-signature tsd-kind-icon">origin<wbr>Bucket<wbr>Identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5454">destiny2/interfaces.ts:5454</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the item belongs to this bucket, it does belong to this category.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="parentcategoryhashes" class="tsd-anchor"></a>
+					<h3>parent<wbr>Category<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<wbr>Category<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5499">destiny2/interfaces.ts:5499</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>All item category hashes of &quot;parent&quot; categories: categories that contain this as
+								a child through the hierarchy of groupedCategoryHashes. It&#39;s a bit redundant,
+							but having this child-centric list speeds up some calculations.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="redacted" class="tsd-anchor"></a>
+					<h3>redacted</h3>
+					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5520">destiny2/interfaces.ts:5520</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, then there is an entity with this identifier/type combination,
+							but BNet is not yet allowed to show it. Sorry!</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="shorttitle" class="tsd-anchor"></a>
+					<h3>short<wbr>Title</h3>
+					<div class="tsd-signature tsd-kind-icon">short<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5445">destiny2/interfaces.ts:5445</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A shortened version of the title. The reason why we have this is because the
+								Armory in German had titles that were too long to display in our UI, so these
+								were localized abbreviated versions of those categories. The property still
+							exists today, even though the Armory doesn&#39;t exist for D2... yet.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="visible" class="tsd-anchor"></a>
+					<h3>visible</h3>
+					<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5432">destiny2/interfaces.ts:5432</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If True, this category should be visible in UI. Sometimes we make categories
+								that we don&#39;t think are interesting externally. It&#39;s up to you if you want to
+							skip on showing them.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html" class="tsd-kind-icon">Destiny<wbr>Item<wbr>Category<wbr>Definition</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#deprecated" class="tsd-kind-icon">deprecated</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#grantdestinyclass" class="tsd-kind-icon">grant<wbr>Destiny<wbr>Class</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#grantdestinyitemtype" class="tsd-kind-icon">grant<wbr>Destiny<wbr>Item<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#grantdestinysubtype" class="tsd-kind-icon">grant<wbr>Destiny<wbr>Sub<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#groupcategoryonly" class="tsd-kind-icon">group<wbr>Category<wbr>Only</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#groupedcategoryhashes" class="tsd-kind-icon">grouped<wbr>Category<wbr>Hashes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#hash" class="tsd-kind-icon">hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#index" class="tsd-kind-icon">index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#itemtyperegex" class="tsd-kind-icon">item<wbr>Type<wbr>Regex</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#itemtyperegexnot" class="tsd-kind-icon">item<wbr>Type<wbr>Regex<wbr>Not</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#originbucketidentifier" class="tsd-kind-icon">origin<wbr>Bucket<wbr>Identifier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#parentcategoryhashes" class="tsd-kind-icon">parent<wbr>Category<wbr>Hashes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#redacted" class="tsd-kind-icon">redacted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#shorttitle" class="tsd-kind-icon">short<wbr>Title</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemcategorydefinition.html#visible" class="tsd-kind-icon">visible</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

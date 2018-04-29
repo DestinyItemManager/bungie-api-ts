@@ -1,0 +1,268 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> bungie-api-ts</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="bungie-api-typescript-support">Bungie API TypeScript support</h1>
+				<p>This project implements TypeScript definitions and API helpers for the <a href="https://github.com/Bungie-net/api">Bungie.net API</a>. It&#39;s meant for use in <a href="https://destinyitemmanager.com">Destiny Item Manager</a>, but should be general enough to use in any project. The code is completely generated from Bungie&#39;s documentation - I considered using something like Swagger Codegen, but instead opted for a custom generator so we could make the result as nice as possible.</p>
+				<h1 id="install">Install</h1>
+				<pre><code>npm <span class="hljs-keyword">install</span> bungie-api-ts
+</code></pre><h1 id="interfaces-and-enums">Interfaces and Enums</h1>
+				<p>All the interface type definitions and enums are for type info only - everything will compile out. Only the API helpers produce real JavaScript output. You can import types from each service defined on Bungie.net:</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { DestinyInventoryComponent, DestinyInventoryItemDefinition } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
+</code></pre>
+				<p>There are definitions for every type defined in the Bungie.net services. See <a href="https://bungie-net.github.io/multi/">their documentation</a> for a list - the interface names are the last part of the full name (for example, <code>Destiny.Definitions.DestinyVendorActionDefinition</code> becomes <code>DestinyVendorActionDefinition</code>). There are a few exceptions, like <code>SingleComponentResponseOfDestinyInventoryComponent</code>, which have been mapped into nicer forms like <code>SingleComponentResponse&lt;DestinyInventoryComponent&gt;</code>, and the server responses, which are now <code>ServerResponse&lt;T&gt;</code> instead of something like <code>DestinyCharacterResponse</code>.</p>
+				<h1 id="api-helpers">API Helpers</h1>
+				<p>In addition to the types, there are also simple helper functions for each API endpoint. They define the inputs and outputs to that endpoint, and will call a user-provided function with HTTP request info that you can then use to make an HTTP request. This pattern was used so the API helpers could provide full type information. These helpers are not a full API client - they assist in building one. An example:</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">$http</span>(<span class="hljs-params">config: HttpClientConfig</span>) </span>{
+  <span class="hljs-comment">// fill in the API key, handle OAuth, etc., then make an HTTP request using the config.</span>
+  <span class="hljs-keyword">return</span> fetch(config.url, ...);
+}
+
+<span class="hljs-keyword">const</span> profileInfo: ServerResponse&lt;DestinyProfileResponse&gt; = <span class="hljs-keyword">await</span> getProfile($http, {
+  components: [DestinyComponentType.Profiles, DestinyComponentType.Characters],
+  destinyMembershipId: <span class="hljs-number">12345</span>,
+  membershipType: BungieMembershipType.TigerPsn
+});
+</code></pre>
+				<h1 id="imports">Imports</h1>
+				<p>It is possible to import all services from <code>bungie-api-ts</code> directly, but it&#39;s better to import the specific service and pick out what you want:</p>
+				<pre><code class="lang-typescript"><span class="hljs-comment">// good</span>
+<span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
+getProfile(...);
+
+<span class="hljs-comment">// works, but not as good</span>
+<span class="hljs-keyword">import</span> { Destiny2 } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts'</span>;
+Destiny2.getProfile(...);
+</code></pre>
+				<h1 id="build">Build</h1>
+				<pre><code><span class="hljs-built_in">npm</span> install &amp;&amp; <span class="hljs-built_in">npm</span> start
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_app_api_.html">"app/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_app_index_.html">"app/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_app_interfaces_.html">"app/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_common_.html">"common"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_communitycontent_api_.html">"communitycontent/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_communitycontent_index_.html">"communitycontent/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_communitycontent_interfaces_.html">"communitycontent/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_destiny2_api_.html">"destiny2/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_destiny2_index_.html">"destiny2/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_fireteam_api_.html">"fireteam/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_fireteam_index_.html">"fireteam/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_fireteam_interfaces_.html">"fireteam/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_forum_api_.html">"forum/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_forum_index_.html">"forum/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_forum_interfaces_.html">"forum/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_groupv2_api_.html">"groupv2/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_groupv2_index_.html">"groupv2/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_groupv2_interfaces_.html">"groupv2/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_platform_.html">"platform"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_trending_api_.html">"trending/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_trending_index_.html">"trending/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_trending_interfaces_.html">"trending/interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_user_api_.html">"user/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_user_index_.html">"user/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_user_interfaces_.html">"user/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

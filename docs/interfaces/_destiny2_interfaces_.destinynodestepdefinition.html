@@ -1,0 +1,575 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DestinyNodeStepDefinition | bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_destiny2_interfaces_.destinynodestepdefinition.html">DestinyNodeStepDefinition</a>
+				</li>
+			</ul>
+			<h1>Interface DestinyNodeStepDefinition</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This defines the properties of a &quot;Talent Node Step&quot;. When you see a talent node
+							in game, the actual visible properties that you see (its icon, description, the
+							perks and stats it provides) are not provided by the Node itself, but rather by
+						the currently active Step on the node.</p>
+					</div>
+					<p>When a Talent Node is activated, the currently active step&#39;s benefits are
+					conferred upon the item and character.</p>
+					<p>The currently active step on talent nodes are determined when an item is first
+						instantiated. Sometimes it is random, sometimes it is more deterministic (
+					particularly when a node has only a single step).</p>
+					<p>Note that, when dealing with Talent Node Steps, you must ensure that you have
+						the latest version of content. stepIndex and nodeStepHash - two ways of
+						identifying the step within a node - are both content version dependent, and
+					thus are subject to change between content updates.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DestinyNodeStepDefinition</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#activationrequirement" class="tsd-kind-icon">activation<wbr>Requirement</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#affectslevel" class="tsd-kind-icon">affects<wbr>Level</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#affectsquality" class="tsd-kind-icon">affects<wbr>Quality</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#canactivatenextstep" class="tsd-kind-icon">can<wbr>Activate<wbr>Next<wbr>Step</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#damagetype" class="tsd-kind-icon">damage<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#damagetypehash" class="tsd-kind-icon">damage<wbr>Type<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#interactiondescription" class="tsd-kind-icon">interaction<wbr>Description</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#isnextsteprandom" class="tsd-kind-icon">is<wbr>Next<wbr>Step<wbr>Random</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#nextstepindex" class="tsd-kind-icon">next<wbr>Step<wbr>Index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#nodestephash" class="tsd-kind-icon">node<wbr>Step<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#perkhashes" class="tsd-kind-icon">perk<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#socketreplacements" class="tsd-kind-icon">socket<wbr>Replacements</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#startprogressionbaratprogress" class="tsd-kind-icon">start<wbr>Progression<wbr>Bar<wbr>AtProgress</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#stathashes" class="tsd-kind-icon">stat<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#stepgroups" class="tsd-kind-icon">step<wbr>Groups</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinynodestepdefinition.html#stepindex" class="tsd-kind-icon">step<wbr>Index</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="activationrequirement" class="tsd-anchor"></a>
+					<h3>activation<wbr>Requirement</h3>
+					<div class="tsd-signature tsd-kind-icon">activation<wbr>Requirement<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinynodeactivationrequirement.html" class="tsd-signature-type">DestinyNodeActivationRequirement</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5138">destiny2/interfaces.ts:5138</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the step has requirements for activation (they almost always do, if nothing
+								else than for the Talent Grid&#39;s Progression to have reached a certain level),
+							they will be defined here.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="affectslevel" class="tsd-anchor"></a>
+					<h3>affects<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">affects<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5209">destiny2/interfaces.ts:5209</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true, this step can affect the level of the item. See
+								DestinyInventoryItemDefintion for more information about item levels and their
+							effect on stats.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="affectsquality" class="tsd-anchor"></a>
+					<h3>affects<wbr>Quality</h3>
+					<div class="tsd-signature tsd-kind-icon">affects<wbr>Quality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5195">destiny2/interfaces.ts:5195</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, the step affects the item&#39;s Quality in some way. See
+								DestinyInventoryItemDefinition for more information about the meaning of Quality.
+								I already made a joke about Zen and the Art of Motorcycle Maintenance elsewhere
+							in the documentation, so I will avoid doing it again. Oops too late</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="canactivatenextstep" class="tsd-anchor"></a>
+					<h3>can<wbr>Activate<wbr>Next<wbr>Step</h3>
+					<div class="tsd-signature tsd-kind-icon">can<wbr>Activate<wbr>Next<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5150">destiny2/interfaces.ts:5150</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>There was a time when talent nodes could be activated multiple times, and the
+								effects of subsequent Steps would be compounded on each other, essentially &quot;
+								upgrading&quot; the node. We have moved away from this, but theoretically the
+							capability still exists.</p>
+						</div>
+						<p>I continue to return this in case it is used in the future: if true and this
+							step is the current step in the node, you are allowed to activate the node a
+							second time to receive the benefits of the next step in the node, which will
+						then become the active step.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="damagetype" class="tsd-anchor"></a>
+					<h3>damage<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">damage<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.damagetype.html" class="tsd-signature-type">DamageType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5125">destiny2/interfaces.ts:5125</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An enum representing a damage type granted by activating this step, if any.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="damagetypehash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> damage<wbr>Type<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">damage<wbr>Type<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5132">destiny2/interfaces.ts:5132</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the step provides a damage type, this will be the hash identifier used to
+							look up the damage type&#39;s DestinyDamageTypeDefinition.</p>
+						</div>
+						<p>Mapped to DestinyDamageTypeDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displayproperties" class="tsd-anchor"></a>
+					<h3>display<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5103">destiny2/interfaces.ts:5103</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>These are the display properties actually used to render the Talent Node. The
+							currently active step&#39;s displayProperties are shown.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="interactiondescription" class="tsd-anchor"></a>
+					<h3>interaction<wbr>Description</h3>
+					<div class="tsd-signature tsd-kind-icon">interaction<wbr>Description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5123">destiny2/interfaces.ts:5123</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If you can interact with this node in some way, this is the localized
+							description of that interaction.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isnextsteprandom" class="tsd-anchor"></a>
+					<h3>is<wbr>Next<wbr>Step<wbr>Random</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Next<wbr>Step<wbr>Random<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5163">destiny2/interfaces.ts:5163</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true, the next step to be chosen is random, and if you&#39;re allowed to activate
+							the next step. (if canActivateNextStep = true)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="nextstepindex" class="tsd-anchor"></a>
+					<h3>next<wbr>Step<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">next<wbr>Step<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5158">destiny2/interfaces.ts:5158</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The stepIndex of the next step in the talent node, or -1 if this is the last
+							step or if the next step to be chosen is random.</p>
+						</div>
+						<p>This doesn&#39;t really matter anymore unless canActivateNextStep begins to be used
+						again.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="nodestephash" class="tsd-anchor"></a>
+					<h3>node<wbr>Step<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">node<wbr>Step<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5118">destiny2/interfaces.ts:5118</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The hash of this node step. Unfortunately, while it can be used to uniquely
+								identify the step within a node, it is also content version dependent and should
+							not be relied on without ensuring you have the latest vesion of content.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="perkhashes" class="tsd-anchor"></a>
+					<h3>perk<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">perk<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5171">destiny2/interfaces.ts:5171</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of hash identifiers for Perks (DestinySandboxPerkDefinition) that are
+								applied when this step is active. Perks provide a variety of benefits and
+							modifications - examine DestinySandboxPerkDefinition to learn more.</p>
+						</div>
+						<p>Mapped to DestinySandboxPerkDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="socketreplacements" class="tsd-anchor"></a>
+					<h3>socket<wbr>Replacements</h3>
+					<div class="tsd-signature tsd-kind-icon">socket<wbr>Replacements<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinynodesocketreplaceresponse.html" class="tsd-signature-type">DestinyNodeSocketReplaceResponse</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5215">destiny2/interfaces.ts:5215</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this step is activated, this will be a list of information used to replace
+								socket items with new Plugs. See DestinyInventoryItemDefinition for more
+							information about sockets and plugs.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="startprogressionbaratprogress" class="tsd-anchor"></a>
+					<h3>start<wbr>Progression<wbr>Bar<wbr>AtProgress</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Progression<wbr>Bar<wbr>AtProgress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5181">destiny2/interfaces.ts:5181</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>When the Talent Grid&#39;s progression reaches this value, the circular &quot;progress
+							bar&quot; that surrounds the talent node should be shown.</p>
+						</div>
+						<p>This also indicates the lower bound of said progress bar, with the upper bound
+							being the progress required to reach activationRequirement.gridLevel. (at some
+							point I should precalculate the upper bound and put it in the definition to save
+						people time)</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="stathashes" class="tsd-anchor"></a>
+					<h3>stat<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">stat<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5188">destiny2/interfaces.ts:5188</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>When the step provides stat benefits on the item or character, this is the list
+							of hash identifiers for stats (DestinyStatDefinition) that are provided.</p>
+						</div>
+						<p>Mapped to DestinyStatDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="stepgroups" class="tsd-anchor"></a>
+					<h3>step<wbr>Groups</h3>
+					<div class="tsd-signature tsd-kind-icon">step<wbr>Groups<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinytalentnodestepgroups.html" class="tsd-signature-type">DestinyTalentNodeStepGroups</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5203">destiny2/interfaces.ts:5203</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>In Destiny 1, the Armory&#39;s Perk Filtering was driven by a concept of
+								TalentNodeStepGroups: categorizations of talent nodes based on their
+								functionality. While the Armory isn&#39;t a BNet-facing thing for now, and the new
+								Armory will need to account for Sockets rather than Talent Nodes, this
+							categorization capability feels useful enough to still keep around.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="stepindex" class="tsd-anchor"></a>
+					<h3>step<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">step<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L5112">destiny2/interfaces.ts:5112</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The index of this step in the list of Steps on the Talent Node.</p>
+						</div>
+						<p>Unfortunately, this is the closest thing we have to an identifier for the Step:
+							steps are not provided a content version agnostic identifier. This means that,
+							when you are dealing with talent nodes, you will need to first ensure that you
+						have the latest version of content.</p>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_destiny2_interfaces_.destinynodestepdefinition.html" class="tsd-kind-icon">Destiny<wbr>Node<wbr>Step<wbr>Definition</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#activationrequirement" class="tsd-kind-icon">activation<wbr>Requirement</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#affectslevel" class="tsd-kind-icon">affects<wbr>Level</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#affectsquality" class="tsd-kind-icon">affects<wbr>Quality</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#canactivatenextstep" class="tsd-kind-icon">can<wbr>Activate<wbr>Next<wbr>Step</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#damagetype" class="tsd-kind-icon">damage<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#damagetypehash" class="tsd-kind-icon">damage<wbr>Type<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#interactiondescription" class="tsd-kind-icon">interaction<wbr>Description</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#isnextsteprandom" class="tsd-kind-icon">is<wbr>Next<wbr>Step<wbr>Random</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#nextstepindex" class="tsd-kind-icon">next<wbr>Step<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#nodestephash" class="tsd-kind-icon">node<wbr>Step<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#perkhashes" class="tsd-kind-icon">perk<wbr>Hashes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#socketreplacements" class="tsd-kind-icon">socket<wbr>Replacements</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#startprogressionbaratprogress" class="tsd-kind-icon">start<wbr>Progression<wbr>Bar<wbr>AtProgress</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#stathashes" class="tsd-kind-icon">stat<wbr>Hashes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#stepgroups" class="tsd-kind-icon">step<wbr>Groups</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinynodestepdefinition.html#stepindex" class="tsd-kind-icon">step<wbr>Index</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DestinyMilestoneDefinition | bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_destiny2_interfaces_.destinymilestonedefinition.html">DestinyMilestoneDefinition</a>
+				</li>
+			</ul>
+			<h1>Interface DestinyMilestoneDefinition</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Milestones are an in-game concept where they&#39;re attempting to tell you what you
+						can do next in-game.</p>
+					</div>
+					<p>If that sounds a lot like Advisors in Destiny 1, it is! So we threw out Advisors
+						in the Destiny 2 API and tacked all of the data we would have put on Advisors
+					onto Milestones instead.</p>
+					<p>Each Milestone represents something going on in the game right now:</p>
+					<ul>
+						<li><p>A &quot;ritual activity&quot; you can perform, like nightfall</p>
+						</li>
+						<li><p>A &quot;special event&quot; that may have activities related to it, like Taco Tuesday (
+							there&#39;s no Taco Tuesday in Destiny 2)</p>
+						</li>
+						<li><p>A checklist you can fulfill, like helping your Clan complete all of its weekly
+							objectives</p>
+						</li>
+						<li><p>A tutorial quest you can play through, like the introduction to the Crucible.</p>
+						</li>
+					</ul>
+					<p>Most of these milestones appear in game as well. Some of them are BNet only,
+					because we&#39;re so extra. You&#39;re welcome.</p>
+					<p>There are some important caveats to understand about how we currently render
+						Milestones and their deficiencies. The game currently doesn&#39;t have any content
+						that actually tells you oughtright <em>what</em> the Milestone is: that is to say, what
+						you&#39;ll be doing. The best we get is either a description of the overall
+						Milestone, or of the Quest that the Milestone is having you partake in: which is
+						usually something that assumes you already know what it&#39;s talking about, like &quot;
+						Complete 5 Challenges&quot;. 5 Challenges for what? What&#39;s a challenge? These are not
+					questions that the Milestone data will answer for you unfortunately.</p>
+					<p>This isn&#39;t great, and in the future I&#39;d like to add some custom text to give you
+						more contextual information to pass on to your users. But for now, you can do
+					what we do to render what little display info we do have:</p>
+					<p>Start by looking at the currently active quest (ideally, you&#39;ve fetched
+						DestinyMilestone or DestinyPublicMilestone data from the API, so you know the
+						currently active quest for the Milestone in question). Look up the Quests
+						property in the Milestone Definition, and check if it has display properties. If
+						it does, show that as the description of the Milestone. If it doesn&#39;t, fall back
+					on the Milestone&#39;s description.</p>
+					<p>This approach will let you avoid, whenever possible, the even less useful (and
+					sometimes nonexistant) milestone-level names and descriptions.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DestinyMilestoneDefinition</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#exploreprioritizesactivityimage" class="tsd-kind-icon">explore<wbr>Prioritizes<wbr>Activity<wbr>Image</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#friendlyname" class="tsd-kind-icon">friendly<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#haspredictabledates" class="tsd-kind-icon">has<wbr>Predictable<wbr>Dates</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#hash" class="tsd-kind-icon">hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#image" class="tsd-kind-icon">image</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#isingamemilestone" class="tsd-kind-icon">is<wbr>InGame<wbr>Milestone</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#milestonetype" class="tsd-kind-icon">milestone<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#quests" class="tsd-kind-icon">quests</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#recruitable" class="tsd-kind-icon">recruitable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#redacted" class="tsd-kind-icon">redacted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#rewards" class="tsd-kind-icon">rewards</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#showinexplorer" class="tsd-kind-icon">show<wbr>InExplorer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#values" class="tsd-kind-icon">values</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#vendors" class="tsd-kind-icon">vendors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#vendorsdisplaytitle" class="tsd-kind-icon">vendors<wbr>Display<wbr>Title</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displayproperties" class="tsd-anchor"></a>
+					<h3>display<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6806">destiny2/interfaces.ts:6806</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exploreprioritizesactivityimage" class="tsd-anchor"></a>
+					<h3>explore<wbr>Prioritizes<wbr>Activity<wbr>Image</h3>
+					<div class="tsd-signature tsd-kind-icon">explore<wbr>Prioritizes<wbr>Activity<wbr>Image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6836">destiny2/interfaces.ts:6836</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If TRUE, &quot;Explore Destiny&quot; (the front page of BNet and the companion app)
+								prioritize using the activity image over any overriding Quest or Milestone image
+							provided. This unfortunate hack is brought to you by Trials of The Nine.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="friendlyname" class="tsd-anchor"></a>
+					<h3>friendly<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">friendly<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6822">destiny2/interfaces.ts:6822</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the milestone has a friendly identifier for association with other features -
+								such as Recruiting - that identifier can be found here. This is &quot;friendly&quot; in
+								that it looks better in a URL than whatever the identifier for the Milestone
+							actually is.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="haspredictabledates" class="tsd-anchor"></a>
+					<h3>has<wbr>Predictable<wbr>Dates</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Predictable<wbr>Dates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6844">destiny2/interfaces.ts:6844</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A shortcut for clients - and the server - to understand whether we can predict
+								the start and end dates for this event. In practice, there are multiple ways
+								that an event could have predictable date ranges, but not all events will be
+								able to be predicted via any mechanism (for instance, events that are manually
+							triggered on and off)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hash" class="tsd-anchor"></a>
+					<h3>hash</h3>
+					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6895">destiny2/interfaces.ts:6895</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The unique identifier for this entity. Guaranteed to be unique for the type of
+							entity, but not globally.</p>
+						</div>
+						<p>When entities refer to each other in Destiny content, it is this hash that they
+						are referring to.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="image" class="tsd-anchor"></a>
+					<h3>image</h3>
+					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6808">destiny2/interfaces.ts:6808</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A custom image someone made just for the milestone. Isn&#39;t that special?</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6897">destiny2/interfaces.ts:6897</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The index of the entity as it was found in the investment tables.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isingamemilestone" class="tsd-anchor"></a>
+					<h3>is<wbr>InGame<wbr>Milestone</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>InGame<wbr>Milestone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6887">destiny2/interfaces.ts:6887</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Some milestones are explicit objectives that you can see and interact with in
+								the game. Some milestones are more conceptual, built by BNet to help advise you
+								on activities and events that happen in-game but that aren&#39;t explicitly shown in
+								game as Milestones. If this is TRUE, you can see this as a milestone in the game.
+								If this is FALSE, it&#39;s an event or activity you can participate in, but you won&#39;
+							t see it as a Milestone in the game&#39;s UI.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="milestonetype" class="tsd-anchor"></a>
+					<h3>milestone<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">milestone<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinymilestonetype.html" class="tsd-signature-type">DestinyMilestoneType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6813">destiny2/interfaces.ts:6813</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An enumeration listing one of the possible types of milestones. Check out the
+							DestinyMilestoneType enum for more info!</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="quests" class="tsd-anchor"></a>
+					<h3>quests</h3>
+					<div class="tsd-signature tsd-kind-icon">quests<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6852">destiny2/interfaces.ts:6852</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The full set of possible Quests that give the overview of the Milestone event/
+								activity in question. Only one of these can be active at a time for a given
+								Conceptual Milestone, but many of them may be &quot;available&quot; for the user to choose
+								from. (for instance, with Milestones you can choose from the three available
+							Quests, but only one can be active at a time) Keyed by the quest item.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinymilestonequestdefinition.html" class="tsd-signature-type">DestinyMilestoneQuestDefinition</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="recruitable" class="tsd-anchor"></a>
+					<h3>recruitable</h3>
+					<div class="tsd-signature tsd-kind-icon">recruitable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6815">destiny2/interfaces.ts:6815</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If True, then the Milestone has been integrated with BNet&#39;s recruiting feature.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="redacted" class="tsd-anchor"></a>
+					<h3>redacted</h3>
+					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6902">destiny2/interfaces.ts:6902</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, then there is an entity with this identifier/type combination,
+							but BNet is not yet allowed to show it. Sorry!</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="rewards" class="tsd-anchor"></a>
+					<h3>rewards</h3>
+					<div class="tsd-signature tsd-kind-icon">rewards<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6857">destiny2/interfaces.ts:6857</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this milestone can provide rewards, this will define the categories into
+							which the individual reward entries are placed.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinymilestonerewardcategorydefinition.html" class="tsd-signature-type">DestinyMilestoneRewardCategoryDefinition</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="showinexplorer" class="tsd-anchor"></a>
+					<h3>show<wbr>InExplorer</h3>
+					<div class="tsd-signature tsd-kind-icon">show<wbr>InExplorer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6830">destiny2/interfaces.ts:6830</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If TRUE, this entry should be returned in the list of milestones for the &quot;
+								Explore Destiny&quot; (i.e. new BNet homepage) features of Bungie.net (as long as the
+								underlying event is active) Note that this is a property specifically used by
+								BNet and the companion app for the &quot;Live Events&quot; feature of the front page/
+							welcome view: it&#39;s not a reflection of what you see in-game.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="values" class="tsd-anchor"></a>
+					<h3>values</h3>
+					<div class="tsd-signature tsd-kind-icon">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6878">destiny2/interfaces.ts:6878</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Sometimes, milestones will have arbitrary values associated with them that are
+								of interest to us or to third party developers. This is the collection of those
+								values&#39; definitions, keyed by the identifier of the value and providing useful
+							definition information such as localizable names and descriptions for the value.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinymilestonevaluedefinition.html" class="tsd-signature-type">DestinyMilestoneValueDefinition</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vendors" class="tsd-anchor"></a>
+					<h3>vendors</h3>
+					<div class="tsd-signature tsd-kind-icon">vendors<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinymilestonevendordefinition.html" class="tsd-signature-type">DestinyMilestoneVendorDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6871">destiny2/interfaces.ts:6871</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Sometimes, milestones will have rewards provided by Vendors. This definition
+								gives the information needed to understand which vendors are relevant, the order
+								in which they should be returned if order matters, and the conditions under
+							which the Vendor is relevant to the user.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vendorsdisplaytitle" class="tsd-anchor"></a>
+					<h3>vendors<wbr>Display<wbr>Title</h3>
+					<div class="tsd-signature tsd-kind-icon">vendors<wbr>Display<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L6864">destiny2/interfaces.ts:6864</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If you&#39;re going to show Vendors for the Milestone, you can use this as a
+								localized &quot;header&quot; for the section where you show that vendor data. It&#39;ll
+								provide a more context-relevant clue about what the vendor&#39;s role is in the
+							Milestone.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_destiny2_interfaces_.destinymilestonedefinition.html" class="tsd-kind-icon">Destiny<wbr>Milestone<wbr>Definition</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#exploreprioritizesactivityimage" class="tsd-kind-icon">explore<wbr>Prioritizes<wbr>Activity<wbr>Image</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#friendlyname" class="tsd-kind-icon">friendly<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#haspredictabledates" class="tsd-kind-icon">has<wbr>Predictable<wbr>Dates</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#hash" class="tsd-kind-icon">hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#image" class="tsd-kind-icon">image</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#index" class="tsd-kind-icon">index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#isingamemilestone" class="tsd-kind-icon">is<wbr>InGame<wbr>Milestone</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#milestonetype" class="tsd-kind-icon">milestone<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#quests" class="tsd-kind-icon">quests</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#recruitable" class="tsd-kind-icon">recruitable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#redacted" class="tsd-kind-icon">redacted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#rewards" class="tsd-kind-icon">rewards</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#showinexplorer" class="tsd-kind-icon">show<wbr>InExplorer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#values" class="tsd-kind-icon">values</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#vendors" class="tsd-kind-icon">vendors</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#vendorsdisplaytitle" class="tsd-kind-icon">vendors<wbr>Display<wbr>Title</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

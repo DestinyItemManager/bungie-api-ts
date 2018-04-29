@@ -1,0 +1,486 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DestinyTalentGridDefinition | bungie-api-ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">bungie-api-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_destiny2_interfaces_.destinytalentgriddefinition.html">DestinyTalentGridDefinition</a>
+				</li>
+			</ul>
+			<h1>Interface DestinyTalentGridDefinition</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The time has unfortunately come to talk about Talent Grids.</p>
+					</div>
+					<p>Talent Grids are the most complex and unintuitive part of the Destiny Definition
+					data. Grab a cup of coffee before we begin, I can wait.</p>
+					<p>Talent Grids were the primary way that items could be customized in Destiny 1.
+						In Destiny 2, for now, talent grids have become exclusively used by Subclass/
+						Build items: but the system is still in place for it to be used by items should
+					the direction change back toward talent grids.</p>
+					<p>Talent Grids have Nodes: the visual circles on the talent grid detail screen
+						that have icons and can be activated if you meet certain requirements and pay
+						costs. The actual visual data and effects, however, are driven by the &quot;Steps&quot; on
+						Talent Nodes. Any given node will have 1:M of these steps, and the specific step
+						that will be considered the &quot;current&quot; step (and thus the dictator of all
+						benefits, visual state, and activation requirements on the Node) will almost
+						always not be determined until an instance of the item is created. This is how,
+						in Destiny 1, items were able to have such a wide variety of what users saw as &quot;
+						Perks&quot;: they were actually Talent Grids with nodes that had a wide variety of
+					Steps, randomly chosen at the time of item creation.</p>
+					<p>Now that Talent Grids are used exclusively by subclasses and builds, all of the
+						properties within still apply: but there are additional visual elements on the
+						Subclass/Build screens that are superimposed on top of the talent nodes.
+						Unfortunately, BNet doesn&#39;t have this data: if you want to build a subclass
+						screen, you will have to provide your own &quot;decorative&quot; assets, such as the
+						visual connectors between nodes and the fancy colored-fire-bathed character
+					standing behind the nodes.</p>
+					<p>DestinyInventoryItem.talentGrid.talentGridHash defines an item&#39;s linked Talent
+						Grid, which brings you to this definition that contains enough satic data about
+						talent grids to make your head spin. These <em>must</em> be combined with instanced
+						data - found when live data returns DestinyItemTalentGridComponent - in order to
+						derive meaning. The instanced data will reference nodes and steps within these
+						definitions, which you will then have to look up in the definition and combine
+						with the instanced data to give the user the visual representation of their item&#39;
+					s talent grid.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DestinyTalentGridDefinition</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#exclusivesets" class="tsd-kind-icon">exclusive<wbr>Sets</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#gridlevelpercolumn" class="tsd-kind-icon">grid<wbr>Level<wbr>Per<wbr>Column</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#groups" class="tsd-kind-icon">groups</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#hash" class="tsd-kind-icon">hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#independentnodeindexes" class="tsd-kind-icon">independent<wbr>Node<wbr>Indexes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#maxgridlevel" class="tsd-kind-icon">max<wbr>Grid<wbr>Level</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#nodecategories" class="tsd-kind-icon">node<wbr>Categories</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#nodes" class="tsd-kind-icon">nodes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#progressionhash" class="tsd-kind-icon">progression<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinytalentgriddefinition.html#redacted" class="tsd-kind-icon">redacted</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exclusivesets" class="tsd-anchor"></a>
+					<h3>exclusive<wbr>Sets</h3>
+					<div class="tsd-signature tsd-kind-icon">exclusive<wbr>Sets<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinytalentnodeexclusivesetdefinition.html" class="tsd-signature-type">DestinyTalentNodeExclusiveSetDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4848">destiny2/interfaces.ts:4848</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Talent Nodes can exist in &quot;exclusive sets&quot;: these are sets of nodes in which
+								only a single node in the set can be activated at any given time. Activating a
+								node in this set will automatically deactivate the other nodes in the set (
+							referred to as a &quot;Swap&quot;).</p>
+						</div>
+						<p>If a node in the exclusive set has already been activated, the game will not
+							charge you materials to activate another node in the set, even if you have never
+							activated it before, because you already paid the cost to activate one node in
+						the set.</p>
+						<p>Not to be confused with Exclusive Groups. (how the heck do we NOT get confused
+							by that? Jeez) See the groups property for information about that only-
+						tangentially-related concept.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="gridlevelpercolumn" class="tsd-anchor"></a>
+					<h3>grid<wbr>Level<wbr>Per<wbr>Column</h3>
+					<div class="tsd-signature tsd-kind-icon">grid<wbr>Level<wbr>Per<wbr>Column<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4814">destiny2/interfaces.ts:4814</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The meaning of this has been lost in the sands of time: it still exists as a
+								property, but appears to be unused in the modern UI of talent grids. It used to
+								imply that each visual &quot;column&quot; of talent nodes required identical progression
+								levels in order to be activated. Returning this value in case it is still useful
+							to someone? Perhaps it&#39;s just a bit of interesting history.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="groups" class="tsd-anchor"></a>
+					<h3>groups</h3>
+					<div class="tsd-signature tsd-kind-icon">groups<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4863">destiny2/interfaces.ts:4863</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Talent Nodes can have &quot;Exclusive Groups&quot;. These are not to be confused with
+							Exclusive Sets (see exclusiveSets property).</p>
+						</div>
+						<p>Look at the definition of DestinyTalentExclusiveGroup for more information and
+							how they work. These groups are keyed by the &quot;groupHash&quot; from
+						DestinyTalentExclusiveGroup.</p>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinytalentexclusivegroup.html" class="tsd-signature-type">DestinyTalentExclusiveGroup</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hash" class="tsd-anchor"></a>
+					<h3>hash</h3>
+					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4884">destiny2/interfaces.ts:4884</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The unique identifier for this entity. Guaranteed to be unique for the type of
+							entity, but not globally.</p>
+						</div>
+						<p>When entities refer to each other in Destiny content, it is this hash that they
+						are referring to.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="independentnodeindexes" class="tsd-anchor"></a>
+					<h3>independent<wbr>Node<wbr>Indexes</h3>
+					<div class="tsd-signature tsd-kind-icon">independent<wbr>Node<wbr>Indexes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4854">destiny2/interfaces.ts:4854</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This is a quick reference to the indexes of nodes that are not part of exclusive
+								sets. Handy for knowing which talent nodes can only be activated directly,
+							rather than via swapping.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4886">destiny2/interfaces.ts:4886</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The index of the entity as it was found in the investment tables.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="maxgridlevel" class="tsd-anchor"></a>
+					<h3>max<wbr>Grid<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Grid<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4806">destiny2/interfaces.ts:4806</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum possible level of the Talent Grid: at this level, any nodes are
+							allowed to be activated.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="nodecategories" class="tsd-anchor"></a>
+					<h3>node<wbr>Categories</h3>
+					<div class="tsd-signature tsd-kind-icon">node<wbr>Categories<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinytalentnodecategory.html" class="tsd-signature-type">DestinyTalentNodeCategory</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4876">destiny2/interfaces.ts:4876</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>BNet wants to show talent nodes grouped by similar purpose with localized titles.
+								This is the ordered list of those categories: if you want to show nodes by
+								category, you can iterate over this list, render the displayProperties for the
+								category as the title, and then iterate over the talent nodes referenced by the
+							category to show the related nodes.</p>
+						</div>
+						<p>Note that this is different from Exclusive Groups or Sets, because these
+							categories also incorporate &quot;Independent&quot; nodes that belong to neither sets nor
+							groups. These are purely for visual grouping of nodes rather than functional
+						grouping.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="nodes" class="tsd-anchor"></a>
+					<h3>nodes</h3>
+					<div class="tsd-signature tsd-kind-icon">nodes<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinytalentnodedefinition.html" class="tsd-signature-type">DestinyTalentNodeDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4832">destiny2/interfaces.ts:4832</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of Talent Nodes on the Grid (recall that Nodes themselves are really
+								just locations in the UI to show whatever their current Step is. You will only
+								know the current step for a node by retrieving instanced data through platform
+							calls to the API that return DestinyItemTalentGridComponent).</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="progressionhash" class="tsd-anchor"></a>
+					<h3>progression<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">progression<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4825">destiny2/interfaces.ts:4825</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The hash identifier of the Progression (DestinyProgressionDefinition) that
+								drives whether and when Talent Nodes can be activated on the Grid. Items will
+								have instances of this Progression, and will gain experience that will
+								eventually cause the grid to increase in level. As the grid&#39;s level increases,
+								it will cross the threshold where nodes can be activated. See
+							DestinyTalentGridStepDefinition&#39;s activation requirements for more information.</p>
+						</div>
+						<p>Mapped to DestinyProgressionDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="redacted" class="tsd-anchor"></a>
+					<h3>redacted</h3>
+					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4891">destiny2/interfaces.ts:4891</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, then there is an entity with this identifier/type combination,
+							but BNet is not yet allowed to show it. Sorry!</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_destiny2_interfaces_.destinytalentgriddefinition.html" class="tsd-kind-icon">Destiny<wbr>Talent<wbr>Grid<wbr>Definition</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#exclusivesets" class="tsd-kind-icon">exclusive<wbr>Sets</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#gridlevelpercolumn" class="tsd-kind-icon">grid<wbr>Level<wbr>Per<wbr>Column</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#groups" class="tsd-kind-icon">groups</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#hash" class="tsd-kind-icon">hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#independentnodeindexes" class="tsd-kind-icon">independent<wbr>Node<wbr>Indexes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#index" class="tsd-kind-icon">index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#maxgridlevel" class="tsd-kind-icon">max<wbr>Grid<wbr>Level</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#nodecategories" class="tsd-kind-icon">node<wbr>Categories</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#nodes" class="tsd-kind-icon">nodes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#progressionhash" class="tsd-kind-icon">progression<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinytalentgriddefinition.html#redacted" class="tsd-kind-icon">redacted</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
