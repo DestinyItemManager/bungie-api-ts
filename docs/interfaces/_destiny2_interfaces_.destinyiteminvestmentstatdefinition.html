@@ -96,6 +96,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminvestmentstatdefinition.html#isconditionallyactive" class="tsd-kind-icon">is<wbr>Conditionally<wbr>Active</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminvestmentstatdefinition.html#stattypehash" class="tsd-kind-icon">stat<wbr>Type<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminvestmentstatdefinition.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
@@ -106,12 +107,33 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isconditionallyactive" class="tsd-anchor"></a>
+					<h3>is<wbr>Conditionally<wbr>Active</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Conditionally<wbr>Active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L2877">destiny2/interfaces.ts:2877</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, the stat will only be applied on the item in certain game state
+								conditions, and we can&#39;t know statically whether or not this stat will be
+								applied. Check the &quot;live&quot; API data instead for whether this value is being
+								applied on a specific instance of the item in question, and you can use this to
+								decide whether you want to show the stat on the generic view of the item, or
+								whether you want to show some kind of caveat or warning about the stat value
+							being conditional on game state.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="stattypehash" class="tsd-anchor"></a>
 					<h3>stat<wbr>Type<wbr>Hash</h3>
 					<div class="tsd-signature tsd-kind-icon">stat<wbr>Type<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L2811">destiny2/interfaces.ts:2811</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L2862">destiny2/interfaces.ts:2862</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -127,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L2816">destiny2/interfaces.ts:2816</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L2867">destiny2/interfaces.ts:2867</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -157,6 +179,9 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_destiny2_interfaces_.destinyiteminvestmentstatdefinition.html" class="tsd-kind-icon">Destiny<wbr>Item<wbr>Investment<wbr>Stat<wbr>Definition</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminvestmentstatdefinition.html#isconditionallyactive" class="tsd-kind-icon">is<wbr>Conditionally<wbr>Active</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyiteminvestmentstatdefinition.html#stattypehash" class="tsd-kind-icon">stat<wbr>Type<wbr>Hash</a>
 							</li>

@@ -96,8 +96,13 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displaycategoryhash" class="tsd-kind-icon">display<wbr>Category<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displayinbanner" class="tsd-kind-icon">display<wbr>InBanner</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displaystylehash" class="tsd-kind-icon">display<wbr>Style<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displaystyleidentifier" class="tsd-kind-icon">display<wbr>Style<wbr>Identifier</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#identifier" class="tsd-kind-icon">identifier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#progressionhash" class="tsd-kind-icon">progression<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#sortorder" class="tsd-kind-icon">sort<wbr>Order</a></li>
 							</ul>
 						</section>
 					</div>
@@ -111,9 +116,25 @@
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Category<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L3426">destiny2/interfaces.ts:3426</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3499">destiny2/interfaces.ts:3499</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displayinbanner" class="tsd-anchor"></a>
+					<h3>display<wbr>InBanner</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>InBanner<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3505">destiny2/interfaces.ts:3505</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true, this category should be displayed in the &quot;Banner&quot; section of the vendor&#39;
+							s UI.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="displayproperties" class="tsd-anchor"></a>
@@ -121,9 +142,43 @@
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L3427">destiny2/interfaces.ts:3427</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3500">destiny2/interfaces.ts:3500</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displaystylehash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> display<wbr>Style<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Style<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3523">destiny2/interfaces.ts:3523</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An indicator of how the category will be displayed in the UI. It&#39;s up to you to
+								do something cool or interesting in response to this, or just to treat it as a
+							normal category.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="displaystyleidentifier" class="tsd-anchor"></a>
+					<h3>display<wbr>Style<wbr>Identifier</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Style<wbr>Identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3529">destiny2/interfaces.ts:3529</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An indicator of how the category will be displayed in the UI. It&#39;s up to you to
+								do something cool or interesting in response to this, or just to treat it as a
+							normal category.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="identifier" class="tsd-anchor"></a>
@@ -131,12 +186,46 @@
 					<div class="tsd-signature tsd-kind-icon">identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L3425">destiny2/interfaces.ts:3425</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3498">destiny2/interfaces.ts:3498</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>A string identifier for the display category.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="progressionhash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> progression<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">progression<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3515">destiny2/interfaces.ts:3515</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If it exists, this is the hash identifier of a DestinyProgressionDefinition that
+							represents the progression to show on this display category.</p>
+						</div>
+						<p>Specific categories can now have thier own distinct progression, apparently. So
+						that&#39;s cool.</p>
+						<p>Mapped to DestinyProgressionDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sortorder" class="tsd-anchor"></a>
+					<h3>sort<wbr>Order</h3>
+					<div class="tsd-signature tsd-kind-icon">sort<wbr>Order<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.vendordisplaycategorysortorder.html" class="tsd-signature-type">VendorDisplayCategorySortOrder</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L3517">destiny2/interfaces.ts:3517</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this category sorts items in a nonstandard way, this will be the way we sort.</p>
 						</div>
 					</div>
 				</section>
@@ -164,10 +253,25 @@
 								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displaycategoryhash" class="tsd-kind-icon">display<wbr>Category<wbr>Hash</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displayinbanner" class="tsd-kind-icon">display<wbr>InBanner</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displaystylehash" class="tsd-kind-icon">display<wbr>Style<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#displaystyleidentifier" class="tsd-kind-icon">display<wbr>Style<wbr>Identifier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#identifier" class="tsd-kind-icon">identifier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#progressionhash" class="tsd-kind-icon">progression<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinydisplaycategorydefinition.html#sortorder" class="tsd-kind-icon">sort<wbr>Order</a>
 							</li>
 						</ul>
 					</li>

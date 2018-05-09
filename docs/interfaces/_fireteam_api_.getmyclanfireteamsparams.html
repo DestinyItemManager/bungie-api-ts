@@ -84,6 +84,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_fireteam_api_.getmyclanfireteamsparams.html#groupfilter" class="tsd-kind-icon">group<wbr>Filter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_fireteam_api_.getmyclanfireteamsparams.html#groupid" class="tsd-kind-icon">group<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_fireteam_api_.getmyclanfireteamsparams.html#includeclosed" class="tsd-kind-icon">include<wbr>Closed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_fireteam_api_.getmyclanfireteamsparams.html#page" class="tsd-kind-icon">page</a></li>
@@ -96,17 +97,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="groupfilter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> group<wbr>Filter</h3>
+					<div class="tsd-signature tsd-kind-icon">group<wbr>Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/fireteam/api.ts#L102">fireteam/api.ts:102</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true, filter by clan. Otherwise, ignore the clan and show all of the user&#39;s
+							fireteams.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="groupid" class="tsd-anchor"></a>
 					<h3>group<wbr>Id</h3>
 					<div class="tsd-signature tsd-kind-icon">group<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/fireteam/api.ts#L99">fireteam/api.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/fireteam/api.ts#L107">fireteam/api.ts:107</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The group id of the clan.</p>
+							<p>The group id of the clan. (This parameter is ignored unless the optional query
+							parameter groupFilter is true).</p>
 						</div>
 					</div>
 				</section>
@@ -116,7 +134,7 @@
 					<div class="tsd-signature tsd-kind-icon">include<wbr>Closed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/fireteam/api.ts#L101">fireteam/api.ts:101</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/fireteam/api.ts#L109">fireteam/api.ts:109</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -131,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/fireteam/api.ts#L103">fireteam/api.ts:103</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/fireteam/api.ts#L111">fireteam/api.ts:111</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -146,7 +164,7 @@
 					<div class="tsd-signature tsd-kind-icon">platform<span class="tsd-signature-symbol">:</span> <a href="../enums/_fireteam_interfaces_.fireteamplatform.html" class="tsd-signature-type">FireteamPlatform</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/fireteam/api.ts#L105">fireteam/api.ts:105</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/fireteam/api.ts#L113">fireteam/api.ts:113</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,6 +202,9 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_fireteam_api_.getmyclanfireteamsparams.html" class="tsd-kind-icon">Get<wbr>MyClan<wbr>Fireteams<wbr>Params</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_fireteam_api_.getmyclanfireteamsparams.html#groupfilter" class="tsd-kind-icon">group<wbr>Filter</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_fireteam_api_.getmyclanfireteamsparams.html#groupid" class="tsd-kind-icon">group<wbr>Id</a>
 							</li>

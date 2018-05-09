@@ -96,10 +96,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#alternateplugstyle" class="tsd-kind-icon">alternate<wbr>Plug<wbr>Style</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#alternateuipluglabel" class="tsd-kind-icon">alternate<wbr>UiPlug<wbr>Label</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#enabledmaterialrequirementhash" class="tsd-kind-icon">enabled<wbr>Material<wbr>Requirement<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#enabledrules" class="tsd-kind-icon">enabled<wbr>Rules</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#insertionmaterialrequirementhash" class="tsd-kind-icon">insertion<wbr>Material<wbr>Requirement<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#insertionrules" class="tsd-kind-icon">insertion<wbr>Rules</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#isdummyplug" class="tsd-kind-icon">is<wbr>Dummy<wbr>Plug</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#ispseudoplug" class="tsd-kind-icon">is<wbr>Pseudo<wbr>Plug</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#onactionrecreateself" class="tsd-kind-icon">on<wbr>Action<wbr>Recreate<wbr>Self</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemplugdefinition.html#plugavailability" class="tsd-kind-icon">plug<wbr>Availability</a></li>
@@ -116,12 +119,46 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="alternateplugstyle" class="tsd-anchor"></a>
+					<h3>alternate<wbr>Plug<wbr>Style</h3>
+					<div class="tsd-signature tsd-kind-icon">alternate<wbr>Plug<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.pluguistyles.html" class="tsd-signature-type">PlugUiStyles</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4430">destiny2/interfaces.ts:4430</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The alternate plug of the plug: only applies when the item is in states that
+								only the server can know about and control, unfortunately. See
+							AlternateUiPlugLabel for the related label info.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="alternateuipluglabel" class="tsd-anchor"></a>
+					<h3>alternate<wbr>UiPlug<wbr>Label</h3>
+					<div class="tsd-signature tsd-kind-icon">alternate<wbr>UiPlug<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4424">destiny2/interfaces.ts:4424</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the plug meets certain state requirements, it may have an alternative label
+								applied to it. This is the alternative label that will be applied in such a
+							situation.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="enabledmaterialrequirementhash" class="tsd-anchor"></a>
 					<h3>enabled<wbr>Material<wbr>Requirement<wbr>Hash</h3>
 					<div class="tsd-signature tsd-kind-icon">enabled<wbr>Material<wbr>Requirement<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4249">destiny2/interfaces.ts:4249</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4388">destiny2/interfaces.ts:4388</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +176,7 @@
 					<div class="tsd-signature tsd-kind-icon">enabled<wbr>Rules<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyplugruledefinition.html" class="tsd-signature-type">DestinyPlugRuleDefinition</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4257">destiny2/interfaces.ts:4257</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4396">destiny2/interfaces.ts:4396</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -157,7 +194,7 @@
 					<div class="tsd-signature tsd-kind-icon">insertion<wbr>Material<wbr>Requirement<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4233">destiny2/interfaces.ts:4233</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4372">destiny2/interfaces.ts:4372</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -174,7 +211,7 @@
 					<div class="tsd-signature tsd-kind-icon">insertion<wbr>Rules<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyplugruledefinition.html" class="tsd-signature-type">DestinyPlugRuleDefinition</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4210">destiny2/interfaces.ts:4210</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4349">destiny2/interfaces.ts:4349</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,12 +224,28 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isdummyplug" class="tsd-anchor"></a>
+					<h3>is<wbr>Dummy<wbr>Plug</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Dummy<wbr>Plug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4435">destiny2/interfaces.ts:4435</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If TRUE, this plug is used for UI display purposes only, and doesn&#39;t have any
+							interesting effects of its own.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="ispseudoplug" class="tsd-anchor"></a>
 					<h3>is<wbr>Pseudo<wbr>Plug</h3>
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Pseudo<wbr>Plug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4274">destiny2/interfaces.ts:4274</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4413">destiny2/interfaces.ts:4413</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,7 +261,7 @@
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Action<wbr>Recreate<wbr>Self<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4226">destiny2/interfaces.ts:4226</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4365">destiny2/interfaces.ts:4365</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -224,7 +277,7 @@
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Availability<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.plugavailabilitymode.html" class="tsd-signature-type">PlugAvailabilityMode</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4279">destiny2/interfaces.ts:4279</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4418">destiny2/interfaces.ts:4418</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -240,7 +293,7 @@
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Category<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4221">destiny2/interfaces.ts:4221</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4360">destiny2/interfaces.ts:4360</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +309,7 @@
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Category<wbr>Identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4216">destiny2/interfaces.ts:4216</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4355">destiny2/interfaces.ts:4355</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -273,7 +326,7 @@
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.pluguistyles.html" class="tsd-signature-type">PlugUiStyles</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4269">destiny2/interfaces.ts:4269</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4408">destiny2/interfaces.ts:4408</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +336,7 @@
 					<div class="tsd-signature tsd-kind-icon">preview<wbr>Item<wbr>Override<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4241">destiny2/interfaces.ts:4241</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4380">destiny2/interfaces.ts:4380</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -301,7 +354,7 @@
 					<div class="tsd-signature tsd-kind-icon">ui<wbr>Plug<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9f65fa0/generated-src/destiny2/interfaces.ts#L4268">destiny2/interfaces.ts:4268</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/68e7c4a/generated-src/destiny2/interfaces.ts#L4407">destiny2/interfaces.ts:4407</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -338,6 +391,12 @@
 						<a href="_destiny2_interfaces_.destinyitemplugdefinition.html" class="tsd-kind-icon">Destiny<wbr>Item<wbr>Plug<wbr>Definition</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemplugdefinition.html#alternateplugstyle" class="tsd-kind-icon">alternate<wbr>Plug<wbr>Style</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemplugdefinition.html#alternateuipluglabel" class="tsd-kind-icon">alternate<wbr>UiPlug<wbr>Label</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemplugdefinition.html#enabledmaterialrequirementhash" class="tsd-kind-icon">enabled<wbr>Material<wbr>Requirement<wbr>Hash</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -348,6 +407,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemplugdefinition.html#insertionrules" class="tsd-kind-icon">insertion<wbr>Rules</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemplugdefinition.html#isdummyplug" class="tsd-kind-icon">is<wbr>Dummy<wbr>Plug</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemplugdefinition.html#ispseudoplug" class="tsd-kind-icon">is<wbr>Pseudo<wbr>Plug</a>
