@@ -27,16 +27,16 @@
   ],
   "homepage": "https://github.com/DestinyItemManager/bungie-api-ts",
   "devDependencies": {
-    "@types/node": "^8.5.2",
-    "@types/underscore": "^1.8.6",
+    "@types/node": "^8.10.20",
+    "@types/underscore": "^1.8.8",
     "mkdirp": "^0.5.1",
     "openapi3-ts": "^0.6.2",
     "ts-node": "^4.1.0",
-    "tslint": "^5.8.0",
+    "tslint": "^5.10.0",
     "tslint-eslint-rules": "^4.1.1",
     "typedoc": "^0.11.1",
-    "typescript": "^2.6.2",
-    "underscore": "^1.8.3"
+    "typescript": "^2.9.2",
+    "underscore": "^1.9.1"
   },
   "dependencies": {}
 }
