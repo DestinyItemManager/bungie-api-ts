@@ -108,9 +108,11 @@ function addReachableComponentsFromComponent(allDefinitions: Set<string>, defini
   if (component && component.type === 'array') {
     addDefinitions(allDefinitions, component.items!, doc);
   } else if (component.type === 'object') {
-    Object.values(component.properties).forEach((schema: SchemaObject | ReferenceObject) => {
-      addDefinitions(allDefinitions, schema, doc);
-    });
+    if (component.properties) {
+      Object.values(component.properties).forEach((schema: SchemaObject | ReferenceObject) => {
+        addDefinitions(allDefinitions, schema, doc);
+      });
+    }
     (component.allOf || []).forEach((schema: SchemaObject | ReferenceObject) => {
       addDefinitions(allDefinitions, schema, doc);
     });
