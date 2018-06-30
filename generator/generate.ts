@@ -19,6 +19,7 @@ const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
 const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {
   return (desc.get || desc.post)!.tags![0];
 });
+delete pathPairsByTag[''];
 
 const { componentsByFile, componentByDef } = computeTypeMaps(pathPairsByTag, doc);
 

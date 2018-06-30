@@ -92,6 +92,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html#checklists" class="tsd-kind-icon">checklists</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html#factions" class="tsd-kind-icon">factions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html#milestones" class="tsd-kind-icon">milestones</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html#progressions" class="tsd-kind-icon">progressions</a></li>
@@ -105,12 +106,45 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="checklists" class="tsd-anchor"></a>
+					<h3>checklists</h3>
+					<div class="tsd-signature tsd-kind-icon">checklists<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7178">destiny2/interfaces.ts:7178</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The set of checklists that can be examined for this specific character, keyed by
+							the hash identifier of the Checklist (DestinyChecklistDefinition)</p>
+						</div>
+						<p>For each checklist returned, its value is itself a Dictionary keyed by the
+							checklist&#39;s hash identifier with the value being a boolean indicating if it&#39;s
+						been discovered yet.</p>
+						<p>Mapped to DestinyChecklistDefinition in the manifest.</p>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">object</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-index-signature">
+										<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">boolean</span></h5>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="factions" class="tsd-anchor"></a>
 					<h3>factions</h3>
 					<div class="tsd-signature tsd-kind-icon">factions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L6969">destiny2/interfaces.ts:6969</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7140">destiny2/interfaces.ts:7140</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -135,7 +169,7 @@
 					<div class="tsd-signature tsd-kind-icon">milestones<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L6977">destiny2/interfaces.ts:6977</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7148">destiny2/interfaces.ts:7148</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">progressions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L6962">destiny2/interfaces.ts:6962</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7133">destiny2/interfaces.ts:7133</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +222,7 @@
 					<div class="tsd-signature tsd-kind-icon">quests<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyqueststatus.html" class="tsd-signature-type">DestinyQuestStatus</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L6984">destiny2/interfaces.ts:6984</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7155">destiny2/interfaces.ts:7155</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -205,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">uninstanced<wbr>Item<wbr>Objectives<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L6996">destiny2/interfaces.ts:6996</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7167">destiny2/interfaces.ts:7167</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -248,6 +282,9 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html" class="tsd-kind-icon">Destiny<wbr>Character<wbr>Progression<wbr>Component</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html#checklists" class="tsd-kind-icon">checklists</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinycharacterprogressioncomponent.html#factions" class="tsd-kind-icon">factions</a>
 							</li>

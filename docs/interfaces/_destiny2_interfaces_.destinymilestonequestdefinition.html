@@ -94,6 +94,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#activities" class="tsd-kind-icon">activities</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#destinationhash" class="tsd-kind-icon">destination<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#overrideimage" class="tsd-kind-icon">override<wbr>Image</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#questitemhash" class="tsd-kind-icon">quest<wbr>Item<wbr>Hash</a></li>
@@ -111,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">activities<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L7358">destiny2/interfaces.ts:7358</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7540">destiny2/interfaces.ts:7540</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -133,12 +134,31 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="destinationhash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> destination<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">destination<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7549">destiny2/interfaces.ts:7549</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Sometimes, a Milestone&#39;s quest is related to an entire Destination rather than a
+								specific activity. In that situation, this will be the hash of that Destination.
+								Hotspots are currently the only Milestones that expose this data, but that does
+							not preclude this data from being returned for other Milestones in the future.</p>
+						</div>
+						<p>Mapped to DestinyDestinationDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="displayproperties" class="tsd-anchor"></a>
 					<h3>display<wbr>Properties</h3>
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L7337">destiny2/interfaces.ts:7337</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7519">destiny2/interfaces.ts:7519</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -155,7 +175,7 @@
 					<div class="tsd-signature tsd-kind-icon">override<wbr>Image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L7343">destiny2/interfaces.ts:7343</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7525">destiny2/interfaces.ts:7525</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">quest<wbr>Item<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L7331">destiny2/interfaces.ts:7331</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7513">destiny2/interfaces.ts:7513</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -190,7 +210,7 @@
 					<div class="tsd-signature tsd-kind-icon">quest<wbr>Rewards<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinymilestonequestrewardsdefinition.html" class="tsd-signature-type">DestinyMilestoneQuestRewardsDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L7349">destiny2/interfaces.ts:7349</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7531">destiny2/interfaces.ts:7531</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,6 +243,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#activities" class="tsd-kind-icon">activities</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#destinationhash" class="tsd-kind-icon">destination<wbr>Hash</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonequestdefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>

@@ -78,6 +78,17 @@
 					DestinyInventoryItemDefinition.sockets.socketCategories property.</p>
 					<p>This has the display information for rendering the categories&#39; header, and a
 					hint for how the UI should handle showing this category.</p>
+					<p>The shitty thing about this, however, is that the socket categories&#39; UI style
+						can be overridden by the item&#39;s UI style. For instance, the Socket Category used
+						by Emote Sockets says it&#39;s &quot;consumable,&quot; but that&#39;s a lie: they&#39;re all reusable,
+						and overridden by the detail UI pages in ways that we can&#39;t easily account for
+					in the API.</p>
+					<p>As a result, I will try to compile these rules into the individual sockets on
+						items, and provide the best hint possible there through the plugSources property.
+						In the future, I may attempt to use this information in conjunction with the
+						item to provide a more usable UI hint on the socket layer, but for now improving
+						the consistency of plugSources is the best I have time to provide. (See https://
+					github.com/Bungie-net/api/issues/522 for more info)</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -114,7 +125,7 @@
 					<div class="tsd-signature tsd-kind-icon">category<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinysocketcategorystyle.html" class="tsd-signature-type">DestinySocketCategoryStyle</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L4796">destiny2/interfaces.ts:4796</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4823">destiny2/interfaces.ts:4823</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -129,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L4786">destiny2/interfaces.ts:4786</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4813">destiny2/interfaces.ts:4813</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,7 +150,7 @@
 					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L4804">destiny2/interfaces.ts:4804</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4831">destiny2/interfaces.ts:4831</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -157,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L4806">destiny2/interfaces.ts:4806</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4833">destiny2/interfaces.ts:4833</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L4811">destiny2/interfaces.ts:4811</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4838">destiny2/interfaces.ts:4838</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">ui<wbr>Category<wbr>Style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/45f9a95/generated-src/destiny2/interfaces.ts#L4794">destiny2/interfaces.ts:4794</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4821">destiny2/interfaces.ts:4821</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
