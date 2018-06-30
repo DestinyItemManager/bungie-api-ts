@@ -6,8 +6,7 @@
     "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
-    "declaration": true,
-    "declarationMap": true
+    "declaration": true
   },
   "include": [
     "./generated-src/**/*"
