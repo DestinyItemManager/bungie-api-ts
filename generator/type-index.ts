@@ -116,9 +116,9 @@ function addReachableComponentsFromComponent(allDefinitions: Set<string>, defini
     (component.allOf || []).forEach((schema: SchemaObject | ReferenceObject) => {
       addDefinitions(allDefinitions, schema, doc);
     });
-    (component.additionalProperties || []).forEach((schema: SchemaObject | ReferenceObject) => {
-      addDefinitions(allDefinitions, schema, doc);
-    });
+    if (component.additionalProperties) {
+      addDefinitions(allDefinitions, component.additionalProperties, doc);
+    }
   }
 }
 

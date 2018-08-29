@@ -67,15 +67,13 @@
 				<h1 id="bungie-api-typescript-support">Bungie API TypeScript support</h1>
 				<p>This project implements TypeScript definitions and API helpers for the <a href="https://github.com/Bungie-net/api">Bungie.net API</a>. It&#39;s meant for use in <a href="https://destinyitemmanager.com">Destiny Item Manager</a>, but should be general enough to use in any project. The code is completely generated from Bungie&#39;s documentation - I considered using something like Swagger Codegen, but instead opted for a custom generator so we could make the result as nice as possible.</p>
 				<h1 id="install">Install</h1>
-				<pre><code>npm <span class="hljs-keyword">install</span> bungie-api-ts
-</code></pre><h1 id="interfaces-and-enums">Interfaces and Enums</h1>
+				<pre><code>npm <span class="hljs-keyword">install</span> bungie-api-ts</code></pre><h1 id="interfaces-and-enums">Interfaces and Enums</h1>
 				<p>All the interface type definitions and enums are for type info only - everything will compile out. Only the API helpers produce real JavaScript output. You can import types from each service defined on Bungie.net:</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { DestinyInventoryComponent, DestinyInventoryItemDefinition } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
-</code></pre>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { DestinyInventoryComponent, DestinyInventoryItemDefinition } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;</code></pre>
 				<p>There are definitions for every type defined in the Bungie.net services. See <a href="https://bungie-net.github.io/multi/">their documentation</a> for a list - the interface names are the last part of the full name (for example, <code>Destiny.Definitions.DestinyVendorActionDefinition</code> becomes <code>DestinyVendorActionDefinition</code>). There are a few exceptions, like <code>SingleComponentResponseOfDestinyInventoryComponent</code>, which have been mapped into nicer forms like <code>SingleComponentResponse&lt;DestinyInventoryComponent&gt;</code>, and the server responses, which are now <code>ServerResponse&lt;T&gt;</code> instead of something like <code>DestinyCharacterResponse</code>.</p>
 				<h1 id="api-helpers">API Helpers</h1>
 				<p>In addition to the types, there are also simple helper functions for each API endpoint. They define the inputs and outputs to that endpoint, and will call a user-provided function with HTTP request info that you can then use to make an HTTP request. This pattern was used so the API helpers could provide full type information. These helpers are not a full API client - they assist in building one. An example:</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">$http</span>(<span class="hljs-params">config: HttpClientConfig</span>) </span>{
   <span class="hljs-comment">// fill in the API key, handle OAuth, etc., then make an HTTP request using the config.</span>
@@ -86,21 +84,18 @@
   components: [DestinyComponentType.Profiles, DestinyComponentType.Characters],
   destinyMembershipId: <span class="hljs-number">12345</span>,
   membershipType: BungieMembershipType.TigerPsn
-});
-</code></pre>
+});</code></pre>
 				<h1 id="imports">Imports</h1>
 				<p>It is possible to import all services from <code>bungie-api-ts</code> directly, but it&#39;s better to import the specific service and pick out what you want:</p>
-				<pre><code class="lang-typescript"><span class="hljs-comment">// good</span>
+				<pre><code class="language-typescript"><span class="hljs-comment">// good</span>
 <span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
 getProfile(...);
 
 <span class="hljs-comment">// works, but not as good</span>
 <span class="hljs-keyword">import</span> { Destiny2 } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts'</span>;
-Destiny2.getProfile(...);
-</code></pre>
+Destiny2.getProfile(...);</code></pre>
 				<h1 id="build">Build</h1>
-				<pre><code><span class="hljs-built_in">npm</span> install &amp;&amp; <span class="hljs-built_in">npm</span> start
-</code></pre>
+				<pre><code><span class="hljs-built_in">npm</span> install &amp;&amp; <span class="hljs-built_in">npm</span> start</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

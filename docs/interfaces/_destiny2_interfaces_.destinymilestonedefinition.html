@@ -129,6 +129,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#activities" class="tsd-kind-icon">activities</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#defaultorder" class="tsd-kind-icon">default<wbr>Order</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#exploreprioritizesactivityimage" class="tsd-kind-icon">explore<wbr>Prioritizes<wbr>Activity<wbr>Image</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#friendlyname" class="tsd-kind-icon">friendly<wbr>Name</a></li>
@@ -143,6 +145,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#redacted" class="tsd-kind-icon">redacted</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#rewards" class="tsd-kind-icon">rewards</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#showinexplorer" class="tsd-kind-icon">show<wbr>InExplorer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#showinmilestones" class="tsd-kind-icon">show<wbr>InMilestones</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#values" class="tsd-kind-icon">values</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#vendors" class="tsd-kind-icon">vendors</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonedefinition.html#vendorsdisplaytitle" class="tsd-kind-icon">vendors<wbr>Display<wbr>Title</a></li>
@@ -154,12 +157,39 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="activities" class="tsd-anchor"></a>
+					<h3>activities</h3>
+					<div class="tsd-signature tsd-kind-icon">activities<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinymilestonechallengeactivitydefinition.html" class="tsd-signature-type">DestinyMilestoneChallengeActivityDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8096">destiny2/interfaces.ts:8096</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A Milestone can now be represented by one or more activities directly (without a
+								backing Quest), and that activity can have many challenges, modifiers, and
+							related to it.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="defaultorder" class="tsd-anchor"></a>
+					<h3>default<wbr>Order</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Order<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8097">destiny2/interfaces.ts:8097</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="displayproperties" class="tsd-anchor"></a>
 					<h3>display<wbr>Properties</h3>
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7377">destiny2/interfaces.ts:7377</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L7997">destiny2/interfaces.ts:7997</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">explore<wbr>Prioritizes<wbr>Activity<wbr>Image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7407">destiny2/interfaces.ts:7407</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8032">destiny2/interfaces.ts:8032</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -186,7 +216,7 @@
 					<div class="tsd-signature tsd-kind-icon">friendly<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7393">destiny2/interfaces.ts:7393</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8013">destiny2/interfaces.ts:8013</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -204,7 +234,7 @@
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Predictable<wbr>Dates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7415">destiny2/interfaces.ts:7415</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8040">destiny2/interfaces.ts:8040</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7466">destiny2/interfaces.ts:7466</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8105">destiny2/interfaces.ts:8105</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -241,7 +271,7 @@
 					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7379">destiny2/interfaces.ts:7379</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L7999">destiny2/interfaces.ts:7999</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +286,7 @@
 					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7468">destiny2/interfaces.ts:7468</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8107">destiny2/interfaces.ts:8107</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -271,7 +301,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>InGame<wbr>Milestone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7458">destiny2/interfaces.ts:7458</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8090">destiny2/interfaces.ts:8090</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -291,7 +321,7 @@
 					<div class="tsd-signature tsd-kind-icon">milestone<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinymilestonetype.html" class="tsd-signature-type">DestinyMilestoneType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7384">destiny2/interfaces.ts:7384</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8004">destiny2/interfaces.ts:8004</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -307,7 +337,7 @@
 					<div class="tsd-signature tsd-kind-icon">quests<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7423">destiny2/interfaces.ts:7423</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8052">destiny2/interfaces.ts:8052</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -318,6 +348,9 @@
 								from. (for instance, with Milestones you can choose from the three available
 							Quests, but only one can be active at a time) Keyed by the quest item.</p>
 						</div>
+						<p>As of Forsaken (~September 2018), Quest-style Milestones are being removed for
+							many types of activities. There will likely be further revisions to the
+						Milestone concept in the future.</p>
 					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
@@ -334,7 +367,7 @@
 					<div class="tsd-signature tsd-kind-icon">recruitable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7386">destiny2/interfaces.ts:7386</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8006">destiny2/interfaces.ts:8006</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -349,7 +382,7 @@
 					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7473">destiny2/interfaces.ts:7473</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8112">destiny2/interfaces.ts:8112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -365,7 +398,7 @@
 					<div class="tsd-signature tsd-kind-icon">rewards<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7428">destiny2/interfaces.ts:7428</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8060">destiny2/interfaces.ts:8060</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -373,6 +406,8 @@
 							<p>If this milestone can provide rewards, this will define the categories into
 							which the individual reward entries are placed.</p>
 						</div>
+						<p>This is keyed by the Category&#39;s hash, which is only guaranteed to be unique
+						within a given Milestone.</p>
 					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
@@ -389,7 +424,7 @@
 					<div class="tsd-signature tsd-kind-icon">show<wbr>InExplorer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7401">destiny2/interfaces.ts:7401</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8021">destiny2/interfaces.ts:8021</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -403,12 +438,28 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="showinmilestones" class="tsd-anchor"></a>
+					<h3>show<wbr>InMilestones</h3>
+					<div class="tsd-signature tsd-kind-icon">show<wbr>InMilestones<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8026">destiny2/interfaces.ts:8026</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Determines whether we&#39;ll show this Milestone in the user&#39;s personal Milestones
+							list.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="values" class="tsd-anchor"></a>
 					<h3>values</h3>
 					<div class="tsd-signature tsd-kind-icon">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7449">destiny2/interfaces.ts:7449</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8081">destiny2/interfaces.ts:8081</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -434,7 +485,7 @@
 					<div class="tsd-signature tsd-kind-icon">vendors<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinymilestonevendordefinition.html" class="tsd-signature-type">DestinyMilestoneVendorDefinition</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7442">destiny2/interfaces.ts:7442</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8074">destiny2/interfaces.ts:8074</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -452,7 +503,7 @@
 					<div class="tsd-signature tsd-kind-icon">vendors<wbr>Display<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L7435">destiny2/interfaces.ts:7435</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L8067">destiny2/interfaces.ts:8067</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -484,6 +535,12 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_destiny2_interfaces_.destinymilestonedefinition.html" class="tsd-kind-icon">Destiny<wbr>Milestone<wbr>Definition</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#activities" class="tsd-kind-icon">activities</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#defaultorder" class="tsd-kind-icon">default<wbr>Order</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
 							</li>
@@ -525,6 +582,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#showinexplorer" class="tsd-kind-icon">show<wbr>InExplorer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#showinmilestones" class="tsd-kind-icon">show<wbr>InMilestones</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonedefinition.html#values" class="tsd-kind-icon">values</a>

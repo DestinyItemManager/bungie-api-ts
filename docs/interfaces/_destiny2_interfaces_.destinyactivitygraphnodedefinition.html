@@ -100,6 +100,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivitygraphnodedefinition.html#nodeid" class="tsd-kind-icon">node<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivitygraphnodedefinition.html#overridedisplay" class="tsd-kind-icon">override<wbr>Display</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivitygraphnodedefinition.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivitygraphnodedefinition.html#states" class="tsd-kind-icon">states</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,7 +114,7 @@
 					<div class="tsd-signature tsd-kind-icon">activities<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyactivitygraphnodeactivitydefinition.html" class="tsd-signature-type">DestinyActivityGraphNodeActivityDefinition</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L3205">destiny2/interfaces.ts:3205</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L3265">destiny2/interfaces.ts:3265</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -130,7 +131,7 @@
 					<div class="tsd-signature tsd-kind-icon">featuring<wbr>States<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyactivitygraphnodefeaturingstatedefinition.html" class="tsd-signature-type">DestinyActivityGraphNodeFeaturingStateDefinition</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L3199">destiny2/interfaces.ts:3199</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L3259">destiny2/interfaces.ts:3259</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -149,7 +150,7 @@
 					<div class="tsd-signature tsd-kind-icon">node<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L3184">destiny2/interfaces.ts:3184</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L3244">destiny2/interfaces.ts:3244</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -165,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">override<wbr>Display<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L3189">destiny2/interfaces.ts:3189</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L3249">destiny2/interfaces.ts:3249</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -181,12 +182,29 @@
 					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinypositiondefinition.html" class="tsd-signature-type">DestinyPositionDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L3191">destiny2/interfaces.ts:3191</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L3251">destiny2/interfaces.ts:3251</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The position on the map for this node.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="states" class="tsd-anchor"></a>
+					<h3>states</h3>
+					<div class="tsd-signature tsd-kind-icon">states<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyactivitygraphnodestateentry.html" class="tsd-signature-type">DestinyActivityGraphNodeStateEntry</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L3271">destiny2/interfaces.ts:3271</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Represents possible states that the graph node can be in. These are combined
+								with some checking that happens in the game client and server to determine which
+							state is actually active at any given time.</p>
 						</div>
 					</div>
 				</section>
@@ -224,6 +242,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyactivitygraphnodedefinition.html#position" class="tsd-kind-icon">position</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyactivitygraphnodedefinition.html#states" class="tsd-kind-icon">states</a>
 							</li>
 						</ul>
 					</li>

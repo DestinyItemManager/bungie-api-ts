@@ -95,6 +95,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#hideperksinitemtooltip" class="tsd-kind-icon">hide<wbr>Perks<wbr>InItem<wbr>Tooltip</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#plugsources" class="tsd-kind-icon">plug<wbr>Sources</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#preventinitializationonvendorpurchase" class="tsd-kind-icon">prevent<wbr>Initialization<wbr>OnVendor<wbr>Purchase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#randomizedplugitems" class="tsd-kind-icon">randomized<wbr>Plug<wbr>Items</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#reusableplugitems" class="tsd-kind-icon">reusable<wbr>Plug<wbr>Items</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#reusableplugsethash" class="tsd-kind-icon">reusable<wbr>Plug<wbr>Set<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#singleinitialitemhash" class="tsd-kind-icon">single<wbr>Initial<wbr>Item<wbr>Hash</a></li>
@@ -112,7 +113,7 @@
 					<div class="tsd-signature tsd-kind-icon">hide<wbr>Perks<wbr>InItem<wbr>Tooltip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4648">destiny2/interfaces.ts:4648</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5120">destiny2/interfaces.ts:5120</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -129,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Sources<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.socketplugsources.html" class="tsd-signature-type">SocketPlugSources</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4655">destiny2/interfaces.ts:4655</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5127">destiny2/interfaces.ts:5127</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -147,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">prevent<wbr>Initialization<wbr>OnVendor<wbr>Purchase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4642">destiny2/interfaces.ts:4642</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5114">destiny2/interfaces.ts:5114</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,12 +162,29 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="randomizedplugitems" class="tsd-anchor"></a>
+					<h3>randomized<wbr>Plug<wbr>Items</h3>
+					<div class="tsd-signature tsd-kind-icon">randomized<wbr>Plug<wbr>Items<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyitemsocketentryplugitemrandomizeddefinition.html" class="tsd-signature-type">DestinyItemSocketEntryPlugItemRandomizedDefinition</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5140">destiny2/interfaces.ts:5140</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>As of Forsaken, item sockets can have randomized plugs. If this is populated,
+								the live data will return a subset of plugs from this list that are active and
+							able to be inserted into the socket just like a reusable plug.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="reusableplugitems" class="tsd-anchor"></a>
 					<h3>reusable<wbr>Plug<wbr>Items</h3>
 					<div class="tsd-signature tsd-kind-icon">reusable<wbr>Plug<wbr>Items<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyitemsocketentryplugitemdefinition.html" class="tsd-signature-type">DestinyItemSocketEntryPlugItemDefinition</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4633">destiny2/interfaces.ts:4633</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5105">destiny2/interfaces.ts:5105</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,7 +202,7 @@
 					<div class="tsd-signature tsd-kind-icon">reusable<wbr>Plug<wbr>Set<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4662">destiny2/interfaces.ts:4662</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5134">destiny2/interfaces.ts:5134</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,7 +220,7 @@
 					<div class="tsd-signature tsd-kind-icon">single<wbr>Initial<wbr>Item<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4625">destiny2/interfaces.ts:4625</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5097">destiny2/interfaces.ts:5097</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -221,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">socket<wbr>Type<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/a09fd66/generated-src/destiny2/interfaces.ts#L4616">destiny2/interfaces.ts:4616</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b486013/generated-src/destiny2/interfaces.ts#L5088">destiny2/interfaces.ts:5088</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -261,6 +279,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#preventinitializationonvendorpurchase" class="tsd-kind-icon">prevent<wbr>Initialization<wbr>OnVendor<wbr>Purchase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#randomizedplugitems" class="tsd-kind-icon">randomized<wbr>Plug<wbr>Items</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemsocketentrydefinition.html#reusableplugitems" class="tsd-kind-icon">reusable<wbr>Plug<wbr>Items</a>
