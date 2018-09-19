@@ -96,6 +96,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketstate.html#enablefailindexes" class="tsd-kind-icon">enable<wbr>Fail<wbr>Indexes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketstate.html#isenabled" class="tsd-kind-icon">is<wbr>Enabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketstate.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketstate.html#plughash" class="tsd-kind-icon">plug<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketstate.html#plugobjectives" class="tsd-kind-icon">plug<wbr>Objectives</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsocketstate.html#reusableplughashes" class="tsd-kind-icon">reusable<wbr>Plug<wbr>Hashes</a></li>
@@ -113,7 +114,7 @@
 					<div class="tsd-signature tsd-kind-icon">enable<wbr>Fail<wbr>Indexes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L9512">destiny2/interfaces.ts:9512</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9581">destiny2/interfaces.ts:9581</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -130,7 +131,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L9506">destiny2/interfaces.ts:9506</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9565">destiny2/interfaces.ts:9565</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -141,12 +142,32 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isvisible" class="tsd-anchor"></a>
+					<h3>is<wbr>Visible</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9575">destiny2/interfaces.ts:9575</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A plug may theoretically provide benefits but not be visible - for instance,
+								some older items use a plug&#39;s damage type perk to modify their own damage type.
+								These, though they are not visible, still affect the item. This field indicates
+							that state.</p>
+						</div>
+						<p>An invisible plug, while it provides benefits if it is Enabled, cannot be
+						directly modified by the user.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="plughash" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> plug<wbr>Hash</h3>
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L9500">destiny2/interfaces.ts:9500</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9559">destiny2/interfaces.ts:9559</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -166,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">plug<wbr>Objectives<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyobjectiveprogress.html" class="tsd-signature-type">DestinyObjectiveProgress</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L9530">destiny2/interfaces.ts:9530</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9599">destiny2/interfaces.ts:9599</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,7 +208,7 @@
 					<div class="tsd-signature tsd-kind-icon">reusable<wbr>Plug<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L9520">destiny2/interfaces.ts:9520</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9589">destiny2/interfaces.ts:9589</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -205,7 +226,7 @@
 					<div class="tsd-signature tsd-kind-icon">reusable<wbr>Plugs<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyitemplug.html" class="tsd-signature-type">DestinyItemPlug</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L9547">destiny2/interfaces.ts:9547</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L9616">destiny2/interfaces.ts:9616</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -250,6 +271,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemsocketstate.html#isenabled" class="tsd-kind-icon">is<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyitemsocketstate.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyitemsocketstate.html#plughash" class="tsd-kind-icon">plug<wbr>Hash</a>

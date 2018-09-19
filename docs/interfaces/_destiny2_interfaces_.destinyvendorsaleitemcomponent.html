@@ -100,6 +100,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#costs" class="tsd-kind-icon">costs</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#failureindexes" class="tsd-kind-icon">failure<wbr>Indexes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#itemhash" class="tsd-kind-icon">item<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#overridenextrefreshdate" class="tsd-kind-icon">override<wbr>Next<wbr>Refresh<wbr>Date</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#overridestyleitemhash" class="tsd-kind-icon">override<wbr>Style<wbr>Item<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#quantity" class="tsd-kind-icon">quantity</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#requiredunlocks" class="tsd-kind-icon">required<wbr>Unlocks</a></li>
@@ -119,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">augments<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinyvendoritemstate.html" class="tsd-signature-type">DestinyVendorItemState</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10237">destiny2/interfaces.ts:10237</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10306">destiny2/interfaces.ts:10306</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">costs<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyitemquantity.html" class="tsd-signature-type">DestinyItemQuantity</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10196">destiny2/interfaces.ts:10196</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10265">destiny2/interfaces.ts:10265</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">failure<wbr>Indexes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10227">destiny2/interfaces.ts:10227</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10296">destiny2/interfaces.ts:10296</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -174,7 +175,7 @@
 					<div class="tsd-signature tsd-kind-icon">item<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10175">destiny2/interfaces.ts:10175</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10244">destiny2/interfaces.ts:10244</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -186,12 +187,33 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="overridenextrefreshdate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> override<wbr>Next<wbr>Refresh<wbr>Date</h3>
+					<div class="tsd-signature tsd-kind-icon">override<wbr>Next<wbr>Refresh<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10317">destiny2/interfaces.ts:10317</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this item has its own custom date where it may be removed from the Vendor&#39;s
+							rotation, this is that date.</p>
+						</div>
+						<p>Note that there&#39;s not actually any guarantee that it will go away: it could be
+							chosen again and end up still being in the Vendor&#39;s sale items! But this is the
+							next date where that test will occur, and is also the date that the game shows
+							for availability on things like Bounties being sold. So it&#39;s the best we can
+						give.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="overridestyleitemhash" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> override<wbr>Style<wbr>Item<wbr>Hash</h3>
 					<div class="tsd-signature tsd-kind-icon">override<wbr>Style<wbr>Item<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10187">destiny2/interfaces.ts:10187</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10256">destiny2/interfaces.ts:10256</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -212,7 +234,7 @@
 					<div class="tsd-signature tsd-kind-icon">quantity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10189">destiny2/interfaces.ts:10189</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10258">destiny2/interfaces.ts:10258</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -227,7 +249,7 @@
 					<div class="tsd-signature tsd-kind-icon">required<wbr>Unlocks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10209">destiny2/interfaces.ts:10209</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10278">destiny2/interfaces.ts:10278</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -249,7 +271,7 @@
 					<div class="tsd-signature tsd-kind-icon">sale<wbr>Status<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.vendoritemstatus.html" class="tsd-signature-type">VendorItemStatus</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10194">destiny2/interfaces.ts:10194</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10263">destiny2/interfaces.ts:10263</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -265,7 +287,7 @@
 					<div class="tsd-signature tsd-kind-icon">unlock<wbr>Statuses<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyunlockstatus.html" class="tsd-signature-type">DestinyUnlockStatus</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10217">destiny2/interfaces.ts:10217</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10286">destiny2/interfaces.ts:10286</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -283,7 +305,7 @@
 					<div class="tsd-signature tsd-kind-icon">vendor<wbr>Item<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/9033614/generated-src/destiny2/interfaces.ts#L10168">destiny2/interfaces.ts:10168</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/d590d5d/generated-src/destiny2/interfaces.ts#L10237">destiny2/interfaces.ts:10237</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -327,6 +349,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#itemhash" class="tsd-kind-icon">item<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#overridenextrefreshdate" class="tsd-kind-icon">override<wbr>Next<wbr>Refresh<wbr>Date</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html#overridestyleitemhash" class="tsd-kind-icon">override<wbr>Style<wbr>Item<wbr>Hash</a>
