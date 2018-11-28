@@ -18,7 +18,9 @@ export declare const enum FireteamActivityType {
     Trials = 3,
     Nightfall = 4,
     Anything = 5,
-    Gambit = 6
+    Gambit = 6,
+    BlindWell = 7,
+    EscalationProtocol = 8
 }
 export declare const enum FireteamDateRange {
     All = 0,

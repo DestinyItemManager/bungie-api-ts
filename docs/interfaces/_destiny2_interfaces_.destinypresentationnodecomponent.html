@@ -84,7 +84,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#completionvalue" class="tsd-kind-icon">completion<wbr>Value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#objective" class="tsd-kind-icon">objective</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#progressvalue" class="tsd-kind-icon">progress<wbr>Value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#state" class="tsd-kind-icon">state</a></li>
 							</ul>
 						</section>
@@ -94,14 +96,53 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="completionvalue" class="tsd-anchor"></a>
+					<h3>completion<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">completion<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L7692">destiny2/interfaces.ts:7692</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The value at which the presentation ode is considered to be completed.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="objective" class="tsd-anchor"></a>
 					<h3>objective</h3>
 					<div class="tsd-signature tsd-kind-icon">objective<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyobjectiveprogress.html" class="tsd-signature-type">DestinyObjectiveProgress</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L7610">destiny2/interfaces.ts:7610</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L7685">destiny2/interfaces.ts:7685</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An optional property: presentation nodes MAY have objectives, which can be used
+								to infer more human readable data about the progress. However, progressValue and
+								completionValue ought to be considered the canonical values for progress on
+							Progression Nodes.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="progressvalue" class="tsd-anchor"></a>
+					<h3>progress<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">progress<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L7690">destiny2/interfaces.ts:7690</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>How much of the presentation node is considered to be completed so far by the
+							given character/profile.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="state" class="tsd-anchor"></a>
@@ -109,7 +150,7 @@
 					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinypresentationnodestate.html" class="tsd-signature-type">DestinyPresentationNodeState</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L7609">destiny2/interfaces.ts:7609</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L7678">destiny2/interfaces.ts:7678</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -134,7 +175,13 @@
 						<a href="_destiny2_interfaces_.destinypresentationnodecomponent.html" class="tsd-kind-icon">Destiny<wbr>Presentation<wbr>Node<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#completionvalue" class="tsd-kind-icon">completion<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#objective" class="tsd-kind-icon">objective</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#progressvalue" class="tsd-kind-icon">progress<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinypresentationnodecomponent.html#state" class="tsd-kind-icon">state</a>

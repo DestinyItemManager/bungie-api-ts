@@ -2088,9 +2088,12 @@ export declare const enum DestinyActivityModeCategory {
     None = 0,
     /** PvE activities, where you shoot aliens in the face. */
     PvE = 1,
-    /** PvP activities, where you teabag other humans in the face. */
+    /** PvP activities, where you shoot your "friends". */
     PvP = 2,
-    /** PVE competitive activities. */
+    /**
+     * PVE competitive activities, where you shoot whoever you want whenever you want.
+     * Or run around collecting small glowing triangles.
+     */
     PvECompetitive = 3
 }
 /**
@@ -3972,8 +3975,53 @@ export interface DestinyRecordTitleBlock {
     readonly titlesByGender: {
         [key: number]: string;
     };
+    /**
+     * For those who prefer to use the definitions.
+     *
+     * Mapped to DestinyGenderDefinition in the manifest.
+     */
+    readonly titlesByGenderHash: {
+        [key: number]: string;
+    };
+}
+/**
+ * Gender is a social construct, and as such we have definitions for Genders. Right
+ * now there happens to only be two, but we'll see what the future holds.
+ */
+export interface DestinyGenderDefinition {
+    /**
+     * This is a quick reference enumeration for all of the currently defined Genders.
+     * We use the enumeration for quicker lookups in related data, like
+     * DestinyClassDefinition.genderedClassNames.
+     */
+    readonly genderType: DestinyGender;
+    readonly displayProperties: DestinyDisplayPropertiesDefinition;
+    /**
+     * The unique identifier for this entity. Guaranteed to be unique for the type of
+     * entity, but not globally.
+     *
+     * When entities refer to each other in Destiny content, it is this hash that they
+     * are referring to.
+     */
+    readonly hash: number;
+    /** The index of the entity as it was found in the investment tables. */
+    readonly index: number;
+    /**
+     * If this is true, then there is an entity with this identifier/type combination,
+     * but BNet is not yet allowed to show it. Sorry!
+     */
+    readonly redacted: boolean;
+}
+export declare const enum DestinyGender {
+    Male = 0,
+    Female = 1,
+    Unknown = 2
 }
 export interface DestinyRecordCompletionBlock {
+    /**
+     * The number of objectives that must be completed before the objective is
+     * considered "complete"
+     */
     readonly partialCompletionObjectiveCountThreshold: number;
     readonly ScoreValue: number;
     readonly shouldFireToast: boolean;
@@ -6632,7 +6680,7 @@ export interface DestinyLinkedProfilesResponse {
      * no Destiny account data other than the Membership ID and Type so you can make
      * further queries)
      */
-    readonly profiles: UserInfoCard[];
+    readonly profiles: DestinyProfileUserInfoCard[];
     /**
      * If the requested membership had a linked Bungie.Net membership ID, this is the
      * basic information about that BNet account.
@@ -6648,6 +6696,25 @@ export interface DestinyLinkedProfilesResponse {
      * subsequent calls for their info will also fail.
      */
     readonly profilesWithErrors: DestinyErrorProfile[];
+}
+export interface DestinyProfileUserInfoCard {
+    readonly dateLastPlayed: string;
+    /**
+     * A platform specific additional display name - ex: psn Real Name, bnet Unique
+     * Name, etc.
+     */
+    readonly supplementalDisplayName: string;
+    /** URL the Icon if available. */
+    readonly iconPath: string;
+    /** Type of the membership. */
+    readonly membershipType: BungieMembershipType;
+    /** Membership ID as they user is known in the Accounts service */
+    readonly membershipId: string;
+    /**
+     * Display Name the player has chosen for themselves. The display name is optional
+     * when the data type is used as input to a platform API.
+     */
+    readonly displayName: string;
 }
 /**
  * If a Destiny Profile can't be returned, but we're pretty certain it's a valid
@@ -7046,7 +7113,8 @@ export declare const enum DestinyGameVersions {
     Destiny2 = 1,
     DLC1 = 2,
     DLC2 = 4,
-    Forsaken = 8
+    Forsaken = 8,
+    YearTwoAnnualPass = 16
 }
 /**
  * A Kiosk is a Vendor (DestinyVendorDefinition) that sells items based on whether
@@ -7385,7 +7453,20 @@ export interface DestinyPresentationNodesComponent {
 }
 export interface DestinyPresentationNodeComponent {
     readonly state: DestinyPresentationNodeState;
+    /**
+     * An optional property: presentation nodes MAY have objectives, which can be used
+     * to infer more human readable data about the progress. However, progressValue and
+     * completionValue ought to be considered the canonical values for progress on
+     * Progression Nodes.
+     */
     readonly objective: DestinyObjectiveProgress;
+    /**
+     * How much of the presentation node is considered to be completed so far by the
+     * given character/profile.
+     */
+    readonly progressValue: number;
+    /** The value at which the presentation ode is considered to be completed. */
+    readonly completionValue: number;
 }
 export declare const enum DestinyPresentationNodeState {
     None = 0,
@@ -7491,9 +7572,14 @@ export declare const enum DestinyCollectibleState {
     /**
      * If this flag is set, the collectible should not be shown to the user.
      *
-     * But, I mean do what you want: I'm not your mom. It's much more likely that I'm
-     * your Dad - wait, I promised your mom that I wouldn't tell you. Don't tell her
-     * that I told you.
+     * Please do consider honoring this flag. It is used - for example - to hide items
+     * that a person didn't get from the Eververse. I can't prevent these from being
+     * returned in definitions, because some people may have acquired them and thus
+     * they should show up: but I would hate for people to start feeling some variant
+     * of a Collector's Remorse about these items, and thus increasing their purchasing
+     * based on that compulsion. That would be a very unfortunate outcome, and one that
+     * I wouldn't like to see happen. So please, whether or not I'm your mom, consider
+     * honoring this flag and don't show people invisible collectibles.
      */
     Invisible = 4,
     /**
@@ -7669,6 +7755,10 @@ export interface DestinyRaceDefinition {
     readonly genderedRaceNames: {
         [key: number]: string;
     };
+    /** Mapped to DestinyGenderDefinition in the manifest. */
+    readonly genderedRaceNamesByGenderHash: {
+        [key: number]: string;
+    };
     /**
      * The unique identifier for this entity. Guaranteed to be unique for the type of
      * entity, but not globally.
@@ -7692,39 +7782,6 @@ export declare const enum DestinyRace {
     Unknown = 3
 }
 /**
- * Gender is a social construct, and as such we have definitions for Genders. Right
- * now there happens to only be two, but we'll see what the future holds.
- */
-export interface DestinyGenderDefinition {
-    /**
-     * This is a quick reference enumeration for all of the currently defined Genders.
-     * We use the enumeration for quicker lookups in related data, like
-     * DestinyClassDefinition.genderedClassNames.
-     */
-    readonly genderType: DestinyGender;
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
-}
-export declare const enum DestinyGender {
-    Male = 0,
-    Female = 1,
-    Unknown = 2
-}
-/**
  * Defines a Character Class in Destiny 2. These are types of characters you can
  * play, like Titan, Warlock, and Hunter.
  */
@@ -7741,6 +7798,10 @@ export interface DestinyClassDefinition {
      * referred to in gendered form. Keyed by the DestinyGender.
      */
     readonly genderedClassNames: {
+        [key: number]: string;
+    };
+    /** Mapped to DestinyGenderDefinition in the manifest. */
+    readonly genderedClassNamesByGenderHash: {
         [key: number]: string;
     };
     /**
@@ -8480,6 +8541,13 @@ export interface DestinyMilestoneChallengeActivityDefinition {
      * returned.
      */
     readonly activityGraphNodes: DestinyMilestoneChallengeActivityGraphNodeEntry[];
+    /**
+     * Phases related to this activity, if there are any.
+     *
+     * These will be listed in the order in which they will appear in the actual
+     * activity.
+     */
+    readonly phases: DestinyMilestoneChallengeActivityPhase[];
 }
 export interface DestinyMilestoneChallengeDefinition {
     /** The challenge related to this milestone. */
@@ -8488,6 +8556,10 @@ export interface DestinyMilestoneChallengeDefinition {
 export interface DestinyMilestoneChallengeActivityGraphNodeEntry {
     readonly activityGraphHash: number;
     readonly activityGraphNodeHash: number;
+}
+export interface DestinyMilestoneChallengeActivityPhase {
+    /** The hash identifier of the activity's phase. */
+    readonly phaseHash: number;
 }
 /**
  * If a Milestone has one or more Quests, this will contain the live information
@@ -8726,6 +8798,28 @@ export interface DestinyMilestoneChallengeActivity {
      * Mapped to DestinyActivityModifierDefinition in the manifest.
      */
     readonly modifierHashes: number[];
+    /**
+     * The set of activity options for this activity, keyed by an identifier that's
+     * unique for this activity (not guaranteed to be unique between or across all
+     * activities, though should be unique for every *variant* of a given *conceptual*
+     * activity: for instance, the original D2 Raid has many variant
+     * DestinyActivityDefinitions. While other activities could potentially have the
+     * same option hashes, for any given D2 base Raid variant the hash will be unique).
+     *
+     * As a concrete example of this data, the hashes you get for Raids will correspond
+     * to the currently active "Challenge Mode".
+     *
+     * We don't have any human readable information for these, but saavy 3rd party app
+     * users could manually associate the key (a hash identifier for the "option" that
+     * is enabled/disabled) and the value (whether it's enabled or disabled presently)
+     *
+     * On our side, we don't necessarily even know what these are used for (the game
+     * designers know, but we don't), and we have no human readable data for them. In
+     * order to use them, you will have to do some experimentation.
+     */
+    readonly booleanActivityOptions: {
+        [key: number]: boolean;
+    };
     /**
      * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
      * property, indicating the currently active loadout requirements.
@@ -10934,6 +11028,29 @@ export interface DestinyPublicMilestoneChallengeActivity {
      * property, indicating the currently active loadout requirements.
      */
     readonly loadoutRequirementIndex?: number;
+    /**
+     * The ordered list of phases for this activity, if any. Note that we have no human
+     * readable info for phases, nor any entities to relate them to: relating these
+     * hashes to something human readable is up to you unfortunately.
+     */
+    readonly phaseHashes: number[];
+    /**
+     * The set of activity options for this activity, keyed by an identifier that's
+     * unique for this activity (not guaranteed to be unique between or across all
+     * activities, though should be unique for every *variant* of a given *conceptual*
+     * activity: for instance, the original D2 Raid has many variant
+     * DestinyActivityDefinitions. While other activities could potentially have the
+     * same option hashes, for any given D2 base Raid variant the hash will be unique).
+     *
+     * As a concrete example of this data, the hashes you get for Raids will correspond
+     * to the currently active "Challenge Mode".
+     *
+     * We have no human readable information for this data, so it's up to you if you
+     * want to associate it with such info to show it.
+     */
+    readonly booleanActivityOptions: {
+        [key: number]: boolean;
+    };
 }
 export interface DestinyPublicMilestoneVendor {
     /**

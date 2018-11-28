@@ -246,6 +246,10 @@ export interface GroupQuery {
     readonly currentPage: number;
     readonly requestContinuationToken: string;
 }
+export interface GroupNameSearchRequest {
+    readonly groupName: string;
+    readonly groupType: GroupType;
+}
 export interface GroupAction {
     /** Type of group, either Bungie.net hosted group, or a game services hosted clan. */
     readonly groupType: GroupType;

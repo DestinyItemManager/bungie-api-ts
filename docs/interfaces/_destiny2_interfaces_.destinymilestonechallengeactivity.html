@@ -85,6 +85,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#activityhash" class="tsd-kind-icon">activity<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#booleanactivityoptions" class="tsd-kind-icon">boolean<wbr>Activity<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#challenges" class="tsd-kind-icon">challenges</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#loadoutrequirementindex" class="tsd-kind-icon">loadout<wbr>Requirement<wbr>Index</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#modifierhashes" class="tsd-kind-icon">modifier<wbr>Hashes</a></li>
@@ -102,7 +103,7 @@
 					<div class="tsd-signature tsd-kind-icon">activity<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L8938">destiny2/interfaces.ts:8938</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L9006">destiny2/interfaces.ts:9006</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -112,12 +113,48 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="booleanactivityoptions" class="tsd-anchor"></a>
+					<h3>boolean<wbr>Activity<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">boolean<wbr>Activity<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L9040">destiny2/interfaces.ts:9040</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The set of activity options for this activity, keyed by an identifier that&#39;s
+								unique for this activity (not guaranteed to be unique between or across all
+								activities, though should be unique for every <em>variant</em> of a given <em>conceptual</em>
+								activity: for instance, the original D2 Raid has many variant
+								DestinyActivityDefinitions. While other activities could potentially have the
+							same option hashes, for any given D2 base Raid variant the hash will be unique).</p>
+						</div>
+						<p>As a concrete example of this data, the hashes you get for Raids will correspond
+						to the currently active &quot;Challenge Mode&quot;.</p>
+						<p>We don&#39;t have any human readable information for these, but saavy 3rd party app
+							users could manually associate the key (a hash identifier for the &quot;option&quot; that
+						is enabled/disabled) and the value (whether it&#39;s enabled or disabled presently)</p>
+						<p>On our side, we don&#39;t necessarily even know what these are used for (the game
+							designers know, but we don&#39;t), and we have no human readable data for them. In
+						order to use them, you will have to do some experimentation.</p>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="challenges" class="tsd-anchor"></a>
 					<h3>challenges</h3>
 					<div class="tsd-signature tsd-kind-icon">challenges<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinychallengestatus.html" class="tsd-signature-type">DestinyChallengeStatus</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L8939">destiny2/interfaces.ts:8939</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L9007">destiny2/interfaces.ts:9007</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,7 +164,7 @@
 					<div class="tsd-signature tsd-kind-icon">loadout<wbr>Requirement<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L8957">destiny2/interfaces.ts:8957</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L9045">destiny2/interfaces.ts:9045</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -143,7 +180,7 @@
 					<div class="tsd-signature tsd-kind-icon">modifier<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L8952">destiny2/interfaces.ts:8952</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L9020">destiny2/interfaces.ts:9020</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -165,7 +202,7 @@
 					<div class="tsd-signature tsd-kind-icon">phases<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinymilestoneactivityphase.html" class="tsd-signature-type">DestinyMilestoneActivityPhase</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/df89f5d/generated-src/destiny2/interfaces.ts#L8964">destiny2/interfaces.ts:8964</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/27587ab/generated-src/destiny2/interfaces.ts#L9052">destiny2/interfaces.ts:9052</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -199,6 +236,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#activityhash" class="tsd-kind-icon">activity<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#booleanactivityoptions" class="tsd-kind-icon">boolean<wbr>Activity<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinymilestonechallengeactivity.html#challenges" class="tsd-kind-icon">challenges</a>

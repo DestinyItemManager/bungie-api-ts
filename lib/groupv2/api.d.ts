@@ -11,7 +11,7 @@
  */
 import { HttpClient } from '../http';
 import { BungieMembershipType, ServerResponse } from '../common';
-import { ClanBanner, EntityActionResult, GroupAction, GroupApplicationListRequest, GroupApplicationRequest, GroupApplicationResponse, GroupBanRequest, GroupCreationResponse, GroupDateRange, GroupEditAction, GroupMemberLeaveResult, GroupMembershipSearchResponse, GroupOptionalConversation, GroupOptionalConversationAddRequest, GroupOptionalConversationEditRequest, GroupOptionsEditAction, GroupPotentialMemberStatus, GroupPotentialMembershipSearchResponse, GroupQuery, GroupResponse, GroupSearchResponse, GroupTheme, GroupType, GroupV2Card, GroupsForMemberFilter, RuntimeGroupMemberType, SearchResultOfGroupBan, SearchResultOfGroupMember, SearchResultOfGroupMemberApplication } from './interfaces';
+import { ClanBanner, EntityActionResult, GroupAction, GroupApplicationListRequest, GroupApplicationRequest, GroupApplicationResponse, GroupBanRequest, GroupCreationResponse, GroupDateRange, GroupEditAction, GroupMemberLeaveResult, GroupMembershipSearchResponse, GroupNameSearchRequest, GroupOptionalConversation, GroupOptionalConversationAddRequest, GroupOptionalConversationEditRequest, GroupOptionsEditAction, GroupPotentialMemberStatus, GroupPotentialMembershipSearchResponse, GroupQuery, GroupResponse, GroupSearchResponse, GroupTheme, GroupType, GroupV2Card, GroupsForMemberFilter, RuntimeGroupMemberType, SearchResultOfGroupBan, SearchResultOfGroupMember, SearchResultOfGroupMemberApplication } from './interfaces';
 /** Returns a list of all available group avatars for the signed-in user. */
 export declare function getAvailableAvatars(http: HttpClient): Promise<ServerResponse<{
     [key: number]: string;
@@ -65,6 +65,11 @@ export interface GetGroupByNameParams {
 }
 /** Get information about a specific group with the given name and type. */
 export declare function getGroupByName(http: HttpClient, params: GetGroupByNameParams): Promise<ServerResponse<GroupResponse>>;
+/**
+ * Get information about a specific group with the given name and type. The POST
+ * version.
+ */
+export declare function getGroupByNameV2(http: HttpClient, body: GroupNameSearchRequest): Promise<ServerResponse<GroupResponse>>;
 export interface GetGroupOptionalConversationsParams {
     /** Requested group's id. */
     groupId: string;

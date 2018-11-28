@@ -29,6 +29,7 @@ import {
   GroupEditAction,
   GroupMemberLeaveResult,
   GroupMembershipSearchResponse,
+  GroupNameSearchRequest,
   GroupOptionalConversation,
   GroupOptionalConversationAddRequest,
   GroupOptionalConversationEditRequest,
@@ -150,6 +151,18 @@ export function getGroupByName(http: HttpClient, params: GetGroupByNameParams): 
   return http({
     method: 'GET',
     url: `https://www.bungie.net/Platform/GroupV2/Name/${params.groupName}/${params.groupType}/`
+  });
+}
+
+/**
+ * Get information about a specific group with the given name and type. The POST
+ * version.
+ */
+export function getGroupByNameV2(http: HttpClient, body: GroupNameSearchRequest): Promise<ServerResponse<GroupResponse>> {
+  return http({
+    method: 'POST',
+    url: 'https://www.bungie.net/Platform/GroupV2/NameV2/',
+    body
   });
 }
 
