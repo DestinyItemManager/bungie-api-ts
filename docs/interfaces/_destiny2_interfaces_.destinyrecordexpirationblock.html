@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DestinyVendorSaleItemSetComponent | bungie-api-ts</title>
+	<title>DestinyRecordExpirationBlock | bungie-api-ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_destiny2_interfaces_.destinyvendorsaleitemsetcomponent.html">DestinyVendorSaleItemSetComponent</a>
+					<a href="_destiny2_interfaces_.destinyrecordexpirationblock.html">DestinyRecordExpirationBlock</a>
 				</li>
 			</ul>
-			<h1>Interface DestinyVendorSaleItemSetComponent</h1>
+			<h1>Interface DestinyRecordExpirationBlock</h1>
 		</div>
 	</div>
 </header>
@@ -72,8 +72,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The collection of all items currently being sold by a specific Vendor and
-						visible to the given character for which the request was made.</p>
+						<p>If this record has an expiration after which it cannot be earned, this is some
+						information about that expiration.</p>
 					</div>
 				</div>
 			</section>
@@ -81,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DestinyVendorSaleItemSetComponent</span>
+						<span class="target">DestinyRecordExpirationBlock</span>
 					</li>
 				</ul>
 			</section>
@@ -92,7 +92,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyvendorsaleitemsetcomponent.html#saleitems" class="tsd-kind-icon">sale<wbr>Items</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyrecordexpirationblock.html#description" class="tsd-kind-icon">description</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyrecordexpirationblock.html#hasexpiration" class="tsd-kind-icon">has<wbr>Expiration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyrecordexpirationblock.html#icon" class="tsd-kind-icon">icon</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,30 +103,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="saleitems" class="tsd-anchor"></a>
-					<h3>sale<wbr>Items</h3>
-					<div class="tsd-signature tsd-kind-icon">sale<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="description" class="tsd-anchor"></a>
+					<h3>description</h3>
+					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/591db25/generated-src/destiny2/interfaces.ts#L10315">destiny2/interfaces.ts:10315</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/4f8e1c2/generated-src/destiny2/interfaces.ts#L4370">destiny2/interfaces.ts:4370</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The items being sold by this vendor, keyed by the vendorItemIndex of the item
-								being sold. (because showing sale items depends on the ordering dictated by the
-								categories being shown - see DestinyVendorCategoryComponent - this is a
-							dictionary for quick lookup capability.)</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinyvendorsaleitemcomponent.html" class="tsd-signature-type">DestinyVendorSaleItemComponent</a></h5>
-							</li>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hasexpiration" class="tsd-anchor"></a>
+					<h3>has<wbr>Expiration</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Expiration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/4f8e1c2/generated-src/destiny2/interfaces.ts#L4369">destiny2/interfaces.ts:4369</a></li>
 						</ul>
-					</div>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="icon" class="tsd-anchor"></a>
+					<h3>icon</h3>
+					<div class="tsd-signature tsd-kind-icon">icon<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/4f8e1c2/generated-src/destiny2/interfaces.ts#L4371">destiny2/interfaces.ts:4371</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -144,10 +150,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_destiny2_interfaces_.destinyvendorsaleitemsetcomponent.html" class="tsd-kind-icon">Destiny<wbr>Vendor<wbr>Sale<wbr>Item<wbr>Set<wbr>Component</a>
+						<a href="_destiny2_interfaces_.destinyrecordexpirationblock.html" class="tsd-kind-icon">Destiny<wbr>Record<wbr>Expiration<wbr>Block</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyvendorsaleitemsetcomponent.html#saleitems" class="tsd-kind-icon">sale<wbr>Items</a>
+								<a href="_destiny2_interfaces_.destinyrecordexpirationblock.html#description" class="tsd-kind-icon">description</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyrecordexpirationblock.html#hasexpiration" class="tsd-kind-icon">has<wbr>Expiration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyrecordexpirationblock.html#icon" class="tsd-kind-icon">icon</a>
 							</li>
 						</ul>
 					</li>
