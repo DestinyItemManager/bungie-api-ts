@@ -46,9 +46,16 @@ function generateEnum(defInfo: DefInfo, component: SchemaObject) {
     return `${doc}${value.identifier} = ${value.numericValue}`;
   }).join(',\n');
 
+  const docs = component.description ? [component.description] : [];
+  if (component['x-enum-is-bitmask']) {
+    docs.push(`This enum represents a set of flags - use bitwise operators to check which of these match your value.`);
+  }
+
+  const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
+
   // TODO: const enums are super efficient (they get inlined) but we may want to change this if we want to do things like
   // print out the name of an enum case.
-  return `export const enum ${defInfo.interfaceName} {
+  return `${docString}export const enum ${defInfo.interfaceName} {
 ${indent(values, 1)}
 }`;
 }
@@ -60,6 +67,9 @@ function generateInterfaceSchema(interfaceName: string, component: SchemaObject,
     const docs = schema.description ? [schema.description] : [];
     if (schema['x-mapped-definition']) {
       docs.push(`Mapped to ${componentByDef[schema['x-mapped-definition'].$ref].interfaceName} in the manifest.`);
+    }
+    if (schema['x-enum-is-bitmask']) {
+      docs.push(`This enum represents a set of flags - use bitwise operators to check which of these match your value.`);
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
     return `${docString}readonly ${param}${schema.nullable ? '?' : ''}: ${paramType};`;

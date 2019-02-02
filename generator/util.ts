@@ -11,6 +11,8 @@ export interface DefInfo {
 export function resolveSchemaType(schema: SchemaObject | ReferenceObject, doc: OpenAPIObject): string {
   if (isReferenceObject(schema)) {
     return interfaceName(schema.$ref, doc);
+  } else if (schema['x-enum-reference']) {
+    return interfaceName(schema['x-enum-reference'].$ref, doc);
   } else {
     return typeMapping(schema, doc);
   }
@@ -23,6 +25,7 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
     case "integer":
       // JS can't represent a 64-bit int as a number, so bungie.net returns it as a string in JSON
       return schema.format === 'int64' ? 'string' : 'number';
+
     case "array":
       return resolveSchemaType(schema.items!, doc) + '[]';
     case "object":
@@ -32,7 +35,8 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
         const keySchema: SchemaObject | ReferenceObject = schema['x-dictionary-key'];
         const key = isReferenceObject(keySchema) ? 'number' : resolveSchemaType(keySchema, doc);
         const val = resolveSchemaType(schema.additionalProperties, doc);
-        return `{ [key: ${key}]: ${val} }`;
+        const keyExp = (key === 'number' || key === 'string') ? `key: ${key}` : `key in ${key}`;
+        return `{ [${keyExp}]: ${val} }`;
       }
   }
 
@@ -42,6 +46,8 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
 export function getReferencedTypes(schema: SchemaObject | ReferenceObject): string | undefined {
   if (isReferenceObject(schema)) {
     return schema.$ref;
+  } else if (schema['x-enum-reference']) {
+    return schema['x-enum-reference'].$ref;
   } else if (schema.items) {
     return getReferencedTypes(schema.items!);
   } else if (schema.allOf) {
