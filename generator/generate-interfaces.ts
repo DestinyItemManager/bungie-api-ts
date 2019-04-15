@@ -62,8 +62,8 @@ ${indent(values, 1)}
 
 function generateInterfaceSchema(interfaceName: string, component: SchemaObject, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
   const parameterArgs = _.map(component.properties!, (schema: SchemaObject, param) => {
-    const paramType = resolveSchemaType(schema!, doc);
-    addImport(doc, schema!, componentByDef, importFiles);
+    const paramType = resolveSchemaType(schema, doc);
+    addImport(doc, schema, componentByDef, importFiles);
     const docs = schema.description ? [schema.description] : [];
     if (schema['x-mapped-definition']) {
       docs.push(`Mapped to ${componentByDef[schema['x-mapped-definition'].$ref].interfaceName} in the manifest.`);
@@ -86,12 +86,12 @@ function isSpecialType(name: string) {
 
 function generateSpecialDefinitions() {
   return `export interface SingleComponentResponse<T> {
-  readonly data: T;
+  readonly data?: T;
   readonly privacy: ComponentPrivacySetting;
 }
 
 export interface DictionaryComponentResponse<T> {
-  readonly data: { [key: string]: T };
+  readonly data?: { [key: string]: T };
   readonly privacy: ComponentPrivacySetting;
 }`;
 }
