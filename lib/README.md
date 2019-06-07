@@ -6,7 +6,7 @@ This project implements TypeScript definitions and API helpers for the [Bungie.n
 
 Feel free to fork this and use it to generate for your favorite language!
 
-* [Dart][https://github.com/marquesinijatinha/bungie-api-dart/]
+* [Dart](https://github.com/marquesinijatinha/bungie-api-dart/)
 
 # Install
 

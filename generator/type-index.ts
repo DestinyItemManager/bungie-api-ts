@@ -3,7 +3,7 @@ import { OpenAPIObject, PathItemObject, ParameterObject, SchemaObject, Reference
 import { getRef, lastPart, getReferencedTypes, DefInfo, interfaceName, isRequestBodyObject } from './util';
 
 export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathItemObject][] }, doc: OpenAPIObject) {
-  const allDefsEverywhere = new Set();
+  const allDefsEverywhere = new Set<string>();
   const defsByTag = {};
   _.each(pathPairsByTag, (paths, tag) => {
     const defs = findReachableComponents(tag, paths, doc);
@@ -63,7 +63,7 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
 }
 
 function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject) {
-  const pathDefinitions = paths.reduce((memo: Set<string>, [path, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef, doc)), new Set());
+  const pathDefinitions = paths.reduce((memo: Set<string>, [_, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef, doc)), new Set<string>());
 
   const allDefinitions = new Set(pathDefinitions);
   pathDefinitions.forEach((definition) => addReachableComponentsFromComponent(allDefinitions, definition, doc));
