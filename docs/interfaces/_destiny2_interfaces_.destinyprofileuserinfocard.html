@@ -84,9 +84,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#applicablemembershiptypes" class="tsd-kind-icon">applicable<wbr>Membership<wbr>Types</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#datelastplayed" class="tsd-kind-icon">date<wbr>Last<wbr>Played</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#displayname" class="tsd-kind-icon">display<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#iconpath" class="tsd-kind-icon">icon<wbr>Path</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#iscrosssaveprimary" class="tsd-kind-icon">is<wbr>Cross<wbr>Save<wbr>Primary</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#isoverridden" class="tsd-kind-icon">is<wbr>Overridden</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#membershiptype" class="tsd-kind-icon">membership<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#supplementaldisplayname" class="tsd-kind-icon">supplemental<wbr>Display<wbr>Name</a></li>
@@ -98,12 +101,29 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="applicablemembershiptypes" class="tsd-anchor"></a>
+					<h3>applicable<wbr>Membership<wbr>Types</h3>
+					<div class="tsd-signature tsd-kind-icon">applicable<wbr>Membership<wbr>Types<span class="tsd-signature-symbol">:</span> <a href="../enums/_common_.bungiemembershiptype.html" class="tsd-signature-type">BungieMembershipType</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7357">destiny2/interfaces.ts:7357</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of membership types/Platforms that this Destiny Account can be used on -
+								either its own original platform, or any subservient platforms hooked up to it
+							through Cross Save.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="datelastplayed" class="tsd-anchor"></a>
 					<h3>date<wbr>Last<wbr>Played</h3>
 					<div class="tsd-signature tsd-kind-icon">date<wbr>Last<wbr>Played<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7265">destiny2/interfaces.ts:7265</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7351">destiny2/interfaces.ts:7351</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -113,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7281">destiny2/interfaces.ts:7281</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7385">destiny2/interfaces.ts:7385</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -129,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">icon<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7272">destiny2/interfaces.ts:7272</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7376">destiny2/interfaces.ts:7376</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,12 +159,46 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="iscrosssaveprimary" class="tsd-anchor"></a>
+					<h3>is<wbr>Cross<wbr>Save<wbr>Primary</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Cross<wbr>Save<wbr>Primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7369">destiny2/interfaces.ts:7369</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true, this account is hooked up as the &quot;Primary&quot; cross save account for one
+							or more platforms.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isoverridden" class="tsd-anchor"></a>
+					<h3>is<wbr>Overridden</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Overridden<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7364">destiny2/interfaces.ts:7364</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this profile is being overridden/obscured by Cross Save, this will be set to
+								true. We will still return the profile for display purposes where users need to
+								know the info: it is up to any given area of the app/site to determine if this
+							profile should still be shown.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="membershipid" class="tsd-anchor"></a>
 					<h3>membership<wbr>Id</h3>
 					<div class="tsd-signature tsd-kind-icon">membership<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7276">destiny2/interfaces.ts:7276</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7380">destiny2/interfaces.ts:7380</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,7 +213,7 @@
 					<div class="tsd-signature tsd-kind-icon">membership<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_common_.bungiemembershiptype.html" class="tsd-signature-type">BungieMembershipType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7274">destiny2/interfaces.ts:7274</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7378">destiny2/interfaces.ts:7378</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -174,7 +228,7 @@
 					<div class="tsd-signature tsd-kind-icon">supplemental<wbr>Display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7270">destiny2/interfaces.ts:7270</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7374">destiny2/interfaces.ts:7374</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -205,6 +259,9 @@
 						<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html" class="tsd-kind-icon">Destiny<wbr>Profile<wbr>User<wbr>Info<wbr>Card</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#applicablemembershiptypes" class="tsd-kind-icon">applicable<wbr>Membership<wbr>Types</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#datelastplayed" class="tsd-kind-icon">date<wbr>Last<wbr>Played</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -212,6 +269,12 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#iconpath" class="tsd-kind-icon">icon<wbr>Path</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#iscrosssaveprimary" class="tsd-kind-icon">is<wbr>Cross<wbr>Save<wbr>Primary</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#isoverridden" class="tsd-kind-icon">is<wbr>Overridden</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyprofileuserinfocard.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a>

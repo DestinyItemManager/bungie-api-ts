@@ -109,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">character<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7711">destiny2/interfaces.ts:7711</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7842">destiny2/interfaces.ts:7842</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -124,7 +124,7 @@
 					<div class="tsd-signature tsd-kind-icon">date<wbr>Last<wbr>Played<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7702">destiny2/interfaces.ts:7702</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7822">destiny2/interfaces.ts:7822</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Info<span class="tsd-signature-symbol">:</span> <a href="_user_interfaces_.userinfocard.html" class="tsd-signature-type">UserInfoCard</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7700">destiny2/interfaces.ts:7700</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7820">destiny2/interfaces.ts:7820</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -155,13 +155,22 @@
 					<div class="tsd-signature tsd-kind-icon">versions<wbr>Owned<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinygameversions.html" class="tsd-signature-type">DestinyGameVersions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/b28814d/generated-src/destiny2/interfaces.ts#L7709">destiny2/interfaces.ts:7709</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L7840">destiny2/interfaces.ts:7840</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>If you want to know what expansions they own, this will contain that data.</p>
 						</div>
+						<p>IMPORTANT: This field may not return the data you&#39;re interested in for Cross-
+							Saved users. It returns the last ownership data we saw for this account - which
+							is to say, what they&#39;ve purchased on the platform on which they last played,
+						which now could be a different platform.</p>
+						<p>If you don&#39;t care about per-platform ownership and only care about whatever
+							platform it seems they are playing on most recently, then this should be &quot;good
+							enough.&quot; Otherwise, this should be considered deprecated. We do not have a good
+							alternative to provide at this time with platform specific ownership data for
+						DLC.</p>
 						<p>This enum represents a set of flags - use bitwise operators to check which of
 						these match your value.</p>
 					</div>
