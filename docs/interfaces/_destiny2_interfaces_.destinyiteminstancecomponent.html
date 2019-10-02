@@ -101,10 +101,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#breakertype" class="tsd-kind-icon">breaker<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#breakertypehash" class="tsd-kind-icon">breaker<wbr>Type<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#canequip" class="tsd-kind-icon">can<wbr>Equip</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#cannotequipreason" class="tsd-kind-icon">cannot<wbr>Equip<wbr>Reason</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetype" class="tsd-kind-icon">damage<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetypehash" class="tsd-kind-icon">damage<wbr>Type<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#energy" class="tsd-kind-icon">energy</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#equiprequiredlevel" class="tsd-kind-icon">equip<wbr>Required<wbr>Level</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#isequipped" class="tsd-kind-icon">is<wbr>Equipped</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#itemlevel" class="tsd-kind-icon">item<wbr>Level</a></li>
@@ -119,12 +122,45 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="breakertype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> breaker<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">breaker<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10778">destiny2/interfaces.ts:10778</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If populated, this item has a breaker type corresponding to the given value. See
+							DestinyBreakerTypeDefinition for more details.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="breakertypehash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> breaker<wbr>Type<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">breaker<wbr>Type<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10785">destiny2/interfaces.ts:10785</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If populated, this is the hash identifier for the item&#39;s breaker type. See
+							DestinyBreakerTypeDefinition for more details.</p>
+						</div>
+						<p>Mapped to DestinyBreakerTypeDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="canequip" class="tsd-anchor"></a>
 					<h3>can<wbr>Equip</h3>
 					<div class="tsd-signature tsd-kind-icon">can<wbr>Equip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L10007">destiny2/interfaces.ts:10007</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10748">destiny2/interfaces.ts:10748</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -141,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">cannot<wbr>Equip<wbr>Reason<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.equipfailurereason.html" class="tsd-signature-type">EquipFailureReason</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L10032">destiny2/interfaces.ts:10032</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10773">destiny2/interfaces.ts:10773</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -160,7 +196,7 @@
 					<div class="tsd-signature tsd-kind-icon">damage<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.damagetype.html" class="tsd-signature-type">DamageType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L9977">destiny2/interfaces.ts:9977</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10718">destiny2/interfaces.ts:10718</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -175,7 +211,7 @@
 					<div class="tsd-signature tsd-kind-icon">damage<wbr>Type<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L9984">destiny2/interfaces.ts:9984</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10725">destiny2/interfaces.ts:10725</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,12 +223,29 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="energy" class="tsd-anchor"></a>
+					<h3>energy</h3>
+					<div class="tsd-signature tsd-kind-icon">energy<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyiteminstanceenergy.html" class="tsd-signature-type">DestinyItemInstanceEnergy</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10791">destiny2/interfaces.ts:10791</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>IF populated, this item supports Energy mechanics (i.e. Armor 2.0), and these
+								are the current details of its energy type and available capacity to spend
+							energy points.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="equiprequiredlevel" class="tsd-anchor"></a>
 					<h3>equip<wbr>Required<wbr>Level</h3>
 					<div class="tsd-signature tsd-kind-icon">equip<wbr>Required<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L10012">destiny2/interfaces.ts:10012</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10753">destiny2/interfaces.ts:10753</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,7 +261,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Equipped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L10001">destiny2/interfaces.ts:10001</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10742">destiny2/interfaces.ts:10742</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,7 +276,7 @@
 					<div class="tsd-signature tsd-kind-icon">item<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L9994">destiny2/interfaces.ts:9994</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10735">destiny2/interfaces.ts:10735</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -239,7 +292,7 @@
 					<div class="tsd-signature tsd-kind-icon">primary<wbr>Stat<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinystat.html" class="tsd-signature-type">DestinyStat</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L9989">destiny2/interfaces.ts:9989</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10730">destiny2/interfaces.ts:10730</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -255,7 +308,7 @@
 					<div class="tsd-signature tsd-kind-icon">quality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L9999">destiny2/interfaces.ts:9999</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10740">destiny2/interfaces.ts:10740</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -271,7 +324,7 @@
 					<div class="tsd-signature tsd-kind-icon">unlock<wbr>Hashes<wbr>Required<wbr>ToEquip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L10023">destiny2/interfaces.ts:10023</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10764">destiny2/interfaces.ts:10764</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -306,6 +359,12 @@
 						<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html" class="tsd-kind-icon">Destiny<wbr>Item<wbr>Instance<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#breakertype" class="tsd-kind-icon">breaker<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#breakertypehash" class="tsd-kind-icon">breaker<wbr>Type<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#canequip" class="tsd-kind-icon">can<wbr>Equip</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -316,6 +375,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#damagetypehash" class="tsd-kind-icon">damage<wbr>Type<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#energy" class="tsd-kind-icon">energy</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyiteminstancecomponent.html#equiprequiredlevel" class="tsd-kind-icon">equip<wbr>Required<wbr>Level</a>

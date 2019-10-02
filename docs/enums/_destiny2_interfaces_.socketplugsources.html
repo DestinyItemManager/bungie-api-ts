@@ -73,9 +73,14 @@
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>Indicates how a socket is populated, and where you should look for valid plug
-							data. This is a flags enumeration/bitmask field, as you may have to look in
-						multiple sources across multiple components for valid plugs.</p>
+						data.</p>
 					</div>
+					<p>This is a flags enumeration/bitmask field, as you may have to look in multiple
+					sources across multiple components for valid plugs.</p>
+					<p>For instance, a socket could have plugs that are sourced from its own
+						definition, as well as plugs that are sourced from Character-scoped AND profile-
+						scoped Plug Sets. Only by combining plug data for every indicated source will
+					you be able to know all of the plugs available for a socket.</p>
 					<p>This enum represents a set of flags - use bitwise operators to check which of
 					these match your value.</p>
 				</div>
@@ -105,13 +110,13 @@
 					<div class="tsd-signature tsd-kind-icon">Character<wbr>Plug<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;8</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L5952">destiny2/interfaces.ts:5952</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L6207">destiny2/interfaces.ts:6207</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Use the CharacterPlugSets component data to determine which plugs are valid for
-							this socket.</p>
+							<p>Use the CharacterPlugSets (DestinyProfileResponse.characterPlugSets) component
+							data to determine which plugs are valid for this socket.</p>
 						</div>
 					</div>
 				</section>
@@ -121,7 +126,7 @@
 					<div class="tsd-signature tsd-kind-icon">Inventory<wbr>Sourced<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L5937">destiny2/interfaces.ts:5937</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L6186">destiny2/interfaces.ts:6186</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +144,7 @@
 					<div class="tsd-signature tsd-kind-icon">None<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L5929">destiny2/interfaces.ts:5929</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L6178">destiny2/interfaces.ts:6178</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,13 +159,13 @@
 					<div class="tsd-signature tsd-kind-icon">Profile<wbr>Plug<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;4</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L5947">destiny2/interfaces.ts:5947</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L6202">destiny2/interfaces.ts:6202</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Use the ProfilePlugSets component data to determine which plugs are valid for
-							this socket.</p>
+							<p>Use the ProfilePlugSets (DestinyProfileResponse.profilePlugSets) component data
+							to determine which plugs are valid for this socket.</p>
 						</div>
 					</div>
 				</section>
@@ -170,14 +175,19 @@
 					<div class="tsd-signature tsd-kind-icon">Reusable<wbr>Plug<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;2</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/destiny2/interfaces.ts#L5942">destiny2/interfaces.ts:5942</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L6197">destiny2/interfaces.ts:6197</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Use the DestinyItemSocketsComponent.sockets.reusablePlugs property to determine
-							which plugs are valid for this socket.</p>
+								which plugs are valid for this socket. This may have to be combined with other
+							sources, such as plug sets, if those flags are set.</p>
 						</div>
+						<p>Note that &quot;Reusable&quot; plugs may not necessarily come from a plug set, nor from
+							the &quot;reusablePlugItems&quot; in the socket&#39;s Definition data. They can sometimes be &quot;
+							randomized&quot; in which case the only source of truth at the moment is still the
+						runtime DestinyItemSocketsComponent.sockets.reusablePlugs property.</p>
 					</div>
 				</section>
 			</section>

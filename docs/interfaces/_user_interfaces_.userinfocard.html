@@ -96,8 +96,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#applicablemembershiptypes" class="tsd-kind-icon">applicable<wbr>Membership<wbr>Types</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#crosssaveoverride" class="tsd-kind-icon">cross<wbr>Save<wbr>Override</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#displayname" class="tsd-kind-icon">display<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#iconpath" class="tsd-kind-icon">icon<wbr>Path</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#ispublic" class="tsd-kind-icon">is<wbr>Public</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#membershiptype" class="tsd-kind-icon">membership<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.userinfocard.html#supplementaldisplayname" class="tsd-kind-icon">supplemental<wbr>Display<wbr>Name</a></li>
@@ -109,12 +112,47 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="applicablemembershiptypes" class="tsd-anchor"></a>
+					<h3>applicable<wbr>Membership<wbr>Types</h3>
+					<div class="tsd-signature tsd-kind-icon">applicable<wbr>Membership<wbr>Types<span class="tsd-signature-symbol">:</span> <a href="../enums/_common_.bungiemembershiptype.html" class="tsd-signature-type">BungieMembershipType</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L53">user/interfaces.ts:53</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of Membership Types indicating the platforms on which this Membership
+							can be used.</p>
+						</div>
+						<p>Not in Cross Save = its original membership type. Cross Save Primary = Any
+							membership types it is overridding, and its original membership type Cross Save
+						Overridden = Empty list</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="crosssaveoverride" class="tsd-anchor"></a>
+					<h3>cross<wbr>Save<wbr>Override</h3>
+					<div class="tsd-signature tsd-kind-icon">cross<wbr>Save<wbr>Override<span class="tsd-signature-symbol">:</span> <a href="../enums/_common_.bungiemembershiptype.html" class="tsd-signature-type">BungieMembershipType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L44">user/interfaces.ts:44</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If there is a cross save override in effect, this value will tell you the type
+							that is overridding this one.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="displayname" class="tsd-anchor"></a>
 					<h3>display<wbr>Name</h3>
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/user/interfaces.ts#L45">user/interfaces.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L64">user/interfaces.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -130,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">icon<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/user/interfaces.ts#L36">user/interfaces.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L39">user/interfaces.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -140,12 +178,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ispublic" class="tsd-anchor"></a>
+					<h3>is<wbr>Public</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Public<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L55">user/interfaces.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If True, this is a public user membership.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="membershipid" class="tsd-anchor"></a>
 					<h3>membership<wbr>Id</h3>
 					<div class="tsd-signature tsd-kind-icon">membership<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/user/interfaces.ts#L40">user/interfaces.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L59">user/interfaces.ts:59</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -160,12 +213,12 @@
 					<div class="tsd-signature tsd-kind-icon">membership<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_common_.bungiemembershiptype.html" class="tsd-signature-type">BungieMembershipType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/user/interfaces.ts#L38">user/interfaces.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L57">user/interfaces.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Type of the membership.</p>
+							<p>Type of the membership. Not necessarily the native type.</p>
 						</div>
 					</div>
 				</section>
@@ -175,7 +228,7 @@
 					<div class="tsd-signature tsd-kind-icon">supplemental<wbr>Display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/bf406b0/generated-src/user/interfaces.ts#L34">user/interfaces.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/user/interfaces.ts#L37">user/interfaces.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -212,10 +265,19 @@
 						<a href="_user_interfaces_.userinfocard.html" class="tsd-kind-icon">User<wbr>Info<wbr>Card</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_user_interfaces_.userinfocard.html#applicablemembershiptypes" class="tsd-kind-icon">applicable<wbr>Membership<wbr>Types</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_user_interfaces_.userinfocard.html#crosssaveoverride" class="tsd-kind-icon">cross<wbr>Save<wbr>Override</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_user_interfaces_.userinfocard.html#displayname" class="tsd-kind-icon">display<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_user_interfaces_.userinfocard.html#iconpath" class="tsd-kind-icon">icon<wbr>Path</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_user_interfaces_.userinfocard.html#ispublic" class="tsd-kind-icon">is<wbr>Public</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_user_interfaces_.userinfocard.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a>
