@@ -96,13 +96,17 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#activityhash" class="tsd-kind-icon">activity<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#booleanactivityoptions" class="tsd-kind-icon">boolean<wbr>Activity<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#canjoin" class="tsd-kind-icon">can<wbr>Join</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#canlead" class="tsd-kind-icon">can<wbr>Lead</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#challenges" class="tsd-kind-icon">challenges</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#difficultytier" class="tsd-kind-icon">difficulty<wbr>Tier</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#displaylevel" class="tsd-kind-icon">display<wbr>Level</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#iscompleted" class="tsd-kind-icon">is<wbr>Completed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#isnew" class="tsd-kind-icon">is<wbr>New</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#loadoutrequirementindex" class="tsd-kind-icon">loadout<wbr>Requirement<wbr>Index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#modifierhashes" class="tsd-kind-icon">modifier<wbr>Hashes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyactivity.html#recommendedlight" class="tsd-kind-icon">recommended<wbr>Light</a></li>
 							</ul>
 						</section>
@@ -117,7 +121,7 @@
 					<div class="tsd-signature tsd-kind-icon">activity<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10606">destiny2/interfaces.ts:10606</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10685">destiny2/interfaces.ts:10685</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -129,12 +133,48 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="booleanactivityoptions" class="tsd-anchor"></a>
+					<h3>boolean<wbr>Activity<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">boolean<wbr>Activity<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10743">destiny2/interfaces.ts:10743</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The set of activity options for this activity, keyed by an identifier that&#39;s
+								unique for this activity (not guaranteed to be unique between or across all
+								activities, though should be unique for every <em>variant</em> of a given <em>conceptual</em>
+								activity: for instance, the original D2 Raid has many variant
+								DestinyActivityDefinitions. While other activities could potentially have the
+							same option hashes, for any given D2 base Raid variant the hash will be unique).</p>
+						</div>
+						<p>As a concrete example of this data, the hashes you get for Raids will correspond
+						to the currently active &quot;Challenge Mode&quot;.</p>
+						<p>We don&#39;t have any human readable information for these, but saavy 3rd party app
+							users could manually associate the key (a hash identifier for the &quot;option&quot; that
+						is enabled/disabled) and the value (whether it&#39;s enabled or disabled presently)</p>
+						<p>On our side, we don&#39;t necessarily even know what these are used for (the game
+							designers know, but we don&#39;t), and we have no human readable data for them. In
+						order to use them, you will have to do some experimentation.</p>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="canjoin" class="tsd-anchor"></a>
 					<h3>can<wbr>Join</h3>
 					<div class="tsd-signature tsd-kind-icon">can<wbr>Join<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10612">destiny2/interfaces.ts:10612</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10691">destiny2/interfaces.ts:10691</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -149,7 +189,7 @@
 					<div class="tsd-signature tsd-kind-icon">can<wbr>Lead<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10610">destiny2/interfaces.ts:10610</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10689">destiny2/interfaces.ts:10689</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,12 +199,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="challenges" class="tsd-anchor"></a>
+					<h3>challenges</h3>
+					<div class="tsd-signature tsd-kind-icon">challenges<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinychallengestatus.html" class="tsd-signature-type">DestinyChallengeStatus</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10710">destiny2/interfaces.ts:10710</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="difficultytier" class="tsd-anchor"></a>
 					<h3>difficulty<wbr>Tier</h3>
 					<div class="tsd-signature tsd-kind-icon">difficulty<wbr>Tier<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinyactivitydifficultytier.html" class="tsd-signature-type">DestinyActivityDifficultyTier</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10630">destiny2/interfaces.ts:10630</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10709">destiny2/interfaces.ts:10709</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -180,7 +230,7 @@
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10623">destiny2/interfaces.ts:10623</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10702">destiny2/interfaces.ts:10702</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -195,7 +245,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Completed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10619">destiny2/interfaces.ts:10619</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10698">destiny2/interfaces.ts:10698</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -213,7 +263,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>New<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10608">destiny2/interfaces.ts:10608</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10687">destiny2/interfaces.ts:10687</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -228,7 +278,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10621">destiny2/interfaces.ts:10621</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10700">destiny2/interfaces.ts:10700</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,12 +288,50 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loadoutrequirementindex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loadout<wbr>Requirement<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">loadout<wbr>Requirement<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10748">destiny2/interfaces.ts:10748</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If returned, this is the index into the DestinyActivityDefinition&#39;s &quot;loadouts&quot;
+							property, indicating the currently active loadout requirements.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="modifierhashes" class="tsd-anchor"></a>
+					<h3>modifier<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">modifier<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10723">destiny2/interfaces.ts:10723</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the activity has modifiers, this will be the list of modifiers that all
+								variants have in common. Perform lookups against
+								DestinyActivityModifierDefinition which defines the modifier being applied to
+							get at the modifier data.</p>
+						</div>
+						<p>Note that, in the DestiyActivityDefinition, you will see many more modifiers
+							than this being referred to: those are all <em>possible</em> modifiers for the activity,
+						not the active ones. Use only the active ones to match what&#39;s really live.</p>
+						<p>Mapped to DestinyActivityModifierDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="recommendedlight" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> recommended<wbr>Light</h3>
 					<div class="tsd-signature tsd-kind-icon">recommended<wbr>Light<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/26bcb8a/generated-src/destiny2/interfaces.ts#L10625">destiny2/interfaces.ts:10625</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L10704">destiny2/interfaces.ts:10704</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -276,10 +364,16 @@
 								<a href="_destiny2_interfaces_.destinyactivity.html#activityhash" class="tsd-kind-icon">activity<wbr>Hash</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyactivity.html#booleanactivityoptions" class="tsd-kind-icon">boolean<wbr>Activity<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyactivity.html#canjoin" class="tsd-kind-icon">can<wbr>Join</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyactivity.html#canlead" class="tsd-kind-icon">can<wbr>Lead</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyactivity.html#challenges" class="tsd-kind-icon">challenges</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyactivity.html#difficultytier" class="tsd-kind-icon">difficulty<wbr>Tier</a>
@@ -295,6 +389,12 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyactivity.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyactivity.html#loadoutrequirementindex" class="tsd-kind-icon">loadout<wbr>Requirement<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyactivity.html#modifierhashes" class="tsd-kind-icon">modifier<wbr>Hashes</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyactivity.html#recommendedlight" class="tsd-kind-icon">recommended<wbr>Light</a>
