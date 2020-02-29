@@ -86,6 +86,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.usermembershipdata.html#bungienetuser" class="tsd-kind-icon">bungie<wbr>Net<wbr>User</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.usermembershipdata.html#destinymemberships" class="tsd-kind-icon">destiny<wbr>Memberships</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_interfaces_.usermembershipdata.html#primarymembershipid" class="tsd-kind-icon">primary<wbr>Membership<wbr>Id</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,7 +100,7 @@
 					<div class="tsd-signature tsd-kind-icon">bungie<wbr>Net<wbr>User<span class="tsd-signature-symbol">:</span> <a href="_user_interfaces_.generaluser.html" class="tsd-signature-type">GeneralUser</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/user/interfaces.ts#L140">user/interfaces.ts:140</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/user/interfaces.ts#L147">user/interfaces.ts:147</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -109,7 +110,7 @@
 					<div class="tsd-signature tsd-kind-icon">destiny<wbr>Memberships<span class="tsd-signature-symbol">:</span> <a href="_groupv2_interfaces_.groupuserinfocard.html" class="tsd-signature-type">GroupUserInfoCard</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/user/interfaces.ts#L139">user/interfaces.ts:139</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/user/interfaces.ts#L139">user/interfaces.ts:139</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -117,6 +118,23 @@
 							<p>this allows you to see destiny memberships that are visible and linked to this
 							account (regardless of whether or not they have characters on the world server)</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="primarymembershipid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> primary<wbr>Membership<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">primary<wbr>Membership<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/user/interfaces.ts#L146">user/interfaces.ts:146</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this property is populated, it will have the membership ID of the account
+							considered to be &quot;primary&quot; in this user&#39;s cross save relationship.</p>
+						</div>
+						<p>If null, this user has no cross save relationship, nor primary account.</p>
 					</div>
 				</section>
 			</section>
@@ -162,6 +180,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_user_interfaces_.usermembershipdata.html#destinymemberships" class="tsd-kind-icon">destiny<wbr>Memberships</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_user_interfaces_.usermembershipdata.html#primarymembershipid" class="tsd-kind-icon">primary<wbr>Membership<wbr>Id</a>
 							</li>
 						</ul>
 					</li>

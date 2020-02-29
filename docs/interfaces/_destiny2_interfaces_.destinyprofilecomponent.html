@@ -93,6 +93,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofilecomponent.html#characterids" class="tsd-kind-icon">character<wbr>Ids</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofilecomponent.html#currentseasonhash" class="tsd-kind-icon">current<wbr>Season<wbr>Hash</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofilecomponent.html#datelastplayed" class="tsd-kind-icon">date<wbr>Last<wbr>Played</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofilecomponent.html#seasonhashes" class="tsd-kind-icon">season<wbr>Hashes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyprofilecomponent.html#userinfo" class="tsd-kind-icon">user<wbr>Info</a></li>
@@ -110,7 +111,7 @@
 					<div class="tsd-signature tsd-kind-icon">character<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L8379">destiny2/interfaces.ts:8379</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/destiny2/interfaces.ts#L8417">destiny2/interfaces.ts:8417</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -120,12 +121,28 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="currentseasonhash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> current<wbr>Season<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Season<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/destiny2/interfaces.ts#L8436">destiny2/interfaces.ts:8436</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If populated, this is a reference to the season that is currently active.</p>
+						</div>
+						<p>Mapped to DestinySeasonDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="datelastplayed" class="tsd-anchor"></a>
 					<h3>date<wbr>Last<wbr>Played</h3>
 					<div class="tsd-signature tsd-kind-icon">date<wbr>Last<wbr>Played<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L8359">destiny2/interfaces.ts:8359</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/destiny2/interfaces.ts#L8397">destiny2/interfaces.ts:8397</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -140,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">season<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L8386">destiny2/interfaces.ts:8386</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/destiny2/interfaces.ts#L8430">destiny2/interfaces.ts:8430</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -148,6 +165,11 @@
 							<p>A list of seasons that this profile owns. Unlike versionsOwned, these stay with
 							the profile across Platforms, and thus will be valid.</p>
 						</div>
+						<p>It turns out that Stadia Pro subscriptions will give access to seasons but only
+							while playing on Stadia and with an active subscription. So some users (users
+							who have Stadia Pro but choose to play on some other platform) won&#39;t see these
+							as available: it will be whatever seasons are available for the platform on
+						which they last played.</p>
 						<p>Mapped to DestinySeasonDefinition in the manifest.</p>
 					</div>
 				</section>
@@ -157,7 +179,7 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Info<span class="tsd-signature-symbol">:</span> <a href="_user_interfaces_.userinfocard.html" class="tsd-signature-type">UserInfoCard</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L8357">destiny2/interfaces.ts:8357</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/destiny2/interfaces.ts#L8395">destiny2/interfaces.ts:8395</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -173,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">versions<wbr>Owned<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinygameversions.html" class="tsd-signature-type">DestinyGameVersions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/35c482a/generated-src/destiny2/interfaces.ts#L8377">destiny2/interfaces.ts:8377</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/destiny2/interfaces.ts#L8415">destiny2/interfaces.ts:8415</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -215,6 +237,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyprofilecomponent.html#characterids" class="tsd-kind-icon">character<wbr>Ids</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinyprofilecomponent.html#currentseasonhash" class="tsd-kind-icon">current<wbr>Season<wbr>Hash</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_destiny2_interfaces_.destinyprofilecomponent.html#datelastplayed" class="tsd-kind-icon">date<wbr>Last<wbr>Played</a>
