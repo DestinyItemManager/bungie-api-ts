@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DestinyItemSourceDefinition | bungie-api-ts</title>
+	<title>DestinyMetricDefinition | bungie-api-ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,32 +59,21 @@
 					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html">DestinyItemSourceDefinition</a>
+					<a href="_destiny2_interfaces_.destinymetricdefinition.html">DestinyMetricDefinition</a>
 				</li>
 			</ul>
-			<h1>Interface DestinyItemSourceDefinition</h1>
+			<h1>Interface DestinyMetricDefinition</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Properties of a DestinyInventoryItemDefinition that store all of the information
-							we were able to discern about how the item spawns, and where you can find the
-						item.</p>
-					</div>
-					<p>Items will have many of these sources, one per level at which it spawns, to try
-					and give more granular data about where items spawn for specific level ranges.</p>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DestinyItemSourceDefinition</span>
+						<span class="target">DestinyMetricDefinition</span>
 					</li>
 				</ul>
 			</section>
@@ -95,13 +84,16 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#computedstats" class="tsd-kind-icon">computed<wbr>Stats</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#level" class="tsd-kind-icon">level</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#maxlevelrequired" class="tsd-kind-icon">max<wbr>Level<wbr>Required</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#maxquality" class="tsd-kind-icon">max<wbr>Quality</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#minlevelrequired" class="tsd-kind-icon">min<wbr>Level<wbr>Required</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#minquality" class="tsd-kind-icon">min<wbr>Quality</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#sourcehashes" class="tsd-kind-icon">source<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#hash" class="tsd-kind-icon">hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#lowervalueisbetter" class="tsd-kind-icon">lower<wbr>Value<wbr>IsBetter</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#parentnodehashes" class="tsd-kind-icon">parent<wbr>Node<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#presentationnodetype" class="tsd-kind-icon">presentation<wbr>Node<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#redacted" class="tsd-kind-icon">redacted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#trackingobjectivehash" class="tsd-kind-icon">tracking<wbr>Objective<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#traithashes" class="tsd-kind-icon">trait<wbr>Hashes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricdefinition.html#traitids" class="tsd-kind-icon">trait<wbr>Ids</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,127 +102,140 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="computedstats" class="tsd-anchor"></a>
-					<h3>computed<wbr>Stats</h3>
-					<div class="tsd-signature tsd-kind-icon">computed<wbr>Stats<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="displayproperties" class="tsd-anchor"></a>
+					<h3>display<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinydisplaypropertiesdefinition.html" class="tsd-signature-type">DestinyDisplayPropertiesDefinition</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5776">destiny2/interfaces.ts:5776</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4617">destiny2/interfaces.ts:4617</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hash" class="tsd-anchor"></a>
+					<h3>hash</h3>
+					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4639">destiny2/interfaces.ts:4639</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The stats computed for this level/quality range.</p>
+							<p>The unique identifier for this entity. Guaranteed to be unique for the type of
+							entity, but not globally.</p>
 						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinyinventoryitemstatdefinition.html" class="tsd-signature-type">DestinyInventoryItemStatDefinition</a></h5>
-							</li>
-						</ul>
+						<p>When entities refer to each other in Destiny content, it is this hash that they
+						are referring to.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="level" class="tsd-anchor"></a>
-					<h3>level</h3>
-					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5753">destiny2/interfaces.ts:5753</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4641">destiny2/interfaces.ts:4641</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The level at which the item spawns. Essentially the Primary Key for this source
-								data: there will be multiple of these source entries per item that has source
-							data, grouped by the level at which the item spawns.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxlevelrequired" class="tsd-anchor"></a>
-					<h3>max<wbr>Level<wbr>Required</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Level<wbr>Required<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5774">destiny2/interfaces.ts:5774</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The maximum Character Level required for equipping the item when the item spawns
-								at the item level defined on this DestinyItemSourceDefinition, as far as we saw
-							in our processing.</p>
+							<p>The index of the entity as it was found in the investment tables.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxquality" class="tsd-anchor"></a>
-					<h3>max<wbr>Quality</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Quality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="lowervalueisbetter" class="tsd-anchor"></a>
+					<h3>lower<wbr>Value<wbr>IsBetter</h3>
+					<div class="tsd-signature tsd-kind-icon">lower<wbr>Value<wbr>IsBetter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5762">destiny2/interfaces.ts:5762</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4620">destiny2/interfaces.ts:4620</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="parentnodehashes" class="tsd-anchor"></a>
+					<h3>parent<wbr>Node<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<wbr>Node<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4631">destiny2/interfaces.ts:4631</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The maximum quality at which the item spawns for this level.</p>
+							<p>A quick reference to presentation nodes that have this node as a child.
+							Presentation nodes can be parented under multiple parents.</p>
+						</div>
+						<p>Mapped to DestinyPresentationNodeDefinition in the manifest.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="presentationnodetype" class="tsd-anchor"></a>
+					<h3>presentation<wbr>Node<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">presentation<wbr>Node<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_destiny2_interfaces_.destinypresentationnodetype.html" class="tsd-signature-type">DestinyPresentationNodeType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4621">destiny2/interfaces.ts:4621</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="redacted" class="tsd-anchor"></a>
+					<h3>redacted</h3>
+					<div class="tsd-signature tsd-kind-icon">redacted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4646">destiny2/interfaces.ts:4646</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If this is true, then there is an entity with this identifier/type combination,
+							but BNet is not yet allowed to show it. Sorry!</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="minlevelrequired" class="tsd-anchor"></a>
-					<h3>min<wbr>Level<wbr>Required</h3>
-					<div class="tsd-signature tsd-kind-icon">min<wbr>Level<wbr>Required<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="trackingobjectivehash" class="tsd-anchor"></a>
+					<h3>tracking<wbr>Objective<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">tracking<wbr>Objective<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5768">destiny2/interfaces.ts:5768</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4619">destiny2/interfaces.ts:4619</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The minimum Character Level required for equipping the item when the item spawns
-								at the item level defined on this DestinyItemSourceDefinition, as far as we saw
-							in our processing.</p>
+							<p>Mapped to DestinyObjectiveDefinition in the manifest.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="minquality" class="tsd-anchor"></a>
-					<h3>min<wbr>Quality</h3>
-					<div class="tsd-signature tsd-kind-icon">min<wbr>Quality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="traithashes" class="tsd-anchor"></a>
+					<h3>trait<wbr>Hashes</h3>
+					<div class="tsd-signature tsd-kind-icon">trait<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5760">destiny2/interfaces.ts:5760</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4624">destiny2/interfaces.ts:4624</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The minimum Quality at which the item spawns for this level. Examine
-								DestinyInventoryItemDefinition for more information about what Quality means.
-								Just don&#39;t ask Phaedrus about it, he&#39;ll never stop talking and you&#39;ll have to
-							write a book about it.</p>
+							<p>Mapped to DestinyTraitDefinition in the manifest.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="sourcehashes" class="tsd-anchor"></a>
-					<h3>source<wbr>Hashes</h3>
-					<div class="tsd-signature tsd-kind-icon">source<wbr>Hashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="traitids" class="tsd-anchor"></a>
+					<h3>trait<wbr>Ids</h3>
+					<div class="tsd-signature tsd-kind-icon">trait<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L5782">destiny2/interfaces.ts:5782</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L4622">destiny2/interfaces.ts:4622</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The DestinyRewardSourceDefinitions found that can spawn the item at this level.</p>
-						</div>
-						<p>Mapped to DestinyRewardSourceDefinition in the manifest.</p>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -250,28 +255,37 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html" class="tsd-kind-icon">Destiny<wbr>Item<wbr>Source<wbr>Definition</a>
+						<a href="_destiny2_interfaces_.destinymetricdefinition.html" class="tsd-kind-icon">Destiny<wbr>Metric<wbr>Definition</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#computedstats" class="tsd-kind-icon">computed<wbr>Stats</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#displayproperties" class="tsd-kind-icon">display<wbr>Properties</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#level" class="tsd-kind-icon">level</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#hash" class="tsd-kind-icon">hash</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#maxlevelrequired" class="tsd-kind-icon">max<wbr>Level<wbr>Required</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#index" class="tsd-kind-icon">index</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#maxquality" class="tsd-kind-icon">max<wbr>Quality</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#lowervalueisbetter" class="tsd-kind-icon">lower<wbr>Value<wbr>IsBetter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#minlevelrequired" class="tsd-kind-icon">min<wbr>Level<wbr>Required</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#parentnodehashes" class="tsd-kind-icon">parent<wbr>Node<wbr>Hashes</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#minquality" class="tsd-kind-icon">min<wbr>Quality</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#presentationnodetype" class="tsd-kind-icon">presentation<wbr>Node<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_destiny2_interfaces_.destinyitemsourcedefinition.html#sourcehashes" class="tsd-kind-icon">source<wbr>Hashes</a>
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#redacted" class="tsd-kind-icon">redacted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#trackingobjectivehash" class="tsd-kind-icon">tracking<wbr>Objective<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#traithashes" class="tsd-kind-icon">trait<wbr>Hashes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymetricdefinition.html#traitids" class="tsd-kind-icon">trait<wbr>Ids</a>
 							</li>
 						</ul>
 					</li>

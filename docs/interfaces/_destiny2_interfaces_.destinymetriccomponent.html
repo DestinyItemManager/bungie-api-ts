@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GetStreamingStatusForMemberParams | bungie-api-ts</title>
+	<title>DestinyMetricComponent | bungie-api-ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_communitycontent_api_.html">&quot;communitycontent/api&quot;</a>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_communitycontent_api_.getstreamingstatusformemberparams.html">GetStreamingStatusForMemberParams</a>
+					<a href="_destiny2_interfaces_.destinymetriccomponent.html">DestinyMetricComponent</a>
 				</li>
 			</ul>
-			<h1>Interface GetStreamingStatusForMemberParams</h1>
+			<h1>Interface DestinyMetricComponent</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GetStreamingStatusForMemberParams</span>
+						<span class="target">DestinyMetricComponent</span>
 					</li>
 				</ul>
 			</section>
@@ -84,9 +84,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_communitycontent_api_.getstreamingstatusformemberparams.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_communitycontent_api_.getstreamingstatusformemberparams.html#membershiptype" class="tsd-kind-icon">membership<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_communitycontent_api_.getstreamingstatusformemberparams.html#partnershiptype" class="tsd-kind-icon">partnership<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetriccomponent.html#invisible" class="tsd-kind-icon">invisible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetriccomponent.html#objectiveprogress" class="tsd-kind-icon">objective<wbr>Progress</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,49 +94,24 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="membershipid" class="tsd-anchor"></a>
-					<h3>membership<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">membership<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="invisible" class="tsd-anchor"></a>
+					<h3>invisible</h3>
+					<div class="tsd-signature tsd-kind-icon">invisible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/communitycontent/api.ts#L142">communitycontent/api.ts:142</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L9424">destiny2/interfaces.ts:9424</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The membershipId related to that type.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="membershiptype" class="tsd-anchor"></a>
-					<h3>membership<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">membership<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_common_.bungiemembershiptype.html" class="tsd-signature-type">BungieMembershipType</a></div>
+					<a name="objectiveprogress" class="tsd-anchor"></a>
+					<h3>objective<wbr>Progress</h3>
+					<div class="tsd-signature tsd-kind-icon">objective<wbr>Progress<span class="tsd-signature-symbol">:</span> <a href="_destiny2_interfaces_.destinyobjectiveprogress.html" class="tsd-signature-type">DestinyObjectiveProgress</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/communitycontent/api.ts#L144">communitycontent/api.ts:144</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L9425">destiny2/interfaces.ts:9425</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type of account for which info will be extracted.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="partnershiptype" class="tsd-anchor"></a>
-					<h3>partnership<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">partnership<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_platform_.partnershiptype.html" class="tsd-signature-type">PartnershipType</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/communitycontent/api.ts#L146">communitycontent/api.ts:146</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type of partnership for which info will be extracted.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -148,63 +122,27 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html">"communitycontent/api"</a>
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_communitycontent_api_.getcommunitycontentparams.html" class="tsd-kind-icon">Get<wbr>Community<wbr>Content<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_communitycontent_api_.getcommunitylivestatusesforclanmatesparams.html" class="tsd-kind-icon">Get<wbr>Community<wbr>Live<wbr>Statuses<wbr>For<wbr>Clanmates<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_communitycontent_api_.getcommunitylivestatusesforfriendsparams.html" class="tsd-kind-icon">Get<wbr>Community<wbr>Live<wbr>Statuses<wbr>For<wbr>Friends<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_communitycontent_api_.getcommunitylivestatusesparams.html" class="tsd-kind-icon">Get<wbr>Community<wbr>Live<wbr>Statuses<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_communitycontent_api_.getfeaturedcommunitylivestatusesparams.html" class="tsd-kind-icon">Get<wbr>Featured<wbr>Community<wbr>Live<wbr>Statuses<wbr>Params</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_communitycontent_api_.getstreamingstatusformemberparams.html" class="tsd-kind-icon">Get<wbr>Streaming<wbr>Status<wbr>For<wbr>Member<wbr>Params</a>
+						<a href="_destiny2_interfaces_.destinymetriccomponent.html" class="tsd-kind-icon">Destiny<wbr>Metric<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_communitycontent_api_.getstreamingstatusformemberparams.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a>
+								<a href="_destiny2_interfaces_.destinymetriccomponent.html#invisible" class="tsd-kind-icon">invisible</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_communitycontent_api_.getstreamingstatusformemberparams.html#membershiptype" class="tsd-kind-icon">membership<wbr>Type</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_communitycontent_api_.getstreamingstatusformemberparams.html#partnershiptype" class="tsd-kind-icon">partnership<wbr>Type</a>
+								<a href="_destiny2_interfaces_.destinymetriccomponent.html#objectiveprogress" class="tsd-kind-icon">objective<wbr>Progress</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html#getcommunitycontent" class="tsd-kind-icon">get<wbr>Community<wbr>Content</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html#getcommunitylivestatuses" class="tsd-kind-icon">get<wbr>Community<wbr>Live<wbr>Statuses</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html#getcommunitylivestatusesforclanmates" class="tsd-kind-icon">get<wbr>Community<wbr>Live<wbr>Statuses<wbr>For<wbr>Clanmates</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html#getcommunitylivestatusesforfriends" class="tsd-kind-icon">get<wbr>Community<wbr>Live<wbr>Statuses<wbr>For<wbr>Friends</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html#getfeaturedcommunitylivestatuses" class="tsd-kind-icon">get<wbr>Featured<wbr>Community<wbr>Live<wbr>Statuses</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_communitycontent_api_.html#getstreamingstatusformember" class="tsd-kind-icon">get<wbr>Streaming<wbr>Status<wbr>For<wbr>Member</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

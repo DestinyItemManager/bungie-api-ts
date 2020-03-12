@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GetPartnershipsParams | bungie-api-ts</title>
+	<title>DestinyMetricsComponent | bungie-api-ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_user_api_.html">&quot;user/api&quot;</a>
+					<a href="../modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_user_api_.getpartnershipsparams.html">GetPartnershipsParams</a>
+					<a href="_destiny2_interfaces_.destinymetricscomponent.html">DestinyMetricsComponent</a>
 				</li>
 			</ul>
-			<h1>Interface GetPartnershipsParams</h1>
+			<h1>Interface DestinyMetricsComponent</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GetPartnershipsParams</span>
+						<span class="target">DestinyMetricsComponent</span>
 					</li>
 				</ul>
 			</section>
@@ -84,7 +84,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_user_api_.getpartnershipsparams.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricscomponent.html#metrics" class="tsd-kind-icon">metrics</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_destiny2_interfaces_.destinymetricscomponent.html#metricsrootnodehash" class="tsd-kind-icon">metrics<wbr>Root<wbr>Node<wbr>Hash</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,17 +94,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="membershipid" class="tsd-anchor"></a>
-					<h3>membership<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">membership<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="metrics" class="tsd-anchor"></a>
+					<h3>metrics</h3>
+					<div class="tsd-signature tsd-kind-icon">metrics<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/c8d1606/generated-src/user/api.ts#L97">user/api.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L9418">destiny2/interfaces.ts:9418</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><a href="_destiny2_interfaces_.destinymetriccomponent.html" class="tsd-signature-type">DestinyMetricComponent</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="metricsrootnodehash" class="tsd-anchor"></a>
+					<h3>metrics<wbr>Root<wbr>Node<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">metrics<wbr>Root<wbr>Node<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/DestinyItemManager/bungie-api-ts/blob/f296a35/generated-src/destiny2/interfaces.ts#L9420">destiny2/interfaces.ts:9420</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The ID of the member for whom partnerships should be returned.</p>
+							<p>Mapped to DestinyPresentationNodeDefinition in the manifest.</p>
 						</div>
 					</div>
 				</section>
@@ -116,57 +135,27 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_user_api_.html">"user/api"</a>
+						<a href="../modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_user_api_.getbungienetuserbyidparams.html" class="tsd-kind-icon">Get<wbr>Bungie<wbr>Net<wbr>User<wbr>ById<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_user_api_.getmembershipdatabyidparams.html" class="tsd-kind-icon">Get<wbr>Membership<wbr>Data<wbr>ById<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_user_api_.getmembershipfromhardlinkedcredentialparams.html" class="tsd-kind-icon">Get<wbr>Membership<wbr>From<wbr>Hard<wbr>Linked<wbr>Credential<wbr>Params</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_user_api_.getpartnershipsparams.html" class="tsd-kind-icon">Get<wbr>Partnerships<wbr>Params</a>
+						<a href="_destiny2_interfaces_.destinymetricscomponent.html" class="tsd-kind-icon">Destiny<wbr>Metrics<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_user_api_.getpartnershipsparams.html#membershipid" class="tsd-kind-icon">membership<wbr>Id</a>
+								<a href="_destiny2_interfaces_.destinymetricscomponent.html#metrics" class="tsd-kind-icon">metrics</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_destiny2_interfaces_.destinymetricscomponent.html#metricsrootnodehash" class="tsd-kind-icon">metrics<wbr>Root<wbr>Node<wbr>Hash</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_user_api_.searchusersparams.html" class="tsd-kind-icon">Search<wbr>Users<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#getavailablethemes" class="tsd-kind-icon">get<wbr>Available<wbr>Themes</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#getbungienetuserbyid" class="tsd-kind-icon">get<wbr>Bungie<wbr>Net<wbr>User<wbr>ById</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#getmembershipdatabyid" class="tsd-kind-icon">get<wbr>Membership<wbr>Data<wbr>ById</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#getmembershipdataforcurrentuser" class="tsd-kind-icon">get<wbr>Membership<wbr>Data<wbr>For<wbr>Current<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#getmembershipfromhardlinkedcredential" class="tsd-kind-icon">get<wbr>Membership<wbr>From<wbr>Hard<wbr>Linked<wbr>Credential</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#getpartnerships" class="tsd-kind-icon">get<wbr>Partnerships</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_user_api_.html#searchusers" class="tsd-kind-icon">search<wbr>Users</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
