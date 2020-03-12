@@ -29,12 +29,9 @@ export * from './api';`;
 export function generateSuperIndex(tags: string[], doc: OpenAPIObject) {
   const filename = `generated-src/index.ts`;
 
-  const imports = tags
-    .map((tag) => `import * as ${tag}Import from './${tag.toLowerCase()}';`)
-    .join('\n');
-  const exportStatements = tags.map((tag) => `export const ${tag} = ${tag}Import;`).join('\n');
+  const imports = tags.map((tag) => `export * as ${tag} from './${tag.toLowerCase()}';`).join('\n');
 
-  const definition = [generateHeader(doc), imports, exportStatements].join('\n\n') + '\n';
+  const definition = [generateHeader(doc), imports].join('\n\n') + '\n';
 
   writeOutFile(filename, definition);
 }
