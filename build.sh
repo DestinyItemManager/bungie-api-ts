@@ -9,9 +9,9 @@ cp generator/http.d.ts generated-src
 tsc -p tsconfig.json
 node ./build/generate.js
 
-#rm -rf ./docs
-#typedoc --target ES5 --out ./docs/ --readme README.md generated-src
-#touch ./docs/.nojekyll
+rm -rf ./docs
+typedoc --target ES5 --out ./docs/ --readme README.md generated-src
+touch ./docs/.nojekyll
 
 # Build the package from the generated sources
 rm -rf ./lib
