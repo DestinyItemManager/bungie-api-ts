@@ -94,14 +94,14 @@ export function indent(text: string, indentLevel: number) {
   return lines.map((line) => '  '.repeat(indentLevel) + line).join('\n');
 }
 
-export function writeOutFile(filename: string, contents: string) {
-  mkdirp(path.dirname(filename), (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      fs.writeFile(filename, contents, null, (error) => {
-        console.log(error ? error : `Done with ${filename}!`);
-      });
-    }
-  });
+export async function writeOutFile(filename: string, contents: string) {
+  try {
+    await mkdirp(path.dirname(filename));
+
+    fs.writeFile(filename, contents, null, (error) => {
+      console.log(error ? error : `Done with ${filename}!`);
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }

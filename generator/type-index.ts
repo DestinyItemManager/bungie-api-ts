@@ -148,7 +148,7 @@ function addReachableComponentsFromComponent(
     (component.allOf || []).forEach((schema: SchemaObject | ReferenceObject) => {
       addDefinitions(allDefinitions, schema, doc);
     });
-    if (component.additionalProperties) {
+    if (component.additionalProperties && typeof component.additionalProperties !== 'boolean') {
       addDefinitions(allDefinitions, component.additionalProperties, doc);
     }
   }
