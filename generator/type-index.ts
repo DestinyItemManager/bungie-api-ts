@@ -1,8 +1,24 @@
 import * as _ from 'underscore';
-import { OpenAPIObject, PathItemObject, ParameterObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
-import { getRef, lastPart, getReferencedTypes, DefInfo, interfaceName, isRequestBodyObject } from './util';
+import {
+  OpenAPIObject,
+  PathItemObject,
+  ParameterObject,
+  SchemaObject,
+  ReferenceObject
+} from 'openapi3-ts';
+import {
+  getRef,
+  lastPart,
+  getReferencedTypes,
+  DefInfo,
+  interfaceName,
+  isRequestBodyObject
+} from './util';
 
-export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathItemObject][] }, doc: OpenAPIObject) {
+export function computeTypeMaps(
+  pathPairsByTag: { [tag: string]: [string, PathItemObject][] },
+  doc: OpenAPIObject
+) {
   const allDefsEverywhere = new Set<string>();
   const defsByTag = {};
   _.each(pathPairsByTag, (paths, tag) => {
@@ -13,8 +29,8 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
 
   const allTags = Object.keys(pathPairsByTag);
 
-  const componentsByFile: {[filename: string]: DefInfo[]} = {};
-  const componentByDef: {[def: string]: DefInfo} = {};
+  const componentsByFile: { [filename: string]: DefInfo[] } = {};
+  const componentByDef: { [def: string]: DefInfo } = {};
   for (const def of allDefsEverywhere) {
     const tags: string[] = [];
     _.each(defsByTag, (defs: Set<string>, tag) => {
@@ -62,11 +78,21 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
   }
 }
 
-function findReachableComponents(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject) {
-  const pathDefinitions = paths.reduce((memo: Set<string>, [_, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef, doc)), new Set<string>());
+function findReachableComponents(
+  tag: string,
+  paths: [string, PathItemObject][],
+  doc: OpenAPIObject
+) {
+  const pathDefinitions = paths.reduce(
+    (memo: Set<string>, [_, pathDef]) =>
+      addAll(memo, findReachableComponentsFromPath(pathDef, doc)),
+    new Set<string>()
+  );
 
   const allDefinitions = new Set(pathDefinitions);
-  pathDefinitions.forEach((definition) => addReachableComponentsFromComponent(allDefinitions, definition, doc));
+  pathDefinitions.forEach((definition) =>
+    addReachableComponentsFromComponent(allDefinitions, definition, doc)
+  );
   return allDefinitions;
 }
 
@@ -80,7 +106,9 @@ function addAll<T>(first: Set<T>, second: Set<T>): Set<T> {
 function findReachableComponentsFromPath(pathDef: PathItemObject, doc: OpenAPIObject): Set<string> {
   const methodDef = pathDef.get || pathDef.post!;
   const params = (methodDef.parameters || []) as ParameterObject[];
-  const paramTypes = new Set(params.map((param) => getReferencedTypes(param.schema!)).filter((p) => p)) as Set<string>;
+  const paramTypes = new Set(
+    params.map((param) => getReferencedTypes(param.schema!)).filter((p) => p)
+  ) as Set<string>;
 
   const requestBody = methodDef.requestBody;
   if (requestBody && isRequestBodyObject(requestBody)) {
@@ -99,7 +127,11 @@ function findReachableComponentsFromPath(pathDef: PathItemObject, doc: OpenAPIOb
   return paramTypes;
 }
 
-function addReachableComponentsFromComponent(allDefinitions: Set<string>, definition: string, doc: OpenAPIObject) {
+function addReachableComponentsFromComponent(
+  allDefinitions: Set<string>,
+  definition: string,
+  doc: OpenAPIObject
+) {
   const component = getRef(doc, definition);
   if (!component) {
     return;
@@ -122,7 +154,11 @@ function addReachableComponentsFromComponent(allDefinitions: Set<string>, defini
   }
 }
 
-function addDefinitions(allDefinitions: Set<string>, schema: SchemaObject | ReferenceObject, doc: OpenAPIObject) {
+function addDefinitions(
+  allDefinitions: Set<string>,
+  schema: SchemaObject | ReferenceObject,
+  doc: OpenAPIObject
+) {
   const newDefinition = getReferencedTypes(schema);
   addDefinitionsFromComponent(allDefinitions, newDefinition, doc);
   if (schema['x-mapped-definition']) {
@@ -130,7 +166,11 @@ function addDefinitions(allDefinitions: Set<string>, schema: SchemaObject | Refe
   }
 }
 
-function addDefinitionsFromComponent(allDefinitions: Set<string>, definition: string | undefined, doc: OpenAPIObject) {
+function addDefinitionsFromComponent(
+  allDefinitions: Set<string>,
+  definition: string | undefined,
+  doc: OpenAPIObject
+) {
   if (definition && !allDefinitions.has(definition)) {
     allDefinitions.add(definition);
     addReachableComponentsFromComponent(allDefinitions, definition, doc);

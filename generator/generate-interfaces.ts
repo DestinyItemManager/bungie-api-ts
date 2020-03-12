@@ -1,12 +1,26 @@
 import * as _ from 'underscore';
 import { DefInfo, getRef, resolveSchemaType } from './util';
 import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
-import { generateHeader, generateImports, docComment, indent, addImport, writeOutFile } from './generate-common';
+import {
+  generateHeader,
+  generateImports,
+  docComment,
+  indent,
+  addImport,
+  writeOutFile
+} from './generate-common';
 
-export function generateInterfaceDefinitions(file: string, components: DefInfo[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }) {
+export function generateInterfaceDefinitions(
+  file: string,
+  components: DefInfo[],
+  doc: OpenAPIObject,
+  componentByDef: { [def: string]: DefInfo }
+) {
   const importFiles: { [filename: string]: Set<string> } = {};
 
-  const componentDefinitions = components.map((component) => generateComponentDefinition(component, doc, componentByDef, importFiles));
+  const componentDefinitions = components.map((component) =>
+    generateComponentDefinition(component, doc, componentByDef, importFiles)
+  );
 
   const filename = `generated-src/${file}`;
 
@@ -20,12 +34,20 @@ export function generateInterfaceDefinitions(file: string, components: DefInfo[]
 
   const imports = generateImports(filename, importFiles);
 
-  const definition = _.compact([generateHeader(doc), imports, specialDefinitions, ...componentDefinitions]).join('\n\n') + '\n';
+  const definition =
+    _.compact([generateHeader(doc), imports, specialDefinitions, ...componentDefinitions]).join(
+      '\n\n'
+    ) + '\n';
 
   writeOutFile(filename, definition);
 }
 
-function generateComponentDefinition(defInfo: DefInfo, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+function generateComponentDefinition(
+  defInfo: DefInfo,
+  doc: OpenAPIObject,
+  componentByDef: { [def: string]: DefInfo },
+  importFiles: { [filename: string]: Set<string> }
+) {
   const component = getRef(doc, defInfo.def);
   if (!component) {
     return undefined;
@@ -36,19 +58,29 @@ function generateComponentDefinition(defInfo: DefInfo, doc: OpenAPIObject, compo
   } else if (isSpecialType(defInfo.interfaceName)) {
     return undefined;
   } else {
-    return generateInterfaceSchema(defInfo.interfaceName, component, doc, componentByDef, importFiles);
+    return generateInterfaceSchema(
+      defInfo.interfaceName,
+      component,
+      doc,
+      componentByDef,
+      importFiles
+    );
   }
 }
 
 function generateEnum(defInfo: DefInfo, component: SchemaObject) {
-  const values = component['x-enum-values'].map((value) => {
-    const doc = value.description ? docComment(value.description) + '\n' : '';
-    return `${doc}${value.identifier} = ${value.numericValue}`;
-  }).join(',\n');
+  const values = component['x-enum-values']
+    .map((value) => {
+      const doc = value.description ? docComment(value.description) + '\n' : '';
+      return `${doc}${value.identifier} = ${value.numericValue}`;
+    })
+    .join(',\n');
 
   const docs = component.description ? [component.description] : [];
   if (component['x-enum-is-bitmask']) {
-    docs.push(`This enum represents a set of flags - use bitwise operators to check which of these match your value.`);
+    docs.push(
+      `This enum represents a set of flags - use bitwise operators to check which of these match your value.`
+    );
   }
 
   const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
@@ -60,16 +92,28 @@ ${indent(values, 1)}
 }`;
 }
 
-function generateInterfaceSchema(interfaceName: string, component: SchemaObject, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+function generateInterfaceSchema(
+  interfaceName: string,
+  component: SchemaObject,
+  doc: OpenAPIObject,
+  componentByDef: { [def: string]: DefInfo },
+  importFiles: { [filename: string]: Set<string> }
+) {
   const parameterArgs = _.map(component.properties!, (schema: SchemaObject, param) => {
     const paramType = resolveSchemaType(schema, doc);
     addImport(doc, schema, componentByDef, importFiles);
     const docs = schema.description ? [schema.description] : [];
     if (schema['x-mapped-definition']) {
-      docs.push(`Mapped to ${componentByDef[schema['x-mapped-definition'].$ref].interfaceName} in the manifest.`);
+      docs.push(
+        `Mapped to ${
+          componentByDef[schema['x-mapped-definition'].$ref].interfaceName
+        } in the manifest.`
+      );
     }
     if (schema['x-enum-is-bitmask']) {
-      docs.push(`This enum represents a set of flags - use bitwise operators to check which of these match your value.`);
+      docs.push(
+        `This enum represents a set of flags - use bitwise operators to check which of these match your value.`
+      );
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
     return `${docString}readonly ${param}${schema.nullable ? '?' : ''}: ${paramType};`;

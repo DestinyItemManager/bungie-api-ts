@@ -23,7 +23,7 @@ export function generateHeader(doc: OpenAPIObject): string {
 export function addImport(
   doc: OpenAPIObject,
   schema: SchemaObject | ReferenceObject,
-  componentByDef: {[def: string]: DefInfo },
+  componentByDef: { [def: string]: DefInfo },
   importFiles: { [filename: string]: Set<string> }
 ) {
   const typeRef = getReferencedTypes(schema);
@@ -47,25 +47,37 @@ export function addImport(
   }
 }
 
-export function generateImports(filename: string , importFiles: { [filename: string]: Set<string> }): string {
-  return _.compact(_.map(importFiles, (types, f) => {
-    const absImport = path.resolve('generated-src', f);
-    const absDest = path.resolve(filename);
-    if (absImport === absDest) {
-      return undefined;
-    }
-    let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '');
-    if (!relativePath.startsWith('.')) {
-      relativePath = './' + relativePath;
-    }
-    return `import {
+export function generateImports(
+  filename: string,
+  importFiles: { [filename: string]: Set<string> }
+): string {
+  return _.compact(
+    _.map(importFiles, (types, f) => {
+      const absImport = path.resolve('generated-src', f);
+      const absDest = path.resolve(filename);
+      if (absImport === absDest) {
+        return undefined;
+      }
+      let relativePath = path.relative(path.dirname(absDest), absImport).replace(/(\.d)?\.ts$/, '');
+      if (!relativePath.startsWith('.')) {
+        relativePath = './' + relativePath;
+      }
+      return `import {
   ${[...types].sort().join(',\n  ')}
 } from '${relativePath}';`;
-  })).sort().join("\n");
+    })
+  )
+    .sort()
+    .join('\n');
 }
 
 export function docComment(text: string) {
-  const lines = _.flatten(text.trim().split('\n').map((l) => l.replace(/(.{1,80}(?:\W|$))/g, '$1\n').split('\n'))).map((s: string) => s.trim());
+  const lines = _.flatten(
+    text
+      .trim()
+      .split('\n')
+      .map((l) => l.replace(/(.{1,80}(?:\W|$))/g, '$1\n').split('\n'))
+  ).map((s: string) => s.trim());
   lines.pop();
 
   if (lines.length === 1) {
@@ -73,7 +85,7 @@ export function docComment(text: string) {
   }
 
   return `/**
-${lines.map((line) => line.length ? ' * ' + line : ' *').join('\n')}
+${lines.map((line) => (line.length ? ' * ' + line : ' *')).join('\n')}
  */`;
 }
 

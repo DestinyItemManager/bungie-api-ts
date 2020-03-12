@@ -1,24 +1,59 @@
-import { OpenAPIObject, PathItemObject, ParameterObject, ReferenceObject, RequestBodyObject } from 'openapi3-ts';
-import { lastPart, lcFirst, resolveSchemaType, DefInfo, isReferenceObject, isRequestBodyObject, getRef } from './util';
-import { generateHeader, generateImports, docComment, indent, addImport, writeOutFile } from './generate-common';
+import {
+  OpenAPIObject,
+  PathItemObject,
+  ParameterObject,
+  ReferenceObject,
+  RequestBodyObject
+} from 'openapi3-ts';
+import {
+  lastPart,
+  lcFirst,
+  resolveSchemaType,
+  DefInfo,
+  isReferenceObject,
+  isRequestBodyObject,
+  getRef
+} from './util';
+import {
+  generateHeader,
+  generateImports,
+  docComment,
+  indent,
+  addImport,
+  writeOutFile
+} from './generate-common';
 
 const httpClientType = `import { HttpClient } from '../http';`;
 
-export function generateServiceDefinition(tag: string, paths: [string, PathItemObject][], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }): void {
+export function generateServiceDefinition(
+  tag: string,
+  paths: [string, PathItemObject][],
+  doc: OpenAPIObject,
+  componentByDef: { [def: string]: DefInfo }
+): void {
   const importFiles: { [filename: string]: Set<string> } = {};
 
-  const pathDefinitions = paths.map(([path, pathDef]) => generatePathDefinition(path, pathDef, doc, componentByDef, importFiles));
+  const pathDefinitions = paths.map(([path, pathDef]) =>
+    generatePathDefinition(path, pathDef, doc, componentByDef, importFiles)
+  );
 
   const filename = `generated-src/${tag.toLowerCase()}/api.ts`;
 
   const imports = generateImports(filename, importFiles);
 
-  const definition = [generateHeader(doc), httpClientType, imports, ...pathDefinitions].join('\n\n') + '\n';
+  const definition =
+    [generateHeader(doc), httpClientType, imports, ...pathDefinitions].join('\n\n') + '\n';
 
   writeOutFile(filename, definition);
 }
 
-function generatePathDefinition(path: string, pathDef: PathItemObject, doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+function generatePathDefinition(
+  path: string,
+  pathDef: PathItemObject,
+  doc: OpenAPIObject,
+  componentByDef: { [def: string]: DefInfo },
+  importFiles: { [filename: string]: Set<string> }
+) {
   const server = doc.servers![0].url;
   const interfaceName = lastPart(pathDef.summary!);
   const functionName = lcFirst(interfaceName);
@@ -27,12 +62,16 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
   const methodDef = pathDef.get || pathDef.post!;
   const params = (methodDef.parameters || []) as ParameterObject[];
 
-  const queryParameterNames = params.filter((param) => param.in === 'query').map((param) => param.name);
+  const queryParameterNames = params
+    .filter((param) => param.in === 'query')
+    .map((param) => param.name);
 
   const parameterArgs = ['http: HttpClient'];
   let interfaceDefinition = '';
   if (params.length) {
-    interfaceDefinition = generateInterfaceSchema(interfaceName + 'Params', params, doc, componentByDef, importFiles) + '\n\n';
+    interfaceDefinition =
+      generateInterfaceSchema(interfaceName + 'Params', params, doc, componentByDef, importFiles) +
+      '\n\n';
     parameterArgs.push(`params: ${interfaceName}Params`);
   }
 
@@ -42,17 +81,23 @@ function generatePathDefinition(path: string, pathDef: PathItemObject, doc: Open
 
       const paramType = resolveSchemaType(schema, doc);
       addImport(doc, schema, componentByDef, importFiles);
-      const docString = methodDef.requestBody.description ? docComment(methodDef.requestBody.description) + '\n' : '';
-      parameterArgs.push(`${docString}body${methodDef.requestBody.required ? '' : '?'}: ${paramType}`);
+      const docString = methodDef.requestBody.description
+        ? docComment(methodDef.requestBody.description) + '\n'
+        : '';
+      parameterArgs.push(
+        `${docString}body${methodDef.requestBody.required ? '' : '?'}: ${paramType}`
+      );
     } else if (isReferenceObject(methodDef.requestBody)) {
       throw new Error("didn't expect this");
     }
   }
 
   // tslint:disable-next-line:no-invalid-template-strings
-  const templatizedPath = path.includes("{") ? `\`${server}${path.replace(/{/g, "${params.")}\`` : `'${server}${path}'`;
+  const templatizedPath = path.includes('{')
+    ? `\`${server}${path.replace(/{/g, '${params.')}\``
+    : `'${server}${path}'`;
 
-  let paramsObject = "";
+  let paramsObject = '';
   if (queryParameterNames.length) {
     const paramInitializers = queryParameterNames.map((p) => {
       const param = params.find((pa) => pa.name === p)!;
@@ -92,7 +137,13 @@ export function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnVa
 }`;
 }
 
-function generateInterfaceSchema(interfaceName: string, params: ParameterObject[], doc: OpenAPIObject, componentByDef: {[def: string]: DefInfo }, importFiles: { [filename: string]: Set<string> }) {
+function generateInterfaceSchema(
+  interfaceName: string,
+  params: ParameterObject[],
+  doc: OpenAPIObject,
+  componentByDef: { [def: string]: DefInfo },
+  importFiles: { [filename: string]: Set<string> }
+) {
   const parameterArgs = params.map((param) => {
     // TODO: in general, need something that returns a type object
     const paramType = resolveSchemaType(param.schema!, doc);
