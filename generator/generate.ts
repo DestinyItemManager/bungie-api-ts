@@ -14,8 +14,10 @@ import { generateIndex, generateSuperIndex } from './generate-index';
 
 const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
 
+// Pairs of [request path, path service description]
 const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
 
+// Grouped by "tag" which says which service (destiny, groups, forums, etc)
 const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {
   return (desc.get || desc.post)!.tags![0];
 });
@@ -32,7 +34,7 @@ _.each(pathPairsByTag, (paths, tag) => {
 });
 
 _.each(pathPairsByTag, (paths, tag) => {
-  generateIndex(tag, doc);
+  generateIndex(tag, doc, componentsByFile);
 });
 
 generateSuperIndex(Object.keys(pathPairsByTag), doc);

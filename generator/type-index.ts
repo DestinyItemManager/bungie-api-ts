@@ -13,8 +13,8 @@ export function computeTypeMaps(pathPairsByTag: { [tag: string]: [string, PathIt
 
   const allTags = Object.keys(pathPairsByTag);
 
-  const componentsByFile = {};
-  const componentByDef = {};
+  const componentsByFile: {[filename: string]: DefInfo[]} = {};
+  const componentByDef: {[def: string]: DefInfo} = {};
   for (const def of allDefsEverywhere) {
     const tags: string[] = [];
     _.each(defsByTag, (defs: Set<string>, tag) => {

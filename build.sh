@@ -9,9 +9,9 @@ cp generator/http.d.ts generated-src
 tsc -p tsconfig.json
 node ./build/generate.js
 
-rm -rf ./docs
-typedoc --target ES5 --out ./docs/ --readme README.md generated-src
-touch ./docs/.nojekyll
+#rm -rf ./docs
+#typedoc --target ES5 --out ./docs/ --readme README.md generated-src
+#touch ./docs/.nojekyll
 
 # Build the package from the generated sources
 rm -rf ./lib
@@ -23,3 +23,6 @@ tsc -p tsconfig-package.json
 cp package.json lib/
 cp README.md lib/
 cp bungie-api-LICENSE lib/
+
+sed -i '' 's/dist\///' lib/package.json
+sed -i '' 's/index\.ts/index.js/' lib/package.json
