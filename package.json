@@ -3,6 +3,7 @@
   "version": "2.5.0",
   "description": "TypeScript mappings for the Bungie.net API",
   "main": "./dist/index.ts",
+  "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "scripts": {

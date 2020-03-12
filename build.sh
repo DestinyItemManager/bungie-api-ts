@@ -18,6 +18,7 @@ rm -rf ./lib
 mkdir -p lib
 rsync -a --include '*/' --include '*.d.ts' --exclude '*' generated-src/ lib/
 tsc -p tsconfig-package.json
+tsc -p tsconfig-modules.json
 
 # Copy package.json into lib - we'll publish lib as the package instead of the whole repo, so paths are nicer.
 cp package.json lib/
