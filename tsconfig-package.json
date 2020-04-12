@@ -3,12 +3,10 @@
     "outDir": "./lib/",
     "sourceMap": false,
     "strictNullChecks": true,
-    "module": "commonjs",
+    "module": "ES2015",
     "target": "es5",
     "moduleResolution": "node",
     "declaration": true
   },
-  "include": [
-    "./generated-src/**/*"
-  ]
+  "include": ["./generated-src/**/*"]
 }
