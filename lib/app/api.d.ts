@@ -13,12 +13,12 @@ import { HttpClient } from '../http';
 import { ApiUsage, Application } from './interfaces';
 import { ServerResponse } from '../common';
 export interface GetApplicationApiUsageParams {
-    /** ID of the application to get usage statistics. */
-    applicationId: number;
-    /** End time for query. Goes to now if not specified. */
-    end?: string;
-    /** Start time for query. Goes to 24 hours ago if not specified. */
-    start?: string;
+  /** ID of the application to get usage statistics. */
+  applicationId: number;
+  /** End time for query. Goes to now if not specified. */
+  end?: string;
+  /** Start time for query. Goes to 24 hours ago if not specified. */
+  start?: string;
 }
 /**
  * Get API usage by application for time frame specified. You can go as far back as
@@ -26,6 +26,11 @@ export interface GetApplicationApiUsageParams {
  * You must be authenticated with at least the ReadUserData permission to access
  * this endpoint.
  */
-export declare function getApplicationApiUsage(http: HttpClient, params: GetApplicationApiUsageParams): Promise<ServerResponse<ApiUsage>>;
+export declare function getApplicationApiUsage(
+  http: HttpClient,
+  params: GetApplicationApiUsageParams
+): Promise<ServerResponse<ApiUsage>>;
 /** Get list of applications created by Bungie. */
-export declare function getBungieApplications(http: HttpClient): Promise<ServerResponse<Application[]>>;
+export declare function getBungieApplications(
+  http: HttpClient
+): Promise<ServerResponse<Application[]>>;

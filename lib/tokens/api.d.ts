@@ -13,32 +13,41 @@ import { HttpClient } from '../http';
 import { PartnerOfferClaimRequest, PartnerOfferSkuHistoryResponse } from './interfaces';
 import { ServerResponse } from '../common';
 /** Claim a partner offer as the authenticated user. */
-export declare function claimPartnerOffer(http: HttpClient, body: PartnerOfferClaimRequest): Promise<ServerResponse<boolean>>;
+export declare function claimPartnerOffer(
+  http: HttpClient,
+  body: PartnerOfferClaimRequest
+): Promise<ServerResponse<boolean>>;
 export interface ApplyMissingPartnerOffersWithoutClaimParams {
-    /** The partner application identifier. */
-    partnerApplicationId: number;
-    /**
-     * The bungie.net user to apply missing offers to. If not self, elevated
-     * permissions are required.
-     */
-    targetBnetMembershipId: string;
+  /** The partner application identifier. */
+  partnerApplicationId: number;
+  /**
+   * The bungie.net user to apply missing offers to. If not self, elevated
+   * permissions are required.
+   */
+  targetBnetMembershipId: string;
 }
 /**
  * Apply a partner offer to the targeted user. This endpoint does not claim a new
  * offer, but any already claimed offers will be applied to the game if not already.
  */
-export declare function applyMissingPartnerOffersWithoutClaim(http: HttpClient, params: ApplyMissingPartnerOffersWithoutClaimParams): Promise<ServerResponse<boolean>>;
+export declare function applyMissingPartnerOffersWithoutClaim(
+  http: HttpClient,
+  params: ApplyMissingPartnerOffersWithoutClaimParams
+): Promise<ServerResponse<boolean>>;
 export interface GetPartnerOfferSkuHistoryParams {
-    /** The partner application identifier. */
-    partnerApplicationId: number;
-    /**
-     * The bungie.net user to apply missing offers to. If not self, elevated
-     * permissions are required.
-     */
-    targetBnetMembershipId: string;
+  /** The partner application identifier. */
+  partnerApplicationId: number;
+  /**
+   * The bungie.net user to apply missing offers to. If not self, elevated
+   * permissions are required.
+   */
+  targetBnetMembershipId: string;
 }
 /**
  * Returns the partner sku and offer history of the targeted user. Elevated
  * permissions are required to see users that are not yourself.
  */
-export declare function getPartnerOfferSkuHistory(http: HttpClient, params: GetPartnerOfferSkuHistoryParams): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>>;
+export declare function getPartnerOfferSkuHistory(
+  http: HttpClient,
+  params: GetPartnerOfferSkuHistoryParams
+): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>>;

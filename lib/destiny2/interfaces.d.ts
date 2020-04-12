@@ -9,17 +9,25 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { BungieMembershipType, DateRange, HyperlinkReference, InterpolationPoint, InterpolationPointFloat, PagedQuery, PlatformErrorCodes } from '../common';
+import {
+  BungieMembershipType,
+  DateRange,
+  HyperlinkReference,
+  InterpolationPoint,
+  InterpolationPointFloat,
+  PagedQuery,
+  PlatformErrorCodes,
+} from '../common';
 import { UserInfoCard } from '../user/interfaces';
 export interface SingleComponentResponse<T> {
-    readonly data?: T;
-    readonly privacy: ComponentPrivacySetting;
+  readonly data?: T;
+  readonly privacy: ComponentPrivacySetting;
 }
 export interface DictionaryComponentResponse<T> {
-    readonly data?: {
-        [key: string]: T;
-    };
-    readonly privacy: ComponentPrivacySetting;
+  readonly data?: {
+    [key: string]: T;
+  };
+  readonly privacy: ComponentPrivacySetting;
 }
 /**
  * Information about a current character's status with a Progression. A progression
@@ -28,67 +36,67 @@ export interface DictionaryComponentResponse<T> {
  * DestinyProgressionDefinition for a full picture of the Progression.
  */
 export interface DestinyProgression {
-    /**
-     * The hash identifier of the Progression in question. Use it to look up the
-     * DestinyProgressionDefinition in static data.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressionHash: number;
-    /** The amount of progress earned today for this progression. */
-    readonly dailyProgress: number;
-    /** If this progression has a daily limit, this is that limit. */
-    readonly dailyLimit: number;
-    /** The amount of progress earned toward this progression in the current week. */
-    readonly weeklyProgress: number;
-    /** If this progression has a weekly limit, this is that limit. */
-    readonly weeklyLimit: number;
-    /**
-     * This is the total amount of progress obtained overall for this progression (for
-     * instance, the total amount of Character Level experience earned)
-     */
-    readonly currentProgress: number;
-    /** This is the level of the progression (for instance, the Character Level). */
-    readonly level: number;
-    /**
-     * This is the maximum possible level you can achieve for this progression (for
-     * example, the maximum character level obtainable)
-     */
-    readonly levelCap: number;
-    /**
-     * Progressions define their levels in "steps". Since the last step may be
-     * repeatable, the user may be at a higher level than the actual Step achieved in
-     * the progression. Not necessarily useful, but potentially interesting for those
-     * cruising the API. Relate this to the "steps" property of the DestinyProgression
-     * to see which step the user is on, if you care about that. (Note that this is
-     * Content Version dependent since it refers to indexes.)
-     */
-    readonly stepIndex: number;
-    /**
-     * The amount of progression (i.e. "Experience") needed to reach the next level of
-     * this Progression. Jeez, progression is such an overloaded word.
-     */
-    readonly progressToNextLevel: number;
-    /**
-     * The total amount of progression (i.e. "Experience") needed in order to reach the
-     * next level.
-     */
-    readonly nextLevelAt: number;
-    /**
-     * The number of resets of this progression you've executed this season, if
-     * applicable to this progression.
-     */
-    readonly currentResetCount?: number;
-    /**
-     * Information about historical resets of this progression, if there is any data
-     * for it.
-     */
-    readonly seasonResets: DestinyProgressionResetEntry[];
-    /**
-     * Information about historical rewards for this progression, if there is any data
-     * for it.
-     */
-    readonly rewardItemStates: DestinyProgressionRewardItemState[];
+  /**
+   * The hash identifier of the Progression in question. Use it to look up the
+   * DestinyProgressionDefinition in static data.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressionHash: number;
+  /** The amount of progress earned today for this progression. */
+  readonly dailyProgress: number;
+  /** If this progression has a daily limit, this is that limit. */
+  readonly dailyLimit: number;
+  /** The amount of progress earned toward this progression in the current week. */
+  readonly weeklyProgress: number;
+  /** If this progression has a weekly limit, this is that limit. */
+  readonly weeklyLimit: number;
+  /**
+   * This is the total amount of progress obtained overall for this progression (for
+   * instance, the total amount of Character Level experience earned)
+   */
+  readonly currentProgress: number;
+  /** This is the level of the progression (for instance, the Character Level). */
+  readonly level: number;
+  /**
+   * This is the maximum possible level you can achieve for this progression (for
+   * example, the maximum character level obtainable)
+   */
+  readonly levelCap: number;
+  /**
+   * Progressions define their levels in "steps". Since the last step may be
+   * repeatable, the user may be at a higher level than the actual Step achieved in
+   * the progression. Not necessarily useful, but potentially interesting for those
+   * cruising the API. Relate this to the "steps" property of the DestinyProgression
+   * to see which step the user is on, if you care about that. (Note that this is
+   * Content Version dependent since it refers to indexes.)
+   */
+  readonly stepIndex: number;
+  /**
+   * The amount of progression (i.e. "Experience") needed to reach the next level of
+   * this Progression. Jeez, progression is such an overloaded word.
+   */
+  readonly progressToNextLevel: number;
+  /**
+   * The total amount of progression (i.e. "Experience") needed in order to reach the
+   * next level.
+   */
+  readonly nextLevelAt: number;
+  /**
+   * The number of resets of this progression you've executed this season, if
+   * applicable to this progression.
+   */
+  readonly currentResetCount?: number;
+  /**
+   * Information about historical resets of this progression, if there is any data
+   * for it.
+   */
+  readonly seasonResets: DestinyProgressionResetEntry[];
+  /**
+   * Information about historical rewards for this progression, if there is any data
+   * for it.
+   */
+  readonly rewardItemStates: DestinyProgressionRewardItemState[];
 }
 /**
  * A "Progression" in Destiny is best explained by an example.
@@ -117,105 +125,105 @@ export interface DestinyProgression {
  * about those.
  */
 export interface DestinyProgressionDefinition {
-    readonly displayProperties: DestinyProgressionDisplayPropertiesDefinition;
-    /**
-     * The "Scope" of the progression indicates the source of the progression's live
-     * data.
-     *
-     * See the DestinyProgressionScope enum for more info: but essentially, a
-     * Progression can either be backed by a stored value, or it can be a calculated
-     * derivative of other values.
-     */
-    readonly scope: DestinyProgressionScope;
-    /** If this is True, then the progression doesn't have a maximum level. */
-    readonly repeatLastStep: boolean;
-    /**
-     * If there's a description of how to earn this progression in the local config,
-     * this will be that localized description.
-     */
-    readonly source: string;
-    /**
-     * Progressions are divided into Steps, which roughly equate to "Levels" in the
-     * traditional sense of a Progression. Notably, the last step can be repeated
-     * indefinitely if repeatLastStep is true, meaning that the calculation for your
-     * level is not as simple as comparing your current progress to the max progress of
-     * the steps.
-     *
-     * These and more calculations are done for you if you grab live character
-     * progression data, such as in the DestinyCharacterProgressionComponent.
-     */
-    readonly steps: DestinyProgressionStepDefinition[];
-    /**
-     * If true, the Progression is something worth showing to users.
-     *
-     * If false, BNet isn't going to show it. But that doesn't mean you can't. We're
-     * all friends here.
-     */
-    readonly visible: boolean;
-    /**
-     * If the value exists, this is the hash identifier for the Faction that owns this
-     * Progression.
-     *
-     * This is purely for convenience, if you're looking at a progression and want to
-     * know if and who it's related to in terms of Faction Reputation.
-     *
-     * Mapped to DestinyFactionDefinition in the manifest.
-     */
-    readonly factionHash?: number;
-    /** The #RGB string value for the color related to this progression, if there is one. */
-    readonly color: DestinyColor;
-    /**
-     * For progressions that have it, this is the rank icon we use in the Companion,
-     * displayed above the progressions' rank value.
-     */
-    readonly rankIcon: string;
-    readonly rewardItems: DestinyProgressionRewardItemQuantity[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyProgressionDisplayPropertiesDefinition;
+  /**
+   * The "Scope" of the progression indicates the source of the progression's live
+   * data.
+   *
+   * See the DestinyProgressionScope enum for more info: but essentially, a
+   * Progression can either be backed by a stored value, or it can be a calculated
+   * derivative of other values.
+   */
+  readonly scope: DestinyProgressionScope;
+  /** If this is True, then the progression doesn't have a maximum level. */
+  readonly repeatLastStep: boolean;
+  /**
+   * If there's a description of how to earn this progression in the local config,
+   * this will be that localized description.
+   */
+  readonly source: string;
+  /**
+   * Progressions are divided into Steps, which roughly equate to "Levels" in the
+   * traditional sense of a Progression. Notably, the last step can be repeated
+   * indefinitely if repeatLastStep is true, meaning that the calculation for your
+   * level is not as simple as comparing your current progress to the max progress of
+   * the steps.
+   *
+   * These and more calculations are done for you if you grab live character
+   * progression data, such as in the DestinyCharacterProgressionComponent.
+   */
+  readonly steps: DestinyProgressionStepDefinition[];
+  /**
+   * If true, the Progression is something worth showing to users.
+   *
+   * If false, BNet isn't going to show it. But that doesn't mean you can't. We're
+   * all friends here.
+   */
+  readonly visible: boolean;
+  /**
+   * If the value exists, this is the hash identifier for the Faction that owns this
+   * Progression.
+   *
+   * This is purely for convenience, if you're looking at a progression and want to
+   * know if and who it's related to in terms of Faction Reputation.
+   *
+   * Mapped to DestinyFactionDefinition in the manifest.
+   */
+  readonly factionHash?: number;
+  /** The #RGB string value for the color related to this progression, if there is one. */
+  readonly color: DestinyColor;
+  /**
+   * For progressions that have it, this is the rank icon we use in the Companion,
+   * displayed above the progressions' rank value.
+   */
+  readonly rankIcon: string;
+  readonly rewardItems: DestinyProgressionRewardItemQuantity[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyProgressionDisplayPropertiesDefinition {
-    /**
-     * When progressions show your "experience" gained, that bar has units (i.e. "
-     * Experience", "Bad Dudes Snuffed Out", whatever). This is the localized string
-     * for that unit of measurement.
-     */
-    readonly displayUnitsName: string;
-    readonly description: string;
-    readonly name: string;
-    /**
-     * Note that "icon" is sometimes misleading, and should be interpreted in the
-     * context of the entity. For instance, in Destiny 1 the
-     * DestinyRecordBookDefinition's icon was a big picture of a book.
-     *
-     * But usually, it will be a small square image that you can use as... well, an
-     * icon.
-     *
-     * They are currently represented as 96px x 96px images.
-     */
-    readonly icon: string;
-    readonly iconSequences: DestinyIconSequenceDefinition[];
-    /**
-     * If this item has a high-res icon (at least for now, many things won't), then the
-     * path to that icon will be here.
-     */
-    readonly highResIcon: string;
-    readonly hasIcon: boolean;
+  /**
+   * When progressions show your "experience" gained, that bar has units (i.e. "
+   * Experience", "Bad Dudes Snuffed Out", whatever). This is the localized string
+   * for that unit of measurement.
+   */
+  readonly displayUnitsName: string;
+  readonly description: string;
+  readonly name: string;
+  /**
+   * Note that "icon" is sometimes misleading, and should be interpreted in the
+   * context of the entity. For instance, in Destiny 1 the
+   * DestinyRecordBookDefinition's icon was a big picture of a book.
+   *
+   * But usually, it will be a small square image that you can use as... well, an
+   * icon.
+   *
+   * They are currently represented as 96px x 96px images.
+   */
+  readonly icon: string;
+  readonly iconSequences: DestinyIconSequenceDefinition[];
+  /**
+   * If this item has a high-res icon (at least for now, many things won't), then the
+   * path to that icon will be here.
+   */
+  readonly highResIcon: string;
+  readonly hasIcon: boolean;
 }
 export interface DestinyIconSequenceDefinition {
-    readonly frames: string[];
+  readonly frames: string[];
 }
 /**
  * There are many Progressions in Destiny (think Character Level, or Reputation).
@@ -224,56 +232,56 @@ export interface DestinyIconSequenceDefinition {
  * other game logic
  */
 export declare const enum DestinyProgressionScope {
-    Account = 0,
-    Character = 1,
-    Clan = 2,
-    Item = 3,
-    ImplicitFromEquipment = 4,
-    Mapped = 5,
-    MappedAggregate = 6,
-    MappedStat = 7,
-    MappedUnlockValue = 8
+  Account = 0,
+  Character = 1,
+  Clan = 2,
+  Item = 3,
+  ImplicitFromEquipment = 4,
+  Mapped = 5,
+  MappedAggregate = 6,
+  MappedStat = 7,
+  MappedUnlockValue = 8,
 }
 /**
  * This defines a single Step in a progression (which roughly equates to a level.
  * See DestinyProgressionDefinition for caveats).
  */
 export interface DestinyProgressionStepDefinition {
-    /**
-     * Very rarely, Progressions will have localized text describing the Level of the
-     * progression. This will be that localized text, if it exists. Otherwise, the
-     * standard appears to be to simply show the level numerically.
-     */
-    readonly stepName: string;
-    /**
-     * This appears to be, when you "level up", whether a visual effect will display
-     * and on what entity. See DestinyProgressionStepDisplayEffect for slightly more
-     * info.
-     */
-    readonly displayEffectType: DestinyProgressionStepDisplayEffect;
-    /**
-     * The total amount of progression points/"experience" you will need to initially
-     * reach this step. If this is the last step and the progression is repeating
-     * indefinitely (DestinyProgressionDefinition.repeatLastStep), this will also be
-     * the progress needed to level it up further by repeating this step again.
-     */
-    readonly progressTotal: number;
-    /** A listing of items rewarded as a result of reaching this level. */
-    readonly rewardItems: DestinyItemQuantity[];
-    /**
-     * If this progression step has a specific icon related to it, this is the icon to
-     * show.
-     */
-    readonly icon: string;
+  /**
+   * Very rarely, Progressions will have localized text describing the Level of the
+   * progression. This will be that localized text, if it exists. Otherwise, the
+   * standard appears to be to simply show the level numerically.
+   */
+  readonly stepName: string;
+  /**
+   * This appears to be, when you "level up", whether a visual effect will display
+   * and on what entity. See DestinyProgressionStepDisplayEffect for slightly more
+   * info.
+   */
+  readonly displayEffectType: DestinyProgressionStepDisplayEffect;
+  /**
+   * The total amount of progression points/"experience" you will need to initially
+   * reach this step. If this is the last step and the progression is repeating
+   * indefinitely (DestinyProgressionDefinition.repeatLastStep), this will also be
+   * the progress needed to level it up further by repeating this step again.
+   */
+  readonly progressTotal: number;
+  /** A listing of items rewarded as a result of reaching this level. */
+  readonly rewardItems: DestinyItemQuantity[];
+  /**
+   * If this progression step has a specific icon related to it, this is the icon to
+   * show.
+   */
+  readonly icon: string;
 }
 /**
  * If progression is earned, this determines whether the progression shows visual
  * effects on the character or its item - or neither.
  */
 export declare const enum DestinyProgressionStepDisplayEffect {
-    None = 0,
-    Character = 1,
-    Item = 2
+  None = 0,
+  Character = 1,
+  Item = 2,
 }
 /**
  * Used in a number of Destiny contracts to return data about an item stack and its
@@ -282,23 +290,23 @@ export declare const enum DestinyProgressionStepDisplayEffect {
  * Thanks.
  */
 export interface DestinyItemQuantity {
-    /**
-     * The hash identifier for the item in question. Use it to look up the item's
-     * DestinyInventoryItemDefinition.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If this quantity is referring to a specific instance of an item, this will have
-     * the item's instance ID. Normally, this will be null.
-     */
-    readonly itemInstanceId?: string;
-    /**
-     * The amount of the item needed/available depending on the context of where
-     * DestinyItemQuantity is being used.
-     */
-    readonly quantity: number;
+  /**
+   * The hash identifier for the item in question. Use it to look up the item's
+   * DestinyInventoryItemDefinition.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If this quantity is referring to a specific instance of an item, this will have
+   * the item's instance ID. Normally, this will be null.
+   */
+  readonly itemInstanceId?: string;
+  /**
+   * The amount of the item needed/available depending on the context of where
+   * DestinyItemQuantity is being used.
+   */
+  readonly quantity: number;
 }
 /**
  * So much of what you see in Destiny is actually an Item used in a new and
@@ -312,414 +320,414 @@ export interface DestinyItemQuantity {
  * generic definitions.
  */
 export interface DestinyInventoryItemDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * Tooltips that only come up conditionally for the item. Check the live data
-     * DestinyItemComponent.tooltipNotificationIndexes property for which of these
-     * should be shown at runtime.
-     */
-    readonly tooltipNotifications: DestinyItemTooltipNotification[];
-    /**
-     * If this item has a collectible related to it, this is the hash identifier of
-     * that collectible entry.
-     *
-     * Mapped to DestinyCollectibleDefinition in the manifest.
-     */
-    readonly collectibleHash?: number;
-    /**
-     * A secondary icon associated with the item. Currently this is used in very
-     * context specific applications, such as Emblem Nameplates.
-     */
-    readonly secondaryIcon: string;
-    /**
-     * Pulled from the secondary icon, this is the "secondary background" of the
-     * secondary icon. Confusing? Sure, that's why I call it "overlay" here: because as
-     * far as it's been used thus far, it has been for an optional overlay image. We'll
-     * see if that holds up, but at least for now it explains what this image is a bit
-     * better.
-     */
-    readonly secondaryOverlay: string;
-    /**
-     * Pulled from the Secondary Icon, this is the "special" background for the item.
-     * For Emblems, this is the background image used on the Details view: but it need
-     * not be limited to that for other types of items.
-     */
-    readonly secondarySpecial: string;
-    /**
-     * Sometimes, an item will have a background color. Most notably this occurs with
-     * Emblems, who use the Background Color for small character nameplates such as the
-     * "friends" view you see in-game. There are almost certainly other items that have
-     * background color as well, though I have not bothered to investigate what items
-     * have it nor what purposes they serve: use it as you will.
-     */
-    readonly backgroundColor: DestinyColor;
-    /**
-     * If we were able to acquire an in-game screenshot for the item, the path to that
-     * screenshot will be returned here. Note that not all items have screenshots:
-     * particularly not any non-equippable items.
-     */
-    readonly screenshot: string;
-    /**
-     * The localized title/name of the item's type. This can be whatever the designers
-     * want, and has no guarantee of consistency between items.
-     */
-    readonly itemTypeDisplayName: string;
-    /**
-     * A string identifier that the game's UI uses to determine how the item should be
-     * rendered in inventory screens and the like. This could really be anything - at
-     * the moment, we don't have the time to really breakdown and maintain all the
-     * possible strings this could be, partly because new ones could be added ad hoc.
-     * But if you want to use it to dictate your own UI, or look for items with a
-     * certain display style, go for it!
-     */
-    readonly uiItemDisplayStyle: string;
-    /**
-     * It became a common enough pattern in our UI to show Item Type and Tier combined
-     * into a single localized string that I'm just going to go ahead and start pre-
-     * creating these for items.
-     */
-    readonly itemTypeAndTierDisplayName: string;
-    /**
-     * In theory, it is a localized string telling you about how you can find the item.
-     * I really wish this was more consistent. Many times, it has nothing. Sometimes,
-     * it's instead a more narrative-forward description of the item. Which is cool,
-     * and I wish all properties had that data, but it should really be its own
-     * property.
-     */
-    readonly displaySource: string;
-    /**
-     * An identifier that the game UI uses to determine what type of tooltip to show
-     * for the item. These have no corresponding definitions that BNet can link to: so
-     * it'll be up to you to interpret and display your UI differently according to
-     * these styles (or ignore it).
-     */
-    readonly tooltipStyle: string;
-    /**
-     * If the item can be "used", this block will be non-null, and will have data
-     * related to the action performed when using the item. (Guess what? 99% of the
-     * time, this action is "dismantle". Shocker)
-     */
-    readonly action: DestinyItemActionBlockDefinition;
-    /**
-     * If this item can exist in an inventory, this block will be non-null. In practice,
-     * every item that currently exists has one of these blocks. But note that it is
-     * not necessarily guaranteed.
-     */
-    readonly inventory: DestinyItemInventoryBlockDefinition;
-    /**
-     * If this item is a quest, this block will be non-null. In practice, I wish I had
-     * called this the Quest block, but at the time it wasn't clear to me whether it
-     * would end up being used for purposes other than quests. It will contain data
-     * about the steps in the quest, and mechanics we can use for displaying and
-     * tracking the quest.
-     */
-    readonly setData: DestinyItemSetBlockDefinition;
-    /**
-     * If this item can have stats (such as a weapon, armor, or vehicle), this block
-     * will be non-null and populated with the stats found on the item.
-     */
-    readonly stats: DestinyItemStatBlockDefinition;
-    /**
-     * If the item is an emblem that has a special Objective attached to it - for
-     * instance, if the emblem tracks PVP Kills, or what-have-you. This is a bit
-     * different from, for example, the Vanguard Kill Tracker mod, which pipes data
-     * into the "art channel". When I get some time, I would like to standardize these
-     * so you can get at the values they expose without having to care about what they'
-     * re being used for and how they are wired up, but for now here's the raw data.
-     */
-    readonly emblemObjectiveHash?: number;
-    /**
-     * If this item can be equipped, this block will be non-null and will be populated
-     * with the conditions under which it can be equipped.
-     */
-    readonly equippingBlock: DestinyEquippingBlockDefinition;
-    /**
-     * If this item can be rendered, this block will be non-null and will be populated
-     * with rendering information.
-     */
-    readonly translationBlock: DestinyItemTranslationBlockDefinition;
-    /**
-     * If this item can be Used or Acquired to gain other items (for instance, how
-     * Eververse Boxes can be consumed to get items from the box), this block will be
-     * non-null and will give summary information for the items that can be acquired.
-     */
-    readonly preview: DestinyItemPreviewBlockDefinition;
-    /**
-     * If this item can have a level or stats, this block will be non-null and will be
-     * populated with default quality (item level, "quality", and infusion) data. See
-     * the block for more details, there's often less upfront information in D2 so you'
-     * ll want to be aware of how you use quality and item level on the definition
-     * level now.
-     */
-    readonly quality: DestinyItemQualityBlockDefinition;
-    /**
-     * The conceptual "Value" of an item, if any was defined. See the
-     * DestinyItemValueBlockDefinition for more details.
-     */
-    readonly value: DestinyItemValueBlockDefinition;
-    /**
-     * If this item has a known source, this block will be non-null and populated with
-     * source information. Unfortunately, at this time we are not generating sources:
-     * that is some aggressively manual work which we didn't have time for, and I'm
-     * hoping to get back to at some point in the future.
-     */
-    readonly sourceData: DestinyItemSourceBlockDefinition;
-    /**
-     * If this item has Objectives (extra tasks that can be accomplished related to the
-     * item... most frequently when the item is a Quest Step and the Objectives need to
-     * be completed to move on to the next Quest Step), this block will be non-null and
-     * the objectives defined herein.
-     */
-    readonly objectives: DestinyItemObjectiveBlockDefinition;
-    /**
-     * If this item has available metrics to be shown, this block will be non-null have
-     * the appropriate hashes defined.
-     */
-    readonly metrics: DestinyItemMetricBlockDefinition;
-    /**
-     * If this item *is* a Plug, this will be non-null and the info defined herein. See
-     * DestinyItemPlugDefinition for more information.
-     */
-    readonly plug: DestinyItemPlugDefinition;
-    /**
-     * If this item has related items in a "Gear Set", this will be non-null and the
-     * relationships defined herein.
-     */
-    readonly gearset: DestinyItemGearsetBlockDefinition;
-    /**
-     * If this item is a "reward sack" that can be opened to provide other items, this
-     * will be non-null and the properties of the sack contained herein.
-     */
-    readonly sack: DestinyItemSackBlockDefinition;
-    /**
-     * If this item has any Sockets, this will be non-null and the individual sockets
-     * on the item will be defined herein.
-     */
-    readonly sockets: DestinyItemSocketBlockDefinition;
-    /** Summary data about the item. */
-    readonly summary: DestinyItemSummaryBlockDefinition;
-    /**
-     * If the item has a Talent Grid, this will be non-null and the properties of the
-     * grid defined herein. Note that, while many items still have talent grids, the
-     * only ones with meaningful Nodes still on them will be Subclass/"Build" items.
-     */
-    readonly talentGrid: DestinyItemTalentGridBlockDefinition;
-    /**
-     * If the item has stats, this block will be defined. It has the "raw" investment
-     * stats for the item. These investment stats don't take into account the ways that
-     * the items can spawn, nor do they take into account any Stat Group
-     * transformations. I have retained them for debugging purposes, but I do not know
-     * how useful people will find them.
-     */
-    readonly investmentStats: DestinyItemInvestmentStatDefinition[];
-    /**
-     * If the item has any *intrinsic* Perks (Perks that it will provide regardless of
-     * Sockets, Talent Grid, and other transitory state), they will be defined here.
-     */
-    readonly perks: DestinyItemPerkEntryDefinition[];
-    /**
-     * If the item has any related Lore (DestinyLoreDefinition), this will be the hash
-     * identifier you can use to look up the lore definition.
-     *
-     * Mapped to DestinyLoreDefinition in the manifest.
-     */
-    readonly loreHash?: number;
-    /**
-     * There are times when the game will show you a "summary/vague" version of an item
-     * - such as a description of its type represented as a
-     * DestinyInventoryItemDefinition - rather than display the item itself.
-     *
-     * This happens sometimes when summarizing possible rewards in a tooltip. This is
-     * the item displayed instead, if it exists.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly summaryItemHash?: number;
-    /**
-     * If any animations were extracted from game content for this item, these will be
-     * the definitions of those animations.
-     */
-    readonly animations: DestinyAnimationReference[];
-    /**
-     * BNet may forbid the execution of actions on this item via the API. If that is
-     * occurring, allowActions will be set to false.
-     */
-    readonly allowActions: boolean;
-    /**
-     * If we added any help or informational URLs about this item, these will be those
-     * links.
-     */
-    readonly links: HyperlinkReference[];
-    /**
-     * The boolean will indicate to us (and you!) whether something *could* happen when
-     * you transfer this item from the Postmaster that might be considered a "
-     * destructive" action.
-     *
-     * It is not feasible currently to tell you (or ourelves!) in a consistent way
-     * whether this *will* actually cause a destructive action, so we are playing it
-     * safe: if it has the potential to do so, we will not allow it to be transferred
-     * from the Postmaster by default. You will need to check for this flag before
-     * transferring an item from the Postmaster, or else you'll end up receiving an
-     * error.
-     */
-    readonly doesPostmasterPullHaveSideEffects: boolean;
-    /**
-     * The intrinsic transferability of an item.
-     *
-     * I hate that this boolean is negative - but there's a reason.
-     *
-     * Just because an item is intrinsically transferrable doesn't mean that it can be
-     * transferred, and we don't want to imply that this is the only source of that
-     * transferability.
-     */
-    readonly nonTransferrable: boolean;
-    /**
-     * BNet attempts to make a more formal definition of item "Categories", as defined
-     * by DestinyItemCategoryDefinition. This is a list of all Categories that we were
-     * able to algorithmically determine that this item is a member of. (for instance,
-     * that it's a "Weapon", that it's an "Auto Rifle", etc...)
-     *
-     * The algorithm for these is, unfortunately, volatile. If you believe you see a
-     * miscategorized item, please let us know on the Bungie API forums.
-     *
-     * Mapped to DestinyItemCategoryDefinition in the manifest.
-     */
-    readonly itemCategoryHashes: number[];
-    /**
-     * In Destiny 1, we identified some items as having particular categories that we'd
-     * like to know about for various internal logic purposes. These are defined in
-     * SpecialItemType, and while these days the itemCategoryHashes are the preferred
-     * way of identifying types, we have retained this enum for its convenience.
-     */
-    readonly specialItemType: SpecialItemType;
-    /**
-     * A value indicating the "base" the of the item. This enum is a useful but
-     * dramatic oversimplification of what it means for an item to have a "Type". Still,
-     * it's handy in many situations.
-     *
-     * itemCategoryHashes are the preferred way of identifying types, we have retained
-     * this enum for its convenience.
-     */
-    readonly itemType: DestinyItemType;
-    /**
-     * A value indicating the "sub-type" of the item. For instance, where an item might
-     * have an itemType value "Weapon", this will be something more specific like "Auto
-     * Rifle".
-     *
-     * itemCategoryHashes are the preferred way of identifying types, we have retained
-     * this enum for its convenience.
-     */
-    readonly itemSubType: DestinyItemSubType;
-    /**
-     * We run a similarly weak-sauce algorithm to try and determine whether an item is
-     * restricted to a specific class. If we find it to be restricted in such a way, we
-     * set this classType property to match the class' enumeration value so that users
-     * can easily identify class restricted items.
-     *
-     * If you see a mis-classed item, please inform the developers in the Bungie API
-     * forum.
-     */
-    readonly classType: DestinyClass;
-    /**
-     * Some weapons and plugs can have a "Breaker Type": a special ability that works
-     * sort of like damage type vulnerabilities. This is (almost?) always set on items
-     * by plugs.
-     */
-    readonly breakerType: DestinyBreakerType;
-    /**
-     * Since we also have a breaker type definition, this is the hash for that breaker
-     * type for your convenience. Whether you use the enum or hash and look up the
-     * definition depends on what's cleanest for your code.
-     *
-     * Mapped to DestinyBreakerTypeDefinition in the manifest.
-     */
-    readonly breakerTypeHash?: number;
-    /**
-     * If true, then you will be allowed to equip the item if you pass its other
-     * requirements.
-     *
-     * This being false means that you cannot equip the item under any circumstances.
-     */
-    readonly equippable: boolean;
-    /**
-     * Theoretically, an item can have many possible damage types. In *practice*, this
-     * is not true, but just in case weapons start being made that have multiple (for
-     * instance, an item where a socket has reusable plugs for every possible damage
-     * type that you can choose from freely), this field will return all of the
-     * possible damage types that are available to the weapon by default.
-     *
-     * Mapped to DestinyDamageTypeDefinition in the manifest.
-     */
-    readonly damageTypeHashes: number[];
-    /**
-     * This is the list of all damage types that we know ahead of time the item can
-     * take on. Unfortunately, this does not preclude the possibility of something
-     * funky happening to give the item a damage type that cannot be predicted
-     * beforehand: for example, if some designer decides to create arbitrary non-
-     * reusable plugs that cause damage type to change.
-     *
-     * This damage type prediction will only use the following to determine potential
-     * damage types:
-     *
-     * - Intrinsic perks
-     *
-     * - Talent Node perks
-     *
-     * - Known, reusable plugs for sockets
-     */
-    readonly damageTypes: DamageType[];
-    /**
-     * If the item has a damage type that could be considered to be default, it will be
-     * populated here.
-     *
-     * For various upsetting reasons, it's surprisingly cumbersome to figure this out.
-     * I hope you're happy.
-     */
-    readonly defaultDamageType: DamageType;
-    /**
-     * Similar to defaultDamageType, but represented as the hash identifier for a
-     * DestinyDamageTypeDefinition.
-     *
-     * I will likely regret leaving in the enumeration versions of these properties,
-     * but for now they're very convenient.
-     *
-     * Mapped to DestinyDamageTypeDefinition in the manifest.
-     */
-    readonly defaultDamageTypeHash?: number;
-    /**
-     * If this item is related directly to a Season of Destiny, this is the hash
-     * identifier for that season.
-     *
-     * Mapped to DestinySeasonDefinition in the manifest.
-     */
-    readonly seasonHash?: number;
-    /**
-     * If true, this is a dummy vendor-wrapped item template. Items purchased from
-     * Eververse will be "wrapped" by one of these items so that we can safely provide
-     * refund capabilities before the item is "unwrapped".
-     */
-    readonly isWrapper: boolean;
-    /**
-     * Traits are metadata tags applied to this item. For example: armor slot, weapon
-     * type, foundry, faction, etc. These IDs come from the game and don't map to any
-     * content, but should still be useful.
-     */
-    readonly traitIds: string[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * Tooltips that only come up conditionally for the item. Check the live data
+   * DestinyItemComponent.tooltipNotificationIndexes property for which of these
+   * should be shown at runtime.
+   */
+  readonly tooltipNotifications: DestinyItemTooltipNotification[];
+  /**
+   * If this item has a collectible related to it, this is the hash identifier of
+   * that collectible entry.
+   *
+   * Mapped to DestinyCollectibleDefinition in the manifest.
+   */
+  readonly collectibleHash?: number;
+  /**
+   * A secondary icon associated with the item. Currently this is used in very
+   * context specific applications, such as Emblem Nameplates.
+   */
+  readonly secondaryIcon: string;
+  /**
+   * Pulled from the secondary icon, this is the "secondary background" of the
+   * secondary icon. Confusing? Sure, that's why I call it "overlay" here: because as
+   * far as it's been used thus far, it has been for an optional overlay image. We'll
+   * see if that holds up, but at least for now it explains what this image is a bit
+   * better.
+   */
+  readonly secondaryOverlay: string;
+  /**
+   * Pulled from the Secondary Icon, this is the "special" background for the item.
+   * For Emblems, this is the background image used on the Details view: but it need
+   * not be limited to that for other types of items.
+   */
+  readonly secondarySpecial: string;
+  /**
+   * Sometimes, an item will have a background color. Most notably this occurs with
+   * Emblems, who use the Background Color for small character nameplates such as the
+   * "friends" view you see in-game. There are almost certainly other items that have
+   * background color as well, though I have not bothered to investigate what items
+   * have it nor what purposes they serve: use it as you will.
+   */
+  readonly backgroundColor: DestinyColor;
+  /**
+   * If we were able to acquire an in-game screenshot for the item, the path to that
+   * screenshot will be returned here. Note that not all items have screenshots:
+   * particularly not any non-equippable items.
+   */
+  readonly screenshot: string;
+  /**
+   * The localized title/name of the item's type. This can be whatever the designers
+   * want, and has no guarantee of consistency between items.
+   */
+  readonly itemTypeDisplayName: string;
+  /**
+   * A string identifier that the game's UI uses to determine how the item should be
+   * rendered in inventory screens and the like. This could really be anything - at
+   * the moment, we don't have the time to really breakdown and maintain all the
+   * possible strings this could be, partly because new ones could be added ad hoc.
+   * But if you want to use it to dictate your own UI, or look for items with a
+   * certain display style, go for it!
+   */
+  readonly uiItemDisplayStyle: string;
+  /**
+   * It became a common enough pattern in our UI to show Item Type and Tier combined
+   * into a single localized string that I'm just going to go ahead and start pre-
+   * creating these for items.
+   */
+  readonly itemTypeAndTierDisplayName: string;
+  /**
+   * In theory, it is a localized string telling you about how you can find the item.
+   * I really wish this was more consistent. Many times, it has nothing. Sometimes,
+   * it's instead a more narrative-forward description of the item. Which is cool,
+   * and I wish all properties had that data, but it should really be its own
+   * property.
+   */
+  readonly displaySource: string;
+  /**
+   * An identifier that the game UI uses to determine what type of tooltip to show
+   * for the item. These have no corresponding definitions that BNet can link to: so
+   * it'll be up to you to interpret and display your UI differently according to
+   * these styles (or ignore it).
+   */
+  readonly tooltipStyle: string;
+  /**
+   * If the item can be "used", this block will be non-null, and will have data
+   * related to the action performed when using the item. (Guess what? 99% of the
+   * time, this action is "dismantle". Shocker)
+   */
+  readonly action: DestinyItemActionBlockDefinition;
+  /**
+   * If this item can exist in an inventory, this block will be non-null. In practice,
+   * every item that currently exists has one of these blocks. But note that it is
+   * not necessarily guaranteed.
+   */
+  readonly inventory: DestinyItemInventoryBlockDefinition;
+  /**
+   * If this item is a quest, this block will be non-null. In practice, I wish I had
+   * called this the Quest block, but at the time it wasn't clear to me whether it
+   * would end up being used for purposes other than quests. It will contain data
+   * about the steps in the quest, and mechanics we can use for displaying and
+   * tracking the quest.
+   */
+  readonly setData: DestinyItemSetBlockDefinition;
+  /**
+   * If this item can have stats (such as a weapon, armor, or vehicle), this block
+   * will be non-null and populated with the stats found on the item.
+   */
+  readonly stats: DestinyItemStatBlockDefinition;
+  /**
+   * If the item is an emblem that has a special Objective attached to it - for
+   * instance, if the emblem tracks PVP Kills, or what-have-you. This is a bit
+   * different from, for example, the Vanguard Kill Tracker mod, which pipes data
+   * into the "art channel". When I get some time, I would like to standardize these
+   * so you can get at the values they expose without having to care about what they'
+   * re being used for and how they are wired up, but for now here's the raw data.
+   */
+  readonly emblemObjectiveHash?: number;
+  /**
+   * If this item can be equipped, this block will be non-null and will be populated
+   * with the conditions under which it can be equipped.
+   */
+  readonly equippingBlock: DestinyEquippingBlockDefinition;
+  /**
+   * If this item can be rendered, this block will be non-null and will be populated
+   * with rendering information.
+   */
+  readonly translationBlock: DestinyItemTranslationBlockDefinition;
+  /**
+   * If this item can be Used or Acquired to gain other items (for instance, how
+   * Eververse Boxes can be consumed to get items from the box), this block will be
+   * non-null and will give summary information for the items that can be acquired.
+   */
+  readonly preview: DestinyItemPreviewBlockDefinition;
+  /**
+   * If this item can have a level or stats, this block will be non-null and will be
+   * populated with default quality (item level, "quality", and infusion) data. See
+   * the block for more details, there's often less upfront information in D2 so you'
+   * ll want to be aware of how you use quality and item level on the definition
+   * level now.
+   */
+  readonly quality: DestinyItemQualityBlockDefinition;
+  /**
+   * The conceptual "Value" of an item, if any was defined. See the
+   * DestinyItemValueBlockDefinition for more details.
+   */
+  readonly value: DestinyItemValueBlockDefinition;
+  /**
+   * If this item has a known source, this block will be non-null and populated with
+   * source information. Unfortunately, at this time we are not generating sources:
+   * that is some aggressively manual work which we didn't have time for, and I'm
+   * hoping to get back to at some point in the future.
+   */
+  readonly sourceData: DestinyItemSourceBlockDefinition;
+  /**
+   * If this item has Objectives (extra tasks that can be accomplished related to the
+   * item... most frequently when the item is a Quest Step and the Objectives need to
+   * be completed to move on to the next Quest Step), this block will be non-null and
+   * the objectives defined herein.
+   */
+  readonly objectives: DestinyItemObjectiveBlockDefinition;
+  /**
+   * If this item has available metrics to be shown, this block will be non-null have
+   * the appropriate hashes defined.
+   */
+  readonly metrics: DestinyItemMetricBlockDefinition;
+  /**
+   * If this item *is* a Plug, this will be non-null and the info defined herein. See
+   * DestinyItemPlugDefinition for more information.
+   */
+  readonly plug: DestinyItemPlugDefinition;
+  /**
+   * If this item has related items in a "Gear Set", this will be non-null and the
+   * relationships defined herein.
+   */
+  readonly gearset: DestinyItemGearsetBlockDefinition;
+  /**
+   * If this item is a "reward sack" that can be opened to provide other items, this
+   * will be non-null and the properties of the sack contained herein.
+   */
+  readonly sack: DestinyItemSackBlockDefinition;
+  /**
+   * If this item has any Sockets, this will be non-null and the individual sockets
+   * on the item will be defined herein.
+   */
+  readonly sockets: DestinyItemSocketBlockDefinition;
+  /** Summary data about the item. */
+  readonly summary: DestinyItemSummaryBlockDefinition;
+  /**
+   * If the item has a Talent Grid, this will be non-null and the properties of the
+   * grid defined herein. Note that, while many items still have talent grids, the
+   * only ones with meaningful Nodes still on them will be Subclass/"Build" items.
+   */
+  readonly talentGrid: DestinyItemTalentGridBlockDefinition;
+  /**
+   * If the item has stats, this block will be defined. It has the "raw" investment
+   * stats for the item. These investment stats don't take into account the ways that
+   * the items can spawn, nor do they take into account any Stat Group
+   * transformations. I have retained them for debugging purposes, but I do not know
+   * how useful people will find them.
+   */
+  readonly investmentStats: DestinyItemInvestmentStatDefinition[];
+  /**
+   * If the item has any *intrinsic* Perks (Perks that it will provide regardless of
+   * Sockets, Talent Grid, and other transitory state), they will be defined here.
+   */
+  readonly perks: DestinyItemPerkEntryDefinition[];
+  /**
+   * If the item has any related Lore (DestinyLoreDefinition), this will be the hash
+   * identifier you can use to look up the lore definition.
+   *
+   * Mapped to DestinyLoreDefinition in the manifest.
+   */
+  readonly loreHash?: number;
+  /**
+   * There are times when the game will show you a "summary/vague" version of an item
+   * - such as a description of its type represented as a
+   * DestinyInventoryItemDefinition - rather than display the item itself.
+   *
+   * This happens sometimes when summarizing possible rewards in a tooltip. This is
+   * the item displayed instead, if it exists.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly summaryItemHash?: number;
+  /**
+   * If any animations were extracted from game content for this item, these will be
+   * the definitions of those animations.
+   */
+  readonly animations: DestinyAnimationReference[];
+  /**
+   * BNet may forbid the execution of actions on this item via the API. If that is
+   * occurring, allowActions will be set to false.
+   */
+  readonly allowActions: boolean;
+  /**
+   * If we added any help or informational URLs about this item, these will be those
+   * links.
+   */
+  readonly links: HyperlinkReference[];
+  /**
+   * The boolean will indicate to us (and you!) whether something *could* happen when
+   * you transfer this item from the Postmaster that might be considered a "
+   * destructive" action.
+   *
+   * It is not feasible currently to tell you (or ourelves!) in a consistent way
+   * whether this *will* actually cause a destructive action, so we are playing it
+   * safe: if it has the potential to do so, we will not allow it to be transferred
+   * from the Postmaster by default. You will need to check for this flag before
+   * transferring an item from the Postmaster, or else you'll end up receiving an
+   * error.
+   */
+  readonly doesPostmasterPullHaveSideEffects: boolean;
+  /**
+   * The intrinsic transferability of an item.
+   *
+   * I hate that this boolean is negative - but there's a reason.
+   *
+   * Just because an item is intrinsically transferrable doesn't mean that it can be
+   * transferred, and we don't want to imply that this is the only source of that
+   * transferability.
+   */
+  readonly nonTransferrable: boolean;
+  /**
+   * BNet attempts to make a more formal definition of item "Categories", as defined
+   * by DestinyItemCategoryDefinition. This is a list of all Categories that we were
+   * able to algorithmically determine that this item is a member of. (for instance,
+   * that it's a "Weapon", that it's an "Auto Rifle", etc...)
+   *
+   * The algorithm for these is, unfortunately, volatile. If you believe you see a
+   * miscategorized item, please let us know on the Bungie API forums.
+   *
+   * Mapped to DestinyItemCategoryDefinition in the manifest.
+   */
+  readonly itemCategoryHashes: number[];
+  /**
+   * In Destiny 1, we identified some items as having particular categories that we'd
+   * like to know about for various internal logic purposes. These are defined in
+   * SpecialItemType, and while these days the itemCategoryHashes are the preferred
+   * way of identifying types, we have retained this enum for its convenience.
+   */
+  readonly specialItemType: SpecialItemType;
+  /**
+   * A value indicating the "base" the of the item. This enum is a useful but
+   * dramatic oversimplification of what it means for an item to have a "Type". Still,
+   * it's handy in many situations.
+   *
+   * itemCategoryHashes are the preferred way of identifying types, we have retained
+   * this enum for its convenience.
+   */
+  readonly itemType: DestinyItemType;
+  /**
+   * A value indicating the "sub-type" of the item. For instance, where an item might
+   * have an itemType value "Weapon", this will be something more specific like "Auto
+   * Rifle".
+   *
+   * itemCategoryHashes are the preferred way of identifying types, we have retained
+   * this enum for its convenience.
+   */
+  readonly itemSubType: DestinyItemSubType;
+  /**
+   * We run a similarly weak-sauce algorithm to try and determine whether an item is
+   * restricted to a specific class. If we find it to be restricted in such a way, we
+   * set this classType property to match the class' enumeration value so that users
+   * can easily identify class restricted items.
+   *
+   * If you see a mis-classed item, please inform the developers in the Bungie API
+   * forum.
+   */
+  readonly classType: DestinyClass;
+  /**
+   * Some weapons and plugs can have a "Breaker Type": a special ability that works
+   * sort of like damage type vulnerabilities. This is (almost?) always set on items
+   * by plugs.
+   */
+  readonly breakerType: DestinyBreakerType;
+  /**
+   * Since we also have a breaker type definition, this is the hash for that breaker
+   * type for your convenience. Whether you use the enum or hash and look up the
+   * definition depends on what's cleanest for your code.
+   *
+   * Mapped to DestinyBreakerTypeDefinition in the manifest.
+   */
+  readonly breakerTypeHash?: number;
+  /**
+   * If true, then you will be allowed to equip the item if you pass its other
+   * requirements.
+   *
+   * This being false means that you cannot equip the item under any circumstances.
+   */
+  readonly equippable: boolean;
+  /**
+   * Theoretically, an item can have many possible damage types. In *practice*, this
+   * is not true, but just in case weapons start being made that have multiple (for
+   * instance, an item where a socket has reusable plugs for every possible damage
+   * type that you can choose from freely), this field will return all of the
+   * possible damage types that are available to the weapon by default.
+   *
+   * Mapped to DestinyDamageTypeDefinition in the manifest.
+   */
+  readonly damageTypeHashes: number[];
+  /**
+   * This is the list of all damage types that we know ahead of time the item can
+   * take on. Unfortunately, this does not preclude the possibility of something
+   * funky happening to give the item a damage type that cannot be predicted
+   * beforehand: for example, if some designer decides to create arbitrary non-
+   * reusable plugs that cause damage type to change.
+   *
+   * This damage type prediction will only use the following to determine potential
+   * damage types:
+   *
+   * - Intrinsic perks
+   *
+   * - Talent Node perks
+   *
+   * - Known, reusable plugs for sockets
+   */
+  readonly damageTypes: DamageType[];
+  /**
+   * If the item has a damage type that could be considered to be default, it will be
+   * populated here.
+   *
+   * For various upsetting reasons, it's surprisingly cumbersome to figure this out.
+   * I hope you're happy.
+   */
+  readonly defaultDamageType: DamageType;
+  /**
+   * Similar to defaultDamageType, but represented as the hash identifier for a
+   * DestinyDamageTypeDefinition.
+   *
+   * I will likely regret leaving in the enumeration versions of these properties,
+   * but for now they're very convenient.
+   *
+   * Mapped to DestinyDamageTypeDefinition in the manifest.
+   */
+  readonly defaultDamageTypeHash?: number;
+  /**
+   * If this item is related directly to a Season of Destiny, this is the hash
+   * identifier for that season.
+   *
+   * Mapped to DestinySeasonDefinition in the manifest.
+   */
+  readonly seasonHash?: number;
+  /**
+   * If true, this is a dummy vendor-wrapped item template. Items purchased from
+   * Eververse will be "wrapped" by one of these items so that we can safely provide
+   * refund capabilities before the item is "unwrapped".
+   */
+  readonly isWrapper: boolean;
+  /**
+   * Traits are metadata tags applied to this item. For example: armor slot, weapon
+   * type, foundry, faction, etc. These IDs come from the game and don't map to any
+   * content, but should still be useful.
+   */
+  readonly traitIds: string[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Many Destiny*Definition contracts - the "first order" entities of Destiny that
@@ -727,84 +735,84 @@ export interface DestinyInventoryItemDefinition {
  * information. This is the base class for that display information.
  */
 export interface DestinyDisplayPropertiesDefinition {
-    readonly description: string;
-    readonly name: string;
-    /**
-     * Note that "icon" is sometimes misleading, and should be interpreted in the
-     * context of the entity. For instance, in Destiny 1 the
-     * DestinyRecordBookDefinition's icon was a big picture of a book.
-     *
-     * But usually, it will be a small square image that you can use as... well, an
-     * icon.
-     *
-     * They are currently represented as 96px x 96px images.
-     */
-    readonly icon: string;
-    readonly iconSequences: DestinyIconSequenceDefinition[];
-    /**
-     * If this item has a high-res icon (at least for now, many things won't), then the
-     * path to that icon will be here.
-     */
-    readonly highResIcon: string;
-    readonly hasIcon: boolean;
+  readonly description: string;
+  readonly name: string;
+  /**
+   * Note that "icon" is sometimes misleading, and should be interpreted in the
+   * context of the entity. For instance, in Destiny 1 the
+   * DestinyRecordBookDefinition's icon was a big picture of a book.
+   *
+   * But usually, it will be a small square image that you can use as... well, an
+   * icon.
+   *
+   * They are currently represented as 96px x 96px images.
+   */
+  readonly icon: string;
+  readonly iconSequences: DestinyIconSequenceDefinition[];
+  /**
+   * If this item has a high-res icon (at least for now, many things won't), then the
+   * path to that icon will be here.
+   */
+  readonly highResIcon: string;
+  readonly hasIcon: boolean;
 }
 export interface DestinyItemTooltipNotification {
-    readonly displayString: string;
-    readonly displayStyle: string;
+  readonly displayString: string;
+  readonly displayStyle: string;
 }
 /** Defines a */
 export interface DestinyCollectibleDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * Indicates whether the state of this Collectible is determined on a per-character
-     * or on an account-wide basis.
-     */
-    readonly scope: DestinyScope;
-    /** A human readable string for a hint about how to acquire the item. */
-    readonly sourceString: string;
-    /**
-     * This is a hash identifier we are building on the BNet side in an attempt to let
-     * people group collectibles by similar sources.
-     *
-     * I can't promise that it's going to be 100% accurate, but if the designers were
-     * consistent in assigning the same source strings to items with the same sources,
-     * it *ought to* be. No promises though.
-     *
-     * This hash also doesn't relate to an actual definition, just to note: we've got
-     * nothing useful other than the source string for this data.
-     */
-    readonly sourceHash?: number;
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly itemHash: number;
-    readonly acquisitionInfo: DestinyCollectibleAcquisitionBlock;
-    readonly stateInfo: DestinyCollectibleStateBlock;
-    readonly presentationInfo: DestinyPresentationChildBlock;
-    readonly presentationNodeType: DestinyPresentationNodeType;
-    readonly traitIds: string[];
-    /** Mapped to DestinyTraitDefinition in the manifest. */
-    readonly traitHashes: number[];
-    /**
-     * A quick reference to presentation nodes that have this node as a child.
-     * Presentation nodes can be parented under multiple parents.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly parentNodeHashes: number[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * Indicates whether the state of this Collectible is determined on a per-character
+   * or on an account-wide basis.
+   */
+  readonly scope: DestinyScope;
+  /** A human readable string for a hint about how to acquire the item. */
+  readonly sourceString: string;
+  /**
+   * This is a hash identifier we are building on the BNet side in an attempt to let
+   * people group collectibles by similar sources.
+   *
+   * I can't promise that it's going to be 100% accurate, but if the designers were
+   * consistent in assigning the same source strings to items with the same sources,
+   * it *ought to* be. No promises though.
+   *
+   * This hash also doesn't relate to an actual definition, just to note: we've got
+   * nothing useful other than the source string for this data.
+   */
+  readonly sourceHash?: number;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly itemHash: number;
+  readonly acquisitionInfo: DestinyCollectibleAcquisitionBlock;
+  readonly stateInfo: DestinyCollectibleStateBlock;
+  readonly presentationInfo: DestinyPresentationChildBlock;
+  readonly presentationNodeType: DestinyPresentationNodeType;
+  readonly traitIds: string[];
+  /** Mapped to DestinyTraitDefinition in the manifest. */
+  readonly traitHashes: number[];
+  /**
+   * A quick reference to presentation nodes that have this node as a child.
+   * Presentation nodes can be parented under multiple parents.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly parentNodeHashes: number[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * There's a lot of places where we need to know scope on more than just a profile
@@ -812,14 +820,14 @@ export interface DestinyCollectibleDefinition {
  * scope.
  */
 export declare const enum DestinyScope {
-    Profile = 0,
-    Character = 1
+  Profile = 0,
+  Character = 1,
 }
 export interface DestinyCollectibleAcquisitionBlock {
-    /** Mapped to DestinyMaterialRequirementSetDefinition in the manifest. */
-    readonly acquireMaterialRequirementHash?: number;
-    /** Mapped to DestinyUnlockValueDefinition in the manifest. */
-    readonly acquireTimestampUnlockValueHash?: number;
+  /** Mapped to DestinyMaterialRequirementSetDefinition in the manifest. */
+  readonly acquireMaterialRequirementHash?: number;
+  /** Mapped to DestinyUnlockValueDefinition in the manifest. */
+  readonly acquireTimestampUnlockValueHash?: number;
 }
 /**
  * Represent a set of material requirements: Items that either need to be owned or
@@ -829,23 +837,23 @@ export interface DestinyCollectibleAcquisitionBlock {
  * actions that can be performed in game.
  */
 export interface DestinyMaterialRequirementSetDefinition {
-    /** The list of all materials that are required. */
-    readonly materials: DestinyMaterialRequirement[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /** The list of all materials that are required. */
+  readonly materials: DestinyMaterialRequirement[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Many actions relating to items require you to expend materials: - Activating a
@@ -857,26 +865,26 @@ export interface DestinyMaterialRequirementSetDefinition {
  * response contracts. I'm not sure yet whether I regret that.
  */
 export interface DestinyMaterialRequirement {
-    /**
-     * The hash identifier of the material required. Use it to look up the material's
-     * DestinyInventoryItemDefinition.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If True, the material will be removed from the character's inventory when the
-     * action is performed.
-     */
-    readonly deleteOnAction: boolean;
-    /** The amount of the material required. */
-    readonly count: number;
-    /**
-     * If True, this requirement is "silent": don't bother showing it in a material
-     * requirements display. I mean, I'm not your mom: I'm not going to tell you you *
-     * can't* show it. But we won't show it in our UI.
-     */
-    readonly omitFromRequirements: boolean;
+  /**
+   * The hash identifier of the material required. Use it to look up the material's
+   * DestinyInventoryItemDefinition.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If True, the material will be removed from the character's inventory when the
+   * action is performed.
+   */
+  readonly deleteOnAction: boolean;
+  /** The amount of the material required. */
+  readonly count: number;
+  /**
+   * If True, this requirement is "silent": don't bother showing it in a material
+   * requirements display. I mean, I'm not your mom: I'm not going to tell you you *
+   * can't* show it. But we won't show it in our UI.
+   */
+  readonly omitFromRequirements: boolean;
 }
 /**
  * An Unlock Value is an internal integer value, stored on the server and used in a
@@ -886,26 +894,26 @@ export interface DestinyMaterialRequirement {
  * storage of variable numeric values.
  */
 export interface DestinyUnlockValueDefinition {
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyCollectibleStateBlock {
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly obscuredOverrideItemHash?: number;
-    readonly requirements: DestinyPresentationNodeRequirementsBlock;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly obscuredOverrideItemHash?: number;
+  readonly requirements: DestinyPresentationNodeRequirementsBlock;
 }
 /**
  * Presentation nodes can be restricted by various requirements. This defines the
@@ -913,24 +921,24 @@ export interface DestinyCollectibleStateBlock {
  * requirements aren't met.
  */
 export interface DestinyPresentationNodeRequirementsBlock {
-    /**
-     * If this node is not accessible due to Entitlements (for instance, you don't own
-     * the required game expansion), this is the message to show.
-     */
-    readonly entitlementUnavailableMessage: string;
+  /**
+   * If this node is not accessible due to Entitlements (for instance, you don't own
+   * the required game expansion), this is the message to show.
+   */
+  readonly entitlementUnavailableMessage: string;
 }
 export interface DestinyPresentationChildBlock {
-    readonly presentationNodeType: DestinyPresentationNodeType;
-    /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
-    readonly parentPresentationNodeHashes: number[];
-    readonly displayStyle: DestinyPresentationDisplayStyle;
+  readonly presentationNodeType: DestinyPresentationNodeType;
+  /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
+  readonly parentPresentationNodeHashes: number[];
+  readonly displayStyle: DestinyPresentationDisplayStyle;
 }
 export declare const enum DestinyPresentationNodeType {
-    Default = 0,
-    Category = 1,
-    Collectibles = 2,
-    Records = 3,
-    Metric = 4
+  Default = 0,
+  Category = 1,
+  Collectibles = 2,
+  Records = 3,
+  Metric = 4,
 }
 /**
  * A PresentationNode is an entity that represents a logical grouping of other
@@ -953,82 +961,82 @@ export declare const enum DestinyPresentationNodeType {
  * We'll see if I come to regret this as well.
  */
 export interface DestinyPresentationNodeDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** The original icon for this presentation node, before we futzed with it. */
-    readonly originalIcon: string;
-    /**
-     * Some presentation nodes are meant to be explicitly shown on the "root" or "entry"
-     * screens for the feature to which they are related. You should use this icon
-     * when showing them on such a view, if you have a similar "entry point" view in
-     * your UI. If you don't have a UI, then I guess it doesn't matter either way does
-     * it?
-     */
-    readonly rootViewIcon: string;
-    readonly nodeType: DestinyPresentationNodeType;
-    /**
-     * Indicates whether this presentation node's state is determined on a per-
-     * character or on an account-wide basis.
-     */
-    readonly scope: DestinyScope;
-    /**
-     * If this presentation node shows a related objective (for instance, if it tracks
-     * the progress of its children), the objective being tracked is indicated here.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash?: number;
-    /**
-     * If this presentation node has an associated "Record" that you can accomplish for
-     * completing its children, this is the identifier of that Record.
-     *
-     * Mapped to DestinyRecordDefinition in the manifest.
-     */
-    readonly completionRecordHash?: number;
-    /** The child entities contained by this presentation node. */
-    readonly children: DestinyPresentationNodeChildrenBlock;
-    /** A hint for how to display this presentation node when it's shown in a list. */
-    readonly displayStyle: DestinyPresentationDisplayStyle;
-    /**
-     * A hint for how to display this presentation node when it's shown in its own
-     * detail screen.
-     */
-    readonly screenStyle: DestinyPresentationScreenStyle;
-    /**
-     * The requirements for being able to interact with this presentation node and its
-     * children.
-     */
-    readonly requirements: DestinyPresentationNodeRequirementsBlock;
-    /**
-     * If this presentation node has children, but the game doesn't let you inspect the
-     * details of those children, that is indicated here.
-     */
-    readonly disableChildSubscreenNavigation: boolean;
-    readonly presentationNodeType: DestinyPresentationNodeType;
-    readonly traitIds: string[];
-    /** Mapped to DestinyTraitDefinition in the manifest. */
-    readonly traitHashes: number[];
-    /**
-     * A quick reference to presentation nodes that have this node as a child.
-     * Presentation nodes can be parented under multiple parents.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly parentNodeHashes: number[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** The original icon for this presentation node, before we futzed with it. */
+  readonly originalIcon: string;
+  /**
+   * Some presentation nodes are meant to be explicitly shown on the "root" or "entry"
+   * screens for the feature to which they are related. You should use this icon
+   * when showing them on such a view, if you have a similar "entry point" view in
+   * your UI. If you don't have a UI, then I guess it doesn't matter either way does
+   * it?
+   */
+  readonly rootViewIcon: string;
+  readonly nodeType: DestinyPresentationNodeType;
+  /**
+   * Indicates whether this presentation node's state is determined on a per-
+   * character or on an account-wide basis.
+   */
+  readonly scope: DestinyScope;
+  /**
+   * If this presentation node shows a related objective (for instance, if it tracks
+   * the progress of its children), the objective being tracked is indicated here.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash?: number;
+  /**
+   * If this presentation node has an associated "Record" that you can accomplish for
+   * completing its children, this is the identifier of that Record.
+   *
+   * Mapped to DestinyRecordDefinition in the manifest.
+   */
+  readonly completionRecordHash?: number;
+  /** The child entities contained by this presentation node. */
+  readonly children: DestinyPresentationNodeChildrenBlock;
+  /** A hint for how to display this presentation node when it's shown in a list. */
+  readonly displayStyle: DestinyPresentationDisplayStyle;
+  /**
+   * A hint for how to display this presentation node when it's shown in its own
+   * detail screen.
+   */
+  readonly screenStyle: DestinyPresentationScreenStyle;
+  /**
+   * The requirements for being able to interact with this presentation node and its
+   * children.
+   */
+  readonly requirements: DestinyPresentationNodeRequirementsBlock;
+  /**
+   * If this presentation node has children, but the game doesn't let you inspect the
+   * details of those children, that is indicated here.
+   */
+  readonly disableChildSubscreenNavigation: boolean;
+  readonly presentationNodeType: DestinyPresentationNodeType;
+  readonly traitIds: string[];
+  /** Mapped to DestinyTraitDefinition in the manifest. */
+  readonly traitHashes: number[];
+  /**
+   * A quick reference to presentation nodes that have this node as a child.
+   * Presentation nodes can be parented under multiple parents.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly parentNodeHashes: number[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Defines an "Objective".
@@ -1050,104 +1058,104 @@ export interface DestinyPresentationNodeDefinition {
  * can enhance the information provided about the task.
  */
 export interface DestinyObjectiveDefinition {
-    /**
-     * Ideally, this should tell you what your task is. I'm not going to lie to you
-     * though. Sometimes this doesn't have useful information at all. Which sucks, but
-     * there's nothing either of us can do about it.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The value that the unlock value defined in unlockValueHash must reach in order
-     * for the objective to be considered Completed. Used in calculating progress and
-     * completion status.
-     */
-    readonly completionValue: number;
-    /**
-     * A shortcut for determining the most restrictive gating that this Objective is
-     * set to use. This includes both the dynamic determination of progress and of
-     * completion values. See the DestinyGatingScope enum's documentation for more
-     * details.
-     */
-    readonly scope: DestinyGatingScope;
-    /**
-     * OPTIONAL: a hash identifier for the location at which this objective must be
-     * accomplished, if there is a location defined. Look up the
-     * DestinyLocationDefinition for this hash for that additional location info.
-     *
-     * Mapped to DestinyLocationDefinition in the manifest.
-     */
-    readonly locationHash: number;
-    /** If true, the value is allowed to go negative. */
-    readonly allowNegativeValue: boolean;
-    /**
-     * If true, you can effectively "un-complete" this objective if you lose progress
-     * after crossing the completion threshold.
-     *
-     * If False, once you complete the task it will remain completed forever by locking
-     * the value.
-     */
-    readonly allowValueChangeWhenCompleted: boolean;
-    /**
-     * If true, completion means having an unlock value less than or equal to the
-     * completionValue.
-     *
-     * If False, completion means having an unlock value greater than or equal to the
-     * completionValue.
-     */
-    readonly isCountingDownward: boolean;
-    /**
-     * The UI style applied to the objective. It's an enum, take a look at
-     * DestinyUnlockValueUIStyle for details of the possible styles. Use this info as
-     * you wish to customize your UI.
-     */
-    readonly valueStyle: DestinyUnlockValueUIStyle;
-    /** Text to describe the progress bar. */
-    readonly progressDescription: string;
-    /**
-     * If this objective enables Perks intrinsically, the conditions for that enabling
-     * are defined here.
-     */
-    readonly perks: DestinyObjectivePerkEntryDefinition;
-    /**
-     * If this objective enables modifications on a player's stats intrinsically, the
-     * conditions are defined here.
-     */
-    readonly stats: DestinyObjectiveStatEntryDefinition;
-    /**
-     * If nonzero, this is the minimum value at which the objective's progression
-     * should be shown. Otherwise, don't show it yet.
-     */
-    readonly minimumVisibilityThreshold: number;
-    /**
-     * If True, the progress will continue even beyond the point where the objective
-     * met its minimum completion requirements. Your UI will have to accommodate it.
-     */
-    readonly allowOvercompletion: boolean;
-    /**
-     * If True, you should continue showing the progression value in the UI after it's
-     * complete. I mean, we already do that in BNet anyways, but if you want to be
-     * better behaved than us you could honor this flag.
-     */
-    readonly showValueOnComplete: boolean;
-    /** The style to use when the objective is completed. */
-    readonly completedValueStyle: DestinyUnlockValueUIStyle;
-    /** The style to use when the objective is still in progress. */
-    readonly inProgressValueStyle: DestinyUnlockValueUIStyle;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * Ideally, this should tell you what your task is. I'm not going to lie to you
+   * though. Sometimes this doesn't have useful information at all. Which sucks, but
+   * there's nothing either of us can do about it.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The value that the unlock value defined in unlockValueHash must reach in order
+   * for the objective to be considered Completed. Used in calculating progress and
+   * completion status.
+   */
+  readonly completionValue: number;
+  /**
+   * A shortcut for determining the most restrictive gating that this Objective is
+   * set to use. This includes both the dynamic determination of progress and of
+   * completion values. See the DestinyGatingScope enum's documentation for more
+   * details.
+   */
+  readonly scope: DestinyGatingScope;
+  /**
+   * OPTIONAL: a hash identifier for the location at which this objective must be
+   * accomplished, if there is a location defined. Look up the
+   * DestinyLocationDefinition for this hash for that additional location info.
+   *
+   * Mapped to DestinyLocationDefinition in the manifest.
+   */
+  readonly locationHash: number;
+  /** If true, the value is allowed to go negative. */
+  readonly allowNegativeValue: boolean;
+  /**
+   * If true, you can effectively "un-complete" this objective if you lose progress
+   * after crossing the completion threshold.
+   *
+   * If False, once you complete the task it will remain completed forever by locking
+   * the value.
+   */
+  readonly allowValueChangeWhenCompleted: boolean;
+  /**
+   * If true, completion means having an unlock value less than or equal to the
+   * completionValue.
+   *
+   * If False, completion means having an unlock value greater than or equal to the
+   * completionValue.
+   */
+  readonly isCountingDownward: boolean;
+  /**
+   * The UI style applied to the objective. It's an enum, take a look at
+   * DestinyUnlockValueUIStyle for details of the possible styles. Use this info as
+   * you wish to customize your UI.
+   */
+  readonly valueStyle: DestinyUnlockValueUIStyle;
+  /** Text to describe the progress bar. */
+  readonly progressDescription: string;
+  /**
+   * If this objective enables Perks intrinsically, the conditions for that enabling
+   * are defined here.
+   */
+  readonly perks: DestinyObjectivePerkEntryDefinition;
+  /**
+   * If this objective enables modifications on a player's stats intrinsically, the
+   * conditions are defined here.
+   */
+  readonly stats: DestinyObjectiveStatEntryDefinition;
+  /**
+   * If nonzero, this is the minimum value at which the objective's progression
+   * should be shown. Otherwise, don't show it yet.
+   */
+  readonly minimumVisibilityThreshold: number;
+  /**
+   * If True, the progress will continue even beyond the point where the objective
+   * met its minimum completion requirements. Your UI will have to accommodate it.
+   */
+  readonly allowOvercompletion: boolean;
+  /**
+   * If True, you should continue showing the progression value in the UI after it's
+   * complete. I mean, we already do that in BNet anyways, but if you want to be
+   * better behaved than us you could honor this flag.
+   */
+  readonly showValueOnComplete: boolean;
+  /** The style to use when the objective is completed. */
+  readonly completedValueStyle: DestinyUnlockValueUIStyle;
+  /** The style to use when the objective is still in progress. */
+  readonly inProgressValueStyle: DestinyUnlockValueUIStyle;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * This enumeration represents the most restrictive type of gating that is being
@@ -1184,13 +1192,13 @@ export interface DestinyObjectiveDefinition {
  * specifically whitelisted as otherwise. That sucks, but them's the breaks.
  */
 export declare const enum DestinyGatingScope {
-    None = 0,
-    Global = 1,
-    Clan = 2,
-    Profile = 3,
-    Character = 4,
-    Item = 5,
-    AssumedWorstCase = 6
+  None = 0,
+  Global = 1,
+  Clan = 2,
+  Profile = 3,
+  Character = 4,
+  Item = 5,
+  AssumedWorstCase = 6,
 }
 /**
  * A "Location" is a sort of shortcut for referring to a specific combination of
@@ -1201,34 +1209,34 @@ export declare const enum DestinyGatingScope {
  * Place being referred to by the Objective.
  */
 export interface DestinyLocationDefinition {
-    /**
-     * If the location has a Vendor on it, this is the hash identifier for that Vendor.
-     * Look them up with DestinyVendorDefinition.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * A Location may refer to different specific spots in the world based on the world'
-     * s current state. This is a list of those potential spots, and the data we can
-     * use at runtime to determine which one of the spots is the currently valid one.
-     */
-    readonly locationReleases: DestinyLocationReleaseDefinition[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * If the location has a Vendor on it, this is the hash identifier for that Vendor.
+   * Look them up with DestinyVendorDefinition.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * A Location may refer to different specific spots in the world based on the world'
+   * s current state. This is a list of those potential spots, and the data we can
+   * use at runtime to determine which one of the spots is the currently valid one.
+   */
+  readonly locationReleases: DestinyLocationReleaseDefinition[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * These are the definitions for Vendors.
@@ -1270,268 +1278,268 @@ export interface DestinyLocationDefinition {
  * information from the API when it is available.
  */
 export interface DestinyVendorDefinition {
-    readonly displayProperties: DestinyVendorDisplayPropertiesDefinition;
-    /**
-     * If the vendor has a custom localized string describing the "buy" action, that is
-     * returned here.
-     */
-    readonly buyString: string;
-    /**
-     * Ditto for selling. Not that you can sell items to a vendor anymore. Will it come
-     * back? Who knows. The string's still there.
-     */
-    readonly sellString: string;
-    /**
-     * If the vendor has an item that should be displayed as the "featured" item, this
-     * is the hash identifier for that DestinyVendorItemDefinition.
-     *
-     * Apparently this is usually a related currency, like a reputation token. But it
-     * need not be restricted to that.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly displayItemHash: number;
-    /** If this is true, you aren't allowed to buy whatever the vendor is selling. */
-    readonly inhibitBuying: boolean;
-    /** If this is true, you're not allowed to sell whatever the vendor is buying. */
-    readonly inhibitSelling: boolean;
-    /**
-     * If the Vendor has a faction, this hash will be valid and point to a
-     * DestinyFactionDefinition.
-     *
-     * The game UI and BNet often mine the faction definition for additional elements
-     * and details to place on the screen, such as the faction's Progression status (
-     * aka "Reputation").
-     *
-     * Mapped to DestinyFactionDefinition in the manifest.
-     */
-    readonly factionHash: number;
-    /**
-     * A number used for calculating the frequency of a vendor's inventory resetting/
-     * refreshing.
-     *
-     * Don't worry about calculating this - we do it on the server side and send you
-     * the next refresh date with the live data.
-     */
-    readonly resetIntervalMinutes: number;
-    /**
-     * Again, used for reset/refreshing of inventory. Don't worry too much about it.
-     * Unless you want to.
-     */
-    readonly resetOffsetMinutes: number;
-    /**
-     * If an item can't be purchased from the vendor, there may be many "custom"/game
-     * state specific reasons why not.
-     *
-     * This is a list of localized strings with messages for those custom failures. The
-     * live BNet data will return a failureIndexes property for items that can't be
-     * purchased: using those values to index into this array, you can show the user
-     * the appropriate failure message for the item that can't be bought.
-     */
-    readonly failureStrings: string[];
-    /**
-     * If we were able to predict the dates when this Vendor will be visible/available,
-     * this will be the list of those date ranges. Sadly, we're not able to predict
-     * this very frequently, so this will often be useless data.
-     */
-    readonly unlockRanges: DateRange[];
-    /**
-     * The internal identifier for the Vendor. A holdover from the old days of Vendors,
-     * but we don't have time to refactor it away.
-     */
-    readonly vendorIdentifier: string;
-    /** A portrait of the Vendor's smiling mug. Or frothing tentacles. */
-    readonly vendorPortrait: string;
-    /** If the vendor has a custom banner image, that can be found here. */
-    readonly vendorBanner: string;
-    /**
-     * If a vendor is not enabled, we won't even save the vendor's definition, and we
-     * won't return any items or info about them. It's as if they don't exist.
-     */
-    readonly enabled: boolean;
-    /**
-     * If a vendor is not visible, we still have and will give vendor definition info,
-     * but we won't use them for things like Advisors or UI.
-     */
-    readonly visible: boolean;
-    /** The identifier of the VendorCategoryDefinition for this vendor's subcategory. */
-    readonly vendorSubcategoryIdentifier: string;
-    /**
-     * If TRUE, consolidate categories that only differ by trivial properties (such as
-     * having minor differences in name)
-     */
-    readonly consolidateCategories: boolean;
-    /**
-     * Describes "actions" that can be performed on a vendor. Currently, none of these
-     * exist. But theoretically a Vendor could let you interact with it by performing
-     * actions. We'll see what these end up looking like if they ever get used.
-     */
-    readonly actions: DestinyVendorActionDefinition[];
-    /**
-     * These are the headers for sections of items that the vendor is selling. When you
-     * see items organized by category in the header, it is these categories that it is
-     * showing.
-     *
-     * Well, technically not *exactly* these. On BNet, it doesn't make sense to have
-     * categories be "paged" as we do in Destiny, so we run some heuristics to attempt
-     * to aggregate pages of categories together.
-     *
-     * These are the categories post-concatenation, if the vendor had concatenation
-     * applied. If you want the pre-aggregated category data, use originalCategories.
-     */
-    readonly categories: DestinyVendorCategoryEntryDefinition[];
-    /**
-     * See the categories property for a description of categories and why
-     * originalCategories exists.
-     */
-    readonly originalCategories: DestinyVendorCategoryEntryDefinition[];
-    /**
-     * Display Categories are different from "categories" in that these are
-     * specifically for visual grouping and display of categories in Vendor UI.
-     *
-     * The "categories" structure is for validation of the contained items, and can be
-     * categorized entirely separately from "Display Categories", there need be and
-     * often will be no meaningful relationship between the two.
-     */
-    readonly displayCategories: DestinyDisplayCategoryDefinition[];
-    /**
-     * In addition to selling items, vendors can have "interactions": UI where you "
-     * talk" with the vendor and they offer you a reward, some item, or merely
-     * acknowledge via dialog that you did something cool.
-     */
-    readonly interactions: DestinyVendorInteractionDefinition[];
-    /**
-     * If the vendor shows you items from your own inventory - such as the Vault vendor
-     * does - this data describes the UI around showing those inventory buckets and
-     * which ones get shown.
-     */
-    readonly inventoryFlyouts: DestinyVendorInventoryFlyoutDefinition[];
-    /**
-     * If the vendor sells items (or merely has a list of items to show like the "Sack"
-     * vendors do), this is the list of those items that the vendor can sell. From this
-     * list, only a subset will be available from the vendor at any given time,
-     * selected randomly and reset on the vendor's refresh interval.
-     *
-     * Note that a vendor can sell the same item multiple ways: for instance, nothing
-     * stops a vendor from selling you some specific weapon but using two different
-     * currencies, or the same weapon at multiple "item levels".
-     */
-    readonly itemList: DestinyVendorItemDefinition[];
-    /**
-     * BNet doesn't use this data yet, but it appears to be an optional list of flavor
-     * text about services that the Vendor can provide.
-     */
-    readonly services: DestinyVendorServiceDefinition[];
-    /**
-     * If the Vendor is actually a vehicle for the transferring of items (like the
-     * Vault and Postmaster vendors), this defines the list of source->destination
-     * buckets for transferring.
-     */
-    readonly acceptedItems: DestinyVendorAcceptedItemDefinition[];
-    /**
-     * As many of you know, Vendor data has historically been pretty brutal on the BNet
-     * servers. In an effort to reduce this workload, only Vendors with this flag set
-     * will be returned on Vendor requests. This allows us to filter out Vendors that
-     * don't dynamic data that's particularly useful: things like "Preview/Sack"
-     * vendors, for example, that you can usually suss out the details for using just
-     * the definitions themselves.
-     */
-    readonly returnWithVendorRequest: boolean;
-    /**
-     * A vendor can be at different places in the world depending on the game/character/
-     * account state. This is the list of possible locations for the vendor, along with
-     * conditions we use to determine which one is currently active.
-     */
-    readonly locations: DestinyVendorLocationDefinition[];
-    /**
-     * A vendor can be a part of 0 or 1 "groups" at a time: a group being a collection
-     * of Vendors related by either location or function/purpose. It's used for our our
-     * Companion Vendor UI. Only one of these can be active for a Vendor at a time.
-     */
-    readonly groups: DestinyVendorGroupReference[];
-    /**
-     * Some items don't make sense to return in the API, for example because they
-     * represent an action to be performed rather than an item being sold. I'd rather
-     * we not do this, but at least in the short term this is a workable workaround.
-     */
-    readonly ignoreSaleItemHashes: number[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyVendorDisplayPropertiesDefinition;
+  /**
+   * If the vendor has a custom localized string describing the "buy" action, that is
+   * returned here.
+   */
+  readonly buyString: string;
+  /**
+   * Ditto for selling. Not that you can sell items to a vendor anymore. Will it come
+   * back? Who knows. The string's still there.
+   */
+  readonly sellString: string;
+  /**
+   * If the vendor has an item that should be displayed as the "featured" item, this
+   * is the hash identifier for that DestinyVendorItemDefinition.
+   *
+   * Apparently this is usually a related currency, like a reputation token. But it
+   * need not be restricted to that.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly displayItemHash: number;
+  /** If this is true, you aren't allowed to buy whatever the vendor is selling. */
+  readonly inhibitBuying: boolean;
+  /** If this is true, you're not allowed to sell whatever the vendor is buying. */
+  readonly inhibitSelling: boolean;
+  /**
+   * If the Vendor has a faction, this hash will be valid and point to a
+   * DestinyFactionDefinition.
+   *
+   * The game UI and BNet often mine the faction definition for additional elements
+   * and details to place on the screen, such as the faction's Progression status (
+   * aka "Reputation").
+   *
+   * Mapped to DestinyFactionDefinition in the manifest.
+   */
+  readonly factionHash: number;
+  /**
+   * A number used for calculating the frequency of a vendor's inventory resetting/
+   * refreshing.
+   *
+   * Don't worry about calculating this - we do it on the server side and send you
+   * the next refresh date with the live data.
+   */
+  readonly resetIntervalMinutes: number;
+  /**
+   * Again, used for reset/refreshing of inventory. Don't worry too much about it.
+   * Unless you want to.
+   */
+  readonly resetOffsetMinutes: number;
+  /**
+   * If an item can't be purchased from the vendor, there may be many "custom"/game
+   * state specific reasons why not.
+   *
+   * This is a list of localized strings with messages for those custom failures. The
+   * live BNet data will return a failureIndexes property for items that can't be
+   * purchased: using those values to index into this array, you can show the user
+   * the appropriate failure message for the item that can't be bought.
+   */
+  readonly failureStrings: string[];
+  /**
+   * If we were able to predict the dates when this Vendor will be visible/available,
+   * this will be the list of those date ranges. Sadly, we're not able to predict
+   * this very frequently, so this will often be useless data.
+   */
+  readonly unlockRanges: DateRange[];
+  /**
+   * The internal identifier for the Vendor. A holdover from the old days of Vendors,
+   * but we don't have time to refactor it away.
+   */
+  readonly vendorIdentifier: string;
+  /** A portrait of the Vendor's smiling mug. Or frothing tentacles. */
+  readonly vendorPortrait: string;
+  /** If the vendor has a custom banner image, that can be found here. */
+  readonly vendorBanner: string;
+  /**
+   * If a vendor is not enabled, we won't even save the vendor's definition, and we
+   * won't return any items or info about them. It's as if they don't exist.
+   */
+  readonly enabled: boolean;
+  /**
+   * If a vendor is not visible, we still have and will give vendor definition info,
+   * but we won't use them for things like Advisors or UI.
+   */
+  readonly visible: boolean;
+  /** The identifier of the VendorCategoryDefinition for this vendor's subcategory. */
+  readonly vendorSubcategoryIdentifier: string;
+  /**
+   * If TRUE, consolidate categories that only differ by trivial properties (such as
+   * having minor differences in name)
+   */
+  readonly consolidateCategories: boolean;
+  /**
+   * Describes "actions" that can be performed on a vendor. Currently, none of these
+   * exist. But theoretically a Vendor could let you interact with it by performing
+   * actions. We'll see what these end up looking like if they ever get used.
+   */
+  readonly actions: DestinyVendorActionDefinition[];
+  /**
+   * These are the headers for sections of items that the vendor is selling. When you
+   * see items organized by category in the header, it is these categories that it is
+   * showing.
+   *
+   * Well, technically not *exactly* these. On BNet, it doesn't make sense to have
+   * categories be "paged" as we do in Destiny, so we run some heuristics to attempt
+   * to aggregate pages of categories together.
+   *
+   * These are the categories post-concatenation, if the vendor had concatenation
+   * applied. If you want the pre-aggregated category data, use originalCategories.
+   */
+  readonly categories: DestinyVendorCategoryEntryDefinition[];
+  /**
+   * See the categories property for a description of categories and why
+   * originalCategories exists.
+   */
+  readonly originalCategories: DestinyVendorCategoryEntryDefinition[];
+  /**
+   * Display Categories are different from "categories" in that these are
+   * specifically for visual grouping and display of categories in Vendor UI.
+   *
+   * The "categories" structure is for validation of the contained items, and can be
+   * categorized entirely separately from "Display Categories", there need be and
+   * often will be no meaningful relationship between the two.
+   */
+  readonly displayCategories: DestinyDisplayCategoryDefinition[];
+  /**
+   * In addition to selling items, vendors can have "interactions": UI where you "
+   * talk" with the vendor and they offer you a reward, some item, or merely
+   * acknowledge via dialog that you did something cool.
+   */
+  readonly interactions: DestinyVendorInteractionDefinition[];
+  /**
+   * If the vendor shows you items from your own inventory - such as the Vault vendor
+   * does - this data describes the UI around showing those inventory buckets and
+   * which ones get shown.
+   */
+  readonly inventoryFlyouts: DestinyVendorInventoryFlyoutDefinition[];
+  /**
+   * If the vendor sells items (or merely has a list of items to show like the "Sack"
+   * vendors do), this is the list of those items that the vendor can sell. From this
+   * list, only a subset will be available from the vendor at any given time,
+   * selected randomly and reset on the vendor's refresh interval.
+   *
+   * Note that a vendor can sell the same item multiple ways: for instance, nothing
+   * stops a vendor from selling you some specific weapon but using two different
+   * currencies, or the same weapon at multiple "item levels".
+   */
+  readonly itemList: DestinyVendorItemDefinition[];
+  /**
+   * BNet doesn't use this data yet, but it appears to be an optional list of flavor
+   * text about services that the Vendor can provide.
+   */
+  readonly services: DestinyVendorServiceDefinition[];
+  /**
+   * If the Vendor is actually a vehicle for the transferring of items (like the
+   * Vault and Postmaster vendors), this defines the list of source->destination
+   * buckets for transferring.
+   */
+  readonly acceptedItems: DestinyVendorAcceptedItemDefinition[];
+  /**
+   * As many of you know, Vendor data has historically been pretty brutal on the BNet
+   * servers. In an effort to reduce this workload, only Vendors with this flag set
+   * will be returned on Vendor requests. This allows us to filter out Vendors that
+   * don't dynamic data that's particularly useful: things like "Preview/Sack"
+   * vendors, for example, that you can usually suss out the details for using just
+   * the definitions themselves.
+   */
+  readonly returnWithVendorRequest: boolean;
+  /**
+   * A vendor can be at different places in the world depending on the game/character/
+   * account state. This is the list of possible locations for the vendor, along with
+   * conditions we use to determine which one is currently active.
+   */
+  readonly locations: DestinyVendorLocationDefinition[];
+  /**
+   * A vendor can be a part of 0 or 1 "groups" at a time: a group being a collection
+   * of Vendors related by either location or function/purpose. It's used for our our
+   * Companion Vendor UI. Only one of these can be active for a Vendor at a time.
+   */
+  readonly groups: DestinyVendorGroupReference[];
+  /**
+   * Some items don't make sense to return in the API, for example because they
+   * represent an action to be performed rather than an item being sold. I'd rather
+   * we not do this, but at least in the short term this is a workable workaround.
+   */
+  readonly ignoreSaleItemHashes: number[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyVendorDisplayPropertiesDefinition {
-    /**
-     * I regret calling this a "large icon". It's more like a medium-sized image with a
-     * picture of the vendor's mug on it, trying their best to look cool. Not what one
-     * would call an icon.
-     */
-    readonly largeIcon: string;
-    readonly subtitle: string;
-    /**
-     * If we replaced the icon with something more glitzy, this is the original icon
-     * that the vendor had according to the game's content. It may be more lame and/or
-     * have less razzle-dazzle. But who am I to tell you which icon to use.
-     */
-    readonly originalIcon: string;
-    /**
-     * Vendors, in addition to expected display property data, may also show some "
-     * common requirements" as statically defined definition data. This might be when a
-     * vendor accepts a single type of currency, or when the currency is unique to the
-     * vendor and the designers wanted to show that currency when you interact with the
-     * vendor.
-     */
-    readonly requirementsDisplay: DestinyVendorRequirementDisplayEntryDefinition[];
-    /** This is the icon used in parts of the game UI such as the vendor's waypoint. */
-    readonly smallTransparentIcon: string;
-    /** This is the icon used in the map overview, when the vendor is located on the map. */
-    readonly mapIcon: string;
-    /**
-     * This is apparently the "Watermark". I am not certain offhand where this is
-     * actually used in the Game UI, but some people may find it useful.
-     */
-    readonly largeTransparentIcon: string;
-    readonly description: string;
-    readonly name: string;
-    /**
-     * Note that "icon" is sometimes misleading, and should be interpreted in the
-     * context of the entity. For instance, in Destiny 1 the
-     * DestinyRecordBookDefinition's icon was a big picture of a book.
-     *
-     * But usually, it will be a small square image that you can use as... well, an
-     * icon.
-     *
-     * They are currently represented as 96px x 96px images.
-     */
-    readonly icon: string;
-    readonly iconSequences: DestinyIconSequenceDefinition[];
-    /**
-     * If this item has a high-res icon (at least for now, many things won't), then the
-     * path to that icon will be here.
-     */
-    readonly highResIcon: string;
-    readonly hasIcon: boolean;
+  /**
+   * I regret calling this a "large icon". It's more like a medium-sized image with a
+   * picture of the vendor's mug on it, trying their best to look cool. Not what one
+   * would call an icon.
+   */
+  readonly largeIcon: string;
+  readonly subtitle: string;
+  /**
+   * If we replaced the icon with something more glitzy, this is the original icon
+   * that the vendor had according to the game's content. It may be more lame and/or
+   * have less razzle-dazzle. But who am I to tell you which icon to use.
+   */
+  readonly originalIcon: string;
+  /**
+   * Vendors, in addition to expected display property data, may also show some "
+   * common requirements" as statically defined definition data. This might be when a
+   * vendor accepts a single type of currency, or when the currency is unique to the
+   * vendor and the designers wanted to show that currency when you interact with the
+   * vendor.
+   */
+  readonly requirementsDisplay: DestinyVendorRequirementDisplayEntryDefinition[];
+  /** This is the icon used in parts of the game UI such as the vendor's waypoint. */
+  readonly smallTransparentIcon: string;
+  /** This is the icon used in the map overview, when the vendor is located on the map. */
+  readonly mapIcon: string;
+  /**
+   * This is apparently the "Watermark". I am not certain offhand where this is
+   * actually used in the Game UI, but some people may find it useful.
+   */
+  readonly largeTransparentIcon: string;
+  readonly description: string;
+  readonly name: string;
+  /**
+   * Note that "icon" is sometimes misleading, and should be interpreted in the
+   * context of the entity. For instance, in Destiny 1 the
+   * DestinyRecordBookDefinition's icon was a big picture of a book.
+   *
+   * But usually, it will be a small square image that you can use as... well, an
+   * icon.
+   *
+   * They are currently represented as 96px x 96px images.
+   */
+  readonly icon: string;
+  readonly iconSequences: DestinyIconSequenceDefinition[];
+  /**
+   * If this item has a high-res icon (at least for now, many things won't), then the
+   * path to that icon will be here.
+   */
+  readonly highResIcon: string;
+  readonly hasIcon: boolean;
 }
 /**
  * The localized properties of the requirementsDisplay, allowing information about
  * the requirement or item being featured to be seen.
  */
 export interface DestinyVendorRequirementDisplayEntryDefinition {
-    readonly icon: string;
-    readonly name: string;
-    readonly source: string;
-    readonly type: string;
+  readonly icon: string;
+  readonly name: string;
+  readonly source: string;
+  readonly type: string;
 }
 /**
  * These definitions represent Factions in the game. Factions have ended up
@@ -1545,50 +1553,50 @@ export interface DestinyVendorRequirementDisplayEntryDefinition {
  * Orbit could theoretically exist without the Vendor that provides rewards.
  */
 export interface DestinyFactionDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The hash identifier for the DestinyProgressionDefinition that indicates the
-     * character's relationship with this faction in terms of experience and levels.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressionHash: number;
-    /** The faction token item hashes, and their respective progression values. */
-    readonly tokenValues: {
-        [key: number]: number;
-    };
-    /**
-     * The faction reward item hash, usually an engram.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly rewardItemHash: number;
-    /**
-     * The faction reward vendor hash, used for faction engram previews.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly rewardVendorHash: number;
-    /**
-     * List of vendors that are associated with this faction. The last vendor that
-     * passes the unlock flag checks is the one that should be shown.
-     */
-    readonly vendors: DestinyFactionVendorDefinition[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The hash identifier for the DestinyProgressionDefinition that indicates the
+   * character's relationship with this faction in terms of experience and levels.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressionHash: number;
+  /** The faction token item hashes, and their respective progression values. */
+  readonly tokenValues: {
+    [key: number]: number;
+  };
+  /**
+   * The faction reward item hash, usually an engram.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly rewardItemHash: number;
+  /**
+   * The faction reward vendor hash, used for faction engram previews.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly rewardVendorHash: number;
+  /**
+   * List of vendors that are associated with this faction. The last vendor that
+   * passes the unlock flag checks is the one that should be shown.
+   */
+  readonly vendors: DestinyFactionVendorDefinition[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * These definitions represent faction vendors at different points in the game.
@@ -1597,24 +1605,24 @@ export interface DestinyFactionDefinition {
  * two different locations.
  */
 export interface DestinyFactionVendorDefinition {
-    /**
-     * The faction vendor hash.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * The hash identifier for a Destination at which this vendor may be located. Each
-     * destination where a Vendor may exist will only ever have a single entry.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly destinationHash: number;
-    /**
-     * The relative path to the background image representing this Vendor at this
-     * location, for use in a banner.
-     */
-    readonly backgroundImagePath: string;
+  /**
+   * The faction vendor hash.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * The hash identifier for a Destination at which this vendor may be located. Each
+   * destination where a Vendor may exist will only ever have a single entry.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly destinationHash: number;
+  /**
+   * The relative path to the background image representing this Vendor at this
+   * location, for use in a banner.
+   */
+  readonly backgroundImagePath: string;
 }
 /**
  * On to one of the more confusing subjects of the API. What is a Destination, and
@@ -1625,65 +1633,65 @@ export interface DestinyFactionVendorDefinition {
  * Please, pick a more interesting destination if you come to visit Earth).
  */
 export interface DestinyDestinationDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The place that "owns" this Destination. Use this hash to look up the
-     * DestinyPlaceDefinition.
-     *
-     * Mapped to DestinyPlaceDefinition in the manifest.
-     */
-    readonly placeHash: number;
-    /**
-     * If this Destination has a default Free-Roam activity, this is the hash for that
-     * Activity. Use it to look up the DestinyActivityDefintion.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly defaultFreeroamActivityHash: number;
-    /**
-     * If the Destination has default Activity Graphs (i.e. "Map") that should be shown
-     * in the director, this is the list of those Graphs. At most, only one should be
-     * active at any given time for a Destination: these would represent, for example,
-     * different variants on a Map if the Destination is changing on a macro level
-     * based on game state.
-     */
-    readonly activityGraphEntries: DestinyActivityGraphListEntryDefinition[];
-    /**
-     * A Destination may have many "Bubbles" zones with human readable properties.
-     *
-     * We don't get as much info as I'd like about them - I'd love to return info like
-     * where on the map they are located - but at least this gives you the name of
-     * those bubbles. bubbleSettings and bubbles both have the identical number of
-     * entries, and you should match up their indexes to provide matching bubble and
-     * bubbleSettings data.
-     *
-     * DEPRECATED - Just use bubbles, it now has this data.
-     */
-    readonly bubbleSettings: DestinyDestinationBubbleSettingDefinition[];
-    /**
-     * This provides the unique identifiers for every bubble in the destination (only
-     * guaranteed unique within the destination), and any intrinsic properties of the
-     * bubble.
-     *
-     * bubbleSettings and bubbles both have the identical number of entries, and you
-     * should match up their indexes to provide matching bubble and bubbleSettings data.
-     */
-    readonly bubbles: DestinyBubbleDefinition[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The place that "owns" this Destination. Use this hash to look up the
+   * DestinyPlaceDefinition.
+   *
+   * Mapped to DestinyPlaceDefinition in the manifest.
+   */
+  readonly placeHash: number;
+  /**
+   * If this Destination has a default Free-Roam activity, this is the hash for that
+   * Activity. Use it to look up the DestinyActivityDefintion.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly defaultFreeroamActivityHash: number;
+  /**
+   * If the Destination has default Activity Graphs (i.e. "Map") that should be shown
+   * in the director, this is the list of those Graphs. At most, only one should be
+   * active at any given time for a Destination: these would represent, for example,
+   * different variants on a Map if the Destination is changing on a macro level
+   * based on game state.
+   */
+  readonly activityGraphEntries: DestinyActivityGraphListEntryDefinition[];
+  /**
+   * A Destination may have many "Bubbles" zones with human readable properties.
+   *
+   * We don't get as much info as I'd like about them - I'd love to return info like
+   * where on the map they are located - but at least this gives you the name of
+   * those bubbles. bubbleSettings and bubbles both have the identical number of
+   * entries, and you should match up their indexes to provide matching bubble and
+   * bubbleSettings data.
+   *
+   * DEPRECATED - Just use bubbles, it now has this data.
+   */
+  readonly bubbleSettings: DestinyDestinationBubbleSettingDefinition[];
+  /**
+   * This provides the unique identifiers for every bubble in the destination (only
+   * guaranteed unique within the destination), and any intrinsic properties of the
+   * bubble.
+   *
+   * bubbleSettings and bubbles both have the identical number of entries, and you
+   * should match up their indexes to provide matching bubble and bubbleSettings data.
+   */
+  readonly bubbles: DestinyBubbleDefinition[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Okay, so Activities (DestinyActivityDefinition) take place in Destinations (
@@ -1693,22 +1701,22 @@ export interface DestinyDestinationDefinition {
  * Places are more on the planetary scale, like "Earth" and "Your Mom."
  */
 export interface DestinyPlaceDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * The static data about Activities in Destiny 2.
@@ -1736,202 +1744,202 @@ export interface DestinyPlaceDefinition {
  * See DestinyActivityTypeDefinition for more information.
  */
 export interface DestinyActivityDefinition {
-    /**
-     * The title, subtitle, and icon for the activity. We do a little post-processing
-     * on this to try and account for Activities where the designers have left this
-     * data too minimal to determine what activity is actually being played.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unadulterated form of the display properties, as they ought to be shown in
-     * the Director (if the activity appears in the director).
-     */
-    readonly originalDisplayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The title, subtitle, and icon for the activity as determined by Selection Screen
-     * data, if there is any for this activity. There won't be data in this field if
-     * the activity is never shown in a selection/options screen.
-     */
-    readonly selectionScreenDisplayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If the activity has an icon associated with a specific release (such as a DLC),
-     * this is the path to that release's icon.
-     */
-    readonly releaseIcon: string;
-    /**
-     * If the activity will not be visible until a specific and known time, this will
-     * be the seconds since the Epoch when it will become visible.
-     */
-    readonly releaseTime: number;
-    /** The difficulty level of the activity. */
-    readonly activityLevel: number;
-    /** The recommended light level for this activity. */
-    readonly activityLightLevel: number;
-    /**
-     * The hash identifier for the Destination on which this Activity is played. Use it
-     * to look up the DestinyDestinationDefinition for human readable info about the
-     * destination. A Destination can be thought of as a more specific location than a "
-     * Place". For instance, if the "Place" is Earth, the "Destination" would be a
-     * specific city or region on Earth.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly destinationHash: number;
-    /**
-     * The hash identifier for the "Place" on which this Activity is played. Use it to
-     * look up the DestinyPlaceDefinition for human readable info about the Place. A
-     * Place is the largest-scoped concept for location information. For instance, if
-     * the "Place" is Earth, the "Destination" would be a specific city or region on
-     * Earth.
-     *
-     * Mapped to DestinyPlaceDefinition in the manifest.
-     */
-    readonly placeHash: number;
-    /**
-     * The hash identifier for the Activity Type of this Activity. You may use it to
-     * look up the DestinyActivityTypeDefinition for human readable info, but be
-     * forewarned: Playlists and many PVP Map Activities will map to generic Activity
-     * Types. You'll have to use your knowledge of the Activity Mode being played to
-     * get more specific information about what the user is playing.
-     *
-     * Mapped to DestinyActivityTypeDefinition in the manifest.
-     */
-    readonly activityTypeHash: number;
-    /** The difficulty tier of the activity. */
-    readonly tier: number;
-    /**
-     * When Activities are completed, we generate a "Post-Game Carnage Report", or PGCR,
-     * with details about what happened in that activity (how many kills someone got,
-     * which team won, etc...) We use this image as the background when displaying PGCR
-     * information, and often use it when we refer to the Activity in general.
-     */
-    readonly pgcrImage: string;
-    /**
-     * The expected possible rewards for the activity. These rewards may or may not be
-     * accessible for an individual player based on their character state, the account
-     * state, and even the game's state overall. But it is a useful reference for
-     * possible rewards you can earn in the activity. These match up to rewards
-     * displayed when you hover over the Activity in the in-game Director, and often
-     * refer to Placeholder or "Dummy" items: items that tell you what you can earn in
-     * vague terms rather than what you'll specifically be earning (partly because the
-     * game doesn't even know what you'll earn specifically until you roll for it at
-     * the end)
-     */
-    readonly rewards: DestinyActivityRewardDefinition[];
-    /**
-     * Activities can have Modifiers, as defined in DestinyActivityModifierDefinition.
-     * These are references to the modifiers that *can* be applied to that activity,
-     * along with data that we use to determine if that modifier is actually active at
-     * any given point in time.
-     */
-    readonly modifiers: DestinyActivityModifierReferenceDefinition[];
-    /**
-     * If True, this Activity is actually a Playlist that refers to multiple possible
-     * specific Activities and Activity Modes. For instance, a Crucible Playlist may
-     * have references to multiple Activities (Maps) with multiple Activity Modes (
-     * specific PvP gameplay modes). If this is true, refer to the playlistItems
-     * property for the specific entries in the playlist.
-     */
-    readonly isPlaylist: boolean;
-    /**
-     * An activity can have many Challenges, of which any subset of them may be active
-     * for play at any given period of time. This gives the information about the
-     * challenges and data that we use to understand when they're active and what
-     * rewards they provide. Sadly, at the moment there's no central definition for
-     * challenges: much like "Skulls" were in Destiny 1, these are defined on
-     * individual activities and there can be many duplicates/near duplicates across
-     * the Destiny 2 ecosystem. I have it in mind to centralize these in a future
-     * revision of the API, but we are out of time.
-     */
-    readonly challenges: DestinyActivityChallengeDefinition[];
-    /**
-     * If there are status strings related to the activity and based on internal state
-     * of the game, account, or character, then this will be the definition of those
-     * strings and the states needed in order for the strings to be shown.
-     */
-    readonly optionalUnlockStrings: DestinyActivityUnlockStringDefinition[];
-    /**
-     * Represents all of the possible activities that could be played in the Playlist,
-     * along with information that we can use to determine if they are active at the
-     * present time.
-     */
-    readonly playlistItems: DestinyActivityPlaylistItemDefinition[];
-    /**
-     * Unfortunately, in practice this is almost never populated. In theory, this is
-     * supposed to tell which Activity Graph to show if you bring up the director while
-     * in this activity.
-     */
-    readonly activityGraphList: DestinyActivityGraphListEntryDefinition[];
-    /**
-     * This block of data provides information about the Activity's matchmaking
-     * attributes: how many people can join and such.
-     */
-    readonly matchmaking: DestinyActivityMatchmakingBlockDefinition;
-    /**
-     * This block of data, if it exists, provides information about the guided game
-     * experience and restrictions for this activity. If it doesn't exist, the game is
-     * not able to be played as a guided game.
-     */
-    readonly guidedGame: DestinyActivityGuidedBlockDefinition;
-    /**
-     * If this activity had an activity mode directly defined on it, this will be the
-     * hash of that mode.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly directActivityModeHash?: number;
-    /**
-     * If the activity had an activity mode directly defined on it, this will be the
-     * enum value of that mode.
-     */
-    readonly directActivityModeType?: number;
-    /**
-     * The set of all possible loadout requirements that could be active for this
-     * activity. Only one will be active at any given time, and you can discover which
-     * one through activity-associated data such as Milestones that have activity info
-     * on them.
-     */
-    readonly loadouts: DestinyActivityLoadoutRequirementSet[];
-    /**
-     * The hash identifiers for Activity Modes relevant to this activity.  Note that if
-     * this is a playlist, the specific playlist entry chosen will determine the actual
-     * activity modes that end up being relevant.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly activityModeHashes: number[];
-    /**
-     * The activity modes - if any - in enum form. Because we can't seem to escape the
-     * enums.
-     */
-    readonly activityModeTypes: DestinyActivityModeType[];
-    /** If true, this activity is a PVP activity or playlist. */
-    readonly isPvP: boolean;
-    /**
-     * The list of phases or points of entry into an activity, along with information
-     * we can use to determine their gating and availability.
-     */
-    readonly insertionPoints: DestinyActivityInsertionPointDefinition[];
-    /**
-     * A list of location mappings that are affected by this activity. Pulled out of
-     * DestinyLocationDefinitions for our/your lookup convenience.
-     */
-    readonly activityLocationMappings: DestinyEnvironmentLocationMapping[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * The title, subtitle, and icon for the activity. We do a little post-processing
+   * on this to try and account for Activities where the designers have left this
+   * data too minimal to determine what activity is actually being played.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The unadulterated form of the display properties, as they ought to be shown in
+   * the Director (if the activity appears in the director).
+   */
+  readonly originalDisplayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The title, subtitle, and icon for the activity as determined by Selection Screen
+   * data, if there is any for this activity. There won't be data in this field if
+   * the activity is never shown in a selection/options screen.
+   */
+  readonly selectionScreenDisplayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If the activity has an icon associated with a specific release (such as a DLC),
+   * this is the path to that release's icon.
+   */
+  readonly releaseIcon: string;
+  /**
+   * If the activity will not be visible until a specific and known time, this will
+   * be the seconds since the Epoch when it will become visible.
+   */
+  readonly releaseTime: number;
+  /** The difficulty level of the activity. */
+  readonly activityLevel: number;
+  /** The recommended light level for this activity. */
+  readonly activityLightLevel: number;
+  /**
+   * The hash identifier for the Destination on which this Activity is played. Use it
+   * to look up the DestinyDestinationDefinition for human readable info about the
+   * destination. A Destination can be thought of as a more specific location than a "
+   * Place". For instance, if the "Place" is Earth, the "Destination" would be a
+   * specific city or region on Earth.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly destinationHash: number;
+  /**
+   * The hash identifier for the "Place" on which this Activity is played. Use it to
+   * look up the DestinyPlaceDefinition for human readable info about the Place. A
+   * Place is the largest-scoped concept for location information. For instance, if
+   * the "Place" is Earth, the "Destination" would be a specific city or region on
+   * Earth.
+   *
+   * Mapped to DestinyPlaceDefinition in the manifest.
+   */
+  readonly placeHash: number;
+  /**
+   * The hash identifier for the Activity Type of this Activity. You may use it to
+   * look up the DestinyActivityTypeDefinition for human readable info, but be
+   * forewarned: Playlists and many PVP Map Activities will map to generic Activity
+   * Types. You'll have to use your knowledge of the Activity Mode being played to
+   * get more specific information about what the user is playing.
+   *
+   * Mapped to DestinyActivityTypeDefinition in the manifest.
+   */
+  readonly activityTypeHash: number;
+  /** The difficulty tier of the activity. */
+  readonly tier: number;
+  /**
+   * When Activities are completed, we generate a "Post-Game Carnage Report", or PGCR,
+   * with details about what happened in that activity (how many kills someone got,
+   * which team won, etc...) We use this image as the background when displaying PGCR
+   * information, and often use it when we refer to the Activity in general.
+   */
+  readonly pgcrImage: string;
+  /**
+   * The expected possible rewards for the activity. These rewards may or may not be
+   * accessible for an individual player based on their character state, the account
+   * state, and even the game's state overall. But it is a useful reference for
+   * possible rewards you can earn in the activity. These match up to rewards
+   * displayed when you hover over the Activity in the in-game Director, and often
+   * refer to Placeholder or "Dummy" items: items that tell you what you can earn in
+   * vague terms rather than what you'll specifically be earning (partly because the
+   * game doesn't even know what you'll earn specifically until you roll for it at
+   * the end)
+   */
+  readonly rewards: DestinyActivityRewardDefinition[];
+  /**
+   * Activities can have Modifiers, as defined in DestinyActivityModifierDefinition.
+   * These are references to the modifiers that *can* be applied to that activity,
+   * along with data that we use to determine if that modifier is actually active at
+   * any given point in time.
+   */
+  readonly modifiers: DestinyActivityModifierReferenceDefinition[];
+  /**
+   * If True, this Activity is actually a Playlist that refers to multiple possible
+   * specific Activities and Activity Modes. For instance, a Crucible Playlist may
+   * have references to multiple Activities (Maps) with multiple Activity Modes (
+   * specific PvP gameplay modes). If this is true, refer to the playlistItems
+   * property for the specific entries in the playlist.
+   */
+  readonly isPlaylist: boolean;
+  /**
+   * An activity can have many Challenges, of which any subset of them may be active
+   * for play at any given period of time. This gives the information about the
+   * challenges and data that we use to understand when they're active and what
+   * rewards they provide. Sadly, at the moment there's no central definition for
+   * challenges: much like "Skulls" were in Destiny 1, these are defined on
+   * individual activities and there can be many duplicates/near duplicates across
+   * the Destiny 2 ecosystem. I have it in mind to centralize these in a future
+   * revision of the API, but we are out of time.
+   */
+  readonly challenges: DestinyActivityChallengeDefinition[];
+  /**
+   * If there are status strings related to the activity and based on internal state
+   * of the game, account, or character, then this will be the definition of those
+   * strings and the states needed in order for the strings to be shown.
+   */
+  readonly optionalUnlockStrings: DestinyActivityUnlockStringDefinition[];
+  /**
+   * Represents all of the possible activities that could be played in the Playlist,
+   * along with information that we can use to determine if they are active at the
+   * present time.
+   */
+  readonly playlistItems: DestinyActivityPlaylistItemDefinition[];
+  /**
+   * Unfortunately, in practice this is almost never populated. In theory, this is
+   * supposed to tell which Activity Graph to show if you bring up the director while
+   * in this activity.
+   */
+  readonly activityGraphList: DestinyActivityGraphListEntryDefinition[];
+  /**
+   * This block of data provides information about the Activity's matchmaking
+   * attributes: how many people can join and such.
+   */
+  readonly matchmaking: DestinyActivityMatchmakingBlockDefinition;
+  /**
+   * This block of data, if it exists, provides information about the guided game
+   * experience and restrictions for this activity. If it doesn't exist, the game is
+   * not able to be played as a guided game.
+   */
+  readonly guidedGame: DestinyActivityGuidedBlockDefinition;
+  /**
+   * If this activity had an activity mode directly defined on it, this will be the
+   * hash of that mode.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly directActivityModeHash?: number;
+  /**
+   * If the activity had an activity mode directly defined on it, this will be the
+   * enum value of that mode.
+   */
+  readonly directActivityModeType?: number;
+  /**
+   * The set of all possible loadout requirements that could be active for this
+   * activity. Only one will be active at any given time, and you can discover which
+   * one through activity-associated data such as Milestones that have activity info
+   * on them.
+   */
+  readonly loadouts: DestinyActivityLoadoutRequirementSet[];
+  /**
+   * The hash identifiers for Activity Modes relevant to this activity.  Note that if
+   * this is a playlist, the specific playlist entry chosen will determine the actual
+   * activity modes that end up being relevant.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly activityModeHashes: number[];
+  /**
+   * The activity modes - if any - in enum form. Because we can't seem to escape the
+   * enums.
+   */
+  readonly activityModeTypes: DestinyActivityModeType[];
+  /** If true, this activity is a PVP activity or playlist. */
+  readonly isPvP: boolean;
+  /**
+   * The list of phases or points of entry into an activity, along with information
+   * we can use to determine their gating and availability.
+   */
+  readonly insertionPoints: DestinyActivityInsertionPointDefinition[];
+  /**
+   * A list of location mappings that are affected by this activity. Pulled out of
+   * DestinyLocationDefinitions for our/your lookup convenience.
+   */
+  readonly activityLocationMappings: DestinyEnvironmentLocationMapping[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * The definition for an Activity Type.
@@ -1952,46 +1960,46 @@ export interface DestinyActivityDefinition {
  * in many places across our codebase.
  */
 export interface DestinyActivityTypeDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Activities can refer to one or more sets of tooltip-friendly reward data. These
  * are the definitions for those tooltip friendly rewards.
  */
 export interface DestinyActivityRewardDefinition {
-    /** The header for the reward set, if any. */
-    readonly rewardText: string;
-    /**
-     * The "Items provided" in the reward. This is almost always a pointer to a
-     * DestinyInventoryItemDefintion for an item that you can't actually earn in-game,
-     * but that has name/description/icon information for the vague concept of the
-     * rewards you will receive. This is because the actual reward generation is non-
-     * deterministic and extremely complicated, so the best the game can do is tell you
-     * what you'll get in vague terms. And so too shall we.
-     *
-     * Interesting trivia: you actually *do* earn these items when you complete the
-     * activity. They go into a single-slot bucket on your profile, which is how you
-     * see the pop-ups of these rewards when you complete an activity that match these "
-     * dummy" items. You can even see them if you look at the last one you earned in
-     * your profile-level inventory through the BNet API! Who said reading
-     * documentation is a waste of time?
-     */
-    readonly rewardItems: DestinyItemQuantity[];
+  /** The header for the reward set, if any. */
+  readonly rewardText: string;
+  /**
+   * The "Items provided" in the reward. This is almost always a pointer to a
+   * DestinyInventoryItemDefintion for an item that you can't actually earn in-game,
+   * but that has name/description/icon information for the vague concept of the
+   * rewards you will receive. This is because the actual reward generation is non-
+   * deterministic and extremely complicated, so the best the game can do is tell you
+   * what you'll get in vague terms. And so too shall we.
+   *
+   * Interesting trivia: you actually *do* earn these items when you complete the
+   * activity. They go into a single-slot bucket on your profile, which is how you
+   * see the pop-ups of these rewards when you complete an activity that match these "
+   * dummy" items. You can even see them if you look at the last one you earned in
+   * your profile-level inventory through the BNet API! Who said reading
+   * documentation is a waste of time?
+   */
+  readonly rewardItems: DestinyItemQuantity[];
 }
 /**
  * A reference to an Activity Modifier from another entity, such as an Activity (
@@ -2000,53 +2008,53 @@ export interface DestinyActivityRewardDefinition {
  * This defines some
  */
 export interface DestinyActivityModifierReferenceDefinition {
-    /**
-     * The hash identifier for the DestinyActivityModifierDefinition referenced by this
-     * activity.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly activityModifierHash: number;
+  /**
+   * The hash identifier for the DestinyActivityModifierDefinition referenced by this
+   * activity.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly activityModifierHash: number;
 }
 /**
  * Modifiers - in Destiny 1, these were referred to as "Skulls" - are changes that
  * can be applied to an Activity.
  */
 export interface DestinyActivityModifierDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /** Represents a reference to a Challenge, which for now is just an Objective. */
 export interface DestinyActivityChallengeDefinition {
-    /**
-     * The hash for the Objective that matches this challenge. Use it to look up the
-     * DestinyObjectiveDefinition.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash: number;
-    /**
-     * The rewards as they're represented in the UI. Note that they generally link to "
-     * dummy" items that give a summary of rewards rather than direct, real items
-     * themselves.
-     *
-     * If the quantity is 0, don't show the quantity.
-     */
-    readonly dummyRewards: DestinyItemQuantity[];
+  /**
+   * The hash for the Objective that matches this challenge. Use it to look up the
+   * DestinyObjectiveDefinition.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash: number;
+  /**
+   * The rewards as they're represented in the UI. Note that they generally link to "
+   * dummy" items that give a summary of rewards rather than direct, real items
+   * themselves.
+   *
+   * If the quantity is 0, don't show the quantity.
+   */
+  readonly dummyRewards: DestinyItemQuantity[];
 }
 /**
  * Represents a status string that could be conditionally displayed about an
@@ -2055,8 +2063,8 @@ export interface DestinyActivityChallengeDefinition {
  * strings should be shown.
  */
 export interface DestinyActivityUnlockStringDefinition {
-    /** The string to be displayed if the conditions are met. */
-    readonly displayString: string;
+  /** The string to be displayed if the conditions are met. */
+  readonly displayString: string;
 }
 /**
  * If the activity is a playlist, this is the definition for a specific entry in
@@ -2064,36 +2072,36 @@ export interface DestinyActivityUnlockStringDefinition {
  * can be chosen.
  */
 export interface DestinyActivityPlaylistItemDefinition {
-    /**
-     * The hash identifier of the Activity that can be played. Use it to look up the
-     * DestinyActivityDefinition.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /**
-     * If this playlist entry had an activity mode directly defined on it, this will be
-     * the hash of that mode.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly directActivityModeHash?: number;
-    /**
-     * If the playlist entry had an activity mode directly defined on it, this will be
-     * the enum value of that mode.
-     */
-    readonly directActivityModeType?: number;
-    /**
-     * The hash identifiers for Activity Modes relevant to this entry.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly activityModeHashes: number[];
-    /**
-     * The activity modes - if any - in enum form. Because we can't seem to escape the
-     * enums.
-     */
-    readonly activityModeTypes: DestinyActivityModeType[];
+  /**
+   * The hash identifier of the Activity that can be played. Use it to look up the
+   * DestinyActivityDefinition.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /**
+   * If this playlist entry had an activity mode directly defined on it, this will be
+   * the hash of that mode.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly directActivityModeHash?: number;
+  /**
+   * If the playlist entry had an activity mode directly defined on it, this will be
+   * the enum value of that mode.
+   */
+  readonly directActivityModeType?: number;
+  /**
+   * The hash identifiers for Activity Modes relevant to this entry.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly activityModeHashes: number[];
+  /**
+   * The activity modes - if any - in enum form. Because we can't seem to escape the
+   * enums.
+   */
+  readonly activityModeTypes: DestinyActivityModeType[];
 }
 /**
  * This definition represents an "Activity Mode" as it exists in the Historical
@@ -2107,80 +2115,80 @@ export interface DestinyActivityPlaylistItemDefinition {
  * played, regardless of what specific PVP mode was being played.
  */
 export interface DestinyActivityModeDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If this activity mode has a related PGCR image, this will be the path to said
-     * image.
-     */
-    readonly pgcrImage: string;
-    /**
-     * The Enumeration value for this Activity Mode. Pass this identifier into Stats
-     * endpoints to get aggregate stats for this mode.
-     */
-    readonly modeType: DestinyActivityModeType;
-    /** The type of play being performed in broad terms (PVP, PVE) */
-    readonly activityModeCategory: DestinyActivityModeCategory;
-    /**
-     * If True, this mode has oppositional teams fighting against each other rather
-     * than "Free-For-All" or Co-operative modes of play.
-     *
-     * Note that Aggregate modes are never marked as team based, even if they happen to
-     * be team based at the moment. At any time, an aggregate whose subordinates are
-     * only team based could be changed so that one or more aren't team based, and then
-     * this boolean won't make much sense (the aggregation would become "sometimes team
-     * based"). Let's not deal with that right now.
-     */
-    readonly isTeamBased: boolean;
-    /**
-     * If true, this mode is an aggregation of other, more specific modes rather than
-     * being a mode in itself. This includes modes that group Features/Events rather
-     * than Gameplay, such as Trials of The Nine: Trials of the Nine being an Event
-     * that is interesting to see aggregate data for, but when you play the activities
-     * within Trials of the Nine they are more specific activity modes such as Clash.
-     */
-    readonly isAggregateMode: boolean;
-    /**
-     * The hash identifiers of the DestinyActivityModeDefinitions that represent all of
-     * the "parent" modes for this mode. For instance, the Nightfall Mode is also a
-     * member of AllStrikes and AllPvE.
-     */
-    readonly parentHashes: number[];
-    /**
-     * A Friendly identifier you can use for referring to this Activity Mode. We really
-     * only used this in our URLs, so... you know, take that for whatever it's worth.
-     */
-    readonly friendlyName: string;
-    /**
-     * If this exists, the mode has specific Activities (referred to by the Key) that
-     * should instead map to other Activity Modes when they are played. This was useful
-     * in D1 for Private Matches, where we wanted to have Private Matches as an
-     * activity mode while still referring to the specific mode being played.
-     */
-    readonly activityModeMappings: {
-        [key: number]: DestinyActivityModeType;
-    };
-    /**
-     * If FALSE, we want to ignore this type when we're showing activity modes in BNet
-     * UI. It will still be returned in case 3rd parties want to use it for any purpose.
-     */
-    readonly display: boolean;
-    /** The relative ordering of activity modes. */
-    readonly order: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If this activity mode has a related PGCR image, this will be the path to said
+   * image.
+   */
+  readonly pgcrImage: string;
+  /**
+   * The Enumeration value for this Activity Mode. Pass this identifier into Stats
+   * endpoints to get aggregate stats for this mode.
+   */
+  readonly modeType: DestinyActivityModeType;
+  /** The type of play being performed in broad terms (PVP, PVE) */
+  readonly activityModeCategory: DestinyActivityModeCategory;
+  /**
+   * If True, this mode has oppositional teams fighting against each other rather
+   * than "Free-For-All" or Co-operative modes of play.
+   *
+   * Note that Aggregate modes are never marked as team based, even if they happen to
+   * be team based at the moment. At any time, an aggregate whose subordinates are
+   * only team based could be changed so that one or more aren't team based, and then
+   * this boolean won't make much sense (the aggregation would become "sometimes team
+   * based"). Let's not deal with that right now.
+   */
+  readonly isTeamBased: boolean;
+  /**
+   * If true, this mode is an aggregation of other, more specific modes rather than
+   * being a mode in itself. This includes modes that group Features/Events rather
+   * than Gameplay, such as Trials of The Nine: Trials of the Nine being an Event
+   * that is interesting to see aggregate data for, but when you play the activities
+   * within Trials of the Nine they are more specific activity modes such as Clash.
+   */
+  readonly isAggregateMode: boolean;
+  /**
+   * The hash identifiers of the DestinyActivityModeDefinitions that represent all of
+   * the "parent" modes for this mode. For instance, the Nightfall Mode is also a
+   * member of AllStrikes and AllPvE.
+   */
+  readonly parentHashes: number[];
+  /**
+   * A Friendly identifier you can use for referring to this Activity Mode. We really
+   * only used this in our URLs, so... you know, take that for whatever it's worth.
+   */
+  readonly friendlyName: string;
+  /**
+   * If this exists, the mode has specific Activities (referred to by the Key) that
+   * should instead map to other Activity Modes when they are played. This was useful
+   * in D1 for Private Matches, where we wanted to have Private Matches as an
+   * activity mode while still referring to the specific mode being played.
+   */
+  readonly activityModeMappings: {
+    [key: number]: DestinyActivityModeType;
+  };
+  /**
+   * If FALSE, we want to ignore this type when we're showing activity modes in BNet
+   * UI. It will still be returned in case 3rd parties want to use it for any purpose.
+   */
+  readonly display: boolean;
+  /** The relative ordering of activity modes. */
+  readonly order: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * For historical reasons, this list will have both D1 and D2-relevant Activity
@@ -2188,101 +2196,101 @@ export interface DestinyActivityModeDefinition {
  * back!
  */
 export declare const enum DestinyActivityModeType {
-    None = 0,
-    Story = 2,
-    Strike = 3,
-    Raid = 4,
-    AllPvP = 5,
-    Patrol = 6,
-    AllPvE = 7,
-    Reserved9 = 9,
-    Control = 10,
-    Reserved11 = 11,
-    /**
-     * Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the
-     * highest kills at the end of time wins.
-     */
-    Clash = 12,
-    Reserved13 = 13,
-    CrimsonDoubles = 15,
-    Nightfall = 16,
-    HeroicNightfall = 17,
-    AllStrikes = 18,
-    IronBanner = 19,
-    Reserved20 = 20,
-    Reserved21 = 21,
-    Reserved22 = 22,
-    Reserved24 = 24,
-    AllMayhem = 25,
-    Reserved26 = 26,
-    Reserved27 = 27,
-    Reserved28 = 28,
-    Reserved29 = 29,
-    Reserved30 = 30,
-    Supremacy = 31,
-    PrivateMatchesAll = 32,
-    Survival = 37,
-    Countdown = 38,
-    TrialsOfTheNine = 39,
-    Social = 40,
-    TrialsCountdown = 41,
-    TrialsSurvival = 42,
-    IronBannerControl = 43,
-    IronBannerClash = 44,
-    IronBannerSupremacy = 45,
-    ScoredNightfall = 46,
-    ScoredHeroicNightfall = 47,
-    Rumble = 48,
-    AllDoubles = 49,
-    Doubles = 50,
-    PrivateMatchesClash = 51,
-    PrivateMatchesControl = 52,
-    PrivateMatchesSupremacy = 53,
-    PrivateMatchesCountdown = 54,
-    PrivateMatchesSurvival = 55,
-    PrivateMatchesMayhem = 56,
-    PrivateMatchesRumble = 57,
-    HeroicAdventure = 58,
-    Showdown = 59,
-    Lockdown = 60,
-    Scorched = 61,
-    ScorchedTeam = 62,
-    Gambit = 63,
-    AllPvECompetitive = 64,
-    Breakthrough = 65,
-    BlackArmoryRun = 66,
-    Salvage = 67,
-    IronBannerSalvage = 68,
-    PvPCompetitive = 69,
-    PvPQuickplay = 70,
-    ClashQuickplay = 71,
-    ClashCompetitive = 72,
-    ControlQuickplay = 73,
-    ControlCompetitive = 74,
-    GambitPrime = 75,
-    Reckoning = 76,
-    Menagerie = 77,
-    VexOffensive = 78,
-    NightmareHunt = 79,
-    Elimination = 80,
-    Momentum = 81,
-    Dungeon = 82,
-    Sundial = 83,
-    TrialsOfOsiris = 84
+  None = 0,
+  Story = 2,
+  Strike = 3,
+  Raid = 4,
+  AllPvP = 5,
+  Patrol = 6,
+  AllPvE = 7,
+  Reserved9 = 9,
+  Control = 10,
+  Reserved11 = 11,
+  /**
+   * Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the
+   * highest kills at the end of time wins.
+   */
+  Clash = 12,
+  Reserved13 = 13,
+  CrimsonDoubles = 15,
+  Nightfall = 16,
+  HeroicNightfall = 17,
+  AllStrikes = 18,
+  IronBanner = 19,
+  Reserved20 = 20,
+  Reserved21 = 21,
+  Reserved22 = 22,
+  Reserved24 = 24,
+  AllMayhem = 25,
+  Reserved26 = 26,
+  Reserved27 = 27,
+  Reserved28 = 28,
+  Reserved29 = 29,
+  Reserved30 = 30,
+  Supremacy = 31,
+  PrivateMatchesAll = 32,
+  Survival = 37,
+  Countdown = 38,
+  TrialsOfTheNine = 39,
+  Social = 40,
+  TrialsCountdown = 41,
+  TrialsSurvival = 42,
+  IronBannerControl = 43,
+  IronBannerClash = 44,
+  IronBannerSupremacy = 45,
+  ScoredNightfall = 46,
+  ScoredHeroicNightfall = 47,
+  Rumble = 48,
+  AllDoubles = 49,
+  Doubles = 50,
+  PrivateMatchesClash = 51,
+  PrivateMatchesControl = 52,
+  PrivateMatchesSupremacy = 53,
+  PrivateMatchesCountdown = 54,
+  PrivateMatchesSurvival = 55,
+  PrivateMatchesMayhem = 56,
+  PrivateMatchesRumble = 57,
+  HeroicAdventure = 58,
+  Showdown = 59,
+  Lockdown = 60,
+  Scorched = 61,
+  ScorchedTeam = 62,
+  Gambit = 63,
+  AllPvECompetitive = 64,
+  Breakthrough = 65,
+  BlackArmoryRun = 66,
+  Salvage = 67,
+  IronBannerSalvage = 68,
+  PvPCompetitive = 69,
+  PvPQuickplay = 70,
+  ClashQuickplay = 71,
+  ClashCompetitive = 72,
+  ControlQuickplay = 73,
+  ControlCompetitive = 74,
+  GambitPrime = 75,
+  Reckoning = 76,
+  Menagerie = 77,
+  VexOffensive = 78,
+  NightmareHunt = 79,
+  Elimination = 80,
+  Momentum = 81,
+  Dungeon = 82,
+  Sundial = 83,
+  TrialsOfOsiris = 84,
 }
 /** Activity Modes are grouped into a few possible broad categories. */
 export declare const enum DestinyActivityModeCategory {
-    /** Activities that are neither PVP nor PVE, such as social activities. */
-    None = 0,
-    /** PvE activities, where you shoot aliens in the face. */
-    PvE = 1,
-    /** PvP activities, where you shoot your "friends". */
-    PvP = 2,
-    /**
-     * PVE competitive activities, where you shoot whoever you want whenever you want.
-     * Or run around collecting small glowing triangles.
-     */
-    PvECompetitive = 3
+  /** Activities that are neither PVP nor PVE, such as social activities. */
+  None = 0,
+  /** PvE activities, where you shoot aliens in the face. */
+  PvE = 1,
+  /** PvP activities, where you shoot your "friends". */
+  PvP = 2,
+  /**
+   * PVE competitive activities, where you shoot whoever you want whenever you want.
+   * Or run around collecting small glowing triangles.
+   */
+  PvECompetitive = 3,
 }
 /**
  * Destinations and Activities may have default Activity Graphs that should be
@@ -2292,13 +2300,13 @@ export declare const enum DestinyActivityModeCategory {
  * relevant.
  */
 export interface DestinyActivityGraphListEntryDefinition {
-    /**
-     * The hash identifier of the DestinyActivityGraphDefinition that should be shown
-     * when opening the director.
-     *
-     * Mapped to DestinyActivityGraphDefinition in the manifest.
-     */
-    readonly activityGraphHash: number;
+  /**
+   * The hash identifier of the DestinyActivityGraphDefinition that should be shown
+   * when opening the director.
+   *
+   * Mapped to DestinyActivityGraphDefinition in the manifest.
+   */
+  readonly activityGraphHash: number;
 }
 /**
  * Represents a Map View in the director: be them overview views, destination views,
@@ -2320,48 +2328,48 @@ export interface DestinyActivityGraphListEntryDefinition {
  * providing that content in this definition.
  */
 export interface DestinyActivityGraphDefinition {
-    /**
-     * These represent the visual "nodes" on the map's view. These are the activities
-     * you can click on in the map.
-     */
-    readonly nodes: DestinyActivityGraphNodeDefinition[];
-    /** Represents one-off/special UI elements that appear on the map. */
-    readonly artElements: DestinyActivityGraphArtElementDefinition[];
-    /**
-     * Represents connections between graph nodes. However, it lacks context that we'd
-     * need to make good use of it.
-     */
-    readonly connections: DestinyActivityGraphConnectionDefinition[];
-    /**
-     * Objectives can display on maps, and this is supposedly metadata for that. I have
-     * not had the time to analyze the details of what is useful within however: we
-     * could be missing important data to make this work. Expect this property to be
-     * expanded on later if possible.
-     */
-    readonly displayObjectives: DestinyActivityGraphDisplayObjectiveDefinition[];
-    /**
-     * Progressions can also display on maps, but similarly to displayObjectives we
-     * appear to lack some required information and context right now. We will have to
-     * look into it later and add more data if possible.
-     */
-    readonly displayProgressions: DestinyActivityGraphDisplayProgressionDefinition[];
-    /** Represents links between this Activity Graph and other ones. */
-    readonly linkedGraphs: DestinyLinkedGraphDefinition[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * These represent the visual "nodes" on the map's view. These are the activities
+   * you can click on in the map.
+   */
+  readonly nodes: DestinyActivityGraphNodeDefinition[];
+  /** Represents one-off/special UI elements that appear on the map. */
+  readonly artElements: DestinyActivityGraphArtElementDefinition[];
+  /**
+   * Represents connections between graph nodes. However, it lacks context that we'd
+   * need to make good use of it.
+   */
+  readonly connections: DestinyActivityGraphConnectionDefinition[];
+  /**
+   * Objectives can display on maps, and this is supposedly metadata for that. I have
+   * not had the time to analyze the details of what is useful within however: we
+   * could be missing important data to make this work. Expect this property to be
+   * expanded on later if possible.
+   */
+  readonly displayObjectives: DestinyActivityGraphDisplayObjectiveDefinition[];
+  /**
+   * Progressions can also display on maps, but similarly to displayObjectives we
+   * appear to lack some required information and context right now. We will have to
+   * look into it later and add more data if possible.
+   */
+  readonly displayProgressions: DestinyActivityGraphDisplayProgressionDefinition[];
+  /** Represents links between this Activity Graph and other ones. */
+  readonly linkedGraphs: DestinyLinkedGraphDefinition[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * This is the position and other data related to nodes in the activity graph that
@@ -2371,43 +2379,43 @@ export interface DestinyActivityGraphDefinition {
  * and other UI related to the node)
  */
 export interface DestinyActivityGraphNodeDefinition {
-    /**
-     * An identifier for the Activity Graph Node, only guaranteed to be unique within
-     * its parent Activity Graph.
-     */
-    readonly nodeId: number;
-    /**
-     * The node *may* have display properties that override the active Activity's
-     * display properties.
-     */
-    readonly overrideDisplay: DestinyDisplayPropertiesDefinition;
-    /** The position on the map for this node. */
-    readonly position: DestinyPositionDefinition;
-    /**
-     * The node may have various visual accents placed on it, or styles applied. These
-     * are the list of possible styles that the Node can have. The game iterates
-     * through each, looking for the first one that passes a check of the required game/
-     * character/account state in order to show that style, and then renders the node
-     * in that style.
-     */
-    readonly featuringStates: DestinyActivityGraphNodeFeaturingStateDefinition[];
-    /**
-     * The node may have various possible activities that could be active for it,
-     * however only one may be active at a time. See the
-     * DestinyActivityGraphNodeActivityDefinition for details.
-     */
-    readonly activities: DestinyActivityGraphNodeActivityDefinition[];
-    /**
-     * Represents possible states that the graph node can be in. These are combined
-     * with some checking that happens in the game client and server to determine which
-     * state is actually active at any given time.
-     */
-    readonly states: DestinyActivityGraphNodeStateEntry[];
+  /**
+   * An identifier for the Activity Graph Node, only guaranteed to be unique within
+   * its parent Activity Graph.
+   */
+  readonly nodeId: number;
+  /**
+   * The node *may* have display properties that override the active Activity's
+   * display properties.
+   */
+  readonly overrideDisplay: DestinyDisplayPropertiesDefinition;
+  /** The position on the map for this node. */
+  readonly position: DestinyPositionDefinition;
+  /**
+   * The node may have various visual accents placed on it, or styles applied. These
+   * are the list of possible styles that the Node can have. The game iterates
+   * through each, looking for the first one that passes a check of the required game/
+   * character/account state in order to show that style, and then renders the node
+   * in that style.
+   */
+  readonly featuringStates: DestinyActivityGraphNodeFeaturingStateDefinition[];
+  /**
+   * The node may have various possible activities that could be active for it,
+   * however only one may be active at a time. See the
+   * DestinyActivityGraphNodeActivityDefinition for details.
+   */
+  readonly activities: DestinyActivityGraphNodeActivityDefinition[];
+  /**
+   * Represents possible states that the graph node can be in. These are combined
+   * with some checking that happens in the game client and server to determine which
+   * state is actually active at any given time.
+   */
+  readonly states: DestinyActivityGraphNodeStateEntry[];
 }
 export interface DestinyPositionDefinition {
-    readonly x: number;
-    readonly y: number;
-    readonly z: number;
+  readonly x: number;
+  readonly y: number;
+  readonly z: number;
 }
 /**
  * Nodes can have different visual states. This object represents a single visual
@@ -2415,13 +2423,13 @@ export interface DestinyPositionDefinition {
  * condition to determine whether it should be set.
  */
 export interface DestinyActivityGraphNodeFeaturingStateDefinition {
-    /**
-     * The node can be highlighted in a variety of ways - the game iterates through
-     * these and finds the first FeaturingState that is valid at the present moment
-     * given the Game, Account, and Character state, and renders the node in that state.
-     * See the ActivityGraphNodeHighlightType enum for possible values.
-     */
-    readonly highlightType: ActivityGraphNodeHighlightType;
+  /**
+   * The node can be highlighted in a variety of ways - the game iterates through
+   * these and finds the first FeaturingState that is valid at the present moment
+   * given the Game, Account, and Character state, and renders the node in that state.
+   * See the ActivityGraphNodeHighlightType enum for possible values.
+   */
+  readonly highlightType: ActivityGraphNodeHighlightType;
 }
 /**
  * The various known UI styles in which an item can be highlighted. It'll be up to
@@ -2431,11 +2439,11 @@ export interface DestinyActivityGraphNodeFeaturingStateDefinition {
  * still used.
  */
 export declare const enum ActivityGraphNodeHighlightType {
-    None = 0,
-    Normal = 1,
-    Hyper = 2,
-    Comet = 3,
-    RiseOfIron = 4
+  None = 0,
+  Normal = 1,
+  Hyper = 2,
+  Comet = 3,
+  RiseOfIron = 4,
 }
 /**
  * The actual activity to be redirected to when you click on the node. Note that a
@@ -2447,19 +2455,19 @@ export declare const enum ActivityGraphNodeHighlightType {
  * one is active for the week.
  */
 export interface DestinyActivityGraphNodeActivityDefinition {
-    /**
-     * An identifier for this node activity. It is only guaranteed to be unique within
-     * the Activity Graph.
-     */
-    readonly nodeActivityId: number;
-    /**
-     * The activity that will be activated if the user clicks on this node. Controls
-     * all activity-related information displayed on the node if it is active (the text
-     * shown in the tooltip etc)
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
+  /**
+   * An identifier for this node activity. It is only guaranteed to be unique within
+   * the Activity Graph.
+   */
+  readonly nodeActivityId: number;
+  /**
+   * The activity that will be activated if the user clicks on this node. Controls
+   * all activity-related information displayed on the node if it is active (the text
+   * shown in the tooltip etc)
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
 }
 /**
  * Represents a single state that a graph node might end up in. Depending on what's
@@ -2467,15 +2475,15 @@ export interface DestinyActivityGraphNodeActivityDefinition {
  * excluded from view entirely.
  */
 export interface DestinyActivityGraphNodeStateEntry {
-    readonly state: DestinyGraphNodeState;
+  readonly state: DestinyGraphNodeState;
 }
 /** Represents a potential state of an Activity Graph node. */
 export declare const enum DestinyGraphNodeState {
-    Hidden = 0,
-    Visible = 1,
-    Teaser = 2,
-    Incomplete = 3,
-    Completed = 4
+  Hidden = 0,
+  Visible = 1,
+  Teaser = 2,
+  Incomplete = 3,
+  Completed = 4,
 }
 /**
  * These Art Elements are meant to represent one-off visual effects overlaid on the
@@ -2484,8 +2492,8 @@ export declare const enum DestinyGraphNodeState {
  * if it ever will)
  */
 export interface DestinyActivityGraphArtElementDefinition {
-    /** The position on the map of the art element. */
-    readonly position: DestinyPositionDefinition;
+  /** The position on the map of the art element. */
+  readonly position: DestinyPositionDefinition;
 }
 /**
  * Nodes on a graph can be visually connected: this appears to be the information
@@ -2493,45 +2501,45 @@ export interface DestinyActivityGraphArtElementDefinition {
  * the path for that linking.
  */
 export interface DestinyActivityGraphConnectionDefinition {
-    readonly sourceNodeHash: number;
-    readonly destNodeHash: number;
+  readonly sourceNodeHash: number;
+  readonly destNodeHash: number;
 }
 /**
  * When a Graph needs to show active Objectives, this defines those objectives as
  * well as an identifier.
  */
 export interface DestinyActivityGraphDisplayObjectiveDefinition {
-    /**
-     * $NOTE $amola 2017-01-19 This field is apparently something that CUI uses to
-     * manually wire up objectives to display info. I am unsure how it works.
-     */
-    readonly id: number;
-    /**
-     * The objective being shown on the map.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash: number;
+  /**
+   * $NOTE $amola 2017-01-19 This field is apparently something that CUI uses to
+   * manually wire up objectives to display info. I am unsure how it works.
+   */
+  readonly id: number;
+  /**
+   * The objective being shown on the map.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash: number;
 }
 /**
  * When a Graph needs to show active Progressions, this defines those objectives as
  * well as an identifier.
  */
 export interface DestinyActivityGraphDisplayProgressionDefinition {
-    readonly id: number;
-    readonly progressionHash: number;
+  readonly id: number;
+  readonly progressionHash: number;
 }
 /**
  * This describes links between the current graph and others, as well as when that
  * link is relevant.
  */
 export interface DestinyLinkedGraphDefinition {
-    readonly description: string;
-    readonly name: string;
-    readonly unlockExpression: DestinyUnlockExpressionDefinition;
-    readonly linkedGraphId: number;
-    readonly linkedGraphs: DestinyLinkedGraphEntryDefinition[];
-    readonly overview: string;
+  readonly description: string;
+  readonly name: string;
+  readonly unlockExpression: DestinyUnlockExpressionDefinition;
+  readonly linkedGraphId: number;
+  readonly linkedGraphs: DestinyLinkedGraphEntryDefinition[];
+  readonly overview: string;
 }
 /**
  * Where the sausage gets made. Unlock Expressions are the foundation of the game's
@@ -2543,57 +2551,57 @@ export interface DestinyLinkedGraphDefinition {
  * parsed from Babel.
  */
 export interface DestinyUnlockExpressionDefinition {
-    /**
-     * A shortcut for determining the most restrictive gating that this expression
-     * performs. See the DestinyGatingScope enum's documentation for more details.
-     */
-    readonly scope: DestinyGatingScope;
+  /**
+   * A shortcut for determining the most restrictive gating that this expression
+   * performs. See the DestinyGatingScope enum's documentation for more details.
+   */
+  readonly scope: DestinyGatingScope;
 }
 export interface DestinyLinkedGraphEntryDefinition {
-    readonly activityGraphHash: number;
+  readonly activityGraphHash: number;
 }
 /** Information about matchmaking and party size for the activity. */
 export interface DestinyActivityMatchmakingBlockDefinition {
-    /**
-     * If TRUE, the activity is matchmade. Otherwise, it requires explicit forming of a
-     * party.
-     */
-    readonly isMatchmade: boolean;
-    /** The minimum # of people in the fireteam for the activity to launch. */
-    readonly minParty: number;
-    /** The maximum # of people allowed in a Fireteam. */
-    readonly maxParty: number;
-    /** The maximum # of people allowed across all teams in the activity. */
-    readonly maxPlayers: number;
-    /** If true, you have to Solemnly Swear to be up to Nothing But Good(tm) to play. */
-    readonly requiresGuardianOath: boolean;
+  /**
+   * If TRUE, the activity is matchmade. Otherwise, it requires explicit forming of a
+   * party.
+   */
+  readonly isMatchmade: boolean;
+  /** The minimum # of people in the fireteam for the activity to launch. */
+  readonly minParty: number;
+  /** The maximum # of people allowed in a Fireteam. */
+  readonly maxParty: number;
+  /** The maximum # of people allowed across all teams in the activity. */
+  readonly maxPlayers: number;
+  /** If true, you have to Solemnly Swear to be up to Nothing But Good(tm) to play. */
+  readonly requiresGuardianOath: boolean;
 }
 /** Guided Game information for this activity. */
 export interface DestinyActivityGuidedBlockDefinition {
-    /** The maximum amount of people that can be in the waiting lobby. */
-    readonly guidedMaxLobbySize: number;
-    /** The minimum amount of people that can be in the waiting lobby. */
-    readonly guidedMinLobbySize: number;
-    /**
-     * If -1, the guided group cannot be disbanded. Otherwise, take the total # of
-     * players in the activity and subtract this number: that is the total # of votes
-     * needed for the guided group to disband.
-     */
-    readonly guidedDisbandCount: number;
+  /** The maximum amount of people that can be in the waiting lobby. */
+  readonly guidedMaxLobbySize: number;
+  /** The minimum amount of people that can be in the waiting lobby. */
+  readonly guidedMinLobbySize: number;
+  /**
+   * If -1, the guided group cannot be disbanded. Otherwise, take the total # of
+   * players in the activity and subtract this number: that is the total # of votes
+   * needed for the guided group to disband.
+   */
+  readonly guidedDisbandCount: number;
 }
 export interface DestinyActivityLoadoutRequirementSet {
-    /**
-     * The set of requirements that will be applied on the activity if this requirement
-     * set is active.
-     */
-    readonly requirements: DestinyActivityLoadoutRequirement[];
+  /**
+   * The set of requirements that will be applied on the activity if this requirement
+   * set is active.
+   */
+  readonly requirements: DestinyActivityLoadoutRequirement[];
 }
 export interface DestinyActivityLoadoutRequirement {
-    /** Mapped to DestinyEquipmentSlotDefinition in the manifest. */
-    readonly equipmentSlotHash: number;
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly allowedEquippedItemHashes: number[];
-    readonly allowedWeaponSubTypes: DestinyItemSubType[];
+  /** Mapped to DestinyEquipmentSlotDefinition in the manifest. */
+  readonly equipmentSlotHash: number;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly allowedEquippedItemHashes: number[];
+  readonly allowedWeaponSubTypes: DestinyItemSubType[];
 }
 /**
  * Characters can not only have Inventory buckets (containers of items that are
@@ -2610,44 +2618,44 @@ export interface DestinyActivityLoadoutRequirement {
  * buckets must have Equipment Slots.
  */
 export interface DestinyEquipmentSlotDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * These technically point to "Equipment Category Definitions". But don't get
-     * excited. There's nothing of significant value in those definitions, so I didn't
-     * bother to expose them. You can use the hash here to group equipment slots by
-     * common functionality, which serves the same purpose as if we had the Equipment
-     * Category definitions exposed.
-     */
-    readonly equipmentCategoryHash: number;
-    /**
-     * The inventory bucket that owns this equipment slot.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly bucketTypeHash: number;
-    /**
-     * If True, equipped items should have their custom art dyes applied when rendering
-     * the item. Otherwise, custom art dyes on an item should be ignored if the item is
-     * equipped in this slot.
-     */
-    readonly applyCustomArtDyes: boolean;
-    /** The Art Dye Channels that apply to this equipment slot. */
-    readonly artDyeChannels: DestinyArtDyeReference[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * These technically point to "Equipment Category Definitions". But don't get
+   * excited. There's nothing of significant value in those definitions, so I didn't
+   * bother to expose them. You can use the hash here to group equipment slots by
+   * common functionality, which serves the same purpose as if we had the Equipment
+   * Category definitions exposed.
+   */
+  readonly equipmentCategoryHash: number;
+  /**
+   * The inventory bucket that owns this equipment slot.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly bucketTypeHash: number;
+  /**
+   * If True, equipped items should have their custom art dyes applied when rendering
+   * the item. Otherwise, custom art dyes on an item should be ignored if the item is
+   * equipped in this slot.
+   */
+  readonly applyCustomArtDyes: boolean;
+  /** The Art Dye Channels that apply to this equipment slot. */
+  readonly artDyeChannels: DestinyArtDyeReference[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * An Inventory (be it Character or Profile level) is comprised of many Buckets. An
@@ -2668,96 +2676,96 @@ export interface DestinyEquipmentSlotDefinition {
  * of a Vendor. See the vendor's acceptedItems property for more details.
  */
 export interface DestinyInventoryBucketDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** Where the bucket is found. 0 = Character, 1 = Account */
-    readonly scope: BucketScope;
-    /**
-     * An enum value for what items can be found in the bucket. See the BucketCategory
-     * enum for more details.
-     */
-    readonly category: BucketCategory;
-    /**
-     * Use this property to provide a quick-and-dirty recommended ordering for buckets
-     * in the UI. Most UIs will likely want to forsake this for something more custom
-     * and manual.
-     */
-    readonly bucketOrder: number;
-    /**
-     * The maximum # of item "slots" in a bucket. A slot is a given combination of item
-     * + quantity.
-     *
-     * For instance, a Weapon will always take up a single slot, and always have a
-     * quantity of 1. But a material could take up only a single slot with hundreds of
-     * quantity.
-     */
-    readonly itemCount: number;
-    /**
-     * Sometimes, inventory buckets represent conceptual "locations" in the game that
-     * might not be expected. This value indicates the conceptual location of the
-     * bucket, regardless of where it is actually contained on the character/account.
-     *
-     * See ItemLocation for details.
-     *
-     * Note that location includes the Vault and the Postmaster (both of whom being
-     * just inventory buckets with additional actions that can be performed on them
-     * through a Vendor)
-     */
-    readonly location: ItemLocation;
-    /**
-     * If TRUE, there is at least one Vendor that can transfer items to/from this
-     * bucket. See the DestinyVendorDefinition's acceptedItems property for more
-     * information on how transferring works.
-     */
-    readonly hasTransferDestination: boolean;
-    /**
-     * If True, this bucket is enabled. Disabled buckets may include buckets that were
-     * included for test purposes, or that were going to be used but then were
-     * abandoned but never removed from content *cough*.
-     */
-    readonly enabled: boolean;
-    /**
-     * if a FIFO bucket fills up, it will delete the oldest item from said bucket when
-     * a new item tries to be added to it. If this is FALSE, the bucket will not allow
-     * new items to be placed in it until room is made by the user manually deleting
-     * items from it. You can see an example of this with the Postmaster's bucket.
-     */
-    readonly fifo: boolean;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** Where the bucket is found. 0 = Character, 1 = Account */
+  readonly scope: BucketScope;
+  /**
+   * An enum value for what items can be found in the bucket. See the BucketCategory
+   * enum for more details.
+   */
+  readonly category: BucketCategory;
+  /**
+   * Use this property to provide a quick-and-dirty recommended ordering for buckets
+   * in the UI. Most UIs will likely want to forsake this for something more custom
+   * and manual.
+   */
+  readonly bucketOrder: number;
+  /**
+   * The maximum # of item "slots" in a bucket. A slot is a given combination of item
+   * + quantity.
+   *
+   * For instance, a Weapon will always take up a single slot, and always have a
+   * quantity of 1. But a material could take up only a single slot with hundreds of
+   * quantity.
+   */
+  readonly itemCount: number;
+  /**
+   * Sometimes, inventory buckets represent conceptual "locations" in the game that
+   * might not be expected. This value indicates the conceptual location of the
+   * bucket, regardless of where it is actually contained on the character/account.
+   *
+   * See ItemLocation for details.
+   *
+   * Note that location includes the Vault and the Postmaster (both of whom being
+   * just inventory buckets with additional actions that can be performed on them
+   * through a Vendor)
+   */
+  readonly location: ItemLocation;
+  /**
+   * If TRUE, there is at least one Vendor that can transfer items to/from this
+   * bucket. See the DestinyVendorDefinition's acceptedItems property for more
+   * information on how transferring works.
+   */
+  readonly hasTransferDestination: boolean;
+  /**
+   * If True, this bucket is enabled. Disabled buckets may include buckets that were
+   * included for test purposes, or that were going to be used but then were
+   * abandoned but never removed from content *cough*.
+   */
+  readonly enabled: boolean;
+  /**
+   * if a FIFO bucket fills up, it will delete the oldest item from said bucket when
+   * a new item tries to be added to it. If this is FALSE, the bucket will not allow
+   * new items to be placed in it until room is made by the user manually deleting
+   * items from it. You can see an example of this with the Postmaster's bucket.
+   */
+  readonly fifo: boolean;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export declare const enum BucketScope {
-    Character = 0,
-    Account = 1
+  Character = 0,
+  Account = 1,
 }
 export declare const enum BucketCategory {
-    Invisible = 0,
-    Item = 1,
-    Currency = 2,
-    Equippable = 3,
-    Ignored = 4
+  Invisible = 0,
+  Item = 1,
+  Currency = 2,
+  Equippable = 3,
+  Ignored = 4,
 }
 export declare const enum ItemLocation {
-    Unknown = 0,
-    Inventory = 1,
-    Vault = 2,
-    Vendor = 3,
-    Postmaster = 4
+  Unknown = 0,
+  Inventory = 1,
+  Vault = 2,
+  Vendor = 3,
+  Postmaster = 4,
 }
 export interface DestinyArtDyeReference {
-    readonly artDyeChannelHash: number;
+  readonly artDyeChannelHash: number;
 }
 /**
  * This Enumeration further classifies items by more specific categorizations than
@@ -2776,39 +2784,39 @@ export interface DestinyArtDyeReference {
  * holdovers from Destiny 1 that may or may not still exist.
  */
 export declare const enum DestinyItemSubType {
-    None = 0,
-    /** DEPRECATED. Items can be both "Crucible" and something else interesting. */
-    Crucible = 1,
-    /** DEPRECATED. An item can both be "Vanguard" and something else. */
-    Vanguard = 2,
-    /** DEPRECATED. An item can both be Exotic and something else. */
-    Exotic = 5,
-    AutoRifle = 6,
-    Shotgun = 7,
-    Machinegun = 8,
-    HandCannon = 9,
-    RocketLauncher = 10,
-    FusionRifle = 11,
-    SniperRifle = 12,
-    PulseRifle = 13,
-    ScoutRifle = 14,
-    /** DEPRECATED. An item can both be CRM and something else. */
-    Crm = 16,
-    Sidearm = 17,
-    Sword = 18,
-    Mask = 19,
-    Shader = 20,
-    Ornament = 21,
-    FusionRifleLine = 22,
-    GrenadeLauncher = 23,
-    SubmachineGun = 24,
-    TraceRifle = 25,
-    HelmetArmor = 26,
-    GauntletsArmor = 27,
-    ChestArmor = 28,
-    LegArmor = 29,
-    ClassArmor = 30,
-    Bow = 31
+  None = 0,
+  /** DEPRECATED. Items can be both "Crucible" and something else interesting. */
+  Crucible = 1,
+  /** DEPRECATED. An item can both be "Vanguard" and something else. */
+  Vanguard = 2,
+  /** DEPRECATED. An item can both be Exotic and something else. */
+  Exotic = 5,
+  AutoRifle = 6,
+  Shotgun = 7,
+  Machinegun = 8,
+  HandCannon = 9,
+  RocketLauncher = 10,
+  FusionRifle = 11,
+  SniperRifle = 12,
+  PulseRifle = 13,
+  ScoutRifle = 14,
+  /** DEPRECATED. An item can both be CRM and something else. */
+  Crm = 16,
+  Sidearm = 17,
+  Sword = 18,
+  Mask = 19,
+  Shader = 20,
+  Ornament = 21,
+  FusionRifleLine = 22,
+  GrenadeLauncher = 23,
+  SubmachineGun = 24,
+  TraceRifle = 25,
+  HelmetArmor = 26,
+  GauntletsArmor = 27,
+  ChestArmor = 28,
+  LegArmor = 29,
+  ClassArmor = 30,
+  Bow = 31,
 }
 /**
  * A point of entry into an activity, gated by an unlock flag and with some more-or-
@@ -2822,47 +2830,47 @@ export declare const enum DestinyItemSubType {
  * completed on a weekly achievement.
  */
 export interface DestinyActivityInsertionPointDefinition {
-    /**
-     * A unique hash value representing the phase. This can be useful for, for example,
-     * comparing how different instances of Raids have phases in different orders!
-     */
-    readonly phaseHash: number;
+  /**
+   * A unique hash value representing the phase. This can be useful for, for example,
+   * comparing how different instances of Raids have phases in different orders!
+   */
+  readonly phaseHash: number;
 }
 export interface DestinyEnvironmentLocationMapping {
-    /**
-     * The location that is revealed on the director by this mapping.
-     *
-     * Mapped to DestinyLocationDefinition in the manifest.
-     */
-    readonly locationHash: number;
-    /**
-     * A hint that the UI uses to figure out how this location is activated by the
-     * player.
-     */
-    readonly activationSource: string;
-    /**
-     * If this is populated, it is the item that you must possess for this location to
-     * be active because of this mapping. (theoretically, a location can have multiple
-     * mappings, and some might require an item while others don't)
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash?: number;
-    /**
-     * If this is populated, this is an objective related to the location.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash?: number;
-    /**
-     * If this is populated, this is the activity you have to be playing in order to
-     * see this location appear because of this mapping. (theoretically, a location can
-     * have multiple mappings, and some might require you to be in a specific activity
-     * when others don't)
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash?: number;
+  /**
+   * The location that is revealed on the director by this mapping.
+   *
+   * Mapped to DestinyLocationDefinition in the manifest.
+   */
+  readonly locationHash: number;
+  /**
+   * A hint that the UI uses to figure out how this location is activated by the
+   * player.
+   */
+  readonly activationSource: string;
+  /**
+   * If this is populated, it is the item that you must possess for this location to
+   * be active because of this mapping. (theoretically, a location can have multiple
+   * mappings, and some might require an item while others don't)
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash?: number;
+  /**
+   * If this is populated, this is an objective related to the location.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash?: number;
+  /**
+   * If this is populated, this is the activity you have to be playing in order to
+   * see this location appear because of this mapping. (theoretically, a location can
+   * have multiple mappings, and some might require you to be in a specific activity
+   * when others don't)
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash?: number;
 }
 /**
  * Human readable data about the bubble. Combine with DestinyBubbleDefinition - see
@@ -2871,7 +2879,7 @@ export interface DestinyEnvironmentLocationMapping {
  * DEPRECATED - Just use bubbles.
  */
 export interface DestinyDestinationBubbleSettingDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
 }
 /**
  * Basic identifying data about the bubble. Combine with
@@ -2879,16 +2887,16 @@ export interface DestinyDestinationBubbleSettingDefinition {
  * bubbleSettings for more information.
  */
 export interface DestinyBubbleDefinition {
-    /**
-     * The identifier for the bubble: only guaranteed to be unique within the
-     * Destination.
-     */
-    readonly hash: number;
-    /**
-     * The display properties of this bubble, so you don't have to look them up in a
-     * separate list anymore.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The identifier for the bubble: only guaranteed to be unique within the
+   * Destination.
+   */
+  readonly hash: number;
+  /**
+   * The display properties of this bubble, so you don't have to look them up in a
+   * separate list anymore.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
 }
 /**
  * If a vendor can ever end up performing actions, these are the properties that
@@ -2897,87 +2905,87 @@ export interface DestinyBubbleDefinition {
  * populated and someone finds it useful, it is defined here.
  */
 export interface DestinyVendorActionDefinition {
-    readonly description: string;
-    readonly executeSeconds: number;
-    readonly icon: string;
-    readonly name: string;
-    readonly verb: string;
-    readonly isPositive: boolean;
-    readonly actionId: string;
-    readonly actionHash: number;
-    readonly autoPerformAction: boolean;
+  readonly description: string;
+  readonly executeSeconds: number;
+  readonly icon: string;
+  readonly name: string;
+  readonly verb: string;
+  readonly isPositive: boolean;
+  readonly actionId: string;
+  readonly actionHash: number;
+  readonly autoPerformAction: boolean;
 }
 /**
  * This is the definition for a single Vendor Category, into which Sale Items are
  * grouped.
  */
 export interface DestinyVendorCategoryEntryDefinition {
-    /** The index of the category in the original category definitions for the vendor. */
-    readonly categoryIndex: number;
-    /**
-     * Used in sorting items in vendors... but there's a lot more to it. Just go with
-     * the order provided in the itemIndexes property on the
-     * DestinyVendorCategoryComponent instead, it should be more reliable than trying
-     * to recalculate it yourself.
-     */
-    readonly sortValue: number;
-    /** The hashed identifier for the category. */
-    readonly categoryHash: number;
-    /** The amount of items that will be available when this category is shown. */
-    readonly quantityAvailable: number;
-    /**
-     * If items aren't up for sale in this category, should we still show them (greyed
-     * out)?
-     */
-    readonly showUnavailableItems: boolean;
-    /**
-     * If you don't have the currency required to buy items from this category, should
-     * the items be hidden?
-     */
-    readonly hideIfNoCurrency: boolean;
-    /** True if this category doesn't allow purchases. */
-    readonly hideFromRegularPurchase: boolean;
-    /**
-     * The localized string for making purchases from this category, if it is different
-     * from the vendor's string for purchasing.
-     */
-    readonly buyStringOverride: string;
-    /** If the category is disabled, this is the localized description to show. */
-    readonly disabledDescription: string;
-    /** The localized title of the category. */
-    readonly displayTitle: string;
-    /**
-     * If this category has an overlay prompt that should appear, this contains the
-     * details of that prompt.
-     */
-    readonly overlay: DestinyVendorCategoryOverlayDefinition;
-    /**
-     * A shortcut for the vendor item indexes sold under this category. Saves us from
-     * some expensive reorganization at runtime.
-     */
-    readonly vendorItemIndexes: number[];
-    /**
-     * Sometimes a category isn't actually used to sell items, but rather to preview
-     * them. This implies different UI (and manual placement of the category in the UI)
-     * in the game, and special treatment.
-     */
-    readonly isPreview: boolean;
-    /** If true, this category only displays items: you can't purchase anything in them. */
-    readonly isDisplayOnly: boolean;
-    readonly resetIntervalMinutesOverride: number;
-    readonly resetOffsetMinutesOverride: number;
+  /** The index of the category in the original category definitions for the vendor. */
+  readonly categoryIndex: number;
+  /**
+   * Used in sorting items in vendors... but there's a lot more to it. Just go with
+   * the order provided in the itemIndexes property on the
+   * DestinyVendorCategoryComponent instead, it should be more reliable than trying
+   * to recalculate it yourself.
+   */
+  readonly sortValue: number;
+  /** The hashed identifier for the category. */
+  readonly categoryHash: number;
+  /** The amount of items that will be available when this category is shown. */
+  readonly quantityAvailable: number;
+  /**
+   * If items aren't up for sale in this category, should we still show them (greyed
+   * out)?
+   */
+  readonly showUnavailableItems: boolean;
+  /**
+   * If you don't have the currency required to buy items from this category, should
+   * the items be hidden?
+   */
+  readonly hideIfNoCurrency: boolean;
+  /** True if this category doesn't allow purchases. */
+  readonly hideFromRegularPurchase: boolean;
+  /**
+   * The localized string for making purchases from this category, if it is different
+   * from the vendor's string for purchasing.
+   */
+  readonly buyStringOverride: string;
+  /** If the category is disabled, this is the localized description to show. */
+  readonly disabledDescription: string;
+  /** The localized title of the category. */
+  readonly displayTitle: string;
+  /**
+   * If this category has an overlay prompt that should appear, this contains the
+   * details of that prompt.
+   */
+  readonly overlay: DestinyVendorCategoryOverlayDefinition;
+  /**
+   * A shortcut for the vendor item indexes sold under this category. Saves us from
+   * some expensive reorganization at runtime.
+   */
+  readonly vendorItemIndexes: number[];
+  /**
+   * Sometimes a category isn't actually used to sell items, but rather to preview
+   * them. This implies different UI (and manual placement of the category in the UI)
+   * in the game, and special treatment.
+   */
+  readonly isPreview: boolean;
+  /** If true, this category only displays items: you can't purchase anything in them. */
+  readonly isDisplayOnly: boolean;
+  readonly resetIntervalMinutesOverride: number;
+  readonly resetOffsetMinutesOverride: number;
 }
 /**
  * The details of an overlay prompt to show to a user. They are all fairly self-
  * explanatory localized strings that can be shown.
  */
 export interface DestinyVendorCategoryOverlayDefinition {
-    readonly choiceDescription: string;
-    readonly description: string;
-    readonly icon: string;
-    readonly title: string;
-    /** If this overlay has a currency item that it features, this is said featured item. */
-    readonly currencyItemHash?: number;
+  readonly choiceDescription: string;
+  readonly description: string;
+  readonly icon: string;
+  readonly title: string;
+  /** If this overlay has a currency item that it features, this is said featured item. */
+  readonly currencyItemHash?: number;
 }
 /**
  * Display Categories are different from "categories" in that these are
@@ -2987,45 +2995,45 @@ export interface DestinyVendorCategoryOverlayDefinition {
  * often will be no meaningful relationship between the two.
  */
 export interface DestinyDisplayCategoryDefinition {
-    readonly index: number;
-    /** A string identifier for the display category. */
-    readonly identifier: string;
-    readonly displayCategoryHash: number;
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If true, this category should be displayed in the "Banner" section of the vendor'
-     * s UI.
-     */
-    readonly displayInBanner: boolean;
-    /**
-     * If it exists, this is the hash identifier of a DestinyProgressionDefinition that
-     * represents the progression to show on this display category.
-     *
-     * Specific categories can now have thier own distinct progression, apparently. So
-     * that's cool.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressionHash?: number;
-    /** If this category sorts items in a nonstandard way, this will be the way we sort. */
-    readonly sortOrder: VendorDisplayCategorySortOrder;
-    /**
-     * An indicator of how the category will be displayed in the UI. It's up to you to
-     * do something cool or interesting in response to this, or just to treat it as a
-     * normal category.
-     */
-    readonly displayStyleHash?: number;
-    /**
-     * An indicator of how the category will be displayed in the UI. It's up to you to
-     * do something cool or interesting in response to this, or just to treat it as a
-     * normal category.
-     */
-    readonly displayStyleIdentifier: string;
+  readonly index: number;
+  /** A string identifier for the display category. */
+  readonly identifier: string;
+  readonly displayCategoryHash: number;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If true, this category should be displayed in the "Banner" section of the vendor'
+   * s UI.
+   */
+  readonly displayInBanner: boolean;
+  /**
+   * If it exists, this is the hash identifier of a DestinyProgressionDefinition that
+   * represents the progression to show on this display category.
+   *
+   * Specific categories can now have thier own distinct progression, apparently. So
+   * that's cool.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressionHash?: number;
+  /** If this category sorts items in a nonstandard way, this will be the way we sort. */
+  readonly sortOrder: VendorDisplayCategorySortOrder;
+  /**
+   * An indicator of how the category will be displayed in the UI. It's up to you to
+   * do something cool or interesting in response to this, or just to treat it as a
+   * normal category.
+   */
+  readonly displayStyleHash?: number;
+  /**
+   * An indicator of how the category will be displayed in the UI. It's up to you to
+   * do something cool or interesting in response to this, or just to treat it as a
+   * normal category.
+   */
+  readonly displayStyleIdentifier: string;
 }
 /** Display categories can have custom sort orders. These are the possible options. */
 export declare const enum VendorDisplayCategorySortOrder {
-    Default = 0,
-    SortByTier = 1
+  Default = 0,
+  SortByTier = 1,
 }
 /**
  * A Vendor Interaction is a dialog shown by the vendor other than sale items or
@@ -3033,64 +3041,64 @@ export declare const enum VendorDisplayCategorySortOrder {
  * to it by choosing an option or reward.
  */
 export interface DestinyVendorInteractionDefinition {
-    /**
-     * The position of this interaction in its parent array. Note that this is NOT
-     * content agnostic, and should not be used as such.
-     */
-    readonly interactionIndex: number;
-    /** The potential replies that the user can make to the interaction. */
-    readonly replies: DestinyVendorInteractionReplyDefinition[];
-    /**
-     * If >= 0, this is the category of sale items to show along with this interaction
-     * dialog.
-     */
-    readonly vendorCategoryIndex: number;
-    /**
-     * If this interaction dialog is about a quest, this is the questline related to
-     * the interaction. You can use this to show the quest overview, or even the
-     * character's status with the quest if you use it to find the character's current
-     * Quest Step by checking their inventory against this questlineItemHash's
-     * DestinyInventoryItemDefinition.setData.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly questlineItemHash: number;
-    /**
-     * If this interaction is meant to show you sacks, this is the list of types of
-     * sacks to be shown. If empty, the interaction is not meant to show sacks.
-     */
-    readonly sackInteractionList: DestinyVendorInteractionSackEntryDefinition[];
-    /**
-     * A UI hint for the behavior of the interaction screen. This is useful to
-     * determine what type of interaction is occurring, such as a prompt to receive a
-     * rank up reward or a prompt to choose a reward for completing a quest. The hash
-     * isn't as useful as the Enum in retrospect, well what can you do. Try using
-     * interactionType instead.
-     */
-    readonly uiInteractionType: number;
-    /**
-     * The enumerated version of the possible UI hints for vendor interactions, which
-     * is a little easier to grok than the hash found in uiInteractionType.
-     */
-    readonly interactionType: VendorInteractionType;
-    /**
-     * If this interaction is displaying rewards, this is the text to use for the
-     * header of the reward-displaying section of the interaction.
-     */
-    readonly rewardBlockLabel: string;
-    /**
-     * If the vendor's reward list is sourced from one of his categories, this is the
-     * index into the category array of items to show.
-     */
-    readonly rewardVendorCategoryIndex: number;
-    /** If the vendor interaction has flavor text, this is some of it. */
-    readonly flavorLineOne: string;
-    /** If the vendor interaction has flavor text, this is the rest of it. */
-    readonly flavorLineTwo: string;
-    /** The header for the interaction dialog. */
-    readonly headerDisplayProperties: DestinyDisplayPropertiesDefinition;
-    /** The localized text telling the player what to do when they see this dialog. */
-    readonly instructions: string;
+  /**
+   * The position of this interaction in its parent array. Note that this is NOT
+   * content agnostic, and should not be used as such.
+   */
+  readonly interactionIndex: number;
+  /** The potential replies that the user can make to the interaction. */
+  readonly replies: DestinyVendorInteractionReplyDefinition[];
+  /**
+   * If >= 0, this is the category of sale items to show along with this interaction
+   * dialog.
+   */
+  readonly vendorCategoryIndex: number;
+  /**
+   * If this interaction dialog is about a quest, this is the questline related to
+   * the interaction. You can use this to show the quest overview, or even the
+   * character's status with the quest if you use it to find the character's current
+   * Quest Step by checking their inventory against this questlineItemHash's
+   * DestinyInventoryItemDefinition.setData.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly questlineItemHash: number;
+  /**
+   * If this interaction is meant to show you sacks, this is the list of types of
+   * sacks to be shown. If empty, the interaction is not meant to show sacks.
+   */
+  readonly sackInteractionList: DestinyVendorInteractionSackEntryDefinition[];
+  /**
+   * A UI hint for the behavior of the interaction screen. This is useful to
+   * determine what type of interaction is occurring, such as a prompt to receive a
+   * rank up reward or a prompt to choose a reward for completing a quest. The hash
+   * isn't as useful as the Enum in retrospect, well what can you do. Try using
+   * interactionType instead.
+   */
+  readonly uiInteractionType: number;
+  /**
+   * The enumerated version of the possible UI hints for vendor interactions, which
+   * is a little easier to grok than the hash found in uiInteractionType.
+   */
+  readonly interactionType: VendorInteractionType;
+  /**
+   * If this interaction is displaying rewards, this is the text to use for the
+   * header of the reward-displaying section of the interaction.
+   */
+  readonly rewardBlockLabel: string;
+  /**
+   * If the vendor's reward list is sourced from one of his categories, this is the
+   * index into the category array of items to show.
+   */
+  readonly rewardVendorCategoryIndex: number;
+  /** If the vendor interaction has flavor text, this is some of it. */
+  readonly flavorLineOne: string;
+  /** If the vendor interaction has flavor text, this is the rest of it. */
+  readonly flavorLineTwo: string;
+  /** The header for the interaction dialog. */
+  readonly headerDisplayProperties: DestinyDisplayPropertiesDefinition;
+  /** The localized text telling the player what to do when they see this dialog. */
+  readonly instructions: string;
 }
 /**
  * When the interaction is replied to, Reward sites will fire and items potentially
@@ -3100,27 +3108,27 @@ export interface DestinyVendorInteractionDefinition {
  * interaction: this is how you get either/or rewards from vendors.
  */
 export interface DestinyVendorInteractionReplyDefinition {
-    /** The rewards granted upon responding to the vendor. */
-    readonly itemRewardsSelection: DestinyVendorInteractionRewardSelection;
-    /** The localized text for the reply. */
-    readonly reply: string;
-    /** An enum indicating the type of reply being made. */
-    readonly replyType: DestinyVendorReplyType;
+  /** The rewards granted upon responding to the vendor. */
+  readonly itemRewardsSelection: DestinyVendorInteractionRewardSelection;
+  /** The localized text for the reply. */
+  readonly reply: string;
+  /** An enum indicating the type of reply being made. */
+  readonly replyType: DestinyVendorReplyType;
 }
 /**
  * When a Vendor Interaction provides rewards, they'll either let you choose one or
  * let you have all of them. This determines which it will be.
  */
 export declare const enum DestinyVendorInteractionRewardSelection {
-    None = 0,
-    One = 1,
-    All = 2
+  None = 0,
+  One = 1,
+  All = 2,
 }
 /** This determines the type of reply that a Vendor will have during an Interaction. */
 export declare const enum DestinyVendorReplyType {
-    Accept = 0,
-    Decline = 1,
-    Complete = 2
+  Accept = 0,
+  Decline = 1,
+  Complete = 2,
 }
 /**
  * Compare this sackType to the sack identifier in the
@@ -3128,203 +3136,203 @@ export declare const enum DestinyVendorReplyType {
  * show this sack with this interaction.
  */
 export interface DestinyVendorInteractionSackEntryDefinition {
-    readonly sackType: number;
+  readonly sackType: number;
 }
 /** An enumeration of the known UI interactions for Vendors. */
 export declare const enum VendorInteractionType {
-    Unknown = 0,
-    /** An empty interaction. If this ends up in content, it is probably a game bug. */
-    Undefined = 1,
-    /** An interaction shown when you complete a quest and receive a reward. */
-    QuestComplete = 2,
-    /**
-     * An interaction shown when you talk to a Vendor as an intermediary step of a
-     * quest.
-     */
-    QuestContinue = 3,
-    /** An interaction shown when you are previewing the vendor's reputation rewards. */
-    ReputationPreview = 4,
-    /** An interaction shown when you rank up with the vendor. */
-    RankUpReward = 5,
-    /** An interaction shown when you have tokens to turn in for the vendor. */
-    TokenTurnIn = 6,
-    /** An interaction shown when you're accepting a new quest. */
-    QuestAccept = 7,
-    /**
-     * Honestly, this doesn't seem consistent to me. It is used to give you choices in
-     * the Cryptarch as well as some reward prompts by the Eververse vendor. I'll have
-     * to look into that further at some point.
-     */
-    ProgressTab = 8,
-    /** These seem even less consistent. I don't know what these are. */
-    End = 9,
-    /** Also seem inconsistent. I also don't know what these are offhand. */
-    Start = 10
+  Unknown = 0,
+  /** An empty interaction. If this ends up in content, it is probably a game bug. */
+  Undefined = 1,
+  /** An interaction shown when you complete a quest and receive a reward. */
+  QuestComplete = 2,
+  /**
+   * An interaction shown when you talk to a Vendor as an intermediary step of a
+   * quest.
+   */
+  QuestContinue = 3,
+  /** An interaction shown when you are previewing the vendor's reputation rewards. */
+  ReputationPreview = 4,
+  /** An interaction shown when you rank up with the vendor. */
+  RankUpReward = 5,
+  /** An interaction shown when you have tokens to turn in for the vendor. */
+  TokenTurnIn = 6,
+  /** An interaction shown when you're accepting a new quest. */
+  QuestAccept = 7,
+  /**
+   * Honestly, this doesn't seem consistent to me. It is used to give you choices in
+   * the Cryptarch as well as some reward prompts by the Eververse vendor. I'll have
+   * to look into that further at some point.
+   */
+  ProgressTab = 8,
+  /** These seem even less consistent. I don't know what these are. */
+  End = 9,
+  /** Also seem inconsistent. I also don't know what these are offhand. */
+  Start = 10,
 }
 /**
  * The definition for an "inventory flyout": a UI screen where we show you part of
  * an otherwise hidden vendor inventory: like the Vault inventory buckets.
  */
 export interface DestinyVendorInventoryFlyoutDefinition {
-    /** If the flyout is locked, this is the reason why. */
-    readonly lockedDescription: string;
-    /** The title and other common properties of the flyout. */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** A list of inventory buckets and other metadata to show on the screen. */
-    readonly buckets: DestinyVendorInventoryFlyoutBucketDefinition[];
-    /** An identifier for the flyout, in case anything else needs to refer to them. */
-    readonly flyoutId: number;
-    /**
-     * If this is true, don't show any of the glistening "this is a new item" UI
-     * elements, like we show on the inventory items themselves in in-game UI.
-     */
-    readonly suppressNewness: boolean;
-    /**
-     * If this flyout is meant to show you the contents of the player's equipment slot,
-     * this is the slot to show.
-     */
-    readonly equipmentSlotHash?: number;
+  /** If the flyout is locked, this is the reason why. */
+  readonly lockedDescription: string;
+  /** The title and other common properties of the flyout. */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** A list of inventory buckets and other metadata to show on the screen. */
+  readonly buckets: DestinyVendorInventoryFlyoutBucketDefinition[];
+  /** An identifier for the flyout, in case anything else needs to refer to them. */
+  readonly flyoutId: number;
+  /**
+   * If this is true, don't show any of the glistening "this is a new item" UI
+   * elements, like we show on the inventory items themselves in in-game UI.
+   */
+  readonly suppressNewness: boolean;
+  /**
+   * If this flyout is meant to show you the contents of the player's equipment slot,
+   * this is the slot to show.
+   */
+  readonly equipmentSlotHash?: number;
 }
 /**
  * Information about a single inventory bucket in a vendor flyout UI and how it is
  * shown.
  */
 export interface DestinyVendorInventoryFlyoutBucketDefinition {
-    /** If true, the inventory bucket should be able to be collapsed visually. */
-    readonly collapsible: boolean;
-    /**
-     * The inventory bucket whose contents should be shown.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly inventoryBucketHash: number;
-    /** The methodology to use for sorting items from the flyout. */
-    readonly sortItemsBy: DestinyItemSortType;
+  /** If true, the inventory bucket should be able to be collapsed visually. */
+  readonly collapsible: boolean;
+  /**
+   * The inventory bucket whose contents should be shown.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly inventoryBucketHash: number;
+  /** The methodology to use for sorting items from the flyout. */
+  readonly sortItemsBy: DestinyItemSortType;
 }
 /** Determines how items are sorted in an inventory bucket. */
 export declare const enum DestinyItemSortType {
-    ItemId = 0,
-    Timestamp = 1,
-    StackSize = 2
+  ItemId = 0,
+  Timestamp = 1,
+  StackSize = 2,
 }
 /** This represents an item being sold by the vendor. */
 export interface DestinyVendorItemDefinition {
-    /**
-     * The index into the DestinyVendorDefinition.saleList. This is what we use to
-     * refer to items being sold throughout live and definition data.
-     */
-    readonly vendorItemIndex: number;
-    /**
-     * The hash identifier of the item being sold (DestinyInventoryItemDefinition).
-     *
-     * Note that a vendor can sell the same item in multiple ways, so don't assume that
-     * itemHash is a unique identifier for this entity.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * The amount you will recieve of the item described in itemHash if you make the
-     * purchase.
-     */
-    readonly quantity: number;
-    /**
-     * An list of indexes into the DestinyVendorDefinition.failureStrings array,
-     * indicating the possible failure strings that can be relevant for this item.
-     */
-    readonly failureIndexes: number[];
-    /**
-     * This is a pre-compiled aggregation of item value and priceOverrideList, so that
-     * we have one place to check for what the purchaser must pay for the item. Use
-     * this instead of trying to piece together the price separately.
-     *
-     * The somewhat crappy part about this is that, now that item quantity overrides
-     * have dynamic modifiers, this will not necessarily be statically true. If you
-     * were using this instead of live data, switch to using live data.
-     */
-    readonly currencies: DestinyVendorItemQuantity[];
-    /**
-     * If this item can be refunded, this is the policy for what will be refundd, how,
-     * and in what time period.
-     */
-    readonly refundPolicy: DestinyVendorItemRefundPolicy;
-    /** The amount of time before refundability of the newly purchased item will expire. */
-    readonly refundTimeLimit: number;
-    /**
-     * The Default level at which the item will spawn. Almost always driven by an
-     * adjusto these days. Ideally should be singular. It's a long story how this ended
-     * up as a list, but there is always either going to be 0:1 of these entities.
-     */
-    readonly creationLevels: DestinyItemCreationEntryLevelDefinition[];
-    /**
-     * This is an index specifically into the display category, as opposed to the
-     * server-side Categories (which do not need to match or pair with each other in
-     * any way: server side categories are really just structures for common validation.
-     * Display Category will let us more easily categorize items visually)
-     */
-    readonly displayCategoryIndex: number;
-    /**
-     * The index into the DestinyVendorDefinition.categories array, so you can find the
-     * category associated with this item.
-     */
-    readonly categoryIndex: number;
-    /** Same as above, but for the original category indexes. */
-    readonly originalCategoryIndex: number;
-    /** The minimum character level at which this item is available for sale. */
-    readonly minimumLevel: number;
-    /** The maximum character level at which this item is available for sale. */
-    readonly maximumLevel: number;
-    /** The action to be performed when purchasing the item, if it's not just "buy". */
-    readonly action: DestinyVendorSaleItemActionBlockDefinition;
-    /** The string identifier for the category selling this item. */
-    readonly displayCategory: string;
-    /** The inventory bucket into which this item will be placed upon purchase. */
-    readonly inventoryBucketHash: number;
-    /**
-     * The most restrictive scope that determines whether the item is available in the
-     * Vendor's inventory. See DestinyGatingScope's documentation for more information.
-     *
-     * This can be determined by Unlock gating, or by whether or not the item has
-     * purchase level requirements (minimumLevel and maximumLevel properties).
-     */
-    readonly visibilityScope: DestinyGatingScope;
-    /**
-     * Similar to visibilityScope, it represents the most restrictive scope that
-     * determines whether the item can be purchased. It will at least be as restrictive
-     * as visibilityScope, but could be more restrictive if the item has additional
-     * purchase requirements beyond whether it is merely visible or not.
-     *
-     * See DestinyGatingScope's documentation for more information.
-     */
-    readonly purchasableScope: DestinyGatingScope;
-    /**
-     * If this item can only be purchased by a given platform, this indicates the
-     * platform to which it is restricted.
-     */
-    readonly exclusivity: BungieMembershipType;
-    /** If this sale can only be performed as the result of an offer check, this is true. */
-    readonly isOffer?: boolean;
-    /**
-     * If this sale can only be performed as the result of receiving a CRM offer, this
-     * is true.
-     */
-    readonly isCrm?: boolean;
-    /**
-     * *if* the category this item is in supports non-default sorting, this value
-     * should represent the sorting value to use, pre-processed and ready to go.
-     */
-    readonly sortValue: number;
-    /**
-     * If this item can expire, this is the tooltip message to show with its expiration
-     * info.
-     */
-    readonly expirationTooltip: string;
-    /**
-     * If this is populated, the purchase of this item should redirect to purchasing
-     * these other items instead.
-     */
-    readonly redirectToSaleIndexes: number[];
-    readonly socketOverrides: DestinyVendorItemSocketOverride[];
+  /**
+   * The index into the DestinyVendorDefinition.saleList. This is what we use to
+   * refer to items being sold throughout live and definition data.
+   */
+  readonly vendorItemIndex: number;
+  /**
+   * The hash identifier of the item being sold (DestinyInventoryItemDefinition).
+   *
+   * Note that a vendor can sell the same item in multiple ways, so don't assume that
+   * itemHash is a unique identifier for this entity.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * The amount you will recieve of the item described in itemHash if you make the
+   * purchase.
+   */
+  readonly quantity: number;
+  /**
+   * An list of indexes into the DestinyVendorDefinition.failureStrings array,
+   * indicating the possible failure strings that can be relevant for this item.
+   */
+  readonly failureIndexes: number[];
+  /**
+   * This is a pre-compiled aggregation of item value and priceOverrideList, so that
+   * we have one place to check for what the purchaser must pay for the item. Use
+   * this instead of trying to piece together the price separately.
+   *
+   * The somewhat crappy part about this is that, now that item quantity overrides
+   * have dynamic modifiers, this will not necessarily be statically true. If you
+   * were using this instead of live data, switch to using live data.
+   */
+  readonly currencies: DestinyVendorItemQuantity[];
+  /**
+   * If this item can be refunded, this is the policy for what will be refundd, how,
+   * and in what time period.
+   */
+  readonly refundPolicy: DestinyVendorItemRefundPolicy;
+  /** The amount of time before refundability of the newly purchased item will expire. */
+  readonly refundTimeLimit: number;
+  /**
+   * The Default level at which the item will spawn. Almost always driven by an
+   * adjusto these days. Ideally should be singular. It's a long story how this ended
+   * up as a list, but there is always either going to be 0:1 of these entities.
+   */
+  readonly creationLevels: DestinyItemCreationEntryLevelDefinition[];
+  /**
+   * This is an index specifically into the display category, as opposed to the
+   * server-side Categories (which do not need to match or pair with each other in
+   * any way: server side categories are really just structures for common validation.
+   * Display Category will let us more easily categorize items visually)
+   */
+  readonly displayCategoryIndex: number;
+  /**
+   * The index into the DestinyVendorDefinition.categories array, so you can find the
+   * category associated with this item.
+   */
+  readonly categoryIndex: number;
+  /** Same as above, but for the original category indexes. */
+  readonly originalCategoryIndex: number;
+  /** The minimum character level at which this item is available for sale. */
+  readonly minimumLevel: number;
+  /** The maximum character level at which this item is available for sale. */
+  readonly maximumLevel: number;
+  /** The action to be performed when purchasing the item, if it's not just "buy". */
+  readonly action: DestinyVendorSaleItemActionBlockDefinition;
+  /** The string identifier for the category selling this item. */
+  readonly displayCategory: string;
+  /** The inventory bucket into which this item will be placed upon purchase. */
+  readonly inventoryBucketHash: number;
+  /**
+   * The most restrictive scope that determines whether the item is available in the
+   * Vendor's inventory. See DestinyGatingScope's documentation for more information.
+   *
+   * This can be determined by Unlock gating, or by whether or not the item has
+   * purchase level requirements (minimumLevel and maximumLevel properties).
+   */
+  readonly visibilityScope: DestinyGatingScope;
+  /**
+   * Similar to visibilityScope, it represents the most restrictive scope that
+   * determines whether the item can be purchased. It will at least be as restrictive
+   * as visibilityScope, but could be more restrictive if the item has additional
+   * purchase requirements beyond whether it is merely visible or not.
+   *
+   * See DestinyGatingScope's documentation for more information.
+   */
+  readonly purchasableScope: DestinyGatingScope;
+  /**
+   * If this item can only be purchased by a given platform, this indicates the
+   * platform to which it is restricted.
+   */
+  readonly exclusivity: BungieMembershipType;
+  /** If this sale can only be performed as the result of an offer check, this is true. */
+  readonly isOffer?: boolean;
+  /**
+   * If this sale can only be performed as the result of receiving a CRM offer, this
+   * is true.
+   */
+  readonly isCrm?: boolean;
+  /**
+   * *if* the category this item is in supports non-default sorting, this value
+   * should represent the sorting value to use, pre-processed and ready to go.
+   */
+  readonly sortValue: number;
+  /**
+   * If this item can expire, this is the tooltip message to show with its expiration
+   * info.
+   */
+  readonly expirationTooltip: string;
+  /**
+   * If this is populated, the purchase of this item should redirect to purchasing
+   * these other items instead.
+   */
+  readonly redirectToSaleIndexes: number[];
+  readonly socketOverrides: DestinyVendorItemSocketOverride[];
 }
 /**
  * In addition to item quantity information for vendor prices, this also has any
@@ -3333,66 +3341,66 @@ export interface DestinyVendorItemDefinition {
  * BNet servers, but it's there)
  */
 export interface DestinyVendorItemQuantity {
-    /**
-     * The hash identifier for the item in question. Use it to look up the item's
-     * DestinyInventoryItemDefinition.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If this quantity is referring to a specific instance of an item, this will have
-     * the item's instance ID. Normally, this will be null.
-     */
-    readonly itemInstanceId?: string;
-    /**
-     * The amount of the item needed/available depending on the context of where
-     * DestinyItemQuantity is being used.
-     */
-    readonly quantity: number;
+  /**
+   * The hash identifier for the item in question. Use it to look up the item's
+   * DestinyInventoryItemDefinition.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If this quantity is referring to a specific instance of an item, this will have
+   * the item's instance ID. Normally, this will be null.
+   */
+  readonly itemInstanceId?: string;
+  /**
+   * The amount of the item needed/available depending on the context of where
+   * DestinyItemQuantity is being used.
+   */
+  readonly quantity: number;
 }
 /** The action that happens when the user attempts to refund an item. */
 export declare const enum DestinyVendorItemRefundPolicy {
-    NotRefundable = 0,
-    DeletesItem = 1,
-    RevokesLicense = 2
+  NotRefundable = 0,
+  DeletesItem = 1,
+  RevokesLicense = 2,
 }
 /** An overly complicated wrapper for the item level at which the item should spawn. */
 export interface DestinyItemCreationEntryLevelDefinition {
-    readonly level: number;
+  readonly level: number;
 }
 /** Not terribly useful, some basic cooldown interaction info. */
 export interface DestinyVendorSaleItemActionBlockDefinition {
-    readonly executeSeconds: number;
-    readonly isPositive: boolean;
+  readonly executeSeconds: number;
+  readonly isPositive: boolean;
 }
 /**
  * The information for how the vendor purchase should override a given socket with
  * custom plug data.
  */
 export interface DestinyVendorItemSocketOverride {
-    /**
-     * If this is populated, the socket will be overridden with a specific plug.
-     *
-     * If this isn't populated, it's being overridden by something more complicated
-     * that is only known by the Game Server and God, which means we can't tell you in
-     * advance what it'll be.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly singleItemHash?: number;
-    /**
-     * If this is greater than -1, the number of randomized plugs on this socket will
-     * be set to this quantity instead of whatever it's set to by default.
-     */
-    readonly randomizedOptionsCount: number;
-    /**
-     * This appears to be used to select which socket ultimately gets the override
-     * defined here.
-     *
-     * Mapped to DestinySocketTypeDefinition in the manifest.
-     */
-    readonly socketTypeHash: number;
+  /**
+   * If this is populated, the socket will be overridden with a specific plug.
+   *
+   * If this isn't populated, it's being overridden by something more complicated
+   * that is only known by the Game Server and God, which means we can't tell you in
+   * advance what it'll be.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly singleItemHash?: number;
+  /**
+   * If this is greater than -1, the number of randomized plugs on this socket will
+   * be set to this quantity instead of whatever it's set to by default.
+   */
+  readonly randomizedOptionsCount: number;
+  /**
+   * This appears to be used to select which socket ultimately gets the override
+   * defined here.
+   *
+   * Mapped to DestinySocketTypeDefinition in the manifest.
+   */
+  readonly socketTypeHash: number;
 }
 /**
  * All Sockets have a "Type": a set of common properties that determine when the
@@ -3404,84 +3412,84 @@ export interface DestinyVendorItemSocketOverride {
  * Plugs.
  */
 export interface DestinySocketTypeDefinition {
-    /**
-     * There are fields for this display data, but they appear to be unpopulated as of
-     * now. I am not sure where in the UI these would show if they even were populated,
-     * but I will continue to return this data in case it becomes useful.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** Defines what happens when a plug is inserted into sockets of this type. */
-    readonly insertAction: DestinyInsertPlugActionDefinition;
-    /**
-     * A list of Plug "Categories" that are allowed to be plugged into sockets of this
-     * type.
-     *
-     * These should be compared against a given plug item's
-     * DestinyInventoryItemDefinition.plug.plugCategoryHash, which indicates the plug
-     * item's category.
-     *
-     * If the plug's category matches any whitelisted plug, or if the whitelist is
-     * empty, it is allowed to be inserted.
-     */
-    readonly plugWhitelist: DestinyPlugWhitelistEntryDefinition[];
-    /** Mapped to DestinySocketCategoryDefinition in the manifest. */
-    readonly socketCategoryHash: number;
-    /**
-     * Sometimes a socket isn't visible. These are some of the conditions under which
-     * sockets of this type are not visible. Unfortunately, the truth of visibility is
-     * much, much more complex. Best to rely on the live data for whether the socket is
-     * visible and enabled.
-     */
-    readonly visibility: DestinySocketVisibility;
-    readonly alwaysRandomizeSockets: boolean;
-    readonly isPreviewEnabled: boolean;
-    readonly hideDuplicateReusablePlugs: boolean;
-    /**
-     * This property indicates if the socket type determines whether Emblem icons and
-     * nameplates should be overridden by the inserted plug item's icon and nameplate.
-     */
-    readonly overridesUiAppearance: boolean;
-    readonly avoidDuplicatesOnInitialization: boolean;
-    readonly currencyScalars: DestinySocketTypeScalarMaterialRequirementEntry[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * There are fields for this display data, but they appear to be unpopulated as of
+   * now. I am not sure where in the UI these would show if they even were populated,
+   * but I will continue to return this data in case it becomes useful.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** Defines what happens when a plug is inserted into sockets of this type. */
+  readonly insertAction: DestinyInsertPlugActionDefinition;
+  /**
+   * A list of Plug "Categories" that are allowed to be plugged into sockets of this
+   * type.
+   *
+   * These should be compared against a given plug item's
+   * DestinyInventoryItemDefinition.plug.plugCategoryHash, which indicates the plug
+   * item's category.
+   *
+   * If the plug's category matches any whitelisted plug, or if the whitelist is
+   * empty, it is allowed to be inserted.
+   */
+  readonly plugWhitelist: DestinyPlugWhitelistEntryDefinition[];
+  /** Mapped to DestinySocketCategoryDefinition in the manifest. */
+  readonly socketCategoryHash: number;
+  /**
+   * Sometimes a socket isn't visible. These are some of the conditions under which
+   * sockets of this type are not visible. Unfortunately, the truth of visibility is
+   * much, much more complex. Best to rely on the live data for whether the socket is
+   * visible and enabled.
+   */
+  readonly visibility: DestinySocketVisibility;
+  readonly alwaysRandomizeSockets: boolean;
+  readonly isPreviewEnabled: boolean;
+  readonly hideDuplicateReusablePlugs: boolean;
+  /**
+   * This property indicates if the socket type determines whether Emblem icons and
+   * nameplates should be overridden by the inserted plug item's icon and nameplate.
+   */
+  readonly overridesUiAppearance: boolean;
+  readonly avoidDuplicatesOnInitialization: boolean;
+  readonly currencyScalars: DestinySocketTypeScalarMaterialRequirementEntry[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Data related to what happens while a plug is being inserted, mostly for UI
  * purposes.
  */
 export interface DestinyInsertPlugActionDefinition {
-    /**
-     * How long it takes for the Plugging of the item to be completed once it is
-     * initiated, if you care.
-     */
-    readonly actionExecuteSeconds: number;
-    /**
-     * The type of action being performed when you act on this Socket Type. The most
-     * common value is "insert plug", but there are others as well (for instance, a "
-     * Masterwork" socket may allow for Re-initialization, and an Infusion socket
-     * allows for items to be consumed to upgrade the item)
-     */
-    readonly actionType: SocketTypeActionType;
+  /**
+   * How long it takes for the Plugging of the item to be completed once it is
+   * initiated, if you care.
+   */
+  readonly actionExecuteSeconds: number;
+  /**
+   * The type of action being performed when you act on this Socket Type. The most
+   * common value is "insert plug", but there are others as well (for instance, a "
+   * Masterwork" socket may allow for Re-initialization, and an Infusion socket
+   * allows for items to be consumed to upgrade the item)
+   */
+  readonly actionType: SocketTypeActionType;
 }
 /** Indicates the type of actions that can be performed */
 export declare const enum SocketTypeActionType {
-    InsertPlug = 0,
-    InfuseItem = 1,
-    ReinitializeSocket = 2
+  InsertPlug = 0,
+  InfuseItem = 1,
+  ReinitializeSocket = 2,
 }
 /**
  * Defines a plug "Category" that is allowed to be plugged into a socket of this
@@ -3492,35 +3500,35 @@ export declare const enum SocketTypeActionType {
  * item's category.
  */
 export interface DestinyPlugWhitelistEntryDefinition {
-    /**
-     * The hash identifier of the Plug Category to compare against the plug item's plug.
-     * plugCategoryHash.
-     *
-     * Note that this does NOT relate to any Definition in itself, it is only used for
-     * comparison purposes.
-     */
-    readonly categoryHash: number;
-    /** The string identifier for the category, which is here mostly for debug purposes. */
-    readonly categoryIdentifier: string;
-    /**
-     * The list of all plug items (DestinyInventoryItemDefinition) that the socket may
-     * randomly be populated with when reinitialized.
-     *
-     * Which ones you should actually show are determined by the plug being inserted
-     * into the socket, and the socket’s type.
-     *
-     * When you inspect the plug that could go into a Masterwork Socket, look up the
-     * socket type of the socket being inspected and find the
-     * DestinySocketTypeDefinition.
-     *
-     * Then, look at the Plugs that can fit in that socket. Find the Whitelist in the
-     * DestinySocketTypeDefinition that matches the plug item’s categoryhash.
-     *
-     * That whitelist entry will potentially have a new “
-     * reinitializationPossiblePlugHashes” property.If it does, that means we know what
-     * it will roll if you try to insert this plug into this socket.
-     */
-    readonly reinitializationPossiblePlugHashes: number[];
+  /**
+   * The hash identifier of the Plug Category to compare against the plug item's plug.
+   * plugCategoryHash.
+   *
+   * Note that this does NOT relate to any Definition in itself, it is only used for
+   * comparison purposes.
+   */
+  readonly categoryHash: number;
+  /** The string identifier for the category, which is here mostly for debug purposes. */
+  readonly categoryIdentifier: string;
+  /**
+   * The list of all plug items (DestinyInventoryItemDefinition) that the socket may
+   * randomly be populated with when reinitialized.
+   *
+   * Which ones you should actually show are determined by the plug being inserted
+   * into the socket, and the socket’s type.
+   *
+   * When you inspect the plug that could go into a Masterwork Socket, look up the
+   * socket type of the socket being inspected and find the
+   * DestinySocketTypeDefinition.
+   *
+   * Then, look at the Plugs that can fit in that socket. Find the Whitelist in the
+   * DestinySocketTypeDefinition that matches the plug item’s categoryhash.
+   *
+   * That whitelist entry will potentially have a new “
+   * reinitializationPossiblePlugHashes” property.If it does, that means we know what
+   * it will roll if you try to insert this plug into this socket.
+   */
+  readonly reinitializationPossiblePlugHashes: number[];
 }
 /**
  * Sockets on an item are organized into Categories visually.
@@ -3545,60 +3553,60 @@ export interface DestinyPlugWhitelistEntryDefinition {
  * github.com/Bungie-net/api/issues/522 for more info)
  */
 export interface DestinySocketCategoryDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * A string hinting to the game's UI system about how the sockets in this category
-     * should be displayed.
-     *
-     * BNet doesn't use it: it's up to you to find valid values and make your own
-     * special UI if you want to honor this category style.
-     */
-    readonly uiCategoryStyle: number;
-    /** Same as uiCategoryStyle, but in a more usable enumeration form. */
-    readonly categoryStyle: DestinySocketCategoryStyle;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * A string hinting to the game's UI system about how the sockets in this category
+   * should be displayed.
+   *
+   * BNet doesn't use it: it's up to you to find valid values and make your own
+   * special UI if you want to honor this category style.
+   */
+  readonly uiCategoryStyle: number;
+  /** Same as uiCategoryStyle, but in a more usable enumeration form. */
+  readonly categoryStyle: DestinySocketCategoryStyle;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Represents the possible and known UI styles used by the game for rendering
  * Socket Categories.
  */
 export declare const enum DestinySocketCategoryStyle {
-    Unknown = 0,
-    Reusable = 1,
-    Consumable = 2,
-    Unlockable = 3,
-    Intrinsic = 4,
-    EnergyMeter = 5,
-    LargePerk = 6
+  Unknown = 0,
+  Reusable = 1,
+  Consumable = 2,
+  Unlockable = 3,
+  Intrinsic = 4,
+  EnergyMeter = 5,
+  LargePerk = 6,
 }
 export declare const enum DestinySocketVisibility {
-    Visible = 0,
-    Hidden = 1,
-    HiddenWhenEmpty = 2,
-    HiddenIfNoPlugsAvailable = 3
+  Visible = 0,
+  Hidden = 1,
+  HiddenWhenEmpty = 2,
+  HiddenIfNoPlugsAvailable = 3,
 }
 export interface DestinySocketTypeScalarMaterialRequirementEntry {
-    readonly currencyItemHash: number;
-    readonly scalarValue: number;
+  readonly currencyItemHash: number;
+  readonly scalarValue: number;
 }
 /** When a vendor provides services, this is the localized name of those services. */
 export interface DestinyVendorServiceDefinition {
-    /** The localized name of a service provided. */
-    readonly name: string;
+  /** The localized name of a service provided. */
+  readonly name: string;
 }
 /**
  * If you ever wondered how the Vault works, here it is.
@@ -3613,49 +3621,49 @@ export interface DestinyVendorServiceDefinition {
  * by Accepted Items.
  */
 export interface DestinyVendorAcceptedItemDefinition {
-    /**
-     * The "source" bucket for a transfer. When a user wants to transfer an item, the
-     * appropriate DestinyVendorDefinition's acceptedItems property is evaluated,
-     * looking for an entry where acceptedInventoryBucketHash matches the bucket that
-     * the item being transferred is currently located. If it exists, the item will be
-     * transferred into whatever bucket is defined by destinationInventoryBucketHash.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly acceptedInventoryBucketHash: number;
-    /**
-     * This is the bucket where the item being transferred will be put, given that it
-     * was being transferred *from* the bucket defined in acceptedInventoryBucketHash.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly destinationInventoryBucketHash: number;
+  /**
+   * The "source" bucket for a transfer. When a user wants to transfer an item, the
+   * appropriate DestinyVendorDefinition's acceptedItems property is evaluated,
+   * looking for an entry where acceptedInventoryBucketHash matches the bucket that
+   * the item being transferred is currently located. If it exists, the item will be
+   * transferred into whatever bucket is defined by destinationInventoryBucketHash.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly acceptedInventoryBucketHash: number;
+  /**
+   * This is the bucket where the item being transferred will be put, given that it
+   * was being transferred *from* the bucket defined in acceptedInventoryBucketHash.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly destinationInventoryBucketHash: number;
 }
 /**
  * These definitions represent vendors' locations and relevant display information
  * at different times in the game.
  */
 export interface DestinyVendorLocationDefinition {
-    /**
-     * The hash identifier for a Destination at which this vendor may be located. Each
-     * destination where a Vendor may exist will only ever have a single entry.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly destinationHash: number;
-    /**
-     * The relative path to the background image representing this Vendor at this
-     * location, for use in a banner.
-     */
-    readonly backgroundImagePath: string;
+  /**
+   * The hash identifier for a Destination at which this vendor may be located. Each
+   * destination where a Vendor may exist will only ever have a single entry.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly destinationHash: number;
+  /**
+   * The relative path to the background image representing this Vendor at this
+   * location, for use in a banner.
+   */
+  readonly backgroundImagePath: string;
 }
 export interface DestinyVendorGroupReference {
-    /**
-     * The DestinyVendorGroupDefinition to which this Vendor can belong.
-     *
-     * Mapped to DestinyVendorGroupDefinition in the manifest.
-     */
-    readonly vendorGroupHash: number;
+  /**
+   * The DestinyVendorGroupDefinition to which this Vendor can belong.
+   *
+   * Mapped to DestinyVendorGroupDefinition in the manifest.
+   */
+  readonly vendorGroupHash: number;
 }
 /**
  * BNet attempts to group vendors into similar collections. These groups aren't
@@ -3671,103 +3679,103 @@ export interface DestinyVendorGroupReference {
  * we will do grouping in the Companion.
  */
 export interface DestinyVendorGroupDefinition {
-    /** The recommended order in which to render the groups, Ascending order. */
-    readonly order: number;
-    /** For now, a group just has a name. */
-    readonly categoryName: string;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /** The recommended order in which to render the groups, Ascending order. */
+  readonly order: number;
+  /** For now, a group just has a name. */
+  readonly categoryName: string;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * A specific "spot" referred to by a location. Only one of these can be active at
  * a time for a given Location.
  */
 export interface DestinyLocationReleaseDefinition {
-    /** Sadly, these don't appear to be populated anymore (ever?) */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    readonly smallTransparentIcon: string;
-    readonly mapIcon: string;
-    readonly largeTransparentIcon: string;
-    /**
-     * If we had map information, this spawnPoint would be interesting. But sadly, we
-     * don't have that info.
-     */
-    readonly spawnPoint: number;
-    /**
-     * The Destination being pointed to by this location.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly destinationHash: number;
-    /**
-     * The Activity being pointed to by this location.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /** The Activity Graph being pointed to by this location. */
-    readonly activityGraphHash: number;
-    /**
-     * The Activity Graph Node being pointed to by this location. (Remember that
-     * Activity Graph Node hashes are only unique within an Activity Graph: so use the
-     * combination to find the node being spoken of)
-     */
-    readonly activityGraphNodeHash: number;
-    /**
-     * The Activity Bubble within the Destination. Look this up in the
-     * DestinyDestinationDefinition's bubbles and bubbleSettings properties.
-     */
-    readonly activityBubbleName: number;
-    /**
-     * If we had map information, this would tell us something cool about the path this
-     * location wants you to take. I wish we had map information.
-     */
-    readonly activityPathBundle: number;
-    /**
-     * If we had map information, this would tell us about path information related to
-     * destination on the map. Sad. Maybe you can do something cool with it. Go to town
-     * man.
-     */
-    readonly activityPathDestination: number;
-    /** The type of Nav Point that this represents. See the enumeration for more info. */
-    readonly navPointType: DestinyActivityNavPointType;
-    /**
-     * Looks like it should be the position on the map, but sadly it does not look
-     * populated... yet?
-     */
-    readonly worldPosition: number[];
+  /** Sadly, these don't appear to be populated anymore (ever?) */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  readonly smallTransparentIcon: string;
+  readonly mapIcon: string;
+  readonly largeTransparentIcon: string;
+  /**
+   * If we had map information, this spawnPoint would be interesting. But sadly, we
+   * don't have that info.
+   */
+  readonly spawnPoint: number;
+  /**
+   * The Destination being pointed to by this location.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly destinationHash: number;
+  /**
+   * The Activity being pointed to by this location.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /** The Activity Graph being pointed to by this location. */
+  readonly activityGraphHash: number;
+  /**
+   * The Activity Graph Node being pointed to by this location. (Remember that
+   * Activity Graph Node hashes are only unique within an Activity Graph: so use the
+   * combination to find the node being spoken of)
+   */
+  readonly activityGraphNodeHash: number;
+  /**
+   * The Activity Bubble within the Destination. Look this up in the
+   * DestinyDestinationDefinition's bubbles and bubbleSettings properties.
+   */
+  readonly activityBubbleName: number;
+  /**
+   * If we had map information, this would tell us something cool about the path this
+   * location wants you to take. I wish we had map information.
+   */
+  readonly activityPathBundle: number;
+  /**
+   * If we had map information, this would tell us about path information related to
+   * destination on the map. Sad. Maybe you can do something cool with it. Go to town
+   * man.
+   */
+  readonly activityPathDestination: number;
+  /** The type of Nav Point that this represents. See the enumeration for more info. */
+  readonly navPointType: DestinyActivityNavPointType;
+  /**
+   * Looks like it should be the position on the map, but sadly it does not look
+   * populated... yet?
+   */
+  readonly worldPosition: number[];
 }
 export declare const enum DestinyActivityNavPointType {
-    Inactive = 0,
-    PrimaryObjective = 1,
-    SecondaryObjective = 2,
-    TravelObjective = 3,
-    PublicEventObjective = 4,
-    AmmoCache = 5,
-    PointTypeFlag = 6,
-    CapturePoint = 7,
-    DefensiveEncounter = 8,
-    GhostInteraction = 9,
-    KillAi = 10,
-    QuestItem = 11,
-    PatrolMission = 12,
-    Incoming = 13,
-    ArenaObjective = 14,
-    AutomationHint = 15,
-    TrackedQuest = 16
+  Inactive = 0,
+  PrimaryObjective = 1,
+  SecondaryObjective = 2,
+  TravelObjective = 3,
+  PublicEventObjective = 4,
+  AmmoCache = 5,
+  PointTypeFlag = 6,
+  CapturePoint = 7,
+  DefensiveEncounter = 8,
+  GhostInteraction = 9,
+  KillAi = 10,
+  QuestItem = 11,
+  PatrolMission = 12,
+  Incoming = 13,
+  ArenaObjective = 14,
+  AutomationHint = 15,
+  TrackedQuest = 16,
 }
 /**
  * If you're showing an unlock value in the UI, this is the format in which it
@@ -3775,70 +3783,70 @@ export declare const enum DestinyActivityNavPointType {
  * determine how best to render these options.
  */
 export declare const enum DestinyUnlockValueUIStyle {
-    /** Generally, Automatic means "Just show the number" */
-    Automatic = 0,
-    /**
-     * Show the number as a fractional value. For this to make sense, the value being
-     * displayed should have a comparable upper bound, like the progress to the next
-     * level of a Progression.
-     */
-    Fraction = 1,
-    /**
-     * Show the number as a checkbox. 0 Will mean unchecked, any other value will mean
-     * checked.
-     */
-    Checkbox = 2,
-    /**
-     * Show the number as a percentage. For this to make sense, the value being
-     * displayed should have a comparable upper bound, like the progress to the next
-     * level of a Progression.
-     */
-    Percentage = 3,
-    /**
-     * Show the number as a date and time. The number will be the number of seconds
-     * since the Unix Epoch (January 1st, 1970 at midnight UTC). It'll be up to you to
-     * convert this into a date and time format understandable to the user in their
-     * time zone.
-     */
-    DateTime = 4,
-    /**
-     * Show the number as a floating point value that represents a fraction, where 0 is
-     * min and 1 is max. For this to make sense, the value being displayed should have
-     * a comparable upper bound, like the progress to the next level of a Progression.
-     */
-    FractionFloat = 5,
-    /** Show the number as a straight-up integer. */
-    Integer = 6,
-    /** Show the number as a time duration. The value will be returned as seconds. */
-    TimeDuration = 7,
-    /**
-     * Don't bother showing the value at all, it's not easily human-interpretable, and
-     * used for some internal purpose.
-     */
-    Hidden = 8,
-    /** Example: "1.5x" */
-    Multiplier = 9,
-    /**
-     * Show the value as a series of green pips, like the wins in a Trials of Osiris
-     * score card.
-     */
-    GreenPips = 10,
-    /**
-     * Show the value as a series of red pips, like the losses in a Trials of Osiris
-     * score card.
-     */
-    RedPips = 11,
-    /**
-     * Show the value as a percentage. For example: "51%" - Does no division, only
-     * appends '%'
-     */
-    ExplicitPercentage = 12,
-    /**
-     * Show the value as a floating-point number. For example: "4.52" NOTE: Passed
-     * along from Investment as whole number with last two digits as decimal values (
-     * 452 -> 4.52)
-     */
-    RawFloat = 13
+  /** Generally, Automatic means "Just show the number" */
+  Automatic = 0,
+  /**
+   * Show the number as a fractional value. For this to make sense, the value being
+   * displayed should have a comparable upper bound, like the progress to the next
+   * level of a Progression.
+   */
+  Fraction = 1,
+  /**
+   * Show the number as a checkbox. 0 Will mean unchecked, any other value will mean
+   * checked.
+   */
+  Checkbox = 2,
+  /**
+   * Show the number as a percentage. For this to make sense, the value being
+   * displayed should have a comparable upper bound, like the progress to the next
+   * level of a Progression.
+   */
+  Percentage = 3,
+  /**
+   * Show the number as a date and time. The number will be the number of seconds
+   * since the Unix Epoch (January 1st, 1970 at midnight UTC). It'll be up to you to
+   * convert this into a date and time format understandable to the user in their
+   * time zone.
+   */
+  DateTime = 4,
+  /**
+   * Show the number as a floating point value that represents a fraction, where 0 is
+   * min and 1 is max. For this to make sense, the value being displayed should have
+   * a comparable upper bound, like the progress to the next level of a Progression.
+   */
+  FractionFloat = 5,
+  /** Show the number as a straight-up integer. */
+  Integer = 6,
+  /** Show the number as a time duration. The value will be returned as seconds. */
+  TimeDuration = 7,
+  /**
+   * Don't bother showing the value at all, it's not easily human-interpretable, and
+   * used for some internal purpose.
+   */
+  Hidden = 8,
+  /** Example: "1.5x" */
+  Multiplier = 9,
+  /**
+   * Show the value as a series of green pips, like the wins in a Trials of Osiris
+   * score card.
+   */
+  GreenPips = 10,
+  /**
+   * Show the value as a series of red pips, like the losses in a Trials of Osiris
+   * score card.
+   */
+  RedPips = 11,
+  /**
+   * Show the value as a percentage. For example: "51%" - Does no division, only
+   * appends '%'
+   */
+  ExplicitPercentage = 12,
+  /**
+   * Show the value as a floating-point number. For example: "4.52" NOTE: Passed
+   * along from Investment as whole number with last two digits as decimal values (
+   * 452 -> 4.52)
+   */
+  RawFloat = 13,
 }
 /**
  * Defines the conditions under which an intrinsic perk is applied while
@@ -3848,18 +3856,18 @@ export declare const enum DestinyUnlockValueUIStyle {
  * modifies gameplay in some interesting way.
  */
 export interface DestinyObjectivePerkEntryDefinition {
-    /**
-     * The hash identifier of the DestinySandboxPerkDefinition that will be applied to
-     * the character.
-     *
-     * Mapped to DestinySandboxPerkDefinition in the manifest.
-     */
-    readonly perkHash: number;
-    /**
-     * An enumeration indicating whether it will be applied as long as the Objective is
-     * active, when it's completed, or until it's completed.
-     */
-    readonly style: DestinyObjectiveGrantStyle;
+  /**
+   * The hash identifier of the DestinySandboxPerkDefinition that will be applied to
+   * the character.
+   *
+   * Mapped to DestinySandboxPerkDefinition in the manifest.
+   */
+  readonly perkHash: number;
+  /**
+   * An enumeration indicating whether it will be applied as long as the Objective is
+   * active, when it's completed, or until it's completed.
+   */
+  readonly style: DestinyObjectiveGrantStyle;
 }
 /**
  * Perks are modifiers to a character or item that can be applied situationally.
@@ -3882,66 +3890,66 @@ export interface DestinyObjectivePerkEntryDefinition {
  * unknown and undocumented.
  */
 export interface DestinySandboxPerkDefinition {
-    /**
-     * These display properties are by no means guaranteed to be populated. Usually
-     * when it is, it's only because we back-filled them with the displayProperties of
-     * some Talent Node or Plug item that happened to be uniquely providing that perk.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** The string identifier for the perk. */
-    readonly perkIdentifier: string;
-    /**
-     * If true, you can actually show the perk in the UI. Otherwise, it doesn't have
-     * useful player-facing information.
-     */
-    readonly isDisplayable: boolean;
-    /**
-     * If this perk grants a damage type to a weapon, the damage type will be defined
-     * here.
-     *
-     * Unless you have a compelling reason to use this enum value, use the
-     * damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.
-     */
-    readonly damageType: DamageType;
-    /**
-     * The hash identifier for looking up the DestinyDamageTypeDefinition, if this perk
-     * has a damage type.
-     *
-     * This is preferred over using the damageType enumeration value, which has been
-     * left purely because it is occasionally convenient.
-     */
-    readonly damageTypeHash?: number;
-    /**
-     * An old holdover from the original Armory, this was an attempt to group perks by
-     * functionality.
-     *
-     * It is as yet unpopulated, and there will be quite a bit of work needed to
-     * restore it to its former working order.
-     */
-    readonly perkGroups: DestinyTalentNodeStepGroups;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * These display properties are by no means guaranteed to be populated. Usually
+   * when it is, it's only because we back-filled them with the displayProperties of
+   * some Talent Node or Plug item that happened to be uniquely providing that perk.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** The string identifier for the perk. */
+  readonly perkIdentifier: string;
+  /**
+   * If true, you can actually show the perk in the UI. Otherwise, it doesn't have
+   * useful player-facing information.
+   */
+  readonly isDisplayable: boolean;
+  /**
+   * If this perk grants a damage type to a weapon, the damage type will be defined
+   * here.
+   *
+   * Unless you have a compelling reason to use this enum value, use the
+   * damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.
+   */
+  readonly damageType: DamageType;
+  /**
+   * The hash identifier for looking up the DestinyDamageTypeDefinition, if this perk
+   * has a damage type.
+   *
+   * This is preferred over using the damageType enumeration value, which has been
+   * left purely because it is occasionally convenient.
+   */
+  readonly damageTypeHash?: number;
+  /**
+   * An old holdover from the original Armory, this was an attempt to group perks by
+   * functionality.
+   *
+   * It is as yet unpopulated, and there will be quite a bit of work needed to
+   * restore it to its former working order.
+   */
+  readonly perkGroups: DestinyTalentNodeStepGroups;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export declare const enum DamageType {
-    None = 0,
-    Kinetic = 1,
-    Arc = 2,
-    Thermal = 3,
-    Void = 4,
-    Raid = 5
+  None = 0,
+  Kinetic = 1,
+  Arc = 2,
+  Thermal = 3,
+  Void = 4,
+  Raid = 5,
 }
 /**
  * These properties are an attempt to categorize talent node steps by certain
@@ -3949,108 +3957,108 @@ export declare const enum DamageType {
  * categorized.
  */
 export interface DestinyTalentNodeStepGroups {
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly weaponPerformance: DestinyTalentNodeStepWeaponPerformances;
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly impactEffects: DestinyTalentNodeStepImpactEffects;
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly guardianAttributes: DestinyTalentNodeStepGuardianAttributes;
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly lightAbilities: DestinyTalentNodeStepLightAbilities;
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly damageTypes: DestinyTalentNodeStepDamageTypes;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly weaponPerformance: DestinyTalentNodeStepWeaponPerformances;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly impactEffects: DestinyTalentNodeStepImpactEffects;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly guardianAttributes: DestinyTalentNodeStepGuardianAttributes;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly lightAbilities: DestinyTalentNodeStepLightAbilities;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly damageTypes: DestinyTalentNodeStepDamageTypes;
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum DestinyTalentNodeStepWeaponPerformances {
-    None = 0,
-    RateOfFire = 1,
-    Damage = 2,
-    Accuracy = 4,
-    Range = 8,
-    Zoom = 16,
-    Recoil = 32,
-    Ready = 64,
-    Reload = 128,
-    HairTrigger = 256,
-    AmmoAndMagazine = 512,
-    TrackingAndDetonation = 1024,
-    ShotgunSpread = 2048,
-    ChargeTime = 4096,
-    All = 8191
+  None = 0,
+  RateOfFire = 1,
+  Damage = 2,
+  Accuracy = 4,
+  Range = 8,
+  Zoom = 16,
+  Recoil = 32,
+  Ready = 64,
+  Reload = 128,
+  HairTrigger = 256,
+  AmmoAndMagazine = 512,
+  TrackingAndDetonation = 1024,
+  ShotgunSpread = 2048,
+  ChargeTime = 4096,
+  All = 8191,
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum DestinyTalentNodeStepImpactEffects {
-    None = 0,
-    ArmorPiercing = 1,
-    Ricochet = 2,
-    Flinch = 4,
-    CollateralDamage = 8,
-    Disorient = 16,
-    HighlightTarget = 32,
-    All = 63
+  None = 0,
+  ArmorPiercing = 1,
+  Ricochet = 2,
+  Flinch = 4,
+  CollateralDamage = 8,
+  Disorient = 16,
+  HighlightTarget = 32,
+  All = 63,
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum DestinyTalentNodeStepGuardianAttributes {
-    None = 0,
-    Stats = 1,
-    Shields = 2,
-    Health = 4,
-    Revive = 8,
-    AimUnderFire = 16,
-    Radar = 32,
-    Invisibility = 64,
-    Reputations = 128,
-    All = 255
+  None = 0,
+  Stats = 1,
+  Shields = 2,
+  Health = 4,
+  Revive = 8,
+  AimUnderFire = 16,
+  Radar = 32,
+  Invisibility = 64,
+  Reputations = 128,
+  All = 255,
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum DestinyTalentNodeStepLightAbilities {
-    None = 0,
-    Grenades = 1,
-    Melee = 2,
-    MovementModes = 4,
-    Orbs = 8,
-    SuperEnergy = 16,
-    SuperMods = 32,
-    All = 63
+  None = 0,
+  Grenades = 1,
+  Melee = 2,
+  MovementModes = 4,
+  Orbs = 8,
+  SuperEnergy = 16,
+  SuperMods = 32,
+  All = 63,
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum DestinyTalentNodeStepDamageTypes {
-    None = 0,
-    Kinetic = 1,
-    Arc = 2,
-    Solar = 4,
-    Void = 8,
-    All = 15
+  None = 0,
+  Kinetic = 1,
+  Arc = 2,
+  Solar = 4,
+  Void = 8,
+  All = 15,
 }
 /**
  * Some Objectives provide perks, generally as part of providing some kind of
@@ -4058,22 +4066,22 @@ export declare const enum DestinyTalentNodeStepDamageTypes {
  * granted.
  */
 export declare const enum DestinyObjectiveGrantStyle {
-    WhenIncomplete = 0,
-    WhenComplete = 1,
-    Always = 2
+  WhenIncomplete = 0,
+  WhenComplete = 1,
+  Always = 2,
 }
 /**
  * Defines the conditions under which stat modifications will be applied to a
  * Character while participating in an objective.
  */
 export interface DestinyObjectiveStatEntryDefinition {
-    /** The stat being modified, and the value used. */
-    readonly stat: DestinyItemInvestmentStatDefinition;
-    /**
-     * Whether it will be applied as long as the objective is active, when it's
-     * completed, or until it's completed.
-     */
-    readonly style: DestinyObjectiveGrantStyle;
+  /** The stat being modified, and the value used. */
+  readonly stat: DestinyItemInvestmentStatDefinition;
+  /**
+   * Whether it will be applied as long as the objective is active, when it's
+   * completed, or until it's completed.
+   */
+  readonly style: DestinyObjectiveGrantStyle;
 }
 /**
  * Represents a "raw" investment stat, before calculated stats are calculated and
@@ -4085,27 +4093,27 @@ export interface DestinyObjectiveStatEntryDefinition {
  * something useful or interesting with the pre-processed statistics.
  */
 export interface DestinyItemInvestmentStatDefinition {
-    /**
-     * The hash identifier for the DestinyStatDefinition defining this stat.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly statTypeHash: number;
-    /**
-     * The raw "Investment" value for the stat, before transformations are performed to
-     * turn this raw stat into stats that are displayed in the game UI.
-     */
-    readonly value: number;
-    /**
-     * If this is true, the stat will only be applied on the item in certain game state
-     * conditions, and we can't know statically whether or not this stat will be
-     * applied. Check the "live" API data instead for whether this value is being
-     * applied on a specific instance of the item in question, and you can use this to
-     * decide whether you want to show the stat on the generic view of the item, or
-     * whether you want to show some kind of caveat or warning about the stat value
-     * being conditional on game state.
-     */
-    readonly isConditionallyActive: boolean;
+  /**
+   * The hash identifier for the DestinyStatDefinition defining this stat.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly statTypeHash: number;
+  /**
+   * The raw "Investment" value for the stat, before transformations are performed to
+   * turn this raw stat into stats that are displayed in the game UI.
+   */
+  readonly value: number;
+  /**
+   * If this is true, the stat will only be applied on the item in certain game state
+   * conditions, and we can't know statically whether or not this stat will be
+   * applied. Check the "live" API data instead for whether this value is being
+   * applied on a specific instance of the item in question, and you can use this to
+   * decide whether you want to show the stat on the generic view of the item, or
+   * whether you want to show some kind of caveat or warning about the stat value
+   * being conditional on game state.
+   */
+  readonly isConditionallyActive: boolean;
 }
 /**
  * This represents a stat that's applied to a character or an item (such as a
@@ -4162,36 +4170,36 @@ export interface DestinyItemInvestmentStatDefinition {
  * is then piped back to the UI for display in-game, but not to BNet.)
  */
 export interface DestinyStatDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * Stats can exist on a character or an item, and they may potentially be
-     * aggregated in different ways. The DestinyStatAggregationType enum value
-     * indicates the way that this stat is being aggregated.
-     */
-    readonly aggregationType: DestinyStatAggregationType;
-    /**
-     * True if the stat is computed rather than being delivered as a raw value on items.
-     *
-     * For instance, the Light stat in Destiny 1 was a computed stat.
-     */
-    readonly hasComputedBlock: boolean;
-    /** The category of the stat, according to the game. */
-    readonly statCategory: DestinyStatCategory;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * Stats can exist on a character or an item, and they may potentially be
+   * aggregated in different ways. The DestinyStatAggregationType enum value
+   * indicates the way that this stat is being aggregated.
+   */
+  readonly aggregationType: DestinyStatAggregationType;
+  /**
+   * True if the stat is computed rather than being delivered as a raw value on items.
+   *
+   * For instance, the Light stat in Destiny 1 was a computed stat.
+   */
+  readonly hasComputedBlock: boolean;
+  /** The category of the stat, according to the game. */
+  readonly statCategory: DestinyStatCategory;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * When a Stat (DestinyStatDefinition) is aggregated, this is the rules used for
@@ -4205,74 +4213,74 @@ export interface DestinyStatDefinition {
  * directly on the item.
  */
 export declare const enum DestinyStatAggregationType {
-    CharacterAverage = 0,
-    Character = 1,
-    Item = 2
+  CharacterAverage = 0,
+  Character = 1,
+  Item = 2,
 }
 /** At last, stats have categories. Use this for whatever purpose you might wish. */
 export declare const enum DestinyStatCategory {
-    Gameplay = 0,
-    Weapon = 1,
-    Defense = 2,
-    Primary = 3
+  Gameplay = 0,
+  Weapon = 1,
+  Defense = 2,
+  Primary = 3,
 }
 export interface DestinyRecordDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * Indicates whether this Record's state is determined on a per-character or on an
-     * account-wide basis.
-     */
-    readonly scope: DestinyScope;
-    readonly presentationInfo: DestinyPresentationChildBlock;
-    /** Mapped to DestinyLoreDefinition in the manifest. */
-    readonly loreHash?: number;
-    /** Mapped to DestinyObjectiveDefinition in the manifest. */
-    readonly objectiveHashes: number[];
-    readonly recordValueStyle: DestinyRecordValueStyle;
-    readonly titleInfo: DestinyRecordTitleBlock;
-    readonly completionInfo: DestinyRecordCompletionBlock;
-    readonly stateInfo: SchemaRecordStateBlock;
-    readonly requirements: DestinyPresentationNodeRequirementsBlock;
-    readonly expirationInfo: DestinyRecordExpirationBlock;
-    /**
-     * Some records have multiple 'interval' objectives, and the record may be claimed
-     * at each completed interval
-     */
-    readonly intervalInfo: DestinyRecordIntervalBlock;
-    /**
-     * If there is any publicly available information about rewards earned for
-     * achieving this record, this is the list of those items.
-     *
-     * However, note that some records intentionally have "hidden" rewards. These will
-     * not be returned in this list.
-     */
-    readonly rewardItems: DestinyItemQuantity[];
-    readonly presentationNodeType: DestinyPresentationNodeType;
-    readonly traitIds: string[];
-    /** Mapped to DestinyTraitDefinition in the manifest. */
-    readonly traitHashes: number[];
-    /**
-     * A quick reference to presentation nodes that have this node as a child.
-     * Presentation nodes can be parented under multiple parents.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly parentNodeHashes: number[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * Indicates whether this Record's state is determined on a per-character or on an
+   * account-wide basis.
+   */
+  readonly scope: DestinyScope;
+  readonly presentationInfo: DestinyPresentationChildBlock;
+  /** Mapped to DestinyLoreDefinition in the manifest. */
+  readonly loreHash?: number;
+  /** Mapped to DestinyObjectiveDefinition in the manifest. */
+  readonly objectiveHashes: number[];
+  readonly recordValueStyle: DestinyRecordValueStyle;
+  readonly titleInfo: DestinyRecordTitleBlock;
+  readonly completionInfo: DestinyRecordCompletionBlock;
+  readonly stateInfo: SchemaRecordStateBlock;
+  readonly requirements: DestinyPresentationNodeRequirementsBlock;
+  readonly expirationInfo: DestinyRecordExpirationBlock;
+  /**
+   * Some records have multiple 'interval' objectives, and the record may be claimed
+   * at each completed interval
+   */
+  readonly intervalInfo: DestinyRecordIntervalBlock;
+  /**
+   * If there is any publicly available information about rewards earned for
+   * achieving this record, this is the list of those items.
+   *
+   * However, note that some records intentionally have "hidden" rewards. These will
+   * not be returned in this list.
+   */
+  readonly rewardItems: DestinyItemQuantity[];
+  readonly presentationNodeType: DestinyPresentationNodeType;
+  readonly traitIds: string[];
+  /** Mapped to DestinyTraitDefinition in the manifest. */
+  readonly traitHashes: number[];
+  /**
+   * A quick reference to presentation nodes that have this node as a child.
+   * Presentation nodes can be parented under multiple parents.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly parentNodeHashes: number[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * These are definitions for in-game "Lore," meant to be narrative enhancements of
@@ -4283,158 +4291,158 @@ export interface DestinyRecordDefinition {
  * with them. If they end up having cool data.
  */
 export interface DestinyLoreDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    readonly subtitle: string;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  readonly subtitle: string;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export declare const enum DestinyRecordValueStyle {
-    Integer = 0,
-    Percentage = 1,
-    Milliseconds = 2,
-    Boolean = 3,
-    Decimal = 4
+  Integer = 0,
+  Percentage = 1,
+  Milliseconds = 2,
+  Boolean = 3,
+  Decimal = 4,
 }
 export interface DestinyRecordTitleBlock {
-    readonly hasTitle: boolean;
-    readonly titlesByGender: {
-        [key in DestinyGender]: string;
-    };
-    /**
-     * For those who prefer to use the definitions.
-     *
-     * Mapped to DestinyGenderDefinition in the manifest.
-     */
-    readonly titlesByGenderHash: {
-        [key: number]: string;
-    };
+  readonly hasTitle: boolean;
+  readonly titlesByGender: {
+    [key in DestinyGender]: string;
+  };
+  /**
+   * For those who prefer to use the definitions.
+   *
+   * Mapped to DestinyGenderDefinition in the manifest.
+   */
+  readonly titlesByGenderHash: {
+    [key: number]: string;
+  };
 }
 /**
  * Gender is a social construct, and as such we have definitions for Genders. Right
  * now there happens to only be two, but we'll see what the future holds.
  */
 export interface DestinyGenderDefinition {
-    /**
-     * This is a quick reference enumeration for all of the currently defined Genders.
-     * We use the enumeration for quicker lookups in related data, like
-     * DestinyClassDefinition.genderedClassNames.
-     */
-    readonly genderType: DestinyGender;
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * This is a quick reference enumeration for all of the currently defined Genders.
+   * We use the enumeration for quicker lookups in related data, like
+   * DestinyClassDefinition.genderedClassNames.
+   */
+  readonly genderType: DestinyGender;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export declare const enum DestinyGender {
-    Male = 0,
-    Female = 1,
-    Unknown = 2
+  Male = 0,
+  Female = 1,
+  Unknown = 2,
 }
 export interface DestinyRecordCompletionBlock {
-    /**
-     * The number of objectives that must be completed before the objective is
-     * considered "complete"
-     */
-    readonly partialCompletionObjectiveCountThreshold: number;
-    readonly ScoreValue: number;
-    readonly shouldFireToast: boolean;
-    readonly toastStyle: DestinyRecordToastStyle;
+  /**
+   * The number of objectives that must be completed before the objective is
+   * considered "complete"
+   */
+  readonly partialCompletionObjectiveCountThreshold: number;
+  readonly ScoreValue: number;
+  readonly shouldFireToast: boolean;
+  readonly toastStyle: DestinyRecordToastStyle;
 }
 export declare const enum DestinyRecordToastStyle {
-    None = 0,
-    Record = 1,
-    Lore = 2,
-    Badge = 3,
-    MetaRecord = 4,
-    MedalComplete = 5
+  None = 0,
+  Record = 1,
+  Lore = 2,
+  Badge = 3,
+  MetaRecord = 4,
+  MedalComplete = 5,
 }
 export interface SchemaRecordStateBlock {
-    readonly featuredPriority: number;
-    readonly obscuredString: string;
+  readonly featuredPriority: number;
+  readonly obscuredString: string;
 }
 /**
  * If this record has an expiration after which it cannot be earned, this is some
  * information about that expiration.
  */
 export interface DestinyRecordExpirationBlock {
-    readonly hasExpiration: boolean;
-    readonly description: string;
-    readonly icon: string;
+  readonly hasExpiration: boolean;
+  readonly description: string;
+  readonly icon: string;
 }
 export interface DestinyRecordIntervalBlock {
-    readonly intervalObjectives: DestinyRecordIntervalObjective[];
-    readonly originalObjectiveArrayInsertionIndex: number;
+  readonly intervalObjectives: DestinyRecordIntervalObjective[];
+  readonly originalObjectiveArrayInsertionIndex: number;
 }
 export interface DestinyRecordIntervalObjective {
-    readonly intervalObjectiveHash: number;
-    readonly intervalScoreValue: number;
+  readonly intervalObjectiveHash: number;
+  readonly intervalScoreValue: number;
 }
 export interface DestinyTraitDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    readonly traitCategoryId: string;
-    /** Mapped to DestinyTraitCategoryDefinition in the manifest. */
-    readonly traitCategoryHash: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  readonly traitCategoryId: string;
+  /** Mapped to DestinyTraitCategoryDefinition in the manifest. */
+  readonly traitCategoryHash: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyTraitCategoryDefinition {
-    readonly traitCategoryId: string;
-    /** Mapped to DestinyTraitCategoryDefinition in the manifest. */
-    readonly traitHashes: number[];
-    readonly traitIds: string[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly traitCategoryId: string;
+  /** Mapped to DestinyTraitCategoryDefinition in the manifest. */
+  readonly traitHashes: number[];
+  readonly traitIds: string[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * As/if presentation nodes begin to host more entities as children, these lists
@@ -4444,175 +4452,175 @@ export interface DestinyTraitCategoryDefinition {
  * entity (if anything)
  */
 export interface DestinyPresentationNodeChildrenBlock {
-    readonly presentationNodes: DestinyPresentationNodeChildEntry[];
-    readonly collectibles: DestinyPresentationNodeCollectibleChildEntry[];
-    readonly records: DestinyPresentationNodeRecordChildEntry[];
-    readonly metrics: DestinyPresentationNodeMetricChildEntry[];
+  readonly presentationNodes: DestinyPresentationNodeChildEntry[];
+  readonly collectibles: DestinyPresentationNodeCollectibleChildEntry[];
+  readonly records: DestinyPresentationNodeRecordChildEntry[];
+  readonly metrics: DestinyPresentationNodeMetricChildEntry[];
 }
 export interface DestinyPresentationNodeChildEntry {
-    /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
-    readonly presentationNodeHash: number;
+  /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
+  readonly presentationNodeHash: number;
 }
 export interface DestinyPresentationNodeCollectibleChildEntry {
-    /** Mapped to DestinyCollectibleDefinition in the manifest. */
-    readonly collectibleHash: number;
+  /** Mapped to DestinyCollectibleDefinition in the manifest. */
+  readonly collectibleHash: number;
 }
 export interface DestinyPresentationNodeRecordChildEntry {
-    /** Mapped to DestinyRecordDefinition in the manifest. */
-    readonly recordHash: number;
+  /** Mapped to DestinyRecordDefinition in the manifest. */
+  readonly recordHash: number;
 }
 export interface DestinyPresentationNodeMetricChildEntry {
-    /** Mapped to DestinyMetricDefinition in the manifest. */
-    readonly metricHash: number;
+  /** Mapped to DestinyMetricDefinition in the manifest. */
+  readonly metricHash: number;
 }
 export interface DestinyMetricDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** Mapped to DestinyObjectiveDefinition in the manifest. */
-    readonly trackingObjectiveHash: number;
-    readonly lowerValueIsBetter: boolean;
-    readonly presentationNodeType: DestinyPresentationNodeType;
-    readonly traitIds: string[];
-    /** Mapped to DestinyTraitDefinition in the manifest. */
-    readonly traitHashes: number[];
-    /**
-     * A quick reference to presentation nodes that have this node as a child.
-     * Presentation nodes can be parented under multiple parents.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly parentNodeHashes: number[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** Mapped to DestinyObjectiveDefinition in the manifest. */
+  readonly trackingObjectiveHash: number;
+  readonly lowerValueIsBetter: boolean;
+  readonly presentationNodeType: DestinyPresentationNodeType;
+  readonly traitIds: string[];
+  /** Mapped to DestinyTraitDefinition in the manifest. */
+  readonly traitHashes: number[];
+  /**
+   * A quick reference to presentation nodes that have this node as a child.
+   * Presentation nodes can be parented under multiple parents.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly parentNodeHashes: number[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * A hint for how the presentation node should be displayed when shown in a list.
  * How you use this is your UI is up to you.
  */
 export declare const enum DestinyPresentationDisplayStyle {
-    /** Display the item as a category, through which sub-items are filtered. */
-    Category = 0,
-    Badge = 1,
-    Medals = 2,
-    Collectible = 3,
-    Record = 4
+  /** Display the item as a category, through which sub-items are filtered. */
+  Category = 0,
+  Badge = 1,
+  Medals = 2,
+  Collectible = 3,
+  Record = 4,
 }
 /**
  * A hint for what screen should be shown when this presentation node is clicked
  * into. How you use this is your UI is up to you.
  */
 export declare const enum DestinyPresentationScreenStyle {
-    /** Use the "default" view for the presentation nodes. */
-    Default = 0,
-    /**
-     * Show sub-items as "category sets". In-game, you'd see these as a vertical list
-     * of child presentation nodes - armor sets for example - and the icons of items
-     * within those sets displayed horizontally.
-     */
-    CategorySets = 1,
-    /**
-     * Show sub-items as Badges. (I know, I know. We don't need no stinkin' badges har
-     * har har)
-     */
-    Badge = 2
+  /** Use the "default" view for the presentation nodes. */
+  Default = 0,
+  /**
+   * Show sub-items as "category sets". In-game, you'd see these as a vertical list
+   * of child presentation nodes - armor sets for example - and the icons of items
+   * within those sets displayed horizontally.
+   */
+  CategorySets = 1,
+  /**
+   * Show sub-items as Badges. (I know, I know. We don't need no stinkin' badges har
+   * har har)
+   */
+  Badge = 2,
 }
 /**
  * Represents a color whose RGBA values are all represented as values between 0 and
  * 255.
  */
 export interface DestinyColor {
-    readonly red: number;
-    readonly green: number;
-    readonly blue: number;
-    readonly alpha: number;
+  readonly red: number;
+  readonly green: number;
+  readonly blue: number;
+  readonly alpha: number;
 }
 /**
  * If an item can have an action performed on it (like "Dismantle"), it will be
  * defined here if you care.
  */
 export interface DestinyItemActionBlockDefinition {
-    /** Localized text for the verb of the action being performed. */
-    readonly verbName: string;
-    /** Localized text describing the action being performed. */
-    readonly verbDescription: string;
-    /** The content has this property, however it's not entirely clear how it is used. */
-    readonly isPositive: boolean;
-    /**
-     * If the action has an overlay screen associated with it, this is the name of that
-     * screen. Unfortunately, we cannot return the screen's data itself.
-     */
-    readonly overlayScreenName: string;
-    /** The icon associated with the overlay screen for the action, if any. */
-    readonly overlayIcon: string;
-    /** The number of seconds to delay before allowing this action to be performed again. */
-    readonly requiredCooldownSeconds: number;
-    /**
-     * If the action requires other items to exist or be destroyed, this is the list of
-     * those items and requirements.
-     */
-    readonly requiredItems: DestinyItemActionRequiredItemDefinition[];
-    /**
-     * If performing this action earns you Progression, this is the list of
-     * progressions and values granted for those progressions by performing this action.
-     */
-    readonly progressionRewards: DestinyProgressionRewardDefinition[];
-    /** The internal identifier for the action. */
-    readonly actionTypeLabel: string;
-    /**
-     * Theoretically, an item could have a localized string for a hint about the
-     * location in which the action should be performed. In practice, no items yet have
-     * this property.
-     */
-    readonly requiredLocation: string;
-    /**
-     * The identifier hash for the Cooldown associated with this action. We have not
-     * pulled this data yet for you to have more data to use for cooldowns.
-     */
-    readonly requiredCooldownHash: number;
-    /** If true, the item is deleted when the action completes. */
-    readonly deleteOnAction: boolean;
-    /** If true, the entire stack is deleted when the action completes. */
-    readonly consumeEntireStack: boolean;
-    /**
-     * If true, this action will be performed as soon as you earn this item. Some
-     * rewards work this way, providing you a single item to pick up from a reward-
-     * granting vendor in-game and then immediately consuming itself to provide you
-     * multiple items.
-     */
-    readonly useOnAcquire: boolean;
+  /** Localized text for the verb of the action being performed. */
+  readonly verbName: string;
+  /** Localized text describing the action being performed. */
+  readonly verbDescription: string;
+  /** The content has this property, however it's not entirely clear how it is used. */
+  readonly isPositive: boolean;
+  /**
+   * If the action has an overlay screen associated with it, this is the name of that
+   * screen. Unfortunately, we cannot return the screen's data itself.
+   */
+  readonly overlayScreenName: string;
+  /** The icon associated with the overlay screen for the action, if any. */
+  readonly overlayIcon: string;
+  /** The number of seconds to delay before allowing this action to be performed again. */
+  readonly requiredCooldownSeconds: number;
+  /**
+   * If the action requires other items to exist or be destroyed, this is the list of
+   * those items and requirements.
+   */
+  readonly requiredItems: DestinyItemActionRequiredItemDefinition[];
+  /**
+   * If performing this action earns you Progression, this is the list of
+   * progressions and values granted for those progressions by performing this action.
+   */
+  readonly progressionRewards: DestinyProgressionRewardDefinition[];
+  /** The internal identifier for the action. */
+  readonly actionTypeLabel: string;
+  /**
+   * Theoretically, an item could have a localized string for a hint about the
+   * location in which the action should be performed. In practice, no items yet have
+   * this property.
+   */
+  readonly requiredLocation: string;
+  /**
+   * The identifier hash for the Cooldown associated with this action. We have not
+   * pulled this data yet for you to have more data to use for cooldowns.
+   */
+  readonly requiredCooldownHash: number;
+  /** If true, the item is deleted when the action completes. */
+  readonly deleteOnAction: boolean;
+  /** If true, the entire stack is deleted when the action completes. */
+  readonly consumeEntireStack: boolean;
+  /**
+   * If true, this action will be performed as soon as you earn this item. Some
+   * rewards work this way, providing you a single item to pick up from a reward-
+   * granting vendor in-game and then immediately consuming itself to provide you
+   * multiple items.
+   */
+  readonly useOnAcquire: boolean;
 }
 /**
  * The definition of an item and quantity required in a character's inventory in
  * order to perform an action.
  */
 export interface DestinyItemActionRequiredItemDefinition {
-    /** The minimum quantity of the item you have to have. */
-    readonly count: number;
-    /**
-     * The hash identifier of the item you need to have. Use it to look up the
-     * DestinyInventoryItemDefinition for more info.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If true, the item/quantity will be deleted from your inventory when the action
-     * is performed. Otherwise, you'll retain these required items after the action is
-     * complete.
-     */
-    readonly deleteOnAction: boolean;
+  /** The minimum quantity of the item you have to have. */
+  readonly count: number;
+  /**
+   * The hash identifier of the item you need to have. Use it to look up the
+   * DestinyInventoryItemDefinition for more info.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If true, the item/quantity will be deleted from your inventory when the action
+   * is performed. Otherwise, you'll retain these required items after the action is
+   * complete.
+   */
+  readonly deleteOnAction: boolean;
 }
 /**
  * Inventory Items can reward progression when actions are performed on them. A
@@ -4624,20 +4632,20 @@ export interface DestinyItemActionRequiredItemDefinition {
  * progressions can be granted progression points/experience at the same time.
  */
 export interface DestinyProgressionRewardDefinition {
-    /**
-     * The hash identifier of the DestinyProgressionMappingDefinition that contains the
-     * progressions for which experience should be applied.
-     *
-     * Mapped to DestinyProgressionMappingDefinition in the manifest.
-     */
-    readonly progressionMappingHash: number;
-    /** The amount of experience to give to each of the mapped progressions. */
-    readonly amount: number;
-    /**
-     * If true, the game's internal mechanisms to throttle progression should be
-     * applied.
-     */
-    readonly applyThrottles: boolean;
+  /**
+   * The hash identifier of the DestinyProgressionMappingDefinition that contains the
+   * progressions for which experience should be applied.
+   *
+   * Mapped to DestinyProgressionMappingDefinition in the manifest.
+   */
+  readonly progressionMappingHash: number;
+  /** The amount of experience to give to each of the mapped progressions. */
+  readonly amount: number;
+  /**
+   * If true, the game's internal mechanisms to throttle progression should be
+   * applied.
+   */
+  readonly applyThrottles: boolean;
 }
 /**
  * Aggregations of multiple progressions.
@@ -4646,32 +4654,32 @@ export interface DestinyProgressionRewardDefinition {
  * sometimes have human readable data as well, but only extremely sporadically.
  */
 export interface DestinyProgressionMappingDefinition {
-    /**
-     * Infrequently defined in practice. Defer to the individual progressions' display
-     * properties.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The localized unit of measurement for progression across the progressions
-     * defined in this mapping. Unfortunately, this is very infrequently defined. Defer
-     * to the individual progressions' display units.
-     */
-    readonly displayUnits: string;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * Infrequently defined in practice. Defer to the individual progressions' display
+   * properties.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The localized unit of measurement for progression across the progressions
+   * defined in this mapping. Unfortunately, this is very infrequently defined. Defer
+   * to the individual progressions' display units.
+   */
+  readonly displayUnits: string;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * If the item can exist in an inventory - the overwhelming majority of them can
@@ -4679,64 +4687,64 @@ export interface DestinyProgressionMappingDefinition {
  * with the inventory.
  */
 export interface DestinyItemInventoryBlockDefinition {
-    /**
-     * If this string is populated, you can't have more than one stack with this label
-     * in a given inventory. Note that this is different from the equipping block's
-     * unique label, which is used for equipping uniqueness.
-     */
-    readonly stackUniqueLabel: string;
-    /** The maximum quantity of this item that can exist in a stack. */
-    readonly maxStackSize: number;
-    /**
-     * The hash identifier for the DestinyInventoryBucketDefinition to which this item
-     * belongs. I should have named this "bucketHash", but too many things refer to it
-     * now. Sigh.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly bucketTypeHash: number;
-    /**
-     * If the item is picked up by the lost loot queue, this is the hash identifier for
-     * the DestinyInventoryBucketDefinition into which it will be placed. Again, I
-     * should have named this recoveryBucketHash instead.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly recoveryBucketTypeHash: number;
-    /**
-     * The hash identifier for the Tier Type of the item, use to look up its
-     * DestinyItemTierTypeDefinition if you need to show localized data for the item's
-     * tier.
-     *
-     * Mapped to DestinyItemTierTypeDefinition in the manifest.
-     */
-    readonly tierTypeHash: number;
-    /**
-     * If TRUE, this item is instanced. Otherwise, it is a generic item that merely has
-     * a quantity in a stack (like Glimmer).
-     */
-    readonly isInstanceItem: boolean;
-    /**
-     * The localized name of the tier type, which is a useful shortcut so you don't
-     * have to look up the definition every time. However, it's mostly a holdover from
-     * days before we had a DestinyItemTierTypeDefinition to refer to.
-     */
-    readonly tierTypeName: string;
-    /**
-     * The enumeration matching the tier type of the item to known values, again for
-     * convenience sake.
-     */
-    readonly tierType: TierType;
-    /** The tooltip message to show, if any, when the item expires. */
-    readonly expirationTooltip: string;
-    /** If the item expires while playing in an activity, we show a different message. */
-    readonly expiredInActivityMessage: string;
-    /**
-     * If the item expires in orbit, we show a... more different message. ("Consummate
-     * V's, consummate!")
-     */
-    readonly expiredInOrbitMessage: string;
-    readonly suppressExpirationWhenObjectivesComplete: boolean;
+  /**
+   * If this string is populated, you can't have more than one stack with this label
+   * in a given inventory. Note that this is different from the equipping block's
+   * unique label, which is used for equipping uniqueness.
+   */
+  readonly stackUniqueLabel: string;
+  /** The maximum quantity of this item that can exist in a stack. */
+  readonly maxStackSize: number;
+  /**
+   * The hash identifier for the DestinyInventoryBucketDefinition to which this item
+   * belongs. I should have named this "bucketHash", but too many things refer to it
+   * now. Sigh.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly bucketTypeHash: number;
+  /**
+   * If the item is picked up by the lost loot queue, this is the hash identifier for
+   * the DestinyInventoryBucketDefinition into which it will be placed. Again, I
+   * should have named this recoveryBucketHash instead.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly recoveryBucketTypeHash: number;
+  /**
+   * The hash identifier for the Tier Type of the item, use to look up its
+   * DestinyItemTierTypeDefinition if you need to show localized data for the item's
+   * tier.
+   *
+   * Mapped to DestinyItemTierTypeDefinition in the manifest.
+   */
+  readonly tierTypeHash: number;
+  /**
+   * If TRUE, this item is instanced. Otherwise, it is a generic item that merely has
+   * a quantity in a stack (like Glimmer).
+   */
+  readonly isInstanceItem: boolean;
+  /**
+   * The localized name of the tier type, which is a useful shortcut so you don't
+   * have to look up the definition every time. However, it's mostly a holdover from
+   * days before we had a DestinyItemTierTypeDefinition to refer to.
+   */
+  readonly tierTypeName: string;
+  /**
+   * The enumeration matching the tier type of the item to known values, again for
+   * convenience sake.
+   */
+  readonly tierType: TierType;
+  /** The tooltip message to show, if any, when the item expires. */
+  readonly expirationTooltip: string;
+  /** If the item expires while playing in an activity, we show a different message. */
+  readonly expiredInActivityMessage: string;
+  /**
+   * If the item expires in orbit, we show a... more different message. ("Consummate
+   * V's, consummate!")
+   */
+  readonly expiredInOrbitMessage: string;
+  readonly suppressExpirationWhenObjectivesComplete: boolean;
 }
 /**
  * Defines the tier type of an item. Mostly this provides human readable properties
@@ -4745,91 +4753,91 @@ export interface DestinyItemInventoryBlockDefinition {
  * It also provides some base data for infusion that could be useful.
  */
 export interface DestinyItemTierTypeDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** If this tier defines infusion properties, they will be contained here. */
-    readonly infusionProcess: DestinyItemTierTypeInfusionBlock;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** If this tier defines infusion properties, they will be contained here. */
+  readonly infusionProcess: DestinyItemTierTypeInfusionBlock;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyItemTierTypeInfusionBlock {
-    /**
-     * The default portion of quality that will transfer from the infuser to the
-     * infusee item. (InfuserQuality - InfuseeQuality) * baseQualityTransferRatio =
-     * base quality transferred.
-     */
-    readonly baseQualityTransferRatio: number;
-    /**
-     * As long as InfuserQuality > InfuseeQuality, the amount of quality bestowed is
-     * guaranteed to be at least this value, even if the transferRatio would dictate
-     * that it should be less. The total amount of quality that ends up in the Infusee
-     * cannot exceed the Infuser's quality however (for instance, if you infuse a 300
-     * item with a 301 item and the minimum quality increment is 10, the infused item
-     * will not end up with 310 quality)
-     */
-    readonly minimumQualityIncrement: number;
+  /**
+   * The default portion of quality that will transfer from the infuser to the
+   * infusee item. (InfuserQuality - InfuseeQuality) * baseQualityTransferRatio =
+   * base quality transferred.
+   */
+  readonly baseQualityTransferRatio: number;
+  /**
+   * As long as InfuserQuality > InfuseeQuality, the amount of quality bestowed is
+   * guaranteed to be at least this value, even if the transferRatio would dictate
+   * that it should be less. The total amount of quality that ends up in the Infusee
+   * cannot exceed the Infuser's quality however (for instance, if you infuse a 300
+   * item with a 301 item and the minimum quality increment is 10, the infused item
+   * will not end up with 310 quality)
+   */
+  readonly minimumQualityIncrement: number;
 }
 export declare const enum TierType {
-    Unknown = 0,
-    Currency = 1,
-    Basic = 2,
-    Common = 3,
-    Rare = 4,
-    Superior = 5,
-    Exotic = 6
+  Unknown = 0,
+  Currency = 1,
+  Basic = 2,
+  Common = 3,
+  Rare = 4,
+  Superior = 5,
+  Exotic = 6,
 }
 /**
  * Primarily for Quests, this is the definition of properties related to the item
  * if it is a quest and its various quest steps.
  */
 export interface DestinyItemSetBlockDefinition {
-    /**
-     * A collection of hashes of set items, for items such as Quest Metadata items that
-     * possess this data.
-     */
-    readonly itemList: DestinyItemSetBlockEntryDefinition[];
-    /**
-     * If true, items in the set can only be added in increasing order, and adding an
-     * item will remove any previous item. For Quests, this is by necessity true. Only
-     * one quest step is present at a time, and previous steps are removed as you
-     * advance in the quest.
-     */
-    readonly requireOrderedSetItemAdd: boolean;
-    /** If true, the UI should treat this quest as "featured" */
-    readonly setIsFeatured: boolean;
-    /** A string identifier we can use to attempt to identify the category of the Quest. */
-    readonly setType: string;
-    /** The name of the quest line that this quest step is a part of. */
-    readonly questLineName: string;
+  /**
+   * A collection of hashes of set items, for items such as Quest Metadata items that
+   * possess this data.
+   */
+  readonly itemList: DestinyItemSetBlockEntryDefinition[];
+  /**
+   * If true, items in the set can only be added in increasing order, and adding an
+   * item will remove any previous item. For Quests, this is by necessity true. Only
+   * one quest step is present at a time, and previous steps are removed as you
+   * advance in the quest.
+   */
+  readonly requireOrderedSetItemAdd: boolean;
+  /** If true, the UI should treat this quest as "featured" */
+  readonly setIsFeatured: boolean;
+  /** A string identifier we can use to attempt to identify the category of the Quest. */
+  readonly setType: string;
+  /** The name of the quest line that this quest step is a part of. */
+  readonly questLineName: string;
 }
 /** Defines a particular entry in an ItemSet (AKA a particular Quest Step in a Quest) */
 export interface DestinyItemSetBlockEntryDefinition {
-    /**
-     * Used for tracking which step a user reached. These values will be populated in
-     * the user's internal state, which we expose externally as a more usable
-     * DestinyQuestStatus object. If this item has been obtained, this value will be
-     * set in trackingUnlockValueHash.
-     */
-    readonly trackingValue: number;
-    /**
-     * This is the hash identifier for a DestinyInventoryItemDefinition representing
-     * this quest step.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
+  /**
+   * Used for tracking which step a user reached. These values will be populated in
+   * the user's internal state, which we expose externally as a more usable
+   * DestinyQuestStatus object. If this item has been obtained, this value will be
+   * set in trackingUnlockValueHash.
+   */
+  readonly trackingValue: number;
+  /**
+   * This is the hash identifier for a DestinyInventoryItemDefinition representing
+   * this quest step.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
 }
 /**
  * Information about the item's calculated stats, with as much data as we can find
@@ -4850,60 +4858,60 @@ export interface DestinyItemSetBlockEntryDefinition {
  * statistics, without any planned fix.
  */
 export interface DestinyItemStatBlockDefinition {
-    /**
-     * If true, the game won't show the "primary" stat on this item when you inspect it.
-     *
-     * NOTE: This is being manually mapped, because I happen to want it in a block that
-     * isn't going to directly create this derivative block.
-     */
-    readonly disablePrimaryStatDisplay: boolean;
-    /**
-     * If the item's stats are meant to be modified by a DestinyStatGroupDefinition,
-     * this will be the identifier for that definition.
-     *
-     * If you are using live data or precomputed stats data on the
-     * DestinyInventoryItemDefinition.stats.stats property, you don't have to worry
-     * about statGroupHash and how it alters stats: the already altered stats are
-     * provided to you. But if you want to see how the sausage gets made, or perform
-     * computations yourself, this is valuable information.
-     *
-     * Mapped to DestinyStatGroupDefinition in the manifest.
-     */
-    readonly statGroupHash?: number;
-    /**
-     * If you are looking for precomputed values for the stats on a weapon, this is
-     * where they are stored. Technically these are the "Display" stat values. Please
-     * see DestinyStatsDefinition for what Display Stat Values means, it's a very long
-     * story... but essentially these are the closest values BNet can get to the item
-     * stats that you see in-game.
-     *
-     * These stats are keyed by the DestinyStatDefinition's hash identifier for the
-     * stat that's found on the item.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly stats: {
-        [key: number]: DestinyInventoryItemStatDefinition;
-    };
-    /**
-     * A quick and lazy way to determine whether any stat other than the "primary" stat
-     * is actually visible on the item. Items often have stats that we return in case
-     * people find them useful, but they're not part of the "Stat Group" and thus we
-     * wouldn't display them in our UI. If this is False, then we're not going to
-     * display any of these stats other than the primary one.
-     */
-    readonly hasDisplayableStats: boolean;
-    /**
-     * This stat is determined to be the "primary" stat, and can be looked up in the
-     * stats or any other stat collection related to the item.
-     *
-     * Use this hash to look up the stat's value using DestinyInventoryItemDefinition.
-     * stats.stats, and the renderable data for the primary stat in the related
-     * DestinyStatDefinition.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly primaryBaseStatHash: number;
+  /**
+   * If true, the game won't show the "primary" stat on this item when you inspect it.
+   *
+   * NOTE: This is being manually mapped, because I happen to want it in a block that
+   * isn't going to directly create this derivative block.
+   */
+  readonly disablePrimaryStatDisplay: boolean;
+  /**
+   * If the item's stats are meant to be modified by a DestinyStatGroupDefinition,
+   * this will be the identifier for that definition.
+   *
+   * If you are using live data or precomputed stats data on the
+   * DestinyInventoryItemDefinition.stats.stats property, you don't have to worry
+   * about statGroupHash and how it alters stats: the already altered stats are
+   * provided to you. But if you want to see how the sausage gets made, or perform
+   * computations yourself, this is valuable information.
+   *
+   * Mapped to DestinyStatGroupDefinition in the manifest.
+   */
+  readonly statGroupHash?: number;
+  /**
+   * If you are looking for precomputed values for the stats on a weapon, this is
+   * where they are stored. Technically these are the "Display" stat values. Please
+   * see DestinyStatsDefinition for what Display Stat Values means, it's a very long
+   * story... but essentially these are the closest values BNet can get to the item
+   * stats that you see in-game.
+   *
+   * These stats are keyed by the DestinyStatDefinition's hash identifier for the
+   * stat that's found on the item.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly stats: {
+    [key: number]: DestinyInventoryItemStatDefinition;
+  };
+  /**
+   * A quick and lazy way to determine whether any stat other than the "primary" stat
+   * is actually visible on the item. Items often have stats that we return in case
+   * people find them useful, but they're not part of the "Stat Group" and thus we
+   * wouldn't display them in our UI. If this is False, then we're not going to
+   * display any of these stats other than the primary one.
+   */
+  readonly hasDisplayableStats: boolean;
+  /**
+   * This stat is determined to be the "primary" stat, and can be looked up in the
+   * stats or any other stat collection related to the item.
+   *
+   * Use this hash to look up the stat's value using DestinyInventoryItemDefinition.
+   * stats.stats, and the renderable data for the primary stat in the related
+   * DestinyStatDefinition.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly primaryBaseStatHash: number;
 }
 /**
  * When an inventory item (DestinyInventoryItemDefinition) has Stats (such as
@@ -4921,56 +4929,56 @@ export interface DestinyItemStatBlockDefinition {
  * without live data (such as stat modifiers on Talent Grids and Socket Plugs)
  */
 export interface DestinyStatGroupDefinition {
-    /**
-     * The maximum possible value that any stat in this group can be transformed into.
-     *
-     * This is used by stats that *don't* have scaledStats entries below, but that
-     * still need to be displayed as a progress bar, in which case this is used as the
-     * upper bound for said progress bar. (the lower bound is always 0)
-     */
-    readonly maximumValue: number;
-    /**
-     * This apparently indicates the position of the stats in the UI? I've returned it
-     * in case anyone can use it, but it's not of any use to us on BNet. Something's
-     * being lost in translation with this value.
-     */
-    readonly uiPosition: number;
-    /**
-     * Any stat that requires scaling to be transformed from an "Investment" stat to a "
-     * Display" stat will have an entry in this list. For more information on what
-     * those types of stats mean and the transformation process, see
-     * DestinyStatDefinition.
-     *
-     * In retrospect, I wouldn't mind if this was a dictionary keyed by the stat hash
-     * instead. But I'm going to leave it be because [[After Apple Picking]].
-     */
-    readonly scaledStats: DestinyStatDisplayDefinition[];
-    /**
-     * The game has the ability to override, based on the stat group, what the
-     * localized text is that is displayed for Stats being shown on the item.
-     *
-     * Mercifully, no Stat Groups use this feature currently. If they start using them,
-     * we'll all need to start using them (and those of you who are more prudent than I
-     * am can go ahead and start pre-checking for this.)
-     */
-    readonly overrides: {
-        [key: number]: DestinyStatOverrideDefinition;
-    };
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * The maximum possible value that any stat in this group can be transformed into.
+   *
+   * This is used by stats that *don't* have scaledStats entries below, but that
+   * still need to be displayed as a progress bar, in which case this is used as the
+   * upper bound for said progress bar. (the lower bound is always 0)
+   */
+  readonly maximumValue: number;
+  /**
+   * This apparently indicates the position of the stats in the UI? I've returned it
+   * in case anyone can use it, but it's not of any use to us on BNet. Something's
+   * being lost in translation with this value.
+   */
+  readonly uiPosition: number;
+  /**
+   * Any stat that requires scaling to be transformed from an "Investment" stat to a "
+   * Display" stat will have an entry in this list. For more information on what
+   * those types of stats mean and the transformation process, see
+   * DestinyStatDefinition.
+   *
+   * In retrospect, I wouldn't mind if this was a dictionary keyed by the stat hash
+   * instead. But I'm going to leave it be because [[After Apple Picking]].
+   */
+  readonly scaledStats: DestinyStatDisplayDefinition[];
+  /**
+   * The game has the ability to override, based on the stat group, what the
+   * localized text is that is displayed for Stats being shown on the item.
+   *
+   * Mercifully, no Stat Groups use this feature currently. If they start using them,
+   * we'll all need to start using them (and those of you who are more prudent than I
+   * am can go ahead and start pre-checking for this.)
+   */
+  readonly overrides: {
+    [key: number]: DestinyStatOverrideDefinition;
+  };
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Describes the way that an Item Stat (see DestinyStatDefinition) is transformed
@@ -4982,34 +4990,34 @@ export interface DestinyStatGroupDefinition {
  * value that BNet can get to the in-game display value of the stat)
  */
 export interface DestinyStatDisplayDefinition {
-    /**
-     * The hash identifier for the stat being transformed into a Display stat.
-     *
-     * Use it to look up the DestinyStatDefinition, or key into a
-     * DestinyInventoryItemDefinition's stats property.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly statHash: number;
-    /**
-     * Regardless of the output of interpolation, this is the maximum possible value
-     * that the stat can be. It should also be used as the upper bound for displaying
-     * the stat as a progress bar (the minimum always being 0)
-     */
-    readonly maximumValue: number;
-    /**
-     * If this is true, the stat should be displayed as a number. Otherwise, display it
-     * as a progress bar. Or, you know, do whatever you want. There's no
-     * displayAsNumeric police.
-     */
-    readonly displayAsNumeric: boolean;
-    /**
-     * The interpolation table representing how the Investment Stat is transformed into
-     * a Display Stat.
-     *
-     * See DestinyStatDefinition for a description of the stages of stat transformation.
-     */
-    readonly displayInterpolation: InterpolationPoint[];
+  /**
+   * The hash identifier for the stat being transformed into a Display stat.
+   *
+   * Use it to look up the DestinyStatDefinition, or key into a
+   * DestinyInventoryItemDefinition's stats property.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly statHash: number;
+  /**
+   * Regardless of the output of interpolation, this is the maximum possible value
+   * that the stat can be. It should also be used as the upper bound for displaying
+   * the stat as a progress bar (the minimum always being 0)
+   */
+  readonly maximumValue: number;
+  /**
+   * If this is true, the stat should be displayed as a number. Otherwise, display it
+   * as a progress bar. Or, you know, do whatever you want. There's no
+   * displayAsNumeric police.
+   */
+  readonly displayAsNumeric: boolean;
+  /**
+   * The interpolation table representing how the Investment Stat is transformed into
+   * a Display Stat.
+   *
+   * See DestinyStatDefinition for a description of the stages of stat transformation.
+   */
+  readonly displayInterpolation: InterpolationPoint[];
 }
 /**
  * Stat Groups (DestinyStatGroupDefinition) has the ability to override the
@@ -5030,17 +5038,17 @@ export interface DestinyStatDisplayDefinition {
  * description.
  */
 export interface DestinyStatOverrideDefinition {
-    /**
-     * The hash identifier of the stat whose display properties are being overridden.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly statHash: number;
-    /**
-     * The display properties to show instead of the base DestinyStatDefinition display
-     * properties.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The hash identifier of the stat whose display properties are being overridden.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly statHash: number;
+  /**
+   * The display properties to show instead of the base DestinyStatDefinition display
+   * properties.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
 }
 /**
  * Defines a specific stat value on an item, and the minimum/maximum range that we
@@ -5051,135 +5059,135 @@ export interface DestinyStatOverrideDefinition {
  * at least be close. If it's not close, let us know on the Bungie API forums.
  */
 export interface DestinyInventoryItemStatDefinition {
-    /**
-     * The hash for the DestinyStatDefinition representing this stat.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly statHash: number;
-    /**
-     * This value represents the stat value assuming the minimum possible roll but
-     * accounting for any mandatory bonuses that should be applied to the stat on item
-     * creation.
-     *
-     * In Destiny 1, this was different from the "minimum" value because there were
-     * certain conditions where an item could be theoretically lower level/value than
-     * the initial roll.
-     *
-     * In Destiny 2, this is not possible unless Talent Grids begin to be used again
-     * for these purposes or some other system change occurs... thus in practice, value
-     * and minimum should be the same in Destiny 2. Good riddance.
-     */
-    readonly value: number;
-    /** The minimum possible value for this stat that we think the item can roll. */
-    readonly minimum: number;
-    /**
-     * The maximum possible value for this stat that we think the item can roll.
-     *
-     * WARNING: In Destiny 1, this field was calculated using the potential stat rolls
-     * on the item's talent grid. In Destiny 2, items no longer have meaningful talent
-     * grids and instead have sockets: but the calculation of this field was never
-     * altered to adapt to this change. As such, this field should be considered
-     * deprecated until we can address this oversight.
-     */
-    readonly maximum: number;
-    /**
-     * The maximum possible value for the stat as shown in the UI, if it is being shown
-     * somewhere that reveals maximum in the UI (such as a bar chart-style view).
-     *
-     * This is pulled directly from the item's DestinyStatGroupDefinition, and placed
-     * here for convenience.
-     *
-     * If not returned, there is no maximum to use (and thus the stat should not be
-     * shown in a way that assumes there is a limit to the stat)
-     */
-    readonly displayMaximum?: number;
+  /**
+   * The hash for the DestinyStatDefinition representing this stat.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly statHash: number;
+  /**
+   * This value represents the stat value assuming the minimum possible roll but
+   * accounting for any mandatory bonuses that should be applied to the stat on item
+   * creation.
+   *
+   * In Destiny 1, this was different from the "minimum" value because there were
+   * certain conditions where an item could be theoretically lower level/value than
+   * the initial roll.
+   *
+   * In Destiny 2, this is not possible unless Talent Grids begin to be used again
+   * for these purposes or some other system change occurs... thus in practice, value
+   * and minimum should be the same in Destiny 2. Good riddance.
+   */
+  readonly value: number;
+  /** The minimum possible value for this stat that we think the item can roll. */
+  readonly minimum: number;
+  /**
+   * The maximum possible value for this stat that we think the item can roll.
+   *
+   * WARNING: In Destiny 1, this field was calculated using the potential stat rolls
+   * on the item's talent grid. In Destiny 2, items no longer have meaningful talent
+   * grids and instead have sockets: but the calculation of this field was never
+   * altered to adapt to this change. As such, this field should be considered
+   * deprecated until we can address this oversight.
+   */
+  readonly maximum: number;
+  /**
+   * The maximum possible value for the stat as shown in the UI, if it is being shown
+   * somewhere that reveals maximum in the UI (such as a bar chart-style view).
+   *
+   * This is pulled directly from the item's DestinyStatGroupDefinition, and placed
+   * here for convenience.
+   *
+   * If not returned, there is no maximum to use (and thus the stat should not be
+   * shown in a way that assumes there is a limit to the stat)
+   */
+  readonly displayMaximum?: number;
 }
 /**
  * Items that can be equipped define this block. It contains information we need to
  * understand how and when the item can be equipped.
  */
 export interface DestinyEquippingBlockDefinition {
-    /**
-     * If the item is part of a gearset, this is a reference to that gearset item.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly gearsetItemHash?: number;
-    /**
-     * If defined, this is the label used to check if the item has other items of
-     * matching types already equipped.
-     *
-     * For instance, when you aren't allowed to equip more than one Exotic Weapon, that'
-     * s because all exotic weapons have identical uniqueLabels and the game checks the
-     * to-be-equipped item's uniqueLabel vs. all other already equipped items (other
-     * than the item in the slot that's about to be occupied).
-     */
-    readonly uniqueLabel: string;
-    /** The hash of that unique label. Does not point to a specific definition. */
-    readonly uniqueLabelHash: number;
-    /**
-     * An equipped item *must* be equipped in an Equipment Slot. This is the hash
-     * identifier of the DestinyEquipmentSlotDefinition into which it must be equipped.
-     *
-     * Mapped to DestinyEquipmentSlotDefinition in the manifest.
-     */
-    readonly equipmentSlotTypeHash: number;
-    /**
-     * These are custom attributes on the equippability of the item.
-     *
-     * For now, this can only be "equip on acquire", which would mean that the item
-     * will be automatically equipped as soon as you pick it up.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly attributes: EquippingItemBlockAttributes;
-    /**
-     * Ammo type used by a weapon is no longer determined by the bucket in which it is
-     * contained. If the item has an ammo type - i.e. if it is a weapon - this will be
-     * the type of ammunition expected.
-     */
-    readonly ammoType: DestinyAmmunitionType;
-    /**
-     * These are strings that represent the possible Game/Account/Character state
-     * failure conditions that can occur when trying to equip the item. They match up
-     * one-to-one with requiredUnlockExpressions.
-     */
-    readonly displayStrings: string[];
+  /**
+   * If the item is part of a gearset, this is a reference to that gearset item.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly gearsetItemHash?: number;
+  /**
+   * If defined, this is the label used to check if the item has other items of
+   * matching types already equipped.
+   *
+   * For instance, when you aren't allowed to equip more than one Exotic Weapon, that'
+   * s because all exotic weapons have identical uniqueLabels and the game checks the
+   * to-be-equipped item's uniqueLabel vs. all other already equipped items (other
+   * than the item in the slot that's about to be occupied).
+   */
+  readonly uniqueLabel: string;
+  /** The hash of that unique label. Does not point to a specific definition. */
+  readonly uniqueLabelHash: number;
+  /**
+   * An equipped item *must* be equipped in an Equipment Slot. This is the hash
+   * identifier of the DestinyEquipmentSlotDefinition into which it must be equipped.
+   *
+   * Mapped to DestinyEquipmentSlotDefinition in the manifest.
+   */
+  readonly equipmentSlotTypeHash: number;
+  /**
+   * These are custom attributes on the equippability of the item.
+   *
+   * For now, this can only be "equip on acquire", which would mean that the item
+   * will be automatically equipped as soon as you pick it up.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly attributes: EquippingItemBlockAttributes;
+  /**
+   * Ammo type used by a weapon is no longer determined by the bucket in which it is
+   * contained. If the item has an ammo type - i.e. if it is a weapon - this will be
+   * the type of ammunition expected.
+   */
+  readonly ammoType: DestinyAmmunitionType;
+  /**
+   * These are strings that represent the possible Game/Account/Character state
+   * failure conditions that can occur when trying to equip the item. They match up
+   * one-to-one with requiredUnlockExpressions.
+   */
+  readonly displayStrings: string[];
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum EquippingItemBlockAttributes {
-    None = 0,
-    EquipOnAcquire = 1
+  None = 0,
+  EquipOnAcquire = 1,
 }
 export declare const enum DestinyAmmunitionType {
-    None = 0,
-    Primary = 1,
-    Special = 2,
-    Heavy = 3,
-    Unknown = 4
+  None = 0,
+  Primary = 1,
+  Special = 2,
+  Heavy = 3,
+  Unknown = 4,
 }
 /** This Block defines the rendering data associated with the item, if any. */
 export interface DestinyItemTranslationBlockDefinition {
-    readonly weaponPatternIdentifier: string;
-    readonly weaponPatternHash: number;
-    readonly defaultDyes: DyeReference[];
-    readonly lockedDyes: DyeReference[];
-    readonly customDyes: DyeReference[];
-    readonly arrangements: DestinyGearArtArrangementReference[];
-    readonly hasGeometry: boolean;
+  readonly weaponPatternIdentifier: string;
+  readonly weaponPatternHash: number;
+  readonly defaultDyes: DyeReference[];
+  readonly lockedDyes: DyeReference[];
+  readonly customDyes: DyeReference[];
+  readonly arrangements: DestinyGearArtArrangementReference[];
+  readonly hasGeometry: boolean;
 }
 export interface DyeReference {
-    readonly channelHash: number;
-    readonly dyeHash: number;
+  readonly channelHash: number;
+  readonly dyeHash: number;
 }
 export interface DestinyGearArtArrangementReference {
-    readonly classHash: number;
-    readonly artArrangementHash: number;
+  readonly classHash: number;
+  readonly artArrangementHash: number;
 }
 /**
  * Items like Sacks or Boxes can have items that it shows in-game when you view
@@ -5188,39 +5196,39 @@ export interface DestinyGearArtArrangementReference {
  * This defines those categories, and gives some insights into that data's source.
  */
 export interface DestinyItemPreviewBlockDefinition {
-    /**
-     * A string that the game UI uses as a hint for which detail screen to show for the
-     * item. You, too, can leverage this for your own custom screen detail views. Note,
-     * however, that these are arbitrarily defined by designers: there's no guarantees
-     * of a fixed, known number of these - so fall back to something reasonable if you
-     * don't recognize it.
-     */
-    readonly screenStyle: string;
-    /**
-     * If the preview data is derived from a fake "Preview" Vendor, this will be the
-     * hash identifier for the DestinyVendorDefinition of that fake vendor.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly previewVendorHash: number;
-    /**
-     * If this item should show you Artifact information when you preview it, this is
-     * the hash identifier of the DestinyArtifactDefinition for the artifact whose data
-     * should be shown.
-     *
-     * Mapped to DestinyArtifactDefinition in the manifest.
-     */
-    readonly artifactHash?: number;
-    /**
-     * If the preview has an associated action (like "Open"), this will be the
-     * localized string for that action.
-     */
-    readonly previewActionString: string;
-    /**
-     * This is a list of the items being previewed, categorized in the same way as they
-     * are in the preview UI.
-     */
-    readonly derivedItemCategories: DestinyDerivedItemCategoryDefinition[];
+  /**
+   * A string that the game UI uses as a hint for which detail screen to show for the
+   * item. You, too, can leverage this for your own custom screen detail views. Note,
+   * however, that these are arbitrarily defined by designers: there's no guarantees
+   * of a fixed, known number of these - so fall back to something reasonable if you
+   * don't recognize it.
+   */
+  readonly screenStyle: string;
+  /**
+   * If the preview data is derived from a fake "Preview" Vendor, this will be the
+   * hash identifier for the DestinyVendorDefinition of that fake vendor.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly previewVendorHash: number;
+  /**
+   * If this item should show you Artifact information when you preview it, this is
+   * the hash identifier of the DestinyArtifactDefinition for the artifact whose data
+   * should be shown.
+   *
+   * Mapped to DestinyArtifactDefinition in the manifest.
+   */
+  readonly artifactHash?: number;
+  /**
+   * If the preview has an associated action (like "Open"), this will be the
+   * localized string for that action.
+   */
+  readonly previewActionString: string;
+  /**
+   * This is a list of the items being previewed, categorized in the same way as they
+   * are in the preview UI.
+   */
+  readonly derivedItemCategories: DestinyDerivedItemCategoryDefinition[];
 }
 /**
  * Represents known info about a Destiny Artifact.
@@ -5232,59 +5240,59 @@ export interface DestinyItemPreviewBlockDefinition {
  * to accommodate it more easily.
  */
 export interface DestinyArtifactDefinition {
-    /**
-     * Any basic display info we know about the Artifact. Currently sourced from a
-     * related inventory item, but the source of this data is subject to change.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * Any Geometry/3D info we know about the Artifact. Currently sourced from a
-     * related inventory item's gearset information, but the source of this data is
-     * subject to change.
-     */
-    readonly translationBlock: DestinyItemTranslationBlockDefinition;
-    /**
-     * Any Tier/Rank data related to this artifact, listed in display order.  Currently
-     * sourced from a Vendor, but this source is subject to change.
-     */
-    readonly tiers: DestinyArtifactTierDefinition[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * Any basic display info we know about the Artifact. Currently sourced from a
+   * related inventory item, but the source of this data is subject to change.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * Any Geometry/3D info we know about the Artifact. Currently sourced from a
+   * related inventory item's gearset information, but the source of this data is
+   * subject to change.
+   */
+  readonly translationBlock: DestinyItemTranslationBlockDefinition;
+  /**
+   * Any Tier/Rank data related to this artifact, listed in display order.  Currently
+   * sourced from a Vendor, but this source is subject to change.
+   */
+  readonly tiers: DestinyArtifactTierDefinition[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyArtifactTierDefinition {
-    /** An identifier, unique within the Artifact, for this specific tier. */
-    readonly tierHash: number;
-    /** The human readable title of this tier, if any. */
-    readonly displayTitle: string;
-    /**
-     * A string representing the localized minimum requirement text for this Tier, if
-     * any.
-     */
-    readonly progressRequirementMessage: string;
-    /** The items that can be earned within this tier. */
-    readonly items: DestinyArtifactTierItemDefinition[];
-    /**
-     * The minimum number of "unlock points" that you must have used before you can
-     * unlock items from this tier.
-     */
-    readonly minimumUnlockPointsUsedRequirement: number;
+  /** An identifier, unique within the Artifact, for this specific tier. */
+  readonly tierHash: number;
+  /** The human readable title of this tier, if any. */
+  readonly displayTitle: string;
+  /**
+   * A string representing the localized minimum requirement text for this Tier, if
+   * any.
+   */
+  readonly progressRequirementMessage: string;
+  /** The items that can be earned within this tier. */
+  readonly items: DestinyArtifactTierItemDefinition[];
+  /**
+   * The minimum number of "unlock points" that you must have used before you can
+   * unlock items from this tier.
+   */
+  readonly minimumUnlockPointsUsedRequirement: number;
 }
 export interface DestinyArtifactTierItemDefinition {
-    /** The identifier of the Plug Item unlocked by activating this item in the Artifact. */
-    readonly itemHash: number;
+  /** The identifier of the Plug Item unlocked by activating this item in the Artifact. */
+  readonly itemHash: number;
 }
 /**
  * A shortcut for the fact that some items have a "Preview Vendor" - See
@@ -5300,16 +5308,16 @@ export interface DestinyArtifactTierItemDefinition {
  * aggregation manually.
  */
 export interface DestinyDerivedItemCategoryDefinition {
-    /**
-     * The localized string for the category title. This will be something describing
-     * the items you can get as a group, or your likelihood/the quantity you'll get.
-     */
-    readonly categoryDescription: string;
-    /**
-     * This is the list of all of the items for this category and the basic properties
-     * we'll know about them.
-     */
-    readonly items: DestinyDerivedItemDefinition[];
+  /**
+   * The localized string for the category title. This will be something describing
+   * the items you can get as a group, or your likelihood/the quantity you'll get.
+   */
+  readonly categoryDescription: string;
+  /**
+   * This is the list of all of the items for this category and the basic properties
+   * we'll know about them.
+   */
+  readonly items: DestinyDerivedItemDefinition[];
 }
 /**
  * This is a reference to, and summary data for, a specific item that you can get
@@ -5318,26 +5326,26 @@ export interface DestinyDerivedItemCategoryDefinition {
  * See DestinyDerivedItemCategoryDefinition for more information.
  */
 export interface DestinyDerivedItemDefinition {
-    /**
-     * The hash for the DestinyInventoryItemDefinition of this derived item, if there
-     * is one. Sometimes we are given this information as a manual override, in which
-     * case there won't be an actual DestinyInventoryItemDefinition for what we display,
-     * but you can still show the strings from this object itself.
-     */
-    readonly itemHash?: number;
-    /** The name of the derived item. */
-    readonly itemName: string;
-    /** Additional details about the derived item, in addition to the description. */
-    readonly itemDetail: string;
-    /** A brief description of the item. */
-    readonly itemDescription: string;
-    /** An icon for the item. */
-    readonly iconPath: string;
-    /**
-     * If the item was derived from a "Preview Vendor", this will be an index into the
-     * DestinyVendorDefinition's itemList property. Otherwise, -1.
-     */
-    readonly vendorItemIndex: number;
+  /**
+   * The hash for the DestinyInventoryItemDefinition of this derived item, if there
+   * is one. Sometimes we are given this information as a manual override, in which
+   * case there won't be an actual DestinyInventoryItemDefinition for what we display,
+   * but you can still show the strings from this object itself.
+   */
+  readonly itemHash?: number;
+  /** The name of the derived item. */
+  readonly itemName: string;
+  /** Additional details about the derived item, in addition to the description. */
+  readonly itemDetail: string;
+  /** A brief description of the item. */
+  readonly itemDescription: string;
+  /** An icon for the item. */
+  readonly iconPath: string;
+  /**
+   * If the item was derived from a "Preview Vendor", this will be an index into the
+   * DestinyVendorDefinition's itemList property. Otherwise, -1.
+   */
+  readonly vendorItemIndex: number;
 }
 /**
  * An item's "Quality" determines its calculated stats. The Level at which the item
@@ -5351,52 +5359,52 @@ export interface DestinyDerivedItemDefinition {
  * information about Infusion.
  */
 export interface DestinyItemQualityBlockDefinition {
-    /**
-     * The "base" defined level of an item. This is a list because, in theory, each
-     * Expansion could define its own base level for an item.
-     *
-     * In practice, not only was that never done in Destiny 1, but now this isn't even
-     * populated at all. When it's not populated, the level at which it spawns has to
-     * be inferred by Reward information, of which BNet receives an imperfect view and
-     * will only be reliable on instanced data as a result.
-     */
-    readonly itemLevels: number[];
-    /**
-     * qualityLevel is used in combination with the item's level to calculate stats
-     * like Attack and Defense. It plays a role in that calculation, but not nearly as
-     * large as itemLevel does.
-     */
-    readonly qualityLevel: number;
-    /**
-     * The string identifier for this item's "infusability", if any.
-     *
-     * Items that match the same infusionCategoryName are allowed to infuse with each
-     * other.
-     *
-     * DEPRECATED: Items can now have multiple infusion categories. Please use
-     * infusionCategoryHashes instead.
-     */
-    readonly infusionCategoryName: string;
-    /**
-     * The hash identifier for the infusion. It does not map to a Definition entity.
-     *
-     * DEPRECATED: Items can now have multiple infusion categories. Please use
-     * infusionCategoryHashes instead.
-     */
-    readonly infusionCategoryHash: number;
-    /**
-     * If any one of these hashes matches any value in another item's
-     * infusionCategoryHashes, the two can infuse with each other.
-     */
-    readonly infusionCategoryHashes: number[];
-    /**
-     * An item can refer to pre-set level requirements. They are defined in
-     * DestinyProgressionLevelRequirementDefinition, and you can use this hash to find
-     * the appropriate definition.
-     *
-     * Mapped to DestinyProgressionLevelRequirementDefinition in the manifest.
-     */
-    readonly progressionLevelRequirementHash: number;
+  /**
+   * The "base" defined level of an item. This is a list because, in theory, each
+   * Expansion could define its own base level for an item.
+   *
+   * In practice, not only was that never done in Destiny 1, but now this isn't even
+   * populated at all. When it's not populated, the level at which it spawns has to
+   * be inferred by Reward information, of which BNet receives an imperfect view and
+   * will only be reliable on instanced data as a result.
+   */
+  readonly itemLevels: number[];
+  /**
+   * qualityLevel is used in combination with the item's level to calculate stats
+   * like Attack and Defense. It plays a role in that calculation, but not nearly as
+   * large as itemLevel does.
+   */
+  readonly qualityLevel: number;
+  /**
+   * The string identifier for this item's "infusability", if any.
+   *
+   * Items that match the same infusionCategoryName are allowed to infuse with each
+   * other.
+   *
+   * DEPRECATED: Items can now have multiple infusion categories. Please use
+   * infusionCategoryHashes instead.
+   */
+  readonly infusionCategoryName: string;
+  /**
+   * The hash identifier for the infusion. It does not map to a Definition entity.
+   *
+   * DEPRECATED: Items can now have multiple infusion categories. Please use
+   * infusionCategoryHashes instead.
+   */
+  readonly infusionCategoryHash: number;
+  /**
+   * If any one of these hashes matches any value in another item's
+   * infusionCategoryHashes, the two can infuse with each other.
+   */
+  readonly infusionCategoryHashes: number[];
+  /**
+   * An item can refer to pre-set level requirements. They are defined in
+   * DestinyProgressionLevelRequirementDefinition, and you can use this hash to find
+   * the appropriate definition.
+   *
+   * Mapped to DestinyProgressionLevelRequirementDefinition in the manifest.
+   */
+  readonly progressionLevelRequirementHash: number;
 }
 /**
  * These are pre-constructed collections of data that can be used to determine the
@@ -5412,38 +5420,38 @@ export interface DestinyItemQualityBlockDefinition {
  * that interpolation will be the required level for the item.
  */
 export interface DestinyProgressionLevelRequirementDefinition {
-    /**
-     * A curve of level requirements, weighted by the related progressions' level.
-     *
-     * Interpolate against this curve with the character's progression level to
-     * determine what the level requirement of the generated item that is using this
-     * data will be.
-     */
-    readonly requirementCurve: InterpolationPointFloat[];
-    /**
-     * The progression whose level should be used to determine the level requirement.
-     *
-     * Look up the DestinyProgressionDefinition with this hash for more information
-     * about the progression in question.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressionHash: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * A curve of level requirements, weighted by the related progressions' level.
+   *
+   * Interpolate against this curve with the character's progression level to
+   * determine what the level requirement of the generated item that is using this
+   * data will be.
+   */
+  readonly requirementCurve: InterpolationPointFloat[];
+  /**
+   * The progression whose level should be used to determine the level requirement.
+   *
+   * Look up the DestinyProgressionDefinition with this hash for more information
+   * about the progression in question.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressionHash: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * This defines an item's "Value". Unfortunately, this appears to be used in
@@ -5460,35 +5468,35 @@ export interface DestinyProgressionLevelRequirementDefinition {
  * a bucket where they put arbitrary items and quantities into the item.
  */
 export interface DestinyItemValueBlockDefinition {
-    /** References to the items that make up this item's "value", and the quantity. */
-    readonly itemValue: DestinyItemQuantity[];
-    /**
-     * If there's a localized text description of the value provided, this will be said
-     * description.
-     */
-    readonly valueDescription: string;
+  /** References to the items that make up this item's "value", and the quantity. */
+  readonly itemValue: DestinyItemQuantity[];
+  /**
+   * If there's a localized text description of the value provided, this will be said
+   * description.
+   */
+  readonly valueDescription: string;
 }
 /** Data about an item's "sources": ways that the item can be obtained. */
 export interface DestinyItemSourceBlockDefinition {
-    /**
-     * The list of hash identifiers for Reward Sources that hint where the item can be
-     * found (DestinyRewardSourceDefinition).
-     *
-     * Mapped to DestinyRewardSourceDefinition in the manifest.
-     */
-    readonly sourceHashes: number[];
-    /**
-     * A collection of details about the stats that were computed for the ways we found
-     * that the item could be spawned.
-     */
-    readonly sources: DestinyItemSourceDefinition[];
-    /**
-     * If we found that this item is exclusive to a specific platform, this will be set
-     * to the BungieMembershipType enumeration that matches that platform.
-     */
-    readonly exclusive: BungieMembershipType;
-    /** A denormalized reference back to vendors that potentially sell this item. */
-    readonly vendorSources: DestinyItemVendorSourceReference[];
+  /**
+   * The list of hash identifiers for Reward Sources that hint where the item can be
+   * found (DestinyRewardSourceDefinition).
+   *
+   * Mapped to DestinyRewardSourceDefinition in the manifest.
+   */
+  readonly sourceHashes: number[];
+  /**
+   * A collection of details about the stats that were computed for the ways we found
+   * that the item could be spawned.
+   */
+  readonly sources: DestinyItemSourceDefinition[];
+  /**
+   * If we found that this item is exclusive to a specific platform, this will be set
+   * to the BungieMembershipType enumeration that matches that platform.
+   */
+  readonly exclusive: BungieMembershipType;
+  /** A denormalized reference back to vendors that potentially sell this item. */
+  readonly vendorSources: DestinyItemVendorSourceReference[];
 }
 /**
  * Represents a heuristically-determined "item source" according to Bungie.net.
@@ -5508,28 +5516,28 @@ export interface DestinyItemSourceBlockDefinition {
  * reward.
  */
 export interface DestinyRewardSourceDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * Sources are grouped into categories: common ways that items are provided. I hope
-     * to see this expand in Destiny 2 once we have time to generate accurate reward
-     * source data.
-     */
-    readonly category: DestinyRewardSourceCategory;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * Sources are grouped into categories: common ways that items are provided. I hope
+   * to see this expand in Destiny 2 once we have time to generate accurate reward
+   * source data.
+   */
+  readonly category: DestinyRewardSourceCategory;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * BNet's custom categorization of reward sources. We took a look at the existing
@@ -5537,23 +5545,23 @@ export interface DestinyRewardSourceDefinition {
  * of them. This needs to be re-evaluated for Destiny 2.
  */
 export declare const enum DestinyRewardSourceCategory {
-    /** The source doesn't fit well into any of the other types. */
-    None = 0,
-    /**
-     * The source is directly related to the rewards gained by playing an activity or
-     * set of activities. This currently includes Quests and other action in-game.
-     */
-    Activity = 1,
-    /** This source is directly related to items that Vendors sell. */
-    Vendor = 2,
-    /**
-     * This source is a custom aggregation of items that can be earned in many ways,
-     * but that share some other property in common that is useful to share. For
-     * instance, in Destiny 1 we would make "Reward Sources" for every game expansion:
-     * that way, you could search reward sources to see what items became available
-     * with any given Expansion.
-     */
-    Aggregate = 3
+  /** The source doesn't fit well into any of the other types. */
+  None = 0,
+  /**
+   * The source is directly related to the rewards gained by playing an activity or
+   * set of activities. This currently includes Quests and other action in-game.
+   */
+  Activity = 1,
+  /** This source is directly related to items that Vendors sell. */
+  Vendor = 2,
+  /**
+   * This source is a custom aggregation of items that can be earned in many ways,
+   * but that share some other property in common that is useful to share. For
+   * instance, in Destiny 1 we would make "Reward Sources" for every game expansion:
+   * that way, you could search reward sources to see what items became available
+   * with any given Expansion.
+   */
+  Aggregate = 3,
 }
 /**
  * Properties of a DestinyInventoryItemDefinition that store all of the information
@@ -5564,43 +5572,43 @@ export declare const enum DestinyRewardSourceCategory {
  * and give more granular data about where items spawn for specific level ranges.
  */
 export interface DestinyItemSourceDefinition {
-    /**
-     * The level at which the item spawns. Essentially the Primary Key for this source
-     * data: there will be multiple of these source entries per item that has source
-     * data, grouped by the level at which the item spawns.
-     */
-    readonly level: number;
-    /**
-     * The minimum Quality at which the item spawns for this level. Examine
-     * DestinyInventoryItemDefinition for more information about what Quality means.
-     * Just don't ask Phaedrus about it, he'll never stop talking and you'll have to
-     * write a book about it.
-     */
-    readonly minQuality: number;
-    /** The maximum quality at which the item spawns for this level. */
-    readonly maxQuality: number;
-    /**
-     * The minimum Character Level required for equipping the item when the item spawns
-     * at the item level defined on this DestinyItemSourceDefinition, as far as we saw
-     * in our processing.
-     */
-    readonly minLevelRequired: number;
-    /**
-     * The maximum Character Level required for equipping the item when the item spawns
-     * at the item level defined on this DestinyItemSourceDefinition, as far as we saw
-     * in our processing.
-     */
-    readonly maxLevelRequired: number;
-    /** The stats computed for this level/quality range. */
-    readonly computedStats: {
-        [key: number]: DestinyInventoryItemStatDefinition;
-    };
-    /**
-     * The DestinyRewardSourceDefinitions found that can spawn the item at this level.
-     *
-     * Mapped to DestinyRewardSourceDefinition in the manifest.
-     */
-    readonly sourceHashes: number[];
+  /**
+   * The level at which the item spawns. Essentially the Primary Key for this source
+   * data: there will be multiple of these source entries per item that has source
+   * data, grouped by the level at which the item spawns.
+   */
+  readonly level: number;
+  /**
+   * The minimum Quality at which the item spawns for this level. Examine
+   * DestinyInventoryItemDefinition for more information about what Quality means.
+   * Just don't ask Phaedrus about it, he'll never stop talking and you'll have to
+   * write a book about it.
+   */
+  readonly minQuality: number;
+  /** The maximum quality at which the item spawns for this level. */
+  readonly maxQuality: number;
+  /**
+   * The minimum Character Level required for equipping the item when the item spawns
+   * at the item level defined on this DestinyItemSourceDefinition, as far as we saw
+   * in our processing.
+   */
+  readonly minLevelRequired: number;
+  /**
+   * The maximum Character Level required for equipping the item when the item spawns
+   * at the item level defined on this DestinyItemSourceDefinition, as far as we saw
+   * in our processing.
+   */
+  readonly maxLevelRequired: number;
+  /** The stats computed for this level/quality range. */
+  readonly computedStats: {
+    [key: number]: DestinyInventoryItemStatDefinition;
+  };
+  /**
+   * The DestinyRewardSourceDefinitions found that can spawn the item at this level.
+   *
+   * Mapped to DestinyRewardSourceDefinition in the manifest.
+   */
+  readonly sourceHashes: number[];
 }
 /**
  * Represents that a vendor could sell this item, and provides a quick link to that
@@ -5614,20 +5622,20 @@ export interface DestinyItemSourceDefinition {
  * there may be multiple vendorItemIndexes for a single Vendor hash.
  */
 export interface DestinyItemVendorSourceReference {
-    /**
-     * The identifier for the vendor that may sell this item.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * The Vendor sale item indexes that represent the sale information for this item.
-     * The same vendor may sell an item in multiple "ways", hence why this is a list. (
-     * for instance, a weapon may be "sold" as a reward in a quest, for Glimmer, and
-     * for Masterwork Cores: each of those ways would be represented by a different
-     * vendor sale item with a different index)
-     */
-    readonly vendorItemIndexes: number[];
+  /**
+   * The identifier for the vendor that may sell this item.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * The Vendor sale item indexes that represent the sale information for this item.
+   * The same vendor may sell an item in multiple "ways", hence why this is a list. (
+   * for instance, a weapon may be "sold" as a reward in a quest, for Glimmer, and
+   * for Masterwork Cores: each of those ways would be represented by a different
+   * vendor sale item with a different index)
+   */
+  readonly vendorItemIndexes: number[];
 }
 /**
  * An item can have objectives on it. In practice, these are the exclusive purview
@@ -5638,78 +5646,78 @@ export interface DestinyItemVendorSourceReference {
  * data as DestinyQuestStatus data, and other useful information.
  */
 export interface DestinyItemObjectiveBlockDefinition {
-    /**
-     * The hashes to Objectives (DestinyObjectiveDefinition) that are part of this
-     * Quest Step, in the order that they should be rendered.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHashes: number[];
-    /**
-     * For every entry in objectiveHashes, there is a corresponding entry in this array
-     * at the same index. If the objective is meant to be associated with a specific
-     * DestinyActivityDefinition, there will be a valid hash at that index. Otherwise,
-     * it will be invalid (0).
-     *
-     * Rendered somewhat obsolete by perObjectiveDisplayProperties, which currently has
-     * much the same information but may end up with more info in the future.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly displayActivityHashes: number[];
-    /**
-     * If True, all objectives must be completed for the step to be completed. If False,
-     * any one objective can be completed for the step to be completed.
-     */
-    readonly requireFullObjectiveCompletion: boolean;
-    /**
-     * The hash for the DestinyInventoryItemDefinition representing the Quest to which
-     * this Quest Step belongs.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly questlineItemHash: number;
-    /** The localized string for narrative text related to this quest step, if any. */
-    readonly narrative: string;
-    /**
-     * The localized string describing an action to be performed associated with the
-     * objectives, if any.
-     */
-    readonly objectiveVerbName: string;
-    /**
-     * The identifier for the type of quest being performed, if any. Not associated
-     * with any fixed definition, yet.
-     */
-    readonly questTypeIdentifier: string;
-    /**
-     * A hashed value for the questTypeIdentifier, because apparently I like to be
-     * redundant.
-     */
-    readonly questTypeHash: number;
-    /** One entry per Objective on the item, it will have related display information. */
-    readonly perObjectiveDisplayProperties: DestinyObjectiveDisplayProperties[];
-    readonly displayAsStatTracker: boolean;
+  /**
+   * The hashes to Objectives (DestinyObjectiveDefinition) that are part of this
+   * Quest Step, in the order that they should be rendered.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHashes: number[];
+  /**
+   * For every entry in objectiveHashes, there is a corresponding entry in this array
+   * at the same index. If the objective is meant to be associated with a specific
+   * DestinyActivityDefinition, there will be a valid hash at that index. Otherwise,
+   * it will be invalid (0).
+   *
+   * Rendered somewhat obsolete by perObjectiveDisplayProperties, which currently has
+   * much the same information but may end up with more info in the future.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly displayActivityHashes: number[];
+  /**
+   * If True, all objectives must be completed for the step to be completed. If False,
+   * any one objective can be completed for the step to be completed.
+   */
+  readonly requireFullObjectiveCompletion: boolean;
+  /**
+   * The hash for the DestinyInventoryItemDefinition representing the Quest to which
+   * this Quest Step belongs.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly questlineItemHash: number;
+  /** The localized string for narrative text related to this quest step, if any. */
+  readonly narrative: string;
+  /**
+   * The localized string describing an action to be performed associated with the
+   * objectives, if any.
+   */
+  readonly objectiveVerbName: string;
+  /**
+   * The identifier for the type of quest being performed, if any. Not associated
+   * with any fixed definition, yet.
+   */
+  readonly questTypeIdentifier: string;
+  /**
+   * A hashed value for the questTypeIdentifier, because apparently I like to be
+   * redundant.
+   */
+  readonly questTypeHash: number;
+  /** One entry per Objective on the item, it will have related display information. */
+  readonly perObjectiveDisplayProperties: DestinyObjectiveDisplayProperties[];
+  readonly displayAsStatTracker: boolean;
 }
 export interface DestinyObjectiveDisplayProperties {
-    /**
-     * The activity associated with this objective in the context of this item, if any.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash?: number;
-    /** If true, the game shows this objective on item preview screens. */
-    readonly displayOnItemPreviewScreen: boolean;
+  /**
+   * The activity associated with this objective in the context of this item, if any.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash?: number;
+  /** If true, the game shows this objective on item preview screens. */
+  readonly displayOnItemPreviewScreen: boolean;
 }
 /** The metrics available for display and selection on an item. */
 export interface DestinyItemMetricBlockDefinition {
-    /**
-     * Hash identifiers for any DestinyPresentationNodeDefinition entry that can be
-     * used to list available metrics. Any metric listed directly below these nodes, or
-     * in any of these nodes' children will be made available for selection.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly availableMetricCategoryNodeHashes: number[];
+  /**
+   * Hash identifiers for any DestinyPresentationNodeDefinition entry that can be
+   * used to list available metrics. Any metric listed directly below these nodes, or
+   * in any of these nodes' children will be made available for selection.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly availableMetricCategoryNodeHashes: number[];
 }
 /**
  * If an item is a Plug, its DestinyInventoryItemDefinition.plug property will be
@@ -5721,125 +5729,125 @@ export interface DestinyItemMetricBlockDefinition {
  * compatibility), whether it is enabled and other Plug info.
  */
 export interface DestinyItemPlugDefinition {
-    /**
-     * The rules around when this plug can be inserted into a socket, aside from the
-     * socket's individual restrictions.
-     *
-     * The live data DestinyItemPlugComponent.insertFailIndexes will be an index into
-     * this array, so you can pull out the failure strings appropriate for the user.
-     */
-    readonly insertionRules: DestinyPlugRuleDefinition[];
-    /**
-     * The string identifier for the plug's category. Use the socket's
-     * DestinySocketTypeDefinition.plugWhitelist to determine whether this plug can be
-     * inserted into the socket.
-     */
-    readonly plugCategoryIdentifier: string;
-    /**
-     * The hash for the plugCategoryIdentifier. You can use this instead if you wish: I
-     * put both in the definition for debugging purposes.
-     */
-    readonly plugCategoryHash: number;
-    /**
-     * If you successfully socket the item, this will determine whether or not you get "
-     * refunded" on the plug.
-     */
-    readonly onActionRecreateSelf: boolean;
-    /**
-     * If inserting this plug requires materials, this is the hash identifier for
-     * looking up the DestinyMaterialRequirementSetDefinition for those requirements.
-     *
-     * Mapped to DestinyMaterialRequirementSetDefinition in the manifest.
-     */
-    readonly insertionMaterialRequirementHash: number;
-    /**
-     * In the game, if you're inspecting a plug item directly, this will be the item
-     * shown with the plug attached. Look up the DestinyInventoryItemDefinition for
-     * this hash for the item.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly previewItemOverrideHash: number;
-    /**
-     * It's not enough for the plug to be inserted. It has to be enabled as well. For
-     * it to be enabled, it may require materials. This is the hash identifier for the
-     * DestinyMaterialRequirementSetDefinition for those requirements, if there is one.
-     *
-     * Mapped to DestinyMaterialRequirementSetDefinition in the manifest.
-     */
-    readonly enabledMaterialRequirementHash: number;
-    /**
-     * The rules around whether the plug, once inserted, is enabled and providing its
-     * benefits.
-     *
-     * The live data DestinyItemPlugComponent.enableFailIndexes will be an index into
-     * this array, so you can pull out the failure strings appropriate for the user.
-     */
-    readonly enabledRules: DestinyPlugRuleDefinition[];
-    /**
-     * Plugs can have arbitrary, UI-defined identifiers that the UI designers use to
-     * determine the style applied to plugs. Unfortunately, we have neither a
-     * definitive list of these labels nor advance warning of when new labels might be
-     * applied or how that relates to how they get rendered. If you want to, you can
-     * refer to known labels to change your own styles: but know that new ones can be
-     * created arbitrarily, and we have no way of associating the labels with any
-     * specific UI style guidance... you'll have to piece that together on your end. Or
-     * do what we do, and just show plugs more generically, without specialized styles.
-     */
-    readonly uiPlugLabel: string;
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly plugStyle: PlugUiStyles;
-    /**
-     * Indicates the rules about when this plug can be used. See the
-     * PlugAvailabilityMode enumeration for more information!
-     */
-    readonly plugAvailability: PlugAvailabilityMode;
-    /**
-     * If the plug meets certain state requirements, it may have an alternative label
-     * applied to it. This is the alternative label that will be applied in such a
-     * situation.
-     */
-    readonly alternateUiPlugLabel: string;
-    /**
-     * The alternate plug of the plug: only applies when the item is in states that
-     * only the server can know about and control, unfortunately. See
-     * AlternateUiPlugLabel for the related label info.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly alternatePlugStyle: PlugUiStyles;
-    /**
-     * If TRUE, this plug is used for UI display purposes only, and doesn't have any
-     * interesting effects of its own.
-     */
-    readonly isDummyPlug: boolean;
-    /**
-     * Do you ever get the feeling that a system has become so overburdened by edge
-     * cases that it probably should have become some other system entirely? So do I!
-     *
-     * In totally unrelated news, Plugs can now override properties of their parent
-     * items. This is some of the relevant definition data for those overrides.
-     *
-     * If this is populated, it will have the override data to be applied when this
-     * plug is applied to an item.
-     */
-    readonly parentItemOverride: DestinyParentItemOverride;
-    /**
-     * IF not null, this plug provides Energy capacity to the item in which it is
-     * socketed. In Armor 2.0 for example, is implemented in a similar way to
-     * Masterworks, where visually it's a single area of the UI being clicked on to "
-     * Upgrade" to higher energy levels, but it's actually socketing new plugs.
-     */
-    readonly energyCapacity: DestinyEnergyCapacityEntry;
-    /**
-     * IF not null, this plug has an energy cost. This contains the details of that
-     * cost.
-     */
-    readonly energyCost: DestinyEnergyCostEntry;
+  /**
+   * The rules around when this plug can be inserted into a socket, aside from the
+   * socket's individual restrictions.
+   *
+   * The live data DestinyItemPlugComponent.insertFailIndexes will be an index into
+   * this array, so you can pull out the failure strings appropriate for the user.
+   */
+  readonly insertionRules: DestinyPlugRuleDefinition[];
+  /**
+   * The string identifier for the plug's category. Use the socket's
+   * DestinySocketTypeDefinition.plugWhitelist to determine whether this plug can be
+   * inserted into the socket.
+   */
+  readonly plugCategoryIdentifier: string;
+  /**
+   * The hash for the plugCategoryIdentifier. You can use this instead if you wish: I
+   * put both in the definition for debugging purposes.
+   */
+  readonly plugCategoryHash: number;
+  /**
+   * If you successfully socket the item, this will determine whether or not you get "
+   * refunded" on the plug.
+   */
+  readonly onActionRecreateSelf: boolean;
+  /**
+   * If inserting this plug requires materials, this is the hash identifier for
+   * looking up the DestinyMaterialRequirementSetDefinition for those requirements.
+   *
+   * Mapped to DestinyMaterialRequirementSetDefinition in the manifest.
+   */
+  readonly insertionMaterialRequirementHash: number;
+  /**
+   * In the game, if you're inspecting a plug item directly, this will be the item
+   * shown with the plug attached. Look up the DestinyInventoryItemDefinition for
+   * this hash for the item.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly previewItemOverrideHash: number;
+  /**
+   * It's not enough for the plug to be inserted. It has to be enabled as well. For
+   * it to be enabled, it may require materials. This is the hash identifier for the
+   * DestinyMaterialRequirementSetDefinition for those requirements, if there is one.
+   *
+   * Mapped to DestinyMaterialRequirementSetDefinition in the manifest.
+   */
+  readonly enabledMaterialRequirementHash: number;
+  /**
+   * The rules around whether the plug, once inserted, is enabled and providing its
+   * benefits.
+   *
+   * The live data DestinyItemPlugComponent.enableFailIndexes will be an index into
+   * this array, so you can pull out the failure strings appropriate for the user.
+   */
+  readonly enabledRules: DestinyPlugRuleDefinition[];
+  /**
+   * Plugs can have arbitrary, UI-defined identifiers that the UI designers use to
+   * determine the style applied to plugs. Unfortunately, we have neither a
+   * definitive list of these labels nor advance warning of when new labels might be
+   * applied or how that relates to how they get rendered. If you want to, you can
+   * refer to known labels to change your own styles: but know that new ones can be
+   * created arbitrarily, and we have no way of associating the labels with any
+   * specific UI style guidance... you'll have to piece that together on your end. Or
+   * do what we do, and just show plugs more generically, without specialized styles.
+   */
+  readonly uiPlugLabel: string;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly plugStyle: PlugUiStyles;
+  /**
+   * Indicates the rules about when this plug can be used. See the
+   * PlugAvailabilityMode enumeration for more information!
+   */
+  readonly plugAvailability: PlugAvailabilityMode;
+  /**
+   * If the plug meets certain state requirements, it may have an alternative label
+   * applied to it. This is the alternative label that will be applied in such a
+   * situation.
+   */
+  readonly alternateUiPlugLabel: string;
+  /**
+   * The alternate plug of the plug: only applies when the item is in states that
+   * only the server can know about and control, unfortunately. See
+   * AlternateUiPlugLabel for the related label info.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly alternatePlugStyle: PlugUiStyles;
+  /**
+   * If TRUE, this plug is used for UI display purposes only, and doesn't have any
+   * interesting effects of its own.
+   */
+  readonly isDummyPlug: boolean;
+  /**
+   * Do you ever get the feeling that a system has become so overburdened by edge
+   * cases that it probably should have become some other system entirely? So do I!
+   *
+   * In totally unrelated news, Plugs can now override properties of their parent
+   * items. This is some of the relevant definition data for those overrides.
+   *
+   * If this is populated, it will have the override data to be applied when this
+   * plug is applied to an item.
+   */
+  readonly parentItemOverride: DestinyParentItemOverride;
+  /**
+   * IF not null, this plug provides Energy capacity to the item in which it is
+   * socketed. In Armor 2.0 for example, is implemented in a similar way to
+   * Masterworks, where visually it's a single area of the UI being clicked on to "
+   * Upgrade" to higher energy levels, but it's actually socketing new plugs.
+   */
+  readonly energyCapacity: DestinyEnergyCapacityEntry;
+  /**
+   * IF not null, this plug has an energy cost. This contains the details of that
+   * cost.
+   */
+  readonly energyCost: DestinyEnergyCostEntry;
 }
 /**
  * Dictates a rule around whether the plug is enabled or insertable.
@@ -5849,8 +5857,8 @@ export interface DestinyItemPlugDefinition {
  * insertionRules) to get the localized string for the failure message if it failed.
  */
 export interface DestinyPlugRuleDefinition {
-    /** The localized string to show if this rule fails. */
-    readonly failureMessage: string;
+  /** The localized string to show if this rule fails. */
+  readonly failureMessage: string;
 }
 /**
  * If the plug has a specific custom style, this enumeration will represent that
@@ -5860,8 +5868,8 @@ export interface DestinyPlugRuleDefinition {
  * these match your value.
  */
 export declare const enum PlugUiStyles {
-    None = 0,
-    Masterwork = 1
+  None = 0,
+  Masterwork = 1,
 }
 /**
  * This enum determines whether the plug is available to be inserted.
@@ -5878,13 +5886,13 @@ export declare const enum PlugUiStyles {
  * comparing it to
  */
 export declare const enum PlugAvailabilityMode {
-    Normal = 0,
-    UnavailableIfSocketContainsMatchingPlugCategory = 1,
-    AvailableIfSocketContainsMatchingPlugCategory = 2
+  Normal = 0,
+  UnavailableIfSocketContainsMatchingPlugCategory = 1,
+  AvailableIfSocketContainsMatchingPlugCategory = 2,
 }
 export interface DestinyParentItemOverride {
-    readonly additionalEquipRequirementsDisplayStrings: string[];
-    readonly pipIcon: string;
+  readonly additionalEquipRequirementsDisplayStrings: string[];
+  readonly pipIcon: string;
 }
 /**
  * Items can have Energy Capacity, and plugs can provide that capacity such as on a
@@ -5892,77 +5900,77 @@ export interface DestinyParentItemOverride {
  * activating plugs for this item.
  */
 export interface DestinyEnergyCapacityEntry {
-    /** How much energy capacity this plug provides. */
-    readonly capacityValue: number;
-    /**
-     * Energy provided by a plug is always of a specific type - this is the hash
-     * identifier for the energy type for which it provides Capacity.
-     *
-     * Mapped to DestinyEnergyTypeDefinition in the manifest.
-     */
-    readonly energyTypeHash: number;
-    /** The Energy Type for this energy capacity, in enum form for easy use. */
-    readonly energyType: DestinyEnergyType;
+  /** How much energy capacity this plug provides. */
+  readonly capacityValue: number;
+  /**
+   * Energy provided by a plug is always of a specific type - this is the hash
+   * identifier for the energy type for which it provides Capacity.
+   *
+   * Mapped to DestinyEnergyTypeDefinition in the manifest.
+   */
+  readonly energyTypeHash: number;
+  /** The Energy Type for this energy capacity, in enum form for easy use. */
+  readonly energyType: DestinyEnergyType;
 }
 /**
  * Represents types of Energy that can be used for costs and payments related to
  * Armor 2.0 mods.
  */
 export interface DestinyEnergyTypeDefinition {
-    /** The description of the energy type, icon etc... */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** A variant of the icon that is transparent and colorless. */
-    readonly transparentIconPath: string;
-    /**
-     * If TRUE, the game shows this Energy type's icon. Otherwise, it doesn't. Whether
-     * you show it or not is up to you.
-     */
-    readonly showIcon: boolean;
-    /**
-     * We have an enumeration for Energy types for quick reference. This is the current
-     * definition's Energy type enum value.
-     */
-    readonly enumValue: DestinyEnergyType;
-    /**
-     * If this Energy Type can be used for determining the Type of Energy that an item
-     * can consume, this is the hash for the DestinyInvestmentStatDefinition that
-     * represents the stat which holds the Capacity for that energy type. (Note that
-     * this is optional because "Any" is a valid cost, but not valid for Capacity - an
-     * Armor must have a specific Energy Type for determining the energy type that the
-     * Armor is restricted to use)
-     */
-    readonly capacityStatHash?: number;
-    /**
-     * If this Energy Type can be used as a cost to pay for socketing Armor 2.0 items,
-     * this is the hash for the DestinyInvestmentStatDefinition that stores the plug's
-     * raw cost.
-     */
-    readonly costStatHash: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /** The description of the energy type, icon etc... */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** A variant of the icon that is transparent and colorless. */
+  readonly transparentIconPath: string;
+  /**
+   * If TRUE, the game shows this Energy type's icon. Otherwise, it doesn't. Whether
+   * you show it or not is up to you.
+   */
+  readonly showIcon: boolean;
+  /**
+   * We have an enumeration for Energy types for quick reference. This is the current
+   * definition's Energy type enum value.
+   */
+  readonly enumValue: DestinyEnergyType;
+  /**
+   * If this Energy Type can be used for determining the Type of Energy that an item
+   * can consume, this is the hash for the DestinyInvestmentStatDefinition that
+   * represents the stat which holds the Capacity for that energy type. (Note that
+   * this is optional because "Any" is a valid cost, but not valid for Capacity - an
+   * Armor must have a specific Energy Type for determining the energy type that the
+   * Armor is restricted to use)
+   */
+  readonly capacityStatHash?: number;
+  /**
+   * If this Energy Type can be used as a cost to pay for socketing Armor 2.0 items,
+   * this is the hash for the DestinyInvestmentStatDefinition that stores the plug's
+   * raw cost.
+   */
+  readonly costStatHash: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Represents an Energy Type for systems that require payment of energy of certain
  * types, such as with Armor 2.0.
  */
 export declare const enum DestinyEnergyType {
-    Any = 0,
-    Arc = 1,
-    Thermal = 2,
-    Void = 3
+  Any = 0,
+  Arc = 1,
+  Thermal = 2,
+  Void = 3,
 }
 /**
  * Some plugs cost Energy, which is a stat on the item that can be increased by
@@ -5970,17 +5978,17 @@ export declare const enum DestinyEnergyType {
  * upgrading). If a plug has costs, the details of that cost are defined here.
  */
 export interface DestinyEnergyCostEntry {
-    /** The Energy cost for inserting this plug. */
-    readonly energyCost: number;
-    /**
-     * The type of energy that this plug costs, as a reference to the
-     * DestinyEnergyTypeDefinition of the energy type.
-     *
-     * Mapped to DestinyEnergyTypeDefinition in the manifest.
-     */
-    readonly energyTypeHash: number;
-    /** The type of energy that this plug costs, in enum form. */
-    readonly energyType: DestinyEnergyType;
+  /** The Energy cost for inserting this plug. */
+  readonly energyCost: number;
+  /**
+   * The type of energy that this plug costs, as a reference to the
+   * DestinyEnergyTypeDefinition of the energy type.
+   *
+   * Mapped to DestinyEnergyTypeDefinition in the manifest.
+   */
+  readonly energyTypeHash: number;
+  /** The type of energy that this plug costs, in enum form. */
+  readonly energyType: DestinyEnergyType;
 }
 /**
  * If an item has a related gearset, this is the list of items in that set, and an
@@ -5988,15 +5996,15 @@ export interface DestinyEnergyCostEntry {
  * gearset completion (a very rare use for unlock expressions!)
  */
 export interface DestinyItemGearsetBlockDefinition {
-    /** The maximum possible number of items that can be collected. */
-    readonly trackingValueMax: number;
-    /**
-     * The list of hashes for items in the gearset. Use them to look up
-     * DestinyInventoryItemDefinition entries for the items in the set.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemList: number[];
+  /** The maximum possible number of items that can be collected. */
+  readonly trackingValueMax: number;
+  /**
+   * The list of hashes for items in the gearset. Use them to look up
+   * DestinyInventoryItemDefinition entries for the items in the set.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemList: number[];
 }
 /**
  * Some items are "sacks" - they can be "opened" to produce other items. This is
@@ -6004,140 +6012,140 @@ export interface DestinyItemGearsetBlockDefinition {
  * example of items that are considered to be "Sacks".
  */
 export interface DestinyItemSackBlockDefinition {
-    /**
-     * A description of what will happen when you open the sack. As far as I can tell,
-     * this is blank currently. Unknown whether it will eventually be populated with
-     * useful info.
-     */
-    readonly detailAction: string;
-    /** The localized name of the action being performed when you open the sack. */
-    readonly openAction: string;
-    readonly selectItemCount: number;
-    readonly vendorSackType: string;
-    readonly openOnAcquire: boolean;
+  /**
+   * A description of what will happen when you open the sack. As far as I can tell,
+   * this is blank currently. Unknown whether it will eventually be populated with
+   * useful info.
+   */
+  readonly detailAction: string;
+  /** The localized name of the action being performed when you open the sack. */
+  readonly openAction: string;
+  readonly selectItemCount: number;
+  readonly vendorSackType: string;
+  readonly openOnAcquire: boolean;
 }
 /** If defined, the item has at least one socket. */
 export interface DestinyItemSocketBlockDefinition {
-    /**
-     * This was supposed to be a string that would give per-item details about sockets.
-     * In practice, it turns out that all this ever has is the localized word "details".
-     * ... that's lame, but perhaps it will become something cool in the future.
-     */
-    readonly detail: string;
-    /**
-     * Each non-intrinsic (or mutable) socket on an item is defined here. Check inside
-     * for more info.
-     */
-    readonly socketEntries: DestinyItemSocketEntryDefinition[];
-    /**
-     * Each intrinsic (or immutable/permanent) socket on an item is defined here, along
-     * with the plug that is permanently affixed to the socket.
-     */
-    readonly intrinsicSockets: DestinyItemIntrinsicSocketEntryDefinition[];
-    /**
-     * A convenience property, that refers to the sockets in the "sockets" property,
-     * pre-grouped by category and ordered in the manner that they should be grouped in
-     * the UI. You could form this yourself with the existing data, but why would you
-     * want to? Enjoy life man.
-     */
-    readonly socketCategories: DestinyItemSocketCategoryDefinition[];
+  /**
+   * This was supposed to be a string that would give per-item details about sockets.
+   * In practice, it turns out that all this ever has is the localized word "details".
+   * ... that's lame, but perhaps it will become something cool in the future.
+   */
+  readonly detail: string;
+  /**
+   * Each non-intrinsic (or mutable) socket on an item is defined here. Check inside
+   * for more info.
+   */
+  readonly socketEntries: DestinyItemSocketEntryDefinition[];
+  /**
+   * Each intrinsic (or immutable/permanent) socket on an item is defined here, along
+   * with the plug that is permanently affixed to the socket.
+   */
+  readonly intrinsicSockets: DestinyItemIntrinsicSocketEntryDefinition[];
+  /**
+   * A convenience property, that refers to the sockets in the "sockets" property,
+   * pre-grouped by category and ordered in the manner that they should be grouped in
+   * the UI. You could form this yourself with the existing data, but why would you
+   * want to? Enjoy life man.
+   */
+  readonly socketCategories: DestinyItemSocketCategoryDefinition[];
 }
 /**
  * The definition information for a specific socket on an item. This will determine
  * how the socket behaves in-game.
  */
 export interface DestinyItemSocketEntryDefinition {
-    /**
-     * All sockets have a type, and this is the hash identifier for this particular
-     * type. Use it to look up the DestinySocketTypeDefinition: read there for more
-     * information on how socket types affect the behavior of the socket.
-     *
-     * Mapped to DestinySocketTypeDefinition in the manifest.
-     */
-    readonly socketTypeHash: number;
-    /**
-     * If a valid hash, this is the hash identifier for the
-     * DestinyInventoryItemDefinition representing the Plug that will be initially
-     * inserted into the item on item creation. Otherwise, this Socket will either
-     * start without a plug inserted, or will have one randomly inserted.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly singleInitialItemHash: number;
-    /**
-     * This is a list of pre-determined plugs that can *always* be plugged into this
-     * socket, without the character having the plug in their inventory.
-     *
-     * If this list is populated, you will not be allowed to plug an arbitrary item in
-     * the socket: you will only be able to choose from one of these reusable plugs.
-     */
-    readonly reusablePlugItems: DestinyItemSocketEntryPlugItemDefinition[];
-    /**
-     * If this is true, then the socket will not be initialized with a plug if the item
-     * is purchased from a Vendor.
-     *
-     * Remember that Vendors are much more than conceptual vendors: they include "
-     * Collection Kiosks" and other entities. See DestinyVendorDefinition for more
-     * information.
-     */
-    readonly preventInitializationOnVendorPurchase: boolean;
-    /**
-     * If this is true, the perks provided by this socket shouldn't be shown in the
-     * item's tooltip. This might be useful if it's providing a hidden bonus, or if the
-     * bonus is less important than other benefits on the item.
-     */
-    readonly hidePerksInItemTooltip: boolean;
-    /**
-     * Indicates where you should go to get plugs for this socket. This will affect how
-     * you populate your UI, as well as what plugs are valid for this socket. It's an
-     * alternative to having to check for the existence of certain properties (
-     * reusablePlugItems for example) to infer where plugs should come from.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly plugSources: SocketPlugSources;
-    /**
-     * If this socket's plugs come from a reusable DestinyPlugSetDefinition, this is
-     * the identifier for that set. We added this concept to reduce some major
-     * duplication that's going to come from sockets as replacements for what was once
-     * implemented as large sets of items and kiosks (like Emotes).
-     *
-     * As of Shadowkeep, these will come up much more frequently and be driven by game
-     * content rather than custom curation.
-     *
-     * Mapped to DestinyPlugSetDefinition in the manifest.
-     */
-    readonly reusablePlugSetHash?: number;
-    /**
-     * This field replaces "randomizedPlugItems" as of Shadowkeep launch. If a socket
-     * has randomized plugs, this is a pointer to the set of plugs that could be used,
-     * as defined in DestinyPlugSetDefinition.
-     *
-     * If null, the item has no randomized plugs.
-     *
-     * Mapped to DestinyPlugSetDefinition in the manifest.
-     */
-    readonly randomizedPlugSetHash?: number;
-    /**
-     * If true, then this socket is visible in the item's "default" state. If you have
-     * an instance, you should always check the runtime state, as that can override
-     * this visibility setting: but if you're looking at the item on a conceptual level,
-     * this property can be useful for hiding data such as legacy sockets - which
-     * remain defined on items for infrastructure purposes, but can be confusing for
-     * users to see.
-     */
-    readonly defaultVisible: boolean;
+  /**
+   * All sockets have a type, and this is the hash identifier for this particular
+   * type. Use it to look up the DestinySocketTypeDefinition: read there for more
+   * information on how socket types affect the behavior of the socket.
+   *
+   * Mapped to DestinySocketTypeDefinition in the manifest.
+   */
+  readonly socketTypeHash: number;
+  /**
+   * If a valid hash, this is the hash identifier for the
+   * DestinyInventoryItemDefinition representing the Plug that will be initially
+   * inserted into the item on item creation. Otherwise, this Socket will either
+   * start without a plug inserted, or will have one randomly inserted.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly singleInitialItemHash: number;
+  /**
+   * This is a list of pre-determined plugs that can *always* be plugged into this
+   * socket, without the character having the plug in their inventory.
+   *
+   * If this list is populated, you will not be allowed to plug an arbitrary item in
+   * the socket: you will only be able to choose from one of these reusable plugs.
+   */
+  readonly reusablePlugItems: DestinyItemSocketEntryPlugItemDefinition[];
+  /**
+   * If this is true, then the socket will not be initialized with a plug if the item
+   * is purchased from a Vendor.
+   *
+   * Remember that Vendors are much more than conceptual vendors: they include "
+   * Collection Kiosks" and other entities. See DestinyVendorDefinition for more
+   * information.
+   */
+  readonly preventInitializationOnVendorPurchase: boolean;
+  /**
+   * If this is true, the perks provided by this socket shouldn't be shown in the
+   * item's tooltip. This might be useful if it's providing a hidden bonus, or if the
+   * bonus is less important than other benefits on the item.
+   */
+  readonly hidePerksInItemTooltip: boolean;
+  /**
+   * Indicates where you should go to get plugs for this socket. This will affect how
+   * you populate your UI, as well as what plugs are valid for this socket. It's an
+   * alternative to having to check for the existence of certain properties (
+   * reusablePlugItems for example) to infer where plugs should come from.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly plugSources: SocketPlugSources;
+  /**
+   * If this socket's plugs come from a reusable DestinyPlugSetDefinition, this is
+   * the identifier for that set. We added this concept to reduce some major
+   * duplication that's going to come from sockets as replacements for what was once
+   * implemented as large sets of items and kiosks (like Emotes).
+   *
+   * As of Shadowkeep, these will come up much more frequently and be driven by game
+   * content rather than custom curation.
+   *
+   * Mapped to DestinyPlugSetDefinition in the manifest.
+   */
+  readonly reusablePlugSetHash?: number;
+  /**
+   * This field replaces "randomizedPlugItems" as of Shadowkeep launch. If a socket
+   * has randomized plugs, this is a pointer to the set of plugs that could be used,
+   * as defined in DestinyPlugSetDefinition.
+   *
+   * If null, the item has no randomized plugs.
+   *
+   * Mapped to DestinyPlugSetDefinition in the manifest.
+   */
+  readonly randomizedPlugSetHash?: number;
+  /**
+   * If true, then this socket is visible in the item's "default" state. If you have
+   * an instance, you should always check the runtime state, as that can override
+   * this visibility setting: but if you're looking at the item on a conceptual level,
+   * this property can be useful for hiding data such as legacy sockets - which
+   * remain defined on items for infrastructure purposes, but can be confusing for
+   * users to see.
+   */
+  readonly defaultVisible: boolean;
 }
 /** The definition of a known, reusable plug that can be applied to a socket. */
 export interface DestinyItemSocketEntryPlugItemDefinition {
-    /**
-     * The hash identifier of a DestinyInventoryItemDefinition representing the plug
-     * that can be inserted.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
+  /**
+   * The hash identifier of a DestinyInventoryItemDefinition representing the plug
+   * that can be inserted.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
 }
 /**
  * Indicates how a socket is populated, and where you should look for valid plug
@@ -6155,37 +6163,37 @@ export interface DestinyItemSocketEntryPlugItemDefinition {
  * these match your value.
  */
 export declare const enum SocketPlugSources {
-    /** If there's no way we can detect to insert new plugs. */
-    None = 0,
-    /**
-     * Use plugs found in the player's inventory, based on the socket type rules (see
-     * DestinySocketTypeDefinition for more info)
-     *
-     * Note that a socket - like Shaders - can have *both* reusable plugs and inventory
-     * items inserted theoretically.
-     */
-    InventorySourced = 1,
-    /**
-     * Use the DestinyItemSocketsComponent.sockets.reusablePlugs property to determine
-     * which plugs are valid for this socket. This may have to be combined with other
-     * sources, such as plug sets, if those flags are set.
-     *
-     * Note that "Reusable" plugs may not necessarily come from a plug set, nor from
-     * the "reusablePlugItems" in the socket's Definition data. They can sometimes be "
-     * randomized" in which case the only source of truth at the moment is still the
-     * runtime DestinyItemSocketsComponent.sockets.reusablePlugs property.
-     */
-    ReusablePlugItems = 2,
-    /**
-     * Use the ProfilePlugSets (DestinyProfileResponse.profilePlugSets) component data
-     * to determine which plugs are valid for this socket.
-     */
-    ProfilePlugSet = 4,
-    /**
-     * Use the CharacterPlugSets (DestinyProfileResponse.characterPlugSets) component
-     * data to determine which plugs are valid for this socket.
-     */
-    CharacterPlugSet = 8
+  /** If there's no way we can detect to insert new plugs. */
+  None = 0,
+  /**
+   * Use plugs found in the player's inventory, based on the socket type rules (see
+   * DestinySocketTypeDefinition for more info)
+   *
+   * Note that a socket - like Shaders - can have *both* reusable plugs and inventory
+   * items inserted theoretically.
+   */
+  InventorySourced = 1,
+  /**
+   * Use the DestinyItemSocketsComponent.sockets.reusablePlugs property to determine
+   * which plugs are valid for this socket. This may have to be combined with other
+   * sources, such as plug sets, if those flags are set.
+   *
+   * Note that "Reusable" plugs may not necessarily come from a plug set, nor from
+   * the "reusablePlugItems" in the socket's Definition data. They can sometimes be "
+   * randomized" in which case the only source of truth at the moment is still the
+   * runtime DestinyItemSocketsComponent.sockets.reusablePlugs property.
+   */
+  ReusablePlugItems = 2,
+  /**
+   * Use the ProfilePlugSets (DestinyProfileResponse.profilePlugSets) component data
+   * to determine which plugs are valid for this socket.
+   */
+  ProfilePlugSet = 4,
+  /**
+   * Use the CharacterPlugSets (DestinyProfileResponse.characterPlugSets) component
+   * data to determine which plugs are valid for this socket.
+   */
+  CharacterPlugSet = 8,
 }
 /**
  * Sometimes, we have large sets of reusable plugs that are defined identically and
@@ -6206,51 +6214,51 @@ export declare const enum SocketPlugSources {
  * there where possible, but it will be invalid for many/most plug sets.
  */
 export interface DestinyPlugSetDefinition {
-    /**
-     * If you want to show these plugs in isolation, these are the display properties
-     * for them.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * This is a list of pre-determined plugs that can be plugged into this socket,
-     * without the character having the plug in their inventory.
-     *
-     * If this list is populated, you will not be allowed to plug an arbitrary item in
-     * the socket: you will only be able to choose from one of these reusable plugs.
-     */
-    readonly reusablePlugItems: DestinyItemSocketEntryPlugItemRandomizedDefinition[];
-    /**
-     * Mostly for our debugging or reporting bugs, BNet is making "fake" plug sets in a
-     * desperate effort to reduce socket sizes.
-     *
-     * If this is true, the plug set was generated by BNet: if it looks wrong, that's
-     * a good indicator that it's bungie.net that fucked this up.
-     */
-    readonly isFakePlugSet: boolean;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * If you want to show these plugs in isolation, these are the display properties
+   * for them.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * This is a list of pre-determined plugs that can be plugged into this socket,
+   * without the character having the plug in their inventory.
+   *
+   * If this list is populated, you will not be allowed to plug an arbitrary item in
+   * the socket: you will only be able to choose from one of these reusable plugs.
+   */
+  readonly reusablePlugItems: DestinyItemSocketEntryPlugItemRandomizedDefinition[];
+  /**
+   * Mostly for our debugging or reporting bugs, BNet is making "fake" plug sets in a
+   * desperate effort to reduce socket sizes.
+   *
+   * If this is true, the plug set was generated by BNet: if it looks wrong, that's
+   * a good indicator that it's bungie.net that fucked this up.
+   */
+  readonly isFakePlugSet: boolean;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyItemSocketEntryPlugItemRandomizedDefinition {
-    /**
-     * The hash identifier of a DestinyInventoryItemDefinition representing the plug
-     * that can be inserted.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
+  /**
+   * The hash identifier of a DestinyInventoryItemDefinition representing the plug
+   * that can be inserted.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
 }
 /**
  * Represents a socket that has a plug associated with it intrinsically. This is
@@ -6258,58 +6266,58 @@ export interface DestinyItemSocketEntryPlugItemRandomizedDefinition {
  * but that plug/Mod should never change.
  */
 export interface DestinyItemIntrinsicSocketEntryDefinition {
-    /**
-     * Indicates the plug that is intrinsically inserted into this socket.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
-    /**
-     * Indicates the type of this intrinsic socket.
-     *
-     * Mapped to DestinySocketTypeDefinition in the manifest.
-     */
-    readonly socketTypeHash: number;
-    /**
-     * If true, then this socket is visible in the item's "default" state. If you have
-     * an instance, you should always check the runtime state, as that can override
-     * this visibility setting: but if you're looking at the item on a conceptual level,
-     * this property can be useful for hiding data such as legacy sockets - which
-     * remain defined on items for infrastructure purposes, but can be confusing for
-     * users to see.
-     */
-    readonly defaultVisible: boolean;
+  /**
+   * Indicates the plug that is intrinsically inserted into this socket.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
+  /**
+   * Indicates the type of this intrinsic socket.
+   *
+   * Mapped to DestinySocketTypeDefinition in the manifest.
+   */
+  readonly socketTypeHash: number;
+  /**
+   * If true, then this socket is visible in the item's "default" state. If you have
+   * an instance, you should always check the runtime state, as that can override
+   * this visibility setting: but if you're looking at the item on a conceptual level,
+   * this property can be useful for hiding data such as legacy sockets - which
+   * remain defined on items for infrastructure purposes, but can be confusing for
+   * users to see.
+   */
+  readonly defaultVisible: boolean;
 }
 /**
  * Sockets are grouped into categories in the UI. These define which category and
  * which sockets are under that category.
  */
 export interface DestinyItemSocketCategoryDefinition {
-    /**
-     * The hash for the Socket Category: a quick way to go get the header display
-     * information for the category. Use it to look up DestinySocketCategoryDefinition
-     * info.
-     *
-     * Mapped to DestinySocketCategoryDefinition in the manifest.
-     */
-    readonly socketCategoryHash: number;
-    /**
-     * Use these indexes to look up the sockets in the "sockets.socketEntries" property
-     * on the item definition. These are the indexes under the category, in game-
-     * rendered order.
-     */
-    readonly socketIndexes: number[];
+  /**
+   * The hash for the Socket Category: a quick way to go get the header display
+   * information for the category. Use it to look up DestinySocketCategoryDefinition
+   * info.
+   *
+   * Mapped to DestinySocketCategoryDefinition in the manifest.
+   */
+  readonly socketCategoryHash: number;
+  /**
+   * Use these indexes to look up the sockets in the "sockets.socketEntries" property
+   * on the item definition. These are the indexes under the category, in game-
+   * rendered order.
+   */
+  readonly socketIndexes: number[];
 }
 /**
  * This appears to be information used when rendering rewards. We don't currently
  * use it on BNet.
  */
 export interface DestinyItemSummaryBlockDefinition {
-    /**
-     * Apparently when rendering an item in a reward, this should be used as a sort
-     * priority. We're not doing it presently.
-     */
-    readonly sortPriority: number;
+  /**
+   * Apparently when rendering an item in a reward, this should be used as a sort
+   * priority. We're not doing it presently.
+   */
+  readonly sortPriority: number;
 }
 /**
  * This defines information that can only come from a talent grid on an item. Items
@@ -6320,36 +6328,36 @@ export interface DestinyItemSummaryBlockDefinition {
  * meaningful Nodes.
  */
 export interface DestinyItemTalentGridBlockDefinition {
-    /**
-     * The hash identifier of the DestinyTalentGridDefinition attached to this item.
-     *
-     * Mapped to DestinyTalentGridDefinition in the manifest.
-     */
-    readonly talentGridHash: number;
-    /**
-     * This is meant to be a subtitle for looking at the talent grid. In practice,
-     * somewhat frustratingly, this always merely says the localized word for "Details".
-     * Great. Maybe it'll have more if talent grids ever get used for more than builds
-     * and subclasses again.
-     */
-    readonly itemDetailString: string;
-    /**
-     * A shortcut string identifier for the "build" in question, if this talent grid
-     * has an associated build. Doesn't map to anything we can expose at the moment.
-     */
-    readonly buildName: string;
-    /**
-     * If the talent grid implies a damage type, this is the enum value for that damage
-     * type.
-     */
-    readonly hudDamageType: DamageType;
-    /**
-     * If the talent grid has a special icon that's shown in the game UI (like builds,
-     * funny that), this is the identifier for that icon. Sadly, we don't actually get
-     * that icon right now. I'll be looking to replace this with a path to the actual
-     * icon itself.
-     */
-    readonly hudIcon: string;
+  /**
+   * The hash identifier of the DestinyTalentGridDefinition attached to this item.
+   *
+   * Mapped to DestinyTalentGridDefinition in the manifest.
+   */
+  readonly talentGridHash: number;
+  /**
+   * This is meant to be a subtitle for looking at the talent grid. In practice,
+   * somewhat frustratingly, this always merely says the localized word for "Details".
+   * Great. Maybe it'll have more if talent grids ever get used for more than builds
+   * and subclasses again.
+   */
+  readonly itemDetailString: string;
+  /**
+   * A shortcut string identifier for the "build" in question, if this talent grid
+   * has an associated build. Doesn't map to anything we can expose at the moment.
+   */
+  readonly buildName: string;
+  /**
+   * If the talent grid implies a damage type, this is the enum value for that damage
+   * type.
+   */
+  readonly hudDamageType: DamageType;
+  /**
+   * If the talent grid has a special icon that's shown in the game UI (like builds,
+   * funny that), this is the identifier for that icon. Sadly, we don't actually get
+   * that icon right now. I'll be looking to replace this with a path to the actual
+   * icon itself.
+   */
+  readonly hudIcon: string;
 }
 /**
  * The time has unfortunately come to talk about Talent Grids.
@@ -6391,98 +6399,98 @@ export interface DestinyItemTalentGridBlockDefinition {
  * s talent grid.
  */
 export interface DestinyTalentGridDefinition {
-    /**
-     * The maximum possible level of the Talent Grid: at this level, any nodes are
-     * allowed to be activated.
-     */
-    readonly maxGridLevel: number;
-    /**
-     * The meaning of this has been lost in the sands of time: it still exists as a
-     * property, but appears to be unused in the modern UI of talent grids. It used to
-     * imply that each visual "column" of talent nodes required identical progression
-     * levels in order to be activated. Returning this value in case it is still useful
-     * to someone? Perhaps it's just a bit of interesting history.
-     */
-    readonly gridLevelPerColumn: number;
-    /**
-     * The hash identifier of the Progression (DestinyProgressionDefinition) that
-     * drives whether and when Talent Nodes can be activated on the Grid. Items will
-     * have instances of this Progression, and will gain experience that will
-     * eventually cause the grid to increase in level. As the grid's level increases,
-     * it will cross the threshold where nodes can be activated. See
-     * DestinyTalentGridStepDefinition's activation requirements for more information.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressionHash: number;
-    /**
-     * The list of Talent Nodes on the Grid (recall that Nodes themselves are really
-     * just locations in the UI to show whatever their current Step is. You will only
-     * know the current step for a node by retrieving instanced data through platform
-     * calls to the API that return DestinyItemTalentGridComponent).
-     */
-    readonly nodes: DestinyTalentNodeDefinition[];
-    /**
-     * Talent Nodes can exist in "exclusive sets": these are sets of nodes in which
-     * only a single node in the set can be activated at any given time. Activating a
-     * node in this set will automatically deactivate the other nodes in the set (
-     * referred to as a "Swap").
-     *
-     * If a node in the exclusive set has already been activated, the game will not
-     * charge you materials to activate another node in the set, even if you have never
-     * activated it before, because you already paid the cost to activate one node in
-     * the set.
-     *
-     * Not to be confused with Exclusive Groups. (how the heck do we NOT get confused
-     * by that? Jeez) See the groups property for information about that only-
-     * tangentially-related concept.
-     */
-    readonly exclusiveSets: DestinyTalentNodeExclusiveSetDefinition[];
-    /**
-     * This is a quick reference to the indexes of nodes that are not part of exclusive
-     * sets. Handy for knowing which talent nodes can only be activated directly,
-     * rather than via swapping.
-     */
-    readonly independentNodeIndexes: number[];
-    /**
-     * Talent Nodes can have "Exclusive Groups". These are not to be confused with
-     * Exclusive Sets (see exclusiveSets property).
-     *
-     * Look at the definition of DestinyTalentExclusiveGroup for more information and
-     * how they work. These groups are keyed by the "groupHash" from
-     * DestinyTalentExclusiveGroup.
-     */
-    readonly groups: {
-        [key: number]: DestinyTalentExclusiveGroup;
-    };
-    /**
-     * BNet wants to show talent nodes grouped by similar purpose with localized titles.
-     * This is the ordered list of those categories: if you want to show nodes by
-     * category, you can iterate over this list, render the displayProperties for the
-     * category as the title, and then iterate over the talent nodes referenced by the
-     * category to show the related nodes.
-     *
-     * Note that this is different from Exclusive Groups or Sets, because these
-     * categories also incorporate "Independent" nodes that belong to neither sets nor
-     * groups. These are purely for visual grouping of nodes rather than functional
-     * grouping.
-     */
-    readonly nodeCategories: DestinyTalentNodeCategory[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * The maximum possible level of the Talent Grid: at this level, any nodes are
+   * allowed to be activated.
+   */
+  readonly maxGridLevel: number;
+  /**
+   * The meaning of this has been lost in the sands of time: it still exists as a
+   * property, but appears to be unused in the modern UI of talent grids. It used to
+   * imply that each visual "column" of talent nodes required identical progression
+   * levels in order to be activated. Returning this value in case it is still useful
+   * to someone? Perhaps it's just a bit of interesting history.
+   */
+  readonly gridLevelPerColumn: number;
+  /**
+   * The hash identifier of the Progression (DestinyProgressionDefinition) that
+   * drives whether and when Talent Nodes can be activated on the Grid. Items will
+   * have instances of this Progression, and will gain experience that will
+   * eventually cause the grid to increase in level. As the grid's level increases,
+   * it will cross the threshold where nodes can be activated. See
+   * DestinyTalentGridStepDefinition's activation requirements for more information.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressionHash: number;
+  /**
+   * The list of Talent Nodes on the Grid (recall that Nodes themselves are really
+   * just locations in the UI to show whatever their current Step is. You will only
+   * know the current step for a node by retrieving instanced data through platform
+   * calls to the API that return DestinyItemTalentGridComponent).
+   */
+  readonly nodes: DestinyTalentNodeDefinition[];
+  /**
+   * Talent Nodes can exist in "exclusive sets": these are sets of nodes in which
+   * only a single node in the set can be activated at any given time. Activating a
+   * node in this set will automatically deactivate the other nodes in the set (
+   * referred to as a "Swap").
+   *
+   * If a node in the exclusive set has already been activated, the game will not
+   * charge you materials to activate another node in the set, even if you have never
+   * activated it before, because you already paid the cost to activate one node in
+   * the set.
+   *
+   * Not to be confused with Exclusive Groups. (how the heck do we NOT get confused
+   * by that? Jeez) See the groups property for information about that only-
+   * tangentially-related concept.
+   */
+  readonly exclusiveSets: DestinyTalentNodeExclusiveSetDefinition[];
+  /**
+   * This is a quick reference to the indexes of nodes that are not part of exclusive
+   * sets. Handy for knowing which talent nodes can only be activated directly,
+   * rather than via swapping.
+   */
+  readonly independentNodeIndexes: number[];
+  /**
+   * Talent Nodes can have "Exclusive Groups". These are not to be confused with
+   * Exclusive Sets (see exclusiveSets property).
+   *
+   * Look at the definition of DestinyTalentExclusiveGroup for more information and
+   * how they work. These groups are keyed by the "groupHash" from
+   * DestinyTalentExclusiveGroup.
+   */
+  readonly groups: {
+    [key: number]: DestinyTalentExclusiveGroup;
+  };
+  /**
+   * BNet wants to show talent nodes grouped by similar purpose with localized titles.
+   * This is the ordered list of those categories: if you want to show nodes by
+   * category, you can iterate over this list, render the displayProperties for the
+   * category as the title, and then iterate over the talent nodes referenced by the
+   * category to show the related nodes.
+   *
+   * Note that this is different from Exclusive Groups or Sets, because these
+   * categories also incorporate "Independent" nodes that belong to neither sets nor
+   * groups. These are purely for visual grouping of nodes rather than functional
+   * grouping.
+   */
+  readonly nodeCategories: DestinyTalentNodeCategory[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Talent Grids on items have Nodes. These nodes have positions in the talent grid'
@@ -6496,147 +6504,147 @@ export interface DestinyTalentGridDefinition {
  * work, and how they are used in Destiny 2 (and how they were used in Destiny 1).
  */
 export interface DestinyTalentNodeDefinition {
-    /**
-     * The index into the DestinyTalentGridDefinition's "nodes" property where this
-     * node is located. Used to uniquely identify the node within the Talent Grid. Note
-     * that this is content version dependent: make sure you have the latest version of
-     * content before trying to use these properties.
-     */
-    readonly nodeIndex: number;
-    /**
-     * The hash identifier for the node, which unfortunately is also content version
-     * dependent but can be (and ideally, should be) used instead of the nodeIndex to
-     * uniquely identify the node.
-     *
-     * The two exist side-by-side for backcompat reasons due to the Great Talent Node
-     * Restructuring of Destiny 1, and I ran out of time to remove one of them and
-     * standardize on the other. Sorry!
-     */
-    readonly nodeHash: number;
-    /**
-     * The visual "row" where the node should be shown in the UI. If negative, then the
-     * node is hidden.
-     */
-    readonly row: number;
-    /**
-     * The visual "column" where the node should be shown in the UI. If negative, the
-     * node is hidden.
-     */
-    readonly column: number;
-    /**
-     * Indexes into the DestinyTalentGridDefinition.nodes property for any nodes that
-     * must be activated before this one is allowed to be activated.
-     *
-     * I would have liked to change this to hashes for Destiny 2, but we have run out
-     * of time.
-     */
-    readonly prerequisiteNodeIndexes: number[];
-    /**
-     * At one point, Talent Nodes supported the idea of "Binary Pairs": nodes that
-     * overlapped each other visually, and where activating one deactivated the other.
-     * They ended up not being used, mostly because Exclusive Sets are *almost* a
-     * superset of this concept, but the potential for it to be used still exists in
-     * theory.
-     *
-     * If this is ever used, this will be the index into the
-     * DestinyTalentGridDefinition.nodes property for the node that is the binary pair
-     * match to this node. Activating one deactivates the other.
-     */
-    readonly binaryPairNodeIndex: number;
-    /**
-     * If true, this node will automatically unlock when the Talent Grid's level
-     * reaches the required level of the current step of this node.
-     */
-    readonly autoUnlocks: boolean;
-    /**
-     * At one point, Nodes were going to be able to be activated multiple times,
-     * changing the current step and potentially piling on multiple effects from the
-     * previously activated steps. This property would indicate if the last step could
-     * be activated multiple times.
-     *
-     * This is not currently used, but it isn't out of the question that this could end
-     * up being used again in a theoretical future.
-     */
-    readonly lastStepRepeats: boolean;
-    /**
-     * If this is true, the node's step is determined randomly rather than the first
-     * step being chosen.
-     */
-    readonly isRandom: boolean;
-    /**
-     * At one point, you were going to be able to repurchase talent nodes that had
-     * random steps, to "re-roll" the current step of the node (and thus change the
-     * properties of your item). This was to be the activation requirement for
-     * performing that re-roll.
-     *
-     * The system still exists to do this, as far as I know, so it may yet come back
-     * around!
-     */
-    readonly randomActivationRequirement: DestinyNodeActivationRequirement;
-    /**
-     * If this is true, the node can be "re-rolled" to acquire a different random
-     * current step. This is not used, but still exists for a theoretical future of
-     * talent grids.
-     */
-    readonly isRandomRepurchasable: boolean;
-    /**
-     * At this point, "steps" have been obfuscated into conceptual entities,
-     * aggregating the underlying notions of "properties" and "true steps".
-     *
-     * If you need to know a step as it truly exists - such as when recreating Node
-     * logic when processing Vendor data - you'll have to use the "realSteps" property
-     * below.
-     */
-    readonly steps: DestinyNodeStepDefinition[];
-    /**
-     * The nodeHash values for nodes that are in an Exclusive Set with this node.
-     *
-     * See DestinyTalentGridDefinition.exclusiveSets for more info about exclusive sets.
-     *
-     * Again, note that these are nodeHashes and *not* nodeIndexes.
-     */
-    readonly exclusiveWithNodeHashes: number[];
-    /**
-     * If the node's step is randomly selected, this is the amount of the Talent Grid's
-     * progression experience at which the progression bar for the node should be shown.
-     */
-    readonly randomStartProgressionBarAtProgression: number;
-    /**
-     * A string identifier for a custom visual layout to apply to this talent node.
-     * Unfortunately, we do not have any data for rendering these custom layouts. It
-     * will be up to you to interpret these strings and change your UI if you want to
-     * have custom UI matching these layouts.
-     */
-    readonly layoutIdentifier: string;
-    /**
-     * As of Destiny 2, nodes can exist as part of "Exclusive Groups". These differ
-     * from exclusive sets in that, within the group, many nodes can be activated. But
-     * the act of activating any node in the group will cause "opposing" nodes (nodes
-     * in groups that are not allowed to be activated at the same time as this group)
-     * to deactivate.
-     *
-     * See DestinyTalentExclusiveGroup for more information on the details. This is an
-     * identifier for this node's group, if it is part of one.
-     */
-    readonly groupHash?: number;
-    /**
-     * Talent nodes can be associated with a piece of Lore, generally rendered in a
-     * tooltip. This is the hash identifier of the lore element to show, if there is
-     * one to be show.
-     *
-     * Mapped to DestinyLoreDefinition in the manifest.
-     */
-    readonly loreHash?: number;
-    /**
-     * Comes from the talent grid node style: this identifier should be used to
-     * determine how to render the node in the UI.
-     */
-    readonly nodeStyleIdentifier: string;
-    /**
-     * Comes from the talent grid node style: if true, then this node should be ignored
-     * for determining whether the grid is complete.
-     */
-    readonly ignoreForCompletion: boolean;
+  /**
+   * The index into the DestinyTalentGridDefinition's "nodes" property where this
+   * node is located. Used to uniquely identify the node within the Talent Grid. Note
+   * that this is content version dependent: make sure you have the latest version of
+   * content before trying to use these properties.
+   */
+  readonly nodeIndex: number;
+  /**
+   * The hash identifier for the node, which unfortunately is also content version
+   * dependent but can be (and ideally, should be) used instead of the nodeIndex to
+   * uniquely identify the node.
+   *
+   * The two exist side-by-side for backcompat reasons due to the Great Talent Node
+   * Restructuring of Destiny 1, and I ran out of time to remove one of them and
+   * standardize on the other. Sorry!
+   */
+  readonly nodeHash: number;
+  /**
+   * The visual "row" where the node should be shown in the UI. If negative, then the
+   * node is hidden.
+   */
+  readonly row: number;
+  /**
+   * The visual "column" where the node should be shown in the UI. If negative, the
+   * node is hidden.
+   */
+  readonly column: number;
+  /**
+   * Indexes into the DestinyTalentGridDefinition.nodes property for any nodes that
+   * must be activated before this one is allowed to be activated.
+   *
+   * I would have liked to change this to hashes for Destiny 2, but we have run out
+   * of time.
+   */
+  readonly prerequisiteNodeIndexes: number[];
+  /**
+   * At one point, Talent Nodes supported the idea of "Binary Pairs": nodes that
+   * overlapped each other visually, and where activating one deactivated the other.
+   * They ended up not being used, mostly because Exclusive Sets are *almost* a
+   * superset of this concept, but the potential for it to be used still exists in
+   * theory.
+   *
+   * If this is ever used, this will be the index into the
+   * DestinyTalentGridDefinition.nodes property for the node that is the binary pair
+   * match to this node. Activating one deactivates the other.
+   */
+  readonly binaryPairNodeIndex: number;
+  /**
+   * If true, this node will automatically unlock when the Talent Grid's level
+   * reaches the required level of the current step of this node.
+   */
+  readonly autoUnlocks: boolean;
+  /**
+   * At one point, Nodes were going to be able to be activated multiple times,
+   * changing the current step and potentially piling on multiple effects from the
+   * previously activated steps. This property would indicate if the last step could
+   * be activated multiple times.
+   *
+   * This is not currently used, but it isn't out of the question that this could end
+   * up being used again in a theoretical future.
+   */
+  readonly lastStepRepeats: boolean;
+  /**
+   * If this is true, the node's step is determined randomly rather than the first
+   * step being chosen.
+   */
+  readonly isRandom: boolean;
+  /**
+   * At one point, you were going to be able to repurchase talent nodes that had
+   * random steps, to "re-roll" the current step of the node (and thus change the
+   * properties of your item). This was to be the activation requirement for
+   * performing that re-roll.
+   *
+   * The system still exists to do this, as far as I know, so it may yet come back
+   * around!
+   */
+  readonly randomActivationRequirement: DestinyNodeActivationRequirement;
+  /**
+   * If this is true, the node can be "re-rolled" to acquire a different random
+   * current step. This is not used, but still exists for a theoretical future of
+   * talent grids.
+   */
+  readonly isRandomRepurchasable: boolean;
+  /**
+   * At this point, "steps" have been obfuscated into conceptual entities,
+   * aggregating the underlying notions of "properties" and "true steps".
+   *
+   * If you need to know a step as it truly exists - such as when recreating Node
+   * logic when processing Vendor data - you'll have to use the "realSteps" property
+   * below.
+   */
+  readonly steps: DestinyNodeStepDefinition[];
+  /**
+   * The nodeHash values for nodes that are in an Exclusive Set with this node.
+   *
+   * See DestinyTalentGridDefinition.exclusiveSets for more info about exclusive sets.
+   *
+   * Again, note that these are nodeHashes and *not* nodeIndexes.
+   */
+  readonly exclusiveWithNodeHashes: number[];
+  /**
+   * If the node's step is randomly selected, this is the amount of the Talent Grid's
+   * progression experience at which the progression bar for the node should be shown.
+   */
+  readonly randomStartProgressionBarAtProgression: number;
+  /**
+   * A string identifier for a custom visual layout to apply to this talent node.
+   * Unfortunately, we do not have any data for rendering these custom layouts. It
+   * will be up to you to interpret these strings and change your UI if you want to
+   * have custom UI matching these layouts.
+   */
+  readonly layoutIdentifier: string;
+  /**
+   * As of Destiny 2, nodes can exist as part of "Exclusive Groups". These differ
+   * from exclusive sets in that, within the group, many nodes can be activated. But
+   * the act of activating any node in the group will cause "opposing" nodes (nodes
+   * in groups that are not allowed to be activated at the same time as this group)
+   * to deactivate.
+   *
+   * See DestinyTalentExclusiveGroup for more information on the details. This is an
+   * identifier for this node's group, if it is part of one.
+   */
+  readonly groupHash?: number;
+  /**
+   * Talent nodes can be associated with a piece of Lore, generally rendered in a
+   * tooltip. This is the hash identifier of the lore element to show, if there is
+   * one to be show.
+   *
+   * Mapped to DestinyLoreDefinition in the manifest.
+   */
+  readonly loreHash?: number;
+  /**
+   * Comes from the talent grid node style: this identifier should be used to
+   * determine how to render the node in the UI.
+   */
+  readonly nodeStyleIdentifier: string;
+  /**
+   * Comes from the talent grid node style: if true, then this node should be ignored
+   * for determining whether the grid is complete.
+   */
+  readonly ignoreForCompletion: boolean;
 }
 /**
  * Talent nodes have requirements that must be met before they can be activated.
@@ -6646,27 +6654,27 @@ export interface DestinyTalentNodeDefinition {
  * can be activated.
  */
 export interface DestinyNodeActivationRequirement {
-    /**
-     * The Progression level on the Talent Grid required to activate this node.
-     *
-     * See DestinyTalentGridDefinition.progressionHash for the related Progression, and
-     * read DestinyProgressionDefinition's documentation to learn more about
-     * Progressions.
-     */
-    readonly gridLevel: number;
-    /**
-     * The list of hash identifiers for material requirement sets: materials that are
-     * required for the node to be activated. See
-     * DestinyMaterialRequirementSetDefinition for more information about material
-     * requirements.
-     *
-     * In this case, only a single DestinyMaterialRequirementSetDefinition will be
-     * chosen from this list, and we won't know which one will be chosen until an
-     * instance of the item is created.
-     *
-     * Mapped to DestinyMaterialRequirementSetDefinition in the manifest.
-     */
-    readonly materialRequirementHashes: number[];
+  /**
+   * The Progression level on the Talent Grid required to activate this node.
+   *
+   * See DestinyTalentGridDefinition.progressionHash for the related Progression, and
+   * read DestinyProgressionDefinition's documentation to learn more about
+   * Progressions.
+   */
+  readonly gridLevel: number;
+  /**
+   * The list of hash identifiers for material requirement sets: materials that are
+   * required for the node to be activated. See
+   * DestinyMaterialRequirementSetDefinition for more information about material
+   * requirements.
+   *
+   * In this case, only a single DestinyMaterialRequirementSetDefinition will be
+   * chosen from this list, and we won't know which one will be chosen until an
+   * instance of the item is created.
+   *
+   * Mapped to DestinyMaterialRequirementSetDefinition in the manifest.
+   */
+  readonly materialRequirementHashes: number[];
 }
 /**
  * This defines the properties of a "Talent Node Step". When you see a talent node
@@ -6687,158 +6695,158 @@ export interface DestinyNodeActivationRequirement {
  * thus are subject to change between content updates.
  */
 export interface DestinyNodeStepDefinition {
-    /**
-     * These are the display properties actually used to render the Talent Node. The
-     * currently active step's displayProperties are shown.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The index of this step in the list of Steps on the Talent Node.
-     *
-     * Unfortunately, this is the closest thing we have to an identifier for the Step:
-     * steps are not provided a content version agnostic identifier. This means that,
-     * when you are dealing with talent nodes, you will need to first ensure that you
-     * have the latest version of content.
-     */
-    readonly stepIndex: number;
-    /**
-     * The hash of this node step. Unfortunately, while it can be used to uniquely
-     * identify the step within a node, it is also content version dependent and should
-     * not be relied on without ensuring you have the latest vesion of content.
-     */
-    readonly nodeStepHash: number;
-    /**
-     * If you can interact with this node in some way, this is the localized
-     * description of that interaction.
-     */
-    readonly interactionDescription: string;
-    /** An enum representing a damage type granted by activating this step, if any. */
-    readonly damageType: DamageType;
-    /**
-     * If the step provides a damage type, this will be the hash identifier used to
-     * look up the damage type's DestinyDamageTypeDefinition.
-     *
-     * Mapped to DestinyDamageTypeDefinition in the manifest.
-     */
-    readonly damageTypeHash?: number;
-    /**
-     * If the step has requirements for activation (they almost always do, if nothing
-     * else than for the Talent Grid's Progression to have reached a certain level),
-     * they will be defined here.
-     */
-    readonly activationRequirement: DestinyNodeActivationRequirement;
-    /**
-     * There was a time when talent nodes could be activated multiple times, and the
-     * effects of subsequent Steps would be compounded on each other, essentially "
-     * upgrading" the node. We have moved away from this, but theoretically the
-     * capability still exists.
-     *
-     * I continue to return this in case it is used in the future: if true and this
-     * step is the current step in the node, you are allowed to activate the node a
-     * second time to receive the benefits of the next step in the node, which will
-     * then become the active step.
-     */
-    readonly canActivateNextStep: boolean;
-    /**
-     * The stepIndex of the next step in the talent node, or -1 if this is the last
-     * step or if the next step to be chosen is random.
-     *
-     * This doesn't really matter anymore unless canActivateNextStep begins to be used
-     * again.
-     */
-    readonly nextStepIndex: number;
-    /**
-     * If true, the next step to be chosen is random, and if you're allowed to activate
-     * the next step. (if canActivateNextStep = true)
-     */
-    readonly isNextStepRandom: boolean;
-    /**
-     * The list of hash identifiers for Perks (DestinySandboxPerkDefinition) that are
-     * applied when this step is active. Perks provide a variety of benefits and
-     * modifications - examine DestinySandboxPerkDefinition to learn more.
-     *
-     * Mapped to DestinySandboxPerkDefinition in the manifest.
-     */
-    readonly perkHashes: number[];
-    /**
-     * When the Talent Grid's progression reaches this value, the circular "progress
-     * bar" that surrounds the talent node should be shown.
-     *
-     * This also indicates the lower bound of said progress bar, with the upper bound
-     * being the progress required to reach activationRequirement.gridLevel. (at some
-     * point I should precalculate the upper bound and put it in the definition to save
-     * people time)
-     */
-    readonly startProgressionBarAtProgress: number;
-    /**
-     * When the step provides stat benefits on the item or character, this is the list
-     * of hash identifiers for stats (DestinyStatDefinition) that are provided.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly statHashes: number[];
-    /**
-     * If this is true, the step affects the item's Quality in some way. See
-     * DestinyInventoryItemDefinition for more information about the meaning of Quality.
-     * I already made a joke about Zen and the Art of Motorcycle Maintenance elsewhere
-     * in the documentation, so I will avoid doing it again. Oops too late
-     */
-    readonly affectsQuality: boolean;
-    /**
-     * In Destiny 1, the Armory's Perk Filtering was driven by a concept of
-     * TalentNodeStepGroups: categorizations of talent nodes based on their
-     * functionality. While the Armory isn't a BNet-facing thing for now, and the new
-     * Armory will need to account for Sockets rather than Talent Nodes, this
-     * categorization capability feels useful enough to still keep around.
-     */
-    readonly stepGroups: DestinyTalentNodeStepGroups;
-    /**
-     * If true, this step can affect the level of the item. See
-     * DestinyInventoryItemDefintion for more information about item levels and their
-     * effect on stats.
-     */
-    readonly affectsLevel: boolean;
-    /**
-     * If this step is activated, this will be a list of information used to replace
-     * socket items with new Plugs. See DestinyInventoryItemDefinition for more
-     * information about sockets and plugs.
-     */
-    readonly socketReplacements: DestinyNodeSocketReplaceResponse[];
+  /**
+   * These are the display properties actually used to render the Talent Node. The
+   * currently active step's displayProperties are shown.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The index of this step in the list of Steps on the Talent Node.
+   *
+   * Unfortunately, this is the closest thing we have to an identifier for the Step:
+   * steps are not provided a content version agnostic identifier. This means that,
+   * when you are dealing with talent nodes, you will need to first ensure that you
+   * have the latest version of content.
+   */
+  readonly stepIndex: number;
+  /**
+   * The hash of this node step. Unfortunately, while it can be used to uniquely
+   * identify the step within a node, it is also content version dependent and should
+   * not be relied on without ensuring you have the latest vesion of content.
+   */
+  readonly nodeStepHash: number;
+  /**
+   * If you can interact with this node in some way, this is the localized
+   * description of that interaction.
+   */
+  readonly interactionDescription: string;
+  /** An enum representing a damage type granted by activating this step, if any. */
+  readonly damageType: DamageType;
+  /**
+   * If the step provides a damage type, this will be the hash identifier used to
+   * look up the damage type's DestinyDamageTypeDefinition.
+   *
+   * Mapped to DestinyDamageTypeDefinition in the manifest.
+   */
+  readonly damageTypeHash?: number;
+  /**
+   * If the step has requirements for activation (they almost always do, if nothing
+   * else than for the Talent Grid's Progression to have reached a certain level),
+   * they will be defined here.
+   */
+  readonly activationRequirement: DestinyNodeActivationRequirement;
+  /**
+   * There was a time when talent nodes could be activated multiple times, and the
+   * effects of subsequent Steps would be compounded on each other, essentially "
+   * upgrading" the node. We have moved away from this, but theoretically the
+   * capability still exists.
+   *
+   * I continue to return this in case it is used in the future: if true and this
+   * step is the current step in the node, you are allowed to activate the node a
+   * second time to receive the benefits of the next step in the node, which will
+   * then become the active step.
+   */
+  readonly canActivateNextStep: boolean;
+  /**
+   * The stepIndex of the next step in the talent node, or -1 if this is the last
+   * step or if the next step to be chosen is random.
+   *
+   * This doesn't really matter anymore unless canActivateNextStep begins to be used
+   * again.
+   */
+  readonly nextStepIndex: number;
+  /**
+   * If true, the next step to be chosen is random, and if you're allowed to activate
+   * the next step. (if canActivateNextStep = true)
+   */
+  readonly isNextStepRandom: boolean;
+  /**
+   * The list of hash identifiers for Perks (DestinySandboxPerkDefinition) that are
+   * applied when this step is active. Perks provide a variety of benefits and
+   * modifications - examine DestinySandboxPerkDefinition to learn more.
+   *
+   * Mapped to DestinySandboxPerkDefinition in the manifest.
+   */
+  readonly perkHashes: number[];
+  /**
+   * When the Talent Grid's progression reaches this value, the circular "progress
+   * bar" that surrounds the talent node should be shown.
+   *
+   * This also indicates the lower bound of said progress bar, with the upper bound
+   * being the progress required to reach activationRequirement.gridLevel. (at some
+   * point I should precalculate the upper bound and put it in the definition to save
+   * people time)
+   */
+  readonly startProgressionBarAtProgress: number;
+  /**
+   * When the step provides stat benefits on the item or character, this is the list
+   * of hash identifiers for stats (DestinyStatDefinition) that are provided.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly statHashes: number[];
+  /**
+   * If this is true, the step affects the item's Quality in some way. See
+   * DestinyInventoryItemDefinition for more information about the meaning of Quality.
+   * I already made a joke about Zen and the Art of Motorcycle Maintenance elsewhere
+   * in the documentation, so I will avoid doing it again. Oops too late
+   */
+  readonly affectsQuality: boolean;
+  /**
+   * In Destiny 1, the Armory's Perk Filtering was driven by a concept of
+   * TalentNodeStepGroups: categorizations of talent nodes based on their
+   * functionality. While the Armory isn't a BNet-facing thing for now, and the new
+   * Armory will need to account for Sockets rather than Talent Nodes, this
+   * categorization capability feels useful enough to still keep around.
+   */
+  readonly stepGroups: DestinyTalentNodeStepGroups;
+  /**
+   * If true, this step can affect the level of the item. See
+   * DestinyInventoryItemDefintion for more information about item levels and their
+   * effect on stats.
+   */
+  readonly affectsLevel: boolean;
+  /**
+   * If this step is activated, this will be a list of information used to replace
+   * socket items with new Plugs. See DestinyInventoryItemDefinition for more
+   * information about sockets and plugs.
+   */
+  readonly socketReplacements: DestinyNodeSocketReplaceResponse[];
 }
 /**
  * All damage types that are possible in the game are defined here, along with
  * localized info and icons as needed.
  */
 export interface DestinyDamageTypeDefinition {
-    /** The description of the damage type, icon etc... */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** A variant of the icon that is transparent and colorless. */
-    readonly transparentIconPath: string;
-    /**
-     * If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether
-     * you show it or not is up to you.
-     */
-    readonly showIcon: boolean;
-    /**
-     * We have an enumeration for damage types for quick reference. This is the current
-     * definition's damage type enum value.
-     */
-    readonly enumValue: DamageType;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /** The description of the damage type, icon etc... */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** A variant of the icon that is transparent and colorless. */
+  readonly transparentIconPath: string;
+  /**
+   * If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether
+   * you show it or not is up to you.
+   */
+  readonly showIcon: boolean;
+  /**
+   * We have an enumeration for damage types for quick reference. This is the current
+   * definition's damage type enum value.
+   */
+  readonly enumValue: DamageType;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * This is a bit of an odd duck. Apparently, if talent nodes steps have this data,
@@ -6847,32 +6855,32 @@ export interface DestinyDamageTypeDefinition {
  * indicated plug item.
  */
 export interface DestinyNodeSocketReplaceResponse {
-    /**
-     * The hash identifier of the socket type to find amidst the item's sockets (the
-     * item to which this talent grid is attached). See DestinyInventoryItemDefinition.
-     * sockets.socketEntries to find the socket type of sockets on the item in question.
-     *
-     * Mapped to DestinySocketTypeDefinition in the manifest.
-     */
-    readonly socketTypeHash: number;
-    /**
-     * The hash identifier of the plug item that will be inserted into the socket found.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
+  /**
+   * The hash identifier of the socket type to find amidst the item's sockets (the
+   * item to which this talent grid is attached). See DestinyInventoryItemDefinition.
+   * sockets.socketEntries to find the socket type of sockets on the item in question.
+   *
+   * Mapped to DestinySocketTypeDefinition in the manifest.
+   */
+  readonly socketTypeHash: number;
+  /**
+   * The hash identifier of the plug item that will be inserted into the socket found.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
 }
 /**
  * The list of indexes into the Talent Grid's "nodes" property for nodes in this
  * exclusive set. (See DestinyTalentNodeDefinition.nodeIndex)
  */
 export interface DestinyTalentNodeExclusiveSetDefinition {
-    /**
-     * The list of node indexes for the exclusive set. Historically, these were indexes.
-     * I would have liked to replace this with nodeHashes for consistency, but it's
-     * way too late for that. (9:09 PM, he's right!)
-     */
-    readonly nodeIndexes: number[];
+  /**
+   * The list of node indexes for the exclusive set. Historically, these were indexes.
+   * I would have liked to replace this with nodeHashes for consistency, but it's
+   * way too late for that. (9:09 PM, he's right!)
+   */
+  readonly nodeIndexes: number[];
 }
 /**
  * As of Destiny 2, nodes can exist as part of "Exclusive Groups". These differ
@@ -6882,34 +6890,34 @@ export interface DestinyTalentNodeExclusiveSetDefinition {
  * to deactivate.
  */
 export interface DestinyTalentExclusiveGroup {
-    /**
-     * The identifier for this exclusive group. Only guaranteed unique within the
-     * talent grid, not globally.
-     */
-    readonly groupHash: number;
-    /**
-     * If this group has an associated piece of lore to show next to it, this will be
-     * the identifier for that DestinyLoreDefinition.
-     *
-     * Mapped to DestinyLoreDefinition in the manifest.
-     */
-    readonly loreHash?: number;
-    /**
-     * A quick reference of the talent nodes that are part of this group, by their
-     * Talent Node hashes. (See DestinyTalentNodeDefinition.nodeHash)
-     */
-    readonly nodeHashes: number[];
-    /**
-     * A quick reference of Groups whose nodes will be deactivated if any node in this
-     * group is activated.
-     */
-    readonly opposingGroupHashes: number[];
-    /**
-     * A quick reference of Nodes that will be deactivated if any node in this group is
-     * activated, by their Talent Node hashes. (See DestinyTalentNodeDefinition.
-     * nodeHash)
-     */
-    readonly opposingNodeHashes: number[];
+  /**
+   * The identifier for this exclusive group. Only guaranteed unique within the
+   * talent grid, not globally.
+   */
+  readonly groupHash: number;
+  /**
+   * If this group has an associated piece of lore to show next to it, this will be
+   * the identifier for that DestinyLoreDefinition.
+   *
+   * Mapped to DestinyLoreDefinition in the manifest.
+   */
+  readonly loreHash?: number;
+  /**
+   * A quick reference of the talent nodes that are part of this group, by their
+   * Talent Node hashes. (See DestinyTalentNodeDefinition.nodeHash)
+   */
+  readonly nodeHashes: number[];
+  /**
+   * A quick reference of Groups whose nodes will be deactivated if any node in this
+   * group is activated.
+   */
+  readonly opposingGroupHashes: number[];
+  /**
+   * A quick reference of Nodes that will be deactivated if any node in this group is
+   * activated, by their Talent Node hashes. (See DestinyTalentNodeDefinition.
+   * nodeHash)
+   */
+  readonly opposingNodeHashes: number[];
 }
 /**
  * An artificial construct provided by Bungie.Net, where we attempt to group talent
@@ -6919,45 +6927,45 @@ export interface DestinyTalentExclusiveGroup {
  * purpose.
  */
 export interface DestinyTalentNodeCategory {
-    /**
-     * Mostly just for debug purposes, but if you find it useful you can have it. This
-     * is BNet's manually created identifier for this category.
-     */
-    readonly identifier: string;
-    /**
-     * If true, we found the localized content in a related DestinyLoreDefinition
-     * instead of local BNet localization files. This is mostly for ease of my own
-     * future investigations.
-     */
-    readonly isLoreDriven: boolean;
-    /**
-     * Will contain at least the "name", which will be the title of the category. We
-     * will likely not have description and an icon yet, but I'm going to keep my
-     * options open.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The set of all hash identifiers for Talent Nodes (DestinyTalentNodeDefinition)
-     * in this Talent Grid that are part of this Category.
-     */
-    readonly nodeHashes: number[];
+  /**
+   * Mostly just for debug purposes, but if you find it useful you can have it. This
+   * is BNet's manually created identifier for this category.
+   */
+  readonly identifier: string;
+  /**
+   * If true, we found the localized content in a related DestinyLoreDefinition
+   * instead of local BNet localization files. This is mostly for ease of my own
+   * future investigations.
+   */
+  readonly isLoreDriven: boolean;
+  /**
+   * Will contain at least the "name", which will be the title of the category. We
+   * will likely not have description and an icon yet, but I'm going to keep my
+   * options open.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The set of all hash identifiers for Talent Nodes (DestinyTalentNodeDefinition)
+   * in this Talent Grid that are part of this Category.
+   */
+  readonly nodeHashes: number[];
 }
 /** An intrinsic perk on an item, and the requirements for it to be activated. */
 export interface DestinyItemPerkEntryDefinition {
-    /**
-     * If this perk is not active, this is the string to show for why it's not
-     * providing its benefits.
-     */
-    readonly requirementDisplayString: string;
-    /**
-     * A hash identifier for the DestinySandboxPerkDefinition being provided on the
-     * item.
-     *
-     * Mapped to DestinySandboxPerkDefinition in the manifest.
-     */
-    readonly perkHash: number;
-    /** Indicates whether this perk should be shown, or if it should be shown disabled. */
-    readonly perkVisibility: ItemPerkVisibility;
+  /**
+   * If this perk is not active, this is the string to show for why it's not
+   * providing its benefits.
+   */
+  readonly requirementDisplayString: string;
+  /**
+   * A hash identifier for the DestinySandboxPerkDefinition being provided on the
+   * item.
+   *
+   * Mapped to DestinySandboxPerkDefinition in the manifest.
+   */
+  readonly perkHash: number;
+  /** Indicates whether this perk should be shown, or if it should be shown disabled. */
+  readonly perkVisibility: ItemPerkVisibility;
 }
 /**
  * Indicates how a perk should be shown, or if it should be, in the game UI. Maybe
@@ -6965,14 +6973,14 @@ export interface DestinyItemPerkEntryDefinition {
  * those of you trying to figure out what they do!)
  */
 export declare const enum ItemPerkVisibility {
-    Visible = 0,
-    Disabled = 1,
-    Hidden = 2
+  Visible = 0,
+  Disabled = 1,
+  Hidden = 2,
 }
 export interface DestinyAnimationReference {
-    readonly animName: string;
-    readonly animIdentifier: string;
-    readonly path: string;
+  readonly animName: string;
+  readonly animIdentifier: string;
+  readonly path: string;
 }
 /**
  * In an attempt to categorize items by type, usage, and other interesting
@@ -6990,120 +6998,120 @@ export interface DestinyAnimationReference {
  * And let us know if you see more categories that you wish would be added!
  */
 export interface DestinyItemCategoryDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If True, this category should be visible in UI. Sometimes we make categories
-     * that we don't think are interesting externally. It's up to you if you want to
-     * skip on showing them.
-     */
-    readonly visible: boolean;
-    /**
-     * If True, this category has been deprecated: it may have no items left, or there
-     * may be only legacy items that remain in it which are no longer relevant to the
-     * game.
-     */
-    readonly deprecated: boolean;
-    /**
-     * A shortened version of the title. The reason why we have this is because the
-     * Armory in German had titles that were too long to display in our UI, so these
-     * were localized abbreviated versions of those categories. The property still
-     * exists today, even though the Armory doesn't exist for D2... yet.
-     */
-    readonly shortTitle: string;
-    /**
-     * The janky regular expression we used against the item type to try and discern
-     * whether the item belongs to this category.
-     */
-    readonly itemTypeRegex: string;
-    /** If the item in question has this category, it also should have this breaker type. */
-    readonly grantDestinyBreakerType: DestinyBreakerType;
-    /**
-     * If the item is a plug, this is the identifier we expect to find associated with
-     * it if it is in this category.
-     */
-    readonly plugCategoryIdentifier: string;
-    /** If the item type matches this janky regex, it does *not* belong to this category. */
-    readonly itemTypeRegexNot: string;
-    /** If the item belongs to this bucket, it does belong to this category. */
-    readonly originBucketIdentifier: string;
-    /**
-     * If an item belongs to this category, it will also receive this item type. This
-     * is now how DestinyItemType is populated for items: it used to be an even jankier
-     * process, but that's a story that requires more alcohol.
-     */
-    readonly grantDestinyItemType: DestinyItemType;
-    /**
-     * If an item belongs to this category, it will also receive this subtype enum
-     * value.
-     *
-     * I know what you're thinking - what if it belongs to multiple categories that
-     * provide sub-types?
-     *
-     * The last one processed wins, as is the case with all of these "grant" enums. Now
-     * you can see one reason why we moved away from these enums... but they're so
-     * convenient when they work, aren't they?
-     */
-    readonly grantDestinySubType: DestinyItemSubType;
-    /**
-     * If an item belongs to this category, it will also get this class restriction
-     * enum value.
-     *
-     * See the other "grant"-prefixed properties on this definition for my color
-     * commentary.
-     */
-    readonly grantDestinyClass: DestinyClass;
-    /** The traitId that can be found on items that belong to this category. */
-    readonly traitId: string;
-    /**
-     * If this category is a "parent" category of other categories, those children will
-     * have their hashes listed in rendering order here, and can be looked up using
-     * these hashes against DestinyItemCategoryDefinition.
-     *
-     * In this way, you can build up a visual hierarchy of item categories. That's what
-     * we did, and you can do it too. I believe in you. Yes, you, Carl.
-     *
-     * (I hope someone named Carl reads this someday)
-     *
-     * Mapped to DestinyItemCategoryDefinition in the manifest.
-     */
-    readonly groupedCategoryHashes: number[];
-    /**
-     * All item category hashes of "parent" categories: categories that contain this as
-     * a child through the hierarchy of groupedCategoryHashes. It's a bit redundant,
-     * but having this child-centric list speeds up some calculations.
-     */
-    readonly parentCategoryHashes: number[];
-    /**
-     * If true, this category is only used for grouping, and should not be evaluated
-     * with its own checks. Rather, the item only has this category if it has one of
-     * its child categories.
-     */
-    readonly groupCategoryOnly: boolean;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If True, this category should be visible in UI. Sometimes we make categories
+   * that we don't think are interesting externally. It's up to you if you want to
+   * skip on showing them.
+   */
+  readonly visible: boolean;
+  /**
+   * If True, this category has been deprecated: it may have no items left, or there
+   * may be only legacy items that remain in it which are no longer relevant to the
+   * game.
+   */
+  readonly deprecated: boolean;
+  /**
+   * A shortened version of the title. The reason why we have this is because the
+   * Armory in German had titles that were too long to display in our UI, so these
+   * were localized abbreviated versions of those categories. The property still
+   * exists today, even though the Armory doesn't exist for D2... yet.
+   */
+  readonly shortTitle: string;
+  /**
+   * The janky regular expression we used against the item type to try and discern
+   * whether the item belongs to this category.
+   */
+  readonly itemTypeRegex: string;
+  /** If the item in question has this category, it also should have this breaker type. */
+  readonly grantDestinyBreakerType: DestinyBreakerType;
+  /**
+   * If the item is a plug, this is the identifier we expect to find associated with
+   * it if it is in this category.
+   */
+  readonly plugCategoryIdentifier: string;
+  /** If the item type matches this janky regex, it does *not* belong to this category. */
+  readonly itemTypeRegexNot: string;
+  /** If the item belongs to this bucket, it does belong to this category. */
+  readonly originBucketIdentifier: string;
+  /**
+   * If an item belongs to this category, it will also receive this item type. This
+   * is now how DestinyItemType is populated for items: it used to be an even jankier
+   * process, but that's a story that requires more alcohol.
+   */
+  readonly grantDestinyItemType: DestinyItemType;
+  /**
+   * If an item belongs to this category, it will also receive this subtype enum
+   * value.
+   *
+   * I know what you're thinking - what if it belongs to multiple categories that
+   * provide sub-types?
+   *
+   * The last one processed wins, as is the case with all of these "grant" enums. Now
+   * you can see one reason why we moved away from these enums... but they're so
+   * convenient when they work, aren't they?
+   */
+  readonly grantDestinySubType: DestinyItemSubType;
+  /**
+   * If an item belongs to this category, it will also get this class restriction
+   * enum value.
+   *
+   * See the other "grant"-prefixed properties on this definition for my color
+   * commentary.
+   */
+  readonly grantDestinyClass: DestinyClass;
+  /** The traitId that can be found on items that belong to this category. */
+  readonly traitId: string;
+  /**
+   * If this category is a "parent" category of other categories, those children will
+   * have their hashes listed in rendering order here, and can be looked up using
+   * these hashes against DestinyItemCategoryDefinition.
+   *
+   * In this way, you can build up a visual hierarchy of item categories. That's what
+   * we did, and you can do it too. I believe in you. Yes, you, Carl.
+   *
+   * (I hope someone named Carl reads this someday)
+   *
+   * Mapped to DestinyItemCategoryDefinition in the manifest.
+   */
+  readonly groupedCategoryHashes: number[];
+  /**
+   * All item category hashes of "parent" categories: categories that contain this as
+   * a child through the hierarchy of groupedCategoryHashes. It's a bit redundant,
+   * but having this child-centric list speeds up some calculations.
+   */
+  readonly parentCategoryHashes: number[];
+  /**
+   * If true, this category is only used for grouping, and should not be evaluated
+   * with its own checks. Rather, the item only has this category if it has one of
+   * its child categories.
+   */
+  readonly groupCategoryOnly: boolean;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * A plug can optionally have a "Breaker Type": a special ability that can affect
  * units in unique ways. Activating this plug can grant one of these types.
  */
 export declare const enum DestinyBreakerType {
-    None = 0,
-    ShieldPiercing = 1,
-    Disruption = 2,
-    Stagger = 3
+  None = 0,
+  ShieldPiercing = 1,
+  Disruption = 2,
+  Stagger = 3,
 }
 /**
  * An enumeration that indicates the high-level "type" of the item, attempting to
@@ -7126,39 +7134,39 @@ export declare const enum DestinyBreakerType {
  * fight it.
  */
 export declare const enum DestinyItemType {
-    None = 0,
-    Currency = 1,
-    Armor = 2,
-    Weapon = 3,
-    Message = 7,
-    Engram = 8,
-    Consumable = 9,
-    ExchangeMaterial = 10,
-    MissionReward = 11,
-    QuestStep = 12,
-    QuestStepComplete = 13,
-    Emblem = 14,
-    Quest = 15,
-    Subclass = 16,
-    ClanBanner = 17,
-    Aura = 18,
-    Mod = 19,
-    Dummy = 20,
-    Ship = 21,
-    Vehicle = 22,
-    Emote = 23,
-    Ghost = 24,
-    Package = 25,
-    Bounty = 26,
-    Wrapper = 27,
-    SeasonalArtifact = 28,
-    Finisher = 29
+  None = 0,
+  Currency = 1,
+  Armor = 2,
+  Weapon = 3,
+  Message = 7,
+  Engram = 8,
+  Consumable = 9,
+  ExchangeMaterial = 10,
+  MissionReward = 11,
+  QuestStep = 12,
+  QuestStepComplete = 13,
+  Emblem = 14,
+  Quest = 15,
+  Subclass = 16,
+  ClanBanner = 17,
+  Aura = 18,
+  Mod = 19,
+  Dummy = 20,
+  Ship = 21,
+  Vehicle = 22,
+  Emote = 23,
+  Ghost = 24,
+  Package = 25,
+  Bounty = 26,
+  Wrapper = 27,
+  SeasonalArtifact = 28,
+  Finisher = 29,
 }
 export declare const enum DestinyClass {
-    Titan = 0,
-    Hunter = 1,
-    Warlock = 2,
-    Unknown = 3
+  Titan = 0,
+  Hunter = 1,
+  Warlock = 2,
+  Unknown = 3,
 }
 /**
  * As you run into items that need to be classified for Milestone purposes in ways
@@ -7169,38 +7177,38 @@ export declare const enum DestinyClass {
  * holdovers from Destiny 1 that may or may not still exist.
  */
 export declare const enum SpecialItemType {
-    None = 0,
-    SpecialCurrency = 1,
-    Armor = 8,
-    Weapon = 9,
-    Engram = 23,
-    Consumable = 24,
-    ExchangeMaterial = 25,
-    MissionReward = 27,
-    Currency = 29
+  None = 0,
+  SpecialCurrency = 1,
+  Armor = 8,
+  Weapon = 9,
+  Engram = 23,
+  Consumable = 24,
+  ExchangeMaterial = 25,
+  MissionReward = 27,
+  Currency = 29,
 }
 export interface DestinyBreakerTypeDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * We have an enumeration for Breaker types for quick reference. This is the
-     * current definition's breaker type enum value.
-     */
-    readonly enumValue: DestinyBreakerType;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * We have an enumeration for Breaker types for quick reference. This is the
+   * current definition's breaker type enum value.
+   */
+  readonly enumValue: DestinyBreakerType;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * Defines a canonical "Season" of Destiny: a range of a few months where the game
@@ -7208,103 +7216,103 @@ export interface DestinyBreakerTypeDefinition {
  * and celebrates various seasonal events.
  */
 export interface DestinySeasonDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    readonly backgroundImagePath: string;
-    readonly seasonNumber: number;
-    readonly startDate?: string;
-    readonly endDate?: string;
-    /** Mapped to DestinySeasonPassDefinition in the manifest. */
-    readonly seasonPassHash?: number;
-    /** Mapped to DestinyProgressionDefinition in the manifest. */
-    readonly seasonPassProgressionHash?: number;
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly artifactItemHash?: number;
-    /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
-    readonly sealPresentationNodeHash?: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  readonly backgroundImagePath: string;
+  readonly seasonNumber: number;
+  readonly startDate?: string;
+  readonly endDate?: string;
+  /** Mapped to DestinySeasonPassDefinition in the manifest. */
+  readonly seasonPassHash?: number;
+  /** Mapped to DestinyProgressionDefinition in the manifest. */
+  readonly seasonPassProgressionHash?: number;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly artifactItemHash?: number;
+  /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
+  readonly sealPresentationNodeHash?: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinySeasonPassDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * This is the progression definition related to the progression for the initial
-     * levels 1-100 that provide item rewards for the Season pass. Further experience
-     * after you reach the limit is provided in the "Prestige" progression referred to
-     * by prestigeProgressionHash.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly rewardProgressionHash: number;
-    /**
-     * I know what you're thinking, but I promise we're not going to duplicate and
-     * drown you. Instead, we're giving you sweet, sweet power bonuses.
-     *
-     * Prestige progression is further progression that you can make on the Season
-     * pass after you gain max ranks, that will ultimately increase your power/light
-     * level over the theoretical limit.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly prestigeProgressionHash: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * This is the progression definition related to the progression for the initial
+   * levels 1-100 that provide item rewards for the Season pass. Further experience
+   * after you reach the limit is provided in the "Prestige" progression referred to
+   * by prestigeProgressionHash.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly rewardProgressionHash: number;
+  /**
+   * I know what you're thinking, but I promise we're not going to duplicate and
+   * drown you. Instead, we're giving you sweet, sweet power bonuses.
+   *
+   * Prestige progression is further progression that you can make on the Season
+   * pass after you gain max ranks, that will ultimately increase your power/light
+   * level over the theoretical limit.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly prestigeProgressionHash: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export interface DestinyProgressionRewardItemQuantity {
-    readonly rewardedAtProgressionLevel: number;
-    readonly acquisitionBehavior: DestinyProgressionRewardItemAcquisitionBehavior;
-    readonly uiDisplayStyle: string;
-    readonly claimUnlockDisplayStrings: string[];
-    /**
-     * The hash identifier for the item in question. Use it to look up the item's
-     * DestinyInventoryItemDefinition.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If this quantity is referring to a specific instance of an item, this will have
-     * the item's instance ID. Normally, this will be null.
-     */
-    readonly itemInstanceId?: string;
-    /**
-     * The amount of the item needed/available depending on the context of where
-     * DestinyItemQuantity is being used.
-     */
-    readonly quantity: number;
+  readonly rewardedAtProgressionLevel: number;
+  readonly acquisitionBehavior: DestinyProgressionRewardItemAcquisitionBehavior;
+  readonly uiDisplayStyle: string;
+  readonly claimUnlockDisplayStrings: string[];
+  /**
+   * The hash identifier for the item in question. Use it to look up the item's
+   * DestinyInventoryItemDefinition.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If this quantity is referring to a specific instance of an item, this will have
+   * the item's instance ID. Normally, this will be null.
+   */
+  readonly itemInstanceId?: string;
+  /**
+   * The amount of the item needed/available depending on the context of where
+   * DestinyItemQuantity is being used.
+   */
+  readonly quantity: number;
 }
 /**
  * Represents the different kinds of acquisition behavior for progression reward
  * items.
  */
 export declare const enum DestinyProgressionRewardItemAcquisitionBehavior {
-    Instant = 0,
-    PlayerClaimRequired = 1
+  Instant = 0,
+  PlayerClaimRequired = 1,
 }
 /**
  * Represents a season and the number of resets you had in that season.
@@ -7313,8 +7321,8 @@ export declare const enum DestinyProgressionRewardItemAcquisitionBehavior {
  * seasons. So be careful and check the season numbers being returned.
  */
 export interface DestinyProgressionResetEntry {
-    readonly season: number;
-    readonly resets: number;
+  readonly season: number;
+  readonly resets: number;
 }
 /**
  * Represents the different states a progression reward item can be in.
@@ -7323,20 +7331,20 @@ export interface DestinyProgressionResetEntry {
  * these match your value.
  */
 export declare const enum DestinyProgressionRewardItemState {
-    None = 0,
-    /** If this is set, the reward should be hidden. */
-    Invisible = 1,
-    /** If this is set, the reward has been earned. */
-    Earned = 2,
-    /** If this is set, the reward has been claimed. */
-    Claimed = 4,
-    /**
-     * If this is set, the reward is allowed to be claimed by this Character. An item
-     * can be earned but still can't be claimed in certain circumstances, like if it's
-     * only allowed for certain subclasses. It also might not be able to be claimed if
-     * you already claimed it!
-     */
-    ClaimAllowed = 8
+  None = 0,
+  /** If this is set, the reward should be hidden. */
+  Invisible = 1,
+  /** If this is set, the reward has been earned. */
+  Earned = 2,
+  /** If this is set, the reward has been claimed. */
+  Claimed = 4,
+  /**
+   * If this is set, the reward is allowed to be claimed by this Character. An item
+   * can be earned but still can't be claimed in certain circumstances, like if it's
+   * only allowed for certain subclasses. It also might not be able to be claimed if
+   * you already claimed it!
+   */
+  ClaimAllowed = 8,
 }
 /**
  * Represents the possible components that can be returned from Destiny "Get" calls
@@ -7349,263 +7357,263 @@ export declare const enum DestinyProgressionRewardItemState {
  * CharacterProgressions" You may use either the numerical or string values.
  */
 export declare const enum DestinyComponentType {
-    None = 0,
-    /**
-     * Profiles is the most basic component, only relevant when calling GetProfile.
-     * This returns basic information about the profile, which is almost nothing: a
-     * list of characterIds, some information about the last time you logged in, and
-     * that most sobering statistic: how long you've played.
-     */
-    Profiles = 100,
-    /**
-     * Only applicable for GetProfile, this will return information about receipts for
-     * refundable vendor items.
-     */
-    VendorReceipts = 101,
-    /**
-     * Asking for this will get you the profile-level inventories, such as your Vault
-     * buckets (yeah, the Vault is really inventory buckets located on your Profile)
-     */
-    ProfileInventories = 102,
-    /**
-     * This will get you a summary of items on your Profile that we consider to be "
-     * currencies", such as Glimmer. I mean, if there's Glimmer in Destiny 2. I didn't
-     * say there was Glimmer.
-     */
-    ProfileCurrencies = 103,
-    /**
-     * This will get you any progression-related information that exists on a Profile-
-     * wide level, across all characters.
-     */
-    ProfileProgression = 104,
-    /**
-     * This will get you information about the silver that this profile has on every
-     * platform on which it plays.
-     *
-     * You may only request this component for the logged in user's Profile, and will
-     * not recieve it if you request it for another Profile.
-     */
-    PlatformSilver = 105,
-    /** This will get you summary info about each of the characters in the profile. */
-    Characters = 200,
-    /**
-     * This will get you information about any non-equipped items on the character or
-     * character(s) in question, if you're allowed to see it. You have to either be
-     * authenticated as that user, or that user must allow anonymous viewing of their
-     * non-equipped items in Bungie.Net settings to actually get results.
-     */
-    CharacterInventories = 201,
-    /**
-     * This will get you information about the progression (faction, experience, etc...
-     * "levels") relevant to each character, if you are the currently authenticated
-     * user or the user has elected to allow anonymous viewing of its progression info.
-     */
-    CharacterProgressions = 202,
-    /**
-     * This will get you just enough information to be able to render the character in
-     * 3D if you have written a 3D rendering library for Destiny Characters, or "
-     * borrowed" ours. It's okay, I won't tell anyone if you're using it. I'm no snitch.
-     * (actually, we don't care if you use it - go to town)
-     */
-    CharacterRenderData = 203,
-    /**
-     * This will return info about activities that a user can see and gating on it, if
-     * you are the currently authenticated user or the user has elected to allow
-     * anonymous viewing of its progression info. Note that the data returned by this
-     * can be unfortunately problematic and relatively unreliable in some cases. We'll
-     * eventually work on making it more consistently reliable.
-     */
-    CharacterActivities = 204,
-    /**
-     * This will return info about the equipped items on the character(s). Everyone can
-     * see this.
-     */
-    CharacterEquipment = 205,
-    /**
-     * This will return basic info about instanced items - whether they can be equipped,
-     * their tracked status, and some info commonly needed in many places (current
-     * damage type, primary stat value, etc)
-     */
-    ItemInstances = 300,
-    /**
-     * Items can have Objectives (DestinyObjectiveDefinition) bound to them. If they do,
-     * this will return info for items that have such bound objectives.
-     */
-    ItemObjectives = 301,
-    /**
-     * Items can have perks (DestinyPerkDefinition). If they do, this will return info
-     * for what perks are active on items.
-     */
-    ItemPerks = 302,
-    /**
-     * If you just want to render the weapon, this is just enough info to do that
-     * rendering.
-     */
-    ItemRenderData = 303,
-    /**
-     * Items can have stats, like rate of fire. Asking for this component will return
-     * requested item's stats if they have stats.
-     */
-    ItemStats = 304,
-    /**
-     * Items can have sockets, where plugs can be inserted. Asking for this component
-     * will return all info relevant to the sockets on items that have them.
-     */
-    ItemSockets = 305,
-    /**
-     * Items can have talent grids, though that matters a lot less frequently than it
-     * used to. Asking for this component will return all relevant info about activated
-     * Nodes and Steps on this talent grid, like the good ol' days.
-     */
-    ItemTalentGrids = 306,
-    /**
-     * Items that *aren't* instanced still have important information you need to know:
-     * how much of it you have, the itemHash so you can look up their
-     * DestinyInventoryItemDefinition, whether they're locked, etc... Both instanced
-     * and non-instanced items will have these properties. You will get this
-     * automatically with Inventory components - you only need to pass this when
-     * calling GetItem on a specific item.
-     */
-    ItemCommonData = 307,
-    /**
-     * Items that are "Plugs" can be inserted into sockets. This returns statuses about
-     * those plugs and why they can/can't be inserted. I hear you giggling, there's
-     * nothing funny about inserting plugs. Get your head out of the gutter and pay
-     * attention!
-     */
-    ItemPlugStates = 308,
-    /**
-     * Sometimes, plugs have objectives on them. This data can get really large, so we
-     * split it into its own component. Please, don't grab it unless you need it.
-     */
-    ItemPlugObjectives = 309,
-    /**
-     * Sometimes, designers create thousands of reusable plugs and suddenly your
-     * response sizes are almost 3MB, and something has to give.
-     *
-     * Reusable Plugs were split off as their own component, away from ItemSockets, as
-     * a result of the Plug changes in Shadowkeep that made plug data infeasibly large
-     * for the most common use cases.
-     *
-     * Request this component if and only if you need to know what plugs *could* be
-     * inserted into a socket, and need to know it before "drilling" into the details
-     * of an item in your application (for instance, if you're doing some sort of
-     * interesting sorting or aggregation based on available plugs.
-     *
-     * When you get this, you will also need to combine it with "Plug Sets" data if
-     * you want a full picture of all of the available plugs: this component will only
-     * return plugs that have state data that is per-item. See Plug Sets for available
-     * plugs that have Character, Profile, or no state-specific restrictions.
-     */
-    ItemReusablePlugs = 310,
-    /**
-     * When obtaining vendor information, this will return summary information about
-     * the Vendor or Vendors being returned.
-     */
-    Vendors = 400,
-    /**
-     * When obtaining vendor information, this will return information about the
-     * categories of items provided by the Vendor.
-     */
-    VendorCategories = 401,
-    /**
-     * When obtaining vendor information, this will return the information about items
-     * being sold by the Vendor.
-     */
-    VendorSales = 402,
-    /**
-     * Asking for this component will return you the account's Kiosk statuses: that is,
-     * what items have been filled out/acquired. But only if you are the currently
-     * authenticated user or the user has elected to allow anonymous viewing of its
-     * progression info.
-     */
-    Kiosks = 500,
-    /**
-     * A "shortcut" component that will give you all of the item hashes/quantities of
-     * items that the requested character can use to determine if an action (purchasing,
-     * socket insertion) has the required currency. (recall that all currencies are
-     * just items, and that some vendor purchases require items that you might not
-     * traditionally consider to be a "currency", like plugs/mods!)
-     */
-    CurrencyLookups = 600,
-    /**
-     * Returns summary status information about all "Presentation Nodes". See
-     * DestinyPresentationNodeDefinition for more details, but the gist is that these
-     * are entities used by the game UI to bucket Collectibles and Records into a
-     * hierarchy of categories. You may ask for and use this data if you want to
-     * perform similar bucketing in your own UI: or you can skip it and roll your own.
-     */
-    PresentationNodes = 700,
-    /**
-     * Returns summary status information about all "Collectibles". These are records
-     * of what items you've discovered while playing Destiny, and some other basic
-     * information. For detailed information, you will have to call a separate endpoint
-     * devoted to the purpose.
-     */
-    Collectibles = 800,
-    /**
-     * Returns summary status information about all "Records" (also known in the game
-     * as "Triumphs". I know, it's confusing because there's also "Moments of Triumph"
-     * that will themselves be represented as "Triumphs.")
-     */
-    Records = 900,
-    /**
-     * Returns information that Bungie considers to be "Transitory": data that may
-     * change too frequently or come from a non-authoritative source such that we don't
-     * consider the data to be fully trustworthy, but that might prove useful for some
-     * limited use cases. We can provide no guarantee of timeliness nor consistency for
-     * this data: buyer beware with the Transitory component.
-     */
-    Transitory = 1000,
-    /**
-     * Returns summary status information about all "Metrics" (also known in the game
-     * as "Stat Trackers").
-     */
-    Metrics = 1100
+  None = 0,
+  /**
+   * Profiles is the most basic component, only relevant when calling GetProfile.
+   * This returns basic information about the profile, which is almost nothing: a
+   * list of characterIds, some information about the last time you logged in, and
+   * that most sobering statistic: how long you've played.
+   */
+  Profiles = 100,
+  /**
+   * Only applicable for GetProfile, this will return information about receipts for
+   * refundable vendor items.
+   */
+  VendorReceipts = 101,
+  /**
+   * Asking for this will get you the profile-level inventories, such as your Vault
+   * buckets (yeah, the Vault is really inventory buckets located on your Profile)
+   */
+  ProfileInventories = 102,
+  /**
+   * This will get you a summary of items on your Profile that we consider to be "
+   * currencies", such as Glimmer. I mean, if there's Glimmer in Destiny 2. I didn't
+   * say there was Glimmer.
+   */
+  ProfileCurrencies = 103,
+  /**
+   * This will get you any progression-related information that exists on a Profile-
+   * wide level, across all characters.
+   */
+  ProfileProgression = 104,
+  /**
+   * This will get you information about the silver that this profile has on every
+   * platform on which it plays.
+   *
+   * You may only request this component for the logged in user's Profile, and will
+   * not recieve it if you request it for another Profile.
+   */
+  PlatformSilver = 105,
+  /** This will get you summary info about each of the characters in the profile. */
+  Characters = 200,
+  /**
+   * This will get you information about any non-equipped items on the character or
+   * character(s) in question, if you're allowed to see it. You have to either be
+   * authenticated as that user, or that user must allow anonymous viewing of their
+   * non-equipped items in Bungie.Net settings to actually get results.
+   */
+  CharacterInventories = 201,
+  /**
+   * This will get you information about the progression (faction, experience, etc...
+   * "levels") relevant to each character, if you are the currently authenticated
+   * user or the user has elected to allow anonymous viewing of its progression info.
+   */
+  CharacterProgressions = 202,
+  /**
+   * This will get you just enough information to be able to render the character in
+   * 3D if you have written a 3D rendering library for Destiny Characters, or "
+   * borrowed" ours. It's okay, I won't tell anyone if you're using it. I'm no snitch.
+   * (actually, we don't care if you use it - go to town)
+   */
+  CharacterRenderData = 203,
+  /**
+   * This will return info about activities that a user can see and gating on it, if
+   * you are the currently authenticated user or the user has elected to allow
+   * anonymous viewing of its progression info. Note that the data returned by this
+   * can be unfortunately problematic and relatively unreliable in some cases. We'll
+   * eventually work on making it more consistently reliable.
+   */
+  CharacterActivities = 204,
+  /**
+   * This will return info about the equipped items on the character(s). Everyone can
+   * see this.
+   */
+  CharacterEquipment = 205,
+  /**
+   * This will return basic info about instanced items - whether they can be equipped,
+   * their tracked status, and some info commonly needed in many places (current
+   * damage type, primary stat value, etc)
+   */
+  ItemInstances = 300,
+  /**
+   * Items can have Objectives (DestinyObjectiveDefinition) bound to them. If they do,
+   * this will return info for items that have such bound objectives.
+   */
+  ItemObjectives = 301,
+  /**
+   * Items can have perks (DestinyPerkDefinition). If they do, this will return info
+   * for what perks are active on items.
+   */
+  ItemPerks = 302,
+  /**
+   * If you just want to render the weapon, this is just enough info to do that
+   * rendering.
+   */
+  ItemRenderData = 303,
+  /**
+   * Items can have stats, like rate of fire. Asking for this component will return
+   * requested item's stats if they have stats.
+   */
+  ItemStats = 304,
+  /**
+   * Items can have sockets, where plugs can be inserted. Asking for this component
+   * will return all info relevant to the sockets on items that have them.
+   */
+  ItemSockets = 305,
+  /**
+   * Items can have talent grids, though that matters a lot less frequently than it
+   * used to. Asking for this component will return all relevant info about activated
+   * Nodes and Steps on this talent grid, like the good ol' days.
+   */
+  ItemTalentGrids = 306,
+  /**
+   * Items that *aren't* instanced still have important information you need to know:
+   * how much of it you have, the itemHash so you can look up their
+   * DestinyInventoryItemDefinition, whether they're locked, etc... Both instanced
+   * and non-instanced items will have these properties. You will get this
+   * automatically with Inventory components - you only need to pass this when
+   * calling GetItem on a specific item.
+   */
+  ItemCommonData = 307,
+  /**
+   * Items that are "Plugs" can be inserted into sockets. This returns statuses about
+   * those plugs and why they can/can't be inserted. I hear you giggling, there's
+   * nothing funny about inserting plugs. Get your head out of the gutter and pay
+   * attention!
+   */
+  ItemPlugStates = 308,
+  /**
+   * Sometimes, plugs have objectives on them. This data can get really large, so we
+   * split it into its own component. Please, don't grab it unless you need it.
+   */
+  ItemPlugObjectives = 309,
+  /**
+   * Sometimes, designers create thousands of reusable plugs and suddenly your
+   * response sizes are almost 3MB, and something has to give.
+   *
+   * Reusable Plugs were split off as their own component, away from ItemSockets, as
+   * a result of the Plug changes in Shadowkeep that made plug data infeasibly large
+   * for the most common use cases.
+   *
+   * Request this component if and only if you need to know what plugs *could* be
+   * inserted into a socket, and need to know it before "drilling" into the details
+   * of an item in your application (for instance, if you're doing some sort of
+   * interesting sorting or aggregation based on available plugs.
+   *
+   * When you get this, you will also need to combine it with "Plug Sets" data if
+   * you want a full picture of all of the available plugs: this component will only
+   * return plugs that have state data that is per-item. See Plug Sets for available
+   * plugs that have Character, Profile, or no state-specific restrictions.
+   */
+  ItemReusablePlugs = 310,
+  /**
+   * When obtaining vendor information, this will return summary information about
+   * the Vendor or Vendors being returned.
+   */
+  Vendors = 400,
+  /**
+   * When obtaining vendor information, this will return information about the
+   * categories of items provided by the Vendor.
+   */
+  VendorCategories = 401,
+  /**
+   * When obtaining vendor information, this will return the information about items
+   * being sold by the Vendor.
+   */
+  VendorSales = 402,
+  /**
+   * Asking for this component will return you the account's Kiosk statuses: that is,
+   * what items have been filled out/acquired. But only if you are the currently
+   * authenticated user or the user has elected to allow anonymous viewing of its
+   * progression info.
+   */
+  Kiosks = 500,
+  /**
+   * A "shortcut" component that will give you all of the item hashes/quantities of
+   * items that the requested character can use to determine if an action (purchasing,
+   * socket insertion) has the required currency. (recall that all currencies are
+   * just items, and that some vendor purchases require items that you might not
+   * traditionally consider to be a "currency", like plugs/mods!)
+   */
+  CurrencyLookups = 600,
+  /**
+   * Returns summary status information about all "Presentation Nodes". See
+   * DestinyPresentationNodeDefinition for more details, but the gist is that these
+   * are entities used by the game UI to bucket Collectibles and Records into a
+   * hierarchy of categories. You may ask for and use this data if you want to
+   * perform similar bucketing in your own UI: or you can skip it and roll your own.
+   */
+  PresentationNodes = 700,
+  /**
+   * Returns summary status information about all "Collectibles". These are records
+   * of what items you've discovered while playing Destiny, and some other basic
+   * information. For detailed information, you will have to call a separate endpoint
+   * devoted to the purpose.
+   */
+  Collectibles = 800,
+  /**
+   * Returns summary status information about all "Records" (also known in the game
+   * as "Triumphs". I know, it's confusing because there's also "Moments of Triumph"
+   * that will themselves be represented as "Triumphs.")
+   */
+  Records = 900,
+  /**
+   * Returns information that Bungie considers to be "Transitory": data that may
+   * change too frequently or come from a non-authoritative source such that we don't
+   * consider the data to be fully trustworthy, but that might prove useful for some
+   * limited use cases. We can provide no guarantee of timeliness nor consistency for
+   * this data: buyer beware with the Transitory component.
+   */
+  Transitory = 1000,
+  /**
+   * Returns summary status information about all "Metrics" (also known in the game
+   * as "Stat Trackers").
+   */
+  Metrics = 1100,
 }
 export interface DestinyItemTransferRequest {
-    readonly itemReferenceHash: number;
-    readonly stackSize: number;
-    readonly transferToVault: boolean;
-    readonly itemId: string;
-    readonly characterId: string;
-    readonly membershipType: BungieMembershipType;
+  readonly itemReferenceHash: number;
+  readonly stackSize: number;
+  readonly transferToVault: boolean;
+  readonly itemId: string;
+  readonly characterId: string;
+  readonly membershipType: BungieMembershipType;
 }
 export interface DestinyPostmasterTransferRequest {
-    readonly itemReferenceHash: number;
-    readonly stackSize: number;
-    readonly itemId: string;
-    readonly characterId: string;
-    readonly membershipType: BungieMembershipType;
+  readonly itemReferenceHash: number;
+  readonly stackSize: number;
+  readonly itemId: string;
+  readonly characterId: string;
+  readonly membershipType: BungieMembershipType;
 }
 export interface DestinyItemActionRequest {
-    readonly itemId: string;
-    readonly characterId: string;
-    readonly membershipType: BungieMembershipType;
+  readonly itemId: string;
+  readonly characterId: string;
+  readonly membershipType: BungieMembershipType;
 }
 export interface DestinyItemSetActionRequest {
-    readonly itemIds: string[];
-    readonly characterId: string;
-    readonly membershipType: BungieMembershipType;
+  readonly itemIds: string[];
+  readonly characterId: string;
+  readonly membershipType: BungieMembershipType;
 }
 export interface DestinyItemStateRequest {
-    readonly state: boolean;
-    readonly itemId: string;
-    readonly characterId: string;
-    readonly membershipType: BungieMembershipType;
+  readonly state: boolean;
+  readonly itemId: string;
+  readonly characterId: string;
+  readonly membershipType: BungieMembershipType;
 }
 export interface DestinyInsertPlugsActionRequest {
-    /** Action token provided by the AwaGetActionToken API call. */
-    readonly actionToken: string;
-    /**
-     * The instance ID of the item having a plug inserted. Only instanced items can
-     * have sockets.
-     */
-    readonly itemInstanceId: string;
-    /** The plugs being inserted. */
-    readonly plug: DestinyInsertPlugsRequestEntry;
-    readonly characterId: string;
-    readonly membershipType: BungieMembershipType;
+  /** Action token provided by the AwaGetActionToken API call. */
+  readonly actionToken: string;
+  /**
+   * The instance ID of the item having a plug inserted. Only instanced items can
+   * have sockets.
+   */
+  readonly itemInstanceId: string;
+  /** The plugs being inserted. */
+  readonly plug: DestinyInsertPlugsRequestEntry;
+  readonly characterId: string;
+  readonly membershipType: BungieMembershipType;
 }
 /**
  * If you want to report a player causing trouble in a game, this request will let
@@ -7622,28 +7630,28 @@ export interface DestinyInsertPlugsActionRequest {
  * itself.
  */
 export interface DestinyReportOffensePgcrRequest {
-    /**
-     * So you've decided to report someone instead of cursing them and their
-     * descendants. Well, okay then. This is the category or categorie(s) of
-     * infractions for which you are reporting the user. These are hash identifiers
-     * that map to DestinyReportReasonCategoryDefinition entries.
-     *
-     * Mapped to DestinyReportReasonCategoryDefinition in the manifest.
-     */
-    readonly reasonCategoryHashes: number[];
-    /**
-     * If applicable, provide a more specific reason(s) within the general category of
-     * problems provided by the reasonHash. This is also an identifier for a reason.
-     * All reasonHashes provided must be children of at least one the
-     * reasonCategoryHashes provided.
-     */
-    readonly reasonHashes: number[];
-    /**
-     * Within the PGCR provided when calling the Reporting endpoint, this should be the
-     * character ID of the user that you thought was violating terms of use. They must
-     * exist in the PGCR provided.
-     */
-    readonly offendingCharacterId: string;
+  /**
+   * So you've decided to report someone instead of cursing them and their
+   * descendants. Well, okay then. This is the category or categorie(s) of
+   * infractions for which you are reporting the user. These are hash identifiers
+   * that map to DestinyReportReasonCategoryDefinition entries.
+   *
+   * Mapped to DestinyReportReasonCategoryDefinition in the manifest.
+   */
+  readonly reasonCategoryHashes: number[];
+  /**
+   * If applicable, provide a more specific reason(s) within the general category of
+   * problems provided by the reasonHash. This is also an identifier for a reason.
+   * All reasonHashes provided must be children of at least one the
+   * reasonCategoryHashes provided.
+   */
+  readonly reasonHashes: number[];
+  /**
+   * Within the PGCR provided when calling the Reporting endpoint, this should be the
+   * character ID of the user that you thought was violating terms of use. They must
+   * exist in the PGCR provided.
+   */
+  readonly offendingCharacterId: string;
 }
 /**
  * If the enum value is > 100, it is a "special" group that cannot be queried for
@@ -7651,124 +7659,124 @@ export interface DestinyReportOffensePgcrRequest {
  * general cases)
  */
 export declare const enum DestinyStatsGroupType {
-    None = 0,
-    General = 1,
-    Weapons = 2,
-    Medals = 3,
-    /**
-     * This is purely to serve as the dividing line between filterable and un-
-     * filterable groups. Below this number is a group you can pass as a filter. Above
-     * it are groups used in very specific circumstances and not relevant for filtering.
-     */
-    ReservedGroups = 100,
-    /** Only applicable while generating leaderboards. */
-    Leaderboard = 101,
-    /** These will *only* be consumed by GetAggregateStatsByActivity */
-    Activity = 102,
-    /** These are only consumed and returned by GetUniqueWeaponHistory */
-    UniqueWeapon = 103,
-    Internal = 104
+  None = 0,
+  General = 1,
+  Weapons = 2,
+  Medals = 3,
+  /**
+   * This is purely to serve as the dividing line between filterable and un-
+   * filterable groups. Below this number is a group you can pass as a filter. Above
+   * it are groups used in very specific circumstances and not relevant for filtering.
+   */
+  ReservedGroups = 100,
+  /** Only applicable while generating leaderboards. */
+  Leaderboard = 101,
+  /** These will *only* be consumed by GetAggregateStatsByActivity */
+  Activity = 102,
+  /** These are only consumed and returned by GetUniqueWeaponHistory */
+  UniqueWeapon = 103,
+  Internal = 104,
 }
 export declare const enum PeriodType {
-    None = 0,
-    Daily = 1,
-    AllTime = 2,
-    Activity = 3
+  None = 0,
+  Daily = 1,
+  AllTime = 2,
+  Activity = 3,
 }
 export interface AwaPermissionRequested {
-    /** Type of advanced write action. */
-    readonly type: AwaType;
-    /**
-     * Item instance ID the action shall be applied to. This is optional for all but a
-     * new AwaType values. Rule of thumb is to provide the item instance ID if one is
-     * available.
-     */
-    readonly affectedItemId?: string;
-    /** Destiny membership type of the account to modify. */
-    readonly membershipType: BungieMembershipType;
-    /** Destiny character ID, if applicable, that will be affected by the action. */
-    readonly characterId?: string;
+  /** Type of advanced write action. */
+  readonly type: AwaType;
+  /**
+   * Item instance ID the action shall be applied to. This is optional for all but a
+   * new AwaType values. Rule of thumb is to provide the item instance ID if one is
+   * available.
+   */
+  readonly affectedItemId?: string;
+  /** Destiny membership type of the account to modify. */
+  readonly membershipType: BungieMembershipType;
+  /** Destiny character ID, if applicable, that will be affected by the action. */
+  readonly characterId?: string;
 }
 export interface AwaUserResponse {
-    /** Indication of the selection the user has made (Approving or rejecting the action) */
-    readonly selection: AwaUserSelection;
-    /** Correlation ID of the request */
-    readonly correlationId: string;
-    /** Secret nonce received via the PUSH notification. */
-    readonly nonce: number[];
+  /** Indication of the selection the user has made (Approving or rejecting the action) */
+  readonly selection: AwaUserSelection;
+  /** Correlation ID of the request */
+  readonly correlationId: string;
+  /** Secret nonce received via the PUSH notification. */
+  readonly nonce: number[];
 }
 /**
  * DestinyManifest is the external-facing contract for just the properties needed
  * by those calling the Destiny Platform.
  */
 export interface DestinyManifest {
-    readonly version: string;
-    readonly mobileAssetContentPath: string;
-    readonly mobileGearAssetDataBases: GearAssetDataBaseDefinition[];
-    readonly mobileWorldContentPaths: {
-        [key: string]: string;
+  readonly version: string;
+  readonly mobileAssetContentPath: string;
+  readonly mobileGearAssetDataBases: GearAssetDataBaseDefinition[];
+  readonly mobileWorldContentPaths: {
+    [key: string]: string;
+  };
+  /**
+   * This points to the generated JSON that contains all the Definitions. Each key is
+   * a locale. The value is a path to the aggregated world definitions (warning:
+   * large file!)
+   */
+  readonly jsonWorldContentPaths: {
+    [key: string]: string;
+  };
+  /**
+   * This points to the generated JSON that contains all the Definitions. Each key is
+   * a locale. The value is a dictionary, where the key is a definition type by name,
+   * and the value is the path to the file for that definition. WARNING: This is
+   * unsafe and subject to change - do not depend on data in these files staying
+   * around long-term.
+   */
+  readonly jsonWorldComponentContentPaths: {
+    [key: string]: {
+      [key: string]: string;
     };
-    /**
-     * This points to the generated JSON that contains all the Definitions. Each key is
-     * a locale. The value is a path to the aggregated world definitions (warning:
-     * large file!)
-     */
-    readonly jsonWorldContentPaths: {
-        [key: string]: string;
-    };
-    /**
-     * This points to the generated JSON that contains all the Definitions. Each key is
-     * a locale. The value is a dictionary, where the key is a definition type by name,
-     * and the value is the path to the file for that definition. WARNING: This is
-     * unsafe and subject to change - do not depend on data in these files staying
-     * around long-term.
-     */
-    readonly jsonWorldComponentContentPaths: {
-        [key: string]: {
-            [key: string]: string;
-        };
-    };
-    readonly mobileClanBannerDatabasePath: string;
-    readonly mobileGearCDN: {
-        [key: string]: string;
-    };
-    /**
-     * Information about the "Image Pyramid" for Destiny icons. Where possible, we
-     * create smaller versions of Destiny icons. These are found as subfolders under
-     * the location of the "original/full size" Destiny images, with the same file name
-     * and extension as the original image itself. (this lets us avoid sending largely
-     * redundant path info with every entity, at the expense of the smaller versions of
-     * the image being less discoverable)
-     */
-    readonly iconImagePyramidInfo: ImagePyramidEntry[];
+  };
+  readonly mobileClanBannerDatabasePath: string;
+  readonly mobileGearCDN: {
+    [key: string]: string;
+  };
+  /**
+   * Information about the "Image Pyramid" for Destiny icons. Where possible, we
+   * create smaller versions of Destiny icons. These are found as subfolders under
+   * the location of the "original/full size" Destiny images, with the same file name
+   * and extension as the original image itself. (this lets us avoid sending largely
+   * redundant path info with every entity, at the expense of the smaller versions of
+   * the image being less discoverable)
+   */
+  readonly iconImagePyramidInfo: ImagePyramidEntry[];
 }
 export interface GearAssetDataBaseDefinition {
-    readonly version: number;
-    readonly path: string;
+  readonly version: number;
+  readonly path: string;
 }
 export interface ImagePyramidEntry {
-    /** The name of the subfolder where these images are located. */
-    readonly name: string;
-    /** The factor by which the original image size has been reduced. */
-    readonly factor: number;
+  /** The name of the subfolder where these images are located. */
+  readonly name: string;
+  /** The factor by which the original image size has been reduced. */
+  readonly factor: number;
 }
 /** Provides common properties for destiny definitions. */
 export interface DestinyDefinition {
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * I know what you seek. You seek linked accounts. Found them, you have.
@@ -7778,110 +7786,110 @@ export interface DestinyDefinition {
  * response whose
  */
 export interface DestinyLinkedProfilesResponse {
-    /**
-     * Any Destiny account for whom we could successfully pull characters will be
-     * returned here, as the Platform-level summary of user data. (no character data,
-     * no Destiny account data other than the Membership ID and Type so you can make
-     * further queries)
-     */
-    readonly profiles: DestinyProfileUserInfoCard[];
-    /**
-     * If the requested membership had a linked Bungie.Net membership ID, this is the
-     * basic information about that BNet account.
-     *
-     * I know, Tetron; I know this is mixing UserServices concerns with DestinyServices
-     * concerns. But it's so damn convenient! https://www.youtube.com/watch?v=X5R-bB-
-     * gKVI
-     */
-    readonly bnetMembership: UserInfoCard;
-    /**
-     * This is brief summary info for profiles that we believe have valid Destiny info,
-     * but who failed to return data for some other reason and thus we know that
-     * subsequent calls for their info will also fail.
-     */
-    readonly profilesWithErrors: DestinyErrorProfile[];
+  /**
+   * Any Destiny account for whom we could successfully pull characters will be
+   * returned here, as the Platform-level summary of user data. (no character data,
+   * no Destiny account data other than the Membership ID and Type so you can make
+   * further queries)
+   */
+  readonly profiles: DestinyProfileUserInfoCard[];
+  /**
+   * If the requested membership had a linked Bungie.Net membership ID, this is the
+   * basic information about that BNet account.
+   *
+   * I know, Tetron; I know this is mixing UserServices concerns with DestinyServices
+   * concerns. But it's so damn convenient! https://www.youtube.com/watch?v=X5R-bB-
+   * gKVI
+   */
+  readonly bnetMembership: UserInfoCard;
+  /**
+   * This is brief summary info for profiles that we believe have valid Destiny info,
+   * but who failed to return data for some other reason and thus we know that
+   * subsequent calls for their info will also fail.
+   */
+  readonly profilesWithErrors: DestinyErrorProfile[];
 }
 export interface DestinyProfileUserInfoCard {
-    readonly dateLastPlayed: string;
-    /**
-     * If this profile is being overridden/obscured by Cross Save, this will be set to
-     * true. We will still return the profile for display purposes where users need to
-     * know the info: it is up to any given area of the app/site to determine if this
-     * profile should still be shown.
-     */
-    readonly isOverridden: boolean;
-    /**
-     * If true, this account is hooked up as the "Primary" cross save account for one
-     * or more platforms.
-     */
-    readonly isCrossSavePrimary: boolean;
-    /**
-     * This is the silver available on this Profile across any platforms on which they
-     * have purchased silver.
-     *
-     * This is only available if you are requesting yourself.
-     */
-    readonly platformSilver: DestinyPlatformSilverComponent;
-    /**
-     * If this profile is not in a cross save pairing, this will return the game
-     * versions that we believe this profile has access to.
-     *
-     * For the time being, we will not return this information for any membership that
-     * is in a cross save pairing. The gist is that, once the pairing occurs, we do not
-     * currently have a consistent way to get that information for the profile's
-     * original Platform, and thus gameVersions would be too inconsistent (based on the
-     * last platform they happened to play on) for the info to be useful.
-     *
-     * If we ever can get this data, this field will be deprecated and replaced with
-     * data on the DestinyLinkedProfileResponse itself, with game versions per linked
-     * Platform. But since we can't get that, we have this as a stop-gap measure for
-     * getting the data in the only situation that we currently need it.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly unpairedGameVersions?: number;
-    /**
-     * A platform specific additional display name - ex: psn Real Name, bnet Unique
-     * Name, etc.
-     */
-    readonly supplementalDisplayName: string;
-    /** URL the Icon if available. */
-    readonly iconPath: string;
-    /**
-     * If there is a cross save override in effect, this value will tell you the type
-     * that is overridding this one.
-     */
-    readonly crossSaveOverride: BungieMembershipType;
-    /**
-     * The list of Membership Types indicating the platforms on which this Membership
-     * can be used.
-     *
-     * Not in Cross Save = its original membership type. Cross Save Primary = Any
-     * membership types it is overridding, and its original membership type Cross Save
-     * Overridden = Empty list
-     */
-    readonly applicableMembershipTypes: BungieMembershipType[];
-    /** If True, this is a public user membership. */
-    readonly isPublic: boolean;
-    /** Type of the membership. Not necessarily the native type. */
-    readonly membershipType: BungieMembershipType;
-    /** Membership ID as they user is known in the Accounts service */
-    readonly membershipId: string;
-    /**
-     * Display Name the player has chosen for themselves. The display name is optional
-     * when the data type is used as input to a platform API.
-     */
-    readonly displayName: string;
+  readonly dateLastPlayed: string;
+  /**
+   * If this profile is being overridden/obscured by Cross Save, this will be set to
+   * true. We will still return the profile for display purposes where users need to
+   * know the info: it is up to any given area of the app/site to determine if this
+   * profile should still be shown.
+   */
+  readonly isOverridden: boolean;
+  /**
+   * If true, this account is hooked up as the "Primary" cross save account for one
+   * or more platforms.
+   */
+  readonly isCrossSavePrimary: boolean;
+  /**
+   * This is the silver available on this Profile across any platforms on which they
+   * have purchased silver.
+   *
+   * This is only available if you are requesting yourself.
+   */
+  readonly platformSilver: DestinyPlatformSilverComponent;
+  /**
+   * If this profile is not in a cross save pairing, this will return the game
+   * versions that we believe this profile has access to.
+   *
+   * For the time being, we will not return this information for any membership that
+   * is in a cross save pairing. The gist is that, once the pairing occurs, we do not
+   * currently have a consistent way to get that information for the profile's
+   * original Platform, and thus gameVersions would be too inconsistent (based on the
+   * last platform they happened to play on) for the info to be useful.
+   *
+   * If we ever can get this data, this field will be deprecated and replaced with
+   * data on the DestinyLinkedProfileResponse itself, with game versions per linked
+   * Platform. But since we can't get that, we have this as a stop-gap measure for
+   * getting the data in the only situation that we currently need it.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly unpairedGameVersions?: number;
+  /**
+   * A platform specific additional display name - ex: psn Real Name, bnet Unique
+   * Name, etc.
+   */
+  readonly supplementalDisplayName: string;
+  /** URL the Icon if available. */
+  readonly iconPath: string;
+  /**
+   * If there is a cross save override in effect, this value will tell you the type
+   * that is overridding this one.
+   */
+  readonly crossSaveOverride: BungieMembershipType;
+  /**
+   * The list of Membership Types indicating the platforms on which this Membership
+   * can be used.
+   *
+   * Not in Cross Save = its original membership type. Cross Save Primary = Any
+   * membership types it is overridding, and its original membership type Cross Save
+   * Overridden = Empty list
+   */
+  readonly applicableMembershipTypes: BungieMembershipType[];
+  /** If True, this is a public user membership. */
+  readonly isPublic: boolean;
+  /** Type of the membership. Not necessarily the native type. */
+  readonly membershipType: BungieMembershipType;
+  /** Membership ID as they user is known in the Accounts service */
+  readonly membershipId: string;
+  /**
+   * Display Name the player has chosen for themselves. The display name is optional
+   * when the data type is used as input to a platform API.
+   */
+  readonly displayName: string;
 }
 export interface DestinyPlatformSilverComponent {
-    /**
-     * If a Profile is played on multiple platforms, this is the silver they have for
-     * each platform, keyed by Membership Type.
-     */
-    readonly platformSilver: {
-        [key in BungieMembershipType]: DestinyItemComponent;
-    };
+  /**
+   * If a Profile is played on multiple platforms, this is the silver they have for
+   * each platform, keyed by Membership Type.
+   */
+  readonly platformSilver: {
+    [key in BungieMembershipType]: DestinyItemComponent;
+  };
 }
 /**
  * The base item component, filled with properties that are generally useful to
@@ -7889,104 +7897,104 @@ export interface DestinyPlatformSilverComponent {
  * component.
  */
 export interface DestinyItemComponent {
-    /**
-     * The identifier for the item's definition, which is where most of the useful
-     * static information for the item can be found.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If the item is instanced, it will have an instance ID. Lack of an instance ID
-     * implies that the item has no distinct local qualities aside from stack size.
-     */
-    readonly itemInstanceId?: string;
-    /**
-     * The quantity of the item in this stack. Note that Instanced items cannot stack.
-     * If an instanced item, this value will always be 1 (as the stack has exactly one
-     * item in it)
-     */
-    readonly quantity: number;
-    /** If the item is bound to a location, it will be specified in this enum. */
-    readonly bindStatus: ItemBindStatus;
-    /**
-     * An easy reference for where the item is located. Redundant if you got the item
-     * from an Inventory, but useful when making detail calls on specific items.
-     */
-    readonly location: ItemLocation;
-    /**
-     * The hash identifier for the specific inventory bucket in which the item is
-     * located.
-     *
-     * Mapped to DestinyInventoryBucketDefinition in the manifest.
-     */
-    readonly bucketHash: number;
-    /**
-     * If there is a known error state that would cause this item to not be
-     * transferable, this Flags enum will indicate all of those error states. Otherwise,
-     * it will be 0 (CanTransfer).
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly transferStatus: TransferStatuses;
-    /** If the item can be locked, this will indicate that state. */
-    readonly lockable: boolean;
-    /**
-     * A flags enumeration indicating the transient/custom states of the item that
-     * affect how it is rendered: whether it's tracked or locked for example, or
-     * whether it has a masterwork plug inserted.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly state: ItemState;
-    /**
-     * If populated, this is the hash of the item whose icon (and other secondary
-     * styles, but *not* the human readable strings) should override whatever icons/
-     * styles are on the item being sold.
-     *
-     * If you don't do this, certain items whose styles are being overridden by
-     * socketed items - such as the "Recycle Shader" item - would show whatever their
-     * default icon/style is, and it wouldn't be pretty or look accurate.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly overrideStyleItemHash?: number;
-    /** If the item can expire, this is the date at which it will/did expire. */
-    readonly expirationDate?: string;
-    /**
-     * If this is true, the object is actually a "wrapper" of the object it's
-     * representing. This means that it's not the actual item itself, but rather an
-     * item that must be "opened" in game before you have and can use the item.
-     *
-     * Wrappers are an evolution of "bundles", which give an easy way to let you
-     * preview the contents of what you purchased while still letting you get a refund
-     * before you "open" it.
-     */
-    readonly isWrapper: boolean;
-    /**
-     * If this is populated, it is a list of indexes into
-     * DestinyInventoryItemDefinition.tooltipNotifications for any special tooltip
-     * messages that need to be shown for this item.
-     */
-    readonly tooltipNotificationIndexes: number[];
-    /**
-     * The identifier for the currently-selected metric definition, to be displayed on
-     * the emblem nameplate.
-     */
-    readonly metricHash?: number;
-    /**
-     * The objective progress for the currently-selected metric definition, to be
-     * displayed on the emblem nameplate.
-     */
-    readonly metricObjective: DestinyObjectiveProgress;
+  /**
+   * The identifier for the item's definition, which is where most of the useful
+   * static information for the item can be found.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If the item is instanced, it will have an instance ID. Lack of an instance ID
+   * implies that the item has no distinct local qualities aside from stack size.
+   */
+  readonly itemInstanceId?: string;
+  /**
+   * The quantity of the item in this stack. Note that Instanced items cannot stack.
+   * If an instanced item, this value will always be 1 (as the stack has exactly one
+   * item in it)
+   */
+  readonly quantity: number;
+  /** If the item is bound to a location, it will be specified in this enum. */
+  readonly bindStatus: ItemBindStatus;
+  /**
+   * An easy reference for where the item is located. Redundant if you got the item
+   * from an Inventory, but useful when making detail calls on specific items.
+   */
+  readonly location: ItemLocation;
+  /**
+   * The hash identifier for the specific inventory bucket in which the item is
+   * located.
+   *
+   * Mapped to DestinyInventoryBucketDefinition in the manifest.
+   */
+  readonly bucketHash: number;
+  /**
+   * If there is a known error state that would cause this item to not be
+   * transferable, this Flags enum will indicate all of those error states. Otherwise,
+   * it will be 0 (CanTransfer).
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly transferStatus: TransferStatuses;
+  /** If the item can be locked, this will indicate that state. */
+  readonly lockable: boolean;
+  /**
+   * A flags enumeration indicating the transient/custom states of the item that
+   * affect how it is rendered: whether it's tracked or locked for example, or
+   * whether it has a masterwork plug inserted.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly state: ItemState;
+  /**
+   * If populated, this is the hash of the item whose icon (and other secondary
+   * styles, but *not* the human readable strings) should override whatever icons/
+   * styles are on the item being sold.
+   *
+   * If you don't do this, certain items whose styles are being overridden by
+   * socketed items - such as the "Recycle Shader" item - would show whatever their
+   * default icon/style is, and it wouldn't be pretty or look accurate.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly overrideStyleItemHash?: number;
+  /** If the item can expire, this is the date at which it will/did expire. */
+  readonly expirationDate?: string;
+  /**
+   * If this is true, the object is actually a "wrapper" of the object it's
+   * representing. This means that it's not the actual item itself, but rather an
+   * item that must be "opened" in game before you have and can use the item.
+   *
+   * Wrappers are an evolution of "bundles", which give an easy way to let you
+   * preview the contents of what you purchased while still letting you get a refund
+   * before you "open" it.
+   */
+  readonly isWrapper: boolean;
+  /**
+   * If this is populated, it is a list of indexes into
+   * DestinyInventoryItemDefinition.tooltipNotifications for any special tooltip
+   * messages that need to be shown for this item.
+   */
+  readonly tooltipNotificationIndexes: number[];
+  /**
+   * The identifier for the currently-selected metric definition, to be displayed on
+   * the emblem nameplate.
+   */
+  readonly metricHash?: number;
+  /**
+   * The objective progress for the currently-selected metric definition, to be
+   * displayed on the emblem nameplate.
+   */
+  readonly metricObjective: DestinyObjectiveProgress;
 }
 export declare const enum ItemBindStatus {
-    NotBound = 0,
-    BoundToCharacter = 1,
-    BoundToAccount = 2,
-    BoundToGuild = 3
+  NotBound = 0,
+  BoundToCharacter = 1,
+  BoundToAccount = 2,
+  BoundToGuild = 3,
 }
 /**
  * Whether you can transfer an item, and why not if you can't.
@@ -7995,20 +8003,20 @@ export declare const enum ItemBindStatus {
  * these match your value.
  */
 export declare const enum TransferStatuses {
-    /** The item can be transferred. */
-    CanTransfer = 0,
-    /** You can't transfer the item because it is equipped on a character. */
-    ItemIsEquipped = 1,
-    /**
-     * The item is defined as not transferrable in its DestinyInventoryItemDefinition.
-     * nonTransferrable property.
-     */
-    NotTransferrable = 2,
-    /**
-     * You could transfer the item, but the place you're trying to put it has run out
-     * of room! Check your remaining Vault and/or character space.
-     */
-    NoRoomInDestination = 4
+  /** The item can be transferred. */
+  CanTransfer = 0,
+  /** You can't transfer the item because it is equipped on a character. */
+  ItemIsEquipped = 1,
+  /**
+   * The item is defined as not transferrable in its DestinyInventoryItemDefinition.
+   * nonTransferrable property.
+   */
+  NotTransferrable = 2,
+  /**
+   * You could transfer the item, but the place you're trying to put it has run out
+   * of room! Check your remaining Vault and/or character space.
+   */
+  NoRoomInDestination = 4,
 }
 /**
  * A flags enumeration/bitmask where each bit represents a different possible state
@@ -8019,81 +8027,81 @@ export declare const enum TransferStatuses {
  * these match your value.
  */
 export declare const enum ItemState {
-    None = 0,
-    /**
-     * If this bit is set, the item has been "locked" by the user and cannot be deleted.
-     * You may want to represent this visually with a "lock" icon.
-     */
-    Locked = 1,
-    /**
-     * If this bit is set, the item is a quest that's being tracked by the user. You
-     * may want a visual indicator to show that this is a tracked quest.
-     */
-    Tracked = 2,
-    /**
-     * If this bit is set, the item has a Masterwork plug inserted. This usually
-     * coincides with having a special "glowing" effect applied to the item's icon.
-     */
-    Masterwork = 4
+  None = 0,
+  /**
+   * If this bit is set, the item has been "locked" by the user and cannot be deleted.
+   * You may want to represent this visually with a "lock" icon.
+   */
+  Locked = 1,
+  /**
+   * If this bit is set, the item is a quest that's being tracked by the user. You
+   * may want a visual indicator to show that this is a tracked quest.
+   */
+  Tracked = 2,
+  /**
+   * If this bit is set, the item has a Masterwork plug inserted. This usually
+   * coincides with having a special "glowing" effect applied to the item's icon.
+   */
+  Masterwork = 4,
 }
 /**
  * Returns data about a character's status with a given Objective. Combine with
  * DestinyObjectiveDefinition static data for display purposes.
  */
 export interface DestinyObjectiveProgress {
-    /**
-     * The unique identifier of the Objective being referred to. Use to look up the
-     * DestinyObjectiveDefinition in static data.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash: number;
-    /**
-     * If the Objective has a Destination associated with it, this is the unique
-     * identifier of the Destination being referred to. Use to look up the
-     * DestinyDestinationDefinition in static data. This will give localized data about
-     * *where* in the universe the objective should be achieved.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly destinationHash?: number;
-    /**
-     * If the Objective has an Activity associated with it, this is the unique
-     * identifier of the Activity being referred to. Use to look up the
-     * DestinyActivityDefinition in static data. This will give localized data about *
-     * what* you should be playing for the objective to be achieved.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash?: number;
-    /**
-     * If progress has been made, and the progress can be measured numerically, this
-     * will be the value of that progress. You can compare it to the
-     * DestinyObjectiveDefinition.completionValue property for current vs. upper bounds,
-     * and use DestinyObjectiveDefinition.valueStyle to determine how this should be
-     * rendered. Note that progress, in Destiny 2, need not be a literal numeric
-     * progression. It could be one of a number of possible values, even a Timestamp.
-     * Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.
-     */
-    readonly progress?: number;
-    /**
-     * As of Forsaken, objectives' completion value is determined dynamically at
-     * runtime.
-     *
-     * This value represents the threshold of progress you need to surpass in order for
-     * this objective to be considered "complete".
-     *
-     * If you were using objective data, switch from using the
-     * DestinyObjectiveDefinition's "completionValue" to this value.
-     */
-    readonly completionValue: number;
-    /** Whether or not the Objective is completed. */
-    readonly complete: boolean;
-    /**
-     * If this is true, the objective is visible in-game. Otherwise, it's not yet
-     * visible to the player. Up to you if you want to honor this property.
-     */
-    readonly visible: boolean;
+  /**
+   * The unique identifier of the Objective being referred to. Use to look up the
+   * DestinyObjectiveDefinition in static data.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash: number;
+  /**
+   * If the Objective has a Destination associated with it, this is the unique
+   * identifier of the Destination being referred to. Use to look up the
+   * DestinyDestinationDefinition in static data. This will give localized data about
+   * *where* in the universe the objective should be achieved.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly destinationHash?: number;
+  /**
+   * If the Objective has an Activity associated with it, this is the unique
+   * identifier of the Activity being referred to. Use to look up the
+   * DestinyActivityDefinition in static data. This will give localized data about *
+   * what* you should be playing for the objective to be achieved.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash?: number;
+  /**
+   * If progress has been made, and the progress can be measured numerically, this
+   * will be the value of that progress. You can compare it to the
+   * DestinyObjectiveDefinition.completionValue property for current vs. upper bounds,
+   * and use DestinyObjectiveDefinition.valueStyle to determine how this should be
+   * rendered. Note that progress, in Destiny 2, need not be a literal numeric
+   * progression. It could be one of a number of possible values, even a Timestamp.
+   * Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.
+   */
+  readonly progress?: number;
+  /**
+   * As of Forsaken, objectives' completion value is determined dynamically at
+   * runtime.
+   *
+   * This value represents the threshold of progress you need to surpass in order for
+   * this objective to be considered "complete".
+   *
+   * If you were using objective data, switch from using the
+   * DestinyObjectiveDefinition's "completionValue" to this value.
+   */
+  readonly completionValue: number;
+  /** Whether or not the Objective is completed. */
+  readonly complete: boolean;
+  /**
+   * If this is true, the objective is visible in-game. Otherwise, it's not yet
+   * visible to the player. Up to you if you want to honor this property.
+   */
+  readonly visible: boolean;
 }
 /**
  * If a Destiny Profile can't be returned, but we're pretty certain it's a valid
@@ -8104,212 +8112,214 @@ export interface DestinyObjectiveProgress {
  * Membership ID.
  */
 export interface DestinyErrorProfile {
-    /**
-     * The error that we encountered. You should be able to look up localized text to
-     * show to the user for these failures.
-     */
-    readonly errorCode: PlatformErrorCodes;
-    /**
-     * Basic info about the account that failed. Don't expect anything other than
-     * membership ID, Membership Type, and displayName to be populated.
-     */
-    readonly infoCard: UserInfoCard;
+  /**
+   * The error that we encountered. You should be able to look up localized text to
+   * show to the user for these failures.
+   */
+  readonly errorCode: PlatformErrorCodes;
+  /**
+   * Basic info about the account that failed. Don't expect anything other than
+   * membership ID, Membership Type, and displayName to be populated.
+   */
+  readonly infoCard: UserInfoCard;
 }
 /**
  * The response for GetDestinyProfile, with components for character and item-level
  * data.
  */
 export interface DestinyProfileResponse {
-    /**
-     * Recent, refundable purchases you have made from vendors. When will you use it?
-     * Couldn't say...
-     *
-     * COMPONENT TYPE: VendorReceipts
-     */
-    readonly vendorReceipts: SingleComponentResponse<DestinyVendorReceiptsComponent>;
-    /**
-     * The profile-level inventory of the Destiny Profile.
-     *
-     * COMPONENT TYPE: ProfileInventories
-     */
-    readonly profileInventory: SingleComponentResponse<DestinyInventoryComponent>;
-    /**
-     * The profile-level currencies owned by the Destiny Profile.
-     *
-     * COMPONENT TYPE: ProfileCurrencies
-     */
-    readonly profileCurrencies: SingleComponentResponse<DestinyInventoryComponent>;
-    /**
-     * The basic information about the Destiny Profile (formerly "Account").
-     *
-     * COMPONENT TYPE: Profiles
-     */
-    readonly profile: SingleComponentResponse<DestinyProfileComponent>;
-    /**
-     * Silver quantities for any platform on which this Profile plays destiny.
-     *
-     * COMPONENT TYPE: PlatformSilver
-     */
-    readonly platformSilver: SingleComponentResponse<DestinyPlatformSilverComponent>;
-    /**
-     * Items available from Kiosks that are available Profile-wide (i.e. across all
-     * characters)
-     *
-     * This component returns information about what Kiosk items are available to you
-     * on a *Profile* level. It is theoretically possible for Kiosks to have items
-     * gated by specific Character as well. If you ever have those, you will find them
-     * on the characterKiosks property.
-     *
-     * COMPONENT TYPE: Kiosks
-     */
-    readonly profileKiosks: SingleComponentResponse<DestinyKiosksComponent>;
-    /**
-     * When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more
-     * info), this is the set of plugs and their states that are profile-scoped.
-     *
-     * This comes back with ItemSockets, as it is needed for a complete picture of the
-     * sockets on requested items.
-     *
-     * COMPONENT TYPE: ItemSockets
-     */
-    readonly profilePlugSets: SingleComponentResponse<DestinyPlugSetsComponent>;
-    /**
-     * When we have progression information - such as Checklists - that may apply
-     * profile-wide, it will be returned here rather than in the per-character
-     * progression data.
-     *
-     * COMPONENT TYPE: ProfileProgression
-     */
-    readonly profileProgression: SingleComponentResponse<DestinyProfileProgressionComponent>;
-    /** COMPONENT TYPE: PresentationNodes */
-    readonly profilePresentationNodes: SingleComponentResponse<DestinyPresentationNodesComponent>;
-    /** COMPONENT TYPE: Records */
-    readonly profileRecords: SingleComponentResponse<DestinyProfileRecordsComponent>;
-    /** COMPONENT TYPE: Collectibles */
-    readonly profileCollectibles: SingleComponentResponse<DestinyProfileCollectiblesComponent>;
-    /** COMPONENT TYPE: Transitory */
-    readonly profileTransitoryData: SingleComponentResponse<DestinyProfileTransitoryComponent>;
-    /** COMPONENT TYPE: Metrics */
-    readonly metrics: SingleComponentResponse<DestinyMetricsComponent>;
-    /**
-     * Basic information about each character, keyed by the CharacterId.
-     *
-     * COMPONENT TYPE: Characters
-     */
-    readonly characters: DictionaryComponentResponse<DestinyCharacterComponent>;
-    /**
-     * The character-level non-equipped inventory items, keyed by the Character's Id.
-     *
-     * COMPONENT TYPE: CharacterInventories
-     */
-    readonly characterInventories: DictionaryComponentResponse<DestinyInventoryComponent>;
-    /**
-     * Character-level progression data, keyed by the Character's Id.
-     *
-     * COMPONENT TYPE: CharacterProgressions
-     */
-    readonly characterProgressions: DictionaryComponentResponse<DestinyCharacterProgressionComponent>;
-    /**
-     * Character rendering data - a minimal set of info needed to render a character in
-     * 3D - keyed by the Character's Id.
-     *
-     * COMPONENT TYPE: CharacterRenderData
-     */
-    readonly characterRenderData: DictionaryComponentResponse<DestinyCharacterRenderComponent>;
-    /**
-     * Character activity data - the activities available to this character and its
-     * status, keyed by the Character's Id.
-     *
-     * COMPONENT TYPE: CharacterActivities
-     */
-    readonly characterActivities: DictionaryComponentResponse<DestinyCharacterActivitiesComponent>;
-    /**
-     * The character's equipped items, keyed by the Character's Id.
-     *
-     * COMPONENT TYPE: CharacterEquipment
-     */
-    readonly characterEquipment: DictionaryComponentResponse<DestinyInventoryComponent>;
-    /**
-     * Items available from Kiosks that are available to a specific character as
-     * opposed to the account as a whole. It must be combined with data from the
-     * profileKiosks property to get a full picture of the character's available items
-     * to check out of a kiosk.
-     *
-     * This component returns information about what Kiosk items are available to you
-     * on a *Character* level. Usually, kiosk items will be earned for the entire
-     * Profile (all characters) at once. To find those, look in the profileKiosks
-     * property.
-     *
-     * COMPONENT TYPE: Kiosks
-     */
-    readonly characterKiosks: DictionaryComponentResponse<DestinyKiosksComponent>;
-    /**
-     * When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more
-     * info), this is the set of plugs and their states, per character, that are
-     * character-scoped.
-     *
-     * This comes back with ItemSockets, as it is needed for a complete picture of the
-     * sockets on requested items.
-     *
-     * COMPONENT TYPE: ItemSockets
-     */
-    readonly characterPlugSets: DictionaryComponentResponse<DestinyPlugSetsComponent>;
-    /**
-     * Do you ever get the feeling that a system was designed *too* flexibly? That it
-     * can be used in so many different ways that you end up being unable to provide an
-     * easy to use abstraction for the mess that's happening under the surface?
-     *
-     * Let's talk about character-specific data that might be related to items without
-     * instances. These two statements are totally unrelated, I promise.
-     *
-     * At some point during D2, it was decided that items - such as Bounties - could be
-     * given to characters and *not* have instance data, but that *could* display and
-     * even use relevant state information on your account and character.
-     *
-     * Up to now, any item that had meaningful dependencies on character or account
-     * state had to be instanced, and thus "itemComponents" was all that you needed: it
-     * was keyed by item's instance IDs and provided the stateful information you
-     * needed inside.
-     *
-     * Unfortunately, we don't live in such a magical world anymore. This is
-     * information held on a per-character basis about non-instanced items that the
-     * characters have in their inventory - or that reference character-specific state
-     * information even if it's in Account-level inventory - and the values related to
-     * that item's state in relation to the given character.
-     *
-     * To give a concrete example, look at a Moments of Triumph bounty. They exist in a
-     * character's inventory, and show/care about a character's progression toward
-     * completing the bounty. But the bounty itself is a non-instanced item, like a mod
-     * or a currency. This returns that data for the characters who have the bounty in
-     * their inventory.
-     *
-     * I'm not crying, you're crying Okay we're both crying but it's going to be okay I
-     * promise Actually I shouldn't promise that, I don't know if it's going to be okay
-     */
-    readonly characterUninstancedItemComponents: {
-        [key: string]: DestinyBaseItemComponentSetOfuint32;
-    };
-    /** COMPONENT TYPE: PresentationNodes */
-    readonly characterPresentationNodes: DictionaryComponentResponse<DestinyPresentationNodesComponent>;
-    /** COMPONENT TYPE: Records */
-    readonly characterRecords: DictionaryComponentResponse<DestinyCharacterRecordsComponent>;
-    /** COMPONENT TYPE: Collectibles */
-    readonly characterCollectibles: DictionaryComponentResponse<DestinyCollectiblesComponent>;
-    /**
-     * Information about instanced items across all returned characters, keyed by the
-     * item's instance ID.
-     *
-     * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
-     * types.]
-     */
-    readonly itemComponents: DestinyItemComponentSetOfint64;
-    /**
-     * A "lookup" convenience component that can be used to quickly check if the
-     * character has access to items that can be used for purchasing.
-     *
-     * COMPONENT TYPE: CurrencyLookups
-     */
-    readonly characterCurrencyLookups: DictionaryComponentResponse<DestinyCurrenciesComponent>;
+  /**
+   * Recent, refundable purchases you have made from vendors. When will you use it?
+   * Couldn't say...
+   *
+   * COMPONENT TYPE: VendorReceipts
+   */
+  readonly vendorReceipts: SingleComponentResponse<DestinyVendorReceiptsComponent>;
+  /**
+   * The profile-level inventory of the Destiny Profile.
+   *
+   * COMPONENT TYPE: ProfileInventories
+   */
+  readonly profileInventory: SingleComponentResponse<DestinyInventoryComponent>;
+  /**
+   * The profile-level currencies owned by the Destiny Profile.
+   *
+   * COMPONENT TYPE: ProfileCurrencies
+   */
+  readonly profileCurrencies: SingleComponentResponse<DestinyInventoryComponent>;
+  /**
+   * The basic information about the Destiny Profile (formerly "Account").
+   *
+   * COMPONENT TYPE: Profiles
+   */
+  readonly profile: SingleComponentResponse<DestinyProfileComponent>;
+  /**
+   * Silver quantities for any platform on which this Profile plays destiny.
+   *
+   * COMPONENT TYPE: PlatformSilver
+   */
+  readonly platformSilver: SingleComponentResponse<DestinyPlatformSilverComponent>;
+  /**
+   * Items available from Kiosks that are available Profile-wide (i.e. across all
+   * characters)
+   *
+   * This component returns information about what Kiosk items are available to you
+   * on a *Profile* level. It is theoretically possible for Kiosks to have items
+   * gated by specific Character as well. If you ever have those, you will find them
+   * on the characterKiosks property.
+   *
+   * COMPONENT TYPE: Kiosks
+   */
+  readonly profileKiosks: SingleComponentResponse<DestinyKiosksComponent>;
+  /**
+   * When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more
+   * info), this is the set of plugs and their states that are profile-scoped.
+   *
+   * This comes back with ItemSockets, as it is needed for a complete picture of the
+   * sockets on requested items.
+   *
+   * COMPONENT TYPE: ItemSockets
+   */
+  readonly profilePlugSets: SingleComponentResponse<DestinyPlugSetsComponent>;
+  /**
+   * When we have progression information - such as Checklists - that may apply
+   * profile-wide, it will be returned here rather than in the per-character
+   * progression data.
+   *
+   * COMPONENT TYPE: ProfileProgression
+   */
+  readonly profileProgression: SingleComponentResponse<DestinyProfileProgressionComponent>;
+  /** COMPONENT TYPE: PresentationNodes */
+  readonly profilePresentationNodes: SingleComponentResponse<DestinyPresentationNodesComponent>;
+  /** COMPONENT TYPE: Records */
+  readonly profileRecords: SingleComponentResponse<DestinyProfileRecordsComponent>;
+  /** COMPONENT TYPE: Collectibles */
+  readonly profileCollectibles: SingleComponentResponse<DestinyProfileCollectiblesComponent>;
+  /** COMPONENT TYPE: Transitory */
+  readonly profileTransitoryData: SingleComponentResponse<DestinyProfileTransitoryComponent>;
+  /** COMPONENT TYPE: Metrics */
+  readonly metrics: SingleComponentResponse<DestinyMetricsComponent>;
+  /**
+   * Basic information about each character, keyed by the CharacterId.
+   *
+   * COMPONENT TYPE: Characters
+   */
+  readonly characters: DictionaryComponentResponse<DestinyCharacterComponent>;
+  /**
+   * The character-level non-equipped inventory items, keyed by the Character's Id.
+   *
+   * COMPONENT TYPE: CharacterInventories
+   */
+  readonly characterInventories: DictionaryComponentResponse<DestinyInventoryComponent>;
+  /**
+   * Character-level progression data, keyed by the Character's Id.
+   *
+   * COMPONENT TYPE: CharacterProgressions
+   */
+  readonly characterProgressions: DictionaryComponentResponse<DestinyCharacterProgressionComponent>;
+  /**
+   * Character rendering data - a minimal set of info needed to render a character in
+   * 3D - keyed by the Character's Id.
+   *
+   * COMPONENT TYPE: CharacterRenderData
+   */
+  readonly characterRenderData: DictionaryComponentResponse<DestinyCharacterRenderComponent>;
+  /**
+   * Character activity data - the activities available to this character and its
+   * status, keyed by the Character's Id.
+   *
+   * COMPONENT TYPE: CharacterActivities
+   */
+  readonly characterActivities: DictionaryComponentResponse<DestinyCharacterActivitiesComponent>;
+  /**
+   * The character's equipped items, keyed by the Character's Id.
+   *
+   * COMPONENT TYPE: CharacterEquipment
+   */
+  readonly characterEquipment: DictionaryComponentResponse<DestinyInventoryComponent>;
+  /**
+   * Items available from Kiosks that are available to a specific character as
+   * opposed to the account as a whole. It must be combined with data from the
+   * profileKiosks property to get a full picture of the character's available items
+   * to check out of a kiosk.
+   *
+   * This component returns information about what Kiosk items are available to you
+   * on a *Character* level. Usually, kiosk items will be earned for the entire
+   * Profile (all characters) at once. To find those, look in the profileKiosks
+   * property.
+   *
+   * COMPONENT TYPE: Kiosks
+   */
+  readonly characterKiosks: DictionaryComponentResponse<DestinyKiosksComponent>;
+  /**
+   * When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more
+   * info), this is the set of plugs and their states, per character, that are
+   * character-scoped.
+   *
+   * This comes back with ItemSockets, as it is needed for a complete picture of the
+   * sockets on requested items.
+   *
+   * COMPONENT TYPE: ItemSockets
+   */
+  readonly characterPlugSets: DictionaryComponentResponse<DestinyPlugSetsComponent>;
+  /**
+   * Do you ever get the feeling that a system was designed *too* flexibly? That it
+   * can be used in so many different ways that you end up being unable to provide an
+   * easy to use abstraction for the mess that's happening under the surface?
+   *
+   * Let's talk about character-specific data that might be related to items without
+   * instances. These two statements are totally unrelated, I promise.
+   *
+   * At some point during D2, it was decided that items - such as Bounties - could be
+   * given to characters and *not* have instance data, but that *could* display and
+   * even use relevant state information on your account and character.
+   *
+   * Up to now, any item that had meaningful dependencies on character or account
+   * state had to be instanced, and thus "itemComponents" was all that you needed: it
+   * was keyed by item's instance IDs and provided the stateful information you
+   * needed inside.
+   *
+   * Unfortunately, we don't live in such a magical world anymore. This is
+   * information held on a per-character basis about non-instanced items that the
+   * characters have in their inventory - or that reference character-specific state
+   * information even if it's in Account-level inventory - and the values related to
+   * that item's state in relation to the given character.
+   *
+   * To give a concrete example, look at a Moments of Triumph bounty. They exist in a
+   * character's inventory, and show/care about a character's progression toward
+   * completing the bounty. But the bounty itself is a non-instanced item, like a mod
+   * or a currency. This returns that data for the characters who have the bounty in
+   * their inventory.
+   *
+   * I'm not crying, you're crying Okay we're both crying but it's going to be okay I
+   * promise Actually I shouldn't promise that, I don't know if it's going to be okay
+   */
+  readonly characterUninstancedItemComponents: {
+    [key: string]: DestinyBaseItemComponentSetOfuint32;
+  };
+  /** COMPONENT TYPE: PresentationNodes */
+  readonly characterPresentationNodes: DictionaryComponentResponse<
+    DestinyPresentationNodesComponent
+  >;
+  /** COMPONENT TYPE: Records */
+  readonly characterRecords: DictionaryComponentResponse<DestinyCharacterRecordsComponent>;
+  /** COMPONENT TYPE: Collectibles */
+  readonly characterCollectibles: DictionaryComponentResponse<DestinyCollectiblesComponent>;
+  /**
+   * Information about instanced items across all returned characters, keyed by the
+   * item's instance ID.
+   *
+   * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
+   * types.]
+   */
+  readonly itemComponents: DestinyItemComponentSetOfint64;
+  /**
+   * A "lookup" convenience component that can be used to quickly check if the
+   * character has access to items that can be used for purchasing.
+   *
+   * COMPONENT TYPE: CurrencyLookups
+   */
+  readonly characterCurrencyLookups: DictionaryComponentResponse<DestinyCurrenciesComponent>;
 }
 /**
  * For now, this isn't used for much: it's a record of the recent refundable
@@ -8317,8 +8327,8 @@ export interface DestinyProfileResponse {
  * refunds/buyback via the API. Wouldn't that be fun?
  */
 export interface DestinyVendorReceiptsComponent {
-    /** The receipts for refundable purchases made at a vendor. */
-    readonly receipts: DestinyVendorReceipt[];
+  /** The receipts for refundable purchases made at a vendor. */
+  readonly receipts: DestinyVendorReceipt[];
 }
 /**
  * If a character purchased an item that is refundable, a Vendor Receipt will be
@@ -8327,37 +8337,37 @@ export interface DestinyVendorReceiptsComponent {
  * provide the ability to refund a purchase *yet*, but you know.
  */
 export interface DestinyVendorReceipt {
-    /**
-     * The amount paid for the item, in terms of items that were consumed in the
-     * purchase and their quantity.
-     */
-    readonly currencyPaid: DestinyItemQuantity[];
-    /** The item that was received, and its quantity. */
-    readonly itemReceived: DestinyItemQuantity;
-    /** The unlock flag used to determine whether you still have the purchased item. */
-    readonly licenseUnlockHash: number;
-    /** The ID of the character who made the purchase. */
-    readonly purchasedByCharacterId: string;
-    /**
-     * Whether you can get a refund, and what happens in order for the refund to be
-     * received. See the DestinyVendorItemRefundPolicy enum for details.
-     */
-    readonly refundPolicy: DestinyVendorItemRefundPolicy;
-    /** The identifier of this receipt. */
-    readonly sequenceNumber: number;
-    /** The seconds since epoch at which this receipt is rendered invalid. */
-    readonly timeToExpiration: string;
-    /** The date at which this receipt is rendered invalid. */
-    readonly expiresOn: string;
+  /**
+   * The amount paid for the item, in terms of items that were consumed in the
+   * purchase and their quantity.
+   */
+  readonly currencyPaid: DestinyItemQuantity[];
+  /** The item that was received, and its quantity. */
+  readonly itemReceived: DestinyItemQuantity;
+  /** The unlock flag used to determine whether you still have the purchased item. */
+  readonly licenseUnlockHash: number;
+  /** The ID of the character who made the purchase. */
+  readonly purchasedByCharacterId: string;
+  /**
+   * Whether you can get a refund, and what happens in order for the refund to be
+   * received. See the DestinyVendorItemRefundPolicy enum for details.
+   */
+  readonly refundPolicy: DestinyVendorItemRefundPolicy;
+  /** The identifier of this receipt. */
+  readonly sequenceNumber: number;
+  /** The seconds since epoch at which this receipt is rendered invalid. */
+  readonly timeToExpiration: string;
+  /** The date at which this receipt is rendered invalid. */
+  readonly expiresOn: string;
 }
 /**
  * A set of flags for reason(s) why the component populated in the way that it did.
  * Inspect the individual flags for the reasons.
  */
 export declare const enum ComponentPrivacySetting {
-    None = 0,
-    Public = 1,
-    Private = 2
+  None = 0,
+  Public = 1,
+  Private = 2,
 }
 /**
  * A list of minimal information for items in an inventory: be it a character's
@@ -8371,63 +8381,63 @@ export declare const enum ComponentPrivacySetting {
  * info.
  */
 export interface DestinyInventoryComponent {
-    /**
-     * The items in this inventory. If you care to bucket them, use the item's
-     * bucketHash property to group them.
-     */
-    readonly items: DestinyItemComponent[];
+  /**
+   * The items in this inventory. If you care to bucket them, use the item's
+   * bucketHash property to group them.
+   */
+  readonly items: DestinyItemComponent[];
 }
 /**
  * The most essential summary information about a Profile (in Destiny 1, we called
  * these "Accounts").
  */
 export interface DestinyProfileComponent {
-    /**
-     * If you need to render the Profile (their platform name, icon, etc...) somewhere,
-     * this property contains that information.
-     */
-    readonly userInfo: UserInfoCard;
-    /** The last time the user played with any character on this Profile. */
-    readonly dateLastPlayed: string;
-    /**
-     * If you want to know what expansions they own, this will contain that data.
-     *
-     * IMPORTANT: This field may not return the data you're interested in for Cross-
-     * Saved users. It returns the last ownership data we saw for this account - which
-     * is to say, what they've purchased on the platform on which they last played,
-     * which now could be a different platform.
-     *
-     * If you don't care about per-platform ownership and only care about whatever
-     * platform it seems they are playing on most recently, then this should be "good
-     * enough." Otherwise, this should be considered deprecated. We do not have a good
-     * alternative to provide at this time with platform specific ownership data for
-     * DLC.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly versionsOwned: DestinyGameVersions;
-    /** A list of the character IDs, for further querying on your part. */
-    readonly characterIds: string[];
-    /**
-     * A list of seasons that this profile owns. Unlike versionsOwned, these stay with
-     * the profile across Platforms, and thus will be valid.
-     *
-     * It turns out that Stadia Pro subscriptions will give access to seasons but only
-     * while playing on Stadia and with an active subscription. So some users (users
-     * who have Stadia Pro but choose to play on some other platform) won't see these
-     * as available: it will be whatever seasons are available for the platform on
-     * which they last played.
-     *
-     * Mapped to DestinySeasonDefinition in the manifest.
-     */
-    readonly seasonHashes: number[];
-    /**
-     * If populated, this is a reference to the season that is currently active.
-     *
-     * Mapped to DestinySeasonDefinition in the manifest.
-     */
-    readonly currentSeasonHash?: number;
+  /**
+   * If you need to render the Profile (their platform name, icon, etc...) somewhere,
+   * this property contains that information.
+   */
+  readonly userInfo: UserInfoCard;
+  /** The last time the user played with any character on this Profile. */
+  readonly dateLastPlayed: string;
+  /**
+   * If you want to know what expansions they own, this will contain that data.
+   *
+   * IMPORTANT: This field may not return the data you're interested in for Cross-
+   * Saved users. It returns the last ownership data we saw for this account - which
+   * is to say, what they've purchased on the platform on which they last played,
+   * which now could be a different platform.
+   *
+   * If you don't care about per-platform ownership and only care about whatever
+   * platform it seems they are playing on most recently, then this should be "good
+   * enough." Otherwise, this should be considered deprecated. We do not have a good
+   * alternative to provide at this time with platform specific ownership data for
+   * DLC.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly versionsOwned: DestinyGameVersions;
+  /** A list of the character IDs, for further querying on your part. */
+  readonly characterIds: string[];
+  /**
+   * A list of seasons that this profile owns. Unlike versionsOwned, these stay with
+   * the profile across Platforms, and thus will be valid.
+   *
+   * It turns out that Stadia Pro subscriptions will give access to seasons but only
+   * while playing on Stadia and with an active subscription. So some users (users
+   * who have Stadia Pro but choose to play on some other platform) won't see these
+   * as available: it will be whatever seasons are available for the platform on
+   * which they last played.
+   *
+   * Mapped to DestinySeasonDefinition in the manifest.
+   */
+  readonly seasonHashes: number[];
+  /**
+   * If populated, this is a reference to the season that is currently active.
+   *
+   * Mapped to DestinySeasonDefinition in the manifest.
+   */
+  readonly currentSeasonHash?: number;
 }
 /**
  * A flags enumeration/bitmask indicating the versions of the game that a given
@@ -8437,13 +8447,13 @@ export interface DestinyProfileComponent {
  * these match your value.
  */
 export declare const enum DestinyGameVersions {
-    None = 0,
-    Destiny2 = 1,
-    DLC1 = 2,
-    DLC2 = 4,
-    Forsaken = 8,
-    YearTwoAnnualPass = 16,
-    Shadowkeep = 32
+  None = 0,
+  Destiny2 = 1,
+  DLC1 = 2,
+  DLC2 = 4,
+  Forsaken = 8,
+  YearTwoAnnualPass = 16,
+  Shadowkeep = 32,
 }
 /**
  * A Kiosk is a Vendor (DestinyVendorDefinition) that sells items based on whether
@@ -8460,41 +8470,41 @@ export declare const enum DestinyGameVersions {
  * version of the content manifest databases before using this data.
  */
 export interface DestinyKiosksComponent {
-    /**
-     * A dictionary keyed by the Kiosk Vendor's hash identifier (use it to look up the
-     * DestinyVendorDefinition for the relevant kiosk vendor), and whose value is a
-     * list of all the items that the user can "see" in the Kiosk, and any other
-     * interesting metadata.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly kioskItems: {
-        [key: number]: DestinyKioskItem[];
-    };
+  /**
+   * A dictionary keyed by the Kiosk Vendor's hash identifier (use it to look up the
+   * DestinyVendorDefinition for the relevant kiosk vendor), and whose value is a
+   * list of all the items that the user can "see" in the Kiosk, and any other
+   * interesting metadata.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly kioskItems: {
+    [key: number]: DestinyKioskItem[];
+  };
 }
 export interface DestinyKioskItem {
-    /**
-     * The index of the item in the related DestinyVendorDefintion's itemList property,
-     * representing the sale.
-     */
-    readonly index: number;
-    /**
-     * If true, the user can not only see the item, but they can acquire it. It is
-     * possible that a user can see a kiosk item and not be able to acquire it.
-     */
-    readonly canAcquire: boolean;
-    /**
-     * Indexes into failureStrings for the Vendor, indicating the reasons why it failed
-     * if any.
-     */
-    readonly failureIndexes: number[];
-    /**
-     * I may regret naming it this way - but this represents when an item has an
-     * objective that doesn't serve a beneficial purpose, but rather is used for "
-     * flavor" or additional information. For instance, when Emblems track specific
-     * stats, those stats are represented as Objectives on the item.
-     */
-    readonly flavorObjective: DestinyObjectiveProgress;
+  /**
+   * The index of the item in the related DestinyVendorDefintion's itemList property,
+   * representing the sale.
+   */
+  readonly index: number;
+  /**
+   * If true, the user can not only see the item, but they can acquire it. It is
+   * possible that a user can see a kiosk item and not be able to acquire it.
+   */
+  readonly canAcquire: boolean;
+  /**
+   * Indexes into failureStrings for the Vendor, indicating the reasons why it failed
+   * if any.
+   */
+  readonly failureIndexes: number[];
+  /**
+   * I may regret naming it this way - but this represents when an item has an
+   * objective that doesn't serve a beneficial purpose, but rather is used for "
+   * flavor" or additional information. For instance, when Emblems track specific
+   * stats, those stats are represented as Objectives on the item.
+   */
+  readonly flavorObjective: DestinyObjectiveProgress;
 }
 /**
  * Sockets may refer to a "Plug Set": a set of reusable plugs that may be shared
@@ -8509,56 +8519,56 @@ export interface DestinyKioskItem {
  * they cannot be reused)
  */
 export interface DestinyPlugSetsComponent {
-    /**
-     * The shared list of plugs for each relevant PlugSet, keyed by the hash identifier
-     * of the PlugSet (DestinyPlugSetDefinition).
-     *
-     * Mapped to DestinyPlugSetDefinition in the manifest.
-     */
-    readonly plugs: {
-        [key: number]: DestinyItemPlug[];
-    };
+  /**
+   * The shared list of plugs for each relevant PlugSet, keyed by the hash identifier
+   * of the PlugSet (DestinyPlugSetDefinition).
+   *
+   * Mapped to DestinyPlugSetDefinition in the manifest.
+   */
+  readonly plugs: {
+    [key: number]: DestinyItemPlug[];
+  };
 }
 export interface DestinyItemPlug {
-    /**
-     * Sometimes, Plugs may have objectives: these are often used for flavor and
-     * display purposes, but they can be used for any arbitrary purpose (both
-     * fortunately and unfortunately). Recently (with Season 2) they were expanded in
-     * use to be used as the "gating" for whether the plug can be inserted at all. For
-     * instance, a Plug might be tracking the number of PVP kills you have made. It
-     * will use the parent item's data about that tracking status to determine what to
-     * show, and will generally show it using the DestinyObjectiveDefinition's
-     * progressDescription property. Refer to the plug's itemHash and objective
-     * property for more information if you would like to display even more data.
-     */
-    readonly plugObjectives: DestinyObjectiveProgress[];
-    /**
-     * The hash identifier of the DestinyInventoryItemDefinition that represents this
-     * plug.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
-    /** If true, this plug has met all of its insertion requirements. Big if true. */
-    readonly canInsert: boolean;
-    /** If true, this plug will provide its benefits while inserted. */
-    readonly enabled: boolean;
-    /**
-     * If the plug cannot be inserted for some reason, this will have the indexes into
-     * the plug item definition's plug.insertionRules property, so you can show the
-     * reasons why it can't be inserted.
-     *
-     * This list will be empty if the plug can be inserted.
-     */
-    readonly insertFailIndexes: number[];
-    /**
-     * If a plug is not enabled, this will be populated with indexes into the plug item
-     * definition's plug.enabledRules property, so that you can show the reasons why it
-     * is not enabled.
-     *
-     * This list will be empty if the plug is enabled.
-     */
-    readonly enableFailIndexes: number[];
+  /**
+   * Sometimes, Plugs may have objectives: these are often used for flavor and
+   * display purposes, but they can be used for any arbitrary purpose (both
+   * fortunately and unfortunately). Recently (with Season 2) they were expanded in
+   * use to be used as the "gating" for whether the plug can be inserted at all. For
+   * instance, a Plug might be tracking the number of PVP kills you have made. It
+   * will use the parent item's data about that tracking status to determine what to
+   * show, and will generally show it using the DestinyObjectiveDefinition's
+   * progressDescription property. Refer to the plug's itemHash and objective
+   * property for more information if you would like to display even more data.
+   */
+  readonly plugObjectives: DestinyObjectiveProgress[];
+  /**
+   * The hash identifier of the DestinyInventoryItemDefinition that represents this
+   * plug.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
+  /** If true, this plug has met all of its insertion requirements. Big if true. */
+  readonly canInsert: boolean;
+  /** If true, this plug will provide its benefits while inserted. */
+  readonly enabled: boolean;
+  /**
+   * If the plug cannot be inserted for some reason, this will have the indexes into
+   * the plug item definition's plug.insertionRules property, so you can show the
+   * reasons why it can't be inserted.
+   *
+   * This list will be empty if the plug can be inserted.
+   */
+  readonly insertFailIndexes: number[];
+  /**
+   * If a plug is not enabled, this will be populated with indexes into the plug item
+   * definition's plug.enabledRules property, so that you can show the reasons why it
+   * is not enabled.
+   *
+   * This list will be empty if the plug is enabled.
+   */
+  readonly enableFailIndexes: number[];
 }
 /**
  * The set of progression-related information that applies at a Profile-wide level
@@ -8568,26 +8578,26 @@ export interface DestinyItemPlug {
  * This will include information such as Checklist info.
  */
 export interface DestinyProfileProgressionComponent {
-    /**
-     * The set of checklists that can be examined on a profile-wide basis, keyed by the
-     * hash identifier of the Checklist (DestinyChecklistDefinition)
-     *
-     * For each checklist returned, its value is itself a Dictionary keyed by the
-     * checklist's hash identifier with the value being a boolean indicating if it's
-     * been discovered yet.
-     *
-     * Mapped to DestinyChecklistDefinition in the manifest.
-     */
-    readonly checklists: {
-        [key: number]: {
-            [key: number]: boolean;
-        };
+  /**
+   * The set of checklists that can be examined on a profile-wide basis, keyed by the
+   * hash identifier of the Checklist (DestinyChecklistDefinition)
+   *
+   * For each checklist returned, its value is itself a Dictionary keyed by the
+   * checklist's hash identifier with the value being a boolean indicating if it's
+   * been discovered yet.
+   *
+   * Mapped to DestinyChecklistDefinition in the manifest.
+   */
+  readonly checklists: {
+    [key: number]: {
+      [key: number]: boolean;
     };
-    /**
-     * Data related to your progress on the current season's artifact that is the same
-     * across characters.
-     */
-    readonly seasonalArtifact: DestinyArtifactProfileScoped;
+  };
+  /**
+   * Data related to your progress on the current season's artifact that is the same
+   * across characters.
+   */
+  readonly seasonalArtifact: DestinyArtifactProfileScoped;
 }
 /**
  * By public demand, Checklists are loose sets of "things to do/things you have
@@ -8611,31 +8621,31 @@ export interface DestinyProfileProgressionComponent {
  * the release of D2: Forsaken.
  */
 export interface DestinyChecklistDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** A localized string prompting you to view the checklist. */
-    readonly viewActionString: string;
-    /**
-     * Indicates whether you will find this checklist on the Profile or Character
-     * components.
-     */
-    readonly scope: DestinyScope;
-    /** The individual checklist items. Gotta catch 'em all. */
-    readonly entries: DestinyChecklistEntryDefinition[];
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** A localized string prompting you to view the checklist. */
+  readonly viewActionString: string;
+  /**
+   * Indicates whether you will find this checklist on the Profile or Character
+   * components.
+   */
+  readonly scope: DestinyScope;
+  /** The individual checklist items. Gotta catch 'em all. */
+  readonly entries: DestinyChecklistEntryDefinition[];
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * The properties of an individual checklist item. Note that almost everything is
@@ -8646,40 +8656,40 @@ export interface DestinyChecklistDefinition {
  * actually be able to be associated with some other Destiny entity.
  */
 export interface DestinyChecklistEntryDefinition {
-    /**
-     * The identifier for this Checklist entry. Guaranteed unique only within this
-     * Checklist Definition, and not globally/for all checklists.
-     */
-    readonly hash: number;
-    /**
-     * Even if no other associations exist, we will give you *something* for display
-     * properties. In cases where we have no associated entities, it may be as simple
-     * as a numerical identifier.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** Mapped to DestinyDestinationDefinition in the manifest. */
-    readonly destinationHash?: number;
-    /** Mapped to DestinyLocationDefinition in the manifest. */
-    readonly locationHash?: number;
-    /**
-     * Note that a Bubble's hash doesn't uniquely identify a "top level" entity in
-     * Destiny. Only the combination of location and bubble can uniquely identify a
-     * place in the world of Destiny: so if bubbleHash is populated, locationHash must
-     * too be populated for it to have any meaning.
-     *
-     * You can use this property if it is populated to look up the
-     * DestinyLocationDefinition's associated .locationReleases[].activityBubbleName
-     * property.
-     */
-    readonly bubbleHash?: number;
-    /** Mapped to DestinyActivityDefinition in the manifest. */
-    readonly activityHash?: number;
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly itemHash?: number;
-    readonly vendorHash?: number;
-    readonly vendorInteractionIndex?: number;
-    /** The scope at which this specific entry can be computed. */
-    readonly scope: DestinyScope;
+  /**
+   * The identifier for this Checklist entry. Guaranteed unique only within this
+   * Checklist Definition, and not globally/for all checklists.
+   */
+  readonly hash: number;
+  /**
+   * Even if no other associations exist, we will give you *something* for display
+   * properties. In cases where we have no associated entities, it may be as simple
+   * as a numerical identifier.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** Mapped to DestinyDestinationDefinition in the manifest. */
+  readonly destinationHash?: number;
+  /** Mapped to DestinyLocationDefinition in the manifest. */
+  readonly locationHash?: number;
+  /**
+   * Note that a Bubble's hash doesn't uniquely identify a "top level" entity in
+   * Destiny. Only the combination of location and bubble can uniquely identify a
+   * place in the world of Destiny: so if bubbleHash is populated, locationHash must
+   * too be populated for it to have any meaning.
+   *
+   * You can use this property if it is populated to look up the
+   * DestinyLocationDefinition's associated .locationReleases[].activityBubbleName
+   * property.
+   */
+  readonly bubbleHash?: number;
+  /** Mapped to DestinyActivityDefinition in the manifest. */
+  readonly activityHash?: number;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly itemHash?: number;
+  readonly vendorHash?: number;
+  readonly vendorInteractionIndex?: number;
+  /** The scope at which this specific entry can be computed. */
+  readonly scope: DestinyScope;
 }
 /**
  * Represents a Seasonal Artifact and all data related to it for the requested
@@ -8690,38 +8700,38 @@ export interface DestinyChecklistEntryDefinition {
  * overview information.
  */
 export interface DestinyArtifactProfileScoped {
-    /** Mapped to DestinyArtifactDefinition in the manifest. */
-    readonly artifactHash: number;
-    readonly pointProgression: DestinyProgression;
-    readonly pointsAcquired: number;
-    readonly powerBonusProgression: DestinyProgression;
-    readonly powerBonus: number;
+  /** Mapped to DestinyArtifactDefinition in the manifest. */
+  readonly artifactHash: number;
+  readonly pointProgression: DestinyProgression;
+  readonly pointsAcquired: number;
+  readonly powerBonusProgression: DestinyProgression;
+  readonly powerBonus: number;
 }
 export interface DestinyPresentationNodesComponent {
-    readonly nodes: {
-        [key: number]: DestinyPresentationNodeComponent;
-    };
+  readonly nodes: {
+    [key: number]: DestinyPresentationNodeComponent;
+  };
 }
 export interface DestinyPresentationNodeComponent {
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly state: DestinyPresentationNodeState;
-    /**
-     * An optional property: presentation nodes MAY have objectives, which can be used
-     * to infer more human readable data about the progress. However, progressValue and
-     * completionValue ought to be considered the canonical values for progress on
-     * Progression Nodes.
-     */
-    readonly objective: DestinyObjectiveProgress;
-    /**
-     * How much of the presentation node is considered to be completed so far by the
-     * given character/profile.
-     */
-    readonly progressValue: number;
-    /** The value at which the presentation node is considered to be completed. */
-    readonly completionValue: number;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly state: DestinyPresentationNodeState;
+  /**
+   * An optional property: presentation nodes MAY have objectives, which can be used
+   * to infer more human readable data about the progress. However, progressValue and
+   * completionValue ought to be considered the canonical values for progress on
+   * Progression Nodes.
+   */
+  readonly objective: DestinyObjectiveProgress;
+  /**
+   * How much of the presentation node is considered to be completed so far by the
+   * given character/profile.
+   */
+  readonly progressValue: number;
+  /** The value at which the presentation node is considered to be completed. */
+  readonly completionValue: number;
 }
 /**
  * I know this doesn't look like a Flags Enumeration/bitmask right now, but I
@@ -8733,50 +8743,50 @@ export interface DestinyPresentationNodeComponent {
  * these match your value.
  */
 export declare const enum DestinyPresentationNodeState {
-    None = 0,
-    /**
-     * If this is set, the game recommends that you not show this node. But you know
-     * your life, do what you've got to do.
-     */
-    Invisible = 1,
-    /** Turns out Presentation Nodes can also be obscured. If they are, this is set. */
-    Obscured = 2
+  None = 0,
+  /**
+   * If this is set, the game recommends that you not show this node. But you know
+   * your life, do what you've got to do.
+   */
+  Invisible = 1,
+  /** Turns out Presentation Nodes can also be obscured. If they are, this is set. */
+  Obscured = 2,
 }
 export interface DestinyProfileRecordsComponent {
-    /** Your "Triumphs" score. */
-    readonly score: number;
-    /**
-     * If this profile is tracking a record, this is the hash identifier of the record
-     * it is tracking.
-     *
-     * Mapped to DestinyRecordDefinition in the manifest.
-     */
-    readonly trackedRecordHash?: number;
-    readonly records: {
-        [key: number]: DestinyRecordComponent;
-    };
-    /**
-     * The hash for the root presentation node definition of Triumph categories.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly recordCategoriesRootNodeHash: number;
-    /**
-     * The hash for the root presentation node definition of Triumph Seals.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly recordSealsRootNodeHash: number;
+  /** Your "Triumphs" score. */
+  readonly score: number;
+  /**
+   * If this profile is tracking a record, this is the hash identifier of the record
+   * it is tracking.
+   *
+   * Mapped to DestinyRecordDefinition in the manifest.
+   */
+  readonly trackedRecordHash?: number;
+  readonly records: {
+    [key: number]: DestinyRecordComponent;
+  };
+  /**
+   * The hash for the root presentation node definition of Triumph categories.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly recordCategoriesRootNodeHash: number;
+  /**
+   * The hash for the root presentation node definition of Triumph Seals.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly recordSealsRootNodeHash: number;
 }
 export interface DestinyRecordComponent {
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly state: DestinyRecordState;
-    readonly objectives: DestinyObjectiveProgress[];
-    readonly intervalObjectives: DestinyObjectiveProgress[];
-    readonly intervalsRedeemedCount: number;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly state: DestinyRecordState;
+  readonly objectives: DestinyObjectiveProgress[];
+  readonly intervalObjectives: DestinyObjectiveProgress[];
+  readonly intervalsRedeemedCount: number;
 }
 /**
  * A Flags enumeration/bitmask where each bit represents a possible state that a
@@ -8786,82 +8796,82 @@ export interface DestinyRecordComponent {
  * these match your value.
  */
 export declare const enum DestinyRecordState {
-    /**
-     * If there are no flags set, the record is in a state where it *could* be redeemed,
-     * but it has not been yet.
-     */
-    None = 0,
-    /** If this is set, the completed record has been redeemed. */
-    RecordRedeemed = 1,
-    /**
-     * If this is set, there's a reward available from this Record but it's unavailable
-     * for redemption.
-     */
-    RewardUnavailable = 2,
-    /** If this is set, the objective for this Record has not yet been completed. */
-    ObjectiveNotCompleted = 4,
-    /**
-     * If this is set, the game recommends that you replace the display text of this
-     * Record with DestinyRecordDefinition.stateInfo.obscuredString.
-     */
-    Obscured = 8,
-    /**
-     * If this is set, the game recommends that you not show this record. Do what you
-     * will with this recommendation.
-     */
-    Invisible = 16,
-    /**
-     * If this is set, you can't complete this record because you lack some permission
-     * that's required to complete it.
-     */
-    EntitlementUnowned = 32,
-    /**
-     * If this is set, the record has a title (check DestinyRecordDefinition for title
-     * info) and you can equip it.
-     */
-    CanEquipTitle = 64
+  /**
+   * If there are no flags set, the record is in a state where it *could* be redeemed,
+   * but it has not been yet.
+   */
+  None = 0,
+  /** If this is set, the completed record has been redeemed. */
+  RecordRedeemed = 1,
+  /**
+   * If this is set, there's a reward available from this Record but it's unavailable
+   * for redemption.
+   */
+  RewardUnavailable = 2,
+  /** If this is set, the objective for this Record has not yet been completed. */
+  ObjectiveNotCompleted = 4,
+  /**
+   * If this is set, the game recommends that you replace the display text of this
+   * Record with DestinyRecordDefinition.stateInfo.obscuredString.
+   */
+  Obscured = 8,
+  /**
+   * If this is set, the game recommends that you not show this record. Do what you
+   * will with this recommendation.
+   */
+  Invisible = 16,
+  /**
+   * If this is set, you can't complete this record because you lack some permission
+   * that's required to complete it.
+   */
+  EntitlementUnowned = 32,
+  /**
+   * If this is set, the record has a title (check DestinyRecordDefinition for title
+   * info) and you can equip it.
+   */
+  CanEquipTitle = 64,
 }
 export interface DestinyProfileCollectiblesComponent {
-    /**
-     * The list of collectibles determined by the game as having been "recently"
-     * acquired.
-     *
-     * Mapped to DestinyCollectibleDefinition in the manifest.
-     */
-    readonly recentCollectibleHashes: number[];
-    /**
-     * The list of collectibles determined by the game as having been "recently"
-     * acquired.
-     *
-     * The game client itself actually controls this data, so I personally question
-     * whether anyone will get much use out of this: because we can't edit this value
-     * through the API. But in case anyone finds it useful, here it is.
-     *
-     * Mapped to DestinyCollectibleDefinition in the manifest.
-     */
-    readonly newnessFlaggedCollectibleHashes: number[];
-    readonly collectibles: {
-        [key: number]: DestinyCollectibleComponent;
-    };
-    /**
-     * The hash for the root presentation node definition of Collection categories.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly collectionCategoriesRootNodeHash: number;
-    /**
-     * The hash for the root presentation node definition of Collection Badges.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly collectionBadgesRootNodeHash: number;
+  /**
+   * The list of collectibles determined by the game as having been "recently"
+   * acquired.
+   *
+   * Mapped to DestinyCollectibleDefinition in the manifest.
+   */
+  readonly recentCollectibleHashes: number[];
+  /**
+   * The list of collectibles determined by the game as having been "recently"
+   * acquired.
+   *
+   * The game client itself actually controls this data, so I personally question
+   * whether anyone will get much use out of this: because we can't edit this value
+   * through the API. But in case anyone finds it useful, here it is.
+   *
+   * Mapped to DestinyCollectibleDefinition in the manifest.
+   */
+  readonly newnessFlaggedCollectibleHashes: number[];
+  readonly collectibles: {
+    [key: number]: DestinyCollectibleComponent;
+  };
+  /**
+   * The hash for the root presentation node definition of Collection categories.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly collectionCategoriesRootNodeHash: number;
+  /**
+   * The hash for the root presentation node definition of Collection Badges.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly collectionBadgesRootNodeHash: number;
 }
 export interface DestinyCollectibleComponent {
-    /**
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly state: DestinyCollectibleState;
+  /**
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly state: DestinyCollectibleState;
 }
 /**
  * A Flags Enumeration/bitmask where each bit represents a different state that the
@@ -8882,50 +8892,50 @@ export interface DestinyCollectibleComponent {
  * these match your value.
  */
 export declare const enum DestinyCollectibleState {
-    None = 0,
-    /** If this flag is set, you have not yet obtained this collectible. */
-    NotAcquired = 1,
-    /**
-     * If this flag is set, the item is "obscured" to you: you can/should use the
-     * alternate item hash found in DestinyCollectibleDefinition.stateInfo.
-     * obscuredOverrideItemHash when displaying this collectible instead of the default
-     * display info.
-     */
-    Obscured = 2,
-    /**
-     * If this flag is set, the collectible should not be shown to the user.
-     *
-     * Please do consider honoring this flag. It is used - for example - to hide items
-     * that a person didn't get from the Eververse. I can't prevent these from being
-     * returned in definitions, because some people may have acquired them and thus
-     * they should show up: but I would hate for people to start feeling some variant
-     * of a Collector's Remorse about these items, and thus increasing their purchasing
-     * based on that compulsion. That would be a very unfortunate outcome, and one that
-     * I wouldn't like to see happen. So please, whether or not I'm your mom, consider
-     * honoring this flag and don't show people invisible collectibles.
-     */
-    Invisible = 4,
-    /**
-     * If this flag is set, the collectible requires payment for creating an instance
-     * of the item, and you are lacking in currency. Bring the benjamins next time. Or
-     * spinmetal. Whatever.
-     */
-    CannotAffordMaterialRequirements = 8,
-    /**
-     * If this flag is set, you can't pull this item out of your collection because
-     * there's no room left in your inventory.
-     */
-    InventorySpaceUnavailable = 16,
-    /**
-     * If this flag is set, you already have one of these items and can't have a second
-     * one.
-     */
-    UniquenessViolation = 32,
-    /**
-     * If this flag is set, the ability to pull this item out of your collection has
-     * been disabled.
-     */
-    PurchaseDisabled = 64
+  None = 0,
+  /** If this flag is set, you have not yet obtained this collectible. */
+  NotAcquired = 1,
+  /**
+   * If this flag is set, the item is "obscured" to you: you can/should use the
+   * alternate item hash found in DestinyCollectibleDefinition.stateInfo.
+   * obscuredOverrideItemHash when displaying this collectible instead of the default
+   * display info.
+   */
+  Obscured = 2,
+  /**
+   * If this flag is set, the collectible should not be shown to the user.
+   *
+   * Please do consider honoring this flag. It is used - for example - to hide items
+   * that a person didn't get from the Eververse. I can't prevent these from being
+   * returned in definitions, because some people may have acquired them and thus
+   * they should show up: but I would hate for people to start feeling some variant
+   * of a Collector's Remorse about these items, and thus increasing their purchasing
+   * based on that compulsion. That would be a very unfortunate outcome, and one that
+   * I wouldn't like to see happen. So please, whether or not I'm your mom, consider
+   * honoring this flag and don't show people invisible collectibles.
+   */
+  Invisible = 4,
+  /**
+   * If this flag is set, the collectible requires payment for creating an instance
+   * of the item, and you are lacking in currency. Bring the benjamins next time. Or
+   * spinmetal. Whatever.
+   */
+  CannotAffordMaterialRequirements = 8,
+  /**
+   * If this flag is set, you can't pull this item out of your collection because
+   * there's no room left in your inventory.
+   */
+  InventorySpaceUnavailable = 16,
+  /**
+   * If this flag is set, you already have one of these items and can't have a second
+   * one.
+   */
+  UniquenessViolation = 32,
+  /**
+   * If this flag is set, the ability to pull this item out of your collection has
+   * been disabled.
+   */
+  PurchaseDisabled = 64,
 }
 /**
  * This is an experimental set of data that Bungie considers to be "transitory" -
@@ -8940,30 +8950,30 @@ export declare const enum DestinyCollectibleState {
  * changed their status before we can receive refreshed data.
  */
 export interface DestinyProfileTransitoryComponent {
-    /**
-     * If you have any members currently in your party, this is some (very) bare-bones
-     * information about those members.
-     */
-    readonly partyMembers: DestinyProfileTransitoryPartyMember[];
-    /**
-     * If you are in an activity, this is some transitory info about the activity
-     * currently being played.
-     */
-    readonly currentActivity: DestinyProfileTransitoryCurrentActivity;
-    /**
-     * Information about whether and what might prevent you from joining this person on
-     * a fireteam.
-     */
-    readonly joinability: DestinyProfileTransitoryJoinability;
-    /** Information about tracked entities. */
-    readonly tracking: DestinyProfileTransitoryTrackingEntry[];
-    /**
-     * The hash identifier for the DestinyDestinationDefinition of the last location
-     * you were orbiting when in orbit.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly lastOrbitedDestinationHash?: number;
+  /**
+   * If you have any members currently in your party, this is some (very) bare-bones
+   * information about those members.
+   */
+  readonly partyMembers: DestinyProfileTransitoryPartyMember[];
+  /**
+   * If you are in an activity, this is some transitory info about the activity
+   * currently being played.
+   */
+  readonly currentActivity: DestinyProfileTransitoryCurrentActivity;
+  /**
+   * Information about whether and what might prevent you from joining this person on
+   * a fireteam.
+   */
+  readonly joinability: DestinyProfileTransitoryJoinability;
+  /** Information about tracked entities. */
+  readonly tracking: DestinyProfileTransitoryTrackingEntry[];
+  /**
+   * The hash identifier for the DestinyDestinationDefinition of the last location
+   * you were orbiting when in orbit.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly lastOrbitedDestinationHash?: number;
 }
 /**
  * This is some bare minimum information about a party member in a Fireteam.
@@ -8978,24 +8988,24 @@ export interface DestinyProfileTransitoryComponent {
  * character. Pretty please with sugar on top.
  */
 export interface DestinyProfileTransitoryPartyMember {
-    /** The Membership ID that matches the party member. */
-    readonly membershipId: string;
-    /**
-     * The identifier for the DestinyInventoryItemDefinition of the player's emblem.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly emblemHash: number;
-    /** The player's last known display name. */
-    readonly displayName: string;
-    /**
-     * A Flags Enumeration value indicating the states that the player is in relevant
-     * to being on a fireteam.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly status: DestinyPartyMemberStates;
+  /** The Membership ID that matches the party member. */
+  readonly membershipId: string;
+  /**
+   * The identifier for the DestinyInventoryItemDefinition of the player's emblem.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly emblemHash: number;
+  /** The player's last known display name. */
+  readonly displayName: string;
+  /**
+   * A Flags Enumeration value indicating the states that the player is in relevant
+   * to being on a fireteam.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly status: DestinyPartyMemberStates;
 }
 /**
  * A flags enumeration that represents a Fireteam Member's status.
@@ -9004,21 +9014,21 @@ export interface DestinyProfileTransitoryPartyMember {
  * these match your value.
  */
 export declare const enum DestinyPartyMemberStates {
-    None = 0,
-    /** This one's pretty obvious - they're on your Fireteam. */
-    FireteamMember = 1,
-    /** I don't know what it means to be in a 'Posse', but apparently this is it. */
-    PosseMember = 2,
-    /**
-     * Nor do I understand the difference between them being in a 'Group' vs. a '
-     * Fireteam'.
-     *
-     * I'll update these docs once I get more info. If I get more info. If you're
-     * reading this, I never got more info. You're on your own, kid.
-     */
-    GroupMember = 4,
-    /** This person is the party leader. */
-    PartyLeader = 8
+  None = 0,
+  /** This one's pretty obvious - they're on your Fireteam. */
+  FireteamMember = 1,
+  /** I don't know what it means to be in a 'Posse', but apparently this is it. */
+  PosseMember = 2,
+  /**
+   * Nor do I understand the difference between them being in a 'Group' vs. a '
+   * Fireteam'.
+   *
+   * I'll update these docs once I get more info. If I get more info. If you're
+   * reading this, I never got more info. You're on your own, kid.
+   */
+  GroupMember = 4,
+  /** This person is the party leader. */
+  PartyLeader = 8,
 }
 /**
  * If you are playing in an activity, this is some information about it.
@@ -9029,21 +9039,21 @@ export declare const enum DestinyPartyMemberStates {
  * comparison.
  */
 export interface DestinyProfileTransitoryCurrentActivity {
-    /** When the activity started. */
-    readonly startTime?: string;
-    /**
-     * If you're still in it but it "ended" (like when folks are dancing around the
-     * loot after they beat a boss), this is when the activity ended.
-     */
-    readonly endTime?: string;
-    /** This is what our non-authoritative source thought the score was. */
-    readonly score: number;
-    /** If you have human opponents, this is the highest opposing team's score. */
-    readonly highestOpposingFactionScore: number;
-    /** This is how many human or poorly crafted aimbot opponents you have. */
-    readonly numberOfOpponents: number;
-    /** This is how many human or poorly crafted aimbots are on your team. */
-    readonly numberOfPlayers: number;
+  /** When the activity started. */
+  readonly startTime?: string;
+  /**
+   * If you're still in it but it "ended" (like when folks are dancing around the
+   * loot after they beat a boss), this is when the activity ended.
+   */
+  readonly endTime?: string;
+  /** This is what our non-authoritative source thought the score was. */
+  readonly score: number;
+  /** If you have human opponents, this is the highest opposing team's score. */
+  readonly highestOpposingFactionScore: number;
+  /** This is how many human or poorly crafted aimbot opponents you have. */
+  readonly numberOfOpponents: number;
+  /** This is how many human or poorly crafted aimbots are on your team. */
+  readonly numberOfPlayers: number;
 }
 /**
  * Some basic information about whether you can be joined, how many slots are left
@@ -9051,28 +9061,28 @@ export interface DestinyProfileTransitoryCurrentActivity {
  * perhaps it will be in some use cases?
  */
 export interface DestinyProfileTransitoryJoinability {
-    /** The number of slots still available on this person's fireteam. */
-    readonly openSlots: number;
-    /** Who the person is currently allowing invites from. */
-    readonly privacySetting: DestinyGamePrivacySetting;
-    /**
-     * Reasons why a person can't join this person's fireteam.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly closedReasons: DestinyJoinClosedReasons;
+  /** The number of slots still available on this person's fireteam. */
+  readonly openSlots: number;
+  /** Who the person is currently allowing invites from. */
+  readonly privacySetting: DestinyGamePrivacySetting;
+  /**
+   * Reasons why a person can't join this person's fireteam.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly closedReasons: DestinyJoinClosedReasons;
 }
 /**
  * A player can choose to restrict requests to join their Fireteam to specific
  * states. These are the possible states a user can choose.
  */
 export declare const enum DestinyGamePrivacySetting {
-    Open = 0,
-    ClanAndFriendsOnly = 1,
-    FriendsOnly = 2,
-    InvitationOnly = 3,
-    Closed = 4
+  Open = 0,
+  ClanAndFriendsOnly = 1,
+  FriendsOnly = 2,
+  InvitationOnly = 3,
+  Closed = 4,
 }
 /**
  * A Flags enumeration representing the reasons why a person can't join this user's
@@ -9082,26 +9092,26 @@ export declare const enum DestinyGamePrivacySetting {
  * these match your value.
  */
 export declare const enum DestinyJoinClosedReasons {
-    None = 0,
-    /** The user is currently in matchmaking. */
-    InMatchmaking = 1,
-    /** The user is currently in a loading screen. */
-    Loading = 2,
-    /** The user is in an activity that requires solo play. */
-    SoloMode = 4,
-    /**
-     * The user can't be joined for one of a variety of internal reasons. Basically,
-     * the game can't let you join at this time, but for reasons that aren't under the
-     * control of this user.
-     */
-    InternalReasons = 8,
-    /**
-     * The user's current activity/quest/other transitory game state is preventing
-     * joining.
-     */
-    DisallowedByGameState = 16,
-    /** The user appears to be offline. */
-    Offline = 32768
+  None = 0,
+  /** The user is currently in matchmaking. */
+  InMatchmaking = 1,
+  /** The user is currently in a loading screen. */
+  Loading = 2,
+  /** The user is in an activity that requires solo play. */
+  SoloMode = 4,
+  /**
+   * The user can't be joined for one of a variety of internal reasons. Basically,
+   * the game can't let you join at this time, but for reasons that aren't under the
+   * control of this user.
+   */
+  InternalReasons = 8,
+  /**
+   * The user's current activity/quest/other transitory game state is preventing
+   * joining.
+   */
+  DisallowedByGameState = 16,
+  /** The user appears to be offline. */
+  Offline = 32768,
 }
 /**
  * This represents a single "thing" being tracked by the player.
@@ -9113,192 +9123,192 @@ export declare const enum DestinyJoinClosedReasons {
  * entries have values being tracked.
  */
 export interface DestinyProfileTransitoryTrackingEntry {
-    /**
-     * OPTIONAL - If this is tracking a DestinyLocationDefinition, this is the
-     * identifier for that location.
-     *
-     * Mapped to DestinyLocationDefinition in the manifest.
-     */
-    readonly locationHash?: number;
-    /**
-     * OPTIONAL - If this is tracking the status of a DestinyInventoryItemDefinition,
-     * this is the identifier for that item.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash?: number;
-    /**
-     * OPTIONAL - If this is tracking the status of a DestinyObjectiveDefinition, this
-     * is the identifier for that objective.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash?: number;
-    /**
-     * OPTIONAL - If this is tracking the status of a DestinyActivityDefinition, this
-     * is the identifier for that activity.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash?: number;
-    /**
-     * OPTIONAL - If this is tracking the status of a quest, this is the identifier for
-     * the DestinyInventoryItemDefinition that containst that questline data.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly questlineItemHash?: number;
-    /**
-     * OPTIONAL - I've got to level with you, I don't really know what this is. Is it
-     * when you started tracking it? Is it only populated for tracked items that have
-     * time limits?
-     *
-     * I don't know, but we can get at it - when I get time to actually test what it is,
-     * I'll update this. In the meantime, bask in the mysterious data.
-     */
-    readonly trackedDate?: string;
+  /**
+   * OPTIONAL - If this is tracking a DestinyLocationDefinition, this is the
+   * identifier for that location.
+   *
+   * Mapped to DestinyLocationDefinition in the manifest.
+   */
+  readonly locationHash?: number;
+  /**
+   * OPTIONAL - If this is tracking the status of a DestinyInventoryItemDefinition,
+   * this is the identifier for that item.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash?: number;
+  /**
+   * OPTIONAL - If this is tracking the status of a DestinyObjectiveDefinition, this
+   * is the identifier for that objective.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash?: number;
+  /**
+   * OPTIONAL - If this is tracking the status of a DestinyActivityDefinition, this
+   * is the identifier for that activity.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash?: number;
+  /**
+   * OPTIONAL - If this is tracking the status of a quest, this is the identifier for
+   * the DestinyInventoryItemDefinition that containst that questline data.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly questlineItemHash?: number;
+  /**
+   * OPTIONAL - I've got to level with you, I don't really know what this is. Is it
+   * when you started tracking it? Is it only populated for tracked items that have
+   * time limits?
+   *
+   * I don't know, but we can get at it - when I get time to actually test what it is,
+   * I'll update this. In the meantime, bask in the mysterious data.
+   */
+  readonly trackedDate?: string;
 }
 export interface DestinyMetricsComponent {
-    readonly metrics: {
-        [key: number]: DestinyMetricComponent;
-    };
-    /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
-    readonly metricsRootNodeHash: number;
+  readonly metrics: {
+    [key: number]: DestinyMetricComponent;
+  };
+  /** Mapped to DestinyPresentationNodeDefinition in the manifest. */
+  readonly metricsRootNodeHash: number;
 }
 export interface DestinyMetricComponent {
-    readonly invisible: boolean;
-    readonly objectiveProgress: DestinyObjectiveProgress;
+  readonly invisible: boolean;
+  readonly objectiveProgress: DestinyObjectiveProgress;
 }
 /**
  * This component contains base properties of the character. You'll probably want
  * to always request this component, but hey you do you.
  */
 export interface DestinyCharacterComponent {
-    /**
-     * Every Destiny Profile has a membershipId. This is provided on the character as
-     * well for convenience.
-     */
-    readonly membershipId: string;
-    /**
-     * membershipType tells you the platform on which the character plays. Examine the
-     * BungieMembershipType enumeration for possible values.
-     */
-    readonly membershipType: BungieMembershipType;
-    /** The unique identifier for the character. */
-    readonly characterId: string;
-    /** The last date that the user played Destiny. */
-    readonly dateLastPlayed: string;
-    /** If the user is currently playing, this is how long they've been playing. */
-    readonly minutesPlayedThisSession: string;
-    /**
-     * If this value is 525,600, then they played Destiny for a year. Or they're a very
-     * dedicated Rent fan. Note that this includes idle time, not just time spent
-     * actually in activities shooting things.
-     */
-    readonly minutesPlayedTotal: string;
-    /**
-     * The user's calculated "Light Level". Light level is an indicator of your power
-     * that mostly matters in the end game, once you've reached the maximum character
-     * level: it's a level that's dependent on the average Attack/Defense power of your
-     * items.
-     */
-    readonly light: number;
-    /**
-     * Your character's stats, such as Agility, Resilience, etc... *not* historical
-     * stats.
-     *
-     * You'll have to call a different endpoint for those.
-     */
-    readonly stats: {
-        [key: number]: number;
-    };
-    /**
-     * Use this hash to look up the character's DestinyRaceDefinition.
-     *
-     * Mapped to DestinyRaceDefinition in the manifest.
-     */
-    readonly raceHash: number;
-    /**
-     * Use this hash to look up the character's DestinyGenderDefinition.
-     *
-     * Mapped to DestinyGenderDefinition in the manifest.
-     */
-    readonly genderHash: number;
-    /**
-     * Use this hash to look up the character's DestinyClassDefinition.
-     *
-     * Mapped to DestinyClassDefinition in the manifest.
-     */
-    readonly classHash: number;
-    /**
-     * Mostly for historical purposes at this point, this is an enumeration for the
-     * character's race.
-     *
-     * It'll be preferable in the general case to look up the related definition: but
-     * for some people this was too convenient to remove.
-     */
-    readonly raceType: DestinyRace;
-    /**
-     * Mostly for historical purposes at this point, this is an enumeration for the
-     * character's class.
-     *
-     * It'll be preferable in the general case to look up the related definition: but
-     * for some people this was too convenient to remove.
-     */
-    readonly classType: DestinyClass;
-    /**
-     * Mostly for historical purposes at this point, this is an enumeration for the
-     * character's Gender.
-     *
-     * It'll be preferable in the general case to look up the related definition: but
-     * for some people this was too convenient to remove. And yeah, it's an enumeration
-     * and not a boolean. Fight me.
-     */
-    readonly genderType: DestinyGender;
-    /**
-     * A shortcut path to the user's currently equipped emblem image. If you're just
-     * showing summary info for a user, this is more convenient than examining their
-     * equipped emblem and looking up the definition.
-     */
-    readonly emblemPath: string;
-    /**
-     * A shortcut path to the user's currently equipped emblem background image. If you'
-     * re just showing summary info for a user, this is more convenient than examining
-     * their equipped emblem and looking up the definition.
-     */
-    readonly emblemBackgroundPath: string;
-    /**
-     * The hash of the currently equipped emblem for the user. Can be used to look up
-     * the DestinyInventoryItemDefinition.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly emblemHash: number;
-    /**
-     * A shortcut for getting the background color of the user's currently equipped
-     * emblem without having to do a DestinyInventoryItemDefinition lookup.
-     */
-    readonly emblemColor: DestinyColor;
-    /**
-     * The progression that indicates your character's level. Not their light level,
-     * but their character level: you know, the thing you max out a couple hours in and
-     * then ignore for the sake of light level.
-     */
-    readonly levelProgression: DestinyProgression;
-    /** The "base" level of your character, not accounting for any light level. */
-    readonly baseCharacterLevel: number;
-    /**
-     * A number between 0 and 100, indicating the whole and fractional % remaining to
-     * get to the next character level.
-     */
-    readonly percentToNextLevel: number;
-    /**
-     * If this Character has a title assigned to it, this is the identifier of the
-     * DestinyRecordDefinition that has that title information.
-     *
-     * Mapped to DestinyRecordDefinition in the manifest.
-     */
-    readonly titleRecordHash?: number;
+  /**
+   * Every Destiny Profile has a membershipId. This is provided on the character as
+   * well for convenience.
+   */
+  readonly membershipId: string;
+  /**
+   * membershipType tells you the platform on which the character plays. Examine the
+   * BungieMembershipType enumeration for possible values.
+   */
+  readonly membershipType: BungieMembershipType;
+  /** The unique identifier for the character. */
+  readonly characterId: string;
+  /** The last date that the user played Destiny. */
+  readonly dateLastPlayed: string;
+  /** If the user is currently playing, this is how long they've been playing. */
+  readonly minutesPlayedThisSession: string;
+  /**
+   * If this value is 525,600, then they played Destiny for a year. Or they're a very
+   * dedicated Rent fan. Note that this includes idle time, not just time spent
+   * actually in activities shooting things.
+   */
+  readonly minutesPlayedTotal: string;
+  /**
+   * The user's calculated "Light Level". Light level is an indicator of your power
+   * that mostly matters in the end game, once you've reached the maximum character
+   * level: it's a level that's dependent on the average Attack/Defense power of your
+   * items.
+   */
+  readonly light: number;
+  /**
+   * Your character's stats, such as Agility, Resilience, etc... *not* historical
+   * stats.
+   *
+   * You'll have to call a different endpoint for those.
+   */
+  readonly stats: {
+    [key: number]: number;
+  };
+  /**
+   * Use this hash to look up the character's DestinyRaceDefinition.
+   *
+   * Mapped to DestinyRaceDefinition in the manifest.
+   */
+  readonly raceHash: number;
+  /**
+   * Use this hash to look up the character's DestinyGenderDefinition.
+   *
+   * Mapped to DestinyGenderDefinition in the manifest.
+   */
+  readonly genderHash: number;
+  /**
+   * Use this hash to look up the character's DestinyClassDefinition.
+   *
+   * Mapped to DestinyClassDefinition in the manifest.
+   */
+  readonly classHash: number;
+  /**
+   * Mostly for historical purposes at this point, this is an enumeration for the
+   * character's race.
+   *
+   * It'll be preferable in the general case to look up the related definition: but
+   * for some people this was too convenient to remove.
+   */
+  readonly raceType: DestinyRace;
+  /**
+   * Mostly for historical purposes at this point, this is an enumeration for the
+   * character's class.
+   *
+   * It'll be preferable in the general case to look up the related definition: but
+   * for some people this was too convenient to remove.
+   */
+  readonly classType: DestinyClass;
+  /**
+   * Mostly for historical purposes at this point, this is an enumeration for the
+   * character's Gender.
+   *
+   * It'll be preferable in the general case to look up the related definition: but
+   * for some people this was too convenient to remove. And yeah, it's an enumeration
+   * and not a boolean. Fight me.
+   */
+  readonly genderType: DestinyGender;
+  /**
+   * A shortcut path to the user's currently equipped emblem image. If you're just
+   * showing summary info for a user, this is more convenient than examining their
+   * equipped emblem and looking up the definition.
+   */
+  readonly emblemPath: string;
+  /**
+   * A shortcut path to the user's currently equipped emblem background image. If you'
+   * re just showing summary info for a user, this is more convenient than examining
+   * their equipped emblem and looking up the definition.
+   */
+  readonly emblemBackgroundPath: string;
+  /**
+   * The hash of the currently equipped emblem for the user. Can be used to look up
+   * the DestinyInventoryItemDefinition.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly emblemHash: number;
+  /**
+   * A shortcut for getting the background color of the user's currently equipped
+   * emblem without having to do a DestinyInventoryItemDefinition lookup.
+   */
+  readonly emblemColor: DestinyColor;
+  /**
+   * The progression that indicates your character's level. Not their light level,
+   * but their character level: you know, the thing you max out a couple hours in and
+   * then ignore for the sake of light level.
+   */
+  readonly levelProgression: DestinyProgression;
+  /** The "base" level of your character, not accounting for any light level. */
+  readonly baseCharacterLevel: number;
+  /**
+   * A number between 0 and 100, indicating the whole and fractional % remaining to
+   * get to the next character level.
+   */
+  readonly percentToNextLevel: number;
+  /**
+   * If this Character has a title assigned to it, this is the identifier of the
+   * DestinyRecordDefinition that has that title information.
+   *
+   * Mapped to DestinyRecordDefinition in the manifest.
+   */
+  readonly titleRecordHash?: number;
 }
 /**
  * In Destiny, "Races" are really more like "Species". Sort of. I mean, are the
@@ -9307,170 +9317,170 @@ export interface DestinyCharacterComponent {
  * Players will choose one for their character.
  */
 export interface DestinyRaceDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * An enumeration defining the existing, known Races/Species for player characters.
-     * This value will be the enum value matching this definition.
-     */
-    readonly raceType: DestinyRace;
-    /**
-     * A localized string referring to the singular form of the Race's name when
-     * referred to in gendered form. Keyed by the DestinyGender.
-     */
-    readonly genderedRaceNames: {
-        [key in DestinyGender]: string;
-    };
-    /** Mapped to DestinyGenderDefinition in the manifest. */
-    readonly genderedRaceNamesByGenderHash: {
-        [key: number]: string;
-    };
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * An enumeration defining the existing, known Races/Species for player characters.
+   * This value will be the enum value matching this definition.
+   */
+  readonly raceType: DestinyRace;
+  /**
+   * A localized string referring to the singular form of the Race's name when
+   * referred to in gendered form. Keyed by the DestinyGender.
+   */
+  readonly genderedRaceNames: {
+    [key in DestinyGender]: string;
+  };
+  /** Mapped to DestinyGenderDefinition in the manifest. */
+  readonly genderedRaceNamesByGenderHash: {
+    [key: number]: string;
+  };
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 export declare const enum DestinyRace {
-    Human = 0,
-    Awoken = 1,
-    Exo = 2,
-    Unknown = 3
+  Human = 0,
+  Awoken = 1,
+  Exo = 2,
+  Unknown = 3,
 }
 /**
  * Defines a Character Class in Destiny 2. These are types of characters you can
  * play, like Titan, Warlock, and Hunter.
  */
 export interface DestinyClassDefinition {
-    /**
-     * In Destiny 1, we added a convenience Enumeration for referring to classes. We've
-     * kept it, though mostly for posterity. This is the enum value for this definition'
-     * s class.
-     */
-    readonly classType: DestinyClass;
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * A localized string referring to the singular form of the Class's name when
-     * referred to in gendered form. Keyed by the DestinyGender.
-     */
-    readonly genderedClassNames: {
-        [key in DestinyGender]: string;
-    };
-    /** Mapped to DestinyGenderDefinition in the manifest. */
-    readonly genderedClassNamesByGenderHash: {
-        [key: number]: string;
-    };
-    /**
-     * Mentors don't really mean anything anymore. Don't expect this to be populated.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly mentorVendorHash?: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * In Destiny 1, we added a convenience Enumeration for referring to classes. We've
+   * kept it, though mostly for posterity. This is the enum value for this definition'
+   * s class.
+   */
+  readonly classType: DestinyClass;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * A localized string referring to the singular form of the Class's name when
+   * referred to in gendered form. Keyed by the DestinyGender.
+   */
+  readonly genderedClassNames: {
+    [key in DestinyGender]: string;
+  };
+  /** Mapped to DestinyGenderDefinition in the manifest. */
+  readonly genderedClassNamesByGenderHash: {
+    [key: number]: string;
+  };
+  /**
+   * Mentors don't really mean anything anymore. Don't expect this to be populated.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly mentorVendorHash?: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * This component returns anything that could be considered "Progression" on a user:
  * data where the user is gaining levels, reputation, completions, rewards, etc...
  */
 export interface DestinyCharacterProgressionComponent {
-    /**
-     * A Dictionary of all known progressions for the Character, keyed by the
-     * Progression's hash.
-     *
-     * Not all progressions have user-facing data, but those who do will have that data
-     * contained in the DestinyProgressionDefinition.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressions: {
-        [key: number]: DestinyProgression;
+  /**
+   * A Dictionary of all known progressions for the Character, keyed by the
+   * Progression's hash.
+   *
+   * Not all progressions have user-facing data, but those who do will have that data
+   * contained in the DestinyProgressionDefinition.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressions: {
+    [key: number]: DestinyProgression;
+  };
+  /**
+   * A dictionary of all known Factions, keyed by the Faction's hash. It contains
+   * data about this character's status with the faction.
+   *
+   * Mapped to DestinyFactionDefinition in the manifest.
+   */
+  readonly factions: {
+    [key: number]: DestinyFactionProgression;
+  };
+  /**
+   * Milestones are related to the simple progressions shown in the game, but return
+   * additional and hopefully helpful information for users about the specifics of
+   * the Milestone's status.
+   *
+   * Mapped to DestinyMilestoneDefinition in the manifest.
+   */
+  readonly milestones: {
+    [key: number]: DestinyMilestone;
+  };
+  /**
+   * If the user has any active quests, the quests' statuses will be returned here.
+   *
+   * Note that quests have been largely supplanted by Milestones, but that doesn't
+   * mean that they won't make a comeback independent of milestones at some point.
+   *
+   * (Fun fact: quests came back as I feared they would, but we never looped back to
+   * populate this... I'm going to put that in the backlog.)
+   */
+  readonly quests: DestinyQuestStatus[];
+  /**
+   * Sometimes, you have items in your inventory that don't have instances, but still
+   * have Objective information. This provides you that objective information for
+   * uninstanced items.
+   *
+   * This dictionary is keyed by the item's hash: which you can use to look up the
+   * name and description for the overall task(s) implied by the objective. The value
+   * is the list of objectives for this item, and their statuses.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly uninstancedItemObjectives: {
+    [key: number]: DestinyObjectiveProgress[];
+  };
+  /**
+   * The set of checklists that can be examined for this specific character, keyed by
+   * the hash identifier of the Checklist (DestinyChecklistDefinition)
+   *
+   * For each checklist returned, its value is itself a Dictionary keyed by the
+   * checklist's hash identifier with the value being a boolean indicating if it's
+   * been discovered yet.
+   *
+   * Mapped to DestinyChecklistDefinition in the manifest.
+   */
+  readonly checklists: {
+    [key: number]: {
+      [key: number]: boolean;
     };
-    /**
-     * A dictionary of all known Factions, keyed by the Faction's hash. It contains
-     * data about this character's status with the faction.
-     *
-     * Mapped to DestinyFactionDefinition in the manifest.
-     */
-    readonly factions: {
-        [key: number]: DestinyFactionProgression;
-    };
-    /**
-     * Milestones are related to the simple progressions shown in the game, but return
-     * additional and hopefully helpful information for users about the specifics of
-     * the Milestone's status.
-     *
-     * Mapped to DestinyMilestoneDefinition in the manifest.
-     */
-    readonly milestones: {
-        [key: number]: DestinyMilestone;
-    };
-    /**
-     * If the user has any active quests, the quests' statuses will be returned here.
-     *
-     * Note that quests have been largely supplanted by Milestones, but that doesn't
-     * mean that they won't make a comeback independent of milestones at some point.
-     *
-     * (Fun fact: quests came back as I feared they would, but we never looped back to
-     * populate this... I'm going to put that in the backlog.)
-     */
-    readonly quests: DestinyQuestStatus[];
-    /**
-     * Sometimes, you have items in your inventory that don't have instances, but still
-     * have Objective information. This provides you that objective information for
-     * uninstanced items.
-     *
-     * This dictionary is keyed by the item's hash: which you can use to look up the
-     * name and description for the overall task(s) implied by the objective. The value
-     * is the list of objectives for this item, and their statuses.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly uninstancedItemObjectives: {
-        [key: number]: DestinyObjectiveProgress[];
-    };
-    /**
-     * The set of checklists that can be examined for this specific character, keyed by
-     * the hash identifier of the Checklist (DestinyChecklistDefinition)
-     *
-     * For each checklist returned, its value is itself a Dictionary keyed by the
-     * checklist's hash identifier with the value being a boolean indicating if it's
-     * been discovered yet.
-     *
-     * Mapped to DestinyChecklistDefinition in the manifest.
-     */
-    readonly checklists: {
-        [key: number]: {
-            [key: number]: boolean;
-        };
-    };
-    /**
-     * Data related to your progress on the current season's artifact that can vary per
-     * character.
-     */
-    readonly seasonalArtifact: DestinyArtifactCharacterScoped;
+  };
+  /**
+   * Data related to your progress on the current season's artifact that can vary per
+   * character.
+   */
+  readonly seasonalArtifact: DestinyArtifactCharacterScoped;
 }
 /**
  * Mostly for historical purposes, we segregate Faction progressions from other
@@ -9478,79 +9488,79 @@ export interface DestinyCharacterProgressionComponent {
  * DestinyFactionDefinition of the faction related to the progression.
  */
 export interface DestinyFactionProgression {
-    /**
-     * The hash identifier of the Faction related to this progression. Use it to look
-     * up the DestinyFactionDefinition for more rendering info.
-     *
-     * Mapped to DestinyFactionDefinition in the manifest.
-     */
-    readonly factionHash: number;
-    /**
-     * The index of the Faction vendor that is currently available. Will be set to -1
-     * if no vendors are available.
-     */
-    readonly factionVendorIndex: number;
-    /**
-     * The hash identifier of the Progression in question. Use it to look up the
-     * DestinyProgressionDefinition in static data.
-     *
-     * Mapped to DestinyProgressionDefinition in the manifest.
-     */
-    readonly progressionHash: number;
-    /** The amount of progress earned today for this progression. */
-    readonly dailyProgress: number;
-    /** If this progression has a daily limit, this is that limit. */
-    readonly dailyLimit: number;
-    /** The amount of progress earned toward this progression in the current week. */
-    readonly weeklyProgress: number;
-    /** If this progression has a weekly limit, this is that limit. */
-    readonly weeklyLimit: number;
-    /**
-     * This is the total amount of progress obtained overall for this progression (for
-     * instance, the total amount of Character Level experience earned)
-     */
-    readonly currentProgress: number;
-    /** This is the level of the progression (for instance, the Character Level). */
-    readonly level: number;
-    /**
-     * This is the maximum possible level you can achieve for this progression (for
-     * example, the maximum character level obtainable)
-     */
-    readonly levelCap: number;
-    /**
-     * Progressions define their levels in "steps". Since the last step may be
-     * repeatable, the user may be at a higher level than the actual Step achieved in
-     * the progression. Not necessarily useful, but potentially interesting for those
-     * cruising the API. Relate this to the "steps" property of the DestinyProgression
-     * to see which step the user is on, if you care about that. (Note that this is
-     * Content Version dependent since it refers to indexes.)
-     */
-    readonly stepIndex: number;
-    /**
-     * The amount of progression (i.e. "Experience") needed to reach the next level of
-     * this Progression. Jeez, progression is such an overloaded word.
-     */
-    readonly progressToNextLevel: number;
-    /**
-     * The total amount of progression (i.e. "Experience") needed in order to reach the
-     * next level.
-     */
-    readonly nextLevelAt: number;
-    /**
-     * The number of resets of this progression you've executed this season, if
-     * applicable to this progression.
-     */
-    readonly currentResetCount?: number;
-    /**
-     * Information about historical resets of this progression, if there is any data
-     * for it.
-     */
-    readonly seasonResets: DestinyProgressionResetEntry[];
-    /**
-     * Information about historical rewards for this progression, if there is any data
-     * for it.
-     */
-    readonly rewardItemStates: DestinyProgressionRewardItemState[];
+  /**
+   * The hash identifier of the Faction related to this progression. Use it to look
+   * up the DestinyFactionDefinition for more rendering info.
+   *
+   * Mapped to DestinyFactionDefinition in the manifest.
+   */
+  readonly factionHash: number;
+  /**
+   * The index of the Faction vendor that is currently available. Will be set to -1
+   * if no vendors are available.
+   */
+  readonly factionVendorIndex: number;
+  /**
+   * The hash identifier of the Progression in question. Use it to look up the
+   * DestinyProgressionDefinition in static data.
+   *
+   * Mapped to DestinyProgressionDefinition in the manifest.
+   */
+  readonly progressionHash: number;
+  /** The amount of progress earned today for this progression. */
+  readonly dailyProgress: number;
+  /** If this progression has a daily limit, this is that limit. */
+  readonly dailyLimit: number;
+  /** The amount of progress earned toward this progression in the current week. */
+  readonly weeklyProgress: number;
+  /** If this progression has a weekly limit, this is that limit. */
+  readonly weeklyLimit: number;
+  /**
+   * This is the total amount of progress obtained overall for this progression (for
+   * instance, the total amount of Character Level experience earned)
+   */
+  readonly currentProgress: number;
+  /** This is the level of the progression (for instance, the Character Level). */
+  readonly level: number;
+  /**
+   * This is the maximum possible level you can achieve for this progression (for
+   * example, the maximum character level obtainable)
+   */
+  readonly levelCap: number;
+  /**
+   * Progressions define their levels in "steps". Since the last step may be
+   * repeatable, the user may be at a higher level than the actual Step achieved in
+   * the progression. Not necessarily useful, but potentially interesting for those
+   * cruising the API. Relate this to the "steps" property of the DestinyProgression
+   * to see which step the user is on, if you care about that. (Note that this is
+   * Content Version dependent since it refers to indexes.)
+   */
+  readonly stepIndex: number;
+  /**
+   * The amount of progression (i.e. "Experience") needed to reach the next level of
+   * this Progression. Jeez, progression is such an overloaded word.
+   */
+  readonly progressToNextLevel: number;
+  /**
+   * The total amount of progression (i.e. "Experience") needed in order to reach the
+   * next level.
+   */
+  readonly nextLevelAt: number;
+  /**
+   * The number of resets of this progression you've executed this season, if
+   * applicable to this progression.
+   */
+  readonly currentResetCount?: number;
+  /**
+   * Information about historical resets of this progression, if there is any data
+   * for it.
+   */
+  readonly seasonResets: DestinyProgressionResetEntry[];
+  /**
+   * Information about historical rewards for this progression, if there is any data
+   * for it.
+   */
+  readonly rewardItemStates: DestinyProgressionRewardItemState[];
 }
 /**
  * Represents a runtime instance of a user's milestone status. Live Milestone data
@@ -9560,94 +9570,94 @@ export interface DestinyFactionProgression {
  * 3.0 for those who remember the Destiny 1 API.
  */
 export interface DestinyMilestone {
-    /**
-     * The unique identifier for the Milestone. Use it to look up the
-     * DestinyMilestoneDefinition, so you can combine the other data in this contract
-     * with static definition data.
-     *
-     * Mapped to DestinyMilestoneDefinition in the manifest.
-     */
-    readonly milestoneHash: number;
-    /**
-     * Indicates what quests are available for this Milestone. Usually this will be
-     * only a single Quest, but some quests have multiple available that you can choose
-     * from at any given time. All possible quests for a milestone can be found in the
-     * DestinyMilestoneDefinition, but they must be combined with this Live data to
-     * determine which one(s) are actually active right now. It is possible for
-     * Milestones to not have any quests.
-     */
-    readonly availableQuests: DestinyMilestoneQuest[];
-    /**
-     * The currently active Activities in this milestone, when the Milestone is driven
-     * by Challenges.
-     *
-     * Not all Milestones have Challenges, but when they do this will indicate the
-     * Activities and Challenges under those Activities related to this Milestone.
-     */
-    readonly activities: DestinyMilestoneChallengeActivity[];
-    /**
-     * Milestones may have arbitrary key/value pairs associated with them, for data
-     * that users will want to know about but that doesn't fit neatly into any of the
-     * common components such as Quests. A good example of this would be - if this
-     * existed in Destiny 1 - the number of wins you currently have on your Trials of
-     * Osiris ticket. Looking in the DestinyMilestoneDefinition, you can use the string
-     * identifier of this dictionary to look up more info about the value, including
-     * localized string content for displaying the value. The value in the dictionary
-     * is the floating point number. The definition will tell you how to format this
-     * number.
-     */
-    readonly values: {
-        [key: string]: number;
-    };
-    /**
-     * A milestone may have one or more active vendors that are "related" to it (that
-     * provide rewards, or that are the initiators of the Milestone). I already regret
-     * this, even as I'm typing it. [I told you I'd regret this] You see, sometimes a
-     * milestone may be directly correlated with a set of vendors that provide varying
-     * tiers of rewards. The player may not be able to interact with one or more of
-     * those vendors. This will return the hashes of the Vendors that the player *can*
-     * interact with, allowing you to show their current inventory as rewards or
-     * related items to the Milestone or its activities.
-     *
-     * Before we even use it, it's already deprecated! How much of a bummer is that? We
-     * need more data.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHashes: number[];
-    /**
-     * Replaces vendorHashes, which I knew was going to be trouble the day it walked in
-     * the door. This will return not only what Vendors are active and relevant to the
-     * activity (in an implied order that you can choose to ignore), but also other
-     * data - for example, if the Vendor is featuring a specific item relevant to this
-     * event that you should show with them.
-     */
-    readonly vendors: DestinyMilestoneVendor[];
-    /**
-     * If the entity to which this component is attached has known active Rewards for
-     * the player, this will detail information about those rewards, keyed by the
-     * RewardEntry Hash. (See DestinyMilestoneDefinition for more information about
-     * Reward Entries) Note that these rewards are not for the Quests related to the
-     * Milestone. Think of these as "overview/checklist" rewards that may be provided
-     * for Milestones that may provide rewards for performing a variety of tasks that
-     * aren't under a specific Quest.
-     */
-    readonly rewards: DestinyMilestoneRewardCategory[];
-    /**
-     * If known, this is the date when the event last began or refreshed. It will only
-     * be populated for events with fixed and repeating start and end dates.
-     */
-    readonly startDate?: string;
-    /**
-     * If known, this is the date when the event will next end or repeat. It will only
-     * be populated for events with fixed and repeating start and end dates.
-     */
-    readonly endDate?: string;
-    /**
-     * Used for ordering milestones in a display to match how we order them in BNet.
-     * May pull from static data, or possibly in the future from dynamic information.
-     */
-    readonly order: number;
+  /**
+   * The unique identifier for the Milestone. Use it to look up the
+   * DestinyMilestoneDefinition, so you can combine the other data in this contract
+   * with static definition data.
+   *
+   * Mapped to DestinyMilestoneDefinition in the manifest.
+   */
+  readonly milestoneHash: number;
+  /**
+   * Indicates what quests are available for this Milestone. Usually this will be
+   * only a single Quest, but some quests have multiple available that you can choose
+   * from at any given time. All possible quests for a milestone can be found in the
+   * DestinyMilestoneDefinition, but they must be combined with this Live data to
+   * determine which one(s) are actually active right now. It is possible for
+   * Milestones to not have any quests.
+   */
+  readonly availableQuests: DestinyMilestoneQuest[];
+  /**
+   * The currently active Activities in this milestone, when the Milestone is driven
+   * by Challenges.
+   *
+   * Not all Milestones have Challenges, but when they do this will indicate the
+   * Activities and Challenges under those Activities related to this Milestone.
+   */
+  readonly activities: DestinyMilestoneChallengeActivity[];
+  /**
+   * Milestones may have arbitrary key/value pairs associated with them, for data
+   * that users will want to know about but that doesn't fit neatly into any of the
+   * common components such as Quests. A good example of this would be - if this
+   * existed in Destiny 1 - the number of wins you currently have on your Trials of
+   * Osiris ticket. Looking in the DestinyMilestoneDefinition, you can use the string
+   * identifier of this dictionary to look up more info about the value, including
+   * localized string content for displaying the value. The value in the dictionary
+   * is the floating point number. The definition will tell you how to format this
+   * number.
+   */
+  readonly values: {
+    [key: string]: number;
+  };
+  /**
+   * A milestone may have one or more active vendors that are "related" to it (that
+   * provide rewards, or that are the initiators of the Milestone). I already regret
+   * this, even as I'm typing it. [I told you I'd regret this] You see, sometimes a
+   * milestone may be directly correlated with a set of vendors that provide varying
+   * tiers of rewards. The player may not be able to interact with one or more of
+   * those vendors. This will return the hashes of the Vendors that the player *can*
+   * interact with, allowing you to show their current inventory as rewards or
+   * related items to the Milestone or its activities.
+   *
+   * Before we even use it, it's already deprecated! How much of a bummer is that? We
+   * need more data.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHashes: number[];
+  /**
+   * Replaces vendorHashes, which I knew was going to be trouble the day it walked in
+   * the door. This will return not only what Vendors are active and relevant to the
+   * activity (in an implied order that you can choose to ignore), but also other
+   * data - for example, if the Vendor is featuring a specific item relevant to this
+   * event that you should show with them.
+   */
+  readonly vendors: DestinyMilestoneVendor[];
+  /**
+   * If the entity to which this component is attached has known active Rewards for
+   * the player, this will detail information about those rewards, keyed by the
+   * RewardEntry Hash. (See DestinyMilestoneDefinition for more information about
+   * Reward Entries) Note that these rewards are not for the Quests related to the
+   * Milestone. Think of these as "overview/checklist" rewards that may be provided
+   * for Milestones that may provide rewards for performing a variety of tasks that
+   * aren't under a specific Quest.
+   */
+  readonly rewards: DestinyMilestoneRewardCategory[];
+  /**
+   * If known, this is the date when the event last began or refreshed. It will only
+   * be populated for events with fixed and repeating start and end dates.
+   */
+  readonly startDate?: string;
+  /**
+   * If known, this is the date when the event will next end or repeat. It will only
+   * be populated for events with fixed and repeating start and end dates.
+   */
+  readonly endDate?: string;
+  /**
+   * Used for ordering milestones in a display to match how we order them in BNet.
+   * May pull from static data, or possibly in the future from dynamic information.
+   */
+  readonly order: number;
 }
 /**
  * Milestones are an in-game concept where they're attempting to tell you what you
@@ -9696,135 +9706,135 @@ export interface DestinyMilestone {
  * sometimes nonexistant) milestone-level names and descriptions.
  */
 export interface DestinyMilestoneDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * A hint to the UI to indicate what to show as the display properties for this
-     * Milestone when showing "Live" milestone data. Feel free to show more than this
-     * if desired: this hint is meant to simplify our own UI, but it may prove useful
-     * to you as well.
-     */
-    readonly displayPreference: DestinyMilestoneDisplayPreference;
-    /** A custom image someone made just for the milestone. Isn't that special? */
-    readonly image: string;
-    /**
-     * An enumeration listing one of the possible types of milestones. Check out the
-     * DestinyMilestoneType enum for more info!
-     */
-    readonly milestoneType: DestinyMilestoneType;
-    /** If True, then the Milestone has been integrated with BNet's recruiting feature. */
-    readonly recruitable: boolean;
-    /**
-     * If the milestone has a friendly identifier for association with other features -
-     * such as Recruiting - that identifier can be found here. This is "friendly" in
-     * that it looks better in a URL than whatever the identifier for the Milestone
-     * actually is.
-     */
-    readonly friendlyName: string;
-    /**
-     * If TRUE, this entry should be returned in the list of milestones for the "
-     * Explore Destiny" (i.e. new BNet homepage) features of Bungie.net (as long as the
-     * underlying event is active) Note that this is a property specifically used by
-     * BNet and the companion app for the "Live Events" feature of the front page/
-     * welcome view: it's not a reflection of what you see in-game.
-     */
-    readonly showInExplorer: boolean;
-    /**
-     * Determines whether we'll show this Milestone in the user's personal Milestones
-     * list.
-     */
-    readonly showInMilestones: boolean;
-    /**
-     * If TRUE, "Explore Destiny" (the front page of BNet and the companion app)
-     * prioritize using the activity image over any overriding Quest or Milestone image
-     * provided. This unfortunate hack is brought to you by Trials of The Nine.
-     */
-    readonly explorePrioritizesActivityImage: boolean;
-    /**
-     * A shortcut for clients - and the server - to understand whether we can predict
-     * the start and end dates for this event. In practice, there are multiple ways
-     * that an event could have predictable date ranges, but not all events will be
-     * able to be predicted via any mechanism (for instance, events that are manually
-     * triggered on and off)
-     */
-    readonly hasPredictableDates: boolean;
-    /**
-     * The full set of possible Quests that give the overview of the Milestone event/
-     * activity in question. Only one of these can be active at a time for a given
-     * Conceptual Milestone, but many of them may be "available" for the user to choose
-     * from. (for instance, with Milestones you can choose from the three available
-     * Quests, but only one can be active at a time) Keyed by the quest item.
-     *
-     * As of Forsaken (~September 2018), Quest-style Milestones are being removed for
-     * many types of activities. There will likely be further revisions to the
-     * Milestone concept in the future.
-     */
-    readonly quests: {
-        [key: number]: DestinyMilestoneQuestDefinition;
-    };
-    /**
-     * If this milestone can provide rewards, this will define the categories into
-     * which the individual reward entries are placed.
-     *
-     * This is keyed by the Category's hash, which is only guaranteed to be unique
-     * within a given Milestone.
-     */
-    readonly rewards: {
-        [key: number]: DestinyMilestoneRewardCategoryDefinition;
-    };
-    /**
-     * If you're going to show Vendors for the Milestone, you can use this as a
-     * localized "header" for the section where you show that vendor data. It'll
-     * provide a more context-relevant clue about what the vendor's role is in the
-     * Milestone.
-     */
-    readonly vendorsDisplayTitle: string;
-    /**
-     * Sometimes, milestones will have rewards provided by Vendors. This definition
-     * gives the information needed to understand which vendors are relevant, the order
-     * in which they should be returned if order matters, and the conditions under
-     * which the Vendor is relevant to the user.
-     */
-    readonly vendors: DestinyMilestoneVendorDefinition[];
-    /**
-     * Sometimes, milestones will have arbitrary values associated with them that are
-     * of interest to us or to third party developers. This is the collection of those
-     * values' definitions, keyed by the identifier of the value and providing useful
-     * definition information such as localizable names and descriptions for the value.
-     */
-    readonly values: {
-        [key: string]: DestinyMilestoneValueDefinition;
-    };
-    /**
-     * Some milestones are explicit objectives that you can see and interact with in
-     * the game. Some milestones are more conceptual, built by BNet to help advise you
-     * on activities and events that happen in-game but that aren't explicitly shown in
-     * game as Milestones. If this is TRUE, you can see this as a milestone in the game.
-     * If this is FALSE, it's an event or activity you can participate in, but you won'
-     * t see it as a Milestone in the game's UI.
-     */
-    readonly isInGameMilestone: boolean;
-    /**
-     * A Milestone can now be represented by one or more activities directly (without a
-     * backing Quest), and that activity can have many challenges, modifiers, and
-     * related to it.
-     */
-    readonly activities: DestinyMilestoneChallengeActivityDefinition[];
-    readonly defaultOrder: number;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * A hint to the UI to indicate what to show as the display properties for this
+   * Milestone when showing "Live" milestone data. Feel free to show more than this
+   * if desired: this hint is meant to simplify our own UI, but it may prove useful
+   * to you as well.
+   */
+  readonly displayPreference: DestinyMilestoneDisplayPreference;
+  /** A custom image someone made just for the milestone. Isn't that special? */
+  readonly image: string;
+  /**
+   * An enumeration listing one of the possible types of milestones. Check out the
+   * DestinyMilestoneType enum for more info!
+   */
+  readonly milestoneType: DestinyMilestoneType;
+  /** If True, then the Milestone has been integrated with BNet's recruiting feature. */
+  readonly recruitable: boolean;
+  /**
+   * If the milestone has a friendly identifier for association with other features -
+   * such as Recruiting - that identifier can be found here. This is "friendly" in
+   * that it looks better in a URL than whatever the identifier for the Milestone
+   * actually is.
+   */
+  readonly friendlyName: string;
+  /**
+   * If TRUE, this entry should be returned in the list of milestones for the "
+   * Explore Destiny" (i.e. new BNet homepage) features of Bungie.net (as long as the
+   * underlying event is active) Note that this is a property specifically used by
+   * BNet and the companion app for the "Live Events" feature of the front page/
+   * welcome view: it's not a reflection of what you see in-game.
+   */
+  readonly showInExplorer: boolean;
+  /**
+   * Determines whether we'll show this Milestone in the user's personal Milestones
+   * list.
+   */
+  readonly showInMilestones: boolean;
+  /**
+   * If TRUE, "Explore Destiny" (the front page of BNet and the companion app)
+   * prioritize using the activity image over any overriding Quest or Milestone image
+   * provided. This unfortunate hack is brought to you by Trials of The Nine.
+   */
+  readonly explorePrioritizesActivityImage: boolean;
+  /**
+   * A shortcut for clients - and the server - to understand whether we can predict
+   * the start and end dates for this event. In practice, there are multiple ways
+   * that an event could have predictable date ranges, but not all events will be
+   * able to be predicted via any mechanism (for instance, events that are manually
+   * triggered on and off)
+   */
+  readonly hasPredictableDates: boolean;
+  /**
+   * The full set of possible Quests that give the overview of the Milestone event/
+   * activity in question. Only one of these can be active at a time for a given
+   * Conceptual Milestone, but many of them may be "available" for the user to choose
+   * from. (for instance, with Milestones you can choose from the three available
+   * Quests, but only one can be active at a time) Keyed by the quest item.
+   *
+   * As of Forsaken (~September 2018), Quest-style Milestones are being removed for
+   * many types of activities. There will likely be further revisions to the
+   * Milestone concept in the future.
+   */
+  readonly quests: {
+    [key: number]: DestinyMilestoneQuestDefinition;
+  };
+  /**
+   * If this milestone can provide rewards, this will define the categories into
+   * which the individual reward entries are placed.
+   *
+   * This is keyed by the Category's hash, which is only guaranteed to be unique
+   * within a given Milestone.
+   */
+  readonly rewards: {
+    [key: number]: DestinyMilestoneRewardCategoryDefinition;
+  };
+  /**
+   * If you're going to show Vendors for the Milestone, you can use this as a
+   * localized "header" for the section where you show that vendor data. It'll
+   * provide a more context-relevant clue about what the vendor's role is in the
+   * Milestone.
+   */
+  readonly vendorsDisplayTitle: string;
+  /**
+   * Sometimes, milestones will have rewards provided by Vendors. This definition
+   * gives the information needed to understand which vendors are relevant, the order
+   * in which they should be returned if order matters, and the conditions under
+   * which the Vendor is relevant to the user.
+   */
+  readonly vendors: DestinyMilestoneVendorDefinition[];
+  /**
+   * Sometimes, milestones will have arbitrary values associated with them that are
+   * of interest to us or to third party developers. This is the collection of those
+   * values' definitions, keyed by the identifier of the value and providing useful
+   * definition information such as localizable names and descriptions for the value.
+   */
+  readonly values: {
+    [key: string]: DestinyMilestoneValueDefinition;
+  };
+  /**
+   * Some milestones are explicit objectives that you can see and interact with in
+   * the game. Some milestones are more conceptual, built by BNet to help advise you
+   * on activities and events that happen in-game but that aren't explicitly shown in
+   * game as Milestones. If this is TRUE, you can see this as a milestone in the game.
+   * If this is FALSE, it's an event or activity you can participate in, but you won'
+   * t see it as a Milestone in the game's UI.
+   */
+  readonly isInGameMilestone: boolean;
+  /**
+   * A Milestone can now be represented by one or more activities directly (without a
+   * backing Quest), and that activity can have many challenges, modifiers, and
+   * related to it.
+   */
+  readonly activities: DestinyMilestoneChallengeActivityDefinition[];
+  readonly defaultOrder: number;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * A hint for the UI as to what display information ought to be shown. Defaults to
@@ -9834,48 +9844,48 @@ export interface DestinyMilestoneDefinition {
  * MilestoneDefinition.displayProperties.
  */
 export declare const enum DestinyMilestoneDisplayPreference {
-    /**
-     * Indicates you should show DestinyMilestoneDefinition.displayProperties for this
-     * Milestone.
-     */
-    MilestoneDefinition = 0,
-    /**
-     * Indicates you should show the displayProperties for any currently active Quest
-     * Steps in DestinyMilestone.availableQuests.
-     */
-    CurrentQuestSteps = 1,
-    /**
-     * Indicates you should show the displayProperties for any currently active
-     * Activities and their Challenges in DestinyMilestone.activities.
-     */
-    CurrentActivityChallenges = 2
+  /**
+   * Indicates you should show DestinyMilestoneDefinition.displayProperties for this
+   * Milestone.
+   */
+  MilestoneDefinition = 0,
+  /**
+   * Indicates you should show the displayProperties for any currently active Quest
+   * Steps in DestinyMilestone.availableQuests.
+   */
+  CurrentQuestSteps = 1,
+  /**
+   * Indicates you should show the displayProperties for any currently active
+   * Activities and their Challenges in DestinyMilestone.activities.
+   */
+  CurrentActivityChallenges = 2,
 }
 /**
  * The type of milestone. Milestones can be Tutorials, one-time/triggered/non-
  * repeating but not necessarily tutorials, or Repeating Milestones.
  */
 export declare const enum DestinyMilestoneType {
-    Unknown = 0,
-    /**
-     * One-time milestones that are specifically oriented toward teaching players about
-     * new mechanics and gameplay modes.
-     */
-    Tutorial = 1,
-    /** Milestones that, once completed a single time, can never be repeated. */
-    OneTime = 2,
-    /**
-     * Milestones that repeat/reset on a weekly basis. They need not all reset on the
-     * same day or time, but do need to reset weekly to qualify for this type.
-     */
-    Weekly = 3,
-    /** Milestones that repeat or reset on a daily basis. */
-    Daily = 4,
-    /**
-     * Special indicates that the event is not on a daily/weekly cadence, but does
-     * occur more than once. For instance, Iron Banner in Destiny 1 or the Dawning were
-     * examples of what could be termed "Special" events.
-     */
-    Special = 5
+  Unknown = 0,
+  /**
+   * One-time milestones that are specifically oriented toward teaching players about
+   * new mechanics and gameplay modes.
+   */
+  Tutorial = 1,
+  /** Milestones that, once completed a single time, can never be repeated. */
+  OneTime = 2,
+  /**
+   * Milestones that repeat/reset on a weekly basis. They need not all reset on the
+   * same day or time, but do need to reset weekly to qualify for this type.
+   */
+  Weekly = 3,
+  /** Milestones that repeat or reset on a daily basis. */
+  Daily = 4,
+  /**
+   * Special indicates that the event is not on a daily/weekly cadence, but does
+   * occur more than once. For instance, Iron Banner in Destiny 1 or the Dawning were
+   * examples of what could be termed "Special" events.
+   */
+  Special = 5,
 }
 /**
  * Any data we need to figure out whether this Quest Item is the currently active
@@ -9883,52 +9893,52 @@ export declare const enum DestinyMilestoneType {
  * regret it.
  */
 export interface DestinyMilestoneQuestDefinition {
-    /**
-     * The item representing this Milestone quest. Use this hash to look up the
-     * DestinyInventoryItemDefinition for the quest to find its steps and human
-     * readable data.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly questItemHash: number;
-    /**
-     * The individual quests may have different definitions from the overall milestone:
-     * if there's a specific active quest, use these displayProperties instead of that
-     * of the overall DestinyMilestoneDefinition.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If populated, this image can be shown instead of the generic milestone's image
-     * when this quest is live, or it can be used to show a background image for the
-     * quest itself that differs from that of the Activity or the Milestone.
-     */
-    readonly overrideImage: string;
-    /**
-     * The rewards you will get for completing this quest, as best as we could extract
-     * them from our data. Sometimes, it'll be a decent amount of data. Sometimes, it's
-     * going to be sucky. Sorry.
-     */
-    readonly questRewards: DestinyMilestoneQuestRewardsDefinition;
-    /**
-     * The full set of all possible "conceptual activities" that are related to this
-     * Milestone. Tiers or alternative modes of play within these conceptual activities
-     * will be defined as sub-entities. Keyed by the Conceptual Activity Hash. Use the
-     * key to look up DestinyActivityDefinition.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activities: {
-        [key: number]: DestinyMilestoneActivityDefinition;
-    };
-    /**
-     * Sometimes, a Milestone's quest is related to an entire Destination rather than a
-     * specific activity. In that situation, this will be the hash of that Destination.
-     * Hotspots are currently the only Milestones that expose this data, but that does
-     * not preclude this data from being returned for other Milestones in the future.
-     *
-     * Mapped to DestinyDestinationDefinition in the manifest.
-     */
-    readonly destinationHash?: number;
+  /**
+   * The item representing this Milestone quest. Use this hash to look up the
+   * DestinyInventoryItemDefinition for the quest to find its steps and human
+   * readable data.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly questItemHash: number;
+  /**
+   * The individual quests may have different definitions from the overall milestone:
+   * if there's a specific active quest, use these displayProperties instead of that
+   * of the overall DestinyMilestoneDefinition.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If populated, this image can be shown instead of the generic milestone's image
+   * when this quest is live, or it can be used to show a background image for the
+   * quest itself that differs from that of the Activity or the Milestone.
+   */
+  readonly overrideImage: string;
+  /**
+   * The rewards you will get for completing this quest, as best as we could extract
+   * them from our data. Sometimes, it'll be a decent amount of data. Sometimes, it's
+   * going to be sucky. Sorry.
+   */
+  readonly questRewards: DestinyMilestoneQuestRewardsDefinition;
+  /**
+   * The full set of all possible "conceptual activities" that are related to this
+   * Milestone. Tiers or alternative modes of play within these conceptual activities
+   * will be defined as sub-entities. Keyed by the Conceptual Activity Hash. Use the
+   * key to look up DestinyActivityDefinition.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activities: {
+    [key: number]: DestinyMilestoneActivityDefinition;
+  };
+  /**
+   * Sometimes, a Milestone's quest is related to an entire Destination rather than a
+   * specific activity. In that situation, this will be the hash of that Destination.
+   * Hotspots are currently the only Milestones that expose this data, but that does
+   * not preclude this data from being returned for other Milestones in the future.
+   *
+   * Mapped to DestinyDestinationDefinition in the manifest.
+   */
+  readonly destinationHash?: number;
 }
 /**
  * If rewards are given in a quest - as opposed to overall in the entire Milestone -
@@ -9939,18 +9949,18 @@ export interface DestinyMilestoneQuestDefinition {
  * inside of their own class?"
  */
 export interface DestinyMilestoneQuestRewardsDefinition {
-    /**
-     * The items that represent your reward for completing the quest.
-     *
-     * Be warned, these could be "dummy" items: items that are only used to render a
-     * good-looking in-game tooltip, but aren't the actual items themselves.
-     *
-     * For instance, when experience is given there's often a dummy item representing "
-     * experience", with quantity being the amount of experience you got. We don't have
-     * a programmatic association between those and whatever Progression is actually
-     * getting that experience... yet.
-     */
-    readonly items: DestinyMilestoneQuestRewardItem[];
+  /**
+   * The items that represent your reward for completing the quest.
+   *
+   * Be warned, these could be "dummy" items: items that are only used to render a
+   * good-looking in-game tooltip, but aren't the actual items themselves.
+   *
+   * For instance, when experience is given there's often a dummy item representing "
+   * experience", with quantity being the amount of experience you got. We don't have
+   * a programmatic association between those and whatever Progression is actually
+   * getting that experience... yet.
+   */
+  readonly items: DestinyMilestoneQuestRewardItem[];
 }
 /**
  * A subclass of DestinyItemQuantity, that provides not just the item and its
@@ -9961,36 +9971,36 @@ export interface DestinyMilestoneQuestRewardsDefinition {
  * clever person just may do it with our existing endpoints.
  */
 export interface DestinyMilestoneQuestRewardItem {
-    /**
-     * The quest reward item *may* be associated with a vendor. If so, this is that
-     * vendor. Use this hash to look up the DestinyVendorDefinition.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash?: number;
-    /**
-     * The quest reward item *may* be associated with a vendor. If so, this is the
-     * index of the item being sold, which we can use at runtime to find instanced item
-     * information for the reward item.
-     */
-    readonly vendorItemIndex?: number;
-    /**
-     * The hash identifier for the item in question. Use it to look up the item's
-     * DestinyInventoryItemDefinition.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If this quantity is referring to a specific instance of an item, this will have
-     * the item's instance ID. Normally, this will be null.
-     */
-    readonly itemInstanceId?: string;
-    /**
-     * The amount of the item needed/available depending on the context of where
-     * DestinyItemQuantity is being used.
-     */
-    readonly quantity: number;
+  /**
+   * The quest reward item *may* be associated with a vendor. If so, this is that
+   * vendor. Use this hash to look up the DestinyVendorDefinition.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash?: number;
+  /**
+   * The quest reward item *may* be associated with a vendor. If so, this is the
+   * index of the item being sold, which we can use at runtime to find instanced item
+   * information for the reward item.
+   */
+  readonly vendorItemIndex?: number;
+  /**
+   * The hash identifier for the item in question. Use it to look up the item's
+   * DestinyInventoryItemDefinition.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If this quantity is referring to a specific instance of an item, this will have
+   * the item's instance ID. Normally, this will be null.
+   */
+  readonly itemInstanceId?: string;
+  /**
+   * The amount of the item needed/available depending on the context of where
+   * DestinyItemQuantity is being used.
+   */
+  readonly quantity: number;
 }
 /**
  * Milestones can have associated activities which provide additional information
@@ -10002,36 +10012,36 @@ export interface DestinyMilestoneQuestRewardItem {
  * difficulty levels and variants.
  */
 export interface DestinyMilestoneActivityDefinition {
-    /**
-     * The "Conceptual" activity hash. Basically, we picked the lowest level activity
-     * and are treating it as the canonical definition of the activity for rendering
-     * purposes.
-     *
-     * If you care about the specific difficulty modes and variations, use the
-     * activities under "Variants".
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly conceptualActivityHash: number;
-    /**
-     * A milestone-referenced activity can have many variants, such as Tiers or
-     * alternative modes of play.
-     *
-     * Even if there is only a single variant, the details for these are represented
-     * within as a variant definition.
-     *
-     * It is assumed that, if this DestinyMilestoneActivityDefinition is active, then
-     * all variants should be active.
-     *
-     * If a Milestone could ever split the variants' active status conditionally, they
-     * should all have their own DestinyMilestoneActivityDefinition instead! The
-     * potential duplication will be worth it for the obviousness of processing and use.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly variants: {
-        [key: number]: DestinyMilestoneActivityVariantDefinition;
-    };
+  /**
+   * The "Conceptual" activity hash. Basically, we picked the lowest level activity
+   * and are treating it as the canonical definition of the activity for rendering
+   * purposes.
+   *
+   * If you care about the specific difficulty modes and variations, use the
+   * activities under "Variants".
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly conceptualActivityHash: number;
+  /**
+   * A milestone-referenced activity can have many variants, such as Tiers or
+   * alternative modes of play.
+   *
+   * Even if there is only a single variant, the details for these are represented
+   * within as a variant definition.
+   *
+   * It is assumed that, if this DestinyMilestoneActivityDefinition is active, then
+   * all variants should be active.
+   *
+   * If a Milestone could ever split the variants' active status conditionally, they
+   * should all have their own DestinyMilestoneActivityDefinition instead! The
+   * potential duplication will be worth it for the obviousness of processing and use.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly variants: {
+    [key: number]: DestinyMilestoneActivityVariantDefinition;
+  };
 }
 /**
  * Represents a variant on an activity for a Milestone: a specific difficulty tier,
@@ -10041,92 +10051,92 @@ export interface DestinyMilestoneActivityDefinition {
  * progression steps, tier-specific rewards, and custom values.
  */
 export interface DestinyMilestoneActivityVariantDefinition {
-    /**
-     * The hash to use for looking up the variant Activity's definition (
-     * DestinyActivityDefinition), where you can find its distinguishing
-     * characteristics such as difficulty level and recommended light level.
-     *
-     * Frequently, that will be the only distinguishing characteristics in practice,
-     * which is somewhat of a bummer.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /**
-     * If you care to do so, render the variants in the order prescribed by this value.
-     *
-     * When you combine live Milestone data with the definition, the order becomes more
-     * useful because you'll be cross-referencing between the definition and live data.
-     */
-    readonly order: number;
+  /**
+   * The hash to use for looking up the variant Activity's definition (
+   * DestinyActivityDefinition), where you can find its distinguishing
+   * characteristics such as difficulty level and recommended light level.
+   *
+   * Frequently, that will be the only distinguishing characteristics in practice,
+   * which is somewhat of a bummer.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /**
+   * If you care to do so, render the variants in the order prescribed by this value.
+   *
+   * When you combine live Milestone data with the definition, the order becomes more
+   * useful because you'll be cross-referencing between the definition and live data.
+   */
+  readonly order: number;
 }
 /** The definition of a category of rewards, that contains many individual rewards. */
 export interface DestinyMilestoneRewardCategoryDefinition {
-    /**
-     * Identifies the reward category. Only guaranteed unique within this specific
-     * component!
-     */
-    readonly categoryHash: number;
-    /**
-     * The string identifier for the category, if you want to use it for some end.
-     * Guaranteed unique within the specific component.
-     */
-    readonly categoryIdentifier: string;
-    /** Hopefully this is obvious by now. */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If this milestone can provide rewards, this will define the sets of rewards that
-     * can be earned, the conditions under which they can be acquired, internal data
-     * that we'll use at runtime to determine whether you've already earned or redeemed
-     * this set of rewards, and the category that this reward should be placed under.
-     */
-    readonly rewardEntries: {
-        [key: number]: DestinyMilestoneRewardEntryDefinition;
-    };
-    /**
-     * If you want to use BNet's recommended order for rendering categories
-     * programmatically, use this value and compare it to other categories to determine
-     * the order in which they should be rendered. I don't feel great about putting
-     * this here, I won't lie.
-     */
-    readonly order: number;
+  /**
+   * Identifies the reward category. Only guaranteed unique within this specific
+   * component!
+   */
+  readonly categoryHash: number;
+  /**
+   * The string identifier for the category, if you want to use it for some end.
+   * Guaranteed unique within the specific component.
+   */
+  readonly categoryIdentifier: string;
+  /** Hopefully this is obvious by now. */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If this milestone can provide rewards, this will define the sets of rewards that
+   * can be earned, the conditions under which they can be acquired, internal data
+   * that we'll use at runtime to determine whether you've already earned or redeemed
+   * this set of rewards, and the category that this reward should be placed under.
+   */
+  readonly rewardEntries: {
+    [key: number]: DestinyMilestoneRewardEntryDefinition;
+  };
+  /**
+   * If you want to use BNet's recommended order for rendering categories
+   * programmatically, use this value and compare it to other categories to determine
+   * the order in which they should be rendered. I don't feel great about putting
+   * this here, I won't lie.
+   */
+  readonly order: number;
 }
 /**
  * The definition of a specific reward, which may be contained in a category of
  * rewards and that has optional information about how it is obtained.
  */
 export interface DestinyMilestoneRewardEntryDefinition {
-    /**
-     * The identifier for this reward entry. Runtime data will refer to reward entries
-     * by this hash. Only guaranteed unique within the specific Milestone.
-     */
-    readonly rewardEntryHash: number;
-    /**
-     * The string identifier, if you care about it. Only guaranteed unique within the
-     * specific Milestone.
-     */
-    readonly rewardEntryIdentifier: string;
-    /** The items you will get as rewards, and how much of it you'll get. */
-    readonly items: DestinyItemQuantity[];
-    /**
-     * If this reward is redeemed at a Vendor, this is the hash of the Vendor to go to
-     * in order to redeem the reward. Use this hash to look up the
-     * DestinyVendorDefinition.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash?: number;
-    /**
-     * For us to bother returning this info, we should be able to return some kind of
-     * information about why these rewards are grouped together. This is ideally that
-     * information. Look at how confident I am that this will always remain true.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * If you want to follow BNet's ordering of these rewards, use this number within a
-     * given category to order the rewards. Yeah, I know. I feel dirty too.
-     */
-    readonly order: number;
+  /**
+   * The identifier for this reward entry. Runtime data will refer to reward entries
+   * by this hash. Only guaranteed unique within the specific Milestone.
+   */
+  readonly rewardEntryHash: number;
+  /**
+   * The string identifier, if you care about it. Only guaranteed unique within the
+   * specific Milestone.
+   */
+  readonly rewardEntryIdentifier: string;
+  /** The items you will get as rewards, and how much of it you'll get. */
+  readonly items: DestinyItemQuantity[];
+  /**
+   * If this reward is redeemed at a Vendor, this is the hash of the Vendor to go to
+   * in order to redeem the reward. Use this hash to look up the
+   * DestinyVendorDefinition.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash?: number;
+  /**
+   * For us to bother returning this info, we should be able to return some kind of
+   * information about why these rewards are grouped together. This is ideally that
+   * information. Look at how confident I am that this will always remain true.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * If you want to follow BNet's ordering of these rewards, use this number within a
+   * given category to order the rewards. Yeah, I know. I feel dirty too.
+   */
+  readonly order: number;
 }
 /**
  * If the Milestone or a component has vendors whose inventories could/should be
@@ -10136,13 +10146,13 @@ export interface DestinyMilestoneRewardEntryDefinition {
  * actually relevant at the moment, given the user's current state.
  */
 export interface DestinyMilestoneVendorDefinition {
-    /**
-     * The hash of the vendor whose wares should be shown as associated with the
-     * Milestone.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
+  /**
+   * The hash of the vendor whose wares should be shown as associated with the
+   * Milestone.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
 }
 /**
  * The definition for information related to a key/value pair that is relevant for
@@ -10152,75 +10162,75 @@ export interface DestinyMilestoneVendorDefinition {
  * it's not necessarily us.
  */
 export interface DestinyMilestoneValueDefinition {
-    readonly key: string;
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  readonly key: string;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
 }
 export interface DestinyMilestoneChallengeActivityDefinition {
-    /** The activity for which this challenge is active. */
-    readonly activityHash: number;
-    readonly challenges: DestinyMilestoneChallengeDefinition[];
-    /**
-     * If the activity and its challenge is visible on any of these nodes, it will be
-     * returned.
-     */
-    readonly activityGraphNodes: DestinyMilestoneChallengeActivityGraphNodeEntry[];
-    /**
-     * Phases related to this activity, if there are any.
-     *
-     * These will be listed in the order in which they will appear in the actual
-     * activity.
-     */
-    readonly phases: DestinyMilestoneChallengeActivityPhase[];
+  /** The activity for which this challenge is active. */
+  readonly activityHash: number;
+  readonly challenges: DestinyMilestoneChallengeDefinition[];
+  /**
+   * If the activity and its challenge is visible on any of these nodes, it will be
+   * returned.
+   */
+  readonly activityGraphNodes: DestinyMilestoneChallengeActivityGraphNodeEntry[];
+  /**
+   * Phases related to this activity, if there are any.
+   *
+   * These will be listed in the order in which they will appear in the actual
+   * activity.
+   */
+  readonly phases: DestinyMilestoneChallengeActivityPhase[];
 }
 export interface DestinyMilestoneChallengeDefinition {
-    /** The challenge related to this milestone. */
-    readonly challengeObjectiveHash: number;
+  /** The challenge related to this milestone. */
+  readonly challengeObjectiveHash: number;
 }
 export interface DestinyMilestoneChallengeActivityGraphNodeEntry {
-    readonly activityGraphHash: number;
-    readonly activityGraphNodeHash: number;
+  readonly activityGraphHash: number;
+  readonly activityGraphNodeHash: number;
 }
 export interface DestinyMilestoneChallengeActivityPhase {
-    /** The hash identifier of the activity's phase. */
-    readonly phaseHash: number;
+  /** The hash identifier of the activity's phase. */
+  readonly phaseHash: number;
 }
 /**
  * If a Milestone has one or more Quests, this will contain the live information
  * for the character's status with one of those quests.
  */
 export interface DestinyMilestoneQuest {
-    /**
-     * Quests are defined as Items in content. As such, this is the hash identifier of
-     * the DestinyInventoryItemDefinition that represents this quest. It will have
-     * pointers to all of the steps in the quest, and display information for the quest
-     * (title, description, icon etc) Individual steps will be referred to in the Quest
-     * item's DestinyInventoryItemDefinition.setData property, and themselves are Items
-     * with their own renderable data.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly questItemHash: number;
-    /** The current status of the quest for the character making the request. */
-    readonly status: DestinyQuestStatus;
-    /**
-     * *IF* the Milestone has an active Activity that can give you greater details
-     * about what you need to do, it will be returned here. Remember to associate this
-     * with the DestinyMilestoneDefinition's activities to get details about the
-     * activity, including what specific quest it is related to if you have multiple
-     * quests to choose from.
-     */
-    readonly activity: DestinyMilestoneActivity;
-    /**
-     * The activities referred to by this quest can have many associated challenges.
-     * They are all contained here, with activityHashes so that you can associate them
-     * with the specific activity variants in which they can be found. In retrospect, I
-     * probably should have put these under the specific Activity Variants, but it's
-     * too late to change it now. Theoretically, a quest without Activities can still
-     * have Challenges, which is why this is on a higher level than activity/variants,
-     * but it probably should have been in both places. That may come as a later
-     * revision.
-     */
-    readonly challenges: DestinyChallengeStatus[];
+  /**
+   * Quests are defined as Items in content. As such, this is the hash identifier of
+   * the DestinyInventoryItemDefinition that represents this quest. It will have
+   * pointers to all of the steps in the quest, and display information for the quest
+   * (title, description, icon etc) Individual steps will be referred to in the Quest
+   * item's DestinyInventoryItemDefinition.setData property, and themselves are Items
+   * with their own renderable data.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly questItemHash: number;
+  /** The current status of the quest for the character making the request. */
+  readonly status: DestinyQuestStatus;
+  /**
+   * *IF* the Milestone has an active Activity that can give you greater details
+   * about what you need to do, it will be returned here. Remember to associate this
+   * with the DestinyMilestoneDefinition's activities to get details about the
+   * activity, including what specific quest it is related to if you have multiple
+   * quests to choose from.
+   */
+  readonly activity: DestinyMilestoneActivity;
+  /**
+   * The activities referred to by this quest can have many associated challenges.
+   * They are all contained here, with activityHashes so that you can associate them
+   * with the specific activity variants in which they can be found. In retrospect, I
+   * probably should have put these under the specific Activity Variants, but it's
+   * too late to change it now. Theoretically, a quest without Activities can still
+   * have Challenges, which is why this is on a higher level than activity/variants,
+   * but it probably should have been in both places. That may come as a later
+   * revision.
+   */
+  readonly challenges: DestinyChallengeStatus[];
 }
 /**
  * Data regarding the progress of a Quest for a specific character. Quests are
@@ -10229,52 +10239,52 @@ export interface DestinyMilestoneQuest {
  * quest.
  */
 export interface DestinyQuestStatus {
-    /**
-     * The hash identifier for the Quest Item. (Note: Quests are defined as Items, and
-     * thus you would use this to look up the quest's DestinyInventoryItemDefinition).
-     * For information on all steps in the quest, you can then examine its
-     * DestinyInventoryItemDefinition.setData property for Quest Steps (which are *also*
-     * items). You can use the Item Definition to display human readable data about
-     * the overall quest.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly questHash: number;
-    /**
-     * The hash identifier of the current Quest Step, which is also a
-     * DestinyInventoryItemDefinition. You can use this to get human readable data
-     * about the current step and what to do in that step.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly stepHash: number;
-    /**
-     * A step can have multiple objectives. This will give you the progress for each
-     * objective in the current step, in the order in which they are rendered in-game.
-     */
-    readonly stepObjectives: DestinyObjectiveProgress[];
-    /** Whether or not the quest is tracked */
-    readonly tracked: boolean;
-    /**
-     * The current Quest Step will be an instanced item in the player's inventory. If
-     * you care about that, this is the instance ID of that item.
-     */
-    readonly itemInstanceId: string;
-    /**
-     * Whether or not the whole quest has been completed, regardless of whether or not
-     * you have redeemed the rewards for the quest.
-     */
-    readonly completed: boolean;
-    /** Whether or not you have redeemed rewards for this quest. */
-    readonly redeemed: boolean;
-    /** Whether or not you have started this quest. */
-    readonly started: boolean;
-    /**
-     * If the quest has a related Vendor that you should talk to in order to initiate
-     * the quest/earn rewards/continue the quest, this will be the hash identifier of
-     * that Vendor. Look it up its DestinyVendorDefinition.
-     */
-    readonly vendorHash?: number;
+  /**
+   * The hash identifier for the Quest Item. (Note: Quests are defined as Items, and
+   * thus you would use this to look up the quest's DestinyInventoryItemDefinition).
+   * For information on all steps in the quest, you can then examine its
+   * DestinyInventoryItemDefinition.setData property for Quest Steps (which are *also*
+   * items). You can use the Item Definition to display human readable data about
+   * the overall quest.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly questHash: number;
+  /**
+   * The hash identifier of the current Quest Step, which is also a
+   * DestinyInventoryItemDefinition. You can use this to get human readable data
+   * about the current step and what to do in that step.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly stepHash: number;
+  /**
+   * A step can have multiple objectives. This will give you the progress for each
+   * objective in the current step, in the order in which they are rendered in-game.
+   */
+  readonly stepObjectives: DestinyObjectiveProgress[];
+  /** Whether or not the quest is tracked */
+  readonly tracked: boolean;
+  /**
+   * The current Quest Step will be an instanced item in the player's inventory. If
+   * you care about that, this is the instance ID of that item.
+   */
+  readonly itemInstanceId: string;
+  /**
+   * Whether or not the whole quest has been completed, regardless of whether or not
+   * you have redeemed the rewards for the quest.
+   */
+  readonly completed: boolean;
+  /** Whether or not you have redeemed rewards for this quest. */
+  readonly redeemed: boolean;
+  /** Whether or not you have started this quest. */
+  readonly started: boolean;
+  /**
+   * If the quest has a related Vendor that you should talk to in order to initiate
+   * the quest/earn rewards/continue the quest, this will be the hash identifier of
+   * that Vendor. Look it up its DestinyVendorDefinition.
+   */
+  readonly vendorHash?: number;
 }
 /**
  * Sometimes, we know the specific activity that the Milestone wants you to play.
@@ -10282,82 +10292,82 @@ export interface DestinyQuestStatus {
  * variants. (sometimes there's only one variant, but I think you get the point)
  */
 export interface DestinyMilestoneActivity {
-    /**
-     * The hash of an arbitrarily chosen variant of this activity. We'll go ahead and
-     * call that the "canonical" activity, because if you're using this value you
-     * should only use it for properties that are common across the variants: things
-     * like the name of the activity, it's location, etc... Use this hash to look up
-     * the DestinyActivityDefinition of this activity for rendering data.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /**
-     * The hash identifier of the most specific Activity Mode under which this activity
-     * is played. This is useful for situations where the activity in question is - for
-     * instance - a PVP map, but it's not clear what mode the PVP map is being played
-     * under. If it's a playlist, this will be less specific: but hopefully useful in
-     * some way.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly activityModeHash?: number;
-    /**
-     * The enumeration equivalent of the most specific Activity Mode under which this
-     * activity is played.
-     */
-    readonly activityModeType?: number;
-    /**
-     * If the activity has modifiers, this will be the list of modifiers that all
-     * variants have in common. Perform lookups against
-     * DestinyActivityModifierDefinition which defines the modifier being applied to
-     * get at the modifier data. Note that, in the DestiyActivityDefinition, you will
-     * see many more modifiers than this being referred to: those are all *possible*
-     * modifiers for the activity, not the active ones. Use only the active ones to
-     * match what's really live.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly modifierHashes: number[];
-    /**
-     * If you want more than just name/location/etc... you're going to have to dig into
-     * and show the variants of the conceptual activity. These will differ in seemingly
-     * arbitrary ways, like difficulty level and modifiers applied. Show it in whatever
-     * way tickles your fancy.
-     */
-    readonly variants: DestinyMilestoneActivityVariant[];
+  /**
+   * The hash of an arbitrarily chosen variant of this activity. We'll go ahead and
+   * call that the "canonical" activity, because if you're using this value you
+   * should only use it for properties that are common across the variants: things
+   * like the name of the activity, it's location, etc... Use this hash to look up
+   * the DestinyActivityDefinition of this activity for rendering data.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /**
+   * The hash identifier of the most specific Activity Mode under which this activity
+   * is played. This is useful for situations where the activity in question is - for
+   * instance - a PVP map, but it's not clear what mode the PVP map is being played
+   * under. If it's a playlist, this will be less specific: but hopefully useful in
+   * some way.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly activityModeHash?: number;
+  /**
+   * The enumeration equivalent of the most specific Activity Mode under which this
+   * activity is played.
+   */
+  readonly activityModeType?: number;
+  /**
+   * If the activity has modifiers, this will be the list of modifiers that all
+   * variants have in common. Perform lookups against
+   * DestinyActivityModifierDefinition which defines the modifier being applied to
+   * get at the modifier data. Note that, in the DestiyActivityDefinition, you will
+   * see many more modifiers than this being referred to: those are all *possible*
+   * modifiers for the activity, not the active ones. Use only the active ones to
+   * match what's really live.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly modifierHashes: number[];
+  /**
+   * If you want more than just name/location/etc... you're going to have to dig into
+   * and show the variants of the conceptual activity. These will differ in seemingly
+   * arbitrary ways, like difficulty level and modifiers applied. Show it in whatever
+   * way tickles your fancy.
+   */
+  readonly variants: DestinyMilestoneActivityVariant[];
 }
 /** Represents custom data that we know about an individual variant of an activity. */
 export interface DestinyMilestoneActivityVariant {
-    /**
-     * The hash for the specific variant of the activity related to this milestone. You
-     * can pull more detailed static info from the DestinyActivityDefinition, such as
-     * difficulty level.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /**
-     * An OPTIONAL component: if it makes sense to talk about this activity variant in
-     * terms of whether or not it has been completed or what progress you have made in
-     * it, this will be returned. Otherwise, this will be NULL.
-     */
-    readonly completionStatus: DestinyMilestoneActivityCompletionStatus;
-    /**
-     * The hash identifier of the most specific Activity Mode under which this activity
-     * is played. This is useful for situations where the activity in question is - for
-     * instance - a PVP map, but it's not clear what mode the PVP map is being played
-     * under. If it's a playlist, this will be less specific: but hopefully useful in
-     * some way.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly activityModeHash?: number;
-    /**
-     * The enumeration equivalent of the most specific Activity Mode under which this
-     * activity is played.
-     */
-    readonly activityModeType?: number;
+  /**
+   * The hash for the specific variant of the activity related to this milestone. You
+   * can pull more detailed static info from the DestinyActivityDefinition, such as
+   * difficulty level.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /**
+   * An OPTIONAL component: if it makes sense to talk about this activity variant in
+   * terms of whether or not it has been completed or what progress you have made in
+   * it, this will be returned. Otherwise, this will be NULL.
+   */
+  readonly completionStatus: DestinyMilestoneActivityCompletionStatus;
+  /**
+   * The hash identifier of the most specific Activity Mode under which this activity
+   * is played. This is useful for situations where the activity in question is - for
+   * instance - a PVP map, but it's not clear what mode the PVP map is being played
+   * under. If it's a playlist, this will be less specific: but hopefully useful in
+   * some way.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly activityModeHash?: number;
+  /**
+   * The enumeration equivalent of the most specific Activity Mode under which this
+   * activity is played.
+   */
+  readonly activityModeType?: number;
 }
 /**
  * Represents this player's personal completion status for the Activity under a
@@ -10367,15 +10377,15 @@ export interface DestinyMilestoneActivityVariant {
  * doesn't make sense to talk about a Crucible Playlist in those terms.
  */
 export interface DestinyMilestoneActivityCompletionStatus {
-    /** If the activity has been "completed", that information will be returned here. */
-    readonly completed: boolean;
-    /**
-     * If the Activity has discrete "phases" that we can track, that info will be here.
-     * Otherwise, this value will be NULL. Note that this is a list and not a
-     * dictionary: the order implies the ascending order of phases or progression in
-     * this activity.
-     */
-    readonly phases: DestinyMilestoneActivityPhase[];
+  /** If the activity has been "completed", that information will be returned here. */
+  readonly completed: boolean;
+  /**
+   * If the Activity has discrete "phases" that we can track, that info will be here.
+   * Otherwise, this value will be NULL. Note that this is a list and not a
+   * dictionary: the order implies the ascending order of phases or progression in
+   * this activity.
+   */
+  readonly phases: DestinyMilestoneActivityPhase[];
 }
 /**
  * Represents whatever information we can return about an explicit phase in an
@@ -10384,14 +10394,14 @@ export interface DestinyMilestoneActivityCompletionStatus {
  * making it more than just a list of booleans out of that overly-optimistic hope.
  */
 export interface DestinyMilestoneActivityPhase {
-    /** Indicates if the phase has been completed. */
-    readonly complete: boolean;
-    /**
-     * In DestinyActivityDefinition, if the activity has phases, there will be a set of
-     * phases defined in the "insertionPoints" property. This is the hash that maps to
-     * that phase.
-     */
-    readonly phaseHash: number;
+  /** Indicates if the phase has been completed. */
+  readonly complete: boolean;
+  /**
+   * In DestinyActivityDefinition, if the activity has phases, there will be a set of
+   * phases defined in the "insertionPoints" property. This is the hash that maps to
+   * that phase.
+   */
+  readonly phaseHash: number;
 }
 /**
  * Represents the status and other related information for a challenge that is - or
@@ -10401,135 +10411,135 @@ export interface DestinyMilestoneActivityPhase {
  * that provide additional variations on play.
  */
 export interface DestinyChallengeStatus {
-    /** The progress - including completion status - of the active challenge. */
-    readonly objective: DestinyObjectiveProgress;
+  /** The progress - including completion status - of the active challenge. */
+  readonly objective: DestinyObjectiveProgress;
 }
 export interface DestinyMilestoneChallengeActivity {
-    /** Mapped to DestinyActivityDefinition in the manifest. */
-    readonly activityHash: number;
-    readonly challenges: DestinyChallengeStatus[];
-    /**
-     * If the activity has modifiers, this will be the list of modifiers that all
-     * variants have in common. Perform lookups against
-     * DestinyActivityModifierDefinition which defines the modifier being applied to
-     * get at the modifier data.
-     *
-     * Note that, in the DestiyActivityDefinition, you will see many more modifiers
-     * than this being referred to: those are all *possible* modifiers for the activity,
-     * not the active ones. Use only the active ones to match what's really live.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly modifierHashes: number[];
-    /**
-     * The set of activity options for this activity, keyed by an identifier that's
-     * unique for this activity (not guaranteed to be unique between or across all
-     * activities, though should be unique for every *variant* of a given *conceptual*
-     * activity: for instance, the original D2 Raid has many variant
-     * DestinyActivityDefinitions. While other activities could potentially have the
-     * same option hashes, for any given D2 base Raid variant the hash will be unique).
-     *
-     * As a concrete example of this data, the hashes you get for Raids will correspond
-     * to the currently active "Challenge Mode".
-     *
-     * We don't have any human readable information for these, but saavy 3rd party app
-     * users could manually associate the key (a hash identifier for the "option" that
-     * is enabled/disabled) and the value (whether it's enabled or disabled presently)
-     *
-     * On our side, we don't necessarily even know what these are used for (the game
-     * designers know, but we don't), and we have no human readable data for them. In
-     * order to use them, you will have to do some experimentation.
-     */
-    readonly booleanActivityOptions: {
-        [key: number]: boolean;
-    };
-    /**
-     * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
-     * property, indicating the currently active loadout requirements.
-     */
-    readonly loadoutRequirementIndex?: number;
-    /**
-     * If the Activity has discrete "phases" that we can track, that info will be here.
-     * Otherwise, this value will be NULL. Note that this is a list and not a
-     * dictionary: the order implies the ascending order of phases or progression in
-     * this activity.
-     */
-    readonly phases: DestinyMilestoneActivityPhase[];
+  /** Mapped to DestinyActivityDefinition in the manifest. */
+  readonly activityHash: number;
+  readonly challenges: DestinyChallengeStatus[];
+  /**
+   * If the activity has modifiers, this will be the list of modifiers that all
+   * variants have in common. Perform lookups against
+   * DestinyActivityModifierDefinition which defines the modifier being applied to
+   * get at the modifier data.
+   *
+   * Note that, in the DestiyActivityDefinition, you will see many more modifiers
+   * than this being referred to: those are all *possible* modifiers for the activity,
+   * not the active ones. Use only the active ones to match what's really live.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly modifierHashes: number[];
+  /**
+   * The set of activity options for this activity, keyed by an identifier that's
+   * unique for this activity (not guaranteed to be unique between or across all
+   * activities, though should be unique for every *variant* of a given *conceptual*
+   * activity: for instance, the original D2 Raid has many variant
+   * DestinyActivityDefinitions. While other activities could potentially have the
+   * same option hashes, for any given D2 base Raid variant the hash will be unique).
+   *
+   * As a concrete example of this data, the hashes you get for Raids will correspond
+   * to the currently active "Challenge Mode".
+   *
+   * We don't have any human readable information for these, but saavy 3rd party app
+   * users could manually associate the key (a hash identifier for the "option" that
+   * is enabled/disabled) and the value (whether it's enabled or disabled presently)
+   *
+   * On our side, we don't necessarily even know what these are used for (the game
+   * designers know, but we don't), and we have no human readable data for them. In
+   * order to use them, you will have to do some experimentation.
+   */
+  readonly booleanActivityOptions: {
+    [key: number]: boolean;
+  };
+  /**
+   * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
+   * property, indicating the currently active loadout requirements.
+   */
+  readonly loadoutRequirementIndex?: number;
+  /**
+   * If the Activity has discrete "phases" that we can track, that info will be here.
+   * Otherwise, this value will be NULL. Note that this is a list and not a
+   * dictionary: the order implies the ascending order of phases or progression in
+   * this activity.
+   */
+  readonly phases: DestinyMilestoneActivityPhase[];
 }
 /**
  * If a Milestone has one or more Vendors that are relevant to it, this will
  * contain information about that vendor that you can choose to show.
  */
 export interface DestinyMilestoneVendor {
-    /**
-     * The hash identifier of the Vendor related to this Milestone. You can show useful
-     * things from this, such as thier Faction icon or whatever you might care about.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * If this vendor is featuring a specific item for this event, this will be the
-     * hash identifier of that item. I'm taking bets now on how long we go before this
-     * needs to be a list or some other, more complex representation instead and I
-     * deprecate this too. I'm going to go with 5 months. Calling it now, 2017-09-14 at
-     * 9:46pm PST.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly previewItemHash?: number;
+  /**
+   * The hash identifier of the Vendor related to this Milestone. You can show useful
+   * things from this, such as thier Faction icon or whatever you might care about.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * If this vendor is featuring a specific item for this event, this will be the
+   * hash identifier of that item. I'm taking bets now on how long we go before this
+   * needs to be a list or some other, more complex representation instead and I
+   * deprecate this too. I'm going to go with 5 months. Calling it now, 2017-09-14 at
+   * 9:46pm PST.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly previewItemHash?: number;
 }
 /**
  * Represents a category of "summary" rewards that can be earned for the Milestone
  * regardless of specific quest rewards that can be earned.
  */
 export interface DestinyMilestoneRewardCategory {
-    /**
-     * Look up the relevant DestinyMilestoneDefinition, and then use rewardCategoryHash
-     * to look up the category info in DestinyMilestoneDefinition.rewards.
-     */
-    readonly rewardCategoryHash: number;
-    /** The individual reward entries for this category, and their status. */
-    readonly entries: DestinyMilestoneRewardEntry[];
+  /**
+   * Look up the relevant DestinyMilestoneDefinition, and then use rewardCategoryHash
+   * to look up the category info in DestinyMilestoneDefinition.rewards.
+   */
+  readonly rewardCategoryHash: number;
+  /** The individual reward entries for this category, and their status. */
+  readonly entries: DestinyMilestoneRewardEntry[];
 }
 /**
  * The character-specific data for a milestone's reward entry. See
  * DestinyMilestoneDefinition for more information about Reward Entries.
  */
 export interface DestinyMilestoneRewardEntry {
-    /**
-     * The identifier for the reward entry in question. It is important to look up the
-     * related DestinyMilestoneRewardEntryDefinition to get the static details about
-     * the reward, which you can do by looking up the milestone's
-     * DestinyMilestoneDefinition and examining the DestinyMilestoneDefinition.rewards[
-     * rewardCategoryHash].rewardEntries[rewardEntryHash] data.
-     */
-    readonly rewardEntryHash: number;
-    /** If TRUE, the player has earned this reward. */
-    readonly earned: boolean;
-    /**
-     * If TRUE, the player has redeemed/picked up/obtained this reward. Feel free to
-     * alias this to "gotTheShinyBauble" in your own codebase.
-     */
-    readonly redeemed: boolean;
+  /**
+   * The identifier for the reward entry in question. It is important to look up the
+   * related DestinyMilestoneRewardEntryDefinition to get the static details about
+   * the reward, which you can do by looking up the milestone's
+   * DestinyMilestoneDefinition and examining the DestinyMilestoneDefinition.rewards[
+   * rewardCategoryHash].rewardEntries[rewardEntryHash] data.
+   */
+  readonly rewardEntryHash: number;
+  /** If TRUE, the player has earned this reward. */
+  readonly earned: boolean;
+  /**
+   * If TRUE, the player has redeemed/picked up/obtained this reward. Feel free to
+   * alias this to "gotTheShinyBauble" in your own codebase.
+   */
+  readonly redeemed: boolean;
 }
 export interface DestinyArtifactCharacterScoped {
-    /** Mapped to DestinyArtifactDefinition in the manifest. */
-    readonly artifactHash: number;
-    readonly pointsUsed: number;
-    readonly resetCount: number;
-    readonly tiers: DestinyArtifactTier[];
+  /** Mapped to DestinyArtifactDefinition in the manifest. */
+  readonly artifactHash: number;
+  readonly pointsUsed: number;
+  readonly resetCount: number;
+  readonly tiers: DestinyArtifactTier[];
 }
 export interface DestinyArtifactTier {
-    readonly tierHash: number;
-    readonly isUnlocked: boolean;
-    readonly pointsToUnlock: number;
-    readonly items: DestinyArtifactTierItem[];
+  readonly tierHash: number;
+  readonly isUnlocked: boolean;
+  readonly pointsToUnlock: number;
+  readonly items: DestinyArtifactTierItem[];
 }
 export interface DestinyArtifactTierItem {
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly itemHash: number;
-    readonly isActive: boolean;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly itemHash: number;
+  readonly isActive: boolean;
 }
 /**
  * Only really useful if you're attempting to render the character's current
@@ -10541,31 +10551,31 @@ export interface DestinyArtifactTierItem {
  * how we use this data, but be warned: the rabbit hole goes pretty deep.
  */
 export interface DestinyCharacterRenderComponent {
-    /**
-     * Custom dyes, calculated by iterating over the character's equipped items. Useful
-     * for pre-fetching all of the dye data needed from our server.
-     */
-    readonly customDyes: DyeReference[];
-    /**
-     * This is actually something that Spasm.js *doesn't* do right now, and that we don'
-     * t return assets for yet. This is the data about what character customization
-     * options you picked. You can combine this with
-     * DestinyCharacterCustomizationOptionDefinition to show some cool info, and
-     * hopefully someday to actually render a user's face in 3D. We'll see if we ever
-     * end up with time for that.
-     */
-    readonly customization: DestinyCharacterCustomization;
-    /**
-     * A minimal view of:
-     *
-     * - Equipped items
-     *
-     * - The rendering-related custom options on those equipped items
-     *
-     * Combined, that should be enough to render all of the items on the equipped
-     * character.
-     */
-    readonly peerView: DestinyCharacterPeerView;
+  /**
+   * Custom dyes, calculated by iterating over the character's equipped items. Useful
+   * for pre-fetching all of the dye data needed from our server.
+   */
+  readonly customDyes: DyeReference[];
+  /**
+   * This is actually something that Spasm.js *doesn't* do right now, and that we don'
+   * t return assets for yet. This is the data about what character customization
+   * options you picked. You can combine this with
+   * DestinyCharacterCustomizationOptionDefinition to show some cool info, and
+   * hopefully someday to actually render a user's face in 3D. We'll see if we ever
+   * end up with time for that.
+   */
+  readonly customization: DestinyCharacterCustomization;
+  /**
+   * A minimal view of:
+   *
+   * - Equipped items
+   *
+   * - The rendering-related custom options on those equipped items
+   *
+   * Combined, that should be enough to render all of the items on the equipped
+   * character.
+   */
+  readonly peerView: DestinyCharacterPeerView;
 }
 /**
  * Raw data about the customization options chosen for a character's face and
@@ -10579,40 +10589,40 @@ export interface DestinyCharacterRenderComponent {
  * we sadly do not expose yet)
  */
 export interface DestinyCharacterCustomization {
-    readonly personality: number;
-    readonly face: number;
-    readonly skinColor: number;
-    readonly lipColor: number;
-    readonly eyeColor: number;
-    readonly hairColors: number[];
-    readonly featureColors: number[];
-    readonly decalColor: number;
-    readonly wearHelmet: boolean;
-    readonly hairIndex: number;
-    readonly featureIndex: number;
-    readonly decalIndex: number;
+  readonly personality: number;
+  readonly face: number;
+  readonly skinColor: number;
+  readonly lipColor: number;
+  readonly eyeColor: number;
+  readonly hairColors: number[];
+  readonly featureColors: number[];
+  readonly decalColor: number;
+  readonly wearHelmet: boolean;
+  readonly hairIndex: number;
+  readonly featureIndex: number;
+  readonly decalIndex: number;
 }
 /**
  * A minimal view of a character's equipped items, for the purpose of rendering a
  * summary screen or showing the character in 3D.
  */
 export interface DestinyCharacterPeerView {
-    readonly equipment: DestinyItemPeerView[];
+  readonly equipment: DestinyItemPeerView[];
 }
 /**
  * Bare minimum summary information for an item, for the sake of 3D rendering the
  * item.
  */
 export interface DestinyItemPeerView {
-    /**
-     * The hash identifier of the item in question. Use it to look up the
-     * DestinyInventoryItemDefinition of the item for static rendering data.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /** The list of dyes that have been applied to this item. */
-    readonly dyes: DyeReference[];
+  /**
+   * The hash identifier of the item in question. Use it to look up the
+   * DestinyInventoryItemDefinition of the item for static rendering data.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /** The list of dyes that have been applied to this item. */
+  readonly dyes: DyeReference[];
 }
 /**
  * This component holds activity data for a character. It will tell you about the
@@ -10620,54 +10630,54 @@ export interface DestinyItemPeerView {
  * the user.
  */
 export interface DestinyCharacterActivitiesComponent {
-    /** The last date that the user started playing an activity. */
-    readonly dateActivityStarted: string;
-    /** The list of activities that the user can play. */
-    readonly availableActivities: DestinyActivity[];
-    /**
-     * If the user is in an activity, this will be the hash of the Activity being
-     * played. Note that you must combine this info with currentActivityModeHash to get
-     * a real picture of what the user is doing right now. For instance, PVP "
-     * Activities" are just maps: it's the ActivityMode that determines what type of
-     * PVP game they're playing.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly currentActivityHash: number;
-    /**
-     * If the user is in an activity, this will be the hash of the activity mode being
-     * played. Combine with currentActivityHash to give a person a full picture of what
-     * they're doing right now.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly currentActivityModeHash: number;
-    /** And the current activity's most specific mode type, if it can be found. */
-    readonly currentActivityModeType?: number;
-    /**
-     * If the user is in an activity, this will be the hashes of the
-     * DestinyActivityModeDefinition being played. Combine with currentActivityHash to
-     * give a person a full picture of what they're doing right now.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly currentActivityModeHashes: number[];
-    /** All Activity Modes that apply to the current activity being played, in enum form. */
-    readonly currentActivityModeTypes: DestinyActivityModeType[];
-    /**
-     * If the user is in a playlist, this is the hash identifier for the playlist that
-     * they chose.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly currentPlaylistActivityHash?: number;
-    /**
-     * This will have the activity hash of the last completed story/campaign mission,
-     * in case you care about that.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly lastCompletedStoryHash: number;
+  /** The last date that the user started playing an activity. */
+  readonly dateActivityStarted: string;
+  /** The list of activities that the user can play. */
+  readonly availableActivities: DestinyActivity[];
+  /**
+   * If the user is in an activity, this will be the hash of the Activity being
+   * played. Note that you must combine this info with currentActivityModeHash to get
+   * a real picture of what the user is doing right now. For instance, PVP "
+   * Activities" are just maps: it's the ActivityMode that determines what type of
+   * PVP game they're playing.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly currentActivityHash: number;
+  /**
+   * If the user is in an activity, this will be the hash of the activity mode being
+   * played. Combine with currentActivityHash to give a person a full picture of what
+   * they're doing right now.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly currentActivityModeHash: number;
+  /** And the current activity's most specific mode type, if it can be found. */
+  readonly currentActivityModeType?: number;
+  /**
+   * If the user is in an activity, this will be the hashes of the
+   * DestinyActivityModeDefinition being played. Combine with currentActivityHash to
+   * give a person a full picture of what they're doing right now.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly currentActivityModeHashes: number[];
+  /** All Activity Modes that apply to the current activity being played, in enum form. */
+  readonly currentActivityModeTypes: DestinyActivityModeType[];
+  /**
+   * If the user is in a playlist, this is the hash identifier for the playlist that
+   * they chose.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly currentPlaylistActivityHash?: number;
+  /**
+   * This will have the activity hash of the last completed story/campaign mission,
+   * in case you care about that.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly lastCompletedStoryHash: number;
 }
 /**
  * Represents the "Live" data that we can obtain about a Character's status with a
@@ -10678,170 +10688,170 @@ export interface DestinyCharacterActivitiesComponent {
  * picture of the Activity.
  */
 export interface DestinyActivity {
-    /**
-     * The hash identifier of the Activity. Use this to look up the
-     * DestinyActivityDefinition of the activity.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /** If true, then the activity should have a "new" indicator in the Director UI. */
-    readonly isNew: boolean;
-    /** If true, the user is allowed to lead a Fireteam into this activity. */
-    readonly canLead: boolean;
-    /** If true, the user is allowed to join with another Fireteam in this activity. */
-    readonly canJoin: boolean;
-    /**
-     * If true, we both have the ability to know that the user has completed this
-     * activity and they have completed it. Unfortunately, we can't necessarily know
-     * this for all activities. As such, this should probably only be used if you
-     * already know in advance which specific activities you wish to check.
-     */
-    readonly isCompleted: boolean;
-    /** If true, the user should be able to see this activity. */
-    readonly isVisible: boolean;
-    /** The difficulty level of the activity, if applicable. */
-    readonly displayLevel?: number;
-    /** The recommended light level for the activity, if applicable. */
-    readonly recommendedLight?: number;
-    /**
-     * A DestinyActivityDifficultyTier enum value indicating the difficulty of the
-     * activity.
-     */
-    readonly difficultyTier: DestinyActivityDifficultyTier;
-    readonly challenges: DestinyChallengeStatus[];
-    /**
-     * If the activity has modifiers, this will be the list of modifiers that all
-     * variants have in common. Perform lookups against
-     * DestinyActivityModifierDefinition which defines the modifier being applied to
-     * get at the modifier data.
-     *
-     * Note that, in the DestiyActivityDefinition, you will see many more modifiers
-     * than this being referred to: those are all *possible* modifiers for the activity,
-     * not the active ones. Use only the active ones to match what's really live.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly modifierHashes: number[];
-    /**
-     * The set of activity options for this activity, keyed by an identifier that's
-     * unique for this activity (not guaranteed to be unique between or across all
-     * activities, though should be unique for every *variant* of a given *conceptual*
-     * activity: for instance, the original D2 Raid has many variant
-     * DestinyActivityDefinitions. While other activities could potentially have the
-     * same option hashes, for any given D2 base Raid variant the hash will be unique).
-     *
-     * As a concrete example of this data, the hashes you get for Raids will correspond
-     * to the currently active "Challenge Mode".
-     *
-     * We don't have any human readable information for these, but saavy 3rd party app
-     * users could manually associate the key (a hash identifier for the "option" that
-     * is enabled/disabled) and the value (whether it's enabled or disabled presently)
-     *
-     * On our side, we don't necessarily even know what these are used for (the game
-     * designers know, but we don't), and we have no human readable data for them. In
-     * order to use them, you will have to do some experimentation.
-     */
-    readonly booleanActivityOptions: {
-        [key: number]: boolean;
-    };
-    /**
-     * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
-     * property, indicating the currently active loadout requirements.
-     */
-    readonly loadoutRequirementIndex?: number;
+  /**
+   * The hash identifier of the Activity. Use this to look up the
+   * DestinyActivityDefinition of the activity.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /** If true, then the activity should have a "new" indicator in the Director UI. */
+  readonly isNew: boolean;
+  /** If true, the user is allowed to lead a Fireteam into this activity. */
+  readonly canLead: boolean;
+  /** If true, the user is allowed to join with another Fireteam in this activity. */
+  readonly canJoin: boolean;
+  /**
+   * If true, we both have the ability to know that the user has completed this
+   * activity and they have completed it. Unfortunately, we can't necessarily know
+   * this for all activities. As such, this should probably only be used if you
+   * already know in advance which specific activities you wish to check.
+   */
+  readonly isCompleted: boolean;
+  /** If true, the user should be able to see this activity. */
+  readonly isVisible: boolean;
+  /** The difficulty level of the activity, if applicable. */
+  readonly displayLevel?: number;
+  /** The recommended light level for the activity, if applicable. */
+  readonly recommendedLight?: number;
+  /**
+   * A DestinyActivityDifficultyTier enum value indicating the difficulty of the
+   * activity.
+   */
+  readonly difficultyTier: DestinyActivityDifficultyTier;
+  readonly challenges: DestinyChallengeStatus[];
+  /**
+   * If the activity has modifiers, this will be the list of modifiers that all
+   * variants have in common. Perform lookups against
+   * DestinyActivityModifierDefinition which defines the modifier being applied to
+   * get at the modifier data.
+   *
+   * Note that, in the DestiyActivityDefinition, you will see many more modifiers
+   * than this being referred to: those are all *possible* modifiers for the activity,
+   * not the active ones. Use only the active ones to match what's really live.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly modifierHashes: number[];
+  /**
+   * The set of activity options for this activity, keyed by an identifier that's
+   * unique for this activity (not guaranteed to be unique between or across all
+   * activities, though should be unique for every *variant* of a given *conceptual*
+   * activity: for instance, the original D2 Raid has many variant
+   * DestinyActivityDefinitions. While other activities could potentially have the
+   * same option hashes, for any given D2 base Raid variant the hash will be unique).
+   *
+   * As a concrete example of this data, the hashes you get for Raids will correspond
+   * to the currently active "Challenge Mode".
+   *
+   * We don't have any human readable information for these, but saavy 3rd party app
+   * users could manually associate the key (a hash identifier for the "option" that
+   * is enabled/disabled) and the value (whether it's enabled or disabled presently)
+   *
+   * On our side, we don't necessarily even know what these are used for (the game
+   * designers know, but we don't), and we have no human readable data for them. In
+   * order to use them, you will have to do some experimentation.
+   */
+  readonly booleanActivityOptions: {
+    [key: number]: boolean;
+  };
+  /**
+   * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
+   * property, indicating the currently active loadout requirements.
+   */
+  readonly loadoutRequirementIndex?: number;
 }
 /**
  * An enumeration representing the potential difficulty levels of an activity.
  * Their names are... more qualitative than quantitative.
  */
 export declare const enum DestinyActivityDifficultyTier {
-    Trivial = 0,
-    Easy = 1,
-    Normal = 2,
-    Challenging = 3,
-    Hard = 4,
-    Brave = 5,
-    AlmostImpossible = 6,
-    Impossible = 7
+  Trivial = 0,
+  Easy = 1,
+  Normal = 2,
+  Challenging = 3,
+  Hard = 4,
+  Brave = 5,
+  AlmostImpossible = 6,
+  Impossible = 7,
 }
 export interface DestinyBaseItemComponentSetOfuint32 {
-    readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
+  readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
 }
 /**
  * Items can have objectives and progression. When you request this block, you will
  * obtain information about any Objectives and progression tied to this item.
  */
 export interface DestinyItemObjectivesComponent {
-    /**
-     * If the item has a hard association with objectives, your progress on them will
-     * be defined here.
-     *
-     * Objectives are our standard way to describe a series of tasks that have to be
-     * completed for a reward.
-     */
-    readonly objectives: DestinyObjectiveProgress[];
-    /**
-     * I may regret naming it this way - but this represents when an item has an
-     * objective that doesn't serve a beneficial purpose, but rather is used for "
-     * flavor" or additional information. For instance, when Emblems track specific
-     * stats, those stats are represented as Objectives on the item.
-     */
-    readonly flavorObjective: DestinyObjectiveProgress;
-    /**
-     * If we have any information on when these objectives were completed, this will be
-     * the date of that completion. This won't be on many items, but could be
-     * interesting for some items that do store this information.
-     */
-    readonly dateCompleted?: string;
+  /**
+   * If the item has a hard association with objectives, your progress on them will
+   * be defined here.
+   *
+   * Objectives are our standard way to describe a series of tasks that have to be
+   * completed for a reward.
+   */
+  readonly objectives: DestinyObjectiveProgress[];
+  /**
+   * I may regret naming it this way - but this represents when an item has an
+   * objective that doesn't serve a beneficial purpose, but rather is used for "
+   * flavor" or additional information. For instance, when Emblems track specific
+   * stats, those stats are represented as Objectives on the item.
+   */
+  readonly flavorObjective: DestinyObjectiveProgress;
+  /**
+   * If we have any information on when these objectives were completed, this will be
+   * the date of that completion. This won't be on many items, but could be
+   * interesting for some items that do store this information.
+   */
+  readonly dateCompleted?: string;
 }
 export interface DestinyCharacterRecordsComponent {
-    /** Mapped to DestinyRecordDefinition in the manifest. */
-    readonly featuredRecordHashes: number[];
-    readonly records: {
-        [key: number]: DestinyRecordComponent;
-    };
-    /**
-     * The hash for the root presentation node definition of Triumph categories.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly recordCategoriesRootNodeHash: number;
-    /**
-     * The hash for the root presentation node definition of Triumph Seals.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly recordSealsRootNodeHash: number;
+  /** Mapped to DestinyRecordDefinition in the manifest. */
+  readonly featuredRecordHashes: number[];
+  readonly records: {
+    [key: number]: DestinyRecordComponent;
+  };
+  /**
+   * The hash for the root presentation node definition of Triumph categories.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly recordCategoriesRootNodeHash: number;
+  /**
+   * The hash for the root presentation node definition of Triumph Seals.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly recordSealsRootNodeHash: number;
 }
 export interface DestinyCollectiblesComponent {
-    readonly collectibles: {
-        [key: number]: DestinyCollectibleComponent;
-    };
-    /**
-     * The hash for the root presentation node definition of Collection categories.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly collectionCategoriesRootNodeHash: number;
-    /**
-     * The hash for the root presentation node definition of Collection Badges.
-     *
-     * Mapped to DestinyPresentationNodeDefinition in the manifest.
-     */
-    readonly collectionBadgesRootNodeHash: number;
+  readonly collectibles: {
+    [key: number]: DestinyCollectibleComponent;
+  };
+  /**
+   * The hash for the root presentation node definition of Collection categories.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly collectionCategoriesRootNodeHash: number;
+  /**
+   * The hash for the root presentation node definition of Collection Badges.
+   *
+   * Mapped to DestinyPresentationNodeDefinition in the manifest.
+   */
+  readonly collectionBadgesRootNodeHash: number;
 }
 export interface DestinyItemComponentSetOfint64 {
-    readonly instances: DictionaryComponentResponse<DestinyItemInstanceComponent>;
-    readonly perks: DictionaryComponentResponse<DestinyItemPerksComponent>;
-    readonly renderData: DictionaryComponentResponse<DestinyItemRenderComponent>;
-    readonly stats: DictionaryComponentResponse<DestinyItemStatsComponent>;
-    readonly sockets: DictionaryComponentResponse<DestinyItemSocketsComponent>;
-    readonly reusablePlugs: DictionaryComponentResponse<DestinyItemReusablePlugsComponent>;
-    readonly plugObjectives: DictionaryComponentResponse<DestinyItemPlugObjectivesComponent>;
-    readonly talentGrids: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
-    readonly plugStates: DictionaryComponentResponse<DestinyItemPlugComponent>;
-    readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
+  readonly instances: DictionaryComponentResponse<DestinyItemInstanceComponent>;
+  readonly perks: DictionaryComponentResponse<DestinyItemPerksComponent>;
+  readonly renderData: DictionaryComponentResponse<DestinyItemRenderComponent>;
+  readonly stats: DictionaryComponentResponse<DestinyItemStatsComponent>;
+  readonly sockets: DictionaryComponentResponse<DestinyItemSocketsComponent>;
+  readonly reusablePlugs: DictionaryComponentResponse<DestinyItemReusablePlugsComponent>;
+  readonly plugObjectives: DictionaryComponentResponse<DestinyItemPlugObjectivesComponent>;
+  readonly talentGrids: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
+  readonly plugStates: DictionaryComponentResponse<DestinyItemPlugComponent>;
+  readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
 }
 /**
  * If an item is "instanced", this will contain information about the item's
@@ -10859,96 +10869,96 @@ export interface DestinyItemComponentSetOfint64 {
  * isInstanceItem property.
  */
 export interface DestinyItemInstanceComponent {
-    /** If the item has a damage type, this is the item's current damage type. */
-    readonly damageType: DamageType;
-    /**
-     * The current damage type's hash, so you can look up localized info and icons for
-     * it.
-     *
-     * Mapped to DestinyDamageTypeDefinition in the manifest.
-     */
-    readonly damageTypeHash?: number;
-    /**
-     * The item stat that we consider to be "primary" for the item. For instance, this
-     * would be "Attack" for Weapons or "Defense" for armor.
-     */
-    readonly primaryStat: DestinyStat;
-    /**
-     * The Item's "Level" has the most significant bearing on its stats, such as Light
-     * and Power.
-     */
-    readonly itemLevel: number;
-    /**
-     * The "Quality" of the item has a lesser - but still impactful - bearing on stats
-     * like Light and Power.
-     */
-    readonly quality: number;
-    /** Is the item currently equipped on the given character? */
-    readonly isEquipped: boolean;
-    /**
-     * If this is an equippable item, you can check it here. There are permanent as
-     * well as transitory reasons why an item might not be able to be equipped: check
-     * cannotEquipReason for details.
-     */
-    readonly canEquip: boolean;
-    /**
-     * If the item cannot be equipped until you reach a certain level, that level will
-     * be reflected here.
-     */
-    readonly equipRequiredLevel: number;
-    /**
-     * Sometimes, there are limitations to equipping that are represented by character-
-     * level flags called "unlocks".
-     *
-     * This is a list of flags that they need in order to equip the item that the
-     * character has not met. Use these to look up the descriptions to show in your UI
-     * by looking up the relevant DestinyUnlockDefinitions for the hashes.
-     *
-     * Mapped to DestinyUnlockDefinition in the manifest.
-     */
-    readonly unlockHashesRequiredToEquip: number[];
-    /**
-     * If you cannot equip the item, this is a flags enum that enumerates all of the
-     * reasons why you couldn't equip the item. You may need to refine your UI further
-     * by using unlockHashesRequiredToEquip and equipRequiredLevel.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly cannotEquipReason: EquipFailureReason;
-    /**
-     * If populated, this item has a breaker type corresponding to the given value. See
-     * DestinyBreakerTypeDefinition for more details.
-     */
-    readonly breakerType?: number;
-    /**
-     * If populated, this is the hash identifier for the item's breaker type. See
-     * DestinyBreakerTypeDefinition for more details.
-     *
-     * Mapped to DestinyBreakerTypeDefinition in the manifest.
-     */
-    readonly breakerTypeHash?: number;
-    /**
-     * IF populated, this item supports Energy mechanics (i.e. Armor 2.0), and these
-     * are the current details of its energy type and available capacity to spend
-     * energy points.
-     */
-    readonly energy: DestinyItemInstanceEnergy;
+  /** If the item has a damage type, this is the item's current damage type. */
+  readonly damageType: DamageType;
+  /**
+   * The current damage type's hash, so you can look up localized info and icons for
+   * it.
+   *
+   * Mapped to DestinyDamageTypeDefinition in the manifest.
+   */
+  readonly damageTypeHash?: number;
+  /**
+   * The item stat that we consider to be "primary" for the item. For instance, this
+   * would be "Attack" for Weapons or "Defense" for armor.
+   */
+  readonly primaryStat: DestinyStat;
+  /**
+   * The Item's "Level" has the most significant bearing on its stats, such as Light
+   * and Power.
+   */
+  readonly itemLevel: number;
+  /**
+   * The "Quality" of the item has a lesser - but still impactful - bearing on stats
+   * like Light and Power.
+   */
+  readonly quality: number;
+  /** Is the item currently equipped on the given character? */
+  readonly isEquipped: boolean;
+  /**
+   * If this is an equippable item, you can check it here. There are permanent as
+   * well as transitory reasons why an item might not be able to be equipped: check
+   * cannotEquipReason for details.
+   */
+  readonly canEquip: boolean;
+  /**
+   * If the item cannot be equipped until you reach a certain level, that level will
+   * be reflected here.
+   */
+  readonly equipRequiredLevel: number;
+  /**
+   * Sometimes, there are limitations to equipping that are represented by character-
+   * level flags called "unlocks".
+   *
+   * This is a list of flags that they need in order to equip the item that the
+   * character has not met. Use these to look up the descriptions to show in your UI
+   * by looking up the relevant DestinyUnlockDefinitions for the hashes.
+   *
+   * Mapped to DestinyUnlockDefinition in the manifest.
+   */
+  readonly unlockHashesRequiredToEquip: number[];
+  /**
+   * If you cannot equip the item, this is a flags enum that enumerates all of the
+   * reasons why you couldn't equip the item. You may need to refine your UI further
+   * by using unlockHashesRequiredToEquip and equipRequiredLevel.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly cannotEquipReason: EquipFailureReason;
+  /**
+   * If populated, this item has a breaker type corresponding to the given value. See
+   * DestinyBreakerTypeDefinition for more details.
+   */
+  readonly breakerType?: number;
+  /**
+   * If populated, this is the hash identifier for the item's breaker type. See
+   * DestinyBreakerTypeDefinition for more details.
+   *
+   * Mapped to DestinyBreakerTypeDefinition in the manifest.
+   */
+  readonly breakerTypeHash?: number;
+  /**
+   * IF populated, this item supports Energy mechanics (i.e. Armor 2.0), and these
+   * are the current details of its energy type and available capacity to spend
+   * energy points.
+   */
+  readonly energy: DestinyItemInstanceEnergy;
 }
 /**
  * Represents a stat on an item *or* Character (NOT a Historical Stat, but a
  * physical attribute stat like Attack, Defense etc...)
  */
 export interface DestinyStat {
-    /**
-     * The hash identifier for the Stat. Use it to look up the DestinyStatDefinition
-     * for static data about the stat.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly statHash: number;
-    /** The current value of the Stat. */
-    readonly value: number;
+  /**
+   * The hash identifier for the Stat. Use it to look up the DestinyStatDefinition
+   * for static data about the stat.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly statHash: number;
+  /** The current value of the Stat. */
+  readonly value: number;
 }
 /**
  * Unlock Flags are small bits (literally, a bit, as in a boolean value) that the
@@ -10956,28 +10966,28 @@ export interface DestinyStat {
  * and other interesting tidbits of information.
  */
 export interface DestinyUnlockDefinition {
-    /**
-     * Sometimes, but not frequently, these unlock flags also have human readable
-     * information: usually when they are being directly tested for some requirement,
-     * in which case the string is a localized description of why the requirement check
-     * failed.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  /**
+   * Sometimes, but not frequently, these unlock flags also have human readable
+   * information: usually when they are being directly tested for some requirement,
+   * in which case the string is a localized description of why the requirement check
+   * failed.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * The reasons why an item cannot be equipped, if any. Many flags can be set, or "
@@ -10987,61 +10997,61 @@ export interface DestinyUnlockDefinition {
  * these match your value.
  */
 export declare const enum EquipFailureReason {
-    /** The item is/was able to be equipped. */
-    None = 0,
-    /**
-     * This is not the kind of item that can be equipped. Did you try equipping Glimmer
-     * or something?
-     */
-    ItemUnequippable = 1,
-    /**
-     * This item is part of a "unique set", and you can't have more than one item of
-     * that same set type equipped at once. For instance, if you already have an Exotic
-     * Weapon equipped, you can't equip a second one in another weapon slot.
-     */
-    ItemUniqueEquipRestricted = 2,
-    /**
-     * This item has state-based gating that prevents it from being equipped in certain
-     * circumstances. For instance, an item might be for Warlocks only and you're a
-     * Titan, or it might require you to have beaten some special quest that you haven'
-     * t beaten yet. Use the additional failure data passed on the item itself to get
-     * more information about what the specific failure case was (See
-     * DestinyInventoryItemDefinition and DestinyItemInstanceComponent)
-     */
-    ItemFailedUnlockCheck = 4,
-    /**
-     * This item requires you to have reached a specific character level in order to
-     * equip it, and you haven't reached that level yet.
-     */
-    ItemFailedLevelCheck = 8,
-    /**
-     * This item can't be equipped on the character requested, because it must be in
-     * that character's inventory first. Transfer the item to the character you want to
-     * equip it before you attempt to equip it.
-     */
-    ItemNotOnCharacter = 16
+  /** The item is/was able to be equipped. */
+  None = 0,
+  /**
+   * This is not the kind of item that can be equipped. Did you try equipping Glimmer
+   * or something?
+   */
+  ItemUnequippable = 1,
+  /**
+   * This item is part of a "unique set", and you can't have more than one item of
+   * that same set type equipped at once. For instance, if you already have an Exotic
+   * Weapon equipped, you can't equip a second one in another weapon slot.
+   */
+  ItemUniqueEquipRestricted = 2,
+  /**
+   * This item has state-based gating that prevents it from being equipped in certain
+   * circumstances. For instance, an item might be for Warlocks only and you're a
+   * Titan, or it might require you to have beaten some special quest that you haven'
+   * t beaten yet. Use the additional failure data passed on the item itself to get
+   * more information about what the specific failure case was (See
+   * DestinyInventoryItemDefinition and DestinyItemInstanceComponent)
+   */
+  ItemFailedUnlockCheck = 4,
+  /**
+   * This item requires you to have reached a specific character level in order to
+   * equip it, and you haven't reached that level yet.
+   */
+  ItemFailedLevelCheck = 8,
+  /**
+   * This item can't be equipped on the character requested, because it must be in
+   * that character's inventory first. Transfer the item to the character you want to
+   * equip it before you attempt to equip it.
+   */
+  ItemNotOnCharacter = 16,
 }
 export interface DestinyItemInstanceEnergy {
-    /**
-     * The type of energy for this item. Plugs that require Energy can only be inserted
-     * if they have the "Any" Energy Type or the matching energy type of this item.
-     * This is a reference to the DestinyEnergyTypeDefinition for the energy type,
-     * where you can find extended info about it.
-     *
-     * Mapped to DestinyEnergyTypeDefinition in the manifest.
-     */
-    readonly energyTypeHash: number;
-    /** This is the enum version of the Energy Type value, for convenience. */
-    readonly energyType: DestinyEnergyType;
-    /**
-     * The total capacity of Energy that the item currently has, regardless of if it is
-     * currently being used.
-     */
-    readonly energyCapacity: number;
-    /** The amount of Energy currently in use by inserted plugs. */
-    readonly energyUsed: number;
-    /** The amount of energy still available for inserting new plugs. */
-    readonly energyUnused: number;
+  /**
+   * The type of energy for this item. Plugs that require Energy can only be inserted
+   * if they have the "Any" Energy Type or the matching energy type of this item.
+   * This is a reference to the DestinyEnergyTypeDefinition for the energy type,
+   * where you can find extended info about it.
+   *
+   * Mapped to DestinyEnergyTypeDefinition in the manifest.
+   */
+  readonly energyTypeHash: number;
+  /** This is the enum version of the Energy Type value, for convenience. */
+  readonly energyType: DestinyEnergyType;
+  /**
+   * The total capacity of Energy that the item currently has, regardless of if it is
+   * currently being used.
+   */
+  readonly energyCapacity: number;
+  /** The amount of Energy currently in use by inserted plugs. */
+  readonly energyUsed: number;
+  /** The amount of energy still available for inserting new plugs. */
+  readonly energyUnused: number;
 }
 /**
  * Instanced items can have perks: benefits that the item bestows.
@@ -11054,11 +11064,11 @@ export interface DestinyItemInstanceEnergy {
  * summarized here for your convenience.
  */
 export interface DestinyItemPerksComponent {
-    /**
-     * The list of perks to display in an item tooltip - and whether or not they have
-     * been activated.
-     */
-    readonly perks: DestinyPerkReference[];
+  /**
+   * The list of perks to display in an item tooltip - and whether or not they have
+   * been activated.
+   */
+  readonly perks: DestinyPerkReference[];
 }
 /**
  * The list of perks to display in an item tooltip - and whether or not they have
@@ -11068,47 +11078,47 @@ export interface DestinyItemPerksComponent {
  * intrinsic to the item or provided in activated talent nodes or sockets.
  */
 export interface DestinyPerkReference {
-    /**
-     * The hash identifier for the perk, which can be used to look up
-     * DestinySandboxPerkDefinition if it exists. Be warned, perks frequently do not
-     * have user-viewable information. You should examine whether you actually found a
-     * name/description in the perk's definition before you show it to the user.
-     *
-     * Mapped to DestinySandboxPerkDefinition in the manifest.
-     */
-    readonly perkHash: number;
-    /** The icon for the perk. */
-    readonly iconPath: string;
-    /**
-     * Whether this perk is currently active. (We may return perks that you have not
-     * actually activated yet: these represent perks that you should show in the item's
-     * tooltip, but that the user has not yet activated.)
-     */
-    readonly isActive: boolean;
-    /**
-     * Some perks provide benefits, but aren't visible in the UI. This value will let
-     * you know if this is perk should be shown in your UI.
-     */
-    readonly visible: boolean;
+  /**
+   * The hash identifier for the perk, which can be used to look up
+   * DestinySandboxPerkDefinition if it exists. Be warned, perks frequently do not
+   * have user-viewable information. You should examine whether you actually found a
+   * name/description in the perk's definition before you show it to the user.
+   *
+   * Mapped to DestinySandboxPerkDefinition in the manifest.
+   */
+  readonly perkHash: number;
+  /** The icon for the perk. */
+  readonly iconPath: string;
+  /**
+   * Whether this perk is currently active. (We may return perks that you have not
+   * actually activated yet: these represent perks that you should show in the item's
+   * tooltip, but that the user has not yet activated.)
+   */
+  readonly isActive: boolean;
+  /**
+   * Some perks provide benefits, but aren't visible in the UI. This value will let
+   * you know if this is perk should be shown in your UI.
+   */
+  readonly visible: boolean;
 }
 /**
  * Many items can be rendered in 3D. When you request this block, you will obtain
  * the custom data needed to render this specific instance of the item.
  */
 export interface DestinyItemRenderComponent {
-    /** If you should use custom dyes on this item, it will be indicated here. */
-    readonly useCustomDyes: boolean;
-    /**
-     * A dictionary for rendering gear components, with:
-     *
-     * key = Art Arrangement Region Index
-     *
-     * value = The chosen Arrangement Index for the Region, based on the value of a
-     * stat on the item used for making the choice.
-     */
-    readonly artRegions: {
-        [key: number]: number;
-    };
+  /** If you should use custom dyes on this item, it will be indicated here. */
+  readonly useCustomDyes: boolean;
+  /**
+   * A dictionary for rendering gear components, with:
+   *
+   * key = Art Arrangement Region Index
+   *
+   * value = The chosen Arrangement Index for the Region, based on the value of a
+   * stat on the item used for making the choice.
+   */
+  readonly artRegions: {
+    [key: number]: number;
+  };
 }
 /**
  * If you want the stats on an item's instanced data, get this component.
@@ -11120,15 +11130,15 @@ export interface DestinyItemRenderComponent {
  * compared to what you see in-game for some stats. I know, it sucks. I hate it too.
  */
 export interface DestinyItemStatsComponent {
-    /**
-     * If the item has stats that it provides (damage, defense, etc...), it will be
-     * given here.
-     *
-     * Mapped to DestinyStatDefinition in the manifest.
-     */
-    readonly stats: {
-        [key: number]: DestinyStat;
-    };
+  /**
+   * If the item has stats that it provides (damage, defense, etc...), it will be
+   * given here.
+   *
+   * Mapped to DestinyStatDefinition in the manifest.
+   */
+  readonly stats: {
+    [key: number]: DestinyStat;
+  };
 }
 /**
  * Instanced items can have sockets, which are slots on the item where plugs can be
@@ -11139,8 +11149,8 @@ export interface DestinyItemStatsComponent {
  * for more details.
  */
 export interface DestinyItemSocketsComponent {
-    /** The list of all sockets on the item, and their status information. */
-    readonly sockets: DestinyItemSocketState[];
+  /** The list of all sockets on the item, and their status information. */
+  readonly sockets: DestinyItemSocketState[];
 }
 /**
  * The status of a given item's socket. (which plug is inserted, if any: whether it
@@ -11150,120 +11160,120 @@ export interface DestinyItemSocketsComponent {
  * the inserted item instead of most of these properties. :shrug:
  */
 export interface DestinyItemSocketState {
-    /**
-     * The currently active plug, if any.
-     *
-     * Note that, because all plugs are statically defined, its effect on stats and
-     * perks can be statically determined using the plug item's definition. The stats
-     * and perks can be taken at face value on the plug item as the stats and perks it
-     * will provide to the user/item.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugHash?: number;
-    /**
-     * Even if a plug is inserted, it doesn't mean it's enabled.
-     *
-     * This flag indicates whether the plug is active and providing its benefits.
-     */
-    readonly isEnabled: boolean;
-    /**
-     * A plug may theoretically provide benefits but not be visible - for instance,
-     * some older items use a plug's damage type perk to modify their own damage type.
-     * These, though they are not visible, still affect the item. This field indicates
-     * that state.
-     *
-     * An invisible plug, while it provides benefits if it is Enabled, cannot be
-     * directly modified by the user.
-     */
-    readonly isVisible: boolean;
-    /**
-     * If a plug is inserted but not enabled, this will be populated with indexes into
-     * the plug item definition's plug.enabledRules property, so that you can show the
-     * reasons why it is not enabled.
-     */
-    readonly enableFailIndexes: number[];
+  /**
+   * The currently active plug, if any.
+   *
+   * Note that, because all plugs are statically defined, its effect on stats and
+   * perks can be statically determined using the plug item's definition. The stats
+   * and perks can be taken at face value on the plug item as the stats and perks it
+   * will provide to the user/item.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugHash?: number;
+  /**
+   * Even if a plug is inserted, it doesn't mean it's enabled.
+   *
+   * This flag indicates whether the plug is active and providing its benefits.
+   */
+  readonly isEnabled: boolean;
+  /**
+   * A plug may theoretically provide benefits but not be visible - for instance,
+   * some older items use a plug's damage type perk to modify their own damage type.
+   * These, though they are not visible, still affect the item. This field indicates
+   * that state.
+   *
+   * An invisible plug, while it provides benefits if it is Enabled, cannot be
+   * directly modified by the user.
+   */
+  readonly isVisible: boolean;
+  /**
+   * If a plug is inserted but not enabled, this will be populated with indexes into
+   * the plug item definition's plug.enabledRules property, so that you can show the
+   * reasons why it is not enabled.
+   */
+  readonly enableFailIndexes: number[];
 }
 export interface DestinyItemReusablePlugsComponent {
-    /**
-     * If the item supports reusable plugs, this is the list of plugs that are allowed
-     * to be used for the socket, and any relevant information about whether they are "
-     * enabled", whether they are allowed to be inserted, and any other information
-     * such as objectives.
-     *
-     * A Reusable Plug is a plug that you can always insert into this socket as long
-     * as its insertion rules are passed, regardless of whether or not you have the
-     * plug in your inventory. An example of it failing an insertion rule would be if
-     * it has an Objective that needs to be completed before it can be inserted, and
-     * that objective hasn't been completed yet.
-     *
-     * In practice, a socket will *either* have reusable plugs *or* it will allow for
-     * plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.
-     * socket for more info.
-     *
-     * KEY = The INDEX into the item's list of sockets. VALUE = The set of plugs for
-     * that socket.
-     *
-     * If a socket doesn't have any reusable plugs defined at the item scope, there
-     * will be no entry for that socket.
-     */
-    readonly plugs: {
-        [key: number]: DestinyItemPlugBase[];
-    };
+  /**
+   * If the item supports reusable plugs, this is the list of plugs that are allowed
+   * to be used for the socket, and any relevant information about whether they are "
+   * enabled", whether they are allowed to be inserted, and any other information
+   * such as objectives.
+   *
+   * A Reusable Plug is a plug that you can always insert into this socket as long
+   * as its insertion rules are passed, regardless of whether or not you have the
+   * plug in your inventory. An example of it failing an insertion rule would be if
+   * it has an Objective that needs to be completed before it can be inserted, and
+   * that objective hasn't been completed yet.
+   *
+   * In practice, a socket will *either* have reusable plugs *or* it will allow for
+   * plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.
+   * socket for more info.
+   *
+   * KEY = The INDEX into the item's list of sockets. VALUE = The set of plugs for
+   * that socket.
+   *
+   * If a socket doesn't have any reusable plugs defined at the item scope, there
+   * will be no entry for that socket.
+   */
+  readonly plugs: {
+    [key: number]: DestinyItemPlugBase[];
+  };
 }
 export interface DestinyItemPlugBase {
-    /**
-     * The hash identifier of the DestinyInventoryItemDefinition that represents this
-     * plug.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
-    /** If true, this plug has met all of its insertion requirements. Big if true. */
-    readonly canInsert: boolean;
-    /** If true, this plug will provide its benefits while inserted. */
-    readonly enabled: boolean;
-    /**
-     * If the plug cannot be inserted for some reason, this will have the indexes into
-     * the plug item definition's plug.insertionRules property, so you can show the
-     * reasons why it can't be inserted.
-     *
-     * This list will be empty if the plug can be inserted.
-     */
-    readonly insertFailIndexes: number[];
-    /**
-     * If a plug is not enabled, this will be populated with indexes into the plug item
-     * definition's plug.enabledRules property, so that you can show the reasons why it
-     * is not enabled.
-     *
-     * This list will be empty if the plug is enabled.
-     */
-    readonly enableFailIndexes: number[];
+  /**
+   * The hash identifier of the DestinyInventoryItemDefinition that represents this
+   * plug.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
+  /** If true, this plug has met all of its insertion requirements. Big if true. */
+  readonly canInsert: boolean;
+  /** If true, this plug will provide its benefits while inserted. */
+  readonly enabled: boolean;
+  /**
+   * If the plug cannot be inserted for some reason, this will have the indexes into
+   * the plug item definition's plug.insertionRules property, so you can show the
+   * reasons why it can't be inserted.
+   *
+   * This list will be empty if the plug can be inserted.
+   */
+  readonly insertFailIndexes: number[];
+  /**
+   * If a plug is not enabled, this will be populated with indexes into the plug item
+   * definition's plug.enabledRules property, so that you can show the reasons why it
+   * is not enabled.
+   *
+   * This list will be empty if the plug is enabled.
+   */
+  readonly enableFailIndexes: number[];
 }
 export interface DestinyItemPlugObjectivesComponent {
-    /**
-     * This set of data is keyed by the Item Hash (DestinyInventoryItemDefinition) of
-     * the plug whose objectives are being returned, with the value being the list of
-     * those objectives.
-     *
-     * What if two plugs with the same hash are returned for an item, you ask?
-     *
-     * Good question! They share the same item-scoped state, and as such would have
-     * identical objective state as a result. How's that for convenient.
-     *
-     * Sometimes, Plugs may have objectives: generally, these are used for flavor and
-     * display purposes. For instance, a Plug might be tracking the number of PVP kills
-     * you have made. It will use the parent item's data about that tracking status to
-     * determine what to show, and will generally show it using the
-     * DestinyObjectiveDefinition's progressDescription property. Refer to the plug's
-     * itemHash and objective property for more information if you would like to
-     * display even more data.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly objectivesPerPlug: {
-        [key: number]: DestinyObjectiveProgress[];
-    };
+  /**
+   * This set of data is keyed by the Item Hash (DestinyInventoryItemDefinition) of
+   * the plug whose objectives are being returned, with the value being the list of
+   * those objectives.
+   *
+   * What if two plugs with the same hash are returned for an item, you ask?
+   *
+   * Good question! They share the same item-scoped state, and as such would have
+   * identical objective state as a result. How's that for convenient.
+   *
+   * Sometimes, Plugs may have objectives: generally, these are used for flavor and
+   * display purposes. For instance, a Plug might be tracking the number of PVP kills
+   * you have made. It will use the parent item's data about that tracking status to
+   * determine what to show, and will generally show it using the
+   * DestinyObjectiveDefinition's progressDescription property. Refer to the plug's
+   * itemHash and objective property for more information if you would like to
+   * display even more data.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly objectivesPerPlug: {
+    [key: number]: DestinyObjectiveProgress[];
+  };
 }
 /**
  * Well, we're here in Destiny 2, and Talent Grids are unfortunately still around.
@@ -11288,39 +11298,39 @@ export interface DestinyItemPlugObjectivesComponent {
  * s cold out there in the deep end.
  */
 export interface DestinyItemTalentGridComponent {
-    /**
-     * Most items don't have useful talent grids anymore, but Builds in particular
-     * still do.
-     *
-     * You can use this hash to lookup the DestinyTalentGridDefinition attached to this
-     * item, which will be crucial for understanding the node values on the item.
-     *
-     * Mapped to DestinyTalentGridDefinition in the manifest.
-     */
-    readonly talentGridHash: number;
-    /**
-     * Detailed information about the individual nodes in the talent grid.
-     *
-     * A node represents a single visual "pip" in the talent grid or Build detail view,
-     * though each node may have multiple "steps" which indicate the actual bonuses and
-     * visual representation of that node.
-     */
-    readonly nodes: DestinyTalentNode[];
-    /**
-     * Indicates whether the talent grid on this item is completed, and thus whether it
-     * should have a gold border around it.
-     *
-     * Only will be true if the item actually *has* a talent grid, and only then if it
-     * is completed (i.e. every exclusive set has an activated node, and every non-
-     * exclusive set node has been activated)
-     */
-    readonly isGridComplete: boolean;
-    /**
-     * If the item has a progression, it will be detailed here. A progression means
-     * that the item can gain experience. Thresholds of experience are what determines
-     * whether and when a talent node can be activated.
-     */
-    readonly gridProgression: DestinyProgression;
+  /**
+   * Most items don't have useful talent grids anymore, but Builds in particular
+   * still do.
+   *
+   * You can use this hash to lookup the DestinyTalentGridDefinition attached to this
+   * item, which will be crucial for understanding the node values on the item.
+   *
+   * Mapped to DestinyTalentGridDefinition in the manifest.
+   */
+  readonly talentGridHash: number;
+  /**
+   * Detailed information about the individual nodes in the talent grid.
+   *
+   * A node represents a single visual "pip" in the talent grid or Build detail view,
+   * though each node may have multiple "steps" which indicate the actual bonuses and
+   * visual representation of that node.
+   */
+  readonly nodes: DestinyTalentNode[];
+  /**
+   * Indicates whether the talent grid on this item is completed, and thus whether it
+   * should have a gold border around it.
+   *
+   * Only will be true if the item actually *has* a talent grid, and only then if it
+   * is completed (i.e. every exclusive set has an activated node, and every non-
+   * exclusive set node has been activated)
+   */
+  readonly isGridComplete: boolean;
+  /**
+   * If the item has a progression, it will be detailed here. A progression means
+   * that the item can gain experience. Thresholds of experience are what determines
+   * whether and when a talent node can be activated.
+   */
+  readonly gridProgression: DestinyProgression;
 }
 /**
  * I see you've come to find out more about Talent Nodes. I'm so sorry. Talent
@@ -11344,79 +11354,79 @@ export interface DestinyItemTalentGridComponent {
  * based on talent grid data.
  */
 export interface DestinyTalentNode {
-    /**
-     * The index of the Talent Node being referred to (an index into
-     * DestinyTalentGridDefinition.nodes[]). CONTENT VERSION DEPENDENT.
-     */
-    readonly nodeIndex: number;
-    /**
-     * The hash of the Talent Node being referred to (in DestinyTalentGridDefinition.
-     * nodes). Deceptively CONTENT VERSION DEPENDENT. We have no guarantee of the hash'
-     * s immutability between content versions.
-     */
-    readonly nodeHash: number;
-    /**
-     * An DestinyTalentNodeState enum value indicating the node's state: whether it can
-     * be activated or swapped, and why not if neither can be performed.
-     */
-    readonly state: DestinyTalentNodeState;
-    /** If true, the node is activated: it's current step then provides its benefits. */
-    readonly isActivated: boolean;
-    /**
-     * The currently relevant Step for the node. It is this step that has rendering
-     * data for the node and the benefits that are provided if the node is activated. (
-     * the actual rules for benefits provided are extremely complicated in theory, but
-     * with how Talent Grids are being used in Destiny 2 you don't have to worry about
-     * a lot of those old Destiny 1 rules.) This is an index into:
-     * DestinyTalentGridDefinition.nodes[nodeIndex].steps[stepIndex]
-     */
-    readonly stepIndex: number;
-    /**
-     * If the node has material requirements to be activated, this is the list of those
-     * requirements.
-     */
-    readonly materialsToUpgrade: DestinyMaterialRequirement[];
-    /**
-     * The progression level required on the Talent Grid in order to be able to
-     * activate this talent node. Talent Grids have their own Progression - similar to
-     * Character Level, but in this case it is experience related to the item itself.
-     */
-    readonly activationGridLevel: number;
-    /**
-     * If you want to show a progress bar or circle for how close this talent node is
-     * to being activate-able, this is the percentage to show. It follows the node's
-     * underlying rules about when the progress bar should first show up, and when it
-     * should be filled.
-     */
-    readonly progressPercent: number;
-    /**
-     * Whether or not the talent node is actually visible in the game's UI. Whether you
-     * want to show it in your own UI is up to you! I'm not gonna tell you who to sock
-     * it to.
-     */
-    readonly hidden: boolean;
-    /**
-     * This property has some history. A talent grid can provide stats on both the item
-     * it's related to and the character equipping the item. This returns data about
-     * those stat bonuses.
-     */
-    readonly nodeStatsBlock: DestinyTalentNodeStatBlock;
+  /**
+   * The index of the Talent Node being referred to (an index into
+   * DestinyTalentGridDefinition.nodes[]). CONTENT VERSION DEPENDENT.
+   */
+  readonly nodeIndex: number;
+  /**
+   * The hash of the Talent Node being referred to (in DestinyTalentGridDefinition.
+   * nodes). Deceptively CONTENT VERSION DEPENDENT. We have no guarantee of the hash'
+   * s immutability between content versions.
+   */
+  readonly nodeHash: number;
+  /**
+   * An DestinyTalentNodeState enum value indicating the node's state: whether it can
+   * be activated or swapped, and why not if neither can be performed.
+   */
+  readonly state: DestinyTalentNodeState;
+  /** If true, the node is activated: it's current step then provides its benefits. */
+  readonly isActivated: boolean;
+  /**
+   * The currently relevant Step for the node. It is this step that has rendering
+   * data for the node and the benefits that are provided if the node is activated. (
+   * the actual rules for benefits provided are extremely complicated in theory, but
+   * with how Talent Grids are being used in Destiny 2 you don't have to worry about
+   * a lot of those old Destiny 1 rules.) This is an index into:
+   * DestinyTalentGridDefinition.nodes[nodeIndex].steps[stepIndex]
+   */
+  readonly stepIndex: number;
+  /**
+   * If the node has material requirements to be activated, this is the list of those
+   * requirements.
+   */
+  readonly materialsToUpgrade: DestinyMaterialRequirement[];
+  /**
+   * The progression level required on the Talent Grid in order to be able to
+   * activate this talent node. Talent Grids have their own Progression - similar to
+   * Character Level, but in this case it is experience related to the item itself.
+   */
+  readonly activationGridLevel: number;
+  /**
+   * If you want to show a progress bar or circle for how close this talent node is
+   * to being activate-able, this is the percentage to show. It follows the node's
+   * underlying rules about when the progress bar should first show up, and when it
+   * should be filled.
+   */
+  readonly progressPercent: number;
+  /**
+   * Whether or not the talent node is actually visible in the game's UI. Whether you
+   * want to show it in your own UI is up to you! I'm not gonna tell you who to sock
+   * it to.
+   */
+  readonly hidden: boolean;
+  /**
+   * This property has some history. A talent grid can provide stats on both the item
+   * it's related to and the character equipping the item. This returns data about
+   * those stat bonuses.
+   */
+  readonly nodeStatsBlock: DestinyTalentNodeStatBlock;
 }
 export declare const enum DestinyTalentNodeState {
-    Invalid = 0,
-    CanUpgrade = 1,
-    NoPoints = 2,
-    NoPrerequisites = 3,
-    NoSteps = 4,
-    NoUnlock = 5,
-    NoMaterial = 6,
-    NoGridLevel = 7,
-    SwappingLocked = 8,
-    MustSwap = 9,
-    Complete = 10,
-    Unknown = 11,
-    CreationOnly = 12,
-    Hidden = 13
+  Invalid = 0,
+  CanUpgrade = 1,
+  NoPoints = 2,
+  NoPrerequisites = 3,
+  NoSteps = 4,
+  NoUnlock = 5,
+  NoMaterial = 6,
+  NoGridLevel = 7,
+  SwappingLocked = 8,
+  MustSwap = 9,
+  Complete = 10,
+  Unknown = 11,
+  CreationOnly = 12,
+  Hidden = 13,
 }
 /**
  * This property has some history. A talent grid can provide stats on both the item
@@ -11424,21 +11434,21 @@ export declare const enum DestinyTalentNodeState {
  * those stat bonuses.
  */
 export interface DestinyTalentNodeStatBlock {
-    /**
-     * The stat benefits conferred when this talent node is activated for the current
-     * Step that is active on the node.
-     */
-    readonly currentStepStats: DestinyStat[];
-    /**
-     * This is a holdover from the old days of Destiny 1, when a node could be
-     * activated multiple times, conferring multiple steps worth of benefits: you would
-     * use this property to show what activating the "next" step on the node would
-     * provide vs. what the current step is providing. While Nodes are currently not
-     * being used this way, the underlying system for this functionality still exists.
-     * I hesitate to remove this property while the ability for designers to make such
-     * a talent grid still exists. Whether you want to show it is up to you.
-     */
-    readonly nextStepStats: DestinyStat[];
+  /**
+   * The stat benefits conferred when this talent node is activated for the current
+   * Step that is active on the node.
+   */
+  readonly currentStepStats: DestinyStat[];
+  /**
+   * This is a holdover from the old days of Destiny 1, when a node could be
+   * activated multiple times, conferring multiple steps worth of benefits: you would
+   * use this property to show what activating the "next" step on the node would
+   * provide vs. what the current step is providing. While Nodes are currently not
+   * being used this way, the underlying system for this functionality still exists.
+   * I hesitate to remove this property while the ability for designers to make such
+   * a talent grid still exists. Whether you want to show it is up to you.
+   */
+  readonly nextStepStats: DestinyStat[];
 }
 /**
  * Plugs are non-instanced items that can provide Stat and Perk benefits when
@@ -11450,45 +11460,45 @@ export interface DestinyTalentNodeStatBlock {
  * it could be inserted.
  */
 export interface DestinyItemPlugComponent {
-    /**
-     * Sometimes, Plugs may have objectives: these are often used for flavor and
-     * display purposes, but they can be used for any arbitrary purpose (both
-     * fortunately and unfortunately). Recently (with Season 2) they were expanded in
-     * use to be used as the "gating" for whether the plug can be inserted at all. For
-     * instance, a Plug might be tracking the number of PVP kills you have made. It
-     * will use the parent item's data about that tracking status to determine what to
-     * show, and will generally show it using the DestinyObjectiveDefinition's
-     * progressDescription property. Refer to the plug's itemHash and objective
-     * property for more information if you would like to display even more data.
-     */
-    readonly plugObjectives: DestinyObjectiveProgress[];
-    /**
-     * The hash identifier of the DestinyInventoryItemDefinition that represents this
-     * plug.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly plugItemHash: number;
-    /** If true, this plug has met all of its insertion requirements. Big if true. */
-    readonly canInsert: boolean;
-    /** If true, this plug will provide its benefits while inserted. */
-    readonly enabled: boolean;
-    /**
-     * If the plug cannot be inserted for some reason, this will have the indexes into
-     * the plug item definition's plug.insertionRules property, so you can show the
-     * reasons why it can't be inserted.
-     *
-     * This list will be empty if the plug can be inserted.
-     */
-    readonly insertFailIndexes: number[];
-    /**
-     * If a plug is not enabled, this will be populated with indexes into the plug item
-     * definition's plug.enabledRules property, so that you can show the reasons why it
-     * is not enabled.
-     *
-     * This list will be empty if the plug is enabled.
-     */
-    readonly enableFailIndexes: number[];
+  /**
+   * Sometimes, Plugs may have objectives: these are often used for flavor and
+   * display purposes, but they can be used for any arbitrary purpose (both
+   * fortunately and unfortunately). Recently (with Season 2) they were expanded in
+   * use to be used as the "gating" for whether the plug can be inserted at all. For
+   * instance, a Plug might be tracking the number of PVP kills you have made. It
+   * will use the parent item's data about that tracking status to determine what to
+   * show, and will generally show it using the DestinyObjectiveDefinition's
+   * progressDescription property. Refer to the plug's itemHash and objective
+   * property for more information if you would like to display even more data.
+   */
+  readonly plugObjectives: DestinyObjectiveProgress[];
+  /**
+   * The hash identifier of the DestinyInventoryItemDefinition that represents this
+   * plug.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly plugItemHash: number;
+  /** If true, this plug has met all of its insertion requirements. Big if true. */
+  readonly canInsert: boolean;
+  /** If true, this plug will provide its benefits while inserted. */
+  readonly enabled: boolean;
+  /**
+   * If the plug cannot be inserted for some reason, this will have the indexes into
+   * the plug item definition's plug.insertionRules property, so you can show the
+   * reasons why it can't be inserted.
+   *
+   * This list will be empty if the plug can be inserted.
+   */
+  readonly insertFailIndexes: number[];
+  /**
+   * If a plug is not enabled, this will be populated with indexes into the plug item
+   * definition's plug.enabledRules property, so that you can show the reasons why it
+   * is not enabled.
+   *
+   * This list will be empty if the plug is enabled.
+   */
+  readonly enableFailIndexes: number[];
 }
 /**
  * This component provides a quick lookup of every item the requested character has
@@ -11505,107 +11515,107 @@ export interface DestinyItemPlugComponent {
  * GetProfile calls.
  */
 export interface DestinyCurrenciesComponent {
-    /**
-     * A dictionary - keyed by the item's hash identifier (
-     * DestinyInventoryItemDefinition), and whose value is the amount of that item you
-     * have across all available inventory buckets for purchasing.
-     *
-     * This allows you to see whether the requesting character can afford any given
-     * purchase/action without having to re-create this list itself.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemQuantities: {
-        [key: number]: number;
-    };
+  /**
+   * A dictionary - keyed by the item's hash identifier (
+   * DestinyInventoryItemDefinition), and whose value is the amount of that item you
+   * have across all available inventory buckets for purchasing.
+   *
+   * This allows you to see whether the requesting character can afford any given
+   * purchase/action without having to re-create this list itself.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemQuantities: {
+    [key: number]: number;
+  };
 }
 /**
  * The response contract for GetDestinyCharacter, with components that can be
  * returned for character and item-level data.
  */
 export interface DestinyCharacterResponse {
-    /**
-     * The character-level non-equipped inventory items.
-     *
-     * COMPONENT TYPE: CharacterInventories
-     */
-    readonly inventory: SingleComponentResponse<DestinyInventoryComponent>;
-    /**
-     * Base information about the character in question.
-     *
-     * COMPONENT TYPE: Characters
-     */
-    readonly character: SingleComponentResponse<DestinyCharacterComponent>;
-    /**
-     * Character progression data, including Milestones.
-     *
-     * COMPONENT TYPE: CharacterProgressions
-     */
-    readonly progressions: SingleComponentResponse<DestinyCharacterProgressionComponent>;
-    /**
-     * Character rendering data - a minimal set of information about equipment and dyes
-     * used for rendering.
-     *
-     * COMPONENT TYPE: CharacterRenderData
-     */
-    readonly renderData: SingleComponentResponse<DestinyCharacterRenderComponent>;
-    /**
-     * Activity data - info about current activities available to the player.
-     *
-     * COMPONENT TYPE: CharacterActivities
-     */
-    readonly activities: SingleComponentResponse<DestinyCharacterActivitiesComponent>;
-    /**
-     * Equipped items on the character.
-     *
-     * COMPONENT TYPE: CharacterEquipment
-     */
-    readonly equipment: SingleComponentResponse<DestinyInventoryComponent>;
-    /**
-     * Items available from Kiosks that are available to this specific character.
-     *
-     * COMPONENT TYPE: Kiosks
-     */
-    readonly kiosks: SingleComponentResponse<DestinyKiosksComponent>;
-    /**
-     * When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more
-     * info), this is the set of plugs and their states that are scoped to this
-     * character.
-     *
-     * This comes back with ItemSockets, as it is needed for a complete picture of the
-     * sockets on requested items.
-     *
-     * COMPONENT TYPE: ItemSockets
-     */
-    readonly plugSets: SingleComponentResponse<DestinyPlugSetsComponent>;
-    /** COMPONENT TYPE: PresentationNodes */
-    readonly presentationNodes: SingleComponentResponse<DestinyPresentationNodesComponent>;
-    /** COMPONENT TYPE: Records */
-    readonly records: SingleComponentResponse<DestinyCharacterRecordsComponent>;
-    /** COMPONENT TYPE: Collectibles */
-    readonly collectibles: SingleComponentResponse<DestinyCollectiblesComponent>;
-    /**
-     * The set of components belonging to the player's instanced items.
-     *
-     * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
-     * types.]
-     */
-    readonly itemComponents: DestinyItemComponentSetOfint64;
-    /**
-     * The set of components belonging to the player's UNinstanced items. Because
-     * apparently now those too can have information relevant to the character's state.
-     *
-     * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
-     * types.]
-     */
-    readonly uninstancedItemComponents: DestinyBaseItemComponentSetOfuint32;
-    /**
-     * A "lookup" convenience component that can be used to quickly check if the
-     * character has access to items that can be used for purchasing.
-     *
-     * COMPONENT TYPE: CurrencyLookups
-     */
-    readonly currencyLookups: SingleComponentResponse<DestinyCurrenciesComponent>;
+  /**
+   * The character-level non-equipped inventory items.
+   *
+   * COMPONENT TYPE: CharacterInventories
+   */
+  readonly inventory: SingleComponentResponse<DestinyInventoryComponent>;
+  /**
+   * Base information about the character in question.
+   *
+   * COMPONENT TYPE: Characters
+   */
+  readonly character: SingleComponentResponse<DestinyCharacterComponent>;
+  /**
+   * Character progression data, including Milestones.
+   *
+   * COMPONENT TYPE: CharacterProgressions
+   */
+  readonly progressions: SingleComponentResponse<DestinyCharacterProgressionComponent>;
+  /**
+   * Character rendering data - a minimal set of information about equipment and dyes
+   * used for rendering.
+   *
+   * COMPONENT TYPE: CharacterRenderData
+   */
+  readonly renderData: SingleComponentResponse<DestinyCharacterRenderComponent>;
+  /**
+   * Activity data - info about current activities available to the player.
+   *
+   * COMPONENT TYPE: CharacterActivities
+   */
+  readonly activities: SingleComponentResponse<DestinyCharacterActivitiesComponent>;
+  /**
+   * Equipped items on the character.
+   *
+   * COMPONENT TYPE: CharacterEquipment
+   */
+  readonly equipment: SingleComponentResponse<DestinyInventoryComponent>;
+  /**
+   * Items available from Kiosks that are available to this specific character.
+   *
+   * COMPONENT TYPE: Kiosks
+   */
+  readonly kiosks: SingleComponentResponse<DestinyKiosksComponent>;
+  /**
+   * When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more
+   * info), this is the set of plugs and their states that are scoped to this
+   * character.
+   *
+   * This comes back with ItemSockets, as it is needed for a complete picture of the
+   * sockets on requested items.
+   *
+   * COMPONENT TYPE: ItemSockets
+   */
+  readonly plugSets: SingleComponentResponse<DestinyPlugSetsComponent>;
+  /** COMPONENT TYPE: PresentationNodes */
+  readonly presentationNodes: SingleComponentResponse<DestinyPresentationNodesComponent>;
+  /** COMPONENT TYPE: Records */
+  readonly records: SingleComponentResponse<DestinyCharacterRecordsComponent>;
+  /** COMPONENT TYPE: Collectibles */
+  readonly collectibles: SingleComponentResponse<DestinyCollectiblesComponent>;
+  /**
+   * The set of components belonging to the player's instanced items.
+   *
+   * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
+   * types.]
+   */
+  readonly itemComponents: DestinyItemComponentSetOfint64;
+  /**
+   * The set of components belonging to the player's UNinstanced items. Because
+   * apparently now those too can have information relevant to the character's state.
+   *
+   * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
+   * types.]
+   */
+  readonly uninstancedItemComponents: DestinyBaseItemComponentSetOfuint32;
+  /**
+   * A "lookup" convenience component that can be used to quickly check if the
+   * character has access to items that can be used for purchasing.
+   *
+   * COMPONENT TYPE: CurrencyLookups
+   */
+  readonly currencyLookups: SingleComponentResponse<DestinyCurrenciesComponent>;
 }
 /**
  * The response object for retrieving an individual instanced item. None of these
@@ -11613,137 +11623,137 @@ export interface DestinyCharacterResponse {
  * those, get your information from the DestinyInventoryDefinition.
  */
 export interface DestinyItemResponse {
-    /**
-     * If the item is on a character, this will return the ID of the character that is
-     * holding the item.
-     */
-    readonly characterId?: string;
-    /**
-     * Common data for the item relevant to its non-instanced properties.
-     *
-     * COMPONENT TYPE: ItemCommonData
-     */
-    readonly item: SingleComponentResponse<DestinyItemComponent>;
-    /**
-     * Basic instance data for the item.
-     *
-     * COMPONENT TYPE: ItemInstances
-     */
-    readonly instance: SingleComponentResponse<DestinyItemInstanceComponent>;
-    /**
-     * Information specifically about the item's objectives.
-     *
-     * COMPONENT TYPE: ItemObjectives
-     */
-    readonly objectives: SingleComponentResponse<DestinyItemObjectivesComponent>;
-    /**
-     * Information specifically about the perks currently active on the item.
-     *
-     * COMPONENT TYPE: ItemPerks
-     */
-    readonly perks: SingleComponentResponse<DestinyItemPerksComponent>;
-    /**
-     * Information about how to render the item in 3D.
-     *
-     * COMPONENT TYPE: ItemRenderData
-     */
-    readonly renderData: SingleComponentResponse<DestinyItemRenderComponent>;
-    /**
-     * Information about the computed stats of the item: power, defense, etc...
-     *
-     * COMPONENT TYPE: ItemStats
-     */
-    readonly stats: SingleComponentResponse<DestinyItemStatsComponent>;
-    /**
-     * Information about the talent grid attached to the item. Talent nodes can provide
-     * a variety of benefits and abilities, and in Destiny 2 are used almost
-     * exclusively for the character's "Builds".
-     *
-     * COMPONENT TYPE: ItemTalentGrids
-     */
-    readonly talentGrid: SingleComponentResponse<DestinyItemTalentGridComponent>;
-    /**
-     * Information about the sockets of the item: which are currently active, what
-     * potential sockets you could have and the stats/abilities/perks you can gain from
-     * them.
-     *
-     * COMPONENT TYPE: ItemSockets
-     */
-    readonly sockets: SingleComponentResponse<DestinyItemSocketsComponent>;
-    /**
-     * Information about the Reusable Plugs for sockets on an item. These are plugs
-     * that you can insert into the given socket regardless of if you actually own an
-     * instance of that plug: they are logic-driven plugs rather than inventory-driven.
-     *
-     * These may need to be combined with Plug Set component data to get a full
-     * picture of available plugs on a given socket.
-     *
-     * COMPONENT TYPE: ItemReusablePlugs
-     */
-    readonly reusablePlugs: SingleComponentResponse<DestinyItemReusablePlugsComponent>;
-    /**
-     * Information about objectives on Plugs for a given item. See the component's
-     * documentation for more info.
-     *
-     * COMPONENT TYPE: ItemPlugObjectives
-     */
-    readonly plugObjectives: SingleComponentResponse<DestinyItemPlugObjectivesComponent>;
+  /**
+   * If the item is on a character, this will return the ID of the character that is
+   * holding the item.
+   */
+  readonly characterId?: string;
+  /**
+   * Common data for the item relevant to its non-instanced properties.
+   *
+   * COMPONENT TYPE: ItemCommonData
+   */
+  readonly item: SingleComponentResponse<DestinyItemComponent>;
+  /**
+   * Basic instance data for the item.
+   *
+   * COMPONENT TYPE: ItemInstances
+   */
+  readonly instance: SingleComponentResponse<DestinyItemInstanceComponent>;
+  /**
+   * Information specifically about the item's objectives.
+   *
+   * COMPONENT TYPE: ItemObjectives
+   */
+  readonly objectives: SingleComponentResponse<DestinyItemObjectivesComponent>;
+  /**
+   * Information specifically about the perks currently active on the item.
+   *
+   * COMPONENT TYPE: ItemPerks
+   */
+  readonly perks: SingleComponentResponse<DestinyItemPerksComponent>;
+  /**
+   * Information about how to render the item in 3D.
+   *
+   * COMPONENT TYPE: ItemRenderData
+   */
+  readonly renderData: SingleComponentResponse<DestinyItemRenderComponent>;
+  /**
+   * Information about the computed stats of the item: power, defense, etc...
+   *
+   * COMPONENT TYPE: ItemStats
+   */
+  readonly stats: SingleComponentResponse<DestinyItemStatsComponent>;
+  /**
+   * Information about the talent grid attached to the item. Talent nodes can provide
+   * a variety of benefits and abilities, and in Destiny 2 are used almost
+   * exclusively for the character's "Builds".
+   *
+   * COMPONENT TYPE: ItemTalentGrids
+   */
+  readonly talentGrid: SingleComponentResponse<DestinyItemTalentGridComponent>;
+  /**
+   * Information about the sockets of the item: which are currently active, what
+   * potential sockets you could have and the stats/abilities/perks you can gain from
+   * them.
+   *
+   * COMPONENT TYPE: ItemSockets
+   */
+  readonly sockets: SingleComponentResponse<DestinyItemSocketsComponent>;
+  /**
+   * Information about the Reusable Plugs for sockets on an item. These are plugs
+   * that you can insert into the given socket regardless of if you actually own an
+   * instance of that plug: they are logic-driven plugs rather than inventory-driven.
+   *
+   * These may need to be combined with Plug Set component data to get a full
+   * picture of available plugs on a given socket.
+   *
+   * COMPONENT TYPE: ItemReusablePlugs
+   */
+  readonly reusablePlugs: SingleComponentResponse<DestinyItemReusablePlugsComponent>;
+  /**
+   * Information about objectives on Plugs for a given item. See the component's
+   * documentation for more info.
+   *
+   * COMPONENT TYPE: ItemPlugObjectives
+   */
+  readonly plugObjectives: SingleComponentResponse<DestinyItemPlugObjectivesComponent>;
 }
 /** A response containing all of the components for all requested vendors. */
 export interface DestinyVendorsResponse {
-    /**
-     * For Vendors being returned, this will give you the information you need to group
-     * them and order them in the same way that the Bungie Companion app performs
-     * grouping. It will automatically be returned if you request the Vendors component.
-     *
-     * COMPONENT TYPE: Vendors
-     */
-    readonly vendorGroups: SingleComponentResponse<DestinyVendorGroupComponent>;
-    /**
-     * The base properties of the vendor. These are keyed by the Vendor Hash, so you
-     * will get one Vendor Component per vendor returned.
-     *
-     * COMPONENT TYPE: Vendors
-     */
-    readonly vendors: DictionaryComponentResponse<DestinyVendorComponent>;
-    /**
-     * Categories that the vendor has available, and references to the sales therein.
-     * These are keyed by the Vendor Hash, so you will get one Categories Component per
-     * vendor returned.
-     *
-     * COMPONENT TYPE: VendorCategories
-     */
-    readonly categories: DictionaryComponentResponse<DestinyVendorCategoriesComponent>;
-    /**
-     * Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by
-     * the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.
-     *
-     * Note that within the Sale Item Set component, the sales are themselves keyed by
-     * the vendorSaleIndex, so you can relate it to the corrent sale item definition
-     * within the Vendor's definition.
-     *
-     * COMPONENT TYPE: VendorSales
-     */
-    readonly sales: DictionaryComponentResponse<PersonalDestinyVendorSaleItemSetComponent>;
-    /**
-     * The set of item detail components, one set of item components per Vendor. These
-     * are keyed by the Vendor Hash, so you will get one Item Component Set per vendor
-     * returned.
-     *
-     * The components contained inside are themselves keyed by the vendorSaleIndex, and
-     * will have whatever item-level components you requested (Sockets, Stats, Instance
-     * data etc...) per item being sold by the vendor.
-     */
-    readonly itemComponents: {
-        [key: number]: DestinyItemComponentSetOfint32;
-    };
-    /**
-     * A "lookup" convenience component that can be used to quickly check if the
-     * character has access to items that can be used for purchasing.
-     *
-     * COMPONENT TYPE: CurrencyLookups
-     */
-    readonly currencyLookups: SingleComponentResponse<DestinyCurrenciesComponent>;
+  /**
+   * For Vendors being returned, this will give you the information you need to group
+   * them and order them in the same way that the Bungie Companion app performs
+   * grouping. It will automatically be returned if you request the Vendors component.
+   *
+   * COMPONENT TYPE: Vendors
+   */
+  readonly vendorGroups: SingleComponentResponse<DestinyVendorGroupComponent>;
+  /**
+   * The base properties of the vendor. These are keyed by the Vendor Hash, so you
+   * will get one Vendor Component per vendor returned.
+   *
+   * COMPONENT TYPE: Vendors
+   */
+  readonly vendors: DictionaryComponentResponse<DestinyVendorComponent>;
+  /**
+   * Categories that the vendor has available, and references to the sales therein.
+   * These are keyed by the Vendor Hash, so you will get one Categories Component per
+   * vendor returned.
+   *
+   * COMPONENT TYPE: VendorCategories
+   */
+  readonly categories: DictionaryComponentResponse<DestinyVendorCategoriesComponent>;
+  /**
+   * Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by
+   * the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.
+   *
+   * Note that within the Sale Item Set component, the sales are themselves keyed by
+   * the vendorSaleIndex, so you can relate it to the corrent sale item definition
+   * within the Vendor's definition.
+   *
+   * COMPONENT TYPE: VendorSales
+   */
+  readonly sales: DictionaryComponentResponse<PersonalDestinyVendorSaleItemSetComponent>;
+  /**
+   * The set of item detail components, one set of item components per Vendor. These
+   * are keyed by the Vendor Hash, so you will get one Item Component Set per vendor
+   * returned.
+   *
+   * The components contained inside are themselves keyed by the vendorSaleIndex, and
+   * will have whatever item-level components you requested (Sockets, Stats, Instance
+   * data etc...) per item being sold by the vendor.
+   */
+  readonly itemComponents: {
+    [key: number]: DestinyItemComponentSetOfint32;
+  };
+  /**
+   * A "lookup" convenience component that can be used to quickly check if the
+   * character has access to items that can be used for purchasing.
+   *
+   * COMPONENT TYPE: CurrencyLookups
+   */
+  readonly currencyLookups: SingleComponentResponse<DestinyCurrenciesComponent>;
 }
 /**
  * This component returns references to all of the Vendors in the response, grouped
@@ -11751,8 +11761,8 @@ export interface DestinyVendorsResponse {
  * which both the groups and the vendors within that group should be rendered.
  */
 export interface DestinyVendorGroupComponent {
-    /** The ordered list of groups being returned. */
-    readonly groups: DestinyVendorGroup[];
+  /** The ordered list of groups being returned. */
+  readonly groups: DestinyVendorGroup[];
 }
 /**
  * Represents a specific group of vendors that can be rendered in the recommended
@@ -11762,69 +11772,69 @@ export interface DestinyVendorGroupComponent {
  * complicated over time.
  */
 export interface DestinyVendorGroup {
-    /** Mapped to DestinyVendorGroupDefinition in the manifest. */
-    readonly vendorGroupHash: number;
-    /**
-     * The ordered list of vendors within a particular group.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHashes: number[];
+  /** Mapped to DestinyVendorGroupDefinition in the manifest. */
+  readonly vendorGroupHash: number;
+  /**
+   * The ordered list of vendors within a particular group.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHashes: number[];
 }
 /** This component contains essential/summary information about the vendor. */
 export interface DestinyVendorComponent {
-    /**
-     * If True, you can purchase from the Vendor.
-     *
-     * Theoretically, Vendors can be restricted from selling items. In practice, none
-     * do that (yet?).
-     */
-    readonly canPurchase: boolean;
-    /**
-     * If the Vendor has a related Reputation, this is the Progression data that
-     * represents the character's Reputation level with this Vendor.
-     */
-    readonly progression: DestinyProgression;
-    /**
-     * An index into the vendor definition's "locations" property array, indicating
-     * which location they are at currently. If -1, then the vendor has no known
-     * location (and you may choose not to show them in your UI as a result. I mean, it'
-     * s your bag honey)
-     */
-    readonly vendorLocationIndex: number;
-    /**
-     * If this vendor has a seasonal rank, this will be the calculated value of that
-     * rank. How nice is that? I mean, that's pretty sweeet. It's a whole 32 bit
-     * integer.
-     */
-    readonly seasonalRank?: number;
-    /**
-     * The unique identifier for the vendor. Use it to look up their
-     * DestinyVendorDefinition.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * The date when this vendor's inventory will next rotate/refresh.
-     *
-     * Note that this is distinct from the date ranges that the vendor is visible/
-     * available in-game: this field indicates the specific time when the vendor's
-     * available items refresh and rotate, regardless of whether the vendor is actually
-     * available at that time. Unfortunately, these two values may be (and are, for the
-     * case of important vendors like Xur) different.
-     *
-     * Issue https://github.com/Bungie-net/api/issues/353 is tracking a fix to start
-     * providing visibility date ranges where possible in addition to this refresh date,
-     * so that all important dates for vendors are available for use.
-     */
-    readonly nextRefreshDate: string;
-    /**
-     * If True, the Vendor is currently accessible.
-     *
-     * If False, they may not actually be visible in the world at the moment.
-     */
-    readonly enabled: boolean;
+  /**
+   * If True, you can purchase from the Vendor.
+   *
+   * Theoretically, Vendors can be restricted from selling items. In practice, none
+   * do that (yet?).
+   */
+  readonly canPurchase: boolean;
+  /**
+   * If the Vendor has a related Reputation, this is the Progression data that
+   * represents the character's Reputation level with this Vendor.
+   */
+  readonly progression: DestinyProgression;
+  /**
+   * An index into the vendor definition's "locations" property array, indicating
+   * which location they are at currently. If -1, then the vendor has no known
+   * location (and you may choose not to show them in your UI as a result. I mean, it'
+   * s your bag honey)
+   */
+  readonly vendorLocationIndex: number;
+  /**
+   * If this vendor has a seasonal rank, this will be the calculated value of that
+   * rank. How nice is that? I mean, that's pretty sweeet. It's a whole 32 bit
+   * integer.
+   */
+  readonly seasonalRank?: number;
+  /**
+   * The unique identifier for the vendor. Use it to look up their
+   * DestinyVendorDefinition.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * The date when this vendor's inventory will next rotate/refresh.
+   *
+   * Note that this is distinct from the date ranges that the vendor is visible/
+   * available in-game: this field indicates the specific time when the vendor's
+   * available items refresh and rotate, regardless of whether the vendor is actually
+   * available at that time. Unfortunately, these two values may be (and are, for the
+   * case of important vendors like Xur) different.
+   *
+   * Issue https://github.com/Bungie-net/api/issues/353 is tracking a fix to start
+   * providing visibility date ranges where possible in addition to this refresh date,
+   * so that all important dates for vendors are available for use.
+   */
+  readonly nextRefreshDate: string;
+  /**
+   * If True, the Vendor is currently accessible.
+   *
+   * If False, they may not actually be visible in the world at the moment.
+   */
+  readonly enabled: boolean;
 }
 /**
  * A vendor can have many categories of items that they sell. This component will
@@ -11836,33 +11846,33 @@ export interface DestinyVendorComponent {
  * this data. This is an unfortunate, but permanent, limitation of Vendor data.
  */
 export interface DestinyVendorCategoriesComponent {
-    /**
-     * The list of categories for items that the vendor sells, in rendering order.
-     *
-     * These categories each point to a "display category" in the displayCategories
-     * property of the DestinyVendorDefinition, as opposed to the other categories.
-     */
-    readonly categories: DestinyVendorCategory[];
+  /**
+   * The list of categories for items that the vendor sells, in rendering order.
+   *
+   * These categories each point to a "display category" in the displayCategories
+   * property of the DestinyVendorDefinition, as opposed to the other categories.
+   */
+  readonly categories: DestinyVendorCategory[];
 }
 /** Information about the category and items currently sold in that category. */
 export interface DestinyVendorCategory {
-    /**
-     * An index into the DestinyVendorDefinition.displayCategories property, so you can
-     * grab the display data for this category.
-     */
-    readonly displayCategoryIndex: number;
-    /**
-     * An ordered list of indexes into items being sold in this category (
-     * DestinyVendorDefinition.itemList) which will contain more information about the
-     * items being sold themselves. Can also be used to index into
-     * DestinyVendorSaleItemComponent data, if you asked for that data to be returned.
-     */
-    readonly itemIndexes: number[];
+  /**
+   * An index into the DestinyVendorDefinition.displayCategories property, so you can
+   * grab the display data for this category.
+   */
+  readonly displayCategoryIndex: number;
+  /**
+   * An ordered list of indexes into items being sold in this category (
+   * DestinyVendorDefinition.itemList) which will contain more information about the
+   * items being sold themselves. Can also be used to index into
+   * DestinyVendorSaleItemComponent data, if you asked for that data to be returned.
+   */
+  readonly itemIndexes: number[];
 }
 export interface PersonalDestinyVendorSaleItemSetComponent {
-    readonly saleItems: {
-        [key: number]: DestinyVendorSaleItemComponent;
-    };
+  readonly saleItems: {
+    [key: number]: DestinyVendorSaleItemComponent;
+  };
 }
 /**
  * Request this component if you want the details about an item being sold in
@@ -11874,122 +11884,122 @@ export interface PersonalDestinyVendorSaleItemSetComponent {
  * acquire them from the DestinyVendorResponse's "items" property.
  */
 export interface DestinyVendorSaleItemComponent {
-    /**
-     * A flag indicating whether the requesting character can buy the item, and if not
-     * the reasons why the character can't buy it.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly saleStatus: VendorItemStatus;
-    /**
-     * If you can't buy the item due to a complex character state, these will be hashes
-     * for DestinyUnlockDefinitions that you can check to see messages regarding the
-     * failure (if the unlocks have human readable information: it is not guaranteed
-     * that Unlocks will have human readable strings, and your application will have to
-     * handle that)
-     *
-     * Prefer using failureIndexes instead. These are provided for informational
-     * purposes, but have largely been supplanted by failureIndexes.
-     *
-     * Mapped to DestinyUnlockDefinition in the manifest.
-     */
-    readonly requiredUnlocks: number[];
-    /**
-     * If any complex unlock states are checked in determining purchasability, these
-     * will be returned here along with the status of the unlock check.
-     *
-     * Prefer using failureIndexes instead. These are provided for informational
-     * purposes, but have largely been supplanted by failureIndexes.
-     */
-    readonly unlockStatuses: DestinyUnlockStatus[];
-    /**
-     * Indexes in to the "failureStrings" lookup table in DestinyVendorDefinition for
-     * the given Vendor. Gives some more reliable failure information for why you can't
-     * purchase an item.
-     *
-     * It is preferred to use these over requiredUnlocks and unlockStatuses: the latter
-     * are provided mostly in case someone can do something interesting with it that I
-     * didn't anticipate.
-     */
-    readonly failureIndexes: number[];
-    /**
-     * A flags enumeration value representing the current state of any "state modifiers"
-     * on the item being sold. These are meant to correspond with some sort of visual
-     * indicator as to the augmentation: for instance, if an item is on sale or if you
-     * already own the item in question.
-     *
-     * Determining how you want to represent these in your own app (or if you even want
-     * to) is an exercise left for the reader.
-     *
-     * This enum represents a set of flags - use bitwise operators to check which of
-     * these match your value.
-     */
-    readonly augments: DestinyVendorItemState;
-    /**
-     * The index into the DestinyVendorDefinition.itemList property. Note that this
-     * means Vendor data *is* Content Version dependent: make sure you have the latest
-     * content before you use Vendor data, or these indexes may mismatch.
-     *
-     * Most systems avoid this problem, but Vendors is one area where we are unable to
-     * reasonably avoid content dependency at the moment.
-     */
-    readonly vendorItemIndex: number;
-    /**
-     * The hash of the item being sold, as a quick shortcut for looking up the
-     * DestinyInventoryItemDefinition of the sale item.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If populated, this is the hash of the item whose icon (and other secondary
-     * styles, but *not* the human readable strings) should override whatever icons/
-     * styles are on the item being sold.
-     *
-     * If you don't do this, certain items whose styles are being overridden by
-     * socketed items - such as the "Recycle Shader" item - would show whatever their
-     * default icon/style is, and it wouldn't be pretty or look accurate.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly overrideStyleItemHash?: number;
-    /** How much of the item you'll be getting. */
-    readonly quantity: number;
-    /** A summary of the current costs of the item. */
-    readonly costs: DestinyItemQuantity[];
-    /**
-     * If this item has its own custom date where it may be removed from the Vendor's
-     * rotation, this is that date.
-     *
-     * Note that there's not actually any guarantee that it will go away: it could be
-     * chosen again and end up still being in the Vendor's sale items! But this is the
-     * next date where that test will occur, and is also the date that the game shows
-     * for availability on things like Bounties being sold. So it's the best we can
-     * give.
-     */
-    readonly overrideNextRefreshDate?: string;
+  /**
+   * A flag indicating whether the requesting character can buy the item, and if not
+   * the reasons why the character can't buy it.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly saleStatus: VendorItemStatus;
+  /**
+   * If you can't buy the item due to a complex character state, these will be hashes
+   * for DestinyUnlockDefinitions that you can check to see messages regarding the
+   * failure (if the unlocks have human readable information: it is not guaranteed
+   * that Unlocks will have human readable strings, and your application will have to
+   * handle that)
+   *
+   * Prefer using failureIndexes instead. These are provided for informational
+   * purposes, but have largely been supplanted by failureIndexes.
+   *
+   * Mapped to DestinyUnlockDefinition in the manifest.
+   */
+  readonly requiredUnlocks: number[];
+  /**
+   * If any complex unlock states are checked in determining purchasability, these
+   * will be returned here along with the status of the unlock check.
+   *
+   * Prefer using failureIndexes instead. These are provided for informational
+   * purposes, but have largely been supplanted by failureIndexes.
+   */
+  readonly unlockStatuses: DestinyUnlockStatus[];
+  /**
+   * Indexes in to the "failureStrings" lookup table in DestinyVendorDefinition for
+   * the given Vendor. Gives some more reliable failure information for why you can't
+   * purchase an item.
+   *
+   * It is preferred to use these over requiredUnlocks and unlockStatuses: the latter
+   * are provided mostly in case someone can do something interesting with it that I
+   * didn't anticipate.
+   */
+  readonly failureIndexes: number[];
+  /**
+   * A flags enumeration value representing the current state of any "state modifiers"
+   * on the item being sold. These are meant to correspond with some sort of visual
+   * indicator as to the augmentation: for instance, if an item is on sale or if you
+   * already own the item in question.
+   *
+   * Determining how you want to represent these in your own app (or if you even want
+   * to) is an exercise left for the reader.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly augments: DestinyVendorItemState;
+  /**
+   * The index into the DestinyVendorDefinition.itemList property. Note that this
+   * means Vendor data *is* Content Version dependent: make sure you have the latest
+   * content before you use Vendor data, or these indexes may mismatch.
+   *
+   * Most systems avoid this problem, but Vendors is one area where we are unable to
+   * reasonably avoid content dependency at the moment.
+   */
+  readonly vendorItemIndex: number;
+  /**
+   * The hash of the item being sold, as a quick shortcut for looking up the
+   * DestinyInventoryItemDefinition of the sale item.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If populated, this is the hash of the item whose icon (and other secondary
+   * styles, but *not* the human readable strings) should override whatever icons/
+   * styles are on the item being sold.
+   *
+   * If you don't do this, certain items whose styles are being overridden by
+   * socketed items - such as the "Recycle Shader" item - would show whatever their
+   * default icon/style is, and it wouldn't be pretty or look accurate.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly overrideStyleItemHash?: number;
+  /** How much of the item you'll be getting. */
+  readonly quantity: number;
+  /** A summary of the current costs of the item. */
+  readonly costs: DestinyItemQuantity[];
+  /**
+   * If this item has its own custom date where it may be removed from the Vendor's
+   * rotation, this is that date.
+   *
+   * Note that there's not actually any guarantee that it will go away: it could be
+   * chosen again and end up still being in the Vendor's sale items! But this is the
+   * next date where that test will occur, and is also the date that the game shows
+   * for availability on things like Bounties being sold. So it's the best we can
+   * give.
+   */
+  readonly overrideNextRefreshDate?: string;
 }
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.
  */
 export declare const enum VendorItemStatus {
-    Success = 0,
-    NoInventorySpace = 1,
-    NoFunds = 2,
-    NoProgression = 4,
-    NoUnlock = 8,
-    NoQuantity = 16,
-    OutsidePurchaseWindow = 32,
-    NotAvailable = 64,
-    UniquenessViolation = 128,
-    UnknownError = 256,
-    AlreadySelling = 512,
-    Unsellable = 1024,
-    SellingInhibited = 2048,
-    AlreadyOwned = 4096,
-    DisplayOnly = 8192
+  Success = 0,
+  NoInventorySpace = 1,
+  NoFunds = 2,
+  NoProgression = 4,
+  NoUnlock = 8,
+  NoQuantity = 16,
+  OutsidePurchaseWindow = 32,
+  NotAvailable = 64,
+  UniquenessViolation = 128,
+  UnknownError = 256,
+  AlreadySelling = 512,
+  Unsellable = 1024,
+  SellingInhibited = 2048,
+  AlreadyOwned = 4096,
+  DisplayOnly = 8192,
 }
 /**
  * Indicates the status of an "Unlock Flag" on a Character or Profile.
@@ -11999,18 +12009,18 @@ export declare const enum VendorItemStatus {
  * DestinyUnlockDefinition.
  */
 export interface DestinyUnlockStatus {
-    /**
-     * The hash identifier for the Unlock Flag. Use to lookup DestinyUnlockDefinition
-     * for static data. Not all unlocks have human readable data - in fact, most don't.
-     * But when they do, it can be very useful to show. Even if they don't have human
-     * readable data, you might be able to infer the meaning of an unlock flag with a
-     * bit of experimentation...
-     *
-     * Mapped to DestinyUnlockDefinition in the manifest.
-     */
-    readonly unlockHash: number;
-    /** Whether the unlock flag is set. */
-    readonly isSet: boolean;
+  /**
+   * The hash identifier for the Unlock Flag. Use to lookup DestinyUnlockDefinition
+   * for static data. Not all unlocks have human readable data - in fact, most don't.
+   * But when they do, it can be very useful to show. Even if they don't have human
+   * readable data, you might be able to infer the meaning of an unlock flag with a
+   * bit of experimentation...
+   *
+   * Mapped to DestinyUnlockDefinition in the manifest.
+   */
+  readonly unlockHash: number;
+  /** Whether the unlock flag is set. */
+  readonly isSet: boolean;
 }
 /**
  * The possible states of Destiny Profile Records. IMPORTANT: Any given item can
@@ -12021,101 +12031,101 @@ export interface DestinyUnlockStatus {
  * these match your value.
  */
 export declare const enum DestinyVendorItemState {
-    /** There are no augments on the item. */
-    None = 0,
-    /**
-     * Deprecated forever (probably). There was a time when Records were going to be
-     * implemented through Vendors, and this field was relevant. Now they're
-     * implemented through Presentation Nodes, and this field doesn't matter anymore.
-     */
-    Incomplete = 1,
-    /**
-     * Deprecated forever (probably). See the description of the "Incomplete" value for
-     * the juicy scoop.
-     */
-    RewardAvailable = 2,
-    /**
-     * Deprecated forever (probably). See the description of the "Incomplete" value for
-     * the juicy scoop.
-     */
-    Complete = 4,
-    /**
-     * This item is considered to be "newly available", and should have some UI showing
-     * how shiny it is.
-     */
-    New = 8,
-    /**
-     * This item is being "featured", and should be shiny in a different way from items
-     * that are merely new.
-     */
-    Featured = 16,
-    /** This item is only available for a limited time, and that time is approaching. */
-    Ending = 32,
-    /** This item is "on sale". Get it while it's hot. */
-    OnSale = 64,
-    /** This item is already owned. */
-    Owned = 128,
-    /** This item should be shown with a "wide view" instead of normal icon view. */
-    WideView = 256,
-    /**
-     * This indicates that you should show some kind of attention-requesting indicator
-     * on the item, in a similar manner to items in the nexus that have such
-     * notifications.
-     */
-    NexusAttention = 512,
-    /** This indicates that the item has some sort of a 'set' discount. */
-    SetDiscount = 1024,
-    /** This indicates that the item has a price drop. */
-    PriceDrop = 2048,
-    /** This indicates that the item is a daily offer. */
-    DailyOffer = 4096
+  /** There are no augments on the item. */
+  None = 0,
+  /**
+   * Deprecated forever (probably). There was a time when Records were going to be
+   * implemented through Vendors, and this field was relevant. Now they're
+   * implemented through Presentation Nodes, and this field doesn't matter anymore.
+   */
+  Incomplete = 1,
+  /**
+   * Deprecated forever (probably). See the description of the "Incomplete" value for
+   * the juicy scoop.
+   */
+  RewardAvailable = 2,
+  /**
+   * Deprecated forever (probably). See the description of the "Incomplete" value for
+   * the juicy scoop.
+   */
+  Complete = 4,
+  /**
+   * This item is considered to be "newly available", and should have some UI showing
+   * how shiny it is.
+   */
+  New = 8,
+  /**
+   * This item is being "featured", and should be shiny in a different way from items
+   * that are merely new.
+   */
+  Featured = 16,
+  /** This item is only available for a limited time, and that time is approaching. */
+  Ending = 32,
+  /** This item is "on sale". Get it while it's hot. */
+  OnSale = 64,
+  /** This item is already owned. */
+  Owned = 128,
+  /** This item should be shown with a "wide view" instead of normal icon view. */
+  WideView = 256,
+  /**
+   * This indicates that you should show some kind of attention-requesting indicator
+   * on the item, in a similar manner to items in the nexus that have such
+   * notifications.
+   */
+  NexusAttention = 512,
+  /** This indicates that the item has some sort of a 'set' discount. */
+  SetDiscount = 1024,
+  /** This indicates that the item has a price drop. */
+  PriceDrop = 2048,
+  /** This indicates that the item is a daily offer. */
+  DailyOffer = 4096,
 }
 export interface DestinyItemComponentSetOfint32 {
-    readonly instances: DictionaryComponentResponse<DestinyItemInstanceComponent>;
-    readonly perks: DictionaryComponentResponse<DestinyItemPerksComponent>;
-    readonly renderData: DictionaryComponentResponse<DestinyItemRenderComponent>;
-    readonly stats: DictionaryComponentResponse<DestinyItemStatsComponent>;
-    readonly sockets: DictionaryComponentResponse<DestinyItemSocketsComponent>;
-    readonly reusablePlugs: DictionaryComponentResponse<DestinyItemReusablePlugsComponent>;
-    readonly plugObjectives: DictionaryComponentResponse<DestinyItemPlugObjectivesComponent>;
-    readonly talentGrids: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
-    readonly plugStates: DictionaryComponentResponse<DestinyItemPlugComponent>;
-    readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
+  readonly instances: DictionaryComponentResponse<DestinyItemInstanceComponent>;
+  readonly perks: DictionaryComponentResponse<DestinyItemPerksComponent>;
+  readonly renderData: DictionaryComponentResponse<DestinyItemRenderComponent>;
+  readonly stats: DictionaryComponentResponse<DestinyItemStatsComponent>;
+  readonly sockets: DictionaryComponentResponse<DestinyItemSocketsComponent>;
+  readonly reusablePlugs: DictionaryComponentResponse<DestinyItemReusablePlugsComponent>;
+  readonly plugObjectives: DictionaryComponentResponse<DestinyItemPlugObjectivesComponent>;
+  readonly talentGrids: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
+  readonly plugStates: DictionaryComponentResponse<DestinyItemPlugComponent>;
+  readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
 }
 /** A response containing all of the components for a vendor. */
 export interface DestinyVendorResponse {
-    /**
-     * The base properties of the vendor.
-     *
-     * COMPONENT TYPE: Vendors
-     */
-    readonly vendor: SingleComponentResponse<DestinyVendorComponent>;
-    /**
-     * Categories that the vendor has available, and references to the sales therein.
-     *
-     * COMPONENT TYPE: VendorCategories
-     */
-    readonly categories: SingleComponentResponse<DestinyVendorCategoriesComponent>;
-    /**
-     * Sales, keyed by the vendorItemIndex of the item being sold.
-     *
-     * COMPONENT TYPE: VendorSales
-     */
-    readonly sales: DictionaryComponentResponse<DestinyVendorSaleItemComponent>;
-    /**
-     * Item components, keyed by the vendorItemIndex of the active sale items.
-     *
-     * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
-     * types.]
-     */
-    readonly itemComponents: DestinyItemComponentSetOfint32;
-    /**
-     * A "lookup" convenience component that can be used to quickly check if the
-     * character has access to items that can be used for purchasing.
-     *
-     * COMPONENT TYPE: CurrencyLookups
-     */
-    readonly currencyLookups: SingleComponentResponse<DestinyCurrenciesComponent>;
+  /**
+   * The base properties of the vendor.
+   *
+   * COMPONENT TYPE: Vendors
+   */
+  readonly vendor: SingleComponentResponse<DestinyVendorComponent>;
+  /**
+   * Categories that the vendor has available, and references to the sales therein.
+   *
+   * COMPONENT TYPE: VendorCategories
+   */
+  readonly categories: SingleComponentResponse<DestinyVendorCategoriesComponent>;
+  /**
+   * Sales, keyed by the vendorItemIndex of the item being sold.
+   *
+   * COMPONENT TYPE: VendorSales
+   */
+  readonly sales: DictionaryComponentResponse<DestinyVendorSaleItemComponent>;
+  /**
+   * Item components, keyed by the vendorItemIndex of the active sale items.
+   *
+   * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
+   * types.]
+   */
+  readonly itemComponents: DestinyItemComponentSetOfint32;
+  /**
+   * A "lookup" convenience component that can be used to quickly check if the
+   * character has access to items that can be used for purchasing.
+   *
+   * COMPONENT TYPE: CurrencyLookups
+   */
+  readonly currencyLookups: SingleComponentResponse<DestinyCurrenciesComponent>;
 }
 /**
  * A response containing all valid components for the public Vendors endpoint.
@@ -12127,78 +12137,78 @@ export interface DestinyVendorResponse {
  * etc... you'll have to call in the context of a character. I know, sad but true.
  */
 export interface DestinyPublicVendorsResponse {
-    /**
-     * For Vendors being returned, this will give you the information you need to group
-     * them and order them in the same way that the Bungie Companion app performs
-     * grouping. It will automatically be returned if you request the Vendors component.
-     *
-     * COMPONENT TYPE: Vendors
-     */
-    readonly vendorGroups: SingleComponentResponse<DestinyVendorGroupComponent>;
-    /**
-     * The base properties of the vendor. These are keyed by the Vendor Hash, so you
-     * will get one Vendor Component per vendor returned.
-     *
-     * COMPONENT TYPE: Vendors
-     */
-    readonly vendors: DictionaryComponentResponse<DestinyPublicVendorComponent>;
-    /**
-     * Categories that the vendor has available, and references to the sales therein.
-     * These are keyed by the Vendor Hash, so you will get one Categories Component per
-     * vendor returned.
-     *
-     * COMPONENT TYPE: VendorCategories
-     */
-    readonly categories: DictionaryComponentResponse<DestinyVendorCategoriesComponent>;
-    /**
-     * Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by
-     * the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.
-     *
-     * Note that within the Sale Item Set component, the sales are themselves keyed by
-     * the vendorSaleIndex, so you can relate it to the corrent sale item definition
-     * within the Vendor's definition.
-     *
-     * COMPONENT TYPE: VendorSales
-     */
-    readonly sales: DictionaryComponentResponse<PublicDestinyVendorSaleItemSetComponent>;
+  /**
+   * For Vendors being returned, this will give you the information you need to group
+   * them and order them in the same way that the Bungie Companion app performs
+   * grouping. It will automatically be returned if you request the Vendors component.
+   *
+   * COMPONENT TYPE: Vendors
+   */
+  readonly vendorGroups: SingleComponentResponse<DestinyVendorGroupComponent>;
+  /**
+   * The base properties of the vendor. These are keyed by the Vendor Hash, so you
+   * will get one Vendor Component per vendor returned.
+   *
+   * COMPONENT TYPE: Vendors
+   */
+  readonly vendors: DictionaryComponentResponse<DestinyPublicVendorComponent>;
+  /**
+   * Categories that the vendor has available, and references to the sales therein.
+   * These are keyed by the Vendor Hash, so you will get one Categories Component per
+   * vendor returned.
+   *
+   * COMPONENT TYPE: VendorCategories
+   */
+  readonly categories: DictionaryComponentResponse<DestinyVendorCategoriesComponent>;
+  /**
+   * Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by
+   * the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.
+   *
+   * Note that within the Sale Item Set component, the sales are themselves keyed by
+   * the vendorSaleIndex, so you can relate it to the corrent sale item definition
+   * within the Vendor's definition.
+   *
+   * COMPONENT TYPE: VendorSales
+   */
+  readonly sales: DictionaryComponentResponse<PublicDestinyVendorSaleItemSetComponent>;
 }
 /**
  * This component contains essential/summary information about the vendor from the
  * perspective of a character-agnostic view.
  */
 export interface DestinyPublicVendorComponent {
-    /**
-     * The unique identifier for the vendor. Use it to look up their
-     * DestinyVendorDefinition.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * The date when this vendor's inventory will next rotate/refresh.
-     *
-     * Note that this is distinct from the date ranges that the vendor is visible/
-     * available in-game: this field indicates the specific time when the vendor's
-     * available items refresh and rotate, regardless of whether the vendor is actually
-     * available at that time. Unfortunately, these two values may be (and are, for the
-     * case of important vendors like Xur) different.
-     *
-     * Issue https://github.com/Bungie-net/api/issues/353 is tracking a fix to start
-     * providing visibility date ranges where possible in addition to this refresh date,
-     * so that all important dates for vendors are available for use.
-     */
-    readonly nextRefreshDate: string;
-    /**
-     * If True, the Vendor is currently accessible.
-     *
-     * If False, they may not actually be visible in the world at the moment.
-     */
-    readonly enabled: boolean;
+  /**
+   * The unique identifier for the vendor. Use it to look up their
+   * DestinyVendorDefinition.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * The date when this vendor's inventory will next rotate/refresh.
+   *
+   * Note that this is distinct from the date ranges that the vendor is visible/
+   * available in-game: this field indicates the specific time when the vendor's
+   * available items refresh and rotate, regardless of whether the vendor is actually
+   * available at that time. Unfortunately, these two values may be (and are, for the
+   * case of important vendors like Xur) different.
+   *
+   * Issue https://github.com/Bungie-net/api/issues/353 is tracking a fix to start
+   * providing visibility date ranges where possible in addition to this refresh date,
+   * so that all important dates for vendors are available for use.
+   */
+  readonly nextRefreshDate: string;
+  /**
+   * If True, the Vendor is currently accessible.
+   *
+   * If False, they may not actually be visible in the world at the moment.
+   */
+  readonly enabled: boolean;
 }
 export interface PublicDestinyVendorSaleItemSetComponent {
-    readonly saleItems: {
-        [key: number]: DestinyPublicVendorSaleItemComponent;
-    };
+  readonly saleItems: {
+    [key: number]: DestinyPublicVendorSaleItemComponent;
+  };
 }
 /**
  * Has character-agnostic information about an item being sold by a vendor.
@@ -12209,103 +12219,103 @@ export interface PublicDestinyVendorSaleItemSetComponent {
  * these, however, you'll have to ask for it in context of a specific character.
  */
 export interface DestinyPublicVendorSaleItemComponent {
-    /**
-     * The index into the DestinyVendorDefinition.itemList property. Note that this
-     * means Vendor data *is* Content Version dependent: make sure you have the latest
-     * content before you use Vendor data, or these indexes may mismatch.
-     *
-     * Most systems avoid this problem, but Vendors is one area where we are unable to
-     * reasonably avoid content dependency at the moment.
-     */
-    readonly vendorItemIndex: number;
-    /**
-     * The hash of the item being sold, as a quick shortcut for looking up the
-     * DestinyInventoryItemDefinition of the sale item.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly itemHash: number;
-    /**
-     * If populated, this is the hash of the item whose icon (and other secondary
-     * styles, but *not* the human readable strings) should override whatever icons/
-     * styles are on the item being sold.
-     *
-     * If you don't do this, certain items whose styles are being overridden by
-     * socketed items - such as the "Recycle Shader" item - would show whatever their
-     * default icon/style is, and it wouldn't be pretty or look accurate.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly overrideStyleItemHash?: number;
-    /** How much of the item you'll be getting. */
-    readonly quantity: number;
-    /** A summary of the current costs of the item. */
-    readonly costs: DestinyItemQuantity[];
-    /**
-     * If this item has its own custom date where it may be removed from the Vendor's
-     * rotation, this is that date.
-     *
-     * Note that there's not actually any guarantee that it will go away: it could be
-     * chosen again and end up still being in the Vendor's sale items! But this is the
-     * next date where that test will occur, and is also the date that the game shows
-     * for availability on things like Bounties being sold. So it's the best we can
-     * give.
-     */
-    readonly overrideNextRefreshDate?: string;
+  /**
+   * The index into the DestinyVendorDefinition.itemList property. Note that this
+   * means Vendor data *is* Content Version dependent: make sure you have the latest
+   * content before you use Vendor data, or these indexes may mismatch.
+   *
+   * Most systems avoid this problem, but Vendors is one area where we are unable to
+   * reasonably avoid content dependency at the moment.
+   */
+  readonly vendorItemIndex: number;
+  /**
+   * The hash of the item being sold, as a quick shortcut for looking up the
+   * DestinyInventoryItemDefinition of the sale item.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly itemHash: number;
+  /**
+   * If populated, this is the hash of the item whose icon (and other secondary
+   * styles, but *not* the human readable strings) should override whatever icons/
+   * styles are on the item being sold.
+   *
+   * If you don't do this, certain items whose styles are being overridden by
+   * socketed items - such as the "Recycle Shader" item - would show whatever their
+   * default icon/style is, and it wouldn't be pretty or look accurate.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly overrideStyleItemHash?: number;
+  /** How much of the item you'll be getting. */
+  readonly quantity: number;
+  /** A summary of the current costs of the item. */
+  readonly costs: DestinyItemQuantity[];
+  /**
+   * If this item has its own custom date where it may be removed from the Vendor's
+   * rotation, this is that date.
+   *
+   * Note that there's not actually any guarantee that it will go away: it could be
+   * chosen again and end up still being in the Vendor's sale items! But this is the
+   * next date where that test will occur, and is also the date that the game shows
+   * for availability on things like Bounties being sold. So it's the best we can
+   * give.
+   */
+  readonly overrideNextRefreshDate?: string;
 }
 /**
  * Returns the detailed information about a Collectible Presentation Node and any
  * Collectibles that are direct descendants.
  */
 export interface DestinyCollectibleNodeDetailResponse {
-    /** COMPONENT TYPE: Collectibles */
-    readonly collectibles: SingleComponentResponse<DestinyCollectiblesComponent>;
-    /**
-     * Item components, keyed by the item hash of the items pointed at collectibles
-     * found under the requested Presentation Node.
-     *
-     * NOTE: I had a lot of hemming and hawing about whether these should be keyed by
-     * collectible hash or item hash... but ultimately having it be keyed by item hash
-     * meant that UI that already uses DestinyItemComponentSet data wouldn't have to
-     * have a special override to do the collectible -> item lookup once you delve into
-     * an item's details, and it also meant that you didn't have to remember that the
-     * Hash being used as the key for plugSets was different from the Hash being used
-     * for the other Dictionaries. As a result, using the Item Hash felt like the least
-     * crappy solution.
-     *
-     * We may all come to regret this decision. We will see.
-     *
-     * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
-     * types.]
-     */
-    readonly collectibleItemComponents: DestinyItemComponentSetOfuint32;
+  /** COMPONENT TYPE: Collectibles */
+  readonly collectibles: SingleComponentResponse<DestinyCollectiblesComponent>;
+  /**
+   * Item components, keyed by the item hash of the items pointed at collectibles
+   * found under the requested Presentation Node.
+   *
+   * NOTE: I had a lot of hemming and hawing about whether these should be keyed by
+   * collectible hash or item hash... but ultimately having it be keyed by item hash
+   * meant that UI that already uses DestinyItemComponentSet data wouldn't have to
+   * have a special override to do the collectible -> item lookup once you delve into
+   * an item's details, and it also meant that you didn't have to remember that the
+   * Hash being used as the key for plugSets was different from the Hash being used
+   * for the other Dictionaries. As a result, using the Item Hash felt like the least
+   * crappy solution.
+   *
+   * We may all come to regret this decision. We will see.
+   *
+   * COMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component
+   * types.]
+   */
+  readonly collectibleItemComponents: DestinyItemComponentSetOfuint32;
 }
 export interface DestinyItemComponentSetOfuint32 {
-    readonly instances: DictionaryComponentResponse<DestinyItemInstanceComponent>;
-    readonly perks: DictionaryComponentResponse<DestinyItemPerksComponent>;
-    readonly renderData: DictionaryComponentResponse<DestinyItemRenderComponent>;
-    readonly stats: DictionaryComponentResponse<DestinyItemStatsComponent>;
-    readonly sockets: DictionaryComponentResponse<DestinyItemSocketsComponent>;
-    readonly reusablePlugs: DictionaryComponentResponse<DestinyItemReusablePlugsComponent>;
-    readonly plugObjectives: DictionaryComponentResponse<DestinyItemPlugObjectivesComponent>;
-    readonly talentGrids: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
-    readonly plugStates: DictionaryComponentResponse<DestinyItemPlugComponent>;
-    readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
+  readonly instances: DictionaryComponentResponse<DestinyItemInstanceComponent>;
+  readonly perks: DictionaryComponentResponse<DestinyItemPerksComponent>;
+  readonly renderData: DictionaryComponentResponse<DestinyItemRenderComponent>;
+  readonly stats: DictionaryComponentResponse<DestinyItemStatsComponent>;
+  readonly sockets: DictionaryComponentResponse<DestinyItemSocketsComponent>;
+  readonly reusablePlugs: DictionaryComponentResponse<DestinyItemReusablePlugsComponent>;
+  readonly plugObjectives: DictionaryComponentResponse<DestinyItemPlugObjectivesComponent>;
+  readonly talentGrids: DictionaryComponentResponse<DestinyItemTalentGridComponent>;
+  readonly plugStates: DictionaryComponentResponse<DestinyItemPlugComponent>;
+  readonly objectives: DictionaryComponentResponse<DestinyItemObjectivesComponent>;
 }
 /** The results of a bulk Equipping operation performed through the Destiny API. */
 export interface DestinyEquipItemResults {
-    readonly equipResults: DestinyEquipItemResult[];
+  readonly equipResults: DestinyEquipItemResult[];
 }
 /** The results of an Equipping operation performed through the Destiny API. */
 export interface DestinyEquipItemResult {
-    /**
-     * The instance ID of the item in question (all items that can be equipped must,
-     * but definition, be Instanced and thus have an Instance ID that you can use to
-     * refer to them)
-     */
-    readonly itemInstanceId: string;
-    /** A PlatformErrorCodes enum indicating whether it succeeded, and if it failed why. */
-    readonly equipStatus: PlatformErrorCodes;
+  /**
+   * The instance ID of the item in question (all items that can be equipped must,
+   * but definition, be Instanced and thus have an Instance ID that you can use to
+   * refer to them)
+   */
+  readonly itemInstanceId: string;
+  /** A PlatformErrorCodes enum indicating whether it succeeded, and if it failed why. */
+  readonly equipStatus: PlatformErrorCodes;
 }
 /**
  * Represents all of the data related to a single plug to be inserted.
@@ -12314,28 +12324,28 @@ export interface DestinyEquipItemResult {
  * receive an error if you attempt to do so. Come on guys, let's play nice.
  */
 export interface DestinyInsertPlugsRequestEntry {
-    /**
-     * The index into the socket array, which identifies the specific socket being
-     * operated on. We also need to know the socketArrayType in order to uniquely
-     * identify the socket.
-     *
-     * Don't point to or try to insert a plug into an infusion socket. It won't work.
-     */
-    readonly socketIndex: number;
-    /**
-     * This property, combined with the socketIndex, tells us which socket we are
-     * referring to (since operations can be performed on both Intrinsic and "default"
-     * sockets, and they occupy different arrays in the Inventory Item Definition). I
-     * know, I know. Don't give me that look.
-     */
-    readonly socketArrayType: DestinySocketArrayType;
-    /**
-     * Plugs are never instanced (except in infusion). So with the hash alone, we
-     * should be able to: 1) Infer whether the player actually needs to have the item,
-     * or if it's a reusable plug 2) Perform any operation needed to use the Plug,
-     * including removing the plug item and running reward sheets.
-     */
-    readonly plugItemHash: number;
+  /**
+   * The index into the socket array, which identifies the specific socket being
+   * operated on. We also need to know the socketArrayType in order to uniquely
+   * identify the socket.
+   *
+   * Don't point to or try to insert a plug into an infusion socket. It won't work.
+   */
+  readonly socketIndex: number;
+  /**
+   * This property, combined with the socketIndex, tells us which socket we are
+   * referring to (since operations can be performed on both Intrinsic and "default"
+   * sockets, and they occupy different arrays in the Inventory Item Definition). I
+   * know, I know. Don't give me that look.
+   */
+  readonly socketArrayType: DestinySocketArrayType;
+  /**
+   * Plugs are never instanced (except in infusion). So with the hash alone, we
+   * should be able to: 1) Infer whether the player actually needs to have the item,
+   * or if it's a reusable plug 2) Perform any operation needed to use the Plug,
+   * including removing the plug item and running reward sheets.
+   */
+  readonly plugItemHash: number;
 }
 /**
  * If you look in the DestinyInventoryItemDefinition's "sockets" property, you'll
@@ -12347,171 +12357,171 @@ export interface DestinyInsertPlugsRequestEntry {
  * if it's in the "intrinsic" list.
  */
 export declare const enum DestinySocketArrayType {
-    Default = 0,
-    Intrinsic = 1
+  Default = 0,
+  Intrinsic = 1,
 }
 export interface DestinyItemChangeResponse {
-    readonly item: DestinyItemResponse;
-    /** Items that appeared in the inventory possibly as a result of an action. */
-    readonly addedInventoryItems: DestinyItemComponent[];
-    /** Items that disappeared from the inventory possibly as a result of an action. */
-    readonly removedInventoryItems: DestinyItemComponent[];
+  readonly item: DestinyItemResponse;
+  /** Items that appeared in the inventory possibly as a result of an action. */
+  readonly addedInventoryItems: DestinyItemComponent[];
+  /** Items that disappeared from the inventory possibly as a result of an action. */
+  readonly removedInventoryItems: DestinyItemComponent[];
 }
 export interface DestinyPostGameCarnageReportData {
-    /** Date and time for the activity. */
-    readonly period: string;
-    /**
-     * If this activity has "phases", this is the phase at which the activity was
-     * started.
-     */
-    readonly startingPhaseIndex?: number;
-    /** Details about the activity. */
-    readonly activityDetails: DestinyHistoricalStatsActivity;
-    /** Collection of players and their data for this activity. */
-    readonly entries: DestinyPostGameCarnageReportEntry[];
-    /** Collection of stats for the player in this activity. */
-    readonly teams: DestinyPostGameCarnageReportTeamEntry[];
+  /** Date and time for the activity. */
+  readonly period: string;
+  /**
+   * If this activity has "phases", this is the phase at which the activity was
+   * started.
+   */
+  readonly startingPhaseIndex?: number;
+  /** Details about the activity. */
+  readonly activityDetails: DestinyHistoricalStatsActivity;
+  /** Collection of players and their data for this activity. */
+  readonly entries: DestinyPostGameCarnageReportEntry[];
+  /** Collection of stats for the player in this activity. */
+  readonly teams: DestinyPostGameCarnageReportTeamEntry[];
 }
 /** Summary information about the activity that was played. */
 export interface DestinyHistoricalStatsActivity {
-    /**
-     * The unique hash identifier of the DestinyActivityDefinition that was played. If
-     * I had this to do over, it'd be named activityHash. Too late now.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly referenceId: number;
-    /**
-     * The unique hash identifier of the DestinyActivityDefinition that was played.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly directorActivityHash: number;
-    /**
-     * The unique identifier for this *specific* match that was played.
-     *
-     * This value can be used to get additional data about this activity such as who
-     * else was playing via the GetPostGameCarnageReport endpoint.
-     */
-    readonly instanceId: string;
-    /** Indicates the most specific game mode of the activity that we could find. */
-    readonly mode: DestinyActivityModeType;
-    /**
-     * The list of all Activity Modes to which this activity applies, including
-     * aggregates. This will let you see, for example, whether the activity was both
-     * Clash and part of the Trials of the Nine event.
-     */
-    readonly modes: DestinyActivityModeType[];
-    /** Whether or not the match was a private match. */
-    readonly isPrivate: boolean;
-    /** The Membership Type indicating the platform on which this match was played. */
-    readonly membershipType: BungieMembershipType;
+  /**
+   * The unique hash identifier of the DestinyActivityDefinition that was played. If
+   * I had this to do over, it'd be named activityHash. Too late now.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly referenceId: number;
+  /**
+   * The unique hash identifier of the DestinyActivityDefinition that was played.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly directorActivityHash: number;
+  /**
+   * The unique identifier for this *specific* match that was played.
+   *
+   * This value can be used to get additional data about this activity such as who
+   * else was playing via the GetPostGameCarnageReport endpoint.
+   */
+  readonly instanceId: string;
+  /** Indicates the most specific game mode of the activity that we could find. */
+  readonly mode: DestinyActivityModeType;
+  /**
+   * The list of all Activity Modes to which this activity applies, including
+   * aggregates. This will let you see, for example, whether the activity was both
+   * Clash and part of the Trials of the Nine event.
+   */
+  readonly modes: DestinyActivityModeType[];
+  /** Whether or not the match was a private match. */
+  readonly isPrivate: boolean;
+  /** The Membership Type indicating the platform on which this match was played. */
+  readonly membershipType: BungieMembershipType;
 }
 export interface DestinyPostGameCarnageReportEntry {
-    /** Standing of the player */
-    readonly standing: number;
-    /** Score of the player if available */
-    readonly score: DestinyHistoricalStatsValue;
-    /** Identity details of the player */
-    readonly player: DestinyPlayer;
-    /** ID of the player's character used in the activity. */
-    readonly characterId: string;
-    /** Collection of stats for the player in this activity. */
-    readonly values: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
-    /** Extended data extracted from the activity blob. */
-    readonly extended: DestinyPostGameCarnageReportExtendedData;
+  /** Standing of the player */
+  readonly standing: number;
+  /** Score of the player if available */
+  readonly score: DestinyHistoricalStatsValue;
+  /** Identity details of the player */
+  readonly player: DestinyPlayer;
+  /** ID of the player's character used in the activity. */
+  readonly characterId: string;
+  /** Collection of stats for the player in this activity. */
+  readonly values: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
+  /** Extended data extracted from the activity blob. */
+  readonly extended: DestinyPostGameCarnageReportExtendedData;
 }
 export interface DestinyHistoricalStatsValue {
-    /** Unique ID for this stat */
-    readonly statId: string;
-    /** Basic stat value. */
-    readonly basic: DestinyHistoricalStatsValuePair;
-    /** Per game average for the statistic, if applicable */
-    readonly pga: DestinyHistoricalStatsValuePair;
-    /** Weighted value of the stat if a weight greater than 1 has been assigned. */
-    readonly weighted: DestinyHistoricalStatsValuePair;
-    /**
-     * When a stat represents the best, most, longest, fastest or some other personal
-     * best, the actual activity ID where that personal best was established is
-     * available on this property.
-     */
-    readonly activityId?: string;
+  /** Unique ID for this stat */
+  readonly statId: string;
+  /** Basic stat value. */
+  readonly basic: DestinyHistoricalStatsValuePair;
+  /** Per game average for the statistic, if applicable */
+  readonly pga: DestinyHistoricalStatsValuePair;
+  /** Weighted value of the stat if a weight greater than 1 has been assigned. */
+  readonly weighted: DestinyHistoricalStatsValuePair;
+  /**
+   * When a stat represents the best, most, longest, fastest or some other personal
+   * best, the actual activity ID where that personal best was established is
+   * available on this property.
+   */
+  readonly activityId?: string;
 }
 export interface DestinyHistoricalStatsValuePair {
-    /** Raw value of the statistic */
-    readonly value: number;
-    /** Localized formated version of the value. */
-    readonly displayValue: string;
+  /** Raw value of the statistic */
+  readonly value: number;
+  /** Localized formated version of the value. */
+  readonly displayValue: string;
 }
 export interface DestinyPlayer {
-    /**
-     * Details about the player as they are known in game (platform display name,
-     * Destiny emblem)
-     */
-    readonly destinyUserInfo: UserInfoCard;
-    /** Class of the character if applicable and available. */
-    readonly characterClass: string;
-    readonly classHash: number;
-    readonly raceHash: number;
-    readonly genderHash: number;
-    /** Level of the character if available. Zero if it is not available. */
-    readonly characterLevel: number;
-    /** Light Level of the character if available. Zero if it is not available. */
-    readonly lightLevel: number;
-    /**
-     * Details about the player as they are known on BungieNet. This will be undefined
-     * if the player has marked their credential private, or does not have a BungieNet
-     * account.
-     */
-    readonly bungieNetUserInfo: UserInfoCard;
-    /**
-     * Current clan name for the player. This value may be null or an empty string if
-     * the user does not have a clan.
-     */
-    readonly clanName: string;
-    /**
-     * Current clan tag for the player. This value may be null or an empty string if
-     * the user does not have a clan.
-     */
-    readonly clanTag: string;
-    /**
-     * If we know the emblem's hash, this can be used to look up the player's emblem at
-     * the time of a match when receiving PGCR data, or otherwise their currently
-     * equipped emblem (if we are able to obtain it).
-     */
-    readonly emblemHash: number;
+  /**
+   * Details about the player as they are known in game (platform display name,
+   * Destiny emblem)
+   */
+  readonly destinyUserInfo: UserInfoCard;
+  /** Class of the character if applicable and available. */
+  readonly characterClass: string;
+  readonly classHash: number;
+  readonly raceHash: number;
+  readonly genderHash: number;
+  /** Level of the character if available. Zero if it is not available. */
+  readonly characterLevel: number;
+  /** Light Level of the character if available. Zero if it is not available. */
+  readonly lightLevel: number;
+  /**
+   * Details about the player as they are known on BungieNet. This will be undefined
+   * if the player has marked their credential private, or does not have a BungieNet
+   * account.
+   */
+  readonly bungieNetUserInfo: UserInfoCard;
+  /**
+   * Current clan name for the player. This value may be null or an empty string if
+   * the user does not have a clan.
+   */
+  readonly clanName: string;
+  /**
+   * Current clan tag for the player. This value may be null or an empty string if
+   * the user does not have a clan.
+   */
+  readonly clanTag: string;
+  /**
+   * If we know the emblem's hash, this can be used to look up the player's emblem at
+   * the time of a match when receiving PGCR data, or otherwise their currently
+   * equipped emblem (if we are able to obtain it).
+   */
+  readonly emblemHash: number;
 }
 export interface DestinyPostGameCarnageReportExtendedData {
-    /** List of weapons and their perspective values. */
-    readonly weapons: DestinyHistoricalWeaponStats[];
-    /** Collection of stats for the player in this activity. */
-    readonly values: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
+  /** List of weapons and their perspective values. */
+  readonly weapons: DestinyHistoricalWeaponStats[];
+  /** Collection of stats for the player in this activity. */
+  readonly values: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
 }
 export interface DestinyHistoricalWeaponStats {
-    /**
-     * The hash ID of the item definition that describes the weapon.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly referenceId: number;
-    /** Collection of stats for the period. */
-    readonly values: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
+  /**
+   * The hash ID of the item definition that describes the weapon.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly referenceId: number;
+  /** Collection of stats for the period. */
+  readonly values: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
 }
 export interface DestinyPostGameCarnageReportTeamEntry {
-    /** Integer ID for the team. */
-    readonly teamId: number;
-    /** Team's standing relative to other teams. */
-    readonly standing: DestinyHistoricalStatsValue;
-    /** Score earned by the team */
-    readonly score: DestinyHistoricalStatsValue;
-    /** Alpha or Bravo */
-    readonly teamName: string;
+  /** Integer ID for the team. */
+  readonly teamId: number;
+  /** Team's standing relative to other teams. */
+  readonly standing: DestinyHistoricalStatsValue;
+  /** Score earned by the team */
+  readonly score: DestinyHistoricalStatsValue;
+  /** Alpha or Bravo */
+  readonly teamName: string;
 }
 /**
  * If you're going to report someone for a Terms of Service violation, you need to
@@ -12524,26 +12534,26 @@ export interface DestinyPostGameCarnageReportTeamEntry {
  * are some reasons defined under multiple categories.
  */
 export interface DestinyReportReasonCategoryDefinition {
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /** The specific reasons for the report under this category. */
-    readonly reasons: {
-        [key: number]: DestinyReportReasonDefinition;
-    };
-    /**
-     * The unique identifier for this entity. Guaranteed to be unique for the type of
-     * entity, but not globally.
-     *
-     * When entities refer to each other in Destiny content, it is this hash that they
-     * are referring to.
-     */
-    readonly hash: number;
-    /** The index of the entity as it was found in the investment tables. */
-    readonly index: number;
-    /**
-     * If this is true, then there is an entity with this identifier/type combination,
-     * but BNet is not yet allowed to show it. Sorry!
-     */
-    readonly redacted: boolean;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /** The specific reasons for the report under this category. */
+  readonly reasons: {
+    [key: number]: DestinyReportReasonDefinition;
+  };
+  /**
+   * The unique identifier for this entity. Guaranteed to be unique for the type of
+   * entity, but not globally.
+   *
+   * When entities refer to each other in Destiny content, it is this hash that they
+   * are referring to.
+   */
+  readonly hash: number;
+  /** The index of the entity as it was found in the investment tables. */
+  readonly index: number;
+  /**
+   * If this is true, then there is an entity with this identifier/type combination,
+   * but BNet is not yet allowed to show it. Sorry!
+   */
+  readonly redacted: boolean;
 }
 /**
  * A specific reason for being banned. Only accessible under the related category (
@@ -12552,245 +12562,245 @@ export interface DestinyReportReasonCategoryDefinition {
  * entries like "Other" are defined under most categories for example.
  */
 export interface DestinyReportReasonDefinition {
-    /**
-     * The identifier for the reason: they are only guaranteed unique under the
-     * Category in which they are found.
-     */
-    readonly reasonHash: number;
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The identifier for the reason: they are only guaranteed unique under the
+   * Category in which they are found.
+   */
+  readonly reasonHash: number;
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
 }
 export interface DestinyHistoricalStatsDefinition {
-    /** Unique programmer friendly ID for this stat */
-    readonly statId: string;
-    /** Statistic group */
-    readonly group: DestinyStatsGroupType;
-    /** Time periods the statistic covers */
-    readonly periodTypes: PeriodType[];
-    /** Game modes where this statistic can be reported. */
-    readonly modes: DestinyActivityModeType[];
-    /** Category for the stat. */
-    readonly category: DestinyStatsCategoryType;
-    /** Display name */
-    readonly statName: string;
-    /** Display name abbreviated */
-    readonly statNameAbbr: string;
-    /** Description of a stat if applicable. */
-    readonly statDescription: string;
-    /** Unit, if any, for the statistic */
-    readonly unitType: UnitType;
-    /** Optional URI to an icon for the statistic */
-    readonly iconImage: string;
-    /** Optional icon for the statistic */
-    readonly mergeMethod?: number;
-    /** Localized Unit Name for the stat. */
-    readonly unitLabel: string;
-    /** Weight assigned to this stat indicating its relative impressiveness. */
-    readonly weight: number;
-    /** The tier associated with this medal - be it implicitly or explicitly. */
-    readonly medalTierHash?: number;
+  /** Unique programmer friendly ID for this stat */
+  readonly statId: string;
+  /** Statistic group */
+  readonly group: DestinyStatsGroupType;
+  /** Time periods the statistic covers */
+  readonly periodTypes: PeriodType[];
+  /** Game modes where this statistic can be reported. */
+  readonly modes: DestinyActivityModeType[];
+  /** Category for the stat. */
+  readonly category: DestinyStatsCategoryType;
+  /** Display name */
+  readonly statName: string;
+  /** Display name abbreviated */
+  readonly statNameAbbr: string;
+  /** Description of a stat if applicable. */
+  readonly statDescription: string;
+  /** Unit, if any, for the statistic */
+  readonly unitType: UnitType;
+  /** Optional URI to an icon for the statistic */
+  readonly iconImage: string;
+  /** Optional icon for the statistic */
+  readonly mergeMethod?: number;
+  /** Localized Unit Name for the stat. */
+  readonly unitLabel: string;
+  /** Weight assigned to this stat indicating its relative impressiveness. */
+  readonly weight: number;
+  /** The tier associated with this medal - be it implicitly or explicitly. */
+  readonly medalTierHash?: number;
 }
 export declare const enum DestinyStatsCategoryType {
-    None = 0,
-    Kills = 1,
-    Assists = 2,
-    Deaths = 3,
-    Criticals = 4,
-    KDa = 5,
-    KD = 6,
-    Score = 7,
-    Entered = 8,
-    TimePlayed = 9,
-    MedalWins = 10,
-    MedalGame = 11,
-    MedalSpecialKills = 12,
-    MedalSprees = 13,
-    MedalMultiKills = 14,
-    MedalAbilities = 15
+  None = 0,
+  Kills = 1,
+  Assists = 2,
+  Deaths = 3,
+  Criticals = 4,
+  KDa = 5,
+  KD = 6,
+  Score = 7,
+  Entered = 8,
+  TimePlayed = 9,
+  MedalWins = 10,
+  MedalGame = 11,
+  MedalSpecialKills = 12,
+  MedalSprees = 13,
+  MedalMultiKills = 14,
+  MedalAbilities = 15,
 }
 export declare const enum UnitType {
-    None = 0,
-    /** Indicates the statistic is a simple count of something. */
-    Count = 1,
-    /** Indicates the statistic is a per game average. */
-    PerGame = 2,
-    /** Indicates the number of seconds */
-    Seconds = 3,
-    /** Indicates the number of points earned */
-    Points = 4,
-    /** Values represents a team ID */
-    Team = 5,
-    /** Values represents a distance (units to-be-determined) */
-    Distance = 6,
-    /** Ratio represented as a whole value from 0 to 100. */
-    Percent = 7,
-    /** Ratio of something, shown with decimal places */
-    Ratio = 8,
-    /** True or false */
-    Boolean = 9,
-    /** The stat is actually a weapon type. */
-    WeaponType = 10,
-    /** Indicates victory, defeat, or something in between. */
-    Standing = 11,
-    /** Number of milliseconds some event spanned. For example, race time, or lap time. */
-    Milliseconds = 12,
-    /** The value is a enumeration of the Completion Reason type. */
-    CompletionReason = 13
+  None = 0,
+  /** Indicates the statistic is a simple count of something. */
+  Count = 1,
+  /** Indicates the statistic is a per game average. */
+  PerGame = 2,
+  /** Indicates the number of seconds */
+  Seconds = 3,
+  /** Indicates the number of points earned */
+  Points = 4,
+  /** Values represents a team ID */
+  Team = 5,
+  /** Values represents a distance (units to-be-determined) */
+  Distance = 6,
+  /** Ratio represented as a whole value from 0 to 100. */
+  Percent = 7,
+  /** Ratio of something, shown with decimal places */
+  Ratio = 8,
+  /** True or false */
+  Boolean = 9,
+  /** The stat is actually a weapon type. */
+  WeaponType = 10,
+  /** Indicates victory, defeat, or something in between. */
+  Standing = 11,
+  /** Number of milliseconds some event spanned. For example, race time, or lap time. */
+  Milliseconds = 12,
+  /** The value is a enumeration of the Completion Reason type. */
+  CompletionReason = 13,
 }
 export interface DestinyLeaderboard {
-    readonly statId: string;
-    readonly entries: DestinyLeaderboardEntry[];
+  readonly statId: string;
+  readonly entries: DestinyLeaderboardEntry[];
 }
 export interface DestinyLeaderboardEntry {
-    /** Where this player ranks on the leaderboard. A value of 1 is the top rank. */
-    readonly rank: number;
-    /** Identity details of the player */
-    readonly player: DestinyPlayer;
-    /** ID of the player's best character for the reported stat. */
-    readonly characterId: string;
-    /** Value of the stat for this player */
-    readonly value: DestinyHistoricalStatsValue;
+  /** Where this player ranks on the leaderboard. A value of 1 is the top rank. */
+  readonly rank: number;
+  /** Identity details of the player */
+  readonly player: DestinyPlayer;
+  /** ID of the player's best character for the reported stat. */
+  readonly characterId: string;
+  /** Value of the stat for this player */
+  readonly value: DestinyHistoricalStatsValue;
 }
 export interface DestinyClanAggregateStat {
-    /** The id of the mode of stats (allPvp, allPvE, etc) */
-    readonly mode: DestinyActivityModeType;
-    /** The id of the stat */
-    readonly statId: string;
-    /** Value of the stat for this player */
-    readonly value: DestinyHistoricalStatsValue;
+  /** The id of the mode of stats (allPvp, allPvE, etc) */
+  readonly mode: DestinyActivityModeType;
+  /** The id of the stat */
+  readonly statId: string;
+  /** Value of the stat for this player */
+  readonly value: DestinyHistoricalStatsValue;
 }
 /**
  * The results of a search for Destiny content. This will be improved on over time,
  * I've been doing some experimenting to see what might be useful.
  */
 export interface DestinyEntitySearchResult {
-    /**
-     * A list of suggested words that might make for better search results, based on
-     * the text searched for.
-     */
-    readonly suggestedWords: string[];
-    /**
-     * The items found that are matches/near matches for the searched-for term, sorted
-     * by something vaguely resembling "relevance". Hopefully this will get better in
-     * the future.
-     */
-    readonly results: SearchResultOfDestinyEntitySearchResultItem;
+  /**
+   * A list of suggested words that might make for better search results, based on
+   * the text searched for.
+   */
+  readonly suggestedWords: string[];
+  /**
+   * The items found that are matches/near matches for the searched-for term, sorted
+   * by something vaguely resembling "relevance". Hopefully this will get better in
+   * the future.
+   */
+  readonly results: SearchResultOfDestinyEntitySearchResultItem;
 }
 export interface SearchResultOfDestinyEntitySearchResultItem {
-    readonly results: DestinyEntitySearchResultItem[];
-    readonly totalResults: number;
-    readonly hasMore: boolean;
-    readonly query: PagedQuery;
-    readonly replacementContinuationToken: string;
-    /**
-     * If useTotalResults is true, then totalResults represents an accurate count.
-     *
-     * If False, it does not, and may be estimated/only the size of the current page.
-     *
-     * Either way, you should probably always only trust hasMore.
-     *
-     * This is a long-held historical throwback to when we used to do paging with known
-     * total results. Those queries toasted our database, and we were left to hastily
-     * alter our endpoints and create backward- compatible shims, of which
-     * useTotalResults is one.
-     */
-    readonly useTotalResults: boolean;
+  readonly results: DestinyEntitySearchResultItem[];
+  readonly totalResults: number;
+  readonly hasMore: boolean;
+  readonly query: PagedQuery;
+  readonly replacementContinuationToken: string;
+  /**
+   * If useTotalResults is true, then totalResults represents an accurate count.
+   *
+   * If False, it does not, and may be estimated/only the size of the current page.
+   *
+   * Either way, you should probably always only trust hasMore.
+   *
+   * This is a long-held historical throwback to when we used to do paging with known
+   * total results. Those queries toasted our database, and we were left to hastily
+   * alter our endpoints and create backward- compatible shims, of which
+   * useTotalResults is one.
+   */
+  readonly useTotalResults: boolean;
 }
 /** An individual Destiny Entity returned from the entity search. */
 export interface DestinyEntitySearchResultItem {
-    /**
-     * The hash identifier of the entity. You will use this to look up the
-     * DestinyDefinition relevant for the entity found.
-     */
-    readonly hash: number;
-    /**
-     * The type of entity, returned as a string matching the DestinyDefinition's
-     * contract class name. You'll have to have your own mapping from class names to
-     * actually looking up those definitions in the manifest databases.
-     */
-    readonly entityType: string;
-    /**
-     * Basic display properties on the entity, so you don't have to look up the
-     * definition to show basic results for the item.
-     */
-    readonly displayProperties: DestinyDisplayPropertiesDefinition;
-    /**
-     * The ranking value for sorting that we calculated using our relevance formula.
-     * This will hopefully get better with time and iteration.
-     */
-    readonly weight: number;
+  /**
+   * The hash identifier of the entity. You will use this to look up the
+   * DestinyDefinition relevant for the entity found.
+   */
+  readonly hash: number;
+  /**
+   * The type of entity, returned as a string matching the DestinyDefinition's
+   * contract class name. You'll have to have your own mapping from class names to
+   * actually looking up those definitions in the manifest databases.
+   */
+  readonly entityType: string;
+  /**
+   * Basic display properties on the entity, so you don't have to look up the
+   * definition to show basic results for the item.
+   */
+  readonly displayProperties: DestinyDisplayPropertiesDefinition;
+  /**
+   * The ranking value for sorting that we calculated using our relevance formula.
+   * This will hopefully get better with time and iteration.
+   */
+  readonly weight: number;
 }
 export interface DestinyHistoricalStatsByPeriod {
-    readonly allTime: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
-    readonly allTimeTier1: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
-    readonly allTimeTier2: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
-    readonly allTimeTier3: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
-    readonly daily: DestinyHistoricalStatsPeriodGroup[];
-    readonly monthly: DestinyHistoricalStatsPeriodGroup[];
+  readonly allTime: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
+  readonly allTimeTier1: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
+  readonly allTimeTier2: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
+  readonly allTimeTier3: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
+  readonly daily: DestinyHistoricalStatsPeriodGroup[];
+  readonly monthly: DestinyHistoricalStatsPeriodGroup[];
 }
 export interface DestinyHistoricalStatsPeriodGroup {
-    /**
-     * Period for the group. If the stat periodType is day, then this will have a
-     * specific day. If the type is monthly, then this value will be the first day of
-     * the applicable month. This value is not set when the periodType is 'all time'.
-     */
-    readonly period: string;
-    /** If the period group is for a specific activity, this property will be set. */
-    readonly activityDetails: DestinyHistoricalStatsActivity;
-    /** Collection of stats for the period. */
-    readonly values: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
+  /**
+   * Period for the group. If the stat periodType is day, then this will have a
+   * specific day. If the type is monthly, then this value will be the first day of
+   * the applicable month. This value is not set when the periodType is 'all time'.
+   */
+  readonly period: string;
+  /** If the period group is for a specific activity, this property will be set. */
+  readonly activityDetails: DestinyHistoricalStatsActivity;
+  /** Collection of stats for the period. */
+  readonly values: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
 }
 export interface DestinyHistoricalStatsAccountResult {
-    readonly mergedDeletedCharacters: DestinyHistoricalStatsWithMerged;
-    readonly mergedAllCharacters: DestinyHistoricalStatsWithMerged;
-    readonly characters: DestinyHistoricalStatsPerCharacter[];
+  readonly mergedDeletedCharacters: DestinyHistoricalStatsWithMerged;
+  readonly mergedAllCharacters: DestinyHistoricalStatsWithMerged;
+  readonly characters: DestinyHistoricalStatsPerCharacter[];
 }
 export interface DestinyHistoricalStatsWithMerged {
-    readonly results: {
-        [key: string]: DestinyHistoricalStatsByPeriod;
-    };
-    readonly merged: DestinyHistoricalStatsByPeriod;
+  readonly results: {
+    [key: string]: DestinyHistoricalStatsByPeriod;
+  };
+  readonly merged: DestinyHistoricalStatsByPeriod;
 }
 export interface DestinyHistoricalStatsPerCharacter {
-    readonly characterId: string;
-    readonly deleted: boolean;
-    readonly results: {
-        [key: string]: DestinyHistoricalStatsByPeriod;
-    };
-    readonly merged: DestinyHistoricalStatsByPeriod;
+  readonly characterId: string;
+  readonly deleted: boolean;
+  readonly results: {
+    [key: string]: DestinyHistoricalStatsByPeriod;
+  };
+  readonly merged: DestinyHistoricalStatsByPeriod;
 }
 export interface DestinyActivityHistoryResults {
-    /** List of activities, the most recent activity first. */
-    readonly activities: DestinyHistoricalStatsPeriodGroup[];
+  /** List of activities, the most recent activity first. */
+  readonly activities: DestinyHistoricalStatsPeriodGroup[];
 }
 export interface DestinyHistoricalWeaponStatsData {
-    /** List of weapons and their perspective values. */
-    readonly weapons: DestinyHistoricalWeaponStats[];
+  /** List of weapons and their perspective values. */
+  readonly weapons: DestinyHistoricalWeaponStats[];
 }
 export interface DestinyAggregateActivityResults {
-    /** List of all activities the player has participated in. */
-    readonly activities: DestinyAggregateActivityStats[];
+  /** List of all activities the player has participated in. */
+  readonly activities: DestinyAggregateActivityStats[];
 }
 export interface DestinyAggregateActivityStats {
-    /**
-     * Hash ID that can be looked up in the DestinyActivityTable.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /** Collection of stats for the player in this activity. */
-    readonly values: {
-        [key: string]: DestinyHistoricalStatsValue;
-    };
+  /**
+   * Hash ID that can be looked up in the DestinyActivityTable.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /** Collection of stats for the player in this activity. */
+  readonly values: {
+    [key: string]: DestinyHistoricalStatsValue;
+  };
 }
 /**
  * Represents localized, extended content related to Milestones. This is
@@ -12800,17 +12810,17 @@ export interface DestinyAggregateActivityStats {
  * need this data, hit the Milestone Content endpoint.
  */
 export interface DestinyMilestoneContent {
-    /** The "About this Milestone" text from the Firehose. */
-    readonly about: string;
-    /** The Current Status of the Milestone, as driven by the Firehose. */
-    readonly status: string;
-    /** A list of tips, provided by the Firehose. */
-    readonly tips: string[];
-    /**
-     * If DPS has defined items related to this Milestone, they can categorize those
-     * items in the Firehose. That data will then be returned as item categories here.
-     */
-    readonly itemCategories: DestinyMilestoneContentItemCategory[];
+  /** The "About this Milestone" text from the Firehose. */
+  readonly about: string;
+  /** The Current Status of the Milestone, as driven by the Firehose. */
+  readonly status: string;
+  /** A list of tips, provided by the Firehose. */
+  readonly tips: string[];
+  /**
+   * If DPS has defined items related to this Milestone, they can categorize those
+   * items in the Firehose. That data will then be returned as item categories here.
+   */
+  readonly itemCategories: DestinyMilestoneContentItemCategory[];
 }
 /**
  * Part of our dynamic, localized Milestone content is arbitrary categories of
@@ -12818,9 +12828,9 @@ export interface DestinyMilestoneContent {
  * same as programmatically generated rewards.
  */
 export interface DestinyMilestoneContentItemCategory {
-    readonly title: string;
-    /** Mapped to DestinyInventoryItemDefinition in the manifest. */
-    readonly itemHashes: number[];
+  readonly title: string;
+  /** Mapped to DestinyInventoryItemDefinition in the manifest. */
+  readonly itemHashes: number[];
 }
 /**
  * Information about milestones, presented in a character state-agnostic manner.
@@ -12829,66 +12839,66 @@ export interface DestinyMilestoneContentItemCategory {
  * this as GetPublicAdvisors 3.0, for those who used the Destiny 1 API.
  */
 export interface DestinyPublicMilestone {
-    /**
-     * The hash identifier for the milestone. Use it to look up the
-     * DestinyMilestoneDefinition for static data about the Milestone.
-     *
-     * Mapped to DestinyMilestoneDefinition in the manifest.
-     */
-    readonly milestoneHash: number;
-    /**
-     * A milestone not need have even a single quest, but if there are active quests
-     * they will be returned here.
-     */
-    readonly availableQuests: DestinyPublicMilestoneQuest[];
-    readonly activities: DestinyPublicMilestoneChallengeActivity[];
-    /**
-     * Sometimes milestones - or activities active in milestones - will have relevant
-     * vendors. These are the vendors that are currently relevant.
-     *
-     * Deprecated, already, for the sake of the new "vendors" property that has more
-     * data. What was I thinking.
-     */
-    readonly vendorHashes: number[];
-    /**
-     * This is why we can't have nice things. This is the ordered list of vendors to be
-     * shown that relate to this milestone, potentially along with other interesting
-     * data.
-     */
-    readonly vendors: DestinyPublicMilestoneVendor[];
-    /** If known, this is the date when the Milestone started/became active. */
-    readonly startDate?: string;
-    /** If known, this is the date when the Milestone will expire/recycle/end. */
-    readonly endDate?: string;
-    /**
-     * Used for ordering milestones in a display to match how we order them in BNet.
-     * May pull from static data, or possibly in the future from dynamic information.
-     */
-    readonly order: number;
+  /**
+   * The hash identifier for the milestone. Use it to look up the
+   * DestinyMilestoneDefinition for static data about the Milestone.
+   *
+   * Mapped to DestinyMilestoneDefinition in the manifest.
+   */
+  readonly milestoneHash: number;
+  /**
+   * A milestone not need have even a single quest, but if there are active quests
+   * they will be returned here.
+   */
+  readonly availableQuests: DestinyPublicMilestoneQuest[];
+  readonly activities: DestinyPublicMilestoneChallengeActivity[];
+  /**
+   * Sometimes milestones - or activities active in milestones - will have relevant
+   * vendors. These are the vendors that are currently relevant.
+   *
+   * Deprecated, already, for the sake of the new "vendors" property that has more
+   * data. What was I thinking.
+   */
+  readonly vendorHashes: number[];
+  /**
+   * This is why we can't have nice things. This is the ordered list of vendors to be
+   * shown that relate to this milestone, potentially along with other interesting
+   * data.
+   */
+  readonly vendors: DestinyPublicMilestoneVendor[];
+  /** If known, this is the date when the Milestone started/became active. */
+  readonly startDate?: string;
+  /** If known, this is the date when the Milestone will expire/recycle/end. */
+  readonly endDate?: string;
+  /**
+   * Used for ordering milestones in a display to match how we order them in BNet.
+   * May pull from static data, or possibly in the future from dynamic information.
+   */
+  readonly order: number;
 }
 export interface DestinyPublicMilestoneQuest {
-    /**
-     * Quests are defined as Items in content. As such, this is the hash identifier of
-     * the DestinyInventoryItemDefinition that represents this quest. It will have
-     * pointers to all of the steps in the quest, and display information for the quest
-     * (title, description, icon etc) Individual steps will be referred to in the Quest
-     * item's DestinyInventoryItemDefinition.setData property, and themselves are Items
-     * with their own renderable data.
-     *
-     * Mapped to DestinyMilestoneDefinition in the manifest.
-     */
-    readonly questItemHash: number;
-    /**
-     * A milestone need not have an active activity, but if there is one it will be
-     * returned here, along with any variant and additional information.
-     */
-    readonly activity: DestinyPublicMilestoneActivity;
-    /**
-     * For the given quest there could be 0-to-Many challenges: mini quests that you
-     * can perform in the course of doing this quest, that may grant you rewards and
-     * benefits.
-     */
-    readonly challenges: DestinyPublicMilestoneChallenge[];
+  /**
+   * Quests are defined as Items in content. As such, this is the hash identifier of
+   * the DestinyInventoryItemDefinition that represents this quest. It will have
+   * pointers to all of the steps in the quest, and display information for the quest
+   * (title, description, icon etc) Individual steps will be referred to in the Quest
+   * item's DestinyInventoryItemDefinition.setData property, and themselves are Items
+   * with their own renderable data.
+   *
+   * Mapped to DestinyMilestoneDefinition in the manifest.
+   */
+  readonly questItemHash: number;
+  /**
+   * A milestone need not have an active activity, but if there is one it will be
+   * returned here, along with any variant and additional information.
+   */
+  readonly activity: DestinyPublicMilestoneActivity;
+  /**
+   * For the given quest there could be 0-to-Many challenges: mini quests that you
+   * can perform in the course of doing this quest, that may grant you rewards and
+   * benefits.
+   */
+  readonly challenges: DestinyPublicMilestoneChallenge[];
 }
 /**
  * A milestone may have one or more conceptual Activities associated with it, and
@@ -12899,209 +12909,209 @@ export interface DestinyPublicMilestoneQuest {
  * meet up in person.
  */
 export interface DestinyPublicMilestoneActivity {
-    /**
-     * The hash identifier of the activity that's been chosen to be considered the
-     * canonical "conceptual" activity definition. This may have many variants, defined
-     * herein.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash: number;
-    /**
-     * The activity may have 0-to-many modifiers: if it does, this will contain the
-     * hashes to the DestinyActivityModifierDefinition that defines the modifier being
-     * applied.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly modifierHashes: number[];
-    /**
-     * Every relevant variation of this conceptual activity, including the conceptual
-     * activity itself, have variants defined here.
-     */
-    readonly variants: DestinyPublicMilestoneActivityVariant[];
-    /**
-     * The hash identifier of the most specific Activity Mode under which this activity
-     * is played. This is useful for situations where the activity in question is - for
-     * instance - a PVP map, but it's not clear what mode the PVP map is being played
-     * under. If it's a playlist, this will be less specific: but hopefully useful in
-     * some way.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly activityModeHash?: number;
-    /**
-     * The enumeration equivalent of the most specific Activity Mode under which this
-     * activity is played.
-     */
-    readonly activityModeType?: number;
+  /**
+   * The hash identifier of the activity that's been chosen to be considered the
+   * canonical "conceptual" activity definition. This may have many variants, defined
+   * herein.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash: number;
+  /**
+   * The activity may have 0-to-many modifiers: if it does, this will contain the
+   * hashes to the DestinyActivityModifierDefinition that defines the modifier being
+   * applied.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly modifierHashes: number[];
+  /**
+   * Every relevant variation of this conceptual activity, including the conceptual
+   * activity itself, have variants defined here.
+   */
+  readonly variants: DestinyPublicMilestoneActivityVariant[];
+  /**
+   * The hash identifier of the most specific Activity Mode under which this activity
+   * is played. This is useful for situations where the activity in question is - for
+   * instance - a PVP map, but it's not clear what mode the PVP map is being played
+   * under. If it's a playlist, this will be less specific: but hopefully useful in
+   * some way.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly activityModeHash?: number;
+  /**
+   * The enumeration equivalent of the most specific Activity Mode under which this
+   * activity is played.
+   */
+  readonly activityModeType?: number;
 }
 /** Represents a variant of an activity that's relevant to a milestone. */
 export interface DestinyPublicMilestoneActivityVariant {
-    /**
-     * The hash identifier of this activity variant. Examine the activity's definition
-     * in the Manifest database to determine what makes it a distinct variant. Usually
-     * it will be difficulty level or whether or not it is a guided game variant of the
-     * activity, but theoretically it could be distinguished in any arbitrary way.
-     */
-    readonly activityHash: number;
-    /**
-     * The hash identifier of the most specific Activity Mode under which this activity
-     * is played. This is useful for situations where the activity in question is - for
-     * instance - a PVP map, but it's not clear what mode the PVP map is being played
-     * under. If it's a playlist, this will be less specific: but hopefully useful in
-     * some way.
-     *
-     * Mapped to DestinyActivityModeDefinition in the manifest.
-     */
-    readonly activityModeHash?: number;
-    /**
-     * The enumeration equivalent of the most specific Activity Mode under which this
-     * activity is played.
-     */
-    readonly activityModeType?: number;
+  /**
+   * The hash identifier of this activity variant. Examine the activity's definition
+   * in the Manifest database to determine what makes it a distinct variant. Usually
+   * it will be difficulty level or whether or not it is a guided game variant of the
+   * activity, but theoretically it could be distinguished in any arbitrary way.
+   */
+  readonly activityHash: number;
+  /**
+   * The hash identifier of the most specific Activity Mode under which this activity
+   * is played. This is useful for situations where the activity in question is - for
+   * instance - a PVP map, but it's not clear what mode the PVP map is being played
+   * under. If it's a playlist, this will be less specific: but hopefully useful in
+   * some way.
+   *
+   * Mapped to DestinyActivityModeDefinition in the manifest.
+   */
+  readonly activityModeHash?: number;
+  /**
+   * The enumeration equivalent of the most specific Activity Mode under which this
+   * activity is played.
+   */
+  readonly activityModeType?: number;
 }
 /**
  * A Milestone can have many Challenges. Challenges are just extra Objectives that
  * provide a fun way to mix-up play and provide extra rewards.
  */
 export interface DestinyPublicMilestoneChallenge {
-    /**
-     * The objective for the Challenge, which should have human-readable data about
-     * what needs to be done to accomplish the objective. Use this hash to look up the
-     * DestinyObjectiveDefinition.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly objectiveHash: number;
-    /**
-     * IF the Objective is related to a specific Activity, this will be that activity's
-     * hash. Use it to look up the DestinyActivityDefinition for additional data to
-     * show.
-     *
-     * Mapped to DestinyActivityDefinition in the manifest.
-     */
-    readonly activityHash?: number;
+  /**
+   * The objective for the Challenge, which should have human-readable data about
+   * what needs to be done to accomplish the objective. Use this hash to look up the
+   * DestinyObjectiveDefinition.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly objectiveHash: number;
+  /**
+   * IF the Objective is related to a specific Activity, this will be that activity's
+   * hash. Use it to look up the DestinyActivityDefinition for additional data to
+   * show.
+   *
+   * Mapped to DestinyActivityDefinition in the manifest.
+   */
+  readonly activityHash?: number;
 }
 export interface DestinyPublicMilestoneChallengeActivity {
-    /** Mapped to DestinyActivityDefinition in the manifest. */
-    readonly activityHash: number;
-    readonly challengeObjectiveHashes: number[];
-    /**
-     * If the activity has modifiers, this will be the list of modifiers that all
-     * variants have in common. Perform lookups against
-     * DestinyActivityModifierDefinition which defines the modifier being applied to
-     * get at the modifier data.
-     *
-     * Note that, in the DestiyActivityDefinition, you will see many more modifiers
-     * than this being referred to: those are all *possible* modifiers for the activity,
-     * not the active ones. Use only the active ones to match what's really live.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly modifierHashes: number[];
-    /**
-     * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
-     * property, indicating the currently active loadout requirements.
-     */
-    readonly loadoutRequirementIndex?: number;
-    /**
-     * The ordered list of phases for this activity, if any. Note that we have no human
-     * readable info for phases, nor any entities to relate them to: relating these
-     * hashes to something human readable is up to you unfortunately.
-     */
-    readonly phaseHashes: number[];
-    /**
-     * The set of activity options for this activity, keyed by an identifier that's
-     * unique for this activity (not guaranteed to be unique between or across all
-     * activities, though should be unique for every *variant* of a given *conceptual*
-     * activity: for instance, the original D2 Raid has many variant
-     * DestinyActivityDefinitions. While other activities could potentially have the
-     * same option hashes, for any given D2 base Raid variant the hash will be unique).
-     *
-     * As a concrete example of this data, the hashes you get for Raids will correspond
-     * to the currently active "Challenge Mode".
-     *
-     * We have no human readable information for this data, so it's up to you if you
-     * want to associate it with such info to show it.
-     */
-    readonly booleanActivityOptions: {
-        [key: number]: boolean;
-    };
+  /** Mapped to DestinyActivityDefinition in the manifest. */
+  readonly activityHash: number;
+  readonly challengeObjectiveHashes: number[];
+  /**
+   * If the activity has modifiers, this will be the list of modifiers that all
+   * variants have in common. Perform lookups against
+   * DestinyActivityModifierDefinition which defines the modifier being applied to
+   * get at the modifier data.
+   *
+   * Note that, in the DestiyActivityDefinition, you will see many more modifiers
+   * than this being referred to: those are all *possible* modifiers for the activity,
+   * not the active ones. Use only the active ones to match what's really live.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly modifierHashes: number[];
+  /**
+   * If returned, this is the index into the DestinyActivityDefinition's "loadouts"
+   * property, indicating the currently active loadout requirements.
+   */
+  readonly loadoutRequirementIndex?: number;
+  /**
+   * The ordered list of phases for this activity, if any. Note that we have no human
+   * readable info for phases, nor any entities to relate them to: relating these
+   * hashes to something human readable is up to you unfortunately.
+   */
+  readonly phaseHashes: number[];
+  /**
+   * The set of activity options for this activity, keyed by an identifier that's
+   * unique for this activity (not guaranteed to be unique between or across all
+   * activities, though should be unique for every *variant* of a given *conceptual*
+   * activity: for instance, the original D2 Raid has many variant
+   * DestinyActivityDefinitions. While other activities could potentially have the
+   * same option hashes, for any given D2 base Raid variant the hash will be unique).
+   *
+   * As a concrete example of this data, the hashes you get for Raids will correspond
+   * to the currently active "Challenge Mode".
+   *
+   * We have no human readable information for this data, so it's up to you if you
+   * want to associate it with such info to show it.
+   */
+  readonly booleanActivityOptions: {
+    [key: number]: boolean;
+  };
 }
 export interface DestinyPublicMilestoneVendor {
-    /**
-     * The hash identifier of the Vendor related to this Milestone. You can show useful
-     * things from this, such as thier Faction icon or whatever you might care about.
-     *
-     * Mapped to DestinyVendorDefinition in the manifest.
-     */
-    readonly vendorHash: number;
-    /**
-     * If this vendor is featuring a specific item for this event, this will be the
-     * hash identifier of that item. I'm taking bets now on how long we go before this
-     * needs to be a list or some other, more complex representation instead and I
-     * deprecate this too. I'm going to go with 5 months. Calling it now, 2017-09-14 at
-     * 9:46pm PST.
-     *
-     * Mapped to DestinyInventoryItemDefinition in the manifest.
-     */
-    readonly previewItemHash?: number;
+  /**
+   * The hash identifier of the Vendor related to this Milestone. You can show useful
+   * things from this, such as thier Faction icon or whatever you might care about.
+   *
+   * Mapped to DestinyVendorDefinition in the manifest.
+   */
+  readonly vendorHash: number;
+  /**
+   * If this vendor is featuring a specific item for this event, this will be the
+   * hash identifier of that item. I'm taking bets now on how long we go before this
+   * needs to be a list or some other, more complex representation instead and I
+   * deprecate this too. I'm going to go with 5 months. Calling it now, 2017-09-14 at
+   * 9:46pm PST.
+   *
+   * Mapped to DestinyInventoryItemDefinition in the manifest.
+   */
+  readonly previewItemHash?: number;
 }
 export declare const enum AwaType {
-    None = 0,
-    /** Insert plugs into sockets. */
-    InsertPlugs = 1
+  None = 0,
+  /** Insert plugs into sockets. */
+  InsertPlugs = 1,
 }
 export interface AwaInitializeResponse {
-    /**
-     * ID used to get the token. Present this ID to the user as it will identify this
-     * specific request on their device.
-     */
-    readonly correlationId: string;
-    /** True if the PUSH message will only be sent to the device that made this request. */
-    readonly sentToSelf: boolean;
+  /**
+   * ID used to get the token. Present this ID to the user as it will identify this
+   * specific request on their device.
+   */
+  readonly correlationId: string;
+  /** True if the PUSH message will only be sent to the device that made this request. */
+  readonly sentToSelf: boolean;
 }
 export declare const enum AwaUserSelection {
-    None = 0,
-    Rejected = 1,
-    Approved = 2
+  None = 0,
+  Rejected = 1,
+  Approved = 2,
 }
 export interface AwaAuthorizationResult {
-    /**
-     * Indication of how the user responded to the request. If the value is "Approved"
-     * the actionToken will contain the token that can be presented when performing the
-     * advanced write action.
-     */
-    readonly userSelection: AwaUserSelection;
-    readonly responseReason: AwaResponseReason;
-    /** Message to the app developer to help understand the response. */
-    readonly developerNote: string;
-    /** Credential used to prove the user authorized an advanced write action. */
-    readonly actionToken: string;
-    /**
-     * This token may be used to perform the requested action this number of times, at
-     * a maximum. If this value is 0, then there is no limit.
-     */
-    readonly maximumNumberOfUses: number;
-    /** Time, UTC, when token expires. */
-    readonly validUntil?: string;
-    /** Advanced Write Action Type from the permission request. */
-    readonly type: AwaType;
-    /** MembershipType from the permission request. */
-    readonly membershipType: BungieMembershipType;
+  /**
+   * Indication of how the user responded to the request. If the value is "Approved"
+   * the actionToken will contain the token that can be presented when performing the
+   * advanced write action.
+   */
+  readonly userSelection: AwaUserSelection;
+  readonly responseReason: AwaResponseReason;
+  /** Message to the app developer to help understand the response. */
+  readonly developerNote: string;
+  /** Credential used to prove the user authorized an advanced write action. */
+  readonly actionToken: string;
+  /**
+   * This token may be used to perform the requested action this number of times, at
+   * a maximum. If this value is 0, then there is no limit.
+   */
+  readonly maximumNumberOfUses: number;
+  /** Time, UTC, when token expires. */
+  readonly validUntil?: string;
+  /** Advanced Write Action Type from the permission request. */
+  readonly type: AwaType;
+  /** MembershipType from the permission request. */
+  readonly membershipType: BungieMembershipType;
 }
 export declare const enum AwaResponseReason {
-    None = 0,
-    /** User provided an answer */
-    Answered = 1,
-    /**
-     * The HTTP request timed out, a new request may be made and an answer may still be
-     * provided.
-     */
-    TimedOut = 2,
-    /** This request was replaced by another request. */
-    Replaced = 3
+  None = 0,
+  /** User provided an answer */
+  Answered = 1,
+  /**
+   * The HTTP request timed out, a new request may be made and an answer may still be
+   * provided.
+   */
+  TimedOut = 2,
+  /** This request was replaced by another request. */
+  Replaced = 3,
 }
 /**
  * Represents the public-facing status of an activity: any data about what is
@@ -13109,30 +13119,30 @@ export declare const enum AwaResponseReason {
  * progress in it.
  */
 export interface DestinyPublicActivityStatus {
-    /**
-     * Active Challenges for the activity, if any - represented as hashes for
-     * DestinyObjectiveDefinitions.
-     *
-     * Mapped to DestinyObjectiveDefinition in the manifest.
-     */
-    readonly challengeObjectiveHashes: number[];
-    /**
-     * The active modifiers on this activity, if any - represented as hashes for
-     * DestinyActivityModifierDefinitions.
-     *
-     * Mapped to DestinyActivityModifierDefinition in the manifest.
-     */
-    readonly modifierHashes: number[];
-    /**
-     * If the activity itself provides any specific "mock" rewards, this will be the
-     * items and their quantity.
-     *
-     * Why "mock", you ask? Because these are the rewards as they are represented in
-     * the tooltip of the Activity.
-     *
-     * These are often pointers to fake items that look good in a tooltip, but
-     * represent an abstract concept of what you will get for a reward rather than the
-     * specific items you may obtain.
-     */
-    readonly rewardTooltipItems: DestinyItemQuantity[];
+  /**
+   * Active Challenges for the activity, if any - represented as hashes for
+   * DestinyObjectiveDefinitions.
+   *
+   * Mapped to DestinyObjectiveDefinition in the manifest.
+   */
+  readonly challengeObjectiveHashes: number[];
+  /**
+   * The active modifiers on this activity, if any - represented as hashes for
+   * DestinyActivityModifierDefinitions.
+   *
+   * Mapped to DestinyActivityModifierDefinition in the manifest.
+   */
+  readonly modifierHashes: number[];
+  /**
+   * If the activity itself provides any specific "mock" rewards, this will be the
+   * items and their quantity.
+   *
+   * Why "mock", you ask? Because these are the rewards as they are represented in
+   * the tooltip of the Activity.
+   *
+   * These are often pointers to fake items that look good in a tooltip, but
+   * represent an abstract concept of what you will get for a reward rather than the
+   * specific items you may obtain.
+   */
+  readonly rewardTooltipItems: DestinyItemQuantity[];
 }

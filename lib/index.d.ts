@@ -9,13 +9,23 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-export * as App from './app';
-export * as User from './user';
-export * as Content from './content';
-export * as Forum from './forum';
-export * as GroupV2 from './groupv2';
-export * as Tokens from './tokens';
-export * as Destiny2 from './destiny2';
-export * as CommunityContent from './communitycontent';
-export * as Trending from './trending';
-export * as Fireteam from './fireteam';
+import * as AppImport from './app';
+import * as UserImport from './user';
+import * as ContentImport from './content';
+import * as ForumImport from './forum';
+import * as GroupV2Import from './groupv2';
+import * as TokensImport from './tokens';
+import * as Destiny2Import from './destiny2';
+import * as CommunityContentImport from './communitycontent';
+import * as TrendingImport from './trending';
+import * as FireteamImport from './fireteam';
+export declare const App: typeof AppImport;
+export declare const User: typeof UserImport;
+export declare const Content: typeof ContentImport;
+export declare const Forum: typeof ForumImport;
+export declare const GroupV2: typeof GroupV2Import;
+export declare const Tokens: typeof TokensImport;
+export declare const Destiny2: typeof Destiny2Import;
+export declare const CommunityContent: typeof CommunityContentImport;
+export declare const Trending: typeof TrendingImport;
+export declare const Fireteam: typeof FireteamImport;

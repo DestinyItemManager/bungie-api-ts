@@ -1,0 +1,14 @@
+{
+  "comments": false,
+  "presets": ["@babel/typescript"],
+  "plugins": [
+    [
+      "const-enum",
+      {
+        "transform": "constObject"
+      }
+    ],
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread"
+  ]
+}

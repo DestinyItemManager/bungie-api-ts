@@ -10,26 +10,26 @@
  * Do not edit these files manually.
  */
 export interface PartnerOfferClaimRequest {
-    readonly PartnerOfferId: string;
-    readonly BungieNetMembershipId: string;
-    readonly TransactionId: string;
+  readonly PartnerOfferId: string;
+  readonly BungieNetMembershipId: string;
+  readonly TransactionId: string;
 }
 export interface PartnerOfferSkuHistoryResponse {
-    readonly SkuIdentifier: string;
-    readonly LocalizedName: string;
-    readonly LocalizedDescription: string;
-    readonly ClaimDate: string;
-    readonly AllOffersApplied: boolean;
-    readonly TransactionId: string;
-    readonly SkuOffers: PartnerOfferHistoryResponse[];
+  readonly SkuIdentifier: string;
+  readonly LocalizedName: string;
+  readonly LocalizedDescription: string;
+  readonly ClaimDate: string;
+  readonly AllOffersApplied: boolean;
+  readonly TransactionId: string;
+  readonly SkuOffers: PartnerOfferHistoryResponse[];
 }
 export interface PartnerOfferHistoryResponse {
-    readonly PartnerOfferKey: string;
-    readonly MembershipId?: string;
-    readonly MembershipType?: number;
-    readonly LocalizedName: string;
-    readonly LocalizedDescription: string;
-    readonly IsConsumable: boolean;
-    readonly QuantityApplied: number;
-    readonly ApplyDate?: string;
+  readonly PartnerOfferKey: string;
+  readonly MembershipId?: string;
+  readonly MembershipType?: number;
+  readonly LocalizedName: string;
+  readonly LocalizedDescription: string;
+  readonly IsConsumable: boolean;
+  readonly QuantityApplied: number;
+  readonly ApplyDate?: string;
 }

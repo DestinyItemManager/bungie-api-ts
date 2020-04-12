@@ -10,13 +10,24 @@
  * Do not edit these files manually.
  */
 
-export * as App from './app';
-export * as User from './user';
-export * as Content from './content';
-export * as Forum from './forum';
-export * as GroupV2 from './groupv2';
-export * as Tokens from './tokens';
-export * as Destiny2 from './destiny2';
-export * as CommunityContent from './communitycontent';
-export * as Trending from './trending';
-export * as Fireteam from './fireteam';
+import * as AppImport from './app';
+import * as UserImport from './user';
+import * as ContentImport from './content';
+import * as ForumImport from './forum';
+import * as GroupV2Import from './groupv2';
+import * as TokensImport from './tokens';
+import * as Destiny2Import from './destiny2';
+import * as CommunityContentImport from './communitycontent';
+import * as TrendingImport from './trending';
+import * as FireteamImport from './fireteam';
+
+export const App = AppImport;
+export const User = UserImport;
+export const Content = ContentImport;
+export const Forum = ForumImport;
+export const GroupV2 = GroupV2Import;
+export const Tokens = TokensImport;
+export const Destiny2 = Destiny2Import;
+export const CommunityContent = CommunityContentImport;
+export const Trending = TrendingImport;
+export const Fireteam = FireteamImport;

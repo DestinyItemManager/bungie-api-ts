@@ -6,7 +6,8 @@
     "module": "ES2015",
     "target": "es5",
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+    "emitDeclarationOnly": true
   },
   "include": ["./generated-src/**/*"]
 }
