@@ -10,15 +10,22 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { CommunityContentSortMode, ForumTopicsCategoryFiltersEnum, PostSearchResponse } from '../forum/interfaces';
+import {
+  CommunityContentSortMode,
+  ForumTopicsCategoryFiltersEnum,
+  PostSearchResponse,
+} from '../forum/interfaces';
 import { ServerResponse } from '../common';
 export interface GetCommunityContentParams {
-    /** The type of media to get */
-    mediaFilter: ForumTopicsCategoryFiltersEnum;
-    /** Zero based page */
-    page: number;
-    /** The sort mode. */
-    sort: CommunityContentSortMode;
+  /** The type of media to get */
+  mediaFilter: ForumTopicsCategoryFiltersEnum;
+  /** Zero based page */
+  page: number;
+  /** The sort mode. */
+  sort: CommunityContentSortMode;
 }
 /** Returns community content. */
-export declare function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>>;
+export declare function getCommunityContent(
+  http: HttpClient,
+  params: GetCommunityContentParams
+): Promise<ServerResponse<PostSearchResponse>>;

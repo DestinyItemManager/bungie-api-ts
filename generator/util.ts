@@ -34,7 +34,11 @@ export function typeMapping(schema: SchemaObject, doc: OpenAPIObject): string {
     case 'object':
       if (schema.allOf) {
         return resolveSchemaType(schema.allOf[0], doc);
-      } else if (schema.additionalProperties && schema['x-dictionary-key']) {
+      } else if (
+        schema.additionalProperties &&
+        schema['x-dictionary-key'] &&
+        typeof schema.additionalProperties !== 'boolean'
+      ) {
         const keySchema: SchemaObject | ReferenceObject = schema['x-dictionary-key'];
         const key = isReferenceObject(keySchema) ? 'number' : resolveSchemaType(keySchema, doc);
         const val = resolveSchemaType(schema.additionalProperties, doc);
@@ -55,7 +59,7 @@ export function getReferencedTypes(schema: SchemaObject | ReferenceObject): stri
     return getReferencedTypes(schema.items!);
   } else if (schema.allOf) {
     return getReferencedTypes(schema.allOf[0]);
-  } else if (schema.additionalProperties) {
+  } else if (schema.additionalProperties && typeof schema.additionalProperties !== 'boolean') {
     return getReferencedTypes(schema.additionalProperties);
   }
 }
