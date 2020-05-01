@@ -3,40 +3,47 @@
  * in DIM, but is free for anyone to use.
  */
 
-import * as fs from 'fs';
 import * as _ from 'underscore';
+import * as fs from 'fs';
+
 import { OpenAPIObject, PathItemObject } from 'openapi3-ts';
-import { DefInfo } from './util';
-import { generateServiceDefinition } from './generate-api';
-import { generateInterfaceDefinitions } from './generate-interfaces';
-import { computeTypeMaps } from './type-index';
 import { generateIndex, generateSuperIndex } from './generate-index';
 
-const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
+import { DefInfo } from './util';
+import { computeTypeMaps } from './type-index';
+import { generateInterfaceDefinitions } from './generate-interfaces';
+import { generateServiceDefinition } from './generate-api';
 
-// Pairs of [request path, path service description]
-const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
+// allow some async operations
+(async () => {
+  const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
 
-// Grouped by "tag" which says which service (destiny, groups, forums, etc)
-const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {
-  return (desc.get || desc.post)!.tags![0];
-});
-delete pathPairsByTag[''];
+  // Pairs of [request path, path service description]
+  const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
 
-const { componentsByFile, componentByDef } = computeTypeMaps(pathPairsByTag, doc);
+  // Grouped by "tag" which says which service (destiny, groups, forums, etc)
+  const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {
+    return (desc.get || desc.post)!.tags![0];
+  });
+  delete pathPairsByTag[''];
 
-_.each(componentsByFile, (components: DefInfo[], file: string) => {
-  generateInterfaceDefinitions(file, components, doc, componentByDef);
-});
+  const { componentsByFile, componentByDef } = computeTypeMaps(pathPairsByTag, doc);
 
-_.each(pathPairsByTag, (paths, tag) => {
-  generateServiceDefinition(tag, paths, doc, componentByDef);
-});
+  await Promise.all(
+    _.map(componentsByFile, (components: DefInfo[], file: string) => {
+      return generateInterfaceDefinitions(file, components, doc, componentByDef);
+    })
+  );
 
-_.each(pathPairsByTag, (paths, tag) => {
-  generateIndex(tag, doc, componentsByFile);
-});
+  _.each(pathPairsByTag, (paths, tag) => {
+    generateServiceDefinition(tag, paths, doc, componentByDef);
+  });
 
-generateSuperIndex(Object.keys(pathPairsByTag), doc);
+  _.each(pathPairsByTag, (paths, tag) => {
+    generateIndex(tag, doc, componentsByFile);
+  });
 
-// some way to mark "preview" stuff
+  generateSuperIndex(Object.keys(pathPairsByTag), doc);
+
+  // some way to mark "preview" stuff
+})();

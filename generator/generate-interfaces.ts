@@ -1,16 +1,31 @@
 import * as _ from 'underscore';
-import { DefInfo, getRef, resolveSchemaType } from './util';
+import * as request from 'request-promise-native';
+
+import { DefInfo, getRef, interfaceName, resolveSchemaType } from './util';
 import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
 import {
+  addImport,
+  docComment,
   generateHeader,
   generateImports,
-  docComment,
   indent,
-  addImport,
-  writeOutFile
+  writeOutFile,
 } from './generate-common';
 
-export function generateInterfaceDefinitions(
+const manifestTableListFetcher = (async () => {
+  const manifestMeta = await request.get('https://www.bungie.net/Platform/Destiny2/Manifest/', {
+    json: true,
+  });
+  try {
+    return Object.keys(manifestMeta.Response.jsonWorldComponentContentPaths.en);
+  } catch (e) {
+    console.log(e);
+    console.log(manifestMeta);
+    process.exit(1);
+  }
+})();
+
+export async function generateInterfaceDefinitions(
   file: string,
   components: DefInfo[],
   doc: OpenAPIObject,
@@ -27,6 +42,7 @@ export function generateInterfaceDefinitions(
   let specialDefinitions;
   if (file === 'destiny2/interfaces.ts') {
     specialDefinitions = generateSpecialDefinitions();
+    specialDefinitions += await generateManifestDefinitions(components);
   }
   if (file === 'common.ts') {
     specialDefinitions = generateServerResponseDefinitions();
@@ -149,4 +165,38 @@ function generateServerResponseDefinitions() {
   readonly Message: string;
   readonly MessageData: { [key: string]: string };
 }`;
+}
+
+async function generateManifestDefinitions(components: DefInfo[]) {
+  let manifestTableList = await manifestTableListFetcher;
+
+  // defs we have documentation for. some stuff in manifest doesn't have interface definitions. idk why.
+  const documentedDefs = components.map((component) => component.interfaceName);
+
+  // exclude some tables from the definitionmanifest table because we don't have the forat for them
+  manifestTableList = manifestTableList.filter((tableName) => documentedDefs.includes(tableName));
+
+  return `
+interface HashKeyed<V> { [key: number]: V }
+
+/**
+ * this describes a big object holding several tables of hash-keyed DestinyDefinitions
+ * this is roughly what you get if you decode the gigantic, single-json manifest blob,
+ * but also just what we use to dole out single-table, typed definitions
+ */
+export interface DestinyManifestStructure {
+${manifestTableList
+  .map((manifestTable) => `${manifestTable}: HashKeyed<${manifestTable}>;\n`)
+  .join('')}
+}
+type DestinyManifestTableName = keyof DestinyManifestStructure;
+
+/**
+ * given a STRING table name, this gives the type of an entry from that table
+ * i.e. DestinyDefinitionFrom<typeof 'DestinyInventoryItemDefinition'>
+ * returns the type DestinyInventoryItemDefinition
+ */
+export type DestinyDefinitionFrom<K extends DestinyManifestTableName> = DestinyManifestStructure[K][number];
+
+`;
 }

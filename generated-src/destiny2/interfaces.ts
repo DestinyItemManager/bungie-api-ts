@@ -32,6 +32,76 @@ export interface DictionaryComponentResponse<T> {
   readonly data?: { [key: string]: T };
   readonly privacy: ComponentPrivacySetting;
 }
+interface HashKeyed<V> { [key: number]: V }
+
+/**
+ * this describes a big object holding several tables of hash-keyed DestinyDefinitions
+ * this is roughly what you get if you decode the gigantic, single-json manifest blob,
+ * but also just what we use to dole out single-table, typed definitions
+ */
+export interface DestinyManifestStructure {
+DestinyPlaceDefinition: HashKeyed<DestinyPlaceDefinition>;
+DestinyActivityDefinition: HashKeyed<DestinyActivityDefinition>;
+DestinyActivityTypeDefinition: HashKeyed<DestinyActivityTypeDefinition>;
+DestinyClassDefinition: HashKeyed<DestinyClassDefinition>;
+DestinyGenderDefinition: HashKeyed<DestinyGenderDefinition>;
+DestinyInventoryBucketDefinition: HashKeyed<DestinyInventoryBucketDefinition>;
+DestinyRaceDefinition: HashKeyed<DestinyRaceDefinition>;
+DestinyTalentGridDefinition: HashKeyed<DestinyTalentGridDefinition>;
+DestinyUnlockDefinition: HashKeyed<DestinyUnlockDefinition>;
+DestinyMaterialRequirementSetDefinition: HashKeyed<DestinyMaterialRequirementSetDefinition>;
+DestinySandboxPerkDefinition: HashKeyed<DestinySandboxPerkDefinition>;
+DestinyStatGroupDefinition: HashKeyed<DestinyStatGroupDefinition>;
+DestinyProgressionMappingDefinition: HashKeyed<DestinyProgressionMappingDefinition>;
+DestinyFactionDefinition: HashKeyed<DestinyFactionDefinition>;
+DestinyVendorGroupDefinition: HashKeyed<DestinyVendorGroupDefinition>;
+DestinyRewardSourceDefinition: HashKeyed<DestinyRewardSourceDefinition>;
+DestinyUnlockValueDefinition: HashKeyed<DestinyUnlockValueDefinition>;
+DestinyItemCategoryDefinition: HashKeyed<DestinyItemCategoryDefinition>;
+DestinyDamageTypeDefinition: HashKeyed<DestinyDamageTypeDefinition>;
+DestinyActivityModeDefinition: HashKeyed<DestinyActivityModeDefinition>;
+DestinyActivityGraphDefinition: HashKeyed<DestinyActivityGraphDefinition>;
+DestinyCollectibleDefinition: HashKeyed<DestinyCollectibleDefinition>;
+DestinyStatDefinition: HashKeyed<DestinyStatDefinition>;
+DestinyItemTierTypeDefinition: HashKeyed<DestinyItemTierTypeDefinition>;
+DestinyMetricDefinition: HashKeyed<DestinyMetricDefinition>;
+DestinyPlugSetDefinition: HashKeyed<DestinyPlugSetDefinition>;
+DestinyPresentationNodeDefinition: HashKeyed<DestinyPresentationNodeDefinition>;
+DestinyRecordDefinition: HashKeyed<DestinyRecordDefinition>;
+DestinyDestinationDefinition: HashKeyed<DestinyDestinationDefinition>;
+DestinyEquipmentSlotDefinition: HashKeyed<DestinyEquipmentSlotDefinition>;
+DestinyInventoryItemDefinition: HashKeyed<DestinyInventoryItemDefinition>;
+DestinyLocationDefinition: HashKeyed<DestinyLocationDefinition>;
+DestinyLoreDefinition: HashKeyed<DestinyLoreDefinition>;
+DestinyObjectiveDefinition: HashKeyed<DestinyObjectiveDefinition>;
+DestinyProgressionDefinition: HashKeyed<DestinyProgressionDefinition>;
+DestinyProgressionLevelRequirementDefinition: HashKeyed<DestinyProgressionLevelRequirementDefinition>;
+DestinySeasonDefinition: HashKeyed<DestinySeasonDefinition>;
+DestinySeasonPassDefinition: HashKeyed<DestinySeasonPassDefinition>;
+DestinySocketCategoryDefinition: HashKeyed<DestinySocketCategoryDefinition>;
+DestinySocketTypeDefinition: HashKeyed<DestinySocketTypeDefinition>;
+DestinyTraitDefinition: HashKeyed<DestinyTraitDefinition>;
+DestinyTraitCategoryDefinition: HashKeyed<DestinyTraitCategoryDefinition>;
+DestinyVendorDefinition: HashKeyed<DestinyVendorDefinition>;
+DestinyMilestoneDefinition: HashKeyed<DestinyMilestoneDefinition>;
+DestinyActivityModifierDefinition: HashKeyed<DestinyActivityModifierDefinition>;
+DestinyReportReasonCategoryDefinition: HashKeyed<DestinyReportReasonCategoryDefinition>;
+DestinyArtifactDefinition: HashKeyed<DestinyArtifactDefinition>;
+DestinyBreakerTypeDefinition: HashKeyed<DestinyBreakerTypeDefinition>;
+DestinyChecklistDefinition: HashKeyed<DestinyChecklistDefinition>;
+DestinyEnergyTypeDefinition: HashKeyed<DestinyEnergyTypeDefinition>;
+
+}
+type DestinyManifestTableName = keyof DestinyManifestStructure;
+
+/**
+ * given a STRING table name, this gives the type of an entry from that table
+ * i.e. DestinyDefinitionFrom<typeof 'DestinyInventoryItemDefinition'>
+ * returns the type DestinyInventoryItemDefinition
+ */
+export type DestinyDefinitionFrom<K extends DestinyManifestTableName> = DestinyManifestStructure[K][number];
+
+
 
 /**
  * Information about a current character's status with a Progression. A progression
