@@ -60,6 +60,8 @@ Destiny2.getProfile(...);
 # Build
 
 ```
-git submodule update --init --recursive
-yarn && yarn start
+# setup
+yarn && yarn submodule
+# run
+yarn start
 ```

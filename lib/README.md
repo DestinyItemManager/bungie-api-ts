@@ -60,5 +60,8 @@ Destiny2.getProfile(...);
 # Build
 
 ```
-yarn && yarn start
+# setup
+yarn && yarn submodule
+# run
+yarn start
 ```
