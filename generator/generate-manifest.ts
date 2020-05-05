@@ -1,36 +1,13 @@
-import * as request from 'request-promise-native';
-
-import {
-  DefInfo,
-  getRef,
-  isReferenceObject,
-  isRequestBodyObject,
-  lastPart,
-  lcFirst,
-  resolveSchemaType,
-} from './util';
-import {
-  OpenAPIObject,
-  ParameterObject,
-  PathItemObject,
-  ReferenceObject,
-  RequestBodyObject,
-} from 'openapi3-ts';
-import {
-  addImport,
-  docComment,
-  generateHeader,
-  generateImports,
-  indent,
-  writeOutFile,
-} from './generate-common';
+import { DefInfo } from './util';
+import { OpenAPIObject } from 'openapi3-ts';
+import { writeOutFile } from './generate-common';
 
 const httpClientType = `import { HttpClient } from '../http';`;
 
 const manifestComponentListPromise = (async () => {
-  const manifestMeta = await request.get('https://www.bungie.net/Platform/Destiny2/Manifest/', {
-    json: true,
-  });
+  const manifestMeta = await fetch(
+    'https://www.bungie.net/Platform/Destiny2/Manifest/'
+  ).then((res) => res.json());
   try {
     return Object.keys(manifestMeta.Response.jsonWorldComponentContentPaths.en);
   } catch (e) {
