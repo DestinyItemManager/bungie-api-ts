@@ -250,9 +250,17 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
   language: string;
 }
 /**
- * fetches and returns a single table (Component) from the d2 manifest
+ * this fetches and returns a single table (Component) from the d2 manifest
  * i.e. DestinyInventoryItemDefinition / DestinyObjectiveDefinition /
  * DestinyVendorDefinition / DestinySeasonDefinition / etc.
+ *
+ * due to... LIMITATIONS, the array of table names needs to be recognized by
+ * typescript as readonly (not mutable between inception and fetching),
+ * so that it considers them table names and not just strings.
+ * like ['DestinyInventoryItemDefinition' as const]
+ * or maybe ['DestinyInventoryItemDefinition'] as const
+ * or just hard coded like
+ * function(['DestinyInventoryItemDefinition'])
  */
 export declare function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
   http: HttpClient,
@@ -263,7 +271,12 @@ export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponen
   tableNames: T;
   language: string;
 }
-/** bundles multiple single tables into a properly typed object with table keys */
+/**
+ * this returns a similar structure to getAllDestinyManifestComponents (the big manifest json)
+ * but only specific components within. it bundles multiple single tables requests,
+ * into a single properly typed object with keys named after manifest components
+ * i.e. { DestinyInventoryItemDefinition: etc..., DestinyObjectiveDefinition: etc... }
+ */
 export declare function getDestinyManifestSlice<T extends DestinyManifestComponentName[]>(
   http: HttpClient,
   params: GetDestinyManifestSliceParams<T>
