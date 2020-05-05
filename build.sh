@@ -29,5 +29,5 @@ cp package.json lib/
 cp README.md lib/
 cp bungie-api-LICENSE lib/
 
-sed -i'' 's/dist\///' lib/package.json
-sed -i'' 's/index\.ts/index.js/' lib/package.json
+sed -i '' 's/dist\///' lib/package.json
+sed -i '' 's/index\.ts/index.js/' lib/package.json
