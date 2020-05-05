@@ -12,6 +12,7 @@ import { generateIndex, generateSuperIndex } from './generate-index';
 import { DefInfo } from './util';
 import { computeTypeMaps } from './type-index';
 import { generateInterfaceDefinitions } from './generate-interfaces';
+import { generateManifestUtils } from './generate-manifest';
 import { generateServiceDefinition } from './generate-api';
 
 // allow some async operations
@@ -29,11 +30,11 @@ import { generateServiceDefinition } from './generate-api';
 
   const { componentsByFile, componentByDef } = computeTypeMaps(pathPairsByTag, doc);
 
-  await Promise.all(
-    _.map(componentsByFile, (components: DefInfo[], file: string) => {
-      return generateInterfaceDefinitions(file, components, doc, componentByDef);
-    })
-  );
+  _.each(componentsByFile, (components: DefInfo[], file: string) => {
+    generateInterfaceDefinitions(file, components, doc, componentByDef);
+  });
+
+  await generateManifestUtils(componentsByFile['destiny2/interfaces.ts'], doc);
 
   _.each(pathPairsByTag, (paths, tag) => {
     generateServiceDefinition(tag, paths, doc, componentByDef);
