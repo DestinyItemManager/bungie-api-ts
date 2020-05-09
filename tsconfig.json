@@ -3,11 +3,10 @@
     "outDir": "./build/",
     "sourceMap": true,
     "strictNullChecks": true,
-    "module": "commonjs",
+    "module": "es2015",
     "target": "es2017",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
-  "include": [
-    "./generator/**/*"
-  ]
+  "include": ["./generator/**/*"]
 }

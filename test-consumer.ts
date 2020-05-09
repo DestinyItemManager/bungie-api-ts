@@ -1,3 +1,3 @@
-import * as Bungie from './dist';
+import * as Bungie from './lib/index.js';
 
-Bungie.User.
+console.log('Hey');

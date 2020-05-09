@@ -2,6 +2,7 @@
   "name": "bungie-api-ts",
   "version": "3.0.0",
   "description": "TypeScript mappings for the Bungie.net API",
+  "type": "module",
   "main": "./dist/index.ts",
   "types": "./dist/index.d.ts",
   "sideEffects": false,

@@ -1,7 +1,7 @@
 import { DefInfo } from './util';
 import { OpenAPIObject } from 'openapi3-ts';
 import fetch from 'node-fetch';
-import { writeOutFile } from './generate-common';
+import { writeOutFile } from './generate-common.js';
 
 const httpClientType = `import { HttpClient } from '../http';`;
 
