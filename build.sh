@@ -1,26 +1,8 @@
 #!/bin/sh -ex
 
 # there maybe a better way to do this...
-UNAME=$( command -v uname)
 
-case $( "${UNAME}" | tr '[:upper:]' '[:lower:]') in
-  linux*)
-    os='linux'
-    ;;
-  darwin*)
-    os='darwin'
-    ;;
-  msys*|cygwin*|mingw*)
-    # or possible 'bash on windows'
-    os='windows'
-    ;;
-  nt|win*)
-    os='windows'
-    ;;
-  *)
-    os='unknown'
-    ;;
-esac
+os=$(node -e "console.log(process.platform)")
 
 # Prepare the generated source directory
 rm -rf ./generated-src
@@ -51,13 +33,10 @@ cp package.json lib/
 cp README.md lib/
 cp bungie-api-LICENSE lib/
 
-case $($os) in
-  darwin)
+if [ $os = "darwin"]
     sed -i '' 's/dist\///' lib/package.json
     sed -i '' 's/index\.ts/index.js/' lib/package.json
-    ;;
-  *)
+else
     sed -i'' 's/dist\///' lib/package.json
     sed -i'' 's/index\.ts/index.js/' lib/package.json
-    ;;
-esac
+fi
