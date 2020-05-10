@@ -1,7 +1,8 @@
+import { getDestinyManifestComponent, getDestinyManifestSlice } from '../lib/destiny2/manifest';
+
 import { HttpClientConfig } from '../lib/http';
 import fetch from 'node-fetch';
 import { getDestinyManifest } from '../lib/destiny2';
-import { getDestinyManifestSlice } from '../lib/destiny2/manifest';
 
 async function httpClient(config: HttpClientConfig) {
   return fetch(config.url, config)
@@ -15,6 +16,12 @@ async function httpClient(config: HttpClientConfig) {
 
 async () => {
   const manifestMeta = (await getDestinyManifest(httpClient)).Response;
+
+  // const manifestTable = await getDestinyManifestComponent(httpClient, {
+  //   destinyManifest: manifestMeta,
+  //   tableName: 'DestinyInventoryItemDefinition',
+  //   language: 'en',
+  // });
 
   const partialManifest = await getDestinyManifestSlice(httpClient, {
     destinyManifest: manifestMeta,
