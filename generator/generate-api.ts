@@ -1,26 +1,26 @@
 import {
-  OpenAPIObject,
-  PathItemObject,
-  ParameterObject,
-  ReferenceObject,
-  RequestBodyObject
-} from 'openapi3-ts';
-import {
+  DefInfo,
+  getRef,
+  isReferenceObject,
+  isRequestBodyObject,
   lastPart,
   lcFirst,
   resolveSchemaType,
-  DefInfo,
-  isReferenceObject,
-  isRequestBodyObject,
-  getRef
 } from './util';
 import {
+  OpenAPIObject,
+  ParameterObject,
+  PathItemObject,
+  ReferenceObject,
+  RequestBodyObject,
+} from 'openapi3-ts';
+import {
+  addImport,
+  docComment,
   generateHeader,
   generateImports,
-  docComment,
   indent,
-  addImport,
-  writeOutFile
+  writeOutFile,
 } from './generate-common';
 
 const httpClientType = `import { HttpClient } from '../http';`;

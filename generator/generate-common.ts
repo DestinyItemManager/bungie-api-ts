@@ -62,6 +62,7 @@ export function generateImports(
       if (!relativePath.startsWith('.')) {
         relativePath = './' + relativePath;
       }
+      if (path.sep === '\\') relativePath = relativePath.replace(/\\/g, '/');
       return `import {
   ${[...types].sort().join(',\n  ')}
 } from '${relativePath}';`;
