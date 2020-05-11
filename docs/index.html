@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> bungie-api-ts</h1>
+			<h1>bungie-api-ts</h1>
 		</div>
 	</div>
 </header>
@@ -64,19 +64,30 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="bungie-api-typescript-support">Bungie API TypeScript support</h1>
+				<a href="#bungie-api-typescript-support" id="bungie-api-typescript-support" style="color: inherit; text-decoration: none;">
+					<h1>Bungie API TypeScript support</h1>
+				</a>
 				<p>This project implements TypeScript definitions and API helpers for the <a href="https://github.com/Bungie-net/api">Bungie.net API</a>. It&#39;s meant for use in <a href="https://destinyitemmanager.com">Destiny Item Manager</a>, but should be general enough to use in any project. The code is completely generated from Bungie&#39;s documentation - I considered using something like Swagger Codegen, but instead opted for a custom generator so we could make the result as nice as possible.</p>
-				<h1 id="ports">Ports</h1>
+				<a href="#ports" id="ports" style="color: inherit; text-decoration: none;">
+					<h1>Ports</h1>
+				</a>
 				<p>Feel free to fork this and use it to generate for your favorite language!</p>
 				<ul>
 					<li><a href="https://github.com/marquesinijatinha/bungie-api-dart/">Dart</a></li>
 				</ul>
-				<h1 id="install">Install</h1>
-				<pre><code>npm <span class="hljs-keyword">install</span> bungie-api-ts</code></pre><h1 id="interfaces-and-enums">Interfaces and Enums</h1>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h1>Install</h1>
+				</a>
+				<pre><code>yarn <span class="hljs-keyword">add</span><span class="bash"> bungie-api-ts</span></code></pre>
+				<a href="#interfaces-and-enums" id="interfaces-and-enums" style="color: inherit; text-decoration: none;">
+					<h1>Interfaces and Enums</h1>
+				</a>
 				<p>All the interface type definitions and enums are for type info only - everything will compile out. Only the API helpers produce real JavaScript output. You can import types from each service defined on Bungie.net:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { DestinyInventoryComponent, DestinyInventoryItemDefinition } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;</code></pre>
 				<p>There are definitions for every type defined in the Bungie.net services. See <a href="https://bungie-net.github.io/multi/">their documentation</a> for a list - the interface names are the last part of the full name (for example, <code>Destiny.Definitions.DestinyVendorActionDefinition</code> becomes <code>DestinyVendorActionDefinition</code>). There are a few exceptions, like <code>SingleComponentResponseOfDestinyInventoryComponent</code>, which have been mapped into nicer forms like <code>SingleComponentResponse&lt;DestinyInventoryComponent&gt;</code>, and the server responses, which are now <code>ServerResponse&lt;T&gt;</code> instead of something like <code>DestinyCharacterResponse</code>.</p>
-				<h1 id="api-helpers">API Helpers</h1>
+				<a href="#api-helpers" id="api-helpers" style="color: inherit; text-decoration: none;">
+					<h1>API Helpers</h1>
+				</a>
 				<p>In addition to the types, there are also simple helper functions for each API endpoint. They define the inputs and outputs to that endpoint, and will call a user-provided function with HTTP request info that you can then use to make an HTTP request. This pattern was used so the API helpers could provide full type information. These helpers are not a full API client - they assist in building one. An example:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
 
@@ -90,7 +101,9 @@
   destinyMembershipId: <span class="hljs-number">12345</span>,
   membershipType: BungieMembershipType.TigerPsn
 });</code></pre>
-				<h1 id="imports">Imports</h1>
+				<a href="#imports" id="imports" style="color: inherit; text-decoration: none;">
+					<h1>Imports</h1>
+				</a>
 				<p>It is possible to import all services from <code>bungie-api-ts</code> directly, but it&#39;s better to import the specific service and pick out what you want:</p>
 				<pre><code class="language-typescript"><span class="hljs-comment">// good</span>
 <span class="hljs-keyword">import</span> { getProfile, HttpClientConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts/destiny2'</span>;
@@ -99,8 +112,13 @@ getProfile(...);
 <span class="hljs-comment">// works, but not as good</span>
 <span class="hljs-keyword">import</span> { Destiny2 } <span class="hljs-keyword">from</span> <span class="hljs-string">'bungie-api-ts'</span>;
 Destiny2.getProfile(...);</code></pre>
-				<h1 id="build">Build</h1>
-				<pre><code><span class="hljs-built_in">npm</span> install &amp;&amp; <span class="hljs-built_in">npm</span> start</code></pre>
+				<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+					<h1>Build</h1>
+				</a>
+				<pre><code><span class="hljs-comment"># setup</span>
+<span class="hljs-attr">yarn</span> <span class="hljs-string">&amp;&amp; yarn submodule</span>
+<span class="hljs-comment"># run</span>
+<span class="hljs-attr">yarn</span> <span class="hljs-string">start</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -110,100 +128,106 @@ Destiny2.getProfile(...);</code></pre>
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_api_.html">"app/api"</a>
+						<a href="modules/_app_api_.html">&quot;app/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_index_.html">"app/index"</a>
+						<a href="modules/_app_index_.html">&quot;app/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_interfaces_.html">"app/interfaces"</a>
+						<a href="modules/_app_interfaces_.html">&quot;app/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_common_.html">"common"</a>
+						<a href="modules/_common_.html">&quot;common&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_communitycontent_api_.html">"communitycontent/api"</a>
+						<a href="modules/_communitycontent_api_.html">&quot;communitycontent/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_communitycontent_index_.html">"communitycontent/index"</a>
+						<a href="modules/_communitycontent_index_.html">&quot;communitycontent/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_content_api_.html">"content/api"</a>
+						<a href="modules/_content_api_.html">&quot;content/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_content_index_.html">"content/index"</a>
+						<a href="modules/_content_index_.html">&quot;content/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_content_interfaces_.html">"content/interfaces"</a>
+						<a href="modules/_content_interfaces_.html">&quot;content/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_destiny2_api_.html">"destiny2/api"</a>
+						<a href="modules/_destiny2_api_.html">&quot;destiny2/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_destiny2_index_.html">"destiny2/index"</a>
+						<a href="modules/_destiny2_index_.html">&quot;destiny2/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_destiny2_interfaces_.html">"destiny2/interfaces"</a>
+						<a href="modules/_destiny2_interfaces_.html">&quot;destiny2/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_fireteam_api_.html">"fireteam/api"</a>
+						<a href="modules/_destiny2_manifest_.html">&quot;destiny2/manifest&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_fireteam_index_.html">"fireteam/index"</a>
+						<a href="modules/_fireteam_api_.html">&quot;fireteam/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_fireteam_interfaces_.html">"fireteam/interfaces"</a>
+						<a href="modules/_fireteam_index_.html">&quot;fireteam/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_forum_api_.html">"forum/api"</a>
+						<a href="modules/_fireteam_interfaces_.html">&quot;fireteam/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_forum_index_.html">"forum/index"</a>
+						<a href="modules/_forum_api_.html">&quot;forum/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_forum_interfaces_.html">"forum/interfaces"</a>
+						<a href="modules/_forum_index_.html">&quot;forum/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_groupv2_api_.html">"groupv2/api"</a>
+						<a href="modules/_forum_interfaces_.html">&quot;forum/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_groupv2_index_.html">"groupv2/index"</a>
+						<a href="modules/_groupv2_api_.html">&quot;groupv2/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_groupv2_interfaces_.html">"groupv2/interfaces"</a>
+						<a href="modules/_groupv2_index_.html">&quot;groupv2/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="modules/_groupv2_interfaces_.html">&quot;groupv2/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_platform_.html">"platform"</a>
+						<a href="modules/_http_.html">&quot;http&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_tokens_api_.html">"tokens/api"</a>
+						<a href="modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_tokens_index_.html">"tokens/index"</a>
+						<a href="modules/_platform_.html">&quot;platform&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_tokens_interfaces_.html">"tokens/interfaces"</a>
+						<a href="modules/_tokens_api_.html">&quot;tokens/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_trending_api_.html">"trending/api"</a>
+						<a href="modules/_tokens_index_.html">&quot;tokens/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_trending_index_.html">"trending/index"</a>
+						<a href="modules/_tokens_interfaces_.html">&quot;tokens/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_trending_interfaces_.html">"trending/interfaces"</a>
+						<a href="modules/_trending_api_.html">&quot;trending/api&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_user_api_.html">"user/api"</a>
+						<a href="modules/_trending_index_.html">&quot;trending/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_user_index_.html">"user/index"</a>
+						<a href="modules/_trending_interfaces_.html">&quot;trending/interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_user_interfaces_.html">"user/interfaces"</a>
+						<a href="modules/_user_api_.html">&quot;user/api&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_user_index_.html">&quot;user/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_user_interfaces_.html">&quot;user/interfaces&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -226,6 +250,7 @@ Destiny2.getProfile(...);</code></pre>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -274,7 +299,7 @@ Destiny2.getProfile(...);</code></pre>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
