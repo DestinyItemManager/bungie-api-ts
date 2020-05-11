@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
+    "rootDir": "./generator",
     "outDir": "./build/",
     "sourceMap": true,
     "strictNullChecks": true,
     "module": "es2015",
     "target": "es2017",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "include": ["./generator/**/*"]
 }

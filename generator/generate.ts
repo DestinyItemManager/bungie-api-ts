@@ -13,6 +13,7 @@ import { computeTypeMaps } from './type-index.js';
 import { generateInterfaceDefinitions } from './generate-interfaces.js';
 import { generateManifestUtils } from './generate-manifest.js';
 import { generateServiceDefinition } from './generate-api.js';
+import { generatePackageJson } from './generate-package-json.js';
 
 // allow some async operations
 (async () => {
@@ -44,6 +45,9 @@ import { generateServiceDefinition } from './generate-api.js';
   });
 
   generateSuperIndex(Object.keys(pathPairsByTag), doc);
+
+  // read top package.json, remove dependencies, add exports block per service
+  generatePackageJson(Object.keys(pathPairsByTag));
 
   // some way to mark "preview" stuff
 })();

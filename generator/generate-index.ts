@@ -23,7 +23,7 @@ export * from './api.js';`;
 
   // Destiny2 service has special manifest helpers
   if (tag === 'Destiny2') {
-    imports = `${imports}\nexport * from './manifest';`;
+    imports = `${imports}\nexport * from './manifest.js';`;
   }
 
   const definition = [generateHeader(doc), imports].join('\n\n') + '\n';

@@ -1,3 +1,5 @@
-import * as Bungie from './lib/index.js';
+import { getDestinyManifest } from './lib/destiny2/api.js';
 
-console.log('Hey');
+const fakeHttp = async (config) => console.log(config.url);
+
+getDestinyManifest(fakeHttp);
