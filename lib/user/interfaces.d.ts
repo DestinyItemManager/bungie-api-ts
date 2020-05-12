@@ -9,9 +9,9 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { BungieMembershipType } from '../common';
-import { GroupUserInfoCard } from '../groupv2/interfaces';
-import { IgnoreResponse } from '../platform';
+import { BungieMembershipType } from '../common.js';
+import { GroupUserInfoCard } from '../groupv2/interfaces.js';
+import { IgnoreResponse } from '../platform.js';
 /**
  * This contract supplies basic information commonly used to display a minimal
  * amount of information about a user. Take care to not add more properties here

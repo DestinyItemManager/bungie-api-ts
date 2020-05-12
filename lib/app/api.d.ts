@@ -10,8 +10,8 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { ApiUsage, Application } from './interfaces';
-import { ServerResponse } from '../common';
+import { ApiUsage, Application } from './interfaces.js';
+import { ServerResponse } from '../common.js';
 export interface GetApplicationApiUsageParams {
   /** ID of the application to get usage statistics. */
   applicationId: number;

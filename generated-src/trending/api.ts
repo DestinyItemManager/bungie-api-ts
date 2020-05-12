@@ -17,10 +17,10 @@ import {
   TrendingCategories,
   TrendingDetail,
   TrendingEntryType
-} from './interfaces';
+} from './interfaces.js';
 import {
   ServerResponse
-} from '../common';
+} from '../common.js';
 
 /**
  * Returns trending items for Bungie.net, collapsed into the first page of items

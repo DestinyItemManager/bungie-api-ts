@@ -17,8 +17,8 @@ import {
   InterpolationPointFloat,
   PagedQuery,
   PlatformErrorCodes,
-} from '../common';
-import { UserInfoCard } from '../user/interfaces';
+} from '../common.js';
+import { UserInfoCard } from '../user/interfaces.js';
 export interface SingleComponentResponse<T> {
   readonly data?: T;
   readonly privacy: ComponentPrivacySetting;

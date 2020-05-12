@@ -14,8 +14,8 @@ import {
   CommunityContentSortMode,
   ForumTopicsCategoryFiltersEnum,
   PostSearchResponse,
-} from '../forum/interfaces';
-import { ServerResponse } from '../common';
+} from '../forum/interfaces.js';
+import { ServerResponse } from '../common.js';
 export interface GetCommunityContentParams {
   /** The type of media to get */
   mediaFilter: ForumTopicsCategoryFiltersEnum;

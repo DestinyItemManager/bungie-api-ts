@@ -13,10 +13,10 @@
 import {
   BungieMembershipType,
   PagedQuery
-} from '../common';
+} from '../common.js';
 import {
   UserInfoCard
-} from '../user/interfaces';
+} from '../user/interfaces.js';
 
 export const enum FireteamDateRange {
   All = 0,

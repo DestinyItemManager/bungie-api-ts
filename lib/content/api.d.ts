@@ -14,8 +14,8 @@ import {
   ContentItemPublicContract,
   ContentTypeDescription,
   SearchResultOfContentItemPublicContract,
-} from './interfaces';
-import { ServerResponse } from '../common';
+} from './interfaces.js';
+import { ServerResponse } from '../common.js';
 export interface GetContentTypeParams {
   type: string;
 }

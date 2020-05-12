@@ -12,17 +12,17 @@
 
 import {
   GeneralUser
-} from '../user/interfaces';
+} from '../user/interfaces.js';
 import {
   GroupResponse
-} from '../groupv2/interfaces';
+} from '../groupv2/interfaces.js';
 import {
   IgnoreResponse,
   TagResponse
-} from '../platform';
+} from '../platform.js';
 import {
   PagedQuery
-} from '../common';
+} from '../common.js';
 
 /**
  * This enum represents a set of flags - use bitwise operators to check which of

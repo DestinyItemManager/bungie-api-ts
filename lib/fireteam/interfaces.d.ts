@@ -9,8 +9,8 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { BungieMembershipType, PagedQuery } from '../common';
-import { UserInfoCard } from '../user/interfaces';
+import { BungieMembershipType, PagedQuery } from '../common.js';
+import { UserInfoCard } from '../user/interfaces.js';
 export declare const enum FireteamDateRange {
   All = 0,
   Now = 1,

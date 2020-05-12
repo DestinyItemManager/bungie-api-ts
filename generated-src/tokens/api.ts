@@ -15,10 +15,10 @@ import { HttpClient } from '../http';
 import {
   PartnerOfferClaimRequest,
   PartnerOfferSkuHistoryResponse
-} from './interfaces';
+} from './interfaces.js';
 import {
   ServerResponse
-} from '../common';
+} from '../common.js';
 
 /** Claim a partner offer as the authenticated user. */
 export function claimPartnerOffer(http: HttpClient, body: PartnerOfferClaimRequest): Promise<ServerResponse<boolean>> {

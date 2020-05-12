@@ -18,8 +18,8 @@ import {
   FireteamSlotSearch,
   SearchResultOfFireteamResponse,
   SearchResultOfFireteamSummary,
-} from './interfaces';
-import { ServerResponse } from '../common';
+} from './interfaces.js';
+import { ServerResponse } from '../common.js';
 export interface GetActivePrivateClanFireteamCountParams {
   /** The group id of the clan. */
   groupId: string;

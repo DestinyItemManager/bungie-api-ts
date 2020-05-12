@@ -10,8 +10,8 @@
  * Do not edit these files manually.
  */
 
-export * from '../common';
-export * from '../http';
-export * from './api';
-export * from './interfaces';
-export * from './manifest';
+export * from '../common.js';
+export * from '../http.js';
+export * from './api.js';
+export * from './interfaces.js';
+export * from './manifest.js';

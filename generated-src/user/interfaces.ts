@@ -12,13 +12,13 @@
 
 import {
   BungieMembershipType
-} from '../common';
+} from '../common.js';
 import {
   GroupUserInfoCard
-} from '../groupv2/interfaces';
+} from '../groupv2/interfaces.js';
 import {
   IgnoreResponse
-} from '../platform';
+} from '../platform.js';
 
 /**
  * This contract supplies basic information commonly used to display a minimal

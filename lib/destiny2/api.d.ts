@@ -51,9 +51,9 @@ import {
   DestinyVendorResponse,
   DestinyVendorsResponse,
   PeriodType,
-} from './interfaces';
-import { BungieMembershipType, ServerResponse } from '../common';
-import { UserInfoCard } from '../user/interfaces';
+} from './interfaces.js';
+import { BungieMembershipType, ServerResponse } from '../common.js';
+import { UserInfoCard } from '../user/interfaces.js';
 /** Returns the current version of the manifest as a json object. */
 export declare function getDestinyManifest(
   http: HttpClient

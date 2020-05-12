@@ -9,10 +9,10 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { GeneralUser } from '../user/interfaces';
-import { GroupResponse } from '../groupv2/interfaces';
-import { IgnoreResponse, TagResponse } from '../platform';
-import { PagedQuery } from '../common';
+import { GeneralUser } from '../user/interfaces.js';
+import { GroupResponse } from '../groupv2/interfaces.js';
+import { IgnoreResponse, TagResponse } from '../platform.js';
+import { PagedQuery } from '../common.js';
 /**
  * This enum represents a set of flags - use bitwise operators to check which of
  * these match your value.

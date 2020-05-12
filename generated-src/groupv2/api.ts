@@ -15,7 +15,7 @@ import { HttpClient } from '../http';
 import {
   BungieMembershipType,
   ServerResponse
-} from '../common';
+} from '../common.js';
 import {
   ClanBanner,
   EntityActionResult,
@@ -46,7 +46,7 @@ import {
   SearchResultOfGroupBan,
   SearchResultOfGroupMember,
   SearchResultOfGroupMemberApplication
-} from './interfaces';
+} from './interfaces.js';
 
 /** Returns a list of all available group avatars for the signed-in user. */
 export function getAvailableAvatars(http: HttpClient): Promise<ServerResponse<{ [key: number]: string }>> {
