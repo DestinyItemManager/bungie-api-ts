@@ -21,6 +21,11 @@ export * from './api';`;
     imports = `${imports}\nexport * from './interfaces';`;
   }
 
+  // Destiny2 service has special manifest helpers
+  if (tag === 'Destiny2') {
+    imports = `${imports}\nexport * from './manifest';`;
+  }
+
   const definition = [generateHeader(doc), imports].join('\n\n') + '\n';
 
   writeOutFile(filename, definition);
