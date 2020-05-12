@@ -2,3 +2,4 @@ node_modules/
 ts-api/
 build/
 lib/package-lock.json
+/tests/test.js

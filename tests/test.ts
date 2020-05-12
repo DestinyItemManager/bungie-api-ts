@@ -1,8 +1,8 @@
-import { getDestinyManifestComponent, getDestinyManifestSlice } from '../lib/destiny2/manifest';
+import { getDestinyManifestSlice } from '../lib/destiny2/manifest.js';
 
-import { HttpClientConfig } from '../lib/http';
+import { HttpClientConfig } from '../lib/http.js';
 import fetch from 'node-fetch';
-import { getDestinyManifest } from '../lib/destiny2';
+import { getDestinyManifest } from '../lib/destiny2/index.js';
 
 async function httpClient(config: HttpClientConfig) {
   return fetch(config.url, config)
