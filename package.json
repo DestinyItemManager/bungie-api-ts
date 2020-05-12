@@ -9,6 +9,9 @@
     "submodule": "git submodule init && git submodule update",
     "test": "tsc tests/test.ts && node tests/test.js"
   },
+  "engines": {
+    "node": ">=13.9.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/DestinyItemManager/bungie-api-ts.git"
