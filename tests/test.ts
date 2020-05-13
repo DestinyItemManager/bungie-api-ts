@@ -1,8 +1,7 @@
-import { getDestinyManifestSlice } from '../lib/destiny2/manifest.js';
-
 import { HttpClientConfig } from '../lib/http.js';
 import fetch from 'node-fetch';
 import { getDestinyManifest } from '../lib/destiny2/index.js';
+import { getDestinyManifestSlice } from '../lib/destiny2/manifest.js';
 
 async function httpClient(config: HttpClientConfig) {
   return fetch(config.url, config)
@@ -14,7 +13,7 @@ async function httpClient(config: HttpClientConfig) {
     });
 }
 
-async () => {
+(async () => {
   const manifestMeta = (await getDestinyManifest(httpClient)).Response;
 
   // const manifestTable = await getDestinyManifestComponent(httpClient, {
@@ -61,5 +60,5 @@ async () => {
     !betterDevilsTests && console.log('betterDevilsTests failed. unexpected data:', betterDevils);
     !locationTests && console.log('locationTests failed. unexpected data:', exampleLocation);
     process.exit(1);
-  }
-};
+  } else console.log('tests passed'); // manifest downloader worked and expected attributes were present
+})();

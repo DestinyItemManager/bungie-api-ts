@@ -28,3 +28,5 @@ yarn prettier --write lib/**/*
 cp README.md lib/
 cp bungie-api-LICENSE lib/
 rm generator/package.json
+
+yarn test
