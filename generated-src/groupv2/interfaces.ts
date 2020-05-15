@@ -14,14 +14,14 @@ import {
   BungieMembershipType,
   PagedQuery,
   PlatformErrorCodes
-} from '../common';
+} from '../common.js';
 import {
   DestinyProgression
-} from '../destiny2/interfaces';
+} from '../destiny2/interfaces.js';
 import {
   UserInfoCard,
   UserMembership
-} from '../user/interfaces';
+} from '../user/interfaces.js';
 
 export interface GroupUserInfoCard {
   /**

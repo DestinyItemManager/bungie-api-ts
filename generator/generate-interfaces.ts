@@ -1,5 +1,5 @@
-import * as _ from 'underscore';
-import { DefInfo, getRef, resolveSchemaType } from './util';
+import _ from 'underscore';
+import { DefInfo, getRef, resolveSchemaType } from './util.js';
 import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
 import {
   generateHeader,
@@ -7,8 +7,8 @@ import {
   docComment,
   indent,
   addImport,
-  writeOutFile
-} from './generate-common';
+  writeOutFile,
+} from './generate-common.js';
 
 export function generateInterfaceDefinitions(
   file: string,

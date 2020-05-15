@@ -16,10 +16,10 @@ import {
   CommunityContentSortMode,
   ForumTopicsCategoryFiltersEnum,
   PostSearchResponse
-} from '../forum/interfaces';
+} from '../forum/interfaces.js';
 import {
   ServerResponse
-} from '../common';
+} from '../common.js';
 
 export interface GetCommunityContentParams {
   /** The type of media to get */

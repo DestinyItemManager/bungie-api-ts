@@ -17,9 +17,9 @@ import {
   ForumTopicsQuickDateEnum,
   ForumTopicsSortEnum,
   PostSearchResponse,
-} from './interfaces';
-import { ServerResponse } from '../common';
-import { TagResponse } from '../platform';
+} from './interfaces.js';
+import { ServerResponse } from '../common.js';
+import { TagResponse } from '../platform.js';
 export interface GetTopicsPagedParams {
   /** A category filter */
   categoryFilter: ForumTopicsCategoryFiltersEnum;

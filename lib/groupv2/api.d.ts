@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { BungieMembershipType, ServerResponse } from '../common';
+import { BungieMembershipType, ServerResponse } from '../common.js';
 import {
   ClanBanner,
   EntityActionResult,
@@ -41,7 +41,7 @@ import {
   SearchResultOfGroupBan,
   SearchResultOfGroupMember,
   SearchResultOfGroupMemberApplication,
-} from './interfaces';
+} from './interfaces.js';
 /** Returns a list of all available group avatars for the signed-in user. */
 export declare function getAvailableAvatars(
   http: HttpClient

@@ -1,8 +1,8 @@
-import { DefInfo, getReferencedTypes, getRef } from './util';
-import * as _ from 'underscore';
-import * as path from 'path';
-import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
+import { DefInfo, getReferencedTypes, getRef } from './util.js';
+import _ from 'underscore';
+import path from 'path';
+import fs from 'fs';
+import mkdirp from 'mkdirp';
 import { OpenAPIObject, SchemaObject, ReferenceObject } from 'openapi3-ts';
 
 export function generateHeader(doc: OpenAPIObject): string {
@@ -65,7 +65,7 @@ export function generateImports(
       if (path.sep === '\\') relativePath = relativePath.replace(/\\/g, '/');
       return `import {
   ${[...types].sort().join(',\n  ')}
-} from '${relativePath}';`;
+} from '${relativePath}.js';`;
     })
   )
     .sort()

@@ -57,6 +57,23 @@ import { Destiny2 } from 'bungie-api-ts';
 Destiny2.getProfile(...);
 ```
 
+# Manifest Helpers
+
+The `destiny2` import also contains helpers for typing and downloading the Destiny manifest:
+
+```typescript
+import { getDestinyManifestSlice } from 'bungie-api-ts/destiny2';
+
+const destinyManifest = await getDestinyManifest($http);
+const manifestTables = getDestinyManifestSlice($http, {
+  destinyManifest,
+  tableNames: ['DestinyInventoryItemDefinition', 'DestinySocketDefinition'];
+  language: 'en';
+});
+
+// manifestTables is an object with properties DestinyInventoryItemDefinition and DestinySocketDefinition
+```
+
 # Build
 
 ```

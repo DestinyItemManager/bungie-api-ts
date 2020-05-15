@@ -18,11 +18,11 @@ import {
   HardLinkedUserMembership,
   UserMembershipData,
   UserTheme
-} from './interfaces';
+} from './interfaces.js';
 import {
   BungieMembershipType,
   ServerResponse
-} from '../common';
+} from '../common.js';
 
 export interface GetBungieNetUserByIdParams {
   /** The requested Bungie.net membership id. */

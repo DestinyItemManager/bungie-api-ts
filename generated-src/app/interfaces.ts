@@ -12,10 +12,10 @@
 
 import {
   DateRange
-} from '../common';
+} from '../common.js';
 import {
   UserInfoCard
-} from '../user/interfaces';
+} from '../user/interfaces.js';
 
 export interface ApiUsage {
   /** The date range for the data being reported. */

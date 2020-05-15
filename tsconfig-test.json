@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": "./generator",
-    "outDir": "./build/",
-    "sourceMap": true,
     "strictNullChecks": true,
     "module": "es2015",
     "target": "es2017",
@@ -10,5 +7,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["./generator/**/*"]
+  "include": ["./tests/**/*.ts"]
 }

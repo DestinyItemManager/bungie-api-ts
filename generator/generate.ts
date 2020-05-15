@@ -3,17 +3,17 @@
  * in DIM, but is free for anyone to use.
  */
 
-import * as _ from 'underscore';
-import * as fs from 'fs';
-
+import fs from 'fs';
+import _ from 'underscore';
 import { OpenAPIObject, PathItemObject } from 'openapi3-ts';
-import { generateIndex, generateSuperIndex } from './generate-index';
+import { generateIndex, generateSuperIndex } from './generate-index.js';
 
-import { DefInfo } from './util';
-import { computeTypeMaps } from './type-index';
-import { generateInterfaceDefinitions } from './generate-interfaces';
-import { generateManifestUtils } from './generate-manifest';
-import { generateServiceDefinition } from './generate-api';
+import { DefInfo } from './util.js';
+import { computeTypeMaps } from './type-index.js';
+import { generateInterfaceDefinitions } from './generate-interfaces.js';
+import { generateManifestUtils } from './generate-manifest.js';
+import { generateServiceDefinition } from './generate-api.js';
+import { generatePackageJson } from './generate-package-json.js';
 
 // allow some async operations
 (async () => {
@@ -45,6 +45,9 @@ import { generateServiceDefinition } from './generate-api';
   });
 
   generateSuperIndex(Object.keys(pathPairsByTag), doc);
+
+  // read top package.json, remove dependencies, add exports block per service
+  generatePackageJson(Object.keys(pathPairsByTag));
 
   // some way to mark "preview" stuff
 })();

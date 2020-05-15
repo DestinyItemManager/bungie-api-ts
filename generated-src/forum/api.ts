@@ -19,13 +19,13 @@ import {
   ForumTopicsQuickDateEnum,
   ForumTopicsSortEnum,
   PostSearchResponse
-} from './interfaces';
+} from './interfaces.js';
 import {
   ServerResponse
-} from '../common';
+} from '../common.js';
 import {
   TagResponse
-} from '../platform';
+} from '../platform.js';
 
 export interface GetTopicsPagedParams {
   /** A category filter */

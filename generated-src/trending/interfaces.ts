@@ -12,15 +12,15 @@
 
 import {
   ContentItemPublicContract
-} from '../content/interfaces';
+} from '../content/interfaces.js';
 import {
   DestinyMilestoneContent,
   DestinyPublicActivityStatus,
   DestinyPublicMilestone
-} from '../destiny2/interfaces';
+} from '../destiny2/interfaces.js';
 import {
   PagedQuery
-} from '../common';
+} from '../common.js';
 
 /** The known entity types that you can have returned from Trending. */
 export const enum TrendingEntryType {

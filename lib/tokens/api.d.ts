@@ -10,8 +10,8 @@
  * Do not edit these files manually.
  */
 import { HttpClient } from '../http';
-import { PartnerOfferClaimRequest, PartnerOfferSkuHistoryResponse } from './interfaces';
-import { ServerResponse } from '../common';
+import { PartnerOfferClaimRequest, PartnerOfferSkuHistoryResponse } from './interfaces.js';
+import { ServerResponse } from '../common.js';
 /** Claim a partner offer as the authenticated user. */
 export declare function claimPartnerOffer(
   http: HttpClient,

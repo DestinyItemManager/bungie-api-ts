@@ -9,9 +9,9 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { BungieMembershipType, PagedQuery, PlatformErrorCodes } from '../common';
-import { DestinyProgression } from '../destiny2/interfaces';
-import { UserInfoCard, UserMembership } from '../user/interfaces';
+import { BungieMembershipType, PagedQuery, PlatformErrorCodes } from '../common.js';
+import { DestinyProgression } from '../destiny2/interfaces.js';
+import { UserInfoCard, UserMembership } from '../user/interfaces.js';
 export interface GroupUserInfoCard {
   /**
    * This will be the display name the clan server last saw the user as. If the

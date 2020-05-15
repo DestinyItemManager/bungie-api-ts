@@ -9,8 +9,8 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { DateRange } from '../common';
-import { UserInfoCard } from '../user/interfaces';
+import { DateRange } from '../common.js';
+import { UserInfoCard } from '../user/interfaces.js';
 export interface ApiUsage {
   /** The date range for the data being reported. */
   readonly range: DateRange;

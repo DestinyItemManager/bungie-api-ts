@@ -15,8 +15,8 @@ import {
   TrendingCategories,
   TrendingDetail,
   TrendingEntryType,
-} from './interfaces';
-import { ServerResponse } from '../common';
+} from './interfaces.js';
+import { ServerResponse } from '../common.js';
 /**
  * Returns trending items for Bungie.net, collapsed into the first page of items
  * per category. For pagination within a category, call GetTrendingCategory.

@@ -9,8 +9,8 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { GeneralUser } from '../user/interfaces';
-import { PagedQuery } from '../common';
+import { GeneralUser } from '../user/interfaces.js';
+import { PagedQuery } from '../common.js';
 export interface ContentTypeDescription {
   readonly cType: string;
   readonly name: string;

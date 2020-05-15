@@ -12,10 +12,10 @@
 
 import {
   GeneralUser
-} from '../user/interfaces';
+} from '../user/interfaces.js';
 import {
   PagedQuery
-} from '../common';
+} from '../common.js';
 
 export interface ContentTypeDescription {
   readonly cType: string;

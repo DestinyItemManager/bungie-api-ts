@@ -15,10 +15,10 @@ import { HttpClient } from '../http';
 import {
   ApiUsage,
   Application
-} from './interfaces';
+} from './interfaces.js';
 import {
   ServerResponse
-} from '../common';
+} from '../common.js';
 
 export interface GetApplicationApiUsageParams {
   /** ID of the application to get usage statistics. */

@@ -6,7 +6,7 @@ import {
   lastPart,
   lcFirst,
   resolveSchemaType,
-} from './util';
+} from './util.js';
 import {
   OpenAPIObject,
   ParameterObject,
@@ -21,7 +21,7 @@ import {
   generateImports,
   indent,
   writeOutFile,
-} from './generate-common';
+} from './generate-common.js';
 
 const httpClientType = `import { HttpClient } from '../http';`;
 

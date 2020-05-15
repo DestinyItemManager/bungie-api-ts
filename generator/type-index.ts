@@ -1,10 +1,10 @@
-import * as _ from 'underscore';
+import _ from 'underscore';
 import {
   OpenAPIObject,
   PathItemObject,
   ParameterObject,
   SchemaObject,
-  ReferenceObject
+  ReferenceObject,
 } from 'openapi3-ts';
 import {
   getRef,
@@ -12,8 +12,8 @@ import {
   getReferencedTypes,
   DefInfo,
   interfaceName,
-  isRequestBodyObject
-} from './util';
+  isRequestBodyObject,
+} from './util.js';
 
 export function computeTypeMaps(
   pathPairsByTag: { [tag: string]: [string, PathItemObject][] },
@@ -42,7 +42,7 @@ export function computeTypeMaps(
       def,
       tags,
       filename: chooseFile(def, tags, allTags),
-      interfaceName: interfaceName(def, doc)
+      interfaceName: interfaceName(def, doc),
     };
 
     componentsByFile[info.filename] = componentsByFile[info.filename] || [];
