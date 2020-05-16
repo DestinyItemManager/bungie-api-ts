@@ -5,54 +5,52 @@ import { writeOutFile } from './generate-common.js';
 
 const httpClientType = `import { HttpClient } from '../http';`;
 
-const manifestComponentListPromise = (async () => {
-  const manifestMeta = await fetch(
-    'https://www.bungie.net/Platform/Destiny2/Manifest/'
-  ).then((res) => res.json());
+const manifestMetadataPromise = (async () => {
   try {
-    return Object.keys(manifestMeta.Response.jsonWorldComponentContentPaths.en);
+    let manifestMeta = await fetch(
+      'https://www.bungie.net/Platform/Destiny2/Manifest/'
+    ).then((res) => res.json());
+    return manifestMeta.Response;
   } catch (e) {
     console.log(e);
-    console.log(manifestMeta);
     process.exit(1);
   }
 })();
 
 export async function generateManifestUtils(components: DefInfo[], doc: OpenAPIObject) {
-  const manifestComponentList = await getManifestComponentList(components);
+  // const manifestComponentList = await getManifestComponentList(components);
 
-  const manifestStructure = generateManifestDefinitions(manifestComponentList);
+  const manifestStructure = await generateManifestDefinitions(components);
+  // const languageList = await generateLanguageList(components);
 
   const filename = `generated-src/destiny2/manifest.ts`;
 
-  const imports = `import {${manifestComponentList.map((c) => `\n  ${c},`).join('')}
-  DestinyManifest
-} from './interfaces';`;
-
   const definition =
-    [
-      generateManifestHeader(doc),
-      httpClientType,
-      imports,
-      manifestStructure,
-      manifestUtilDefinitions,
-    ].join('\n\n') + '\n';
+    [generateManifestHeader(doc), httpClientType, manifestStructure, manifestUtilDefinitions].join(
+      '\n\n'
+    ) + '\n';
 
   writeOutFile(filename, definition);
 }
 
-async function getManifestComponentList(components: DefInfo[]) {
-  let manifestComponentList = await manifestComponentListPromise;
+async function generateManifestDefinitions(components: DefInfo[]) {
+  //defsToInclude: string[], languageList: string[]
+  let manifestMetadata = await manifestMetadataPromise;
 
   // defs we have documentation for. some stuff in manifest doesn't have interface definitions. idk why.
   const documentedDefs = components.map((component) => component.interfaceName);
 
   // exclude some tables from the definitionmanifest table because we don't have the forat for them
-  return manifestComponentList.filter((tableName) => documentedDefs.includes(tableName));
-}
+  const defsToInclude = Object.keys(
+    manifestMetadata.jsonWorldComponentContentPaths.en
+  ).filter((tableName) => documentedDefs.includes(tableName));
 
-function generateManifestDefinitions(defsToInclude: string[]) {
-  return `
+  const languageList = Object.keys(manifestMetadata.jsonWorldComponentContentPaths).sort();
+
+  return `import {${defsToInclude.map((c) => `\n  ${c},`).join('')}
+  DestinyManifest
+} from './interfaces';
+
 /**
  * this describes a big object holding several tables of hash-keyed DestinyDefinitions.
  * this is roughly what you get if you decode the gigantic, single-json manifest blob,
@@ -62,6 +60,16 @@ export interface AllDestinyManifestComponents {
 ${defsToInclude
   .map((manifestComponent) => `  ${manifestComponent}: { [key: number]: ${manifestComponent} };\n`)
   .join('')}}
+
+/**
+ * languages the manifest comes in, as their required keys to download them
+ */
+export const destinyManifestLanguages = [
+${languageList.map((l) => `  '${l}',`).join('\n')}
+] as const;
+
+export type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
+
 `;
 }
 
@@ -109,7 +117,7 @@ export type DestinyDefinitionFrom<
 
 export interface GetAllDestinyManifestComponentsParams {
   destinyManifest: DestinyManifest;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /** fetches the enormous combined JSON manifest file */
 export function getAllDestinyManifestComponents(
@@ -125,7 +133,7 @@ export function getAllDestinyManifestComponents(
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
   destinyManifest: DestinyManifest;
   tableName: T;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /**
  * this fetches and returns a single table (Component) from the d2 manifest
@@ -157,7 +165,7 @@ export function getDestinyManifestComponent<T extends DestinyManifestComponentNa
 export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponentName[]> {
   destinyManifest: DestinyManifest;
   tableNames: T;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /**
  * this returns a similar structure to getAllDestinyManifestComponents (the big manifest json)

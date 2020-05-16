@@ -67,7 +67,6 @@ import {
   DestinyManifest
 } from './interfaces';
 
-
 /**
  * this describes a big object holding several tables of hash-keyed DestinyDefinitions.
  * this is roughly what you get if you decode the gigantic, single-json manifest blob,
@@ -126,6 +125,28 @@ export interface AllDestinyManifestComponents {
   DestinyEnergyTypeDefinition: { [key: number]: DestinyEnergyTypeDefinition };
 }
 
+/**
+ * languages the manifest comes in, as their required keys to download them
+ */
+export const destinyManifestLanguages = [
+  'de',
+  'en',
+  'es',
+  'es-mx',
+  'fr',
+  'it',
+  'ja',
+  'ko',
+  'pl',
+  'pt-br',
+  'ru',
+  'zh-chs',
+  'zh-cht',
+] as const;
+
+export type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
+
+
 
 
 // thoughts:
@@ -155,7 +176,7 @@ export type DestinyDefinitionFrom<
 
 export interface GetAllDestinyManifestComponentsParams {
   destinyManifest: DestinyManifest;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /** fetches the enormous combined JSON manifest file */
 export function getAllDestinyManifestComponents(
@@ -171,7 +192,7 @@ export function getAllDestinyManifestComponents(
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
   destinyManifest: DestinyManifest;
   tableName: T;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /**
  * this fetches and returns a single table (Component) from the d2 manifest
@@ -203,7 +224,7 @@ export function getDestinyManifestComponent<T extends DestinyManifestComponentNa
 export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponentName[]> {
   destinyManifest: DestinyManifest;
   tableNames: T;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /**
  * this returns a similar structure to getAllDestinyManifestComponents (the big manifest json)
