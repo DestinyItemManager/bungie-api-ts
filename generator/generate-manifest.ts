@@ -18,10 +18,7 @@ const manifestMetadataPromise = (async () => {
 })();
 
 export async function generateManifestUtils(components: DefInfo[], doc: OpenAPIObject) {
-  // const manifestComponentList = await getManifestComponentList(components);
-
   const manifestStructure = await generateManifestDefinitions(components);
-  // const languageList = await generateLanguageList(components);
 
   const filename = `generated-src/destiny2/manifest.ts`;
 
@@ -34,13 +31,12 @@ export async function generateManifestUtils(components: DefInfo[], doc: OpenAPIO
 }
 
 async function generateManifestDefinitions(components: DefInfo[]) {
-  //defsToInclude: string[], languageList: string[]
   let manifestMetadata = await manifestMetadataPromise;
 
   // defs we have documentation for. some stuff in manifest doesn't have interface definitions. idk why.
   const documentedDefs = components.map((component) => component.interfaceName);
 
-  // exclude some tables from the definitionmanifest table because we don't have the forat for them
+  // exclude some tables from the definitionmanifest table because we don't have the format for them
   const defsToInclude = Object.keys(
     manifestMetadata.jsonWorldComponentContentPaths.en
   ).filter((tableName) => documentedDefs.includes(tableName));
