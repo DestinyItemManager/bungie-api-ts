@@ -54,7 +54,14 @@ function generatePathDefinition(
   componentByDef: { [def: string]: DefInfo },
   importFiles: { [filename: string]: Set<string> }
 ) {
-  const server = doc.servers![0].url;
+  let server = doc.servers![0].url;
+  // per https://github.com/Bungie-net/api/issues/853
+  // strict condition, so no surprises if doc.servers changes
+  if (
+    server === 'https://www.bungie.net/Platform' &&
+    path.includes('/Stats/PostGameCarnageReport/')
+  )
+    server = 'https://stats.bungie.net/Platform';
   const interfaceName = lastPart(pathDef.summary!);
   const functionName = lcFirst(interfaceName);
 

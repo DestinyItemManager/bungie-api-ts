@@ -470,7 +470,7 @@ export interface GetPostGameCarnageReportParams {
 export function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<ServerResponse<DestinyPostGameCarnageReportData>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/`
+    url: `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/`
   });
 }
 
@@ -488,7 +488,7 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
 export function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams, body: DestinyReportOffensePgcrRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`,
+    url: `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`,
     body
   });
 }
