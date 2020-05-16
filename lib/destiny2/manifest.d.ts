@@ -221,6 +221,25 @@ export interface AllDestinyManifestComponents {
     [key: number]: DestinyEnergyTypeDefinition;
   };
 }
+/**
+ * languages the manifest comes in, as their required keys to download them
+ */
+export declare const destinyManifestLanguages: readonly [
+  'de',
+  'en',
+  'es',
+  'es-mx',
+  'fr',
+  'it',
+  'ja',
+  'ko',
+  'pl',
+  'pt-br',
+  'ru',
+  'zh-chs',
+  'zh-cht'
+];
+export declare type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
 export declare type DestinyManifestComponentName = keyof AllDestinyManifestComponents;
 export declare type DestinyManifestSlice<K extends Readonly<DestinyManifestComponentName[]>> = Pick<
   AllDestinyManifestComponents,
@@ -237,7 +256,7 @@ export declare type DestinyDefinitionFrom<
 > = AllDestinyManifestComponents[K][number];
 export interface GetAllDestinyManifestComponentsParams {
   destinyManifest: DestinyManifest;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /** fetches the enormous combined JSON manifest file */
 export declare function getAllDestinyManifestComponents(
@@ -247,7 +266,7 @@ export declare function getAllDestinyManifestComponents(
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
   destinyManifest: DestinyManifest;
   tableName: T;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /**
  * this fetches and returns a single table (Component) from the d2 manifest
@@ -271,7 +290,7 @@ export declare function getDestinyManifestComponent<T extends DestinyManifestCom
 export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponentName[]> {
   destinyManifest: DestinyManifest;
   tableNames: T;
-  language: string;
+  language: DestinyManifestLanguage;
 }
 /**
  * this returns a similar structure to getAllDestinyManifestComponents (the big manifest json)
