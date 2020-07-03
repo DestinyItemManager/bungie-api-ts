@@ -10,6 +10,12 @@ import {
   writeOutFile,
 } from './generate-common.js';
 
+/**
+ * Some properties aren't marked as nullable in the openapi docs, but they are frequently null in practice and cause trouble.
+ * Adding a property to this list forces it to be emitted as nullable.
+ */
+const frequentlyNullProperties = ['itemCategoryHashes'];
+
 export function generateInterfaceDefinitions(
   file: string,
   components: DefInfo[],
@@ -116,7 +122,9 @@ function generateInterfaceSchema(
       );
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
-    return `${docString}readonly ${param}${schema.nullable ? '?' : ''}: ${paramType};`;
+    return `${docString}readonly ${param}${
+      schema.nullable || frequentlyNullProperties.includes(param) ? '?' : ''
+    }: ${paramType};`;
   });
   const docString = component.description ? docComment(component.description) + '\n' : '';
   return `${docString}export interface ${interfaceName} {

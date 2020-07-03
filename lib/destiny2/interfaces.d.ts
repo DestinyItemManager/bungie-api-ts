@@ -592,7 +592,7 @@ export interface DestinyInventoryItemDefinition {
    *
    * Mapped to DestinyItemCategoryDefinition in the manifest.
    */
-  readonly itemCategoryHashes: number[];
+  readonly itemCategoryHashes?: number[];
   /**
    * In Destiny 1, we identified some items as having particular categories that we'd
    * like to know about for various internal logic purposes. These are defined in
