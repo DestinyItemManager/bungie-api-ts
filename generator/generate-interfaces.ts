@@ -123,7 +123,11 @@ function generateInterfaceSchema(
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
     return `${docString}readonly ${param}${
-      schema.nullable || frequentlyNullProperties.includes(param) ? '?' : ''
+      schema.nullable ||
+      frequentlyNullProperties.includes(param) ||
+      schema.description?.toLowerCase().includes('null')
+        ? '?'
+        : ''
     }: ${paramType};`;
   });
   const docString = component.description ? docComment(component.description) + '\n' : '';

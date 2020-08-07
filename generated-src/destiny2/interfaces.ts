@@ -419,13 +419,13 @@ export interface DestinyInventoryItemDefinition {
    * related to the action performed when using the item. (Guess what? 99% of the
    * time, this action is "dismantle". Shocker)
    */
-  readonly action: DestinyItemActionBlockDefinition;
+  readonly action?: DestinyItemActionBlockDefinition;
   /**
    * If this item can exist in an inventory, this block will be non-null. In practice,
    * every item that currently exists has one of these blocks. But note that it is
    * not necessarily guaranteed.
    */
-  readonly inventory: DestinyItemInventoryBlockDefinition;
+  readonly inventory?: DestinyItemInventoryBlockDefinition;
   /**
    * If this item is a quest, this block will be non-null. In practice, I wish I had
    * called this the Quest block, but at the time it wasn't clear to me whether it
@@ -433,12 +433,12 @@ export interface DestinyInventoryItemDefinition {
    * about the steps in the quest, and mechanics we can use for displaying and
    * tracking the quest.
    */
-  readonly setData: DestinyItemSetBlockDefinition;
+  readonly setData?: DestinyItemSetBlockDefinition;
   /**
    * If this item can have stats (such as a weapon, armor, or vehicle), this block
    * will be non-null and populated with the stats found on the item.
    */
-  readonly stats: DestinyItemStatBlockDefinition;
+  readonly stats?: DestinyItemStatBlockDefinition;
   /**
    * If the item is an emblem that has a special Objective attached to it - for
    * instance, if the emblem tracks PVP Kills, or what-have-you. This is a bit
@@ -452,18 +452,18 @@ export interface DestinyInventoryItemDefinition {
    * If this item can be equipped, this block will be non-null and will be populated
    * with the conditions under which it can be equipped.
    */
-  readonly equippingBlock: DestinyEquippingBlockDefinition;
+  readonly equippingBlock?: DestinyEquippingBlockDefinition;
   /**
    * If this item can be rendered, this block will be non-null and will be populated
    * with rendering information.
    */
-  readonly translationBlock: DestinyItemTranslationBlockDefinition;
+  readonly translationBlock?: DestinyItemTranslationBlockDefinition;
   /**
    * If this item can be Used or Acquired to gain other items (for instance, how
    * Eververse Boxes can be consumed to get items from the box), this block will be
    * non-null and will give summary information for the items that can be acquired.
    */
-  readonly preview: DestinyItemPreviewBlockDefinition;
+  readonly preview?: DestinyItemPreviewBlockDefinition;
   /**
    * If this item can have a level or stats, this block will be non-null and will be
    * populated with default quality (item level, "quality", and infusion) data. See
@@ -471,7 +471,7 @@ export interface DestinyInventoryItemDefinition {
    * ll want to be aware of how you use quality and item level on the definition
    * level now.
    */
-  readonly quality: DestinyItemQualityBlockDefinition;
+  readonly quality?: DestinyItemQualityBlockDefinition;
   /**
    * The conceptual "Value" of an item, if any was defined. See the
    * DestinyItemValueBlockDefinition for more details.
@@ -483,39 +483,39 @@ export interface DestinyInventoryItemDefinition {
    * that is some aggressively manual work which we didn't have time for, and I'm
    * hoping to get back to at some point in the future.
    */
-  readonly sourceData: DestinyItemSourceBlockDefinition;
+  readonly sourceData?: DestinyItemSourceBlockDefinition;
   /**
    * If this item has Objectives (extra tasks that can be accomplished related to the
    * item... most frequently when the item is a Quest Step and the Objectives need to
    * be completed to move on to the next Quest Step), this block will be non-null and
    * the objectives defined herein.
    */
-  readonly objectives: DestinyItemObjectiveBlockDefinition;
+  readonly objectives?: DestinyItemObjectiveBlockDefinition;
   /**
    * If this item has available metrics to be shown, this block will be non-null have
    * the appropriate hashes defined.
    */
-  readonly metrics: DestinyItemMetricBlockDefinition;
+  readonly metrics?: DestinyItemMetricBlockDefinition;
   /**
    * If this item *is* a Plug, this will be non-null and the info defined herein. See
    * DestinyItemPlugDefinition for more information.
    */
-  readonly plug: DestinyItemPlugDefinition;
+  readonly plug?: DestinyItemPlugDefinition;
   /**
    * If this item has related items in a "Gear Set", this will be non-null and the
    * relationships defined herein.
    */
-  readonly gearset: DestinyItemGearsetBlockDefinition;
+  readonly gearset?: DestinyItemGearsetBlockDefinition;
   /**
    * If this item is a "reward sack" that can be opened to provide other items, this
    * will be non-null and the properties of the sack contained herein.
    */
-  readonly sack: DestinyItemSackBlockDefinition;
+  readonly sack?: DestinyItemSackBlockDefinition;
   /**
    * If this item has any Sockets, this will be non-null and the individual sockets
    * on the item will be defined herein.
    */
-  readonly sockets: DestinyItemSocketBlockDefinition;
+  readonly sockets?: DestinyItemSocketBlockDefinition;
   /** Summary data about the item. */
   readonly summary: DestinyItemSummaryBlockDefinition;
   /**
@@ -523,7 +523,7 @@ export interface DestinyInventoryItemDefinition {
    * grid defined herein. Note that, while many items still have talent grids, the
    * only ones with meaningful Nodes still on them will be Subclass/"Build" items.
    */
-  readonly talentGrid: DestinyItemTalentGridBlockDefinition;
+  readonly talentGrid?: DestinyItemTalentGridBlockDefinition;
   /**
    * If the item has stats, this block will be defined. It has the "raw" investment
    * stats for the item. These investment stats don't take into account the ways that
@@ -6071,12 +6071,12 @@ export interface DestinyItemPlugDefinition {
    * Masterworks, where visually it's a single area of the UI being clicked on to "
    * Upgrade" to higher energy levels, but it's actually socketing new plugs.
    */
-  readonly energyCapacity: DestinyEnergyCapacityEntry;
+  readonly energyCapacity?: DestinyEnergyCapacityEntry;
   /**
    * IF not null, this plug has an energy cost. This contains the details of that
    * cost.
    */
-  readonly energyCost: DestinyEnergyCostEntry;
+  readonly energyCost?: DestinyEnergyCostEntry;
 }
 
 /**
@@ -10655,7 +10655,7 @@ export interface DestinyMilestoneActivityVariant {
    * terms of whether or not it has been completed or what progress you have made in
    * it, this will be returned. Otherwise, this will be NULL.
    */
-  readonly completionStatus: DestinyMilestoneActivityCompletionStatus;
+  readonly completionStatus?: DestinyMilestoneActivityCompletionStatus;
   /**
    * The hash identifier of the most specific Activity Mode under which this activity
    * is played. This is useful for situations where the activity in question is - for
@@ -10689,7 +10689,7 @@ export interface DestinyMilestoneActivityCompletionStatus {
    * dictionary: the order implies the ascending order of phases or progression in
    * this activity.
    */
-  readonly phases: DestinyMilestoneActivityPhase[];
+  readonly phases?: DestinyMilestoneActivityPhase[];
 }
 
 /**
@@ -10769,7 +10769,7 @@ export interface DestinyMilestoneChallengeActivity {
    * dictionary: the order implies the ascending order of phases or progression in
    * this activity.
    */
-  readonly phases: DestinyMilestoneActivityPhase[];
+  readonly phases?: DestinyMilestoneActivityPhase[];
 }
 
 /**
@@ -12829,12 +12829,12 @@ export interface DestinyPlayer {
    * Current clan name for the player. This value may be null or an empty string if
    * the user does not have a clan.
    */
-  readonly clanName: string;
+  readonly clanName?: string;
   /**
    * Current clan tag for the player. This value may be null or an empty string if
    * the user does not have a clan.
    */
-  readonly clanTag: string;
+  readonly clanTag?: string;
   /**
    * If we know the emblem's hash, this can be used to look up the player's emblem at
    * the time of a match when receiving PGCR data, or otherwise their currently
