@@ -141,7 +141,7 @@ export interface GetProfileParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
   /** Destiny membership ID. */
   destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
@@ -160,7 +160,7 @@ export interface GetCharacterParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
   /** Destiny membership ID. */
   destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
@@ -189,7 +189,7 @@ export interface GetItemParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
   /** The membership ID of the destiny profile. */
   destinyMembershipId: string;
   /** The Instance ID of the destiny item. */
@@ -214,7 +214,7 @@ export interface GetVendorsParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
   destinyMembershipId: string;
   /** The filter of what vendors and items to return, if any. */
@@ -240,7 +240,7 @@ export interface GetVendorParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
   destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */
@@ -259,7 +259,7 @@ export interface GetPublicVendorsParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
 }
 /**
  * Get items available from vendors where the vendors have items for sale that are
@@ -289,7 +289,7 @@ export interface GetCollectibleNodeDetailsParams {
    * See the DestinyComponentType enum for valid components to request. You must
    * request at least one component to receive results.
    */
-  components?: DestinyComponentType[];
+  components: DestinyComponentType[];
   /** Destiny membership ID of another user. You may be denied. */
   destinyMembershipId: string;
   /** A valid non-BungieNet membership type. */

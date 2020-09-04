@@ -156,7 +156,11 @@ function generateInterfaceSchema(
     const paramType = resolveSchemaType(param.schema!, doc);
     addImport(doc, param.schema!, componentByDef, importFiles);
     const docString = param.description ? docComment(param.description) + '\n' : '';
-    return `${docString}${param.name}${param.required ? '' : '?'}: ${paramType};`;
+    return `${docString}${param.name}${
+      param.required || (param.name === 'components' && paramType === 'DestinyComponentType[]')
+        ? ''
+        : '?'
+    }: ${paramType};`;
   });
 
   return `export interface ${interfaceName} {
