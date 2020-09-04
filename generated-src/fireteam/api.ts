@@ -34,10 +34,10 @@ export interface GetActivePrivateClanFireteamCountParams {
  * Gets a count of all active non-public fireteams for the specified clan. Maximum
  * value returned is 25.
  */
-export function getActivePrivateClanFireteamCount(http: HttpClient, params: GetActivePrivateClanFireteamCountParams): Promise<ServerResponse<number>> {
+export function getActivePrivateClanFireteamCount(http: HttpClient, { groupId }: GetActivePrivateClanFireteamCountParams): Promise<ServerResponse<number>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/ActiveCount/`
+    url: `https://www.bungie.net/Platform/Fireteam/Clan/${groupId}/ActiveCount/`
   });
 }
 
@@ -64,13 +64,11 @@ export interface GetAvailableClanFireteamsParams {
  * Gets a listing of all of this clan's fireteams that are have available slots.
  * Caller is not checked for join criteria so caching is maximized.
  */
-export function getAvailableClanFireteams(http: HttpClient, params: GetAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
+export function getAvailableClanFireteams(http: HttpClient, { activityType, dateRange, groupId, page, platform, publicOnly, slotFilter, ...params }: GetAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.publicOnly}/${params.page}/`,
-    params: {
-      langFilter: params.langFilter
-    }
+    url: `https://www.bungie.net/Platform/Fireteam/Clan/${groupId}/Available/${platform}/${activityType}/${dateRange}/${slotFilter}/${publicOnly}/${page}/`,
+    params
   });
 }
 
@@ -93,13 +91,11 @@ export interface SearchPublicAvailableClanFireteamsParams {
  * Gets a listing of all public fireteams starting now with open slots. Caller is
  * not checked for join criteria so caching is maximized.
  */
-export function searchPublicAvailableClanFireteams(http: HttpClient, params: SearchPublicAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
+export function searchPublicAvailableClanFireteams(http: HttpClient, { activityType, dateRange, page, platform, slotFilter, ...params }: SearchPublicAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Search/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.page}/`,
-    params: {
-      langFilter: params.langFilter
-    }
+    url: `https://www.bungie.net/Platform/Fireteam/Search/Available/${platform}/${activityType}/${dateRange}/${slotFilter}/${page}/`,
+    params
   });
 }
 
@@ -128,14 +124,11 @@ export interface GetMyClanFireteamsParams {
  * Gets a listing of all clan fireteams that caller is an applicant, a member, or
  * an alternate of.
  */
-export function getMyClanFireteams(http: HttpClient, params: GetMyClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamResponse>> {
+export function getMyClanFireteams(http: HttpClient, { groupId, includeClosed, page, platform, ...params }: GetMyClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/My/${params.platform}/${params.includeClosed}/${params.page}/`,
-    params: {
-      groupFilter: params.groupFilter,
-      langFilter: params.langFilter
-    }
+    url: `https://www.bungie.net/Platform/Fireteam/Clan/${groupId}/My/${platform}/${includeClosed}/${page}/`,
+    params
   });
 }
 
@@ -147,9 +140,9 @@ export interface GetClanFireteamParams {
 }
 
 /** Gets a specific clan fireteam. */
-export function getClanFireteam(http: HttpClient, params: GetClanFireteamParams): Promise<ServerResponse<FireteamResponse>> {
+export function getClanFireteam(http: HttpClient, { fireteamId, groupId }: GetClanFireteamParams): Promise<ServerResponse<FireteamResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/Summary/${params.fireteamId}/`
+    url: `https://www.bungie.net/Platform/Fireteam/Clan/${groupId}/Summary/${fireteamId}/`
   });
 }

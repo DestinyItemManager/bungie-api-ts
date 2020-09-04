@@ -43,10 +43,10 @@ export interface ApplyMissingPartnerOffersWithoutClaimParams {
  * Apply a partner offer to the targeted user. This endpoint does not claim a new
  * offer, but any already claimed offers will be applied to the game if not already.
  */
-export function applyMissingPartnerOffersWithoutClaim(http: HttpClient, params: ApplyMissingPartnerOffersWithoutClaimParams): Promise<ServerResponse<boolean>> {
+export function applyMissingPartnerOffersWithoutClaim(http: HttpClient, { partnerApplicationId, targetBnetMembershipId }: ApplyMissingPartnerOffersWithoutClaimParams): Promise<ServerResponse<boolean>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/Tokens/Partner/ApplyMissingOffers/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`
+    url: `https://www.bungie.net/Platform/Tokens/Partner/ApplyMissingOffers/${partnerApplicationId}/${targetBnetMembershipId}/`
   });
 }
 
@@ -64,9 +64,9 @@ export interface GetPartnerOfferSkuHistoryParams {
  * Returns the partner sku and offer history of the targeted user. Elevated
  * permissions are required to see users that are not yourself.
  */
-export function getPartnerOfferSkuHistory(http: HttpClient, params: GetPartnerOfferSkuHistoryParams): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>> {
+export function getPartnerOfferSkuHistory(http: HttpClient, { partnerApplicationId, targetBnetMembershipId }: GetPartnerOfferSkuHistoryParams): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Tokens/Partner/History/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`
+    url: `https://www.bungie.net/Platform/Tokens/Partner/History/${partnerApplicationId}/${targetBnetMembershipId}/`
   });
 }

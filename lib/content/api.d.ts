@@ -22,7 +22,7 @@ export interface GetContentTypeParams {
 /** Gets an object describing a particular variant of content. */
 export declare function getContentType(
   http: HttpClient,
-  params: GetContentTypeParams
+  { type }: GetContentTypeParams
 ): Promise<ServerResponse<ContentTypeDescription>>;
 export interface GetContentByIdParams {
   /** false */
@@ -33,7 +33,7 @@ export interface GetContentByIdParams {
 /** Returns a content item referenced by id */
 export declare function getContentById(
   http: HttpClient,
-  params: GetContentByIdParams
+  { id, locale, ...params }: GetContentByIdParams
 ): Promise<ServerResponse<ContentItemPublicContract>>;
 export interface GetContentByTagAndTypeParams {
   /** Not used. */
@@ -45,7 +45,7 @@ export interface GetContentByTagAndTypeParams {
 /** Returns the newest item that matches a given tag and Content Type. */
 export declare function getContentByTagAndType(
   http: HttpClient,
-  params: GetContentByTagAndTypeParams
+  { locale, tag, type, ...params }: GetContentByTagAndTypeParams
 ): Promise<ServerResponse<ContentItemPublicContract>>;
 export interface SearchContentWithTextParams {
   /** Content type tag: Help, News, etc. Supply multiple ctypes separated by space. */
@@ -68,7 +68,7 @@ export interface SearchContentWithTextParams {
  */
 export declare function searchContentWithText(
   http: HttpClient,
-  params: SearchContentWithTextParams
+  { locale, ...params }: SearchContentWithTextParams
 ): Promise<ServerResponse<SearchResultOfContentItemPublicContract>>;
 export interface SearchContentByTagAndTypeParams {
   /** Page number for the search results starting with page 1. */
@@ -84,7 +84,7 @@ export interface SearchContentByTagAndTypeParams {
 /** Searches for Content Items that match the given Tag and Content Type. */
 export declare function searchContentByTagAndType(
   http: HttpClient,
-  params: SearchContentByTagAndTypeParams
+  { locale, tag, type, ...params }: SearchContentByTagAndTypeParams
 ): Promise<ServerResponse<SearchResultOfContentItemPublicContract>>;
 export interface SearchHelpArticlesParams {
   searchtext: string;
@@ -93,5 +93,5 @@ export interface SearchHelpArticlesParams {
 /** Search for Help Articles. */
 export declare function searchHelpArticles(
   http: HttpClient,
-  params: SearchHelpArticlesParams
+  { searchtext, size }: SearchHelpArticlesParams
 ): Promise<ServerResponse<object>>;

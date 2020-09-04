@@ -32,7 +32,7 @@ export interface ApplyMissingPartnerOffersWithoutClaimParams {
  */
 export declare function applyMissingPartnerOffersWithoutClaim(
   http: HttpClient,
-  params: ApplyMissingPartnerOffersWithoutClaimParams
+  { partnerApplicationId, targetBnetMembershipId }: ApplyMissingPartnerOffersWithoutClaimParams
 ): Promise<ServerResponse<boolean>>;
 export interface GetPartnerOfferSkuHistoryParams {
   /** The partner application identifier. */
@@ -49,5 +49,5 @@ export interface GetPartnerOfferSkuHistoryParams {
  */
 export declare function getPartnerOfferSkuHistory(
   http: HttpClient,
-  params: GetPartnerOfferSkuHistoryParams
+  { partnerApplicationId, targetBnetMembershipId }: GetPartnerOfferSkuHistoryParams
 ): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>>;

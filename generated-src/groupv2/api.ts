@@ -73,10 +73,10 @@ export interface GetUserClanInviteSettingParams {
  * Gets the state of the user's clan invite preferences for a particular membership
  * type - true if they wish to be invited to clans, false otherwise.
  */
-export function getUserClanInviteSetting(http: HttpClient, params: GetUserClanInviteSettingParams): Promise<ServerResponse<boolean>> {
+export function getUserClanInviteSetting(http: HttpClient, { mType }: GetUserClanInviteSettingParams): Promise<ServerResponse<boolean>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/GetUserClanInviteSetting/${params.mType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/GetUserClanInviteSetting/${mType}/`
   });
 }
 
@@ -91,10 +91,10 @@ export interface GetRecommendedGroupsParams {
  * Gets groups recommended for you based on the groups to whom those you follow
  * belong.
  */
-export function getRecommendedGroups(http: HttpClient, params: GetRecommendedGroupsParams): Promise<ServerResponse<GroupV2Card[]>> {
+export function getRecommendedGroups(http: HttpClient, { createDateRange, groupType }: GetRecommendedGroupsParams): Promise<ServerResponse<GroupV2Card[]>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/Recommended/${params.groupType}/${params.createDateRange}/`
+    url: `https://www.bungie.net/Platform/GroupV2/Recommended/${groupType}/${createDateRange}/`
   });
 }
 
@@ -113,10 +113,10 @@ export interface GetGroupParams {
 }
 
 /** Get information about a specific group of the given ID. */
-export function getGroup(http: HttpClient, params: GetGroupParams): Promise<ServerResponse<GroupResponse>> {
+export function getGroup(http: HttpClient, { groupId }: GetGroupParams): Promise<ServerResponse<GroupResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/`
   });
 }
 
@@ -128,10 +128,10 @@ export interface GetGroupByNameParams {
 }
 
 /** Get information about a specific group with the given name and type. */
-export function getGroupByName(http: HttpClient, params: GetGroupByNameParams): Promise<ServerResponse<GroupResponse>> {
+export function getGroupByName(http: HttpClient, { groupName, groupType }: GetGroupByNameParams): Promise<ServerResponse<GroupResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/Name/${params.groupName}/${params.groupType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/Name/${groupName}/${groupType}/`
   });
 }
 
@@ -153,10 +153,10 @@ export interface GetGroupOptionalConversationsParams {
 }
 
 /** Gets a list of available optional conversation channels and their settings. */
-export function getGroupOptionalConversations(http: HttpClient, params: GetGroupOptionalConversationsParams): Promise<ServerResponse<GroupOptionalConversation[]>> {
+export function getGroupOptionalConversations(http: HttpClient, { groupId }: GetGroupOptionalConversationsParams): Promise<ServerResponse<GroupOptionalConversation[]>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/OptionalConversations/`
   });
 }
 
@@ -170,10 +170,10 @@ export interface EditGroupParams {
  * perform this operation. This latest revision will only edit the fields you pass
  * in - pass null for properties you want to leave unaltered.
  */
-export function editGroup(http: HttpClient, params: EditGroupParams, body: GroupEditAction): Promise<ServerResponse<number>> {
+export function editGroup(http: HttpClient, { groupId }: EditGroupParams, body: GroupEditAction): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Edit/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Edit/`,
     body
   });
 }
@@ -187,10 +187,10 @@ export interface EditClanBannerParams {
  * Edit an existing group's clan banner. You must have suitable permissions in the
  * group to perform this operation. All fields are required.
  */
-export function editClanBanner(http: HttpClient, params: EditClanBannerParams, body: ClanBanner): Promise<ServerResponse<number>> {
+export function editClanBanner(http: HttpClient, { groupId }: EditClanBannerParams, body: ClanBanner): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/EditClanBanner/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/EditClanBanner/`,
     body
   });
 }
@@ -204,10 +204,10 @@ export interface EditFounderOptionsParams {
  * Edit group options only available to a founder. You must have suitable
  * permissions in the group to perform this operation.
  */
-export function editFounderOptions(http: HttpClient, params: EditFounderOptionsParams, body: GroupOptionsEditAction): Promise<ServerResponse<number>> {
+export function editFounderOptions(http: HttpClient, { groupId }: EditFounderOptionsParams, body: GroupOptionsEditAction): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/EditFounderOptions/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/EditFounderOptions/`,
     body
   });
 }
@@ -221,10 +221,10 @@ export interface AddOptionalConversationParams {
  * Add a new optional conversation/chat channel. Requires admin permissions to the
  * group.
  */
-export function addOptionalConversation(http: HttpClient, params: AddOptionalConversationParams, body: GroupOptionalConversationAddRequest): Promise<ServerResponse<string>> {
+export function addOptionalConversation(http: HttpClient, { groupId }: AddOptionalConversationParams, body: GroupOptionalConversationAddRequest): Promise<ServerResponse<string>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/Add/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/OptionalConversations/Add/`,
     body
   });
 }
@@ -240,10 +240,10 @@ export interface EditOptionalConversationParams {
  * Edit the settings of an optional conversation/chat channel. Requires admin
  * permissions to the group.
  */
-export function editOptionalConversation(http: HttpClient, params: EditOptionalConversationParams, body: GroupOptionalConversationEditRequest): Promise<ServerResponse<string>> {
+export function editOptionalConversation(http: HttpClient, { conversationId, groupId }: EditOptionalConversationParams, body: GroupOptionalConversationEditRequest): Promise<ServerResponse<string>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/OptionalConversations/Edit/${params.conversationId}/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/OptionalConversations/Edit/${conversationId}/`,
     body
   });
 }
@@ -263,14 +263,11 @@ export interface GetMembersOfGroupParams {
 }
 
 /** Get the list of members in a given group. */
-export function getMembersOfGroup(http: HttpClient, params: GetMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
+export function getMembersOfGroup(http: HttpClient, { currentpage, groupId, ...params }: GetMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/`,
-    params: {
-      memberType: params.memberType,
-      nameSearch: params.nameSearch
-    }
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/`,
+    params
   });
 }
 
@@ -282,10 +279,10 @@ export interface GetAdminsAndFounderOfGroupParams {
 }
 
 /** Get the list of members in a given group who are of admin level or higher. */
-export function getAdminsAndFounderOfGroup(http: HttpClient, params: GetAdminsAndFounderOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
+export function getAdminsAndFounderOfGroup(http: HttpClient, { currentpage, groupId }: GetAdminsAndFounderOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/AdminsAndFounder/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/AdminsAndFounder/`
   });
 }
 
@@ -304,10 +301,10 @@ export interface EditGroupMembershipParams {
  * Edit the membership type of a given member. You must have suitable permissions
  * in the group to perform this operation.
  */
-export function editGroupMembership(http: HttpClient, params: EditGroupMembershipParams): Promise<ServerResponse<number>> {
+export function editGroupMembership(http: HttpClient, { groupId, membershipId, membershipType, memberType }: EditGroupMembershipParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/${params.membershipType}/${params.membershipId}/SetMembershipType/${params.memberType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/SetMembershipType/${memberType}/`
   });
 }
 
@@ -325,10 +322,10 @@ export interface KickMemberParams {
  * join the group. You must have suitable permissions in the group to perform this
  * operation.
  */
-export function kickMember(http: HttpClient, params: KickMemberParams): Promise<ServerResponse<GroupMemberLeaveResult>> {
+export function kickMember(http: HttpClient, { groupId, membershipId, membershipType }: KickMemberParams): Promise<ServerResponse<GroupMemberLeaveResult>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Kick/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Kick/`
   });
 }
 
@@ -345,10 +342,10 @@ export interface BanMemberParams {
  * Bans the requested member from the requested group for the specified period of
  * time.
  */
-export function banMember(http: HttpClient, params: BanMemberParams, body: GroupBanRequest): Promise<ServerResponse<number>> {
+export function banMember(http: HttpClient, { groupId, membershipId, membershipType }: BanMemberParams, body: GroupBanRequest): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Ban/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Ban/`,
     body
   });
 }
@@ -362,10 +359,10 @@ export interface UnbanMemberParams {
 }
 
 /** Unbans the requested member, allowing them to re-apply for membership. */
-export function unbanMember(http: HttpClient, params: UnbanMemberParams): Promise<ServerResponse<number>> {
+export function unbanMember(http: HttpClient, { groupId, membershipId, membershipType }: UnbanMemberParams): Promise<ServerResponse<number>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Unban/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Unban/`
   });
 }
 
@@ -380,10 +377,10 @@ export interface GetBannedMembersOfGroupParams {
  * Get the list of banned members in a given group. Only accessible to group Admins
  * and above. Not applicable to all groups. Check group features.
  */
-export function getBannedMembersOfGroup(http: HttpClient, params: GetBannedMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupBan>> {
+export function getBannedMembersOfGroup(http: HttpClient, { currentpage, groupId }: GetBannedMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupBan>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Banned/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Banned/`
   });
 }
 
@@ -400,10 +397,10 @@ export interface AbdicateFoundershipParams {
  * An administrative method to allow the founder of a group or clan to give up
  * their position to another admin permanently.
  */
-export function abdicateFoundership(http: HttpClient, params: AbdicateFoundershipParams): Promise<ServerResponse<boolean>> {
+export function abdicateFoundership(http: HttpClient, { founderIdNew, groupId, membershipType }: AbdicateFoundershipParams): Promise<ServerResponse<boolean>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Admin/AbdicateFoundership/${params.membershipType}/${params.founderIdNew}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Admin/AbdicateFoundership/${membershipType}/${founderIdNew}/`
   });
 }
 
@@ -418,10 +415,10 @@ export interface GetPendingMembershipsParams {
  * Get the list of users who are awaiting a decision on their application to join a
  * given group. Modified to include application info.
  */
-export function getPendingMemberships(http: HttpClient, params: GetPendingMembershipsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
+export function getPendingMemberships(http: HttpClient, { currentpage, groupId }: GetPendingMembershipsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/Pending/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/Pending/`
   });
 }
 
@@ -433,10 +430,10 @@ export interface GetInvitedIndividualsParams {
 }
 
 /** Get the list of users who have been invited into the group. */
-export function getInvitedIndividuals(http: HttpClient, params: GetInvitedIndividualsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
+export function getInvitedIndividuals(http: HttpClient, { currentpage, groupId }: GetInvitedIndividualsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/InvitedIndividuals/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/InvitedIndividuals/`
   });
 }
 
@@ -446,10 +443,10 @@ export interface ApproveAllPendingParams {
 }
 
 /** Approve all of the pending users for the given group. */
-export function approveAllPending(http: HttpClient, params: ApproveAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function approveAllPending(http: HttpClient, { groupId }: ApproveAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/ApproveAll/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/ApproveAll/`,
     body
   });
 }
@@ -460,10 +457,10 @@ export interface DenyAllPendingParams {
 }
 
 /** Deny all of the pending users for the given group. */
-export function denyAllPending(http: HttpClient, params: DenyAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function denyAllPending(http: HttpClient, { groupId }: DenyAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/DenyAll/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/DenyAll/`,
     body
   });
 }
@@ -474,10 +471,10 @@ export interface ApprovePendingForListParams {
 }
 
 /** Approve all of the pending users for the given group. */
-export function approvePendingForList(http: HttpClient, params: ApprovePendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function approvePendingForList(http: HttpClient, { groupId }: ApprovePendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/ApproveList/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/ApproveList/`,
     body
   });
 }
@@ -495,10 +492,10 @@ export interface ApprovePendingParams {
  * Approve the given membershipId to join the group/clan as long as they have
  * applied.
  */
-export function approvePending(http: HttpClient, params: ApprovePendingParams, body: GroupApplicationRequest): Promise<ServerResponse<boolean>> {
+export function approvePending(http: HttpClient, { groupId, membershipId, membershipType }: ApprovePendingParams, body: GroupApplicationRequest): Promise<ServerResponse<boolean>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/Approve/${params.membershipType}/${params.membershipId}/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/Approve/${membershipType}/${membershipId}/`,
     body
   });
 }
@@ -509,10 +506,10 @@ export interface DenyPendingForListParams {
 }
 
 /** Deny all of the pending users for the given group that match the passed-in . */
-export function denyPendingForList(http: HttpClient, params: DenyPendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function denyPendingForList(http: HttpClient, { groupId }: DenyPendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/DenyList/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/DenyList/`,
     body
   });
 }
@@ -529,10 +526,10 @@ export interface GetGroupsForMemberParams {
 }
 
 /** Get information about the groups that a given member has joined. */
-export function getGroupsForMember(http: HttpClient, params: GetGroupsForMemberParams): Promise<ServerResponse<GetGroupsForMemberResponse>> {
+export function getGroupsForMember(http: HttpClient, { filter, groupType, membershipId, membershipType }: GetGroupsForMemberParams): Promise<ServerResponse<GetGroupsForMemberResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/User/${params.membershipType}/${params.membershipId}/${params.filter}/${params.groupType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/User/${membershipType}/${membershipId}/${filter}/${groupType}/`
   });
 }
 
@@ -549,10 +546,10 @@ export interface RecoverGroupForFounderParams {
  * Allows a founder to manually recover a group they can see in game but not on
  * bungie.net
  */
-export function recoverGroupForFounder(http: HttpClient, params: RecoverGroupForFounderParams): Promise<ServerResponse<GroupMembershipSearchResponse>> {
+export function recoverGroupForFounder(http: HttpClient, { groupType, membershipId, membershipType }: RecoverGroupForFounderParams): Promise<ServerResponse<GroupMembershipSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/Recover/${params.membershipType}/${params.membershipId}/${params.groupType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/Recover/${membershipType}/${membershipId}/${groupType}/`
   });
 }
 
@@ -571,10 +568,10 @@ export interface GetPotentialGroupsForMemberParams {
  * Get information about the groups that a given member has applied to or been
  * invited to.
  */
-export function getPotentialGroupsForMember(http: HttpClient, params: GetPotentialGroupsForMemberParams): Promise<ServerResponse<GroupPotentialMembershipSearchResponse>> {
+export function getPotentialGroupsForMember(http: HttpClient, { filter, groupType, membershipId, membershipType }: GetPotentialGroupsForMemberParams): Promise<ServerResponse<GroupPotentialMembershipSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/GroupV2/User/Potential/${params.membershipType}/${params.membershipId}/${params.filter}/${params.groupType}/`
+    url: `https://www.bungie.net/Platform/GroupV2/User/Potential/${membershipType}/${membershipId}/${filter}/${groupType}/`
   });
 }
 
@@ -588,10 +585,10 @@ export interface IndividualGroupInviteParams {
 }
 
 /** Invite a user to join this group. */
-export function individualGroupInvite(http: HttpClient, params: IndividualGroupInviteParams, body: GroupApplicationRequest): Promise<ServerResponse<GroupApplicationResponse>> {
+export function individualGroupInvite(http: HttpClient, { groupId, membershipId, membershipType }: IndividualGroupInviteParams, body: GroupApplicationRequest): Promise<ServerResponse<GroupApplicationResponse>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/IndividualInvite/${params.membershipType}/${params.membershipId}/`,
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/IndividualInvite/${membershipType}/${membershipId}/`,
     body
   });
 }
@@ -606,9 +603,9 @@ export interface IndividualGroupInviteCancelParams {
 }
 
 /** Cancels a pending invitation to join a group. */
-export function individualGroupInviteCancel(http: HttpClient, params: IndividualGroupInviteCancelParams): Promise<ServerResponse<GroupApplicationResponse>> {
+export function individualGroupInviteCancel(http: HttpClient, { groupId, membershipId, membershipType }: IndividualGroupInviteCancelParams): Promise<ServerResponse<GroupApplicationResponse>> {
   return http({
     method: 'POST',
-    url: `https://www.bungie.net/Platform/GroupV2/${params.groupId}/Members/IndividualInviteCancel/${params.membershipType}/${params.membershipId}/`
+    url: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/IndividualInviteCancel/${membershipType}/${membershipId}/`
   });
 }

@@ -33,7 +33,7 @@ export interface GetTrendingCategoryParams {
 /** Returns paginated lists of trending items for a category. */
 export declare function getTrendingCategory(
   http: HttpClient,
-  params: GetTrendingCategoryParams
+  { categoryId, pageNumber }: GetTrendingCategoryParams
 ): Promise<ServerResponse<SearchResultOfTrendingEntry>>;
 export interface GetTrendingEntryDetailParams {
   /** The identifier for the entity to be returned. */
@@ -49,5 +49,5 @@ export interface GetTrendingEntryDetailParams {
  */
 export declare function getTrendingEntryDetail(
   http: HttpClient,
-  params: GetTrendingEntryDetailParams
+  { identifier, trendingEntryType }: GetTrendingEntryDetailParams
 ): Promise<ServerResponse<TrendingDetail>>;

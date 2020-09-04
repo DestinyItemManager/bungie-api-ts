@@ -50,14 +50,11 @@ export interface GetTopicsPagedParams {
 }
 
 /** Get topics from any forum. */
-export function getTopicsPaged(http: HttpClient, params: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getTopicsPaged(http: HttpClient, { categoryFilter, group, page, pageSize, quickDate, sort, ...params }: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetTopicsPaged/${params.page}/${params.pageSize}/${params.group}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`,
-    params: {
-      locales: params.locales,
-      tagstring: params.tagstring
-    }
+    url: `https://www.bungie.net/Platform/Forum/GetTopicsPaged/${page}/${pageSize}/${group}/${sort}/${quickDate}/${categoryFilter}/`,
+    params
   });
 }
 
@@ -78,13 +75,11 @@ export interface GetCoreTopicsPagedParams {
 }
 
 /** Gets a listing of all topics marked as part of the core group. */
-export function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getCoreTopicsPaged(http: HttpClient, { categoryFilter, page, quickDate, sort, ...params }: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetCoreTopicsPaged/${params.page}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`,
-    params: {
-      locales: params.locales
-    }
+    url: `https://www.bungie.net/Platform/Forum/GetCoreTopicsPaged/${page}/${sort}/${quickDate}/${categoryFilter}/`,
+    params
   });
 }
 
@@ -104,13 +99,11 @@ export interface GetPostsThreadedPagedParams {
  * Returns a thread of posts at the given parent, optionally returning replies to
  * those posts as well as the original parent.
  */
-export function getPostsThreadedPaged(http: HttpClient, params: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostsThreadedPaged(http: HttpClient, { getParentPost, page, pageSize, parentPostId, replySize, rootThreadMode, sortMode, ...params }: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetPostsThreadedPaged/${params.parentPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.getParentPost}/${params.rootThreadMode}/${params.sortMode}/`,
-    params: {
-      showbanned: params.showbanned
-    }
+    url: `https://www.bungie.net/Platform/Forum/GetPostsThreadedPaged/${parentPostId}/${page}/${pageSize}/${replySize}/${getParentPost}/${rootThreadMode}/${sortMode}/`,
+    params
   });
 }
 
@@ -129,13 +122,11 @@ export interface GetPostsThreadedPagedFromChildParams {
  * Returns a thread of posts starting at the topicId of the input childPostId,
  * optionally returning replies to those posts as well as the original parent.
  */
-export function getPostsThreadedPagedFromChild(http: HttpClient, params: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostsThreadedPagedFromChild(http: HttpClient, { childPostId, page, pageSize, replySize, rootThreadMode, sortMode, ...params }: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetPostsThreadedPagedFromChild/${params.childPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.rootThreadMode}/${params.sortMode}/`,
-    params: {
-      showbanned: params.showbanned
-    }
+    url: `https://www.bungie.net/Platform/Forum/GetPostsThreadedPagedFromChild/${childPostId}/${page}/${pageSize}/${replySize}/${rootThreadMode}/${sortMode}/`,
+    params
   });
 }
 
@@ -146,13 +137,11 @@ export interface GetPostAndParentParams {
 }
 
 /** Returns the post specified and its immediate parent. */
-export function getPostAndParent(http: HttpClient, params: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostAndParent(http: HttpClient, { childPostId, ...params }: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetPostAndParent/${params.childPostId}/`,
-    params: {
-      showbanned: params.showbanned
-    }
+    url: `https://www.bungie.net/Platform/Forum/GetPostAndParent/${childPostId}/`,
+    params
   });
 }
 
@@ -166,13 +155,11 @@ export interface GetPostAndParentAwaitingApprovalParams {
  * Returns the post specified and its immediate parent of posts that are awaiting
  * approval.
  */
-export function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPostAndParentAwaitingApproval(http: HttpClient, { childPostId, ...params }: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetPostAndParentAwaitingApproval/${params.childPostId}/`,
-    params: {
-      showbanned: params.showbanned
-    }
+    url: `https://www.bungie.net/Platform/Forum/GetPostAndParentAwaitingApproval/${childPostId}/`,
+    params
   });
 }
 
@@ -181,10 +168,10 @@ export interface GetTopicForContentParams {
 }
 
 /** Gets the post Id for the given content item's comments, if it exists. */
-export function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<ServerResponse<string>> {
+export function getTopicForContent(http: HttpClient, { contentId }: GetTopicForContentParams): Promise<ServerResponse<string>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/GetTopicForContent/${params.contentId}/`
+    url: `https://www.bungie.net/Platform/Forum/GetTopicForContent/${contentId}/`
   });
 }
 
@@ -197,13 +184,11 @@ export interface GetForumTagSuggestionsParams {
  * Gets tag suggestions based on partial text entry, matching them with other tags
  * previously used in the forums.
  */
-export function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>> {
+export function getForumTagSuggestions(http: HttpClient, { ...params }: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/Forum/GetForumTagSuggestions/',
-    params: {
-      partialtag: params.partialtag
-    }
+    params
   });
 }
 
@@ -213,10 +198,10 @@ export interface GetPollParams {
 }
 
 /** Gets the specified forum poll. */
-export function getPoll(http: HttpClient, params: GetPollParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPoll(http: HttpClient, { topicId }: GetPollParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Forum/Poll/${params.topicId}/`
+    url: `https://www.bungie.net/Platform/Forum/Poll/${topicId}/`
   });
 }
 

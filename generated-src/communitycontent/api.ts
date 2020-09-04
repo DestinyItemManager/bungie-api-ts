@@ -31,9 +31,9 @@ export interface GetCommunityContentParams {
 }
 
 /** Returns community content. */
-export function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getCommunityContent(http: HttpClient, { mediaFilter, page, sort }: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/CommunityContent/Get/${params.sort}/${params.mediaFilter}/${params.page}/`
+    url: `https://www.bungie.net/Platform/CommunityContent/Get/${sort}/${mediaFilter}/${page}/`
   });
 }

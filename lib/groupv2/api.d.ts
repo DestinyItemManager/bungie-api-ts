@@ -62,7 +62,7 @@ export interface GetUserClanInviteSettingParams {
  */
 export declare function getUserClanInviteSetting(
   http: HttpClient,
-  params: GetUserClanInviteSettingParams
+  { mType }: GetUserClanInviteSettingParams
 ): Promise<ServerResponse<boolean>>;
 export interface GetRecommendedGroupsParams {
   /** Requested range in which to pull recommended groups */
@@ -76,7 +76,7 @@ export interface GetRecommendedGroupsParams {
  */
 export declare function getRecommendedGroups(
   http: HttpClient,
-  params: GetRecommendedGroupsParams
+  { createDateRange, groupType }: GetRecommendedGroupsParams
 ): Promise<ServerResponse<GroupV2Card[]>>;
 /** Search for Groups. */
 export declare function groupSearch(
@@ -90,7 +90,7 @@ export interface GetGroupParams {
 /** Get information about a specific group of the given ID. */
 export declare function getGroup(
   http: HttpClient,
-  params: GetGroupParams
+  { groupId }: GetGroupParams
 ): Promise<ServerResponse<GroupResponse>>;
 export interface GetGroupByNameParams {
   /** Exact name of the group to find. */
@@ -101,7 +101,7 @@ export interface GetGroupByNameParams {
 /** Get information about a specific group with the given name and type. */
 export declare function getGroupByName(
   http: HttpClient,
-  params: GetGroupByNameParams
+  { groupName, groupType }: GetGroupByNameParams
 ): Promise<ServerResponse<GroupResponse>>;
 /**
  * Get information about a specific group with the given name and type. The POST
@@ -118,7 +118,7 @@ export interface GetGroupOptionalConversationsParams {
 /** Gets a list of available optional conversation channels and their settings. */
 export declare function getGroupOptionalConversations(
   http: HttpClient,
-  params: GetGroupOptionalConversationsParams
+  { groupId }: GetGroupOptionalConversationsParams
 ): Promise<ServerResponse<GroupOptionalConversation[]>>;
 export interface EditGroupParams {
   /** Group ID of the group to edit. */
@@ -131,7 +131,7 @@ export interface EditGroupParams {
  */
 export declare function editGroup(
   http: HttpClient,
-  params: EditGroupParams,
+  { groupId }: EditGroupParams,
   body: GroupEditAction
 ): Promise<ServerResponse<number>>;
 export interface EditClanBannerParams {
@@ -144,7 +144,7 @@ export interface EditClanBannerParams {
  */
 export declare function editClanBanner(
   http: HttpClient,
-  params: EditClanBannerParams,
+  { groupId }: EditClanBannerParams,
   body: ClanBanner
 ): Promise<ServerResponse<number>>;
 export interface EditFounderOptionsParams {
@@ -157,7 +157,7 @@ export interface EditFounderOptionsParams {
  */
 export declare function editFounderOptions(
   http: HttpClient,
-  params: EditFounderOptionsParams,
+  { groupId }: EditFounderOptionsParams,
   body: GroupOptionsEditAction
 ): Promise<ServerResponse<number>>;
 export interface AddOptionalConversationParams {
@@ -170,7 +170,7 @@ export interface AddOptionalConversationParams {
  */
 export declare function addOptionalConversation(
   http: HttpClient,
-  params: AddOptionalConversationParams,
+  { groupId }: AddOptionalConversationParams,
   body: GroupOptionalConversationAddRequest
 ): Promise<ServerResponse<string>>;
 export interface EditOptionalConversationParams {
@@ -185,7 +185,7 @@ export interface EditOptionalConversationParams {
  */
 export declare function editOptionalConversation(
   http: HttpClient,
-  params: EditOptionalConversationParams,
+  { conversationId, groupId }: EditOptionalConversationParams,
   body: GroupOptionalConversationEditRequest
 ): Promise<ServerResponse<string>>;
 export interface GetMembersOfGroupParams {
@@ -204,7 +204,7 @@ export interface GetMembersOfGroupParams {
 /** Get the list of members in a given group. */
 export declare function getMembersOfGroup(
   http: HttpClient,
-  params: GetMembersOfGroupParams
+  { currentpage, groupId, ...params }: GetMembersOfGroupParams
 ): Promise<ServerResponse<SearchResultOfGroupMember>>;
 export interface GetAdminsAndFounderOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
@@ -215,7 +215,7 @@ export interface GetAdminsAndFounderOfGroupParams {
 /** Get the list of members in a given group who are of admin level or higher. */
 export declare function getAdminsAndFounderOfGroup(
   http: HttpClient,
-  params: GetAdminsAndFounderOfGroupParams
+  { currentpage, groupId }: GetAdminsAndFounderOfGroupParams
 ): Promise<ServerResponse<SearchResultOfGroupMember>>;
 export interface EditGroupMembershipParams {
   /** ID of the group to which the member belongs. */
@@ -233,7 +233,7 @@ export interface EditGroupMembershipParams {
  */
 export declare function editGroupMembership(
   http: HttpClient,
-  params: EditGroupMembershipParams
+  { groupId, membershipId, membershipType, memberType }: EditGroupMembershipParams
 ): Promise<ServerResponse<number>>;
 export interface KickMemberParams {
   /** Group ID to kick the user from. */
@@ -250,7 +250,7 @@ export interface KickMemberParams {
  */
 export declare function kickMember(
   http: HttpClient,
-  params: KickMemberParams
+  { groupId, membershipId, membershipType }: KickMemberParams
 ): Promise<ServerResponse<GroupMemberLeaveResult>>;
 export interface BanMemberParams {
   /** Group ID that has the member to ban. */
@@ -266,7 +266,7 @@ export interface BanMemberParams {
  */
 export declare function banMember(
   http: HttpClient,
-  params: BanMemberParams,
+  { groupId, membershipId, membershipType }: BanMemberParams,
   body: GroupBanRequest
 ): Promise<ServerResponse<number>>;
 export interface UnbanMemberParams {
@@ -279,7 +279,7 @@ export interface UnbanMemberParams {
 /** Unbans the requested member, allowing them to re-apply for membership. */
 export declare function unbanMember(
   http: HttpClient,
-  params: UnbanMemberParams
+  { groupId, membershipId, membershipType }: UnbanMemberParams
 ): Promise<ServerResponse<number>>;
 export interface GetBannedMembersOfGroupParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 entries. */
@@ -293,7 +293,7 @@ export interface GetBannedMembersOfGroupParams {
  */
 export declare function getBannedMembersOfGroup(
   http: HttpClient,
-  params: GetBannedMembersOfGroupParams
+  { currentpage, groupId }: GetBannedMembersOfGroupParams
 ): Promise<ServerResponse<SearchResultOfGroupBan>>;
 export interface AbdicateFoundershipParams {
   /** The new founder for this group. Must already be a group admin. */
@@ -309,7 +309,7 @@ export interface AbdicateFoundershipParams {
  */
 export declare function abdicateFoundership(
   http: HttpClient,
-  params: AbdicateFoundershipParams
+  { founderIdNew, groupId, membershipType }: AbdicateFoundershipParams
 ): Promise<ServerResponse<boolean>>;
 export interface GetPendingMembershipsParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
@@ -323,7 +323,7 @@ export interface GetPendingMembershipsParams {
  */
 export declare function getPendingMemberships(
   http: HttpClient,
-  params: GetPendingMembershipsParams
+  { currentpage, groupId }: GetPendingMembershipsParams
 ): Promise<ServerResponse<SearchResultOfGroupMemberApplication>>;
 export interface GetInvitedIndividualsParams {
   /** Page number (starting with 1). Each page has a fixed size of 50 items per page. */
@@ -334,7 +334,7 @@ export interface GetInvitedIndividualsParams {
 /** Get the list of users who have been invited into the group. */
 export declare function getInvitedIndividuals(
   http: HttpClient,
-  params: GetInvitedIndividualsParams
+  { currentpage, groupId }: GetInvitedIndividualsParams
 ): Promise<ServerResponse<SearchResultOfGroupMemberApplication>>;
 export interface ApproveAllPendingParams {
   /** ID of the group. */
@@ -343,7 +343,7 @@ export interface ApproveAllPendingParams {
 /** Approve all of the pending users for the given group. */
 export declare function approveAllPending(
   http: HttpClient,
-  params: ApproveAllPendingParams,
+  { groupId }: ApproveAllPendingParams,
   body: GroupApplicationRequest
 ): Promise<ServerResponse<EntityActionResult[]>>;
 export interface DenyAllPendingParams {
@@ -353,7 +353,7 @@ export interface DenyAllPendingParams {
 /** Deny all of the pending users for the given group. */
 export declare function denyAllPending(
   http: HttpClient,
-  params: DenyAllPendingParams,
+  { groupId }: DenyAllPendingParams,
   body: GroupApplicationRequest
 ): Promise<ServerResponse<EntityActionResult[]>>;
 export interface ApprovePendingForListParams {
@@ -363,7 +363,7 @@ export interface ApprovePendingForListParams {
 /** Approve all of the pending users for the given group. */
 export declare function approvePendingForList(
   http: HttpClient,
-  params: ApprovePendingForListParams,
+  { groupId }: ApprovePendingForListParams,
   body: GroupApplicationListRequest
 ): Promise<ServerResponse<EntityActionResult[]>>;
 export interface ApprovePendingParams {
@@ -380,7 +380,7 @@ export interface ApprovePendingParams {
  */
 export declare function approvePending(
   http: HttpClient,
-  params: ApprovePendingParams,
+  { groupId, membershipId, membershipType }: ApprovePendingParams,
   body: GroupApplicationRequest
 ): Promise<ServerResponse<boolean>>;
 export interface DenyPendingForListParams {
@@ -390,7 +390,7 @@ export interface DenyPendingForListParams {
 /** Deny all of the pending users for the given group that match the passed-in . */
 export declare function denyPendingForList(
   http: HttpClient,
-  params: DenyPendingForListParams,
+  { groupId }: DenyPendingForListParams,
   body: GroupApplicationListRequest
 ): Promise<ServerResponse<EntityActionResult[]>>;
 export interface GetGroupsForMemberParams {
@@ -406,7 +406,7 @@ export interface GetGroupsForMemberParams {
 /** Get information about the groups that a given member has joined. */
 export declare function getGroupsForMember(
   http: HttpClient,
-  params: GetGroupsForMemberParams
+  { filter, groupType, membershipId, membershipType }: GetGroupsForMemberParams
 ): Promise<ServerResponse<GetGroupsForMemberResponse>>;
 export interface RecoverGroupForFounderParams {
   /** Type of group the supplied member founded. */
@@ -422,7 +422,7 @@ export interface RecoverGroupForFounderParams {
  */
 export declare function recoverGroupForFounder(
   http: HttpClient,
-  params: RecoverGroupForFounderParams
+  { groupType, membershipId, membershipType }: RecoverGroupForFounderParams
 ): Promise<ServerResponse<GroupMembershipSearchResponse>>;
 export interface GetPotentialGroupsForMemberParams {
   /** Filter apply to list of potential joined groups. */
@@ -440,7 +440,7 @@ export interface GetPotentialGroupsForMemberParams {
  */
 export declare function getPotentialGroupsForMember(
   http: HttpClient,
-  params: GetPotentialGroupsForMemberParams
+  { filter, groupType, membershipId, membershipType }: GetPotentialGroupsForMemberParams
 ): Promise<ServerResponse<GroupPotentialMembershipSearchResponse>>;
 export interface IndividualGroupInviteParams {
   /** ID of the group you would like to join. */
@@ -453,7 +453,7 @@ export interface IndividualGroupInviteParams {
 /** Invite a user to join this group. */
 export declare function individualGroupInvite(
   http: HttpClient,
-  params: IndividualGroupInviteParams,
+  { groupId, membershipId, membershipType }: IndividualGroupInviteParams,
   body: GroupApplicationRequest
 ): Promise<ServerResponse<GroupApplicationResponse>>;
 export interface IndividualGroupInviteCancelParams {
@@ -467,5 +467,5 @@ export interface IndividualGroupInviteCancelParams {
 /** Cancels a pending invitation to join a group. */
 export declare function individualGroupInviteCancel(
   http: HttpClient,
-  params: IndividualGroupInviteCancelParams
+  { groupId, membershipId, membershipType }: IndividualGroupInviteCancelParams
 ): Promise<ServerResponse<GroupApplicationResponse>>;

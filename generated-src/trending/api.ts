@@ -41,10 +41,10 @@ export interface GetTrendingCategoryParams {
 }
 
 /** Returns paginated lists of trending items for a category. */
-export function getTrendingCategory(http: HttpClient, params: GetTrendingCategoryParams): Promise<ServerResponse<SearchResultOfTrendingEntry>> {
+export function getTrendingCategory(http: HttpClient, { categoryId, pageNumber }: GetTrendingCategoryParams): Promise<ServerResponse<SearchResultOfTrendingEntry>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Trending/Categories/${params.categoryId}/${params.pageNumber}/`
+    url: `https://www.bungie.net/Platform/Trending/Categories/${categoryId}/${pageNumber}/`
   });
 }
 
@@ -61,9 +61,9 @@ export interface GetTrendingEntryDetailParams {
  * *and* the identifier: the identifier alone is not guaranteed to be globally
  * unique.
  */
-export function getTrendingEntryDetail(http: HttpClient, params: GetTrendingEntryDetailParams): Promise<ServerResponse<TrendingDetail>> {
+export function getTrendingEntryDetail(http: HttpClient, { identifier, trendingEntryType }: GetTrendingEntryDetailParams): Promise<ServerResponse<TrendingDetail>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Trending/Details/${params.trendingEntryType}/${params.identifier}/`
+    url: `https://www.bungie.net/Platform/Trending/Details/${trendingEntryType}/${identifier}/`
   });
 }
