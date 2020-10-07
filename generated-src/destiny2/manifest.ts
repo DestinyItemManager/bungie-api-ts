@@ -36,21 +36,21 @@ import {
   DestinyActivityModeDefinition,
   DestinyActivityGraphDefinition,
   DestinyCollectibleDefinition,
+  DestinyDestinationDefinition,
+  DestinyEquipmentSlotDefinition,
   DestinyStatDefinition,
+  DestinyInventoryItemDefinition,
   DestinyItemTierTypeDefinition,
+  DestinyLocationDefinition,
+  DestinyLoreDefinition,
   DestinyMetricDefinition,
+  DestinyObjectiveDefinition,
   DestinyPlugSetDefinition,
   DestinyPowerCapDefinition,
   DestinyPresentationNodeDefinition,
-  DestinyRecordDefinition,
-  DestinyDestinationDefinition,
-  DestinyEquipmentSlotDefinition,
-  DestinyInventoryItemDefinition,
-  DestinyLocationDefinition,
-  DestinyLoreDefinition,
-  DestinyObjectiveDefinition,
   DestinyProgressionDefinition,
   DestinyProgressionLevelRequirementDefinition,
+  DestinyRecordDefinition,
   DestinySeasonDefinition,
   DestinySeasonPassDefinition,
   DestinySocketCategoryDefinition,
@@ -96,21 +96,21 @@ export interface AllDestinyManifestComponents {
   DestinyActivityModeDefinition: { [key: number]: DestinyActivityModeDefinition };
   DestinyActivityGraphDefinition: { [key: number]: DestinyActivityGraphDefinition };
   DestinyCollectibleDefinition: { [key: number]: DestinyCollectibleDefinition };
+  DestinyDestinationDefinition: { [key: number]: DestinyDestinationDefinition };
+  DestinyEquipmentSlotDefinition: { [key: number]: DestinyEquipmentSlotDefinition };
   DestinyStatDefinition: { [key: number]: DestinyStatDefinition };
+  DestinyInventoryItemDefinition: { [key: number]: DestinyInventoryItemDefinition };
   DestinyItemTierTypeDefinition: { [key: number]: DestinyItemTierTypeDefinition };
+  DestinyLocationDefinition: { [key: number]: DestinyLocationDefinition };
+  DestinyLoreDefinition: { [key: number]: DestinyLoreDefinition };
   DestinyMetricDefinition: { [key: number]: DestinyMetricDefinition };
+  DestinyObjectiveDefinition: { [key: number]: DestinyObjectiveDefinition };
   DestinyPlugSetDefinition: { [key: number]: DestinyPlugSetDefinition };
   DestinyPowerCapDefinition: { [key: number]: DestinyPowerCapDefinition };
   DestinyPresentationNodeDefinition: { [key: number]: DestinyPresentationNodeDefinition };
-  DestinyRecordDefinition: { [key: number]: DestinyRecordDefinition };
-  DestinyDestinationDefinition: { [key: number]: DestinyDestinationDefinition };
-  DestinyEquipmentSlotDefinition: { [key: number]: DestinyEquipmentSlotDefinition };
-  DestinyInventoryItemDefinition: { [key: number]: DestinyInventoryItemDefinition };
-  DestinyLocationDefinition: { [key: number]: DestinyLocationDefinition };
-  DestinyLoreDefinition: { [key: number]: DestinyLoreDefinition };
-  DestinyObjectiveDefinition: { [key: number]: DestinyObjectiveDefinition };
   DestinyProgressionDefinition: { [key: number]: DestinyProgressionDefinition };
   DestinyProgressionLevelRequirementDefinition: { [key: number]: DestinyProgressionLevelRequirementDefinition };
+  DestinyRecordDefinition: { [key: number]: DestinyRecordDefinition };
   DestinySeasonDefinition: { [key: number]: DestinySeasonDefinition };
   DestinySeasonPassDefinition: { [key: number]: DestinySeasonPassDefinition };
   DestinySocketCategoryDefinition: { [key: number]: DestinySocketCategoryDefinition };
