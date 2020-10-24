@@ -5,6 +5,9 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {},
+  "jest": {
+    "preset": "ts-jest"
+  },
   "engines": {
     "node": ">=13.2.0"
   },

@@ -4,11 +4,13 @@
     "outDir": "./build/",
     "sourceMap": true,
     "strictNullChecks": true,
+    "strict": true,
     "module": "es2015",
     "target": "es2017",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowJs": true
   },
   "include": ["./generator/**/*"]
 }
