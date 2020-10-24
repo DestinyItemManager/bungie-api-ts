@@ -30,10 +30,10 @@ export interface GetBungieNetUserByIdParams {
 }
 
 /** Loads a bungienet user by membership id. */
-export function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>> {
+export function getBungieNetUserById(http: HttpClient, { id }: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetBungieNetUserById/${params.id}/`
+    url: `https://www.bungie.net/Platform/User/GetBungieNetUserById/${id}/`
   });
 }
 
@@ -43,13 +43,11 @@ export interface SearchUsersParams {
 }
 
 /** Returns a list of possible users based on the search string */
-export function searchUsers(http: HttpClient, params: SearchUsersParams): Promise<ServerResponse<GeneralUser[]>> {
+export function searchUsers(http: HttpClient, { ...params }: SearchUsersParams): Promise<ServerResponse<GeneralUser[]>> {
   return http({
     method: 'GET',
     url: 'https://www.bungie.net/Platform/User/SearchUsers/',
-    params: {
-      q: params.q
-    }
+    params
   });
 }
 
@@ -73,10 +71,10 @@ export interface GetMembershipDataByIdParams {
  * membership type. This will include all linked accounts (even when hidden) if
  * supplied credentials permit it.
  */
-export function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>> {
+export function getMembershipDataById(http: HttpClient, { membershipId, membershipType }: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetMembershipsById/${params.membershipId}/${params.membershipType}/`
+    url: `https://www.bungie.net/Platform/User/GetMembershipsById/${membershipId}/${membershipType}/`
   });
 }
 
@@ -102,9 +100,9 @@ export interface GetMembershipFromHardLinkedCredentialParams {
  * Gets any hard linked membership given a credential. Only works for credentials
  * that are public (just SteamID64 right now). Cross Save aware.
  */
-export function getMembershipFromHardLinkedCredential(http: HttpClient, params: GetMembershipFromHardLinkedCredentialParams): Promise<ServerResponse<HardLinkedUserMembership>> {
+export function getMembershipFromHardLinkedCredential(http: HttpClient, { credential, crType }: GetMembershipFromHardLinkedCredentialParams): Promise<ServerResponse<HardLinkedUserMembership>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetMembershipFromHardLinkedCredential/${params.crType}/${params.credential}/`
+    url: `https://www.bungie.net/Platform/User/GetMembershipFromHardLinkedCredential/${crType}/${credential}/`
   });
 }

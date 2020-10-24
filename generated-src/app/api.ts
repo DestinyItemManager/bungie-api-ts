@@ -35,14 +35,11 @@ export interface GetApplicationApiUsageParams {
  * You must be authenticated with at least the ReadUserData permission to access
  * this endpoint.
  */
-export function getApplicationApiUsage(http: HttpClient, params: GetApplicationApiUsageParams): Promise<ServerResponse<ApiUsage>> {
+export function getApplicationApiUsage(http: HttpClient, { applicationId, ...params }: GetApplicationApiUsageParams): Promise<ServerResponse<ApiUsage>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/App/ApiUsage/${params.applicationId}/`,
-    params: {
-      end: params.end,
-      start: params.start
-    }
+    url: `https://www.bungie.net/Platform/App/ApiUsage/${applicationId}/`,
+    params
   });
 }
 

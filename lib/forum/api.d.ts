@@ -44,7 +44,7 @@ export interface GetTopicsPagedParams {
 /** Get topics from any forum. */
 export declare function getTopicsPaged(
   http: HttpClient,
-  params: GetTopicsPagedParams
+  { categoryFilter, group, page, pageSize, quickDate, sort, ...params }: GetTopicsPagedParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetCoreTopicsPagedParams {
   /** The category filter. */
@@ -64,7 +64,7 @@ export interface GetCoreTopicsPagedParams {
 /** Gets a listing of all topics marked as part of the core group. */
 export declare function getCoreTopicsPaged(
   http: HttpClient,
-  params: GetCoreTopicsPagedParams
+  { categoryFilter, page, quickDate, sort, ...params }: GetCoreTopicsPagedParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostsThreadedPagedParams {
   getParentPost: boolean;
@@ -83,7 +83,16 @@ export interface GetPostsThreadedPagedParams {
  */
 export declare function getPostsThreadedPaged(
   http: HttpClient,
-  params: GetPostsThreadedPagedParams
+  {
+    getParentPost,
+    page,
+    pageSize,
+    parentPostId,
+    replySize,
+    rootThreadMode,
+    sortMode,
+    ...params
+  }: GetPostsThreadedPagedParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostsThreadedPagedFromChildParams {
   childPostId: string;
@@ -101,7 +110,15 @@ export interface GetPostsThreadedPagedFromChildParams {
  */
 export declare function getPostsThreadedPagedFromChild(
   http: HttpClient,
-  params: GetPostsThreadedPagedFromChildParams
+  {
+    childPostId,
+    page,
+    pageSize,
+    replySize,
+    rootThreadMode,
+    sortMode,
+    ...params
+  }: GetPostsThreadedPagedFromChildParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostAndParentParams {
   childPostId: string;
@@ -111,7 +128,7 @@ export interface GetPostAndParentParams {
 /** Returns the post specified and its immediate parent. */
 export declare function getPostAndParent(
   http: HttpClient,
-  params: GetPostAndParentParams
+  { childPostId, ...params }: GetPostAndParentParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostAndParentAwaitingApprovalParams {
   childPostId: string;
@@ -124,7 +141,7 @@ export interface GetPostAndParentAwaitingApprovalParams {
  */
 export declare function getPostAndParentAwaitingApproval(
   http: HttpClient,
-  params: GetPostAndParentAwaitingApprovalParams
+  { childPostId, ...params }: GetPostAndParentAwaitingApprovalParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetTopicForContentParams {
   contentId: string;
@@ -132,7 +149,7 @@ export interface GetTopicForContentParams {
 /** Gets the post Id for the given content item's comments, if it exists. */
 export declare function getTopicForContent(
   http: HttpClient,
-  params: GetTopicForContentParams
+  { contentId }: GetTopicForContentParams
 ): Promise<ServerResponse<string>>;
 export interface GetForumTagSuggestionsParams {
   /** The partial tag input to generate suggestions from. */
@@ -144,7 +161,7 @@ export interface GetForumTagSuggestionsParams {
  */
 export declare function getForumTagSuggestions(
   http: HttpClient,
-  params: GetForumTagSuggestionsParams
+  { ...params }: GetForumTagSuggestionsParams
 ): Promise<ServerResponse<TagResponse[]>>;
 export interface GetPollParams {
   /** The post id of the topic that has the poll. */
@@ -153,7 +170,7 @@ export interface GetPollParams {
 /** Gets the specified forum poll. */
 export declare function getPoll(
   http: HttpClient,
-  params: GetPollParams
+  { topicId }: GetPollParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 /**
  * Allows the caller to get a list of to 25 recruitment thread summary information

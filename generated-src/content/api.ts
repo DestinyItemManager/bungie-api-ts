@@ -26,10 +26,10 @@ export interface GetContentTypeParams {
 }
 
 /** Gets an object describing a particular variant of content. */
-export function getContentType(http: HttpClient, params: GetContentTypeParams): Promise<ServerResponse<ContentTypeDescription>> {
+export function getContentType(http: HttpClient, { type }: GetContentTypeParams): Promise<ServerResponse<ContentTypeDescription>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Content/GetContentType/${params.type}/`
+    url: `https://www.bungie.net/Platform/Content/GetContentType/${type}/`
   });
 }
 
@@ -41,13 +41,11 @@ export interface GetContentByIdParams {
 }
 
 /** Returns a content item referenced by id */
-export function getContentById(http: HttpClient, params: GetContentByIdParams): Promise<ServerResponse<ContentItemPublicContract>> {
+export function getContentById(http: HttpClient, { id, locale, ...params }: GetContentByIdParams): Promise<ServerResponse<ContentItemPublicContract>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Content/GetContentById/${params.id}/${params.locale}/`,
-    params: {
-      head: params.head
-    }
+    url: `https://www.bungie.net/Platform/Content/GetContentById/${id}/${locale}/`,
+    params
   });
 }
 
@@ -60,13 +58,11 @@ export interface GetContentByTagAndTypeParams {
 }
 
 /** Returns the newest item that matches a given tag and Content Type. */
-export function getContentByTagAndType(http: HttpClient, params: GetContentByTagAndTypeParams): Promise<ServerResponse<ContentItemPublicContract>> {
+export function getContentByTagAndType(http: HttpClient, { locale, tag, type, ...params }: GetContentByTagAndTypeParams): Promise<ServerResponse<ContentItemPublicContract>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Content/GetContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`,
-    params: {
-      head: params.head
-    }
+    url: `https://www.bungie.net/Platform/Content/GetContentByTagAndType/${tag}/${type}/${locale}/`,
+    params
   });
 }
 
@@ -90,18 +86,11 @@ export interface SearchContentWithTextParams {
  * Gets content based on querystring information passed in. Provides basic search
  * and text search capabilities.
  */
-export function searchContentWithText(http: HttpClient, params: SearchContentWithTextParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
+export function searchContentWithText(http: HttpClient, { locale, ...params }: SearchContentWithTextParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Content/Search/${params.locale}/`,
-    params: {
-      ctype: params.ctype,
-      currentpage: params.currentpage,
-      head: params.head,
-      searchtext: params.searchtext,
-      source: params.source,
-      tag: params.tag
-    }
+    url: `https://www.bungie.net/Platform/Content/Search/${locale}/`,
+    params
   });
 }
 
@@ -118,15 +107,11 @@ export interface SearchContentByTagAndTypeParams {
 }
 
 /** Searches for Content Items that match the given Tag and Content Type. */
-export function searchContentByTagAndType(http: HttpClient, params: SearchContentByTagAndTypeParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
+export function searchContentByTagAndType(http: HttpClient, { locale, tag, type, ...params }: SearchContentByTagAndTypeParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Content/SearchContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`,
-    params: {
-      currentpage: params.currentpage,
-      head: params.head,
-      itemsperpage: params.itemsperpage
-    }
+    url: `https://www.bungie.net/Platform/Content/SearchContentByTagAndType/${tag}/${type}/${locale}/`,
+    params
   });
 }
 
@@ -136,9 +121,9 @@ export interface SearchHelpArticlesParams {
 }
 
 /** Search for Help Articles. */
-export function searchHelpArticles(http: HttpClient, params: SearchHelpArticlesParams): Promise<ServerResponse<object>> {
+export function searchHelpArticles(http: HttpClient, { searchtext, size }: SearchHelpArticlesParams): Promise<ServerResponse<object>> {
   return http({
     method: 'GET',
-    url: `https://www.bungie.net/Platform/Content/SearchHelpArticles/${params.searchtext}/${params.size}/`
+    url: `https://www.bungie.net/Platform/Content/SearchHelpArticles/${searchtext}/${size}/`
   });
 }

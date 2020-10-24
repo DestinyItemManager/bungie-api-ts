@@ -30,7 +30,7 @@ export interface GetActivePrivateClanFireteamCountParams {
  */
 export declare function getActivePrivateClanFireteamCount(
   http: HttpClient,
-  params: GetActivePrivateClanFireteamCountParams
+  { groupId }: GetActivePrivateClanFireteamCountParams
 ): Promise<ServerResponse<number>>;
 export interface GetAvailableClanFireteamsParams {
   /** The activity type to filter by. */
@@ -56,7 +56,16 @@ export interface GetAvailableClanFireteamsParams {
  */
 export declare function getAvailableClanFireteams(
   http: HttpClient,
-  params: GetAvailableClanFireteamsParams
+  {
+    activityType,
+    dateRange,
+    groupId,
+    page,
+    platform,
+    publicOnly,
+    slotFilter,
+    ...params
+  }: GetAvailableClanFireteamsParams
 ): Promise<ServerResponse<SearchResultOfFireteamSummary>>;
 export interface SearchPublicAvailableClanFireteamsParams {
   /** The activity type to filter by. */
@@ -78,7 +87,14 @@ export interface SearchPublicAvailableClanFireteamsParams {
  */
 export declare function searchPublicAvailableClanFireteams(
   http: HttpClient,
-  params: SearchPublicAvailableClanFireteamsParams
+  {
+    activityType,
+    dateRange,
+    page,
+    platform,
+    slotFilter,
+    ...params
+  }: SearchPublicAvailableClanFireteamsParams
 ): Promise<ServerResponse<SearchResultOfFireteamSummary>>;
 export interface GetMyClanFireteamsParams {
   /**
@@ -106,7 +122,7 @@ export interface GetMyClanFireteamsParams {
  */
 export declare function getMyClanFireteams(
   http: HttpClient,
-  params: GetMyClanFireteamsParams
+  { groupId, includeClosed, page, platform, ...params }: GetMyClanFireteamsParams
 ): Promise<ServerResponse<SearchResultOfFireteamResponse>>;
 export interface GetClanFireteamParams {
   /** The unique id of the fireteam. */
@@ -117,5 +133,5 @@ export interface GetClanFireteamParams {
 /** Gets a specific clan fireteam. */
 export declare function getClanFireteam(
   http: HttpClient,
-  params: GetClanFireteamParams
+  { fireteamId, groupId }: GetClanFireteamParams
 ): Promise<ServerResponse<FireteamResponse>>;

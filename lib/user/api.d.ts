@@ -25,7 +25,7 @@ export interface GetBungieNetUserByIdParams {
 /** Loads a bungienet user by membership id. */
 export declare function getBungieNetUserById(
   http: HttpClient,
-  params: GetBungieNetUserByIdParams
+  { id }: GetBungieNetUserByIdParams
 ): Promise<ServerResponse<GeneralUser>>;
 export interface SearchUsersParams {
   /** The search string. */
@@ -34,7 +34,7 @@ export interface SearchUsersParams {
 /** Returns a list of possible users based on the search string */
 export declare function searchUsers(
   http: HttpClient,
-  params: SearchUsersParams
+  { ...params }: SearchUsersParams
 ): Promise<ServerResponse<GeneralUser[]>>;
 /** Returns a list of all available user themes. */
 export declare function getAvailableThemes(http: HttpClient): Promise<ServerResponse<UserTheme[]>>;
@@ -51,7 +51,7 @@ export interface GetMembershipDataByIdParams {
  */
 export declare function getMembershipDataById(
   http: HttpClient,
-  params: GetMembershipDataByIdParams
+  { membershipId, membershipType }: GetMembershipDataByIdParams
 ): Promise<ServerResponse<UserMembershipData>>;
 /**
  * Returns a list of accounts associated with signed in user. This is useful for
@@ -72,5 +72,5 @@ export interface GetMembershipFromHardLinkedCredentialParams {
  */
 export declare function getMembershipFromHardLinkedCredential(
   http: HttpClient,
-  params: GetMembershipFromHardLinkedCredentialParams
+  { credential, crType }: GetMembershipFromHardLinkedCredentialParams
 ): Promise<ServerResponse<HardLinkedUserMembership>>;

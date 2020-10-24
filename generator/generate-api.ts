@@ -79,7 +79,11 @@ function generatePathDefinition(
     interfaceDefinition =
       generateInterfaceSchema(interfaceName + 'Params', params, doc, componentByDef, importFiles) +
       '\n\n';
-    parameterArgs.push(`params: ${interfaceName}Params`);
+    const urlParamNames = params.filter((p) => p.in === 'path').map((p) => p.name);
+    if (queryParameterNames.length) {
+      urlParamNames.push('...params');
+    }
+    parameterArgs.push(`{ ${urlParamNames.join(', ')} }: ${interfaceName}Params`);
   }
 
   if (methodDef.requestBody) {
@@ -101,30 +105,13 @@ function generatePathDefinition(
 
   // tslint:disable-next-line:no-invalid-template-strings
   const templatizedPath = path.includes('{')
-    ? `\`${server}${path.replace(/{/g, '${params.')}\``
+    ? `\`${server}${path.replace(/{/g, '${')}\``
     : `'${server}${path}'`;
 
-  let paramsObject = '';
-  if (queryParameterNames.length) {
-    const paramInitializers = queryParameterNames.map((p) => {
-      const param = params.find((pa) => pa.name === p)!;
-      const paramType = resolveSchemaType(param.schema!, doc);
-
-      if (paramType.endsWith('[]')) {
-        if (!param.required) {
-          return `${p}: params.${p} ? params.${p}.join(',') : undefined`;
-        }
-        return `${p}: params.${p}.join(',')`;
-      }
-
-      return `${p}: params.${p}`;
-    });
-
-    paramsObject = `,
-    params: {
-${indent(paramInitializers.join(',\n'), 3)}
-    }`;
-  }
+  const paramsPassthrough = queryParameterNames.length
+    ? `,
+    params`
+    : '';
 
   let requestBodyParam = '';
   if (methodDef.requestBody && isRequestBodyObject(methodDef.requestBody)) {
@@ -139,7 +126,7 @@ ${indent(paramInitializers.join(',\n'), 3)}
 export function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
   return http({
     method: '${method}',
-    url: ${templatizedPath}${paramsObject}${requestBodyParam}
+    url: ${templatizedPath}${paramsPassthrough}${requestBodyParam}
   });
 }`;
 }
