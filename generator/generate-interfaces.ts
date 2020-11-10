@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import { DefInfo, getRef, resolveSchemaType } from './util.js';
-import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
+import { OpenAPIObject, ReferenceObject, SchemaObject } from 'openapi3-ts';
 import {
   generateHeader,
   generateImports,
@@ -76,7 +76,7 @@ function generateComponentDefinition(
 
 function generateEnum(defInfo: DefInfo, component: SchemaObject) {
   const values = component['x-enum-values']
-    .map((value) => {
+    .map((value: SchemaObject) => {
       const doc = value.description ? docComment(value.description) + '\n' : '';
       return `${doc}${value.identifier} = ${value.numericValue}`;
     })

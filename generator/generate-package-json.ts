@@ -7,7 +7,7 @@ import { writeOutFile } from './generate-common.js';
  */
 export function generatePackageJson(modules: string[]) {
   console.log('Generate package.json??');
-  const moduleExports = {
+  const moduleExports: { [key: string]: string } = {
     '.': './index.js',
   };
 

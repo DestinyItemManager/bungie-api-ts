@@ -20,7 +20,7 @@ export function computeTypeMaps(
   doc: OpenAPIObject
 ) {
   const allDefsEverywhere = new Set<string>();
-  const defsByTag = {};
+  const defsByTag: { [tag: string]: Set<string> } = {};
   _.each(pathPairsByTag, (paths, tag) => {
     const defs = findReachableComponents(tag, paths, doc);
     addAll(allDefsEverywhere, defs);
@@ -154,11 +154,7 @@ function addReachableComponentsFromComponent(
   }
 }
 
-function addDefinitions(
-  allDefinitions: Set<string>,
-  schema: SchemaObject | ReferenceObject,
-  doc: OpenAPIObject
-) {
+function addDefinitions(allDefinitions: Set<string>, schema: SchemaObject, doc: OpenAPIObject) {
   const newDefinition = getReferencedTypes(schema);
   addDefinitionsFromComponent(allDefinitions, newDefinition, doc);
   if (schema['x-mapped-definition']) {
