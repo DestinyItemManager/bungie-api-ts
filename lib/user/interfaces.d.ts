@@ -158,3 +158,126 @@ export interface UserMembership {
    */
   readonly displayName: string;
 }
+/** The set of all email subscription/opt-in settings and definitions. */
+export interface EmailSettings {
+  /** Keyed by the name identifier of the opt-in definition. */
+  readonly optInDefinitions: {
+    [key: string]: EmailOptInDefinition;
+  };
+  /** Keyed by the name identifier of the Subscription definition. */
+  readonly subscriptionDefinitions: {
+    [key: string]: EmailSubscriptionDefinition;
+  };
+  /** Keyed by the name identifier of the View definition. */
+  readonly views: {
+    [key: string]: EmailViewDefinition;
+  };
+}
+/**
+ * Defines a single opt-in category: a wide-scoped permission to send emails for
+ * the subject related to the opt-in.
+ */
+export interface EmailOptInDefinition {
+  /** The unique identifier for this opt-in category. */
+  readonly name: string;
+  /**
+   * The flag value for this opt-in category. For historical reasons, this is defined
+   * as a flags enum.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly value: OptInFlags;
+  /**
+   * If true, this opt-in setting should be set by default in situations where
+   * accounts are created without explicit choices about what they're opting into.
+   */
+  readonly setByDefault: boolean;
+  /** Information about the dependent subscriptions for this opt-in. */
+  readonly dependentSubscriptions: EmailSubscriptionDefinition[];
+}
+/**
+ * This enum represents a set of flags - use bitwise operators to check which of
+ * these match your value.
+ */
+export declare const enum OptInFlags {
+  None = 0,
+  Newsletter = 1,
+  System = 2,
+  Marketing = 4,
+  UserResearch = 8,
+  CustomerService = 16,
+  Social = 32,
+  PlayTests = 64,
+  PlayTestsLocal = 128,
+  Careers = 256,
+}
+/**
+ * Defines a single subscription: permission to send emails for a specific, focused
+ * subject (generally timeboxed, such as for a specific release of a product or
+ * feature).
+ */
+export interface EmailSubscriptionDefinition {
+  /** The unique identifier for this subscription. */
+  readonly name: string;
+  /** A dictionary of localized text for the EMail Opt-in setting, keyed by the locale. */
+  readonly localization: {
+    [key: string]: EMailSettingSubscriptionLocalization;
+  };
+  /** The bitflag value for this subscription. Should be a unique power of two value. */
+  readonly value: string;
+}
+/**
+ * Localized text relevant to a given EMail setting in a given localization. Extra
+ * settings specifically for subscriptions.
+ */
+export interface EMailSettingSubscriptionLocalization {
+  readonly unknownUserDescription: string;
+  readonly registeredUserDescription: string;
+  readonly unregisteredUserDescription: string;
+  readonly unknownUserActionText: string;
+  readonly knownUserActionText: string;
+  readonly title: string;
+  readonly description: string;
+}
+/**
+ * Represents a data-driven view for Email settings. Web/Mobile UI can use this
+ * data to show new EMail settings consistently without further manual work.
+ */
+export interface EmailViewDefinition {
+  /** The identifier for this view. */
+  readonly name: string;
+  /** The ordered list of settings to show in this view. */
+  readonly viewSettings: EmailViewDefinitionSetting[];
+}
+export interface EmailViewDefinitionSetting {
+  /**
+   * The identifier for this UI Setting, which can be used to relate it to custom
+   * strings or other data as desired.
+   */
+  readonly name: string;
+  /** A dictionary of localized text for the EMail setting, keyed by the locale. */
+  readonly localization: {
+    [key: string]: EMailSettingLocalization;
+  };
+  /**
+   * If true, this setting should be set by default if the user hasn't chosen whether
+   * it's set or cleared yet.
+   */
+  readonly setByDefault: boolean;
+  /**
+   * The OptInFlags value to set or clear if this setting is set or cleared in the UI.
+   * It is the aggregate of all underlying opt-in flags related to this setting.
+   *
+   * This enum represents a set of flags - use bitwise operators to check which of
+   * these match your value.
+   */
+  readonly optInAggregateValue: OptInFlags;
+  /** The subscriptions to show as children of this setting, if any. */
+  readonly subscriptions: EmailSubscriptionDefinition[];
+}
+/** Localized text relevant to a given EMail setting in a given localization. */
+export interface EMailSettingLocalization {
+  readonly title: string;
+  readonly description: string;
+}
