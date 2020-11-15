@@ -26,6 +26,7 @@ import { generatePackageJson } from './generate-package-json.js';
   const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {
     return (desc.get || desc.post)!.tags![0];
   });
+  pathPairsByTag['Core'] = pathPairsByTag[''];
   delete pathPairsByTag[''];
 
   const { componentsByFile, componentByDef } = computeTypeMaps(pathPairsByTag, doc);
