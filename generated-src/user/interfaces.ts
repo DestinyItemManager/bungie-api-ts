@@ -287,7 +287,7 @@ export interface EmailViewDefinitionSetting {
    */
   readonly optInAggregateValue: OptInFlags;
   /** The subscriptions to show as children of this setting, if any. */
-  readonly subscriptions: EmailSubscriptionDefinition[];
+  readonly subscriptions?: EmailSubscriptionDefinition[];
 }
 
 /** Localized text relevant to a given EMail setting in a given localization. */

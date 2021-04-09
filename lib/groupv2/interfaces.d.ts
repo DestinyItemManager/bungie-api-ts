@@ -18,7 +18,7 @@ export interface GroupUserInfoCard {
    * account is an active cross save override, this will be the display name to use.
    * Otherwise, this will match the displayName property.
    */
-  readonly LastSeenDisplayName: string;
+  readonly LastSeenDisplayName?: string;
   /** The platform of the LastSeenDisplayName */
   readonly LastSeenDisplayNameType: BungieMembershipType;
   /**

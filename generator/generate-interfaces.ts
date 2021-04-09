@@ -123,9 +123,7 @@ function generateInterfaceSchema(
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
     return `${docString}readonly ${param}${
-      schema.nullable ||
-      frequentlyNullProperties.includes(param) ||
-      schema.description?.toLowerCase().includes('null')
+      schema.nullable || frequentlyNullProperties.includes(param) || looksNullable(schema)
         ? '?'
         : ''
     }: ${paramType};`;
@@ -138,6 +136,18 @@ ${indent(parameterArgs.join('\n'), 1)}
 
 function isSpecialType(name: string) {
   return name.includes('>');
+}
+
+// guess nullableness from a schema's comments
+function looksNullable({ description }: { description?: string }) {
+  description = description?.toLowerCase() ?? '';
+  return (
+    description.includes('null') ||
+    description.includes('if there is any') ||
+    description.includes('if it exists') ||
+    /if [^.]+ this will be/.test(description) ||
+    /[^\w\s]\s*if any/.test(description)
+  );
 }
 
 function generateSpecialDefinitions() {
