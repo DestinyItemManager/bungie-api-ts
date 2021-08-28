@@ -9,7 +9,7 @@ export function generatePackageJson(modules: string[]) {
   console.log('Generate package.json??');
   const moduleExports: { [key: string]: string } = {
     '.': './index.js',
-    http: './http.js',
+    './http': './http.js',
   };
 
   for (const module of modules) {

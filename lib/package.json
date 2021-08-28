@@ -1,6 +1,6 @@
 {
   "name": "bungie-api-ts",
-  "version": "4.10.0",
+  "version": "4.10.1",
   "description": "TypeScript mappings for the Bungie.net API",
   "type": "module",
   "sideEffects": false,
@@ -34,7 +34,7 @@
   "module": "./index.js",
   "exports": {
     ".": "./index.js",
-    "http": "./http.js",
+    "./http": "./http.js",
     "./app": "./app/index.js",
     "./user": "./user/index.js",
     "./content": "./content/index.js",
