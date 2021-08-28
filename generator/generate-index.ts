@@ -14,7 +14,7 @@ export function generateIndex(
   let imports = `export * from '../common.js';${
     tag !== 'Destiny2' ? "\nexport * from '../platform.js';" : ''
   }
-export * from '../http.js';
+export type {HttpClientConfig, HttpClient} from '../http';
 export * from './api.js';`;
 
   if (componentsByFile[`${tag.toLowerCase()}/interfaces.ts`]) {
