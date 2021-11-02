@@ -314,9 +314,6 @@ Object {
 exports[`check config builder for [Function searchDestinyPlayer] 1`] = `
 Object {
   "method": "GET",
-  "params": Object {
-    "returnOriginalProfile": true,
-  },
   "url": "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/3/asdf/",
 }
 `;
