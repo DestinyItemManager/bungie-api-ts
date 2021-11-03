@@ -65,7 +65,7 @@ import {
   DestinyBreakerTypeDefinition,
   DestinyChecklistDefinition,
   DestinyEnergyTypeDefinition,
-  DestinyManifest,
+  DestinyManifest
 } from './interfaces';
 
 /**
@@ -83,9 +83,7 @@ export interface AllDestinyManifestComponents {
   DestinyRaceDefinition: { [key: number]: DestinyRaceDefinition };
   DestinyTalentGridDefinition: { [key: number]: DestinyTalentGridDefinition };
   DestinyUnlockDefinition: { [key: number]: DestinyUnlockDefinition };
-  DestinyMaterialRequirementSetDefinition: {
-    [key: number]: DestinyMaterialRequirementSetDefinition;
-  };
+  DestinyMaterialRequirementSetDefinition: { [key: number]: DestinyMaterialRequirementSetDefinition };
   DestinySandboxPerkDefinition: { [key: number]: DestinySandboxPerkDefinition };
   DestinyStatGroupDefinition: { [key: number]: DestinyStatGroupDefinition };
   DestinyProgressionMappingDefinition: { [key: number]: DestinyProgressionMappingDefinition };
@@ -111,9 +109,7 @@ export interface AllDestinyManifestComponents {
   DestinyPowerCapDefinition: { [key: number]: DestinyPowerCapDefinition };
   DestinyPresentationNodeDefinition: { [key: number]: DestinyPresentationNodeDefinition };
   DestinyProgressionDefinition: { [key: number]: DestinyProgressionDefinition };
-  DestinyProgressionLevelRequirementDefinition: {
-    [key: number]: DestinyProgressionLevelRequirementDefinition;
-  };
+  DestinyProgressionLevelRequirementDefinition: { [key: number]: DestinyProgressionLevelRequirementDefinition };
   DestinyRecordDefinition: { [key: number]: DestinyRecordDefinition };
   DestinySeasonDefinition: { [key: number]: DestinySeasonDefinition };
   DestinySeasonPassDefinition: { [key: number]: DestinySeasonPassDefinition };
@@ -152,6 +148,9 @@ export const destinyManifestLanguages = [
 
 export type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
 
+
+
+
 // thoughts:
 // this relies on the assumption that the separate
 // manifest pieces offered in jsonWorldComponentContentPaths,
@@ -173,8 +172,9 @@ export type DestinyManifestSlice<K extends Readonly<DestinyManifestComponentName
  * i.e.
  * func('DestinyInventoryItemDefinition') will return type DestinyInventoryItemDefinition
  */
-export type DestinyDefinitionFrom<K extends DestinyManifestComponentName> =
-  AllDestinyManifestComponents[K][number];
+export type DestinyDefinitionFrom<
+  K extends DestinyManifestComponentName
+> = AllDestinyManifestComponents[K][number];
 
 export interface GetAllDestinyManifestComponentsParams {
   destinyManifest: DestinyManifest;
@@ -187,7 +187,7 @@ export function getAllDestinyManifestComponents(
 ): Promise<AllDestinyManifestComponents> {
   return http({
     method: 'GET',
-    url: 'https://www.bungie.net' + params.destinyManifest.jsonWorldContentPaths[params.language],
+    url: 'https://www.bungie.net'+params.destinyManifest.jsonWorldContentPaths[params.language],
   });
 }
 
@@ -217,9 +217,9 @@ export function getDestinyManifestComponent<T extends DestinyManifestComponentNa
 ): Promise<AllDestinyManifestComponents[T]> {
   return http({
     method: 'GET',
-    url:
-      'https://www.bungie.net' +
-      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName],
+    url: 'https://www.bungie.net'+
+      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName]
+    ,
   });
 }
 
@@ -268,3 +268,4 @@ export async function getDestinyManifestSlice<T extends DestinyManifestComponent
   }
   return manifestSlice as DestinyManifestSlice<T>;
 }
+

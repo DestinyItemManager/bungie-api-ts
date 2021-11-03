@@ -7,9 +7,9 @@ const httpClientType = `import { HttpClient } from '../http';`;
 
 const manifestMetadataPromise = (async () => {
   try {
-    let manifestMeta = await fetch(
-      'https://www.bungie.net/Platform/Destiny2/Manifest/'
-    ).then((res) => res.json());
+    let manifestMeta = await fetch('https://www.bungie.net/Platform/Destiny2/Manifest/').then(
+      (res) => res.json()
+    );
     return manifestMeta.Response;
   } catch (e) {
     console.log(e);
@@ -37,9 +37,9 @@ async function generateManifestDefinitions(components: DefInfo[]) {
   const documentedDefs = components.map((component) => component.interfaceName);
 
   // exclude some tables from the definitionmanifest table because we don't have the format for them
-  const defsToInclude = Object.keys(
-    manifestMetadata.jsonWorldComponentContentPaths.en
-  ).filter((tableName) => documentedDefs.includes(tableName));
+  const defsToInclude = Object.keys(manifestMetadata.jsonWorldComponentContentPaths.en).filter(
+    (tableName) => documentedDefs.includes(tableName)
+  );
 
   const languageList = Object.keys(manifestMetadata.jsonWorldComponentContentPaths).sort();
 
@@ -197,10 +197,10 @@ export async function getDestinyManifestSlice<T extends DestinyManifestComponent
       return { tableName, tableContent };
     })
   );
-  const manifestSlice = {} as DestinyManifestSlice<T>;
+  const manifestSlice = {} as AllDestinyManifestComponents;
   for (const downloadedTable of downloadedTables) {
-    manifestSlice[downloadedTable.tableName] = downloadedTable.tableContent;
+    manifestSlice[downloadedTable.tableName] = downloadedTable.tableContent as any;
   }
-  return manifestSlice;
+  return manifestSlice as DestinyManifestSlice<T>;
 }
 `;
