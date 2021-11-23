@@ -43,9 +43,7 @@ import {
   SearchResultOfGroupMemberApplication,
 } from './interfaces.js';
 /** Returns a list of all available group avatars for the signed-in user. */
-export declare function getAvailableAvatars(
-  http: HttpClient
-): Promise<
+export declare function getAvailableAvatars(http: HttpClient): Promise<
   ServerResponse<{
     [key: number]: string;
   }>
