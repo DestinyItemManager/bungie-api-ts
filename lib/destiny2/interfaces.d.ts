@@ -8489,9 +8489,7 @@ export interface DestinyProfileResponse {
     [key: string]: DestinyBaseItemComponentSetOfuint32;
   };
   /** COMPONENT TYPE: PresentationNodes */
-  readonly characterPresentationNodes: DictionaryComponentResponse<
-    DestinyPresentationNodesComponent
-  >;
+  readonly characterPresentationNodes: DictionaryComponentResponse<DestinyPresentationNodesComponent>;
   /** COMPONENT TYPE: Records */
   readonly characterRecords: DictionaryComponentResponse<DestinyCharacterRecordsComponent>;
   /** COMPONENT TYPE: Collectibles */

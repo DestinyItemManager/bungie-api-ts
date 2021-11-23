@@ -389,9 +389,7 @@ export declare function reportOffensivePostGameCarnageReportPlayer(
   body: DestinyReportOffensePgcrRequest
 ): Promise<ServerResponse<number>>;
 /** Gets historical stats definitions. */
-export declare function getHistoricalStatsDefinition(
-  http: HttpClient
-): Promise<
+export declare function getHistoricalStatsDefinition(http: HttpClient): Promise<
   ServerResponse<{
     [key: string]: DestinyHistoricalStatsDefinition;
   }>
@@ -669,9 +667,7 @@ export declare function getPublicMilestoneContent(
   params: GetPublicMilestoneContentParams
 ): Promise<ServerResponse<DestinyMilestoneContent>>;
 /** Gets public information about currently available Milestones. */
-export declare function getPublicMilestones(
-  http: HttpClient
-): Promise<
+export declare function getPublicMilestones(http: HttpClient): Promise<
   ServerResponse<{
     [key: number]: DestinyPublicMilestone;
   }>

@@ -13,9 +13,7 @@ import { HttpClient } from '../http';
 import { CoreSettingsConfiguration, CoreSystem, GlobalAlert } from './interfaces.js';
 import { ServerResponse } from '../common.js';
 /** List of available localization cultures */
-export declare function getAvailableLocales(
-  http: HttpClient
-): Promise<
+export declare function getAvailableLocales(http: HttpClient): Promise<
   ServerResponse<{
     [key: string]: string;
   }>
@@ -28,9 +26,7 @@ export declare function getCommonSettings(
  * Get the user-specific system overrides that should be respected alongside common
  * systems.
  */
-export declare function getUserSystemOverrides(
-  http: HttpClient
-): Promise<
+export declare function getUserSystemOverrides(http: HttpClient): Promise<
   ServerResponse<{
     [key: string]: CoreSystem;
   }>
