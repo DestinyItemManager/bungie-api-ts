@@ -311,10 +311,11 @@ Object {
 }
 `;
 
-exports[`check config builder for [Function searchDestinyPlayer] 1`] = `
+exports[`check config builder for [Function searchDestinyPlayerByBungieName] 1`] = `
 Object {
-  "method": "GET",
-  "url": "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/3/asdf/",
+  "body": undefined,
+  "method": "POST",
+  "url": "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/3/",
 }
 `;
 

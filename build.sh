@@ -9,7 +9,7 @@ mkdir -p generated-src
 cp generator/http.ts generated-src
 
 # Compile and run the generator
-tsc -p tsconfig.json
+yarn tsc -p tsconfig.json
 node --experimental-json-modules ./build/generate.js
 
 # Build the package from the generated sources
@@ -20,7 +20,7 @@ cp ./generated-src/package.json.notyet ./lib/package.json
 
 babel generated-src --out-dir lib --extensions ".ts"
 
-tsc -p tsconfig-package.json
+yarn tsc -p tsconfig-package.json
 
 yarn prettier --write lib/**/*
 

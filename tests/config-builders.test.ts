@@ -1,7 +1,6 @@
 import {
   getDestinyManifest,
   getDestinyEntityDefinition,
-  searchDestinyPlayer,
   getLinkedProfiles,
   getProfile,
   getCharacter,
@@ -36,11 +35,10 @@ import {
   awaInitializeRequest,
   awaProvideAuthorizationResult,
   awaGetActionToken,
+  searchDestinyPlayerByBungieName,
 } from '../generated-src/destiny2/api';
-import { getDestinyManifestSlice } from '../generated-src/destiny2/manifest';
-import { HttpClient, HttpClientConfig } from '../generated-src/http';
+import { HttpClient } from '../generated-src/http';
 import { DestinyComponentType } from '../generated-src/destiny2/interfaces';
-import fetch from 'node-fetch';
 
 // instead of actually performing a fetch,
 // this fake HttpClient returns the HttpConfig it would have used to make the fetch
@@ -105,7 +103,7 @@ const p = {
 const testCases: [(..._: any) => any, any[]][] = [
   [getDestinyManifest, [h]],
   [getDestinyEntityDefinition, [h, p]],
-  [searchDestinyPlayer, [h, p]],
+  [searchDestinyPlayerByBungieName, [h, p]],
   [getLinkedProfiles, [h, p]],
   [getProfile, [h, p]],
   [getCharacter, [h, p]],
