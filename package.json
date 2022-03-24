@@ -6,6 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "tsc": "tsc",
+    "publish": "npm publish ./lib",
     "start": "sh ./build.sh",
     "submodule": "git submodule init && git submodule update",
     "updatespec": "git submodule update --remote --merge",
