@@ -64,11 +64,16 @@ The `destiny2` import also contains helpers for typing and downloading the Desti
 ```typescript
 import { getDestinyManifestSlice } from 'bungie-api-ts/destiny2';
 
+async function $http(config: HttpClientConfig) {
+  // fill in the API key, handle OAuth, etc., then make an HTTP request using the config.
+  return fetch(config.url, ...);
+}
+
 const destinyManifest = await getDestinyManifest($http);
 const manifestTables = getDestinyManifestSlice($http, {
   destinyManifest,
-  tableNames: ['DestinyInventoryItemDefinition', 'DestinySocketDefinition'];
-  language: 'en';
+  tableNames: ['DestinyInventoryItemDefinition', 'DestinySocketDefinition'],
+  language: 'en',
 });
 
 // manifestTables is an object with properties DestinyInventoryItemDefinition and DestinySocketDefinition
