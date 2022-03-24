@@ -1,11 +1,12 @@
 {
   "name": "bungie-api-ts",
-  "version": "4.15.0",
+  "version": "4.16.0",
   "description": "TypeScript mappings for the Bungie.net API",
   "type": "module",
   "sideEffects": false,
   "scripts": {
     "tsc": "tsc",
+    "publish": "npm publish ./lib",
     "start": "sh ./build.sh",
     "submodule": "git submodule init && git submodule update",
     "updatespec": "git submodule update --remote --merge",
