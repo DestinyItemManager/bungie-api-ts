@@ -1,13 +1,7 @@
 {
   "comments": false,
-  "presets": ["@babel/typescript"],
+  "presets": [["@babel/preset-typescript", { "optimizeConstEnums": true }]],
   "plugins": [
-    [
-      "const-enum",
-      {
-        "transform": "constObject"
-      }
-    ],
     "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread"
   ]
