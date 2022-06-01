@@ -146,16 +146,26 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
  *
  * but make sure it's not a \`let x =\` or a dynamically set string.
  */
-export function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
+ export async function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
   http: HttpClient,
   params: GetDestinyManifestComponentParams<T>
 ): Promise<AllDestinyManifestComponents[T]> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net'+
-      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName]
-    ,
-  });
+  const r = {
+    method: 'GET' as const,
+    url:
+      'https://www.bungie.net' +
+      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName],
+  };
+  try {
+    return await http(r);
+  } catch (e) {
+    r.url += '?retry';
+    try {
+      return await http(r);
+    } catch {
+      throw e;
+    }
+  }
 }
 
 export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponentName[]> {
