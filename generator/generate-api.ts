@@ -135,7 +135,13 @@ ${indent(paramInitializers.join(',\n'), 3)}
   const returnValue = resolveSchemaType(methodDef.responses['200'], doc);
   addImport(doc, methodDef.responses['200'], componentByDef, importFiles);
 
-  return `${interfaceDefinition}${docComment(methodDef.description!)}
+  const rateDoc =
+    methodDef['x-documentation-attributes']?.ThrottleSecondsBetweenActionPerUser &&
+    `Wait at least ${methodDef['x-documentation-attributes']?.ThrottleSecondsBetweenActionPerUser}s between actions.`;
+
+  return `${interfaceDefinition}${docComment(
+    methodDef.description! + (rateDoc ? '\n' + rateDoc : '')
+  )}
 export function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
   return http({
     method: '${method}',
