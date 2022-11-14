@@ -7,13 +7,7 @@ import {
   lcFirst,
   resolveSchemaType,
 } from './util.js';
-import {
-  OpenAPIObject,
-  ParameterObject,
-  PathItemObject,
-  ReferenceObject,
-  RequestBodyObject,
-} from 'openapi3-ts';
+import { OpenAPIObject, ParameterObject, PathItemObject } from 'openapi3-ts';
 import {
   addImport,
   docComment,
@@ -23,7 +17,7 @@ import {
   writeOutFile,
 } from './generate-common.js';
 
-const httpClientType = `import { HttpClient } from '../http';`;
+const httpClientType = `import { HttpClient, get, post } from '../http';`;
 
 /**
  * Generate an api.ts file for a particular "service", which is defined by a specific tag on the path entry
@@ -158,16 +152,14 @@ function generatePathDefinition(
       return `${p}: params.${p}`;
     });
 
-    paramsObject = `,
-    params: {
-${indent(paramInitializers.join(',\n'), 3)}
-    }`;
+    paramsObject = `, {
+${indent(paramInitializers.join(',\n'), 2)}
+  }`;
   }
 
   let requestBodyParam = '';
   if (methodDef.requestBody && isRequestBodyObject(methodDef.requestBody)) {
-    requestBodyParam = `,
-    body`;
+    requestBodyParam = ', body';
   }
 
   const returnValue = resolveSchemaType(methodDef.responses['200'], doc);
@@ -177,14 +169,16 @@ ${indent(paramInitializers.join(',\n'), 3)}
     methodDef['x-documentation-attributes']?.ThrottleSecondsBetweenActionPerUser &&
     `Wait at least ${methodDef['x-documentation-attributes']?.ThrottleSecondsBetweenActionPerUser}s between actions.`;
 
+  const fnBody =
+    method == 'GET'
+      ? `get(http, ${templatizedPath}${paramsObject})`
+      : `post(http, ${templatizedPath}${requestBodyParam})`;
+
   return `${interfaceDefinition}${docComment(
     methodDef.description! + (rateDoc ? '\n' + rateDoc : '')
   )}
 export function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
-  return http({
-    method: '${method}',
-    url: ${templatizedPath}${paramsObject}${requestBodyParam}
-  });
+  return ${fnBody};
 }`;
 }
 
