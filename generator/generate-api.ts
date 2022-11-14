@@ -45,7 +45,15 @@ export function generateServiceDefinition(
   const apiBase = `const API_BASE = "${server}${prefix}";`;
 
   const definition =
-    [generateHeader(doc), httpClientType, imports, apiBase, ...pathDefinitions].join('\n\n') + '\n';
+    [
+      generateHeader(doc),
+      httpClientType,
+      imports,
+      prefix.length > 0 ? apiBase : undefined,
+      ...pathDefinitions,
+    ]
+      .filter(Boolean)
+      .join('\n\n') + '\n';
 
   writeOutFile(filename, definition);
 }
@@ -81,7 +89,7 @@ function generatePathDefinition(
   let server = doc.servers![0].url;
   // per https://github.com/Bungie-net/api/issues/853
   // strict condition, so no surprises if doc.servers changes
-  let usePathPrefix = true;
+  let usePathPrefix = pathPrefix.length > 0;
   if (
     server === 'https://www.bungie.net/Platform' &&
     path.includes('/Stats/PostGameCarnageReport/')
@@ -215,10 +223,17 @@ ${indent(parameterArgs.join('\n'), 1)}
  * getLongestPrefix("Destiny2/Clan/{groupId}/WeeklyRewardState/", "/Destiny2/Clan/ClanBannerDictionary/", "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/")
  */
 function getLongestPrefix(paths: string[]) {
-  let prefixLetters: string = '';
+  if (paths.length < 2) {
+    return '';
+  }
+
+  let prefixLetters = '';
 
   let index = 0;
   for (const letter of paths[0]) {
+    if (letter === '{') {
+      break;
+    }
     for (const path of paths) {
       if (path[index] !== letter) {
         return prefixLetters;

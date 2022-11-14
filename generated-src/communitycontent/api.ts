@@ -21,8 +21,6 @@ import {
   ServerResponse
 } from '../common.js';
 
-const API_BASE = "https://www.bungie.net/Platform/CommunityContent/Get/{sort}/{mediaFilter}/{page}/";
-
 export interface GetCommunityContentParams {
   /** The type of media to get */
   mediaFilter: ForumTopicsCategoryFiltersEnum;
@@ -34,5 +32,5 @@ export interface GetCommunityContentParams {
 
 /** Returns community content. */
 export function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}`);
+  return get(http, `https://www.bungie.net/Platform/CommunityContent/Get/${params.sort}/${params.mediaFilter}/${params.page}/`);
 }
