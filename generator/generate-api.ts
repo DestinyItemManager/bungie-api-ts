@@ -25,43 +25,81 @@ import {
 
 const httpClientType = `import { HttpClient } from '../http';`;
 
+/**
+ * Generate an api.ts file for a particular "service", which is defined by a specific tag on the path entry
+ * in the OpenAPI spec. e.g. all the User service paths have the tag "User".
+ */
 export function generateServiceDefinition(
   tag: string,
-  paths: [string, PathItemObject][],
+  paths: [path: string, pathDef: PathItemObject][],
   doc: OpenAPIObject,
   componentByDef: { [def: string]: DefInfo }
 ): void {
   const importFiles: { [filename: string]: Set<string> } = {};
 
+  let server = doc.servers![0].url;
+  const prefix = getLongestPrefix(paths.map((p) => p[0]));
+
   const pathDefinitions = paths.map(([path, pathDef]) =>
-    generatePathDefinition(path, pathDef, doc, componentByDef, importFiles)
+    generatePathDefinition(path, pathDef, doc, componentByDef, importFiles, prefix)
   );
 
   const filename = `generated-src/${tag.toLowerCase()}/api.ts`;
 
   const imports = generateImports(filename, importFiles);
 
+  const apiBase = `const API_BASE = "${server}${prefix}";`;
+
   const definition =
-    [generateHeader(doc), httpClientType, imports, ...pathDefinitions].join('\n\n') + '\n';
+    [generateHeader(doc), httpClientType, imports, apiBase, ...pathDefinitions].join('\n\n') + '\n';
 
   writeOutFile(filename, definition);
 }
 
+/**
+ * Generate a properly types function for the api implementation that will pass the correct parameters
+ * to the HTTP client.
+ *
+ * Example:
+ *
+ * export function getVendors(http: HttpClient, params: GetVendorsParams): Promise<ServerResponse<DestinyVendorsResponse>> {
+ *   return http({
+ *     method: 'GET',
+ *     url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/`,
+ *     params: {
+ *       components: params.components?.join(','),
+ *       filter: params.filter
+ *     }
+ *   });
+ * }
+ */
 function generatePathDefinition(
+  /** The path specification for the API */
   path: string,
+  /** OpenAPI information about the path object */
   pathDef: PathItemObject,
+  /** The whole OpenAPI document */
   doc: OpenAPIObject,
-  componentByDef: { [def: string]: DefInfo },
-  importFiles: { [filename: string]: Set<string> }
+  componentByDef: Readonly<{ [def: string]: DefInfo }>,
+  importFiles: { [filename: string]: Set<string> }, // mutated
+  pathPrefix: string
 ) {
   let server = doc.servers![0].url;
   // per https://github.com/Bungie-net/api/issues/853
   // strict condition, so no surprises if doc.servers changes
+  let usePathPrefix = true;
   if (
     server === 'https://www.bungie.net/Platform' &&
     path.includes('/Stats/PostGameCarnageReport/')
-  )
+  ) {
     server = 'https://stats.bungie.net/Platform';
+    usePathPrefix = false;
+  }
+
+  if (usePathPrefix) {
+    path = path.substring(pathPrefix.length);
+  }
+
   const interfaceName = lastPart(pathDef.summary!);
   const functionName = lcFirst(interfaceName);
 
@@ -99,10 +137,10 @@ function generatePathDefinition(
     }
   }
 
-  // tslint:disable-next-line:no-invalid-template-strings
-  const templatizedPath = path.includes('{')
-    ? `\`${server}${path.replace(/{/g, '${params.')}\``
-    : `'${server}${path}'`;
+  const templatizedPath = `\`${usePathPrefix ? '${API_BASE}' : server}${path.replace(
+    /{/g,
+    '${params.'
+  )}\``;
 
   let paramsObject = '';
   if (queryParameterNames.length) {
@@ -172,4 +210,29 @@ function generateInterfaceSchema(
   return `export interface ${interfaceName} {
 ${indent(parameterArgs.join('\n'), 1)}
 }`;
+}
+
+/**
+ * Find the longest prefix for a list of strings.
+ *
+ * @example
+ *
+ * // Returns "/Destiny2/"
+ * getLongestPrefix("Destiny2/Clan/{groupId}/WeeklyRewardState/", "/Destiny2/Clan/ClanBannerDictionary/", "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/")
+ */
+function getLongestPrefix(paths: string[]) {
+  let prefixLetters: string = '';
+
+  let index = 0;
+  for (const letter of paths[0]) {
+    for (const path of paths) {
+      if (path[index] !== letter) {
+        return prefixLetters;
+      }
+    }
+    prefixLetters = prefixLetters.concat(letter);
+    index++;
+  }
+
+  return prefixLetters;
 }

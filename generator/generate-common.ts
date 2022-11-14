@@ -20,11 +20,15 @@ export function generateHeader(doc: OpenAPIObject): string {
  */`;
 }
 
+/**
+ * Add the name of a referenced type from `schema` to the list of symbols to
+ * import for a given imported module file.
+ */
 export function addImport(
   doc: OpenAPIObject,
   schema: SchemaObject | ReferenceObject,
-  componentByDef: { [def: string]: DefInfo },
-  importFiles: { [filename: string]: Set<string> }
+  componentByDef: Readonly<{ [def: string]: DefInfo }>,
+  importFiles: { [filename: string]: Set<string> } // mutated
 ) {
   const typeRef = getReferencedTypes(schema);
   if (typeRef && componentByDef[typeRef]) {
@@ -33,8 +37,7 @@ export function addImport(
       if (component) {
         const property = component.properties!.Response;
         if (property) {
-          importFiles['common.ts'] = importFiles['common.ts'] || new Set();
-          importFiles['common.ts'].add('ServerResponse');
+          (importFiles['common.ts'] ??= new Set()).add('ServerResponse');
           addImport(doc, property, componentByDef, importFiles);
           return;
         }
@@ -42,14 +45,17 @@ export function addImport(
     }
 
     const filename = componentByDef[typeRef].filename;
-    importFiles[filename] = importFiles[filename] || new Set();
-    importFiles[filename].add(componentByDef[typeRef].interfaceName);
+    (importFiles[filename] ??= new Set()).add(componentByDef[typeRef].interfaceName);
   }
 }
 
+/**
+ * Given an output filename and a list of all symbols to be imported, generate
+ * the actual import lines.
+ */
 export function generateImports(
   filename: string,
-  importFiles: { [filename: string]: Set<string> }
+  importFiles: Readonly<{ [filename: string]: Set<string> }>
 ): string {
   return _.compact(
     _.map(importFiles, (types, f) => {
@@ -72,6 +78,9 @@ export function generateImports(
     .join('\n');
 }
 
+/**
+ * Print a JSDoc documentation comment with the given string as its contents.
+ */
 export function docComment(text: string) {
   const lines = _.flatten(
     text
@@ -90,11 +99,17 @@ ${lines.map((line) => (line.length ? ' * ' + line : ' *')).join('\n')}
  */`;
 }
 
+/**
+ * Indent the given text a certain number of levels.
+ */
 export function indent(text: string, indentLevel: number) {
   const lines = text.split('\n');
   return lines.map((line) => '  '.repeat(indentLevel) + line).join('\n');
 }
 
+/**
+ * Write a string contents out to a file.
+ */
 export async function writeOutFile(filename: string, contents: string) {
   try {
     await mkdirp(path.dirname(filename));
