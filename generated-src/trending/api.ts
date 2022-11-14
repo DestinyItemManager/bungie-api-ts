@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   SearchResultOfTrendingEntry,
@@ -22,15 +22,14 @@ import {
   ServerResponse
 } from '../common.js';
 
+const API_BASE = "https://www.bungie.net/Platform/Trending/";
+
 /**
  * Returns trending items for Bungie.net, collapsed into the first page of items
  * per category. For pagination within a category, call GetTrendingCategory.
  */
 export function getTrendingCategories(http: HttpClient): Promise<ServerResponse<TrendingCategories>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Trending/Categories/'
-  });
+  return get(http, `${API_BASE}Categories/`);
 }
 
 export interface GetTrendingCategoryParams {
@@ -42,10 +41,7 @@ export interface GetTrendingCategoryParams {
 
 /** Returns paginated lists of trending items for a category. */
 export function getTrendingCategory(http: HttpClient, params: GetTrendingCategoryParams): Promise<ServerResponse<SearchResultOfTrendingEntry>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Trending/Categories/${params.categoryId}/${params.pageNumber}/`
-  });
+  return get(http, `${API_BASE}Categories/${params.categoryId}/${params.pageNumber}/`);
 }
 
 export interface GetTrendingEntryDetailParams {
@@ -62,8 +58,5 @@ export interface GetTrendingEntryDetailParams {
  * unique.
  */
 export function getTrendingEntryDetail(http: HttpClient, params: GetTrendingEntryDetailParams): Promise<ServerResponse<TrendingDetail>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Trending/Details/${params.trendingEntryType}/${params.identifier}/`
-  });
+  return get(http, `${API_BASE}Details/${params.trendingEntryType}/${params.identifier}/`);
 }

@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   AwaAuthorizationResult,
@@ -66,12 +66,11 @@ import {
   UserInfoCard
 } from '../user/interfaces.js';
 
+const API_BASE = "https://www.bungie.net/Platform/Destiny2/";
+
 /** Returns the current version of the manifest as a json object. */
 export function getDestinyManifest(http: HttpClient): Promise<ServerResponse<DestinyManifest>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Destiny2/Manifest/'
-  });
+  return get(http, `${API_BASE}Manifest/`);
 }
 
 export interface GetDestinyEntityDefinitionParams {
@@ -97,10 +96,7 @@ export interface GetDestinyEntityDefinitionParams {
  * accesses this should be handy.
  */
 export function getDestinyEntityDefinition(http: HttpClient, params: GetDestinyEntityDefinitionParams): Promise<ServerResponse<DestinyDefinition>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Manifest/${params.entityType}/${params.hashIdentifier}/`
-  });
+  return get(http, `${API_BASE}Manifest/${params.entityType}/${params.hashIdentifier}/`);
 }
 
 export interface SearchDestinyPlayerByBungieNameParams {
@@ -116,11 +112,7 @@ export interface SearchDestinyPlayerByBungieNameParams {
  * method will hide overridden memberships due to cross save.
  */
 export function searchDestinyPlayerByBungieName(http: HttpClient, params: SearchDestinyPlayerByBungieNameParams, body: ExactSearchRequest): Promise<ServerResponse<UserInfoCard[]>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/${params.membershipType}/`,
-    body
-  });
+  return post(http, `${API_BASE}SearchDestinyPlayerByBungieName/${params.membershipType}/`, body);
 }
 
 export interface GetLinkedProfilesParams {
@@ -150,12 +142,8 @@ export interface GetLinkedProfilesParams {
  * return linked accounts whose linkages you are allowed to view.
  */
 export function getLinkedProfiles(http: HttpClient, params: GetLinkedProfilesParams): Promise<ServerResponse<DestinyLinkedProfilesResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.membershipId}/LinkedProfiles/`,
-    params: {
-      getAllMemberships: params.getAllMemberships
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.membershipId}/LinkedProfiles/`, {
+    getAllMemberships: params.getAllMemberships
   });
 }
 
@@ -174,12 +162,8 @@ export interface GetProfileParams {
 
 /** Returns Destiny Profile information for the supplied membership. */
 export function getProfile(http: HttpClient, params: GetProfileParams): Promise<ServerResponse<DestinyProfileResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/`,
-    params: {
-      components: params.components ? params.components.join(',') : undefined
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/`, {
+    components: params.components ? params.components.join(',') : undefined
   });
 }
 
@@ -200,12 +184,8 @@ export interface GetCharacterParams {
 
 /** Returns character information for the supplied character. */
 export function getCharacter(http: HttpClient, params: GetCharacterParams): Promise<ServerResponse<DestinyCharacterResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/`,
-    params: {
-      components: params.components ? params.components.join(',') : undefined
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/`, {
+    components: params.components ? params.components.join(',') : undefined
   });
 }
 
@@ -219,18 +199,12 @@ export interface GetClanWeeklyRewardStateParams {
  * or not. Note that this will always report rewards as not redeemed.
  */
 export function getClanWeeklyRewardState(http: HttpClient, params: GetClanWeeklyRewardStateParams): Promise<ServerResponse<DestinyMilestone>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Clan/${params.groupId}/WeeklyRewardState/`
-  });
+  return get(http, `${API_BASE}Clan/${params.groupId}/WeeklyRewardState/`);
 }
 
 /** Returns the dictionary of values for the Clan Banner */
 export function getClanBannerSource(http: HttpClient): Promise<ServerResponse<ClanBannerSource>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Destiny2/Clan/ClanBannerDictionary/'
-  });
+  return get(http, `${API_BASE}Clan/ClanBannerDictionary/`);
 }
 
 export interface GetItemParams {
@@ -254,12 +228,8 @@ export interface GetItemParams {
  * useful instance-specific details and thus are not queryable here.
  */
 export function getItem(http: HttpClient, params: GetItemParams): Promise<ServerResponse<DestinyItemResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Item/${params.itemInstanceId}/`,
-    params: {
-      components: params.components ? params.components.join(',') : undefined
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Item/${params.itemInstanceId}/`, {
+    components: params.components ? params.components.join(',') : undefined
   });
 }
 
@@ -287,13 +257,9 @@ export interface GetVendorsParams {
  * their definitions as-is for those.
  */
 export function getVendors(http: HttpClient, params: GetVendorsParams): Promise<ServerResponse<DestinyVendorsResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/`,
-    params: {
-      components: params.components ? params.components.join(',') : undefined,
-      filter: params.filter
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/`, {
+    components: params.components ? params.components.join(',') : undefined,
+    filter: params.filter
   });
 }
 
@@ -316,12 +282,8 @@ export interface GetVendorParams {
 
 /** Get the details of a specific Vendor. */
 export function getVendor(http: HttpClient, params: GetVendorParams): Promise<ServerResponse<DestinyVendorResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/${params.vendorHash}/`,
-    params: {
-      components: params.components ? params.components.join(',') : undefined
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/${params.vendorHash}/`, {
+    components: params.components ? params.components.join(',') : undefined
   });
 }
 
@@ -342,12 +304,8 @@ export interface GetPublicVendorsParams {
  * guilty of saying: 'It's a long story...'
  */
 export function getPublicVendors(http: HttpClient, params: GetPublicVendorsParams): Promise<ServerResponse<DestinyPublicVendorsResponse>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Destiny2/Vendors/',
-    params: {
-      components: params.components ? params.components.join(',') : undefined
-    }
+  return get(http, `${API_BASE}Vendors/`, {
+    components: params.components ? params.components.join(',') : undefined
   });
 }
 
@@ -381,12 +339,8 @@ export interface GetCollectibleNodeDetailsParams {
  * character.
  */
 export function getCollectibleNodeDetails(http: HttpClient, params: GetCollectibleNodeDetailsParams): Promise<ServerResponse<DestinyCollectibleNodeDetailResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Collectibles/${params.collectiblePresentationNodeHash}/`,
-    params: {
-      components: params.components ? params.components.join(',') : undefined
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Collectibles/${params.collectiblePresentationNodeHash}/`, {
+    components: params.components ? params.components.join(',') : undefined
   });
 }
 
@@ -398,11 +352,7 @@ export function getCollectibleNodeDetails(http: HttpClient, params: GetCollectib
  * Wait at least 0.1s between actions.
  */
 export function transferItem(http: HttpClient, body: DestinyItemTransferRequest): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/TransferItem/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/TransferItem/`, body);
 }
 
 /**
@@ -413,11 +363,7 @@ export function transferItem(http: HttpClient, body: DestinyItemTransferRequest)
  * Wait at least 0.1s between actions.
  */
 export function pullFromPostmaster(http: HttpClient, body: DestinyPostmasterTransferRequest): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/PullFromPostmaster/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/PullFromPostmaster/`, body);
 }
 
 /**
@@ -427,11 +373,7 @@ export function pullFromPostmaster(http: HttpClient, body: DestinyPostmasterTran
  * Wait at least 0.1s between actions.
  */
 export function equipItem(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItem/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/EquipItem/`, body);
 }
 
 /**
@@ -442,11 +384,7 @@ export function equipItem(http: HttpClient, body: DestinyItemActionRequest): Pro
  * Wait at least 0.1s between actions.
  */
 export function equipItems(http: HttpClient, body: DestinyItemSetActionRequest): Promise<ServerResponse<DestinyEquipItemResults>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItems/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/EquipItems/`, body);
 }
 
 /**
@@ -455,11 +393,7 @@ export function equipItems(http: HttpClient, body: DestinyItemSetActionRequest):
  * Wait at least 0.1s between actions.
  */
 export function setItemLockState(http: HttpClient, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/SetLockState/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/SetLockState/`, body);
 }
 
 /**
@@ -469,11 +403,7 @@ export function setItemLockState(http: HttpClient, body: DestinyItemStateRequest
  * Wait at least 1s between actions.
  */
 export function setQuestTrackedState(http: HttpClient, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/SetTrackedState/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/SetTrackedState/`, body);
 }
 
 /**
@@ -488,11 +418,7 @@ export function setQuestTrackedState(http: HttpClient, body: DestinyItemStateReq
  * Wait at least 0.5s between actions.
  */
 export function insertSocketPlug(http: HttpClient, body: DestinyInsertPlugsActionRequest): Promise<ServerResponse<DestinyItemChangeResponse>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlug/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/InsertSocketPlug/`, body);
 }
 
 /**
@@ -505,11 +431,7 @@ export function insertSocketPlug(http: HttpClient, body: DestinyInsertPlugsActio
  * Wait at least 0.5s between actions.
  */
 export function insertSocketPlugFree(http: HttpClient, body: DestinyInsertPlugsFreeActionRequest): Promise<ServerResponse<DestinyItemChangeResponse>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlugFree/',
-    body
-  });
+  return post(http, `${API_BASE}Actions/Items/InsertSocketPlugFree/`, body);
 }
 
 export interface GetPostGameCarnageReportParams {
@@ -519,10 +441,7 @@ export interface GetPostGameCarnageReportParams {
 
 /** Gets the available post game carnage report for the activity ID. */
 export function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<ServerResponse<DestinyPostGameCarnageReportData>> {
-  return http({
-    method: 'GET',
-    url: `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/`
-  });
+  return get(http, `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/`);
 }
 
 export interface ReportOffensivePostGameCarnageReportPlayerParams {
@@ -537,19 +456,12 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
  * of violation, pretty please.
  */
 export function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams, body: DestinyReportOffensePgcrRequest): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`,
-    body
-  });
+  return post(http, `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`, body);
 }
 
 /** Gets historical stats definitions. */
 export function getHistoricalStatsDefinition(http: HttpClient): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsDefinition }>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Destiny2/Stats/Definition/'
-  });
+  return get(http, `${API_BASE}Stats/Definition/`);
 }
 
 export interface GetClanLeaderboardsParams {
@@ -577,14 +489,10 @@ export interface GetClanLeaderboardsParams {
  * that prevent desirable operation.
  */
 export function getClanLeaderboards(http: HttpClient, params: GetClanLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Stats/Leaderboards/Clans/${params.groupId}/`,
-    params: {
-      maxtop: params.maxtop,
-      modes: params.modes,
-      statid: params.statid
-    }
+  return get(http, `${API_BASE}Stats/Leaderboards/Clans/${params.groupId}/`, {
+    maxtop: params.maxtop,
+    modes: params.modes,
+    statid: params.statid
   });
 }
 
@@ -606,12 +514,8 @@ export interface GetClanAggregateStatsParams {
  * operation.
  */
 export function getClanAggregateStats(http: HttpClient, params: GetClanAggregateStatsParams): Promise<ServerResponse<DestinyClanAggregateStat[]>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Stats/AggregateClanStats/${params.groupId}/`,
-    params: {
-      modes: params.modes
-    }
+  return get(http, `${API_BASE}Stats/AggregateClanStats/${params.groupId}/`, {
+    modes: params.modes
   });
 }
 
@@ -642,14 +546,10 @@ export interface GetLeaderboardsParams {
  * public comment/suggestion/preparation.
  */
 export function getLeaderboards(http: HttpClient, params: GetLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Stats/Leaderboards/`,
-    params: {
-      maxtop: params.maxtop,
-      modes: params.modes,
-      statid: params.statid
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Stats/Leaderboards/`, {
+    maxtop: params.maxtop,
+    modes: params.modes,
+    statid: params.statid
   });
 }
 
@@ -685,14 +585,10 @@ export interface GetLeaderboardsForCharacterParams {
  * that prevent desirable operation.
  */
 export function getLeaderboardsForCharacter(http: HttpClient, params: GetLeaderboardsForCharacterParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Stats/Leaderboards/${params.membershipType}/${params.destinyMembershipId}/${params.characterId}/`,
-    params: {
-      maxtop: params.maxtop,
-      modes: params.modes,
-      statid: params.statid
-    }
+  return get(http, `${API_BASE}Stats/Leaderboards/${params.membershipType}/${params.destinyMembershipId}/${params.characterId}/`, {
+    maxtop: params.maxtop,
+    modes: params.modes,
+    statid: params.statid
   });
 }
 
@@ -711,12 +607,8 @@ export interface SearchDestinyEntitiesParams {
 
 /** Gets a page list of Destiny items. */
 export function searchDestinyEntities(http: HttpClient, params: SearchDestinyEntitiesParams): Promise<ServerResponse<DestinyEntitySearchResult>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Armory/Search/${params.type}/${params.searchTerm}/`,
-    params: {
-      page: params.page
-    }
+  return get(http, `${API_BASE}Armory/Search/${params.type}/${params.searchTerm}/`, {
+    page: params.page
   });
 }
 
@@ -761,16 +653,12 @@ export interface GetHistoricalStatsParams {
 
 /** Gets historical stats for indicated character. */
 export function getHistoricalStats(http: HttpClient, params: GetHistoricalStatsParams): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsByPeriod }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/`,
-    params: {
-      dayend: params.dayend,
-      daystart: params.daystart,
-      groups: params.groups ? params.groups.join(',') : undefined,
-      modes: params.modes ? params.modes.join(',') : undefined,
-      periodType: params.periodType
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/`, {
+    dayend: params.dayend,
+    daystart: params.daystart,
+    groups: params.groups ? params.groups.join(',') : undefined,
+    modes: params.modes ? params.modes.join(',') : undefined,
+    periodType: params.periodType
   });
 }
 
@@ -791,12 +679,8 @@ export interface GetHistoricalStatsForAccountParams {
  * account.
  */
 export function getHistoricalStatsForAccount(http: HttpClient, params: GetHistoricalStatsForAccountParams): Promise<ServerResponse<DestinyHistoricalStatsAccountResult>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Stats/`,
-    params: {
-      groups: params.groups ? params.groups.join(',') : undefined
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Stats/`, {
+    groups: params.groups ? params.groups.join(',') : undefined
   });
 }
 
@@ -821,14 +705,10 @@ export interface GetActivityHistoryParams {
 
 /** Gets activity history stats for indicated character. */
 export function getActivityHistory(http: HttpClient, params: GetActivityHistoryParams): Promise<ServerResponse<DestinyActivityHistoryResults>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/Activities/`,
-    params: {
-      count: params.count,
-      mode: params.mode,
-      page: params.page
-    }
+  return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/Activities/`, {
+    count: params.count,
+    mode: params.mode,
+    page: params.page
   });
 }
 
@@ -843,10 +723,7 @@ export interface GetUniqueWeaponHistoryParams {
 
 /** Gets details about unique weapon usage, including all exotic weapons. */
 export function getUniqueWeaponHistory(http: HttpClient, params: GetUniqueWeaponHistoryParams): Promise<ServerResponse<DestinyHistoricalWeaponStatsData>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/UniqueWeapons/`
-  });
+  return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/UniqueWeapons/`);
 }
 
 export interface GetDestinyAggregateActivityStatsParams {
@@ -863,10 +740,7 @@ export interface GetDestinyAggregateActivityStatsParams {
  * statistics for those activities.
  */
 export function getDestinyAggregateActivityStats(http: HttpClient, params: GetDestinyAggregateActivityStatsParams): Promise<ServerResponse<DestinyAggregateActivityResults>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/AggregateActivityStats/`
-  });
+  return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/AggregateActivityStats/`);
 }
 
 export interface GetPublicMilestoneContentParams {
@@ -876,27 +750,17 @@ export interface GetPublicMilestoneContentParams {
 
 /** Gets custom localized content for the milestone of the given hash, if it exists. */
 export function getPublicMilestoneContent(http: HttpClient, params: GetPublicMilestoneContentParams): Promise<ServerResponse<DestinyMilestoneContent>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Milestones/${params.milestoneHash}/Content/`
-  });
+  return get(http, `${API_BASE}Milestones/${params.milestoneHash}/Content/`);
 }
 
 /** Gets public information about currently available Milestones. */
 export function getPublicMilestones(http: HttpClient): Promise<ServerResponse<{ [key: number]: DestinyPublicMilestone }>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Destiny2/Milestones/'
-  });
+  return get(http, `${API_BASE}Milestones/`);
 }
 
 /** Initialize a request to perform an advanced write action. */
 export function awaInitializeRequest(http: HttpClient, body: AwaPermissionRequested): Promise<ServerResponse<AwaInitializeResponse>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Awa/Initialize/',
-    body
-  });
+  return post(http, `${API_BASE}Awa/Initialize/`, body);
 }
 
 /**
@@ -904,11 +768,7 @@ export function awaInitializeRequest(http: HttpClient, body: AwaPermissionReques
  * approve or reject a request.
  */
 export function awaProvideAuthorizationResult(http: HttpClient, body: AwaUserResponse): Promise<ServerResponse<number>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Destiny2/Awa/AwaProvideAuthorizationResult/',
-    body
-  });
+  return post(http, `${API_BASE}Awa/AwaProvideAuthorizationResult/`, body);
 }
 
 export interface AwaGetActionTokenParams {
@@ -918,8 +778,5 @@ export interface AwaGetActionTokenParams {
 
 /** Returns the action token if user approves the request. */
 export function awaGetActionToken(http: HttpClient, params: AwaGetActionTokenParams): Promise<ServerResponse<AwaAuthorizationResult>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Destiny2/Awa/GetActionToken/${params.correlationId}/`
-  });
+  return get(http, `${API_BASE}Awa/GetActionToken/${params.correlationId}/`);
 }

@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   ApiUsage,
@@ -19,6 +19,8 @@ import {
 import {
   ServerResponse
 } from '../common.js';
+
+const API_BASE = "https://www.bungie.net/Platform/App/";
 
 export interface GetApplicationApiUsageParams {
   /** ID of the application to get usage statistics. */
@@ -36,20 +38,13 @@ export interface GetApplicationApiUsageParams {
  * this endpoint.
  */
 export function getApplicationApiUsage(http: HttpClient, params: GetApplicationApiUsageParams): Promise<ServerResponse<ApiUsage>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/App/ApiUsage/${params.applicationId}/`,
-    params: {
-      end: params.end,
-      start: params.start
-    }
+  return get(http, `${API_BASE}ApiUsage/${params.applicationId}/`, {
+    end: params.end,
+    start: params.start
   });
 }
 
 /** Get list of applications created by Bungie. */
 export function getBungieApplications(http: HttpClient): Promise<ServerResponse<Application[]>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/App/FirstParty/'
-  });
+  return get(http, `${API_BASE}FirstParty/`);
 }

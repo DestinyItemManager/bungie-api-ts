@@ -13,3 +13,5 @@ export interface HttpClientConfig {
  * helper functions will use this to return the right type.
  */
 export declare type HttpClient = (config: HttpClientConfig) => Promise<any>;
+export declare function get(http: HttpClient, url: string, params?: any): Promise<any>;
+export declare function post(http: HttpClient, url: string, body?: any): Promise<any>;

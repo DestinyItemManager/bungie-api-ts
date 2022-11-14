@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   BungieMembershipType,
@@ -23,24 +23,19 @@ import {
   PartnerRewardHistoryResponse
 } from './interfaces.js';
 
+const API_BASE = "https://www.bungie.net/Platform/Tokens/";
+
 /**
  * Twitch Drops self-repair function - scans twitch for drops not marked as
  * fulfilled and resyncs them.
  */
 export function forceDropsRepair(http: HttpClient): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Tokens/Partner/ForceDropsRepair/'
-  });
+  return post(http, `${API_BASE}Partner/ForceDropsRepair/`);
 }
 
 /** Claim a partner offer as the authenticated user. */
 export function claimPartnerOffer(http: HttpClient, body: PartnerOfferClaimRequest): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: 'https://www.bungie.net/Platform/Tokens/Partner/ClaimOffer/',
-    body
-  });
+  return post(http, `${API_BASE}Partner/ClaimOffer/`, body);
 }
 
 export interface ApplyMissingPartnerOffersWithoutClaimParams {
@@ -58,10 +53,7 @@ export interface ApplyMissingPartnerOffersWithoutClaimParams {
  * offer, but any already claimed offers will be applied to the game if not already.
  */
 export function applyMissingPartnerOffersWithoutClaim(http: HttpClient, params: ApplyMissingPartnerOffersWithoutClaimParams): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Tokens/Partner/ApplyMissingOffers/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`
-  });
+  return post(http, `${API_BASE}Partner/ApplyMissingOffers/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`);
 }
 
 export interface GetPartnerOfferSkuHistoryParams {
@@ -79,10 +71,7 @@ export interface GetPartnerOfferSkuHistoryParams {
  * permissions are required to see users that are not yourself.
  */
 export function getPartnerOfferSkuHistory(http: HttpClient, params: GetPartnerOfferSkuHistoryParams): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Tokens/Partner/History/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`
-  });
+  return get(http, `${API_BASE}Partner/History/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`);
 }
 
 export interface GetPartnerRewardHistoryParams {
@@ -97,10 +86,7 @@ export interface GetPartnerRewardHistoryParams {
  * and Twitch drops.
  */
 export function getPartnerRewardHistory(http: HttpClient, params: GetPartnerRewardHistoryParams): Promise<ServerResponse<PartnerRewardHistoryResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Tokens/Partner/History/${params.targetBnetMembershipId}/Application/${params.partnerApplicationId}/`
-  });
+  return get(http, `${API_BASE}Partner/History/${params.targetBnetMembershipId}/Application/${params.partnerApplicationId}/`);
 }
 
 export interface GetBungieRewardsForUserParams {
@@ -113,10 +99,7 @@ export interface GetBungieRewardsForUserParams {
 
 /** Returns the bungie rewards for the targeted user. */
 export function getBungieRewardsForUser(http: HttpClient, params: GetBungieRewardsForUserParams): Promise<ServerResponse<{ [key: string]: BungieRewardDisplay }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Tokens/Rewards/GetRewardsForUser/${params.membershipId}/`
-  });
+  return get(http, `${API_BASE}Rewards/GetRewardsForUser/${params.membershipId}/`);
 }
 
 export interface GetBungieRewardsForPlatformUserParams {
@@ -134,16 +117,10 @@ export interface GetBungieRewardsForPlatformUserParams {
  * and Type are used.
  */
 export function getBungieRewardsForPlatformUser(http: HttpClient, params: GetBungieRewardsForPlatformUserParams): Promise<ServerResponse<{ [key: string]: BungieRewardDisplay }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Tokens/Rewards/GetRewardsForPlatformUser/${params.membershipId}/${params.membershipType}/`
-  });
+  return get(http, `${API_BASE}Rewards/GetRewardsForPlatformUser/${params.membershipId}/${params.membershipType}/`);
 }
 
 /** Returns a list of the current bungie rewards */
 export function getBungieRewardsList(http: HttpClient): Promise<ServerResponse<{ [key: string]: BungieRewardDisplay }>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Tokens/Rewards/BungieRewards/'
-  });
+  return get(http, `${API_BASE}Rewards/BungieRewards/`);
 }

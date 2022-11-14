@@ -16,17 +16,31 @@ export interface HttpClientConfig {
 export type HttpClient = (config: HttpClientConfig) => Promise<any>;
 
 export function get(http: HttpClient, url: string, params?: any) {
-  return http({
-    method: 'GET',
-    url,
-    params,
-  });
+  return http(
+    params
+      ? {
+          method: 'GET',
+          url,
+          params,
+        }
+      : {
+          method: 'GET',
+          url,
+        }
+  );
 }
 
 export function post(http: HttpClient, url: string, body?: any) {
-  return http({
-    method: 'POST',
-    url,
-    body,
-  });
+  return http(
+    body
+      ? {
+          method: 'POST',
+          url,
+          body,
+        }
+      : {
+          method: 'POST',
+          url,
+        }
+  );
 }
