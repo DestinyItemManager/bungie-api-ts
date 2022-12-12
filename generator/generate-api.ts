@@ -59,7 +59,7 @@ export function generateServiceDefinition(
 }
 
 /**
- * Generate a properly types function for the api implementation that will pass the correct parameters
+ * Generate a properly typed function for the API implementation, that will pass the correct parameters
  * to the HTTP client.
  *
  * Example:
