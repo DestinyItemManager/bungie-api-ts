@@ -32,7 +32,7 @@ export function generateServiceDefinition(
   const importFiles: { [filename: string]: Set<string> } = {};
 
   let server = doc.servers![0].url;
-  const prefix = getLongestPrefix(paths.map((p) => p[0]));
+  const prefix = getLongestCommonPrefix(paths.map((p) => p[0]));
 
   const pathDefinitions = paths.map(([path, pathDef]) =>
     generatePathDefinition(path, pathDef, doc, componentByDef, importFiles, prefix)
