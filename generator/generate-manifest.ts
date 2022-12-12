@@ -7,9 +7,9 @@ const httpClientType = `import { HttpClient } from '../http.js';`;
 
 const manifestMetadataPromise = (async () => {
   try {
-    let manifestMeta = await fetch('https://www.bungie.net/Platform/Destiny2/Manifest/').then(
-      (res) => res.json()
-    );
+    let manifestMeta = await (fetch as any)(
+      'https://www.bungie.net/Platform/Destiny2/Manifest/'
+    ).then((res: Response) => res.json());
     return (manifestMeta as any).Response;
   } catch (e) {
     console.log(e);

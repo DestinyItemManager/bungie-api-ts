@@ -1,6 +1,6 @@
 {
   "name": "bungie-api-ts",
-  "version": "4.20.0",
+  "version": "4.21.0",
   "description": "TypeScript mappings for the Bungie.net API",
   "type": "module",
   "sideEffects": false,
@@ -21,9 +21,7 @@
         }
       ]
     },
-    "transformIgnorePatterns": [
-      "node_modules/(?!variables/.*)"
-    ]
+    "transformIgnorePatterns": []
   },
   "engines": {
     "node": ">=13.2.0"

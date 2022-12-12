@@ -5,9 +5,9 @@ import { HttpClientConfig } from '../generated-src/http';
 import fetch from 'node-fetch';
 
 async function httpClient(config: HttpClientConfig) {
-  return fetch(config.url, config)
-    .then((res) => res.json())
-    .catch((e) => {
+  return (fetch as any)(config.url, config)
+    .then((res: Response) => res.json())
+    .catch((e: any) => {
       console.log('DESTINY API ERROR');
       console.log('probably about to fail a promise here. sorry.');
       console.log(console.log(e));
