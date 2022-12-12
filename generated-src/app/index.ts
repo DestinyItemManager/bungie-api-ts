@@ -12,6 +12,6 @@
 
 export * from '../common.js';
 export * from '../platform.js';
-export type {HttpClientConfig, HttpClient} from '../http';
+export type {HttpClientConfig, HttpClient} from '../http.js';
 export * from './api.js';
 export * from './interfaces.js';

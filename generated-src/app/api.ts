@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient, get, post } from '../http';
+import { HttpClient, get, post } from '../http.js';
 
 import {
   ApiUsage,

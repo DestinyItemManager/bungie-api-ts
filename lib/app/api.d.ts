@@ -9,7 +9,7 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { HttpClient } from '../http';
+import { HttpClient } from '../http.js';
 import { ApiUsage, Application } from './interfaces.js';
 import { ServerResponse } from '../common.js';
 export interface GetApplicationApiUsageParams {

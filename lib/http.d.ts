@@ -12,6 +12,6 @@ export interface HttpClientConfig {
  * should produce a promise for the parsed JSON as a result. The API
  * helper functions will use this to return the right type.
  */
-export declare type HttpClient = (config: HttpClientConfig) => Promise<any>;
+export type HttpClient = (config: HttpClientConfig) => Promise<any>;
 export declare function get(http: HttpClient, url: string, params?: any): Promise<any>;
 export declare function post(http: HttpClient, url: string, body?: any): Promise<any>;

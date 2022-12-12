@@ -10,7 +10,7 @@
  * https://github.com/DestinyItemManager/bungie-api-ts
  * Do not edit these files manually.
  */
-import { HttpClient } from '../http';
+import { HttpClient } from '../http.js';
 import {
   DestinyPlaceDefinition,
   DestinyActivityDefinition,
@@ -67,7 +67,7 @@ import {
   DestinyChecklistDefinition,
   DestinyEnergyTypeDefinition,
   DestinyManifest,
-} from './interfaces';
+} from './interfaces.js';
 /**
  * this describes a big object holding several tables of hash-keyed DestinyDefinitions.
  * this is roughly what you get if you decode the gigantic, single-json manifest blob,
@@ -255,9 +255,9 @@ export declare const destinyManifestLanguages: readonly [
   'zh-chs',
   'zh-cht'
 ];
-export declare type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
-export declare type DestinyManifestComponentName = keyof AllDestinyManifestComponents;
-export declare type DestinyManifestSlice<K extends Readonly<DestinyManifestComponentName[]>> = Pick<
+export type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
+export type DestinyManifestComponentName = keyof AllDestinyManifestComponents;
+export type DestinyManifestSlice<K extends Readonly<DestinyManifestComponentName[]>> = Pick<
   AllDestinyManifestComponents,
   K[number]
 >;
@@ -267,7 +267,7 @@ export declare type DestinyManifestSlice<K extends Readonly<DestinyManifestCompo
  * i.e.
  * func('DestinyInventoryItemDefinition') will return type DestinyInventoryItemDefinition
  */
-export declare type DestinyDefinitionFrom<K extends DestinyManifestComponentName> =
+export type DestinyDefinitionFrom<K extends DestinyManifestComponentName> =
   AllDestinyManifestComponents[K][number];
 export interface GetAllDestinyManifestComponentsParams {
   destinyManifest: DestinyManifest;

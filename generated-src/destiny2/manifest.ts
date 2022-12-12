@@ -11,7 +11,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient } from '../http.js';
 
 import {
   DestinyPlaceDefinition,
@@ -69,7 +69,7 @@ import {
   DestinyChecklistDefinition,
   DestinyEnergyTypeDefinition,
   DestinyManifest
-} from './interfaces';
+} from './interfaces.js';
 
 /**
  * this describes a big object holding several tables of hash-keyed DestinyDefinitions.
