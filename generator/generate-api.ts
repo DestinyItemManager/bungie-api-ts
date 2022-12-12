@@ -220,9 +220,9 @@ ${indent(parameterArgs.join('\n'), 1)}
  * @example
  *
  * // Returns "/Destiny2/"
- * getLongestPrefix("Destiny2/Clan/{groupId}/WeeklyRewardState/", "/Destiny2/Clan/ClanBannerDictionary/", "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/")
+ * getLongestCommonPrefix("Destiny2/Clan/{groupId}/WeeklyRewardState/", "/Destiny2/Clan/ClanBannerDictionary/", "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/")
  */
-function getLongestPrefix(paths: string[]) {
+function getLongestCommonPrefix(paths: string[]) {
   if (paths.length < 2) {
     return '';
   }
