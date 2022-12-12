@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   CommunityContentSortMode,
@@ -32,8 +32,5 @@ export interface GetCommunityContentParams {
 
 /** Returns community content. */
 export function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/CommunityContent/Get/${params.sort}/${params.mediaFilter}/${params.page}/`
-  });
+  return get(http, `https://www.bungie.net/Platform/CommunityContent/Get/${params.sort}/${params.mediaFilter}/${params.page}/`);
 }

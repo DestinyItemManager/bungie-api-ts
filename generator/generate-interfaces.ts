@@ -51,7 +51,9 @@ export function generateInterfaceDefinitions(
 function generateComponentDefinition(
   defInfo: DefInfo,
   doc: OpenAPIObject,
+  // mutated
   componentByDef: { [def: string]: DefInfo },
+  // mutated
   importFiles: { [filename: string]: Set<string> }
 ) {
   const component = getRef(doc, defInfo.def);

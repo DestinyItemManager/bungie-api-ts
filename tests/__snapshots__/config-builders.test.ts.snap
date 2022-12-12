@@ -313,7 +313,6 @@ Object {
 
 exports[`check config builder for [Function searchDestinyPlayerByBungieName] 1`] = `
 Object {
-  "body": undefined,
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/3/",
 }

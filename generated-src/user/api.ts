@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   BungieCredentialType,
@@ -27,6 +27,8 @@ import {
   ServerResponse
 } from '../common.js';
 
+const API_BASE = "https://www.bungie.net/Platform/User/";
+
 export interface GetBungieNetUserByIdParams {
   /** The requested Bungie.net membership id. */
   id: string;
@@ -34,10 +36,7 @@ export interface GetBungieNetUserByIdParams {
 
 /** Loads a bungienet user by membership id. */
 export function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetBungieNetUserById/${params.id}/`
-  });
+  return get(http, `${API_BASE}GetBungieNetUserById/${params.id}/`);
 }
 
 export interface GetSanitizedPlatformDisplayNamesParams {
@@ -51,10 +50,7 @@ export interface GetSanitizedPlatformDisplayNamesParams {
  * cached.
  */
 export function getSanitizedPlatformDisplayNames(http: HttpClient, params: GetSanitizedPlatformDisplayNamesParams): Promise<ServerResponse<{ [key in BungieCredentialType]: string }>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetSanitizedPlatformDisplayNames/${params.membershipId}/`
-  });
+  return get(http, `${API_BASE}GetSanitizedPlatformDisplayNames/${params.membershipId}/`);
 }
 
 export interface GetCredentialTypesForTargetAccountParams {
@@ -64,18 +60,12 @@ export interface GetCredentialTypesForTargetAccountParams {
 
 /** Returns a list of credential types attached to the requested account */
 export function getCredentialTypesForTargetAccount(http: HttpClient, params: GetCredentialTypesForTargetAccountParams): Promise<ServerResponse<GetCredentialTypesForAccountResponse[]>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetCredentialTypesForTargetAccount/${params.membershipId}/`
-  });
+  return get(http, `${API_BASE}GetCredentialTypesForTargetAccount/${params.membershipId}/`);
 }
 
 /** Returns a list of all available user themes. */
 export function getAvailableThemes(http: HttpClient): Promise<ServerResponse<UserTheme[]>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/User/GetAvailableThemes/'
-  });
+  return get(http, `${API_BASE}GetAvailableThemes/`);
 }
 
 export interface GetMembershipDataByIdParams {
@@ -91,10 +81,7 @@ export interface GetMembershipDataByIdParams {
  * supplied credentials permit it.
  */
 export function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetMembershipsById/${params.membershipId}/${params.membershipType}/`
-  });
+  return get(http, `${API_BASE}GetMembershipsById/${params.membershipId}/${params.membershipType}/`);
 }
 
 /**
@@ -102,10 +89,7 @@ export function getMembershipDataById(http: HttpClient, params: GetMembershipDat
  * OAuth implementations that do not give you access to the token response.
  */
 export function getMembershipDataForCurrentUser(http: HttpClient): Promise<ServerResponse<UserMembershipData>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/'
-  });
+  return get(http, `${API_BASE}GetMembershipsForCurrentUser/`);
 }
 
 export interface GetMembershipFromHardLinkedCredentialParams {
@@ -120,10 +104,7 @@ export interface GetMembershipFromHardLinkedCredentialParams {
  * that are public (just SteamID64 right now). Cross Save aware.
  */
 export function getMembershipFromHardLinkedCredential(http: HttpClient, params: GetMembershipFromHardLinkedCredentialParams): Promise<ServerResponse<HardLinkedUserMembership>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/User/GetMembershipFromHardLinkedCredential/${params.crType}/${params.credential}/`
-  });
+  return get(http, `${API_BASE}GetMembershipFromHardLinkedCredential/${params.crType}/${params.credential}/`);
 }
 
 export interface SearchByGlobalNamePrefixParams {
@@ -135,10 +116,7 @@ export interface SearchByGlobalNamePrefixParams {
 
 /** [OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead. */
 export function searchByGlobalNamePrefix(http: HttpClient, params: SearchByGlobalNamePrefixParams): Promise<ServerResponse<UserSearchResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/User/Search/Prefix/${params.displayNamePrefix}/${params.page}/`
-  });
+  return get(http, `${API_BASE}Search/Prefix/${params.displayNamePrefix}/${params.page}/`);
 }
 
 export interface SearchByGlobalNamePostParams {
@@ -148,9 +126,5 @@ export interface SearchByGlobalNamePostParams {
 
 /** Given the prefix of a global display name, returns all users who share that name. */
 export function searchByGlobalNamePost(http: HttpClient, params: SearchByGlobalNamePostParams, body: UserSearchPrefixRequest): Promise<ServerResponse<UserSearchResponse>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/User/Search/GlobalName/${params.page}/`,
-    body
-  });
+  return post(http, `${API_BASE}Search/GlobalName/${params.page}/`, body);
 }

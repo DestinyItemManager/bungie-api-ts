@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   FireteamDateRange,
@@ -25,6 +25,8 @@ import {
   ServerResponse
 } from '../common.js';
 
+const API_BASE = "https://www.bungie.net/Platform/Fireteam/";
+
 export interface GetActivePrivateClanFireteamCountParams {
   /** The group id of the clan. */
   groupId: string;
@@ -35,10 +37,7 @@ export interface GetActivePrivateClanFireteamCountParams {
  * value returned is 25.
  */
 export function getActivePrivateClanFireteamCount(http: HttpClient, params: GetActivePrivateClanFireteamCountParams): Promise<ServerResponse<number>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/ActiveCount/`
-  });
+  return get(http, `${API_BASE}Clan/${params.groupId}/ActiveCount/`);
 }
 
 export interface GetAvailableClanFireteamsParams {
@@ -65,12 +64,8 @@ export interface GetAvailableClanFireteamsParams {
  * Caller is not checked for join criteria so caching is maximized.
  */
 export function getAvailableClanFireteams(http: HttpClient, params: GetAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.publicOnly}/${params.page}/`,
-    params: {
-      langFilter: params.langFilter
-    }
+  return get(http, `${API_BASE}Clan/${params.groupId}/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.publicOnly}/${params.page}/`, {
+    langFilter: params.langFilter
   });
 }
 
@@ -94,12 +89,8 @@ export interface SearchPublicAvailableClanFireteamsParams {
  * not checked for join criteria so caching is maximized.
  */
 export function searchPublicAvailableClanFireteams(http: HttpClient, params: SearchPublicAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Search/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.page}/`,
-    params: {
-      langFilter: params.langFilter
-    }
+  return get(http, `${API_BASE}Search/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.page}/`, {
+    langFilter: params.langFilter
   });
 }
 
@@ -129,13 +120,9 @@ export interface GetMyClanFireteamsParams {
  * alternate of.
  */
 export function getMyClanFireteams(http: HttpClient, params: GetMyClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/My/${params.platform}/${params.includeClosed}/${params.page}/`,
-    params: {
-      groupFilter: params.groupFilter,
-      langFilter: params.langFilter
-    }
+  return get(http, `${API_BASE}Clan/${params.groupId}/My/${params.platform}/${params.includeClosed}/${params.page}/`, {
+    groupFilter: params.groupFilter,
+    langFilter: params.langFilter
   });
 }
 
@@ -148,8 +135,5 @@ export interface GetClanFireteamParams {
 
 /** Gets a specific fireteam. */
 export function getClanFireteam(http: HttpClient, params: GetClanFireteamParams): Promise<ServerResponse<FireteamResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Fireteam/Clan/${params.groupId}/Summary/${params.fireteamId}/`
-  });
+  return get(http, `${API_BASE}Clan/${params.groupId}/Summary/${params.fireteamId}/`);
 }

@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   BungieFriendListResponse,
@@ -22,20 +22,16 @@ import {
   ServerResponse
 } from '../common.js';
 
+const API_BASE = "https://www.bungie.net/Platform/Social/";
+
 /** Returns your Bungie Friend list */
 export function getFriendList(http: HttpClient): Promise<ServerResponse<BungieFriendListResponse>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Social/Friends/'
-  });
+  return get(http, `${API_BASE}Friends/`);
 }
 
 /** Returns your friend request queue. */
 export function getFriendRequestList(http: HttpClient): Promise<ServerResponse<BungieFriendRequestListResponse>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Social/Friends/Requests/'
-  });
+  return get(http, `${API_BASE}Friends/Requests/`);
 }
 
 export interface IssueFriendRequestParams {
@@ -48,10 +44,7 @@ export interface IssueFriendRequestParams {
  * linked membership ids are valid inputs.
  */
 export function issueFriendRequest(http: HttpClient, params: IssueFriendRequestParams): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Social/Friends/Add/${params.membershipId}/`
-  });
+  return post(http, `${API_BASE}Friends/Add/${params.membershipId}/`);
 }
 
 export interface AcceptFriendRequestParams {
@@ -64,10 +57,7 @@ export interface AcceptFriendRequestParams {
  * incoming friend request list, though no error will occur if they are not.
  */
 export function acceptFriendRequest(http: HttpClient, params: AcceptFriendRequestParams): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Social/Friends/Requests/Accept/${params.membershipId}/`
-  });
+  return post(http, `${API_BASE}Friends/Requests/Accept/${params.membershipId}/`);
 }
 
 export interface DeclineFriendRequestParams {
@@ -80,10 +70,7 @@ export interface DeclineFriendRequestParams {
  * incoming friend request list, though no error will occur if they are not.
  */
 export function declineFriendRequest(http: HttpClient, params: DeclineFriendRequestParams): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Social/Friends/Requests/Decline/${params.membershipId}/`
-  });
+  return post(http, `${API_BASE}Friends/Requests/Decline/${params.membershipId}/`);
 }
 
 export interface RemoveFriendParams {
@@ -96,10 +83,7 @@ export interface RemoveFriendParams {
  * friend list, though no error will occur if they are not.
  */
 export function removeFriend(http: HttpClient, params: RemoveFriendParams): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Social/Friends/Remove/${params.membershipId}/`
-  });
+  return post(http, `${API_BASE}Friends/Remove/${params.membershipId}/`);
 }
 
 export interface RemoveFriendRequestParams {
@@ -112,10 +96,7 @@ export interface RemoveFriendRequestParams {
  * outgoing request friend list, though no error will occur if they are not.
  */
 export function removeFriendRequest(http: HttpClient, params: RemoveFriendRequestParams): Promise<ServerResponse<boolean>> {
-  return http({
-    method: 'POST',
-    url: `https://www.bungie.net/Platform/Social/Friends/Requests/Remove/${params.membershipId}/`
-  });
+  return post(http, `${API_BASE}Friends/Requests/Remove/${params.membershipId}/`);
 }
 
 export interface GetPlatformFriendListParams {
@@ -130,8 +111,5 @@ export interface GetPlatformFriendListParams {
  * they have Bungie accounts. Must have a recent login session with said platform.
  */
 export function getPlatformFriendList(http: HttpClient, params: GetPlatformFriendListParams): Promise<ServerResponse<PlatformFriendResponse>> {
-  return http({
-    method: 'GET',
-    url: `https://www.bungie.net/Platform/Social/PlatformFriends/${params.friendPlatform}/${params.page}/`
-  });
+  return get(http, `${API_BASE}PlatformFriends/${params.friendPlatform}/${params.page}/`);
 }

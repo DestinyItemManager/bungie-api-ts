@@ -10,7 +10,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http';
+import { HttpClient, get, post } from '../http';
 
 import {
   CoreSettingsConfiguration,
@@ -21,20 +21,16 @@ import {
   ServerResponse
 } from '../common.js';
 
+const API_BASE = "https://www.bungie.net/Platform/";
+
 /** List of available localization cultures */
 export function getAvailableLocales(http: HttpClient): Promise<ServerResponse<{ [key: string]: string }>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/GetAvailableLocales/'
-  });
+  return get(http, `${API_BASE}GetAvailableLocales/`);
 }
 
 /** Get the common settings used by the Bungie.Net environment. */
 export function getCommonSettings(http: HttpClient): Promise<ServerResponse<CoreSettingsConfiguration>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/Settings/'
-  });
+  return get(http, `${API_BASE}Settings/`);
 }
 
 /**
@@ -42,10 +38,7 @@ export function getCommonSettings(http: HttpClient): Promise<ServerResponse<Core
  * systems.
  */
 export function getUserSystemOverrides(http: HttpClient): Promise<ServerResponse<{ [key: string]: CoreSystem }>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/UserSystemOverrides/'
-  });
+  return get(http, `${API_BASE}UserSystemOverrides/`);
 }
 
 export interface GetGlobalAlertsParams {
@@ -58,11 +51,7 @@ export interface GetGlobalAlertsParams {
  * Usually used for DOC alerts.
  */
 export function getGlobalAlerts(http: HttpClient, params: GetGlobalAlertsParams): Promise<ServerResponse<GlobalAlert[]>> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net/Platform/GlobalAlerts/',
-    params: {
-      includestreaming: params.includestreaming
-    }
+  return get(http, `${API_BASE}GlobalAlerts/`, {
+    includestreaming: params.includestreaming
   });
 }
