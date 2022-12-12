@@ -1,16 +1,16 @@
-import { DefInfo } from './util';
+import { DefInfo } from './util.js';
 import { OpenAPIObject } from 'openapi3-ts';
 import fetch from 'node-fetch';
 import { writeOutFile } from './generate-common.js';
 
-const httpClientType = `import { HttpClient } from '../http';`;
+const httpClientType = `import { HttpClient } from '../http.js';`;
 
 const manifestMetadataPromise = (async () => {
   try {
     let manifestMeta = await fetch('https://www.bungie.net/Platform/Destiny2/Manifest/').then(
       (res) => res.json()
     );
-    return manifestMeta.Response;
+    return (manifestMeta as any).Response;
   } catch (e) {
     console.log(e);
     process.exit(1);
@@ -45,7 +45,7 @@ async function generateManifestDefinitions(components: DefInfo[]) {
 
   return `import {${defsToInclude.map((c) => `\n  ${c},`).join('')}
   DestinyManifest
-} from './interfaces';
+} from './interfaces.js';
 
 /**
  * this describes a big object holding several tables of hash-keyed DestinyDefinitions.

@@ -17,7 +17,7 @@ import {
   writeOutFile,
 } from './generate-common.js';
 
-const httpClientType = `import { HttpClient, get, post } from '../http';`;
+const httpClientType = `import { HttpClient, get, post } from '../http.js';`;
 
 /**
  * Generate an api.ts file for a particular "service", which is defined by a specific tag on the path entry
