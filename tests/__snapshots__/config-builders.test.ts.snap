@@ -1,48 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`check config builder for [Function awaGetActionToken] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Awa/GetActionToken/456734563673/",
 }
 `;
 
 exports[`check config builder for [Function awaInitializeRequest] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Awa/Initialize/",
 }
 `;
 
 exports[`check config builder for [Function awaProvideAuthorizationResult] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Awa/AwaProvideAuthorizationResult/",
 }
 `;
 
 exports[`check config builder for [Function equipItem] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItem/",
 }
 `;
 
 exports[`check config builder for [Function equipItems] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/EquipItems/",
 }
 `;
 
 exports[`check config builder for [Function getActivityHistory] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "count": 10,
     "mode": 5,
     "page": 2,
@@ -52,9 +52,9 @@ Object {
 `;
 
 exports[`check config builder for [Function getCharacter] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/Character/1234658790/",
@@ -62,10 +62,10 @@ Object {
 `;
 
 exports[`check config builder for [Function getClanAggregateStats] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
-    "modes": Array [
+  "params": {
+    "modes": [
       5,
       7,
     ],
@@ -75,11 +75,11 @@ Object {
 `;
 
 exports[`check config builder for [Function getClanLeaderboards] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "maxtop": 6,
-    "modes": Array [
+    "modes": [
       5,
       7,
     ],
@@ -90,16 +90,16 @@ Object {
 `;
 
 exports[`check config builder for [Function getClanWeeklyRewardState] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Clan/78346592834756/WeeklyRewardState/",
 }
 `;
 
 exports[`check config builder for [Function getCollectibleNodeDetails] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/Character/1234658790/Collectibles/10293847/",
@@ -107,30 +107,30 @@ Object {
 `;
 
 exports[`check config builder for [Function getDestinyAggregateActivityStats] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/3/Account/123456/Character/1234658790/Stats/AggregateActivityStats/",
 }
 `;
 
 exports[`check config builder for [Function getDestinyEntityDefinition] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Manifest/DestinyInventoryItemDefinition/23463456/",
 }
 `;
 
 exports[`check config builder for [Function getDestinyManifest] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Manifest/",
 }
 `;
 
 exports[`check config builder for [Function getHistoricalStats] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "dayend": "YYYY-MM-DD",
     "daystart": "YYYY-MM-DD",
     "groups": "General,Weapons",
@@ -142,16 +142,16 @@ Object {
 `;
 
 exports[`check config builder for [Function getHistoricalStatsDefinition] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Stats/Definition/",
 }
 `;
 
 exports[`check config builder for [Function getHistoricalStatsForAccount] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "groups": "General,Weapons",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Account/123456/Stats/",
@@ -159,9 +159,9 @@ Object {
 `;
 
 exports[`check config builder for [Function getItem] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/Item/0987654321/",
@@ -169,11 +169,11 @@ Object {
 `;
 
 exports[`check config builder for [Function getLeaderboards] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "maxtop": 6,
-    "modes": Array [
+    "modes": [
       5,
       7,
     ],
@@ -184,11 +184,11 @@ Object {
 `;
 
 exports[`check config builder for [Function getLeaderboardsForCharacter] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "maxtop": 6,
-    "modes": Array [
+    "modes": [
       5,
       7,
     ],
@@ -199,9 +199,9 @@ Object {
 `;
 
 exports[`check config builder for [Function getLinkedProfiles] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "getAllMemberships": true,
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/LinkedProfiles/",
@@ -209,16 +209,16 @@ Object {
 `;
 
 exports[`check config builder for [Function getPostGameCarnageReport] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/456745673456/",
 }
 `;
 
 exports[`check config builder for [Function getProfile] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/",
@@ -226,23 +226,23 @@ Object {
 `;
 
 exports[`check config builder for [Function getPublicMilestoneContent] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Milestones/23546789/Content/",
 }
 `;
 
 exports[`check config builder for [Function getPublicMilestones] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/Milestones/",
 }
 `;
 
 exports[`check config builder for [Function getPublicVendors] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/Vendors/",
@@ -250,16 +250,16 @@ Object {
 `;
 
 exports[`check config builder for [Function getUniqueWeaponHistory] 1`] = `
-Object {
+{
   "method": "GET",
   "url": "https://www.bungie.net/Platform/Destiny2/3/Account/123456/Character/1234658790/Stats/UniqueWeapons/",
 }
 `;
 
 exports[`check config builder for [Function getVendor] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/Character/1234658790/Vendors/45674576/",
@@ -267,9 +267,9 @@ Object {
 `;
 
 exports[`check config builder for [Function getVendors] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
     "filter": 0,
   },
@@ -278,33 +278,33 @@ Object {
 `;
 
 exports[`check config builder for [Function insertSocketPlug] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlug/",
 }
 `;
 
 exports[`check config builder for [Function pullFromPostmaster] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/PullFromPostmaster/",
 }
 `;
 
 exports[`check config builder for [Function reportOffensivePostGameCarnageReportPlayer] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/456745673456/Report/",
 }
 `;
 
 exports[`check config builder for [Function searchDestinyEntities] 1`] = `
-Object {
+{
   "method": "GET",
-  "params": Object {
+  "params": {
     "page": 2,
   },
   "url": "https://www.bungie.net/Platform/Destiny2/Armory/Search/DestinyInventoryItemDefinition/something/",
@@ -312,31 +312,31 @@ Object {
 `;
 
 exports[`check config builder for [Function searchDestinyPlayerByBungieName] 1`] = `
-Object {
+{
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/3/",
 }
 `;
 
 exports[`check config builder for [Function setItemLockState] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/SetLockState/",
 }
 `;
 
 exports[`check config builder for [Function setQuestTrackedState] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/SetTrackedState/",
 }
 `;
 
 exports[`check config builder for [Function transferItem] 1`] = `
-Object {
-  "body": Object {},
+{
+  "body": {},
   "method": "POST",
   "url": "https://www.bungie.net/Platform/Destiny2/Actions/Items/TransferItem/",
 }

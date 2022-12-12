@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import { DefInfo, getRef, resolveSchemaType } from './util.js';
 import { OpenAPIObject, ReferenceObject, SchemaObject } from 'openapi3-ts';
 import {

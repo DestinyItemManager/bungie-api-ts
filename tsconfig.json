@@ -7,7 +7,7 @@
     "strict": true,
     "module": "esnext",
     "target": "es2017",
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true

@@ -24,7 +24,7 @@ test('manifest downloads and getDestinyManifestSlice contains 2 tables', async (
   });
 
   expect(Object.keys(partialManifest)).toMatchInlineSnapshot(`
-    Array [
+    [
       "DestinyInventoryItemDefinition",
       "DestinyLocationDefinition",
     ]

@@ -4,7 +4,7 @@
  */
 
 import fs from 'fs';
-import _ from 'underscore';
+import _ from 'lodash';
 import { OpenAPIObject, PathItemObject } from 'openapi3-ts';
 import { generateIndex, generateSuperIndex } from './generate-index.js';
 
@@ -20,7 +20,7 @@ import { generatePackageJson } from './generate-package-json.js';
   const doc = JSON.parse(fs.readFileSync('api-src/openapi.json').toString()) as OpenAPIObject;
 
   // Pairs of [request path, path service description]
-  const pathPairs = _.pairs(doc.paths) as [string, PathItemObject][];
+  const pathPairs = _.toPairs(doc.paths) as [string, PathItemObject][];
 
   // Grouped by "tag" which says which service (destiny, groups, forums, etc)
   const pathPairsByTag = _.groupBy(pathPairs, ([path, desc]) => {

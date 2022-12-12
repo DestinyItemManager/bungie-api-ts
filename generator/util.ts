@@ -1,5 +1,5 @@
 import { SchemaObject, ReferenceObject, OpenAPIObject, RequestBodyObject } from 'openapi3-ts';
-import _ from 'underscore';
+import _ from 'lodash';
 
 export interface DefInfo {
   def: string;

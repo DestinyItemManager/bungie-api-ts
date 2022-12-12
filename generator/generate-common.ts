@@ -1,5 +1,5 @@
 import { DefInfo, getReferencedTypes, getRef } from './util.js';
-import _ from 'underscore';
+import _ from 'lodash';
 import path from 'path';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
