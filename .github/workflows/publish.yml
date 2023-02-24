@@ -1,0 +1,31 @@
+name: NPM Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      # This will only publish if the package.json version has changed
+      - name: Check version changes
+        uses: EndBug/version-check@v1 # More info about the arguments on the action page
+        id: check # This will be the reference for later
+
+      - name: Setup Node
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Publish the package to NPM
+        if: steps.check.outputs.changed == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # NPM will automatically authenticate with this

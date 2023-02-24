@@ -87,3 +87,7 @@ yarn && yarn submodule
 # run
 yarn start
 ```
+
+# Publishing
+
+Update the version in `package.json`, and when the PR merges to `master`, a GitHub workflow will automatically publish to NPM. Don't forget to run `yarn start` and commit all changed files!
