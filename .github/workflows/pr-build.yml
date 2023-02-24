@@ -1,0 +1,48 @@
+name: PR Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# Ensures that only one deploy task per branch/environment will run at a time.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
+
+      - name: Install
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: Build
+        run: yarn start
+
+      - name: porcelain check
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          base: HEAD
+          filters: |
+            changed:
+              - '**'
+
+      - name: Fail if modified files
+        if: steps.filter.outputs.changed == 'true'
+        run: |
+          echo "::error title=Built files not checked in::Make sure to run yarn start and check in modified files"
+          exit 1
+
+      - name: Test
+        run: yarn test
