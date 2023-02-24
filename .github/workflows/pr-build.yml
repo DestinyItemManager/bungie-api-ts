@@ -39,7 +39,7 @@ jobs:
               - '**'
 
       - name: Fail if modified files
-        if: steps.filter.outputs.changed
+        if: steps.filter.outputs.changed == 'true'
         run: |
           echo "::error title=Built files not checked in::Make sure to run yarn start and check in modified files"
           exit 1
