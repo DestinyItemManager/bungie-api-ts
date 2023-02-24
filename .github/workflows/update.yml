@@ -37,6 +37,10 @@ jobs:
         if: steps.filter.outputs.changed == 'true'
         run: yarn install --frozen-lockfile --prefer-offline
 
+      - name: Bump version
+        if: steps.filter.outputs.changed == 'true'
+        run: yarn version --minor
+
       - name: Build
         if: steps.filter.outputs.changed == 'true'
         run: yarn start
