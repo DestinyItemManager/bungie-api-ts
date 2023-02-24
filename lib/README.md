@@ -88,6 +88,10 @@ yarn && yarn submodule
 yarn start
 ```
 
+# Updating API sources
+
+Run the [update API sources](https://github.com/DestinyItemManager/bungie-api-ts/actions/workflows/update.yml) GitHub Action and it should create a new PR for the updated sources.
+
 # Publishing
 
 Update the version in `package.json`, and when the PR merges to `master`, a GitHub workflow will automatically publish to NPM. Don't forget to run `yarn start` and commit all changed files!
