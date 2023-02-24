@@ -1,0 +1,49 @@
+name: Update API sources
+
+on:
+  # Can be manually triggered
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Update submodules
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+      - name: Check for changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          base: HEAD
+          filters: |
+            changed:
+              - '**'
+
+      - name: Setup Node
+        if: steps.filter.outputs.changed == 'true'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
+
+      - name: Install
+        if: steps.filter.outputs.changed == 'true'
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: Build
+        if: steps.filter.outputs.changed == 'true'
+        run: yarn start
+
+      - name: Create Pull Request
+        if: steps.filter.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v4
+        with:
+          title: "Updated api-src"
+          commit-message: "Updated api-src"
