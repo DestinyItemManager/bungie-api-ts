@@ -30,6 +30,6 @@ jobs:
 
       - name: Publish the package to NPM
         if: steps.check.outputs.changed == 'true'
-        run: npm publish
+        run: cd lib && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # NPM will automatically authenticate with this
