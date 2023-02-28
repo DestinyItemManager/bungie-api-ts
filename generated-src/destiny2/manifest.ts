@@ -42,6 +42,9 @@ import {
   DestinyStatDefinition,
   DestinyInventoryItemDefinition,
   DestinyItemTierTypeDefinition,
+  DestinyLoadoutColorDefinition,
+  DestinyLoadoutIconDefinition,
+  DestinyLoadoutNameDefinition,
   DestinyLocationDefinition,
   DestinyLoreDefinition,
   DestinyMaterialRequirementSetDefinition,
@@ -56,6 +59,7 @@ import {
   DestinySandboxPatternDefinition,
   DestinySeasonDefinition,
   DestinySeasonPassDefinition,
+  DestinySocialCommendationDefinition,
   DestinySocketCategoryDefinition,
   DestinySocketTypeDefinition,
   DestinyTraitDefinition,
@@ -67,6 +71,10 @@ import {
   DestinyBreakerTypeDefinition,
   DestinyChecklistDefinition,
   DestinyEnergyTypeDefinition,
+  DestinySocialCommendationNodeDefinition,
+  DestinyGuardianRankDefinition,
+  DestinyGuardianRankConstantsDefinition,
+  DestinyLoadoutConstantsDefinition,
   DestinyManifest
 } from './interfaces.js';
 
@@ -104,6 +112,9 @@ export interface AllDestinyManifestComponents {
   DestinyStatDefinition: { [key: number]: DestinyStatDefinition };
   DestinyInventoryItemDefinition: { [key: number]: DestinyInventoryItemDefinition };
   DestinyItemTierTypeDefinition: { [key: number]: DestinyItemTierTypeDefinition };
+  DestinyLoadoutColorDefinition: { [key: number]: DestinyLoadoutColorDefinition };
+  DestinyLoadoutIconDefinition: { [key: number]: DestinyLoadoutIconDefinition };
+  DestinyLoadoutNameDefinition: { [key: number]: DestinyLoadoutNameDefinition };
   DestinyLocationDefinition: { [key: number]: DestinyLocationDefinition };
   DestinyLoreDefinition: { [key: number]: DestinyLoreDefinition };
   DestinyMaterialRequirementSetDefinition: { [key: number]: DestinyMaterialRequirementSetDefinition };
@@ -118,6 +129,7 @@ export interface AllDestinyManifestComponents {
   DestinySandboxPatternDefinition: { [key: number]: DestinySandboxPatternDefinition };
   DestinySeasonDefinition: { [key: number]: DestinySeasonDefinition };
   DestinySeasonPassDefinition: { [key: number]: DestinySeasonPassDefinition };
+  DestinySocialCommendationDefinition: { [key: number]: DestinySocialCommendationDefinition };
   DestinySocketCategoryDefinition: { [key: number]: DestinySocketCategoryDefinition };
   DestinySocketTypeDefinition: { [key: number]: DestinySocketTypeDefinition };
   DestinyTraitDefinition: { [key: number]: DestinyTraitDefinition };
@@ -129,6 +141,10 @@ export interface AllDestinyManifestComponents {
   DestinyBreakerTypeDefinition: { [key: number]: DestinyBreakerTypeDefinition };
   DestinyChecklistDefinition: { [key: number]: DestinyChecklistDefinition };
   DestinyEnergyTypeDefinition: { [key: number]: DestinyEnergyTypeDefinition };
+  DestinySocialCommendationNodeDefinition: { [key: number]: DestinySocialCommendationNodeDefinition };
+  DestinyGuardianRankDefinition: { [key: number]: DestinyGuardianRankDefinition };
+  DestinyGuardianRankConstantsDefinition: { [key: number]: DestinyGuardianRankConstantsDefinition };
+  DestinyLoadoutConstantsDefinition: { [key: number]: DestinyLoadoutConstantsDefinition };
 }
 
 /**

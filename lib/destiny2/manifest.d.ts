@@ -40,6 +40,9 @@ import {
   DestinyStatDefinition,
   DestinyInventoryItemDefinition,
   DestinyItemTierTypeDefinition,
+  DestinyLoadoutColorDefinition,
+  DestinyLoadoutIconDefinition,
+  DestinyLoadoutNameDefinition,
   DestinyLocationDefinition,
   DestinyLoreDefinition,
   DestinyMaterialRequirementSetDefinition,
@@ -54,6 +57,7 @@ import {
   DestinySandboxPatternDefinition,
   DestinySeasonDefinition,
   DestinySeasonPassDefinition,
+  DestinySocialCommendationDefinition,
   DestinySocketCategoryDefinition,
   DestinySocketTypeDefinition,
   DestinyTraitDefinition,
@@ -65,6 +69,10 @@ import {
   DestinyBreakerTypeDefinition,
   DestinyChecklistDefinition,
   DestinyEnergyTypeDefinition,
+  DestinySocialCommendationNodeDefinition,
+  DestinyGuardianRankDefinition,
+  DestinyGuardianRankConstantsDefinition,
+  DestinyLoadoutConstantsDefinition,
   DestinyManifest,
 } from './interfaces.js';
 /**
@@ -157,6 +165,15 @@ export interface AllDestinyManifestComponents {
   DestinyItemTierTypeDefinition: {
     [key: number]: DestinyItemTierTypeDefinition;
   };
+  DestinyLoadoutColorDefinition: {
+    [key: number]: DestinyLoadoutColorDefinition;
+  };
+  DestinyLoadoutIconDefinition: {
+    [key: number]: DestinyLoadoutIconDefinition;
+  };
+  DestinyLoadoutNameDefinition: {
+    [key: number]: DestinyLoadoutNameDefinition;
+  };
   DestinyLocationDefinition: {
     [key: number]: DestinyLocationDefinition;
   };
@@ -199,6 +216,9 @@ export interface AllDestinyManifestComponents {
   DestinySeasonPassDefinition: {
     [key: number]: DestinySeasonPassDefinition;
   };
+  DestinySocialCommendationDefinition: {
+    [key: number]: DestinySocialCommendationDefinition;
+  };
   DestinySocketCategoryDefinition: {
     [key: number]: DestinySocketCategoryDefinition;
   };
@@ -232,6 +252,18 @@ export interface AllDestinyManifestComponents {
   DestinyEnergyTypeDefinition: {
     [key: number]: DestinyEnergyTypeDefinition;
   };
+  DestinySocialCommendationNodeDefinition: {
+    [key: number]: DestinySocialCommendationNodeDefinition;
+  };
+  DestinyGuardianRankDefinition: {
+    [key: number]: DestinyGuardianRankDefinition;
+  };
+  DestinyGuardianRankConstantsDefinition: {
+    [key: number]: DestinyGuardianRankConstantsDefinition;
+  };
+  DestinyLoadoutConstantsDefinition: {
+    [key: number]: DestinyLoadoutConstantsDefinition;
+  };
 }
 /**
  * languages the manifest comes in, as their required keys to download them
@@ -251,7 +283,7 @@ export declare const destinyManifestLanguages: readonly [
   'zh-chs',
   'zh-cht'
 ];
-export type DestinyManifestLanguage = (typeof destinyManifestLanguages)[number];
+export type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
 export type DestinyManifestComponentName = keyof AllDestinyManifestComponents;
 export type DestinyManifestSlice<K extends Readonly<DestinyManifestComponentName[]>> = Pick<
   AllDestinyManifestComponents,
