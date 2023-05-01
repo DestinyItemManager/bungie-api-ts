@@ -11329,6 +11329,7 @@ export interface DestinyArtifactTierItem {
   /** Mapped to DestinyInventoryItemDefinition in the manifest. */
   readonly itemHash: number;
   readonly isActive: boolean;
+  readonly isVisible: boolean;
 }
 /**
  * Only really useful if you're attempting to render the character's current
