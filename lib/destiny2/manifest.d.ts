@@ -283,7 +283,7 @@ export declare const destinyManifestLanguages: readonly [
   'zh-chs',
   'zh-cht'
 ];
-export type DestinyManifestLanguage = typeof destinyManifestLanguages[number];
+export type DestinyManifestLanguage = (typeof destinyManifestLanguages)[number];
 export type DestinyManifestComponentName = keyof AllDestinyManifestComponents;
 export type DestinyManifestSlice<K extends Readonly<DestinyManifestComponentName[]>> = Pick<
   AllDestinyManifestComponents,

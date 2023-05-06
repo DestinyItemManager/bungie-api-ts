@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { DefInfo, getRef, resolveSchemaType } from './util.js';
-import { OpenAPIObject, ReferenceObject, SchemaObject } from 'openapi3-ts';
+import { OpenAPIObject, SchemaObject } from 'openapi3-ts';
 import {
   generateHeader,
   generateImports,
@@ -9,6 +9,7 @@ import {
   addImport,
   writeOutFile,
 } from './generate-common.js';
+import { missingPropsByInterfaceName } from './missing-props.js';
 
 /**
  * Some properties aren't marked as nullable in the openapi docs, but they are frequently null in practice and cause trouble.
@@ -107,31 +108,37 @@ function generateInterfaceSchema(
   componentByDef: { [def: string]: DefInfo },
   importFiles: { [filename: string]: Set<string> }
 ) {
-  const parameterArgs = _.map(component.properties!, (schema: SchemaObject, param) => {
+  // for *missing* props, this acts conservatively and only inserts our overrides if the prop isn't provided by bungie at all.
+  // we could add *overrides* later but for now don't want to overwrite a prop if they get around to adding it.
+  const missingProps = missingPropsByInterfaceName[interfaceName] ?? {};
+  for (const k in component.properties) delete missingProps[k];
+  const properties = { ...component.properties, ...missingProps };
+
+  const parameterArgs = _.map(properties, (schema: SchemaObject, param) => {
     const paramType = resolveSchemaType(schema, doc);
     addImport(doc, schema, componentByDef, importFiles);
     const docs = schema.description ? [schema.description] : [];
-    if (schema['x-mapped-definition']) {
-      docs.push(
-        `Mapped to ${
-          componentByDef[schema['x-mapped-definition'].$ref].interfaceName
-        } in the manifest.`
-      );
+
+    const crossMappedDef = schema['x-mapped-definition']?.$ref;
+    if (crossMappedDef) {
+      docs.push(`Mapped to ${componentByDef[crossMappedDef].interfaceName} in the manifest.`);
     }
+
     if (schema['x-enum-is-bitmask']) {
       docs.push(
         `This enum represents a set of flags - use bitwise operators to check which of these match your value.`
       );
     }
     const docString = docs.length ? docComment(docs.join('\n')) + '\n' : '';
-    return `${docString}readonly ${param}${
+
+    const isNullable =
       schema.nullable ||
       frequentlyNullProperties.includes(param) ||
-      schema.description?.toLowerCase().includes('null')
-        ? '?'
-        : ''
-    }: ${paramType};`;
+      schema.description?.toLowerCase().includes('null');
+
+    return `${docString}readonly ${param}${isNullable ? '?' : ''}: ${paramType};`;
   });
+
   const docString = component.description ? docComment(component.description) + '\n' : '';
   return `${docString}export interface ${interfaceName} {
 ${indent(parameterArgs.join('\n'), 1)}
