@@ -27,10 +27,10 @@ export interface GetApplicationApiUsageParams {
  * this endpoint.
  */
 export declare function getApplicationApiUsage(
-  http: HttpClient<ServerResponse<ApiUsage>>,
+  http: HttpClient,
   params: GetApplicationApiUsageParams
 ): Promise<ServerResponse<ApiUsage>>;
 /** Get list of applications created by Bungie. */
 export declare function getBungieApplications(
-  http: HttpClient<ServerResponse<Application[]>>
+  http: HttpClient
 ): Promise<ServerResponse<Application[]>>;

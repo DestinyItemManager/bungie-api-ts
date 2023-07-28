@@ -22,7 +22,7 @@ export interface GetContentTypeParams {
 }
 /** Gets an object describing a particular variant of content. */
 export declare function getContentType(
-  http: HttpClient<ServerResponse<ContentTypeDescription>>,
+  http: HttpClient,
   params: GetContentTypeParams
 ): Promise<ServerResponse<ContentTypeDescription>>;
 export interface GetContentByIdParams {
@@ -33,7 +33,7 @@ export interface GetContentByIdParams {
 }
 /** Returns a content item referenced by id */
 export declare function getContentById(
-  http: HttpClient<ServerResponse<ContentItemPublicContract>>,
+  http: HttpClient,
   params: GetContentByIdParams
 ): Promise<ServerResponse<ContentItemPublicContract>>;
 export interface GetContentByTagAndTypeParams {
@@ -45,7 +45,7 @@ export interface GetContentByTagAndTypeParams {
 }
 /** Returns the newest item that matches a given tag and Content Type. */
 export declare function getContentByTagAndType(
-  http: HttpClient<ServerResponse<ContentItemPublicContract>>,
+  http: HttpClient,
   params: GetContentByTagAndTypeParams
 ): Promise<ServerResponse<ContentItemPublicContract>>;
 export interface SearchContentWithTextParams {
@@ -68,7 +68,7 @@ export interface SearchContentWithTextParams {
  * and text search capabilities.
  */
 export declare function searchContentWithText(
-  http: HttpClient<ServerResponse<SearchResultOfContentItemPublicContract>>,
+  http: HttpClient,
   params: SearchContentWithTextParams
 ): Promise<ServerResponse<SearchResultOfContentItemPublicContract>>;
 export interface SearchContentByTagAndTypeParams {
@@ -84,7 +84,7 @@ export interface SearchContentByTagAndTypeParams {
 }
 /** Searches for Content Items that match the given Tag and Content Type. */
 export declare function searchContentByTagAndType(
-  http: HttpClient<ServerResponse<SearchResultOfContentItemPublicContract>>,
+  http: HttpClient,
   params: SearchContentByTagAndTypeParams
 ): Promise<ServerResponse<SearchResultOfContentItemPublicContract>>;
 export interface SearchHelpArticlesParams {
@@ -93,7 +93,7 @@ export interface SearchHelpArticlesParams {
 }
 /** Search for Help Articles. */
 export declare function searchHelpArticles(
-  http: HttpClient<ServerResponse<object>>,
+  http: HttpClient,
   params: SearchHelpArticlesParams
 ): Promise<ServerResponse<object>>;
 export interface RssNewsArticlesParams {
@@ -106,6 +106,6 @@ export interface RssNewsArticlesParams {
 }
 /** Returns a JSON string response that is the RSS feed for news articles. */
 export declare function rssNewsArticles(
-  http: HttpClient<ServerResponse<NewsArticleRssResponse>>,
+  http: HttpClient,
   params: RssNewsArticlesParams
 ): Promise<ServerResponse<NewsArticleRssResponse>>;

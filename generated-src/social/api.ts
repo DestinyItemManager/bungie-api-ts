@@ -25,12 +25,12 @@ import {
 const API_BASE = "https://www.bungie.net/Platform/Social/";
 
 /** Returns your Bungie Friend list */
-export function getFriendList(http: HttpClient<ServerResponse<BungieFriendListResponse>>): Promise<ServerResponse<BungieFriendListResponse>> {
+export function getFriendList(http: HttpClient): Promise<ServerResponse<BungieFriendListResponse>> {
   return get(http, `${API_BASE}Friends/`);
 }
 
 /** Returns your friend request queue. */
-export function getFriendRequestList(http: HttpClient<ServerResponse<BungieFriendRequestListResponse>>): Promise<ServerResponse<BungieFriendRequestListResponse>> {
+export function getFriendRequestList(http: HttpClient): Promise<ServerResponse<BungieFriendRequestListResponse>> {
   return get(http, `${API_BASE}Friends/Requests/`);
 }
 
@@ -43,7 +43,7 @@ export interface IssueFriendRequestParams {
  * Requests a friend relationship with the target user. Any of the target user's
  * linked membership ids are valid inputs.
  */
-export function issueFriendRequest(http: HttpClient<ServerResponse<boolean>>, params: IssueFriendRequestParams): Promise<ServerResponse<boolean>> {
+export function issueFriendRequest(http: HttpClient, params: IssueFriendRequestParams): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}Friends/Add/${params.membershipId}/`);
 }
 
@@ -56,7 +56,7 @@ export interface AcceptFriendRequestParams {
  * Accepts a friend relationship with the target user. The user must be on your
  * incoming friend request list, though no error will occur if they are not.
  */
-export function acceptFriendRequest(http: HttpClient<ServerResponse<boolean>>, params: AcceptFriendRequestParams): Promise<ServerResponse<boolean>> {
+export function acceptFriendRequest(http: HttpClient, params: AcceptFriendRequestParams): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}Friends/Requests/Accept/${params.membershipId}/`);
 }
 
@@ -69,7 +69,7 @@ export interface DeclineFriendRequestParams {
  * Declines a friend relationship with the target user. The user must be on your
  * incoming friend request list, though no error will occur if they are not.
  */
-export function declineFriendRequest(http: HttpClient<ServerResponse<boolean>>, params: DeclineFriendRequestParams): Promise<ServerResponse<boolean>> {
+export function declineFriendRequest(http: HttpClient, params: DeclineFriendRequestParams): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}Friends/Requests/Decline/${params.membershipId}/`);
 }
 
@@ -82,7 +82,7 @@ export interface RemoveFriendParams {
  * Remove a friend relationship with the target user. The user must be on your
  * friend list, though no error will occur if they are not.
  */
-export function removeFriend(http: HttpClient<ServerResponse<boolean>>, params: RemoveFriendParams): Promise<ServerResponse<boolean>> {
+export function removeFriend(http: HttpClient, params: RemoveFriendParams): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}Friends/Remove/${params.membershipId}/`);
 }
 
@@ -95,7 +95,7 @@ export interface RemoveFriendRequestParams {
  * Remove a friend relationship with the target user. The user must be on your
  * outgoing request friend list, though no error will occur if they are not.
  */
-export function removeFriendRequest(http: HttpClient<ServerResponse<boolean>>, params: RemoveFriendRequestParams): Promise<ServerResponse<boolean>> {
+export function removeFriendRequest(http: HttpClient, params: RemoveFriendRequestParams): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}Friends/Requests/Remove/${params.membershipId}/`);
 }
 
@@ -110,6 +110,6 @@ export interface GetPlatformFriendListParams {
  * Gets the platform friend of the requested type, with additional information if
  * they have Bungie accounts. Must have a recent login session with said platform.
  */
-export function getPlatformFriendList(http: HttpClient<ServerResponse<PlatformFriendResponse>>, params: GetPlatformFriendListParams): Promise<ServerResponse<PlatformFriendResponse>> {
+export function getPlatformFriendList(http: HttpClient, params: GetPlatformFriendListParams): Promise<ServerResponse<PlatformFriendResponse>> {
   return get(http, `${API_BASE}PlatformFriends/${params.friendPlatform}/${params.page}/`);
 }

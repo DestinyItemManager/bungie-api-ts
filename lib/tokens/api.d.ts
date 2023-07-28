@@ -21,12 +21,10 @@ import {
  * Twitch Drops self-repair function - scans twitch for drops not marked as
  * fulfilled and resyncs them.
  */
-export declare function forceDropsRepair(
-  http: HttpClient<ServerResponse<boolean>>
-): Promise<ServerResponse<boolean>>;
+export declare function forceDropsRepair(http: HttpClient): Promise<ServerResponse<boolean>>;
 /** Claim a partner offer as the authenticated user. */
 export declare function claimPartnerOffer(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   body: PartnerOfferClaimRequest
 ): Promise<ServerResponse<boolean>>;
 export interface ApplyMissingPartnerOffersWithoutClaimParams {
@@ -43,7 +41,7 @@ export interface ApplyMissingPartnerOffersWithoutClaimParams {
  * offer, but any already claimed offers will be applied to the game if not already.
  */
 export declare function applyMissingPartnerOffersWithoutClaim(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   params: ApplyMissingPartnerOffersWithoutClaimParams
 ): Promise<ServerResponse<boolean>>;
 export interface GetPartnerOfferSkuHistoryParams {
@@ -60,7 +58,7 @@ export interface GetPartnerOfferSkuHistoryParams {
  * permissions are required to see users that are not yourself.
  */
 export declare function getPartnerOfferSkuHistory(
-  http: HttpClient<ServerResponse<PartnerOfferSkuHistoryResponse[]>>,
+  http: HttpClient,
   params: GetPartnerOfferSkuHistoryParams
 ): Promise<ServerResponse<PartnerOfferSkuHistoryResponse[]>>;
 export interface GetPartnerRewardHistoryParams {
@@ -74,7 +72,7 @@ export interface GetPartnerRewardHistoryParams {
  * and Twitch drops.
  */
 export declare function getPartnerRewardHistory(
-  http: HttpClient<ServerResponse<PartnerRewardHistoryResponse>>,
+  http: HttpClient,
   params: GetPartnerRewardHistoryParams
 ): Promise<ServerResponse<PartnerRewardHistoryResponse>>;
 export interface GetBungieRewardsForUserParams {
@@ -86,11 +84,7 @@ export interface GetBungieRewardsForUserParams {
 }
 /** Returns the bungie rewards for the targeted user. */
 export declare function getBungieRewardsForUser(
-  http: HttpClient<
-    ServerResponse<{
-      [key: string]: BungieRewardDisplay;
-    }>
-  >,
+  http: HttpClient,
   params: GetBungieRewardsForUserParams
 ): Promise<
   ServerResponse<{
@@ -111,11 +105,7 @@ export interface GetBungieRewardsForPlatformUserParams {
  * and Type are used.
  */
 export declare function getBungieRewardsForPlatformUser(
-  http: HttpClient<
-    ServerResponse<{
-      [key: string]: BungieRewardDisplay;
-    }>
-  >,
+  http: HttpClient,
   params: GetBungieRewardsForPlatformUserParams
 ): Promise<
   ServerResponse<{
@@ -123,13 +113,7 @@ export declare function getBungieRewardsForPlatformUser(
   }>
 >;
 /** Returns a list of the current bungie rewards */
-export declare function getBungieRewardsList(
-  http: HttpClient<
-    ServerResponse<{
-      [key: string]: BungieRewardDisplay;
-    }>
-  >
-): Promise<
+export declare function getBungieRewardsList(http: HttpClient): Promise<
   ServerResponse<{
     [key: string]: BungieRewardDisplay;
   }>

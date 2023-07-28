@@ -43,7 +43,7 @@ export interface GetTopicsPagedParams {
 }
 /** Get topics from any forum. */
 export declare function getTopicsPaged(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetTopicsPagedParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetCoreTopicsPagedParams {
@@ -63,7 +63,7 @@ export interface GetCoreTopicsPagedParams {
 }
 /** Gets a listing of all topics marked as part of the core group. */
 export declare function getCoreTopicsPaged(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetCoreTopicsPagedParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostsThreadedPagedParams {
@@ -82,7 +82,7 @@ export interface GetPostsThreadedPagedParams {
  * those posts as well as the original parent.
  */
 export declare function getPostsThreadedPaged(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetPostsThreadedPagedParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostsThreadedPagedFromChildParams {
@@ -100,7 +100,7 @@ export interface GetPostsThreadedPagedFromChildParams {
  * optionally returning replies to those posts as well as the original parent.
  */
 export declare function getPostsThreadedPagedFromChild(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetPostsThreadedPagedFromChildParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostAndParentParams {
@@ -110,7 +110,7 @@ export interface GetPostAndParentParams {
 }
 /** Returns the post specified and its immediate parent. */
 export declare function getPostAndParent(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetPostAndParentParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetPostAndParentAwaitingApprovalParams {
@@ -123,7 +123,7 @@ export interface GetPostAndParentAwaitingApprovalParams {
  * approval.
  */
 export declare function getPostAndParentAwaitingApproval(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetPostAndParentAwaitingApprovalParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 export interface GetTopicForContentParams {
@@ -131,7 +131,7 @@ export interface GetTopicForContentParams {
 }
 /** Gets the post Id for the given content item's comments, if it exists. */
 export declare function getTopicForContent(
-  http: HttpClient<ServerResponse<string>>,
+  http: HttpClient,
   params: GetTopicForContentParams
 ): Promise<ServerResponse<string>>;
 export interface GetForumTagSuggestionsParams {
@@ -143,7 +143,7 @@ export interface GetForumTagSuggestionsParams {
  * previously used in the forums.
  */
 export declare function getForumTagSuggestions(
-  http: HttpClient<ServerResponse<TagResponse[]>>,
+  http: HttpClient,
   params: GetForumTagSuggestionsParams
 ): Promise<ServerResponse<TagResponse[]>>;
 export interface GetPollParams {
@@ -152,7 +152,7 @@ export interface GetPollParams {
 }
 /** Gets the specified forum poll. */
 export declare function getPoll(
-  http: HttpClient<ServerResponse<PostSearchResponse>>,
+  http: HttpClient,
   params: GetPollParams
 ): Promise<ServerResponse<PostSearchResponse>>;
 /**
@@ -160,6 +160,6 @@ export declare function getPoll(
  * objects.
  */
 export declare function getRecruitmentThreadSummaries(
-  http: HttpClient<ServerResponse<ForumRecruitmentDetail[]>>,
+  http: HttpClient,
   body: string[]
 ): Promise<ServerResponse<ForumRecruitmentDetail[]>>;

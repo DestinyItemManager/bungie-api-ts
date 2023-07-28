@@ -22,7 +22,7 @@ import { ServerResponse } from '../common.js';
  * per category. For pagination within a category, call GetTrendingCategory.
  */
 export declare function getTrendingCategories(
-  http: HttpClient<ServerResponse<TrendingCategories>>
+  http: HttpClient
 ): Promise<ServerResponse<TrendingCategories>>;
 export interface GetTrendingCategoryParams {
   /** The ID of the category for whom you want additional results. */
@@ -32,7 +32,7 @@ export interface GetTrendingCategoryParams {
 }
 /** Returns paginated lists of trending items for a category. */
 export declare function getTrendingCategory(
-  http: HttpClient<ServerResponse<SearchResultOfTrendingEntry>>,
+  http: HttpClient,
   params: GetTrendingCategoryParams
 ): Promise<ServerResponse<SearchResultOfTrendingEntry>>;
 export interface GetTrendingEntryDetailParams {
@@ -48,6 +48,6 @@ export interface GetTrendingEntryDetailParams {
  * unique.
  */
 export declare function getTrendingEntryDetail(
-  http: HttpClient<ServerResponse<TrendingDetail>>,
+  http: HttpClient,
   params: GetTrendingEntryDetailParams
 ): Promise<ServerResponse<TrendingDetail>>;

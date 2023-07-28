@@ -51,12 +51,12 @@ import {
 const API_BASE = "https://www.bungie.net/Platform/GroupV2/";
 
 /** Returns a list of all available group avatars for the signed-in user. */
-export function getAvailableAvatars(http: HttpClient<ServerResponse<{ [key: number]: string }>>): Promise<ServerResponse<{ [key: number]: string }>> {
+export function getAvailableAvatars(http: HttpClient): Promise<ServerResponse<{ [key: number]: string }>> {
   return get(http, `${API_BASE}GetAvailableAvatars/`);
 }
 
 /** Returns a list of all available group themes. */
-export function getAvailableThemes(http: HttpClient<ServerResponse<GroupTheme[]>>): Promise<ServerResponse<GroupTheme[]>> {
+export function getAvailableThemes(http: HttpClient): Promise<ServerResponse<GroupTheme[]>> {
   return get(http, `${API_BASE}GetAvailableThemes/`);
 }
 
@@ -69,7 +69,7 @@ export interface GetUserClanInviteSettingParams {
  * Gets the state of the user's clan invite preferences for a particular membership
  * type - true if they wish to be invited to clans, false otherwise.
  */
-export function getUserClanInviteSetting(http: HttpClient<ServerResponse<boolean>>, params: GetUserClanInviteSettingParams): Promise<ServerResponse<boolean>> {
+export function getUserClanInviteSetting(http: HttpClient, params: GetUserClanInviteSettingParams): Promise<ServerResponse<boolean>> {
   return get(http, `${API_BASE}GetUserClanInviteSetting/${params.mType}/`);
 }
 
@@ -84,12 +84,12 @@ export interface GetRecommendedGroupsParams {
  * Gets groups recommended for you based on the groups to whom those you follow
  * belong.
  */
-export function getRecommendedGroups(http: HttpClient<ServerResponse<GroupV2Card[]>>, params: GetRecommendedGroupsParams): Promise<ServerResponse<GroupV2Card[]>> {
+export function getRecommendedGroups(http: HttpClient, params: GetRecommendedGroupsParams): Promise<ServerResponse<GroupV2Card[]>> {
     return post(http, `${API_BASE}Recommended/${params.groupType}/${params.createDateRange}/`);
 }
 
 /** Search for Groups. */
-export function groupSearch(http: HttpClient<ServerResponse<GroupSearchResponse>>, body: GroupQuery): Promise<ServerResponse<GroupSearchResponse>> {
+export function groupSearch(http: HttpClient, body: GroupQuery): Promise<ServerResponse<GroupSearchResponse>> {
     return post(http, `${API_BASE}Search/`, body);
 }
 
@@ -99,7 +99,7 @@ export interface GetGroupParams {
 }
 
 /** Get information about a specific group of the given ID. */
-export function getGroup(http: HttpClient<ServerResponse<GroupResponse>>, params: GetGroupParams): Promise<ServerResponse<GroupResponse>> {
+export function getGroup(http: HttpClient, params: GetGroupParams): Promise<ServerResponse<GroupResponse>> {
   return get(http, `${API_BASE}${params.groupId}/`);
 }
 
@@ -111,7 +111,7 @@ export interface GetGroupByNameParams {
 }
 
 /** Get information about a specific group with the given name and type. */
-export function getGroupByName(http: HttpClient<ServerResponse<GroupResponse>>, params: GetGroupByNameParams): Promise<ServerResponse<GroupResponse>> {
+export function getGroupByName(http: HttpClient, params: GetGroupByNameParams): Promise<ServerResponse<GroupResponse>> {
   return get(http, `${API_BASE}Name/${params.groupName}/${params.groupType}/`);
 }
 
@@ -119,7 +119,7 @@ export function getGroupByName(http: HttpClient<ServerResponse<GroupResponse>>, 
  * Get information about a specific group with the given name and type. The POST
  * version.
  */
-export function getGroupByNameV2(http: HttpClient<ServerResponse<GroupResponse>>, body: GroupNameSearchRequest): Promise<ServerResponse<GroupResponse>> {
+export function getGroupByNameV2(http: HttpClient, body: GroupNameSearchRequest): Promise<ServerResponse<GroupResponse>> {
     return post(http, `${API_BASE}NameV2/`, body);
 }
 
@@ -129,7 +129,7 @@ export interface GetGroupOptionalConversationsParams {
 }
 
 /** Gets a list of available optional conversation channels and their settings. */
-export function getGroupOptionalConversations(http: HttpClient<ServerResponse<GroupOptionalConversation[]>>, params: GetGroupOptionalConversationsParams): Promise<ServerResponse<GroupOptionalConversation[]>> {
+export function getGroupOptionalConversations(http: HttpClient, params: GetGroupOptionalConversationsParams): Promise<ServerResponse<GroupOptionalConversation[]>> {
   return get(http, `${API_BASE}${params.groupId}/OptionalConversations/`);
 }
 
@@ -143,7 +143,7 @@ export interface EditGroupParams {
  * perform this operation. This latest revision will only edit the fields you pass
  * in - pass null for properties you want to leave unaltered.
  */
-export function editGroup(http: HttpClient<ServerResponse<number>>, params: EditGroupParams, body: GroupEditAction): Promise<ServerResponse<number>> {
+export function editGroup(http: HttpClient, params: EditGroupParams, body: GroupEditAction): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}${params.groupId}/Edit/`, body);
 }
 
@@ -156,7 +156,7 @@ export interface EditClanBannerParams {
  * Edit an existing group's clan banner. You must have suitable permissions in the
  * group to perform this operation. All fields are required.
  */
-export function editClanBanner(http: HttpClient<ServerResponse<number>>, params: EditClanBannerParams, body: ClanBanner): Promise<ServerResponse<number>> {
+export function editClanBanner(http: HttpClient, params: EditClanBannerParams, body: ClanBanner): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}${params.groupId}/EditClanBanner/`, body);
 }
 
@@ -169,7 +169,7 @@ export interface EditFounderOptionsParams {
  * Edit group options only available to a founder. You must have suitable
  * permissions in the group to perform this operation.
  */
-export function editFounderOptions(http: HttpClient<ServerResponse<number>>, params: EditFounderOptionsParams, body: GroupOptionsEditAction): Promise<ServerResponse<number>> {
+export function editFounderOptions(http: HttpClient, params: EditFounderOptionsParams, body: GroupOptionsEditAction): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}${params.groupId}/EditFounderOptions/`, body);
 }
 
@@ -182,7 +182,7 @@ export interface AddOptionalConversationParams {
  * Add a new optional conversation/chat channel. Requires admin permissions to the
  * group.
  */
-export function addOptionalConversation(http: HttpClient<ServerResponse<string>>, params: AddOptionalConversationParams, body: GroupOptionalConversationAddRequest): Promise<ServerResponse<string>> {
+export function addOptionalConversation(http: HttpClient, params: AddOptionalConversationParams, body: GroupOptionalConversationAddRequest): Promise<ServerResponse<string>> {
     return post(http, `${API_BASE}${params.groupId}/OptionalConversations/Add/`, body);
 }
 
@@ -197,7 +197,7 @@ export interface EditOptionalConversationParams {
  * Edit the settings of an optional conversation/chat channel. Requires admin
  * permissions to the group.
  */
-export function editOptionalConversation(http: HttpClient<ServerResponse<string>>, params: EditOptionalConversationParams, body: GroupOptionalConversationEditRequest): Promise<ServerResponse<string>> {
+export function editOptionalConversation(http: HttpClient, params: EditOptionalConversationParams, body: GroupOptionalConversationEditRequest): Promise<ServerResponse<string>> {
     return post(http, `${API_BASE}${params.groupId}/OptionalConversations/Edit/${params.conversationId}/`, body);
 }
 
@@ -216,7 +216,7 @@ export interface GetMembersOfGroupParams {
 }
 
 /** Get the list of members in a given group. */
-export function getMembersOfGroup(http: HttpClient<ServerResponse<SearchResultOfGroupMember>>, params: GetMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
+export function getMembersOfGroup(http: HttpClient, params: GetMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
   const strParams: Record<string, string> = {};
   if (params.memberType !== undefined) { strParams.memberType = params.memberType.toString(); }
   if (params.nameSearch !== undefined) { strParams.nameSearch = params.nameSearch; }
@@ -231,7 +231,7 @@ export interface GetAdminsAndFounderOfGroupParams {
 }
 
 /** Get the list of members in a given group who are of admin level or higher. */
-export function getAdminsAndFounderOfGroup(http: HttpClient<ServerResponse<SearchResultOfGroupMember>>, params: GetAdminsAndFounderOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
+export function getAdminsAndFounderOfGroup(http: HttpClient, params: GetAdminsAndFounderOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
   return get(http, `${API_BASE}${params.groupId}/AdminsAndFounder/`);
 }
 
@@ -250,7 +250,7 @@ export interface EditGroupMembershipParams {
  * Edit the membership type of a given member. You must have suitable permissions
  * in the group to perform this operation.
  */
-export function editGroupMembership(http: HttpClient<ServerResponse<number>>, params: EditGroupMembershipParams): Promise<ServerResponse<number>> {
+export function editGroupMembership(http: HttpClient, params: EditGroupMembershipParams): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/SetMembershipType/${params.memberType}/`);
 }
 
@@ -268,7 +268,7 @@ export interface KickMemberParams {
  * join the group. You must have suitable permissions in the group to perform this
  * operation.
  */
-export function kickMember(http: HttpClient<ServerResponse<GroupMemberLeaveResult>>, params: KickMemberParams): Promise<ServerResponse<GroupMemberLeaveResult>> {
+export function kickMember(http: HttpClient, params: KickMemberParams): Promise<ServerResponse<GroupMemberLeaveResult>> {
     return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Kick/`);
 }
 
@@ -285,7 +285,7 @@ export interface BanMemberParams {
  * Bans the requested member from the requested group for the specified period of
  * time.
  */
-export function banMember(http: HttpClient<ServerResponse<number>>, params: BanMemberParams, body: GroupBanRequest): Promise<ServerResponse<number>> {
+export function banMember(http: HttpClient, params: BanMemberParams, body: GroupBanRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Ban/`, body);
 }
 
@@ -298,7 +298,7 @@ export interface UnbanMemberParams {
 }
 
 /** Unbans the requested member, allowing them to re-apply for membership. */
-export function unbanMember(http: HttpClient<ServerResponse<number>>, params: UnbanMemberParams): Promise<ServerResponse<number>> {
+export function unbanMember(http: HttpClient, params: UnbanMemberParams): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Unban/`);
 }
 
@@ -313,7 +313,7 @@ export interface GetBannedMembersOfGroupParams {
  * Get the list of banned members in a given group. Only accessible to group Admins
  * and above. Not applicable to all groups. Check group features.
  */
-export function getBannedMembersOfGroup(http: HttpClient<ServerResponse<SearchResultOfGroupBan>>, params: GetBannedMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupBan>> {
+export function getBannedMembersOfGroup(http: HttpClient, params: GetBannedMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupBan>> {
   return get(http, `${API_BASE}${params.groupId}/Banned/`);
 }
 
@@ -330,7 +330,7 @@ export interface AbdicateFoundershipParams {
  * An administrative method to allow the founder of a group or clan to give up
  * their position to another admin permanently.
  */
-export function abdicateFoundership(http: HttpClient<ServerResponse<boolean>>, params: AbdicateFoundershipParams): Promise<ServerResponse<boolean>> {
+export function abdicateFoundership(http: HttpClient, params: AbdicateFoundershipParams): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}${params.groupId}/Admin/AbdicateFoundership/${params.membershipType}/${params.founderIdNew}/`);
 }
 
@@ -345,7 +345,7 @@ export interface GetPendingMembershipsParams {
  * Get the list of users who are awaiting a decision on their application to join a
  * given group. Modified to include application info.
  */
-export function getPendingMemberships(http: HttpClient<ServerResponse<SearchResultOfGroupMemberApplication>>, params: GetPendingMembershipsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
+export function getPendingMemberships(http: HttpClient, params: GetPendingMembershipsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
   return get(http, `${API_BASE}${params.groupId}/Members/Pending/`);
 }
 
@@ -357,7 +357,7 @@ export interface GetInvitedIndividualsParams {
 }
 
 /** Get the list of users who have been invited into the group. */
-export function getInvitedIndividuals(http: HttpClient<ServerResponse<SearchResultOfGroupMemberApplication>>, params: GetInvitedIndividualsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
+export function getInvitedIndividuals(http: HttpClient, params: GetInvitedIndividualsParams): Promise<ServerResponse<SearchResultOfGroupMemberApplication>> {
   return get(http, `${API_BASE}${params.groupId}/Members/InvitedIndividuals/`);
 }
 
@@ -367,7 +367,7 @@ export interface ApproveAllPendingParams {
 }
 
 /** Approve all of the pending users for the given group. */
-export function approveAllPending(http: HttpClient<ServerResponse<EntityActionResult[]>>, params: ApproveAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function approveAllPending(http: HttpClient, params: ApproveAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
     return post(http, `${API_BASE}${params.groupId}/Members/ApproveAll/`, body);
 }
 
@@ -377,7 +377,7 @@ export interface DenyAllPendingParams {
 }
 
 /** Deny all of the pending users for the given group. */
-export function denyAllPending(http: HttpClient<ServerResponse<EntityActionResult[]>>, params: DenyAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function denyAllPending(http: HttpClient, params: DenyAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
     return post(http, `${API_BASE}${params.groupId}/Members/DenyAll/`, body);
 }
 
@@ -387,7 +387,7 @@ export interface ApprovePendingForListParams {
 }
 
 /** Approve all of the pending users for the given group. */
-export function approvePendingForList(http: HttpClient<ServerResponse<EntityActionResult[]>>, params: ApprovePendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function approvePendingForList(http: HttpClient, params: ApprovePendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
     return post(http, `${API_BASE}${params.groupId}/Members/ApproveList/`, body);
 }
 
@@ -404,7 +404,7 @@ export interface ApprovePendingParams {
  * Approve the given membershipId to join the group/clan as long as they have
  * applied.
  */
-export function approvePending(http: HttpClient<ServerResponse<boolean>>, params: ApprovePendingParams, body: GroupApplicationRequest): Promise<ServerResponse<boolean>> {
+export function approvePending(http: HttpClient, params: ApprovePendingParams, body: GroupApplicationRequest): Promise<ServerResponse<boolean>> {
     return post(http, `${API_BASE}${params.groupId}/Members/Approve/${params.membershipType}/${params.membershipId}/`, body);
 }
 
@@ -414,7 +414,7 @@ export interface DenyPendingForListParams {
 }
 
 /** Deny all of the pending users for the given group that match the passed-in . */
-export function denyPendingForList(http: HttpClient<ServerResponse<EntityActionResult[]>>, params: DenyPendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
+export function denyPendingForList(http: HttpClient, params: DenyPendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
     return post(http, `${API_BASE}${params.groupId}/Members/DenyList/`, body);
 }
 
@@ -430,7 +430,7 @@ export interface GetGroupsForMemberParams {
 }
 
 /** Get information about the groups that a given member has joined. */
-export function getGroupsForMember(http: HttpClient<ServerResponse<GetGroupsForMemberResponse>>, params: GetGroupsForMemberParams): Promise<ServerResponse<GetGroupsForMemberResponse>> {
+export function getGroupsForMember(http: HttpClient, params: GetGroupsForMemberParams): Promise<ServerResponse<GetGroupsForMemberResponse>> {
   return get(http, `${API_BASE}User/${params.membershipType}/${params.membershipId}/${params.filter}/${params.groupType}/`);
 }
 
@@ -447,7 +447,7 @@ export interface RecoverGroupForFounderParams {
  * Allows a founder to manually recover a group they can see in game but not on
  * bungie.net
  */
-export function recoverGroupForFounder(http: HttpClient<ServerResponse<GroupMembershipSearchResponse>>, params: RecoverGroupForFounderParams): Promise<ServerResponse<GroupMembershipSearchResponse>> {
+export function recoverGroupForFounder(http: HttpClient, params: RecoverGroupForFounderParams): Promise<ServerResponse<GroupMembershipSearchResponse>> {
   return get(http, `${API_BASE}Recover/${params.membershipType}/${params.membershipId}/${params.groupType}/`);
 }
 
@@ -466,7 +466,7 @@ export interface GetPotentialGroupsForMemberParams {
  * Get information about the groups that a given member has applied to or been
  * invited to.
  */
-export function getPotentialGroupsForMember(http: HttpClient<ServerResponse<GroupPotentialMembershipSearchResponse>>, params: GetPotentialGroupsForMemberParams): Promise<ServerResponse<GroupPotentialMembershipSearchResponse>> {
+export function getPotentialGroupsForMember(http: HttpClient, params: GetPotentialGroupsForMemberParams): Promise<ServerResponse<GroupPotentialMembershipSearchResponse>> {
   return get(http, `${API_BASE}User/Potential/${params.membershipType}/${params.membershipId}/${params.filter}/${params.groupType}/`);
 }
 
@@ -480,7 +480,7 @@ export interface IndividualGroupInviteParams {
 }
 
 /** Invite a user to join this group. */
-export function individualGroupInvite(http: HttpClient<ServerResponse<GroupApplicationResponse>>, params: IndividualGroupInviteParams, body: GroupApplicationRequest): Promise<ServerResponse<GroupApplicationResponse>> {
+export function individualGroupInvite(http: HttpClient, params: IndividualGroupInviteParams, body: GroupApplicationRequest): Promise<ServerResponse<GroupApplicationResponse>> {
     return post(http, `${API_BASE}${params.groupId}/Members/IndividualInvite/${params.membershipType}/${params.membershipId}/`, body);
 }
 
@@ -494,6 +494,6 @@ export interface IndividualGroupInviteCancelParams {
 }
 
 /** Cancels a pending invitation to join a group. */
-export function individualGroupInviteCancel(http: HttpClient<ServerResponse<GroupApplicationResponse>>, params: IndividualGroupInviteCancelParams): Promise<ServerResponse<GroupApplicationResponse>> {
+export function individualGroupInviteCancel(http: HttpClient, params: IndividualGroupInviteCancelParams): Promise<ServerResponse<GroupApplicationResponse>> {
     return post(http, `${API_BASE}${params.groupId}/Members/IndividualInviteCancel/${params.membershipType}/${params.membershipId}/`);
 }

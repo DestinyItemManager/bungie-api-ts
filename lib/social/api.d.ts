@@ -19,11 +19,11 @@ import {
 import { ServerResponse } from '../common.js';
 /** Returns your Bungie Friend list */
 export declare function getFriendList(
-  http: HttpClient<ServerResponse<BungieFriendListResponse>>
+  http: HttpClient
 ): Promise<ServerResponse<BungieFriendListResponse>>;
 /** Returns your friend request queue. */
 export declare function getFriendRequestList(
-  http: HttpClient<ServerResponse<BungieFriendRequestListResponse>>
+  http: HttpClient
 ): Promise<ServerResponse<BungieFriendRequestListResponse>>;
 export interface IssueFriendRequestParams {
   /** The membership id of the user you wish to add. */
@@ -34,7 +34,7 @@ export interface IssueFriendRequestParams {
  * linked membership ids are valid inputs.
  */
 export declare function issueFriendRequest(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   params: IssueFriendRequestParams
 ): Promise<ServerResponse<boolean>>;
 export interface AcceptFriendRequestParams {
@@ -46,7 +46,7 @@ export interface AcceptFriendRequestParams {
  * incoming friend request list, though no error will occur if they are not.
  */
 export declare function acceptFriendRequest(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   params: AcceptFriendRequestParams
 ): Promise<ServerResponse<boolean>>;
 export interface DeclineFriendRequestParams {
@@ -58,7 +58,7 @@ export interface DeclineFriendRequestParams {
  * incoming friend request list, though no error will occur if they are not.
  */
 export declare function declineFriendRequest(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   params: DeclineFriendRequestParams
 ): Promise<ServerResponse<boolean>>;
 export interface RemoveFriendParams {
@@ -70,7 +70,7 @@ export interface RemoveFriendParams {
  * friend list, though no error will occur if they are not.
  */
 export declare function removeFriend(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   params: RemoveFriendParams
 ): Promise<ServerResponse<boolean>>;
 export interface RemoveFriendRequestParams {
@@ -82,7 +82,7 @@ export interface RemoveFriendRequestParams {
  * outgoing request friend list, though no error will occur if they are not.
  */
 export declare function removeFriendRequest(
-  http: HttpClient<ServerResponse<boolean>>,
+  http: HttpClient,
   params: RemoveFriendRequestParams
 ): Promise<ServerResponse<boolean>>;
 export interface GetPlatformFriendListParams {
@@ -96,6 +96,6 @@ export interface GetPlatformFriendListParams {
  * they have Bungie accounts. Must have a recent login session with said platform.
  */
 export declare function getPlatformFriendList(
-  http: HttpClient<ServerResponse<PlatformFriendResponse>>,
+  http: HttpClient,
   params: GetPlatformFriendListParams
 ): Promise<ServerResponse<PlatformFriendResponse>>;

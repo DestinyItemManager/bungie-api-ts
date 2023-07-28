@@ -15,9 +15,13 @@ export interface HttpClientConfig {
  * should produce a promise for the parsed JSON as a result. The API
  * helper functions will use this to return the right type.
  */
-export type HttpClient<Return> = (config: HttpClientConfig) => Promise<Return>;
+export type HttpClient = <Return>(config: HttpClientConfig) => Promise<Return>;
 
-export function get<Return>(http: HttpClient<Return>, url: string, params?: HttpQueryParams) {
+export function get<Return>(
+  http: HttpClient,
+  url: string,
+  params?: HttpQueryParams
+): Promise<Return> {
   return http(
     params
       ? {
@@ -32,7 +36,7 @@ export function get<Return>(http: HttpClient<Return>, url: string, params?: Http
   );
 }
 
-export function post<Return>(http: HttpClient<Return>, url: string, body?: any) {
+export function post<Return>(http: HttpClient, url: string, body?: any): Promise<Return> {
   return http(
     body
       ? {

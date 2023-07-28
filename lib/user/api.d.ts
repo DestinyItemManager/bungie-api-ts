@@ -27,7 +27,7 @@ export interface GetBungieNetUserByIdParams {
 }
 /** Loads a bungienet user by membership id. */
 export declare function getBungieNetUserById(
-  http: HttpClient<ServerResponse<GeneralUser>>,
+  http: HttpClient,
   params: GetBungieNetUserByIdParams
 ): Promise<ServerResponse<GeneralUser>>;
 export interface GetSanitizedPlatformDisplayNamesParams {
@@ -40,11 +40,7 @@ export interface GetSanitizedPlatformDisplayNamesParams {
  * cached.
  */
 export declare function getSanitizedPlatformDisplayNames(
-  http: HttpClient<
-    ServerResponse<{
-      [key in BungieCredentialType]: string;
-    }>
-  >,
+  http: HttpClient,
   params: GetSanitizedPlatformDisplayNamesParams
 ): Promise<
   ServerResponse<{
@@ -57,13 +53,11 @@ export interface GetCredentialTypesForTargetAccountParams {
 }
 /** Returns a list of credential types attached to the requested account */
 export declare function getCredentialTypesForTargetAccount(
-  http: HttpClient<ServerResponse<GetCredentialTypesForAccountResponse[]>>,
+  http: HttpClient,
   params: GetCredentialTypesForTargetAccountParams
 ): Promise<ServerResponse<GetCredentialTypesForAccountResponse[]>>;
 /** Returns a list of all available user themes. */
-export declare function getAvailableThemes(
-  http: HttpClient<ServerResponse<UserTheme[]>>
-): Promise<ServerResponse<UserTheme[]>>;
+export declare function getAvailableThemes(http: HttpClient): Promise<ServerResponse<UserTheme[]>>;
 export interface GetMembershipDataByIdParams {
   /** The membership ID of the target user. */
   membershipId: string;
@@ -76,7 +70,7 @@ export interface GetMembershipDataByIdParams {
  * supplied credentials permit it.
  */
 export declare function getMembershipDataById(
-  http: HttpClient<ServerResponse<UserMembershipData>>,
+  http: HttpClient,
   params: GetMembershipDataByIdParams
 ): Promise<ServerResponse<UserMembershipData>>;
 /**
@@ -84,7 +78,7 @@ export declare function getMembershipDataById(
  * OAuth implementations that do not give you access to the token response.
  */
 export declare function getMembershipDataForCurrentUser(
-  http: HttpClient<ServerResponse<UserMembershipData>>
+  http: HttpClient
 ): Promise<ServerResponse<UserMembershipData>>;
 export interface GetMembershipFromHardLinkedCredentialParams {
   /** The credential to look up. Must be a valid SteamID64. */
@@ -97,7 +91,7 @@ export interface GetMembershipFromHardLinkedCredentialParams {
  * that are public (just SteamID64 right now). Cross Save aware.
  */
 export declare function getMembershipFromHardLinkedCredential(
-  http: HttpClient<ServerResponse<HardLinkedUserMembership>>,
+  http: HttpClient,
   params: GetMembershipFromHardLinkedCredentialParams
 ): Promise<ServerResponse<HardLinkedUserMembership>>;
 export interface SearchByGlobalNamePrefixParams {
@@ -108,7 +102,7 @@ export interface SearchByGlobalNamePrefixParams {
 }
 /** [OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead. */
 export declare function searchByGlobalNamePrefix(
-  http: HttpClient<ServerResponse<UserSearchResponse>>,
+  http: HttpClient,
   params: SearchByGlobalNamePrefixParams
 ): Promise<ServerResponse<UserSearchResponse>>;
 export interface SearchByGlobalNamePostParams {
@@ -117,7 +111,7 @@ export interface SearchByGlobalNamePostParams {
 }
 /** Given the prefix of a global display name, returns all users who share that name. */
 export declare function searchByGlobalNamePost(
-  http: HttpClient<ServerResponse<UserSearchResponse>>,
+  http: HttpClient,
   params: SearchByGlobalNamePostParams,
   body: UserSearchPrefixRequest
 ): Promise<ServerResponse<UserSearchResponse>>;

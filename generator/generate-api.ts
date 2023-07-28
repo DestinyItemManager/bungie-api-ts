@@ -113,8 +113,7 @@ function generatePathDefinition(
     .filter((param) => param.in === 'query')
     .map((param) => param.name);
 
-  const parameterArgs: string[] = [];
-  let bodyType = 'never';
+  const parameterArgs: string[] = [`http: HttpClient`];
 
   let interfaceDefinition = '';
   if (params.length) {
@@ -136,8 +135,6 @@ function generatePathDefinition(
       parameterArgs.push(
         `${docString}body${methodDef.requestBody.required ? '' : '?'}: ${paramType}`
       );
-
-      bodyType = paramType;
     } else if (isReferenceObject(methodDef.requestBody)) {
       throw new Error("didn't expect this");
     }
@@ -191,8 +188,6 @@ ${indent(paramInitializers.join('\n'), 1)}
           paramsObject.length ? ', strParams' : ''
         })`
       : `  return post(http, ${templatizedPath}${requestBodyParam})`;
-
-  parameterArgs.unshift(`http: HttpClient<${returnValue}>`);
 
   return `${interfaceDefinition}${docComment(
     methodDef.description! + (rateDoc ? '\n' + rateDoc : '')

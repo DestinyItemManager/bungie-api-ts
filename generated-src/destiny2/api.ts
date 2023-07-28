@@ -71,7 +71,7 @@ import {
 const API_BASE = "https://www.bungie.net/Platform/Destiny2/";
 
 /** Returns the current version of the manifest as a json object. */
-export function getDestinyManifest(http: HttpClient<ServerResponse<DestinyManifest>>): Promise<ServerResponse<DestinyManifest>> {
+export function getDestinyManifest(http: HttpClient): Promise<ServerResponse<DestinyManifest>> {
   return get(http, `${API_BASE}Manifest/`);
 }
 
@@ -97,7 +97,7 @@ export interface GetDestinyEntityDefinitionParams {
  * Manifest database if you require large sets of data, but for simple and one-off
  * accesses this should be handy.
  */
-export function getDestinyEntityDefinition(http: HttpClient<ServerResponse<DestinyDefinition>>, params: GetDestinyEntityDefinitionParams): Promise<ServerResponse<DestinyDefinition>> {
+export function getDestinyEntityDefinition(http: HttpClient, params: GetDestinyEntityDefinitionParams): Promise<ServerResponse<DestinyDefinition>> {
   return get(http, `${API_BASE}Manifest/${params.entityType}/${params.hashIdentifier}/`);
 }
 
@@ -113,7 +113,7 @@ export interface SearchDestinyPlayerByBungieNameParams {
  * Returns a list of Destiny memberships given a global Bungie Display Name. This
  * method will hide overridden memberships due to cross save.
  */
-export function searchDestinyPlayerByBungieName(http: HttpClient<ServerResponse<UserInfoCard[]>>, params: SearchDestinyPlayerByBungieNameParams, body: ExactSearchRequest): Promise<ServerResponse<UserInfoCard[]>> {
+export function searchDestinyPlayerByBungieName(http: HttpClient, params: SearchDestinyPlayerByBungieNameParams, body: ExactSearchRequest): Promise<ServerResponse<UserInfoCard[]>> {
     return post(http, `${API_BASE}SearchDestinyPlayerByBungieName/${params.membershipType}/`, body);
 }
 
@@ -143,7 +143,7 @@ export interface GetLinkedProfilesParams {
  * UserServices for people who just care about Destiny data. Note that it will only
  * return linked accounts whose linkages you are allowed to view.
  */
-export function getLinkedProfiles(http: HttpClient<ServerResponse<DestinyLinkedProfilesResponse>>, params: GetLinkedProfilesParams): Promise<ServerResponse<DestinyLinkedProfilesResponse>> {
+export function getLinkedProfiles(http: HttpClient, params: GetLinkedProfilesParams): Promise<ServerResponse<DestinyLinkedProfilesResponse>> {
   const strParams: Record<string, string> = {};
   if (params.getAllMemberships !== undefined) { strParams.getAllMemberships = params.getAllMemberships.toString(); }
   return get(http, `${API_BASE}${params.membershipType}/Profile/${params.membershipId}/LinkedProfiles/`, strParams);
@@ -163,7 +163,7 @@ export interface GetProfileParams {
 }
 
 /** Returns Destiny Profile information for the supplied membership. */
-export function getProfile(http: HttpClient<ServerResponse<DestinyProfileResponse>>, params: GetProfileParams): Promise<ServerResponse<DestinyProfileResponse>> {
+export function getProfile(http: HttpClient, params: GetProfileParams): Promise<ServerResponse<DestinyProfileResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/`, strParams);
@@ -185,7 +185,7 @@ export interface GetCharacterParams {
 }
 
 /** Returns character information for the supplied character. */
-export function getCharacter(http: HttpClient<ServerResponse<DestinyCharacterResponse>>, params: GetCharacterParams): Promise<ServerResponse<DestinyCharacterResponse>> {
+export function getCharacter(http: HttpClient, params: GetCharacterParams): Promise<ServerResponse<DestinyCharacterResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/`, strParams);
@@ -200,12 +200,12 @@ export interface GetClanWeeklyRewardStateParams {
  * Returns information on the weekly clan rewards and if the clan has earned them
  * or not. Note that this will always report rewards as not redeemed.
  */
-export function getClanWeeklyRewardState(http: HttpClient<ServerResponse<DestinyMilestone>>, params: GetClanWeeklyRewardStateParams): Promise<ServerResponse<DestinyMilestone>> {
+export function getClanWeeklyRewardState(http: HttpClient, params: GetClanWeeklyRewardStateParams): Promise<ServerResponse<DestinyMilestone>> {
   return get(http, `${API_BASE}Clan/${params.groupId}/WeeklyRewardState/`);
 }
 
 /** Returns the dictionary of values for the Clan Banner */
-export function getClanBannerSource(http: HttpClient<ServerResponse<ClanBannerSource>>): Promise<ServerResponse<ClanBannerSource>> {
+export function getClanBannerSource(http: HttpClient): Promise<ServerResponse<ClanBannerSource>> {
   return get(http, `${API_BASE}Clan/ClanBannerDictionary/`);
 }
 
@@ -229,7 +229,7 @@ export interface GetItemParams {
  * one with an ItemInstanceId. Non-instanced items, such as materials, have no
  * useful instance-specific details and thus are not queryable here.
  */
-export function getItem(http: HttpClient<ServerResponse<DestinyItemResponse>>, params: GetItemParams): Promise<ServerResponse<DestinyItemResponse>> {
+export function getItem(http: HttpClient, params: GetItemParams): Promise<ServerResponse<DestinyItemResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Item/${params.itemInstanceId}/`, strParams);
@@ -258,7 +258,7 @@ export interface GetVendorsParams {
  * and vendors-as-kiosks, neither of whom have rotating/dynamic inventories. Use
  * their definitions as-is for those.
  */
-export function getVendors(http: HttpClient<ServerResponse<DestinyVendorsResponse>>, params: GetVendorsParams): Promise<ServerResponse<DestinyVendorsResponse>> {
+export function getVendors(http: HttpClient, params: GetVendorsParams): Promise<ServerResponse<DestinyVendorsResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   if (params.filter !== undefined) { strParams.filter = params.filter.toString(); }
@@ -283,7 +283,7 @@ export interface GetVendorParams {
 }
 
 /** Get the details of a specific Vendor. */
-export function getVendor(http: HttpClient<ServerResponse<DestinyVendorResponse>>, params: GetVendorParams): Promise<ServerResponse<DestinyVendorResponse>> {
+export function getVendor(http: HttpClient, params: GetVendorParams): Promise<ServerResponse<DestinyVendorResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Vendors/${params.vendorHash}/`, strParams);
@@ -305,7 +305,7 @@ export interface GetPublicVendorsParams {
  * endpoint due to the way that available inventory is computed. As I am often
  * guilty of saying: 'It's a long story...'
  */
-export function getPublicVendors(http: HttpClient<ServerResponse<DestinyPublicVendorsResponse>>, params: GetPublicVendorsParams): Promise<ServerResponse<DestinyPublicVendorsResponse>> {
+export function getPublicVendors(http: HttpClient, params: GetPublicVendorsParams): Promise<ServerResponse<DestinyPublicVendorsResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   return get(http, `${API_BASE}Vendors/`, strParams);
@@ -340,7 +340,7 @@ export interface GetCollectibleNodeDetailsParams {
  * return item details about those descendants in the context of the requesting
  * character.
  */
-export function getCollectibleNodeDetails(http: HttpClient<ServerResponse<DestinyCollectibleNodeDetailResponse>>, params: GetCollectibleNodeDetailsParams): Promise<ServerResponse<DestinyCollectibleNodeDetailResponse>> {
+export function getCollectibleNodeDetails(http: HttpClient, params: GetCollectibleNodeDetailsParams): Promise<ServerResponse<DestinyCollectibleNodeDetailResponse>> {
   const strParams: Record<string, string> = {};
   if (params.components?.length) { strParams.components = params.components.join(','); }
   return get(http, `${API_BASE}${params.membershipType}/Profile/${params.destinyMembershipId}/Character/${params.characterId}/Collectibles/${params.collectiblePresentationNodeHash}/`, strParams);
@@ -353,7 +353,7 @@ export function getCollectibleNodeDetails(http: HttpClient<ServerResponse<Destin
  *
  * Wait at least 0.1s between actions.
  */
-export function transferItem(http: HttpClient<ServerResponse<number>>, body: DestinyItemTransferRequest): Promise<ServerResponse<number>> {
+export function transferItem(http: HttpClient, body: DestinyItemTransferRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Items/TransferItem/`, body);
 }
 
@@ -364,7 +364,7 @@ export function transferItem(http: HttpClient<ServerResponse<number>>, body: Des
  *
  * Wait at least 0.1s between actions.
  */
-export function pullFromPostmaster(http: HttpClient<ServerResponse<number>>, body: DestinyPostmasterTransferRequest): Promise<ServerResponse<number>> {
+export function pullFromPostmaster(http: HttpClient, body: DestinyPostmasterTransferRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Items/PullFromPostmaster/`, body);
 }
 
@@ -374,7 +374,7 @@ export function pullFromPostmaster(http: HttpClient<ServerResponse<number>>, bod
  *
  * Wait at least 0.1s between actions.
  */
-export function equipItem(http: HttpClient<ServerResponse<number>>, body: DestinyItemActionRequest): Promise<ServerResponse<number>> {
+export function equipItem(http: HttpClient, body: DestinyItemActionRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Items/EquipItem/`, body);
 }
 
@@ -385,7 +385,7 @@ export function equipItem(http: HttpClient<ServerResponse<number>>, body: Destin
  *
  * Wait at least 0.1s between actions.
  */
-export function equipItems(http: HttpClient<ServerResponse<DestinyEquipItemResults>>, body: DestinyItemSetActionRequest): Promise<ServerResponse<DestinyEquipItemResults>> {
+export function equipItems(http: HttpClient, body: DestinyItemSetActionRequest): Promise<ServerResponse<DestinyEquipItemResults>> {
     return post(http, `${API_BASE}Actions/Items/EquipItems/`, body);
 }
 
@@ -395,7 +395,7 @@ export function equipItems(http: HttpClient<ServerResponse<DestinyEquipItemResul
  *
  * Wait at least 1s between actions.
  */
-export function equipLoadout(http: HttpClient<ServerResponse<number>>, body: DestinyLoadoutActionRequest): Promise<ServerResponse<number>> {
+export function equipLoadout(http: HttpClient, body: DestinyLoadoutActionRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Loadouts/EquipLoadout/`, body);
 }
 
@@ -404,7 +404,7 @@ export function equipLoadout(http: HttpClient<ServerResponse<number>>, body: Des
  *
  * Wait at least 1s between actions.
  */
-export function snapshotLoadout(http: HttpClient<ServerResponse<number>>, body: DestinyLoadoutUpdateActionRequest): Promise<ServerResponse<number>> {
+export function snapshotLoadout(http: HttpClient, body: DestinyLoadoutUpdateActionRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Loadouts/SnapshotLoadout/`, body);
 }
 
@@ -413,7 +413,7 @@ export function snapshotLoadout(http: HttpClient<ServerResponse<number>>, body: 
  *
  * Wait at least 1s between actions.
  */
-export function updateLoadoutIdentifiers(http: HttpClient<ServerResponse<number>>, body: DestinyLoadoutUpdateActionRequest): Promise<ServerResponse<number>> {
+export function updateLoadoutIdentifiers(http: HttpClient, body: DestinyLoadoutUpdateActionRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Loadouts/UpdateLoadoutIdentifiers/`, body);
 }
 
@@ -422,7 +422,7 @@ export function updateLoadoutIdentifiers(http: HttpClient<ServerResponse<number>
  *
  * Wait at least 1s between actions.
  */
-export function clearLoadout(http: HttpClient<ServerResponse<number>>, body: DestinyLoadoutActionRequest): Promise<ServerResponse<number>> {
+export function clearLoadout(http: HttpClient, body: DestinyLoadoutActionRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Loadouts/ClearLoadout/`, body);
 }
 
@@ -431,7 +431,7 @@ export function clearLoadout(http: HttpClient<ServerResponse<number>>, body: Des
  *
  * Wait at least 0.1s between actions.
  */
-export function setItemLockState(http: HttpClient<ServerResponse<number>>, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
+export function setItemLockState(http: HttpClient, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Items/SetLockState/`, body);
 }
 
@@ -441,7 +441,7 @@ export function setItemLockState(http: HttpClient<ServerResponse<number>>, body:
  *
  * Wait at least 1s between actions.
  */
-export function setQuestTrackedState(http: HttpClient<ServerResponse<number>>, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
+export function setQuestTrackedState(http: HttpClient, body: DestinyItemStateRequest): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Actions/Items/SetTrackedState/`, body);
 }
 
@@ -456,7 +456,7 @@ export function setQuestTrackedState(http: HttpClient<ServerResponse<number>>, b
  *
  * Wait at least 0.5s between actions.
  */
-export function insertSocketPlug(http: HttpClient<ServerResponse<DestinyItemChangeResponse>>, body: DestinyInsertPlugsActionRequest): Promise<ServerResponse<DestinyItemChangeResponse>> {
+export function insertSocketPlug(http: HttpClient, body: DestinyInsertPlugsActionRequest): Promise<ServerResponse<DestinyItemChangeResponse>> {
     return post(http, `${API_BASE}Actions/Items/InsertSocketPlug/`, body);
 }
 
@@ -469,7 +469,7 @@ export function insertSocketPlug(http: HttpClient<ServerResponse<DestinyItemChan
  *
  * Wait at least 0.5s between actions.
  */
-export function insertSocketPlugFree(http: HttpClient<ServerResponse<DestinyItemChangeResponse>>, body: DestinyInsertPlugsFreeActionRequest): Promise<ServerResponse<DestinyItemChangeResponse>> {
+export function insertSocketPlugFree(http: HttpClient, body: DestinyInsertPlugsFreeActionRequest): Promise<ServerResponse<DestinyItemChangeResponse>> {
     return post(http, `${API_BASE}Actions/Items/InsertSocketPlugFree/`, body);
 }
 
@@ -479,7 +479,7 @@ export interface GetPostGameCarnageReportParams {
 }
 
 /** Gets the available post game carnage report for the activity ID. */
-export function getPostGameCarnageReport(http: HttpClient<ServerResponse<DestinyPostGameCarnageReportData>>, params: GetPostGameCarnageReportParams): Promise<ServerResponse<DestinyPostGameCarnageReportData>> {
+export function getPostGameCarnageReport(http: HttpClient, params: GetPostGameCarnageReportParams): Promise<ServerResponse<DestinyPostGameCarnageReportData>> {
   return get(http, `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/`);
 }
 
@@ -494,12 +494,12 @@ export interface ReportOffensivePostGameCarnageReportPlayerParams {
  * passed in. Please use this judiciously and only when you have strong suspicions
  * of violation, pretty please.
  */
-export function reportOffensivePostGameCarnageReportPlayer(http: HttpClient<ServerResponse<number>>, params: ReportOffensivePostGameCarnageReportPlayerParams, body: DestinyReportOffensePgcrRequest): Promise<ServerResponse<number>> {
+export function reportOffensivePostGameCarnageReportPlayer(http: HttpClient, params: ReportOffensivePostGameCarnageReportPlayerParams, body: DestinyReportOffensePgcrRequest): Promise<ServerResponse<number>> {
     return post(http, `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${params.activityId}/Report/`, body);
 }
 
 /** Gets historical stats definitions. */
-export function getHistoricalStatsDefinition(http: HttpClient<ServerResponse<{ [key: string]: DestinyHistoricalStatsDefinition }>>): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsDefinition }>> {
+export function getHistoricalStatsDefinition(http: HttpClient): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsDefinition }>> {
   return get(http, `${API_BASE}Stats/Definition/`);
 }
 
@@ -527,7 +527,7 @@ export interface GetClanLeaderboardsParams {
  * may experience rough edges. The schema is in final form, but there may be bugs
  * that prevent desirable operation.
  */
-export function getClanLeaderboards(http: HttpClient<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>>, params: GetClanLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
+export function getClanLeaderboards(http: HttpClient, params: GetClanLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
   const strParams: Record<string, string> = {};
   if (params.maxtop !== undefined) { strParams.maxtop = params.maxtop.toString(); }
   if (params.modes !== undefined) { strParams.modes = params.modes; }
@@ -552,7 +552,7 @@ export interface GetClanAggregateStatsParams {
  * edges. The schema is in final form, but there may be bugs that prevent desirable
  * operation.
  */
-export function getClanAggregateStats(http: HttpClient<ServerResponse<DestinyClanAggregateStat[]>>, params: GetClanAggregateStatsParams): Promise<ServerResponse<DestinyClanAggregateStat[]>> {
+export function getClanAggregateStats(http: HttpClient, params: GetClanAggregateStatsParams): Promise<ServerResponse<DestinyClanAggregateStat[]>> {
   const strParams: Record<string, string> = {};
   if (params.modes !== undefined) { strParams.modes = params.modes; }
   return get(http, `${API_BASE}Stats/AggregateClanStats/${params.groupId}/`, strParams);
@@ -584,7 +584,7 @@ export interface GetLeaderboardsParams {
  * implemented. It is being returned for a preview of future functionality, and for
  * public comment/suggestion/preparation.
  */
-export function getLeaderboards(http: HttpClient<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>>, params: GetLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
+export function getLeaderboards(http: HttpClient, params: GetLeaderboardsParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
   const strParams: Record<string, string> = {};
   if (params.maxtop !== undefined) { strParams.maxtop = params.maxtop.toString(); }
   if (params.modes !== undefined) { strParams.modes = params.modes; }
@@ -623,7 +623,7 @@ export interface GetLeaderboardsForCharacterParams {
  * may experience rough edges. The schema is in final form, but there may be bugs
  * that prevent desirable operation.
  */
-export function getLeaderboardsForCharacter(http: HttpClient<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>>, params: GetLeaderboardsForCharacterParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
+export function getLeaderboardsForCharacter(http: HttpClient, params: GetLeaderboardsForCharacterParams): Promise<ServerResponse<{ [key: string]: { [key: string]: DestinyLeaderboard } }>> {
   const strParams: Record<string, string> = {};
   if (params.maxtop !== undefined) { strParams.maxtop = params.maxtop.toString(); }
   if (params.modes !== undefined) { strParams.modes = params.modes; }
@@ -645,7 +645,7 @@ export interface SearchDestinyEntitiesParams {
 }
 
 /** Gets a page list of Destiny items. */
-export function searchDestinyEntities(http: HttpClient<ServerResponse<DestinyEntitySearchResult>>, params: SearchDestinyEntitiesParams): Promise<ServerResponse<DestinyEntitySearchResult>> {
+export function searchDestinyEntities(http: HttpClient, params: SearchDestinyEntitiesParams): Promise<ServerResponse<DestinyEntitySearchResult>> {
   const strParams: Record<string, string> = {};
   if (params.page !== undefined) { strParams.page = params.page.toString(); }
   return get(http, `${API_BASE}Armory/Search/${params.type}/${params.searchTerm}/`, strParams);
@@ -691,7 +691,7 @@ export interface GetHistoricalStatsParams {
 }
 
 /** Gets historical stats for indicated character. */
-export function getHistoricalStats(http: HttpClient<ServerResponse<{ [key: string]: DestinyHistoricalStatsByPeriod }>>, params: GetHistoricalStatsParams): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsByPeriod }>> {
+export function getHistoricalStats(http: HttpClient, params: GetHistoricalStatsParams): Promise<ServerResponse<{ [key: string]: DestinyHistoricalStatsByPeriod }>> {
   const strParams: Record<string, string> = {};
   if (params.dayend !== undefined) { strParams.dayend = params.dayend; }
   if (params.daystart !== undefined) { strParams.daystart = params.daystart; }
@@ -717,7 +717,7 @@ export interface GetHistoricalStatsForAccountParams {
  * Gets aggregate historical stats organized around each character for a given
  * account.
  */
-export function getHistoricalStatsForAccount(http: HttpClient<ServerResponse<DestinyHistoricalStatsAccountResult>>, params: GetHistoricalStatsForAccountParams): Promise<ServerResponse<DestinyHistoricalStatsAccountResult>> {
+export function getHistoricalStatsForAccount(http: HttpClient, params: GetHistoricalStatsForAccountParams): Promise<ServerResponse<DestinyHistoricalStatsAccountResult>> {
   const strParams: Record<string, string> = {};
   if (params.groups?.length) { strParams.groups = params.groups.join(','); }
   return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Stats/`, strParams);
@@ -743,7 +743,7 @@ export interface GetActivityHistoryParams {
 }
 
 /** Gets activity history stats for indicated character. */
-export function getActivityHistory(http: HttpClient<ServerResponse<DestinyActivityHistoryResults>>, params: GetActivityHistoryParams): Promise<ServerResponse<DestinyActivityHistoryResults>> {
+export function getActivityHistory(http: HttpClient, params: GetActivityHistoryParams): Promise<ServerResponse<DestinyActivityHistoryResults>> {
   const strParams: Record<string, string> = {};
   if (params.count !== undefined) { strParams.count = params.count.toString(); }
   if (params.mode !== undefined) { strParams.mode = params.mode.toString(); }
@@ -761,7 +761,7 @@ export interface GetUniqueWeaponHistoryParams {
 }
 
 /** Gets details about unique weapon usage, including all exotic weapons. */
-export function getUniqueWeaponHistory(http: HttpClient<ServerResponse<DestinyHistoricalWeaponStatsData>>, params: GetUniqueWeaponHistoryParams): Promise<ServerResponse<DestinyHistoricalWeaponStatsData>> {
+export function getUniqueWeaponHistory(http: HttpClient, params: GetUniqueWeaponHistoryParams): Promise<ServerResponse<DestinyHistoricalWeaponStatsData>> {
   return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/UniqueWeapons/`);
 }
 
@@ -778,7 +778,7 @@ export interface GetDestinyAggregateActivityStatsParams {
  * Gets all activities the character has participated in together with aggregate
  * statistics for those activities.
  */
-export function getDestinyAggregateActivityStats(http: HttpClient<ServerResponse<DestinyAggregateActivityResults>>, params: GetDestinyAggregateActivityStatsParams): Promise<ServerResponse<DestinyAggregateActivityResults>> {
+export function getDestinyAggregateActivityStats(http: HttpClient, params: GetDestinyAggregateActivityStatsParams): Promise<ServerResponse<DestinyAggregateActivityResults>> {
   return get(http, `${API_BASE}${params.membershipType}/Account/${params.destinyMembershipId}/Character/${params.characterId}/Stats/AggregateActivityStats/`);
 }
 
@@ -788,17 +788,17 @@ export interface GetPublicMilestoneContentParams {
 }
 
 /** Gets custom localized content for the milestone of the given hash, if it exists. */
-export function getPublicMilestoneContent(http: HttpClient<ServerResponse<DestinyMilestoneContent>>, params: GetPublicMilestoneContentParams): Promise<ServerResponse<DestinyMilestoneContent>> {
+export function getPublicMilestoneContent(http: HttpClient, params: GetPublicMilestoneContentParams): Promise<ServerResponse<DestinyMilestoneContent>> {
   return get(http, `${API_BASE}Milestones/${params.milestoneHash}/Content/`);
 }
 
 /** Gets public information about currently available Milestones. */
-export function getPublicMilestones(http: HttpClient<ServerResponse<{ [key: number]: DestinyPublicMilestone }>>): Promise<ServerResponse<{ [key: number]: DestinyPublicMilestone }>> {
+export function getPublicMilestones(http: HttpClient): Promise<ServerResponse<{ [key: number]: DestinyPublicMilestone }>> {
   return get(http, `${API_BASE}Milestones/`);
 }
 
 /** Initialize a request to perform an advanced write action. */
-export function awaInitializeRequest(http: HttpClient<ServerResponse<AwaInitializeResponse>>, body: AwaPermissionRequested): Promise<ServerResponse<AwaInitializeResponse>> {
+export function awaInitializeRequest(http: HttpClient, body: AwaPermissionRequested): Promise<ServerResponse<AwaInitializeResponse>> {
     return post(http, `${API_BASE}Awa/Initialize/`, body);
 }
 
@@ -806,7 +806,7 @@ export function awaInitializeRequest(http: HttpClient<ServerResponse<AwaInitiali
  * Provide the result of the user interaction. Called by the Bungie Destiny App to
  * approve or reject a request.
  */
-export function awaProvideAuthorizationResult(http: HttpClient<ServerResponse<number>>, body: AwaUserResponse): Promise<ServerResponse<number>> {
+export function awaProvideAuthorizationResult(http: HttpClient, body: AwaUserResponse): Promise<ServerResponse<number>> {
     return post(http, `${API_BASE}Awa/AwaProvideAuthorizationResult/`, body);
 }
 
@@ -816,6 +816,6 @@ export interface AwaGetActionTokenParams {
 }
 
 /** Returns the action token if user approves the request. */
-export function awaGetActionToken(http: HttpClient<ServerResponse<AwaAuthorizationResult>>, params: AwaGetActionTokenParams): Promise<ServerResponse<AwaAuthorizationResult>> {
+export function awaGetActionToken(http: HttpClient, params: AwaGetActionTokenParams): Promise<ServerResponse<AwaAuthorizationResult>> {
   return get(http, `${API_BASE}Awa/GetActionToken/${params.correlationId}/`);
 }

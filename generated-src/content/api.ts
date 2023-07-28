@@ -29,7 +29,7 @@ export interface GetContentTypeParams {
 }
 
 /** Gets an object describing a particular variant of content. */
-export function getContentType(http: HttpClient<ServerResponse<ContentTypeDescription>>, params: GetContentTypeParams): Promise<ServerResponse<ContentTypeDescription>> {
+export function getContentType(http: HttpClient, params: GetContentTypeParams): Promise<ServerResponse<ContentTypeDescription>> {
   return get(http, `${API_BASE}GetContentType/${params.type}/`);
 }
 
@@ -41,7 +41,7 @@ export interface GetContentByIdParams {
 }
 
 /** Returns a content item referenced by id */
-export function getContentById(http: HttpClient<ServerResponse<ContentItemPublicContract>>, params: GetContentByIdParams): Promise<ServerResponse<ContentItemPublicContract>> {
+export function getContentById(http: HttpClient, params: GetContentByIdParams): Promise<ServerResponse<ContentItemPublicContract>> {
   const strParams: Record<string, string> = {};
   if (params.head !== undefined) { strParams.head = params.head.toString(); }
   return get(http, `${API_BASE}GetContentById/${params.id}/${params.locale}/`, strParams);
@@ -56,7 +56,7 @@ export interface GetContentByTagAndTypeParams {
 }
 
 /** Returns the newest item that matches a given tag and Content Type. */
-export function getContentByTagAndType(http: HttpClient<ServerResponse<ContentItemPublicContract>>, params: GetContentByTagAndTypeParams): Promise<ServerResponse<ContentItemPublicContract>> {
+export function getContentByTagAndType(http: HttpClient, params: GetContentByTagAndTypeParams): Promise<ServerResponse<ContentItemPublicContract>> {
   const strParams: Record<string, string> = {};
   if (params.head !== undefined) { strParams.head = params.head.toString(); }
   return get(http, `${API_BASE}GetContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`, strParams);
@@ -82,7 +82,7 @@ export interface SearchContentWithTextParams {
  * Gets content based on querystring information passed in. Provides basic search
  * and text search capabilities.
  */
-export function searchContentWithText(http: HttpClient<ServerResponse<SearchResultOfContentItemPublicContract>>, params: SearchContentWithTextParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
+export function searchContentWithText(http: HttpClient, params: SearchContentWithTextParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
   const strParams: Record<string, string> = {};
   if (params.ctype !== undefined) { strParams.ctype = params.ctype; }
   if (params.currentpage !== undefined) { strParams.currentpage = params.currentpage.toString(); }
@@ -106,7 +106,7 @@ export interface SearchContentByTagAndTypeParams {
 }
 
 /** Searches for Content Items that match the given Tag and Content Type. */
-export function searchContentByTagAndType(http: HttpClient<ServerResponse<SearchResultOfContentItemPublicContract>>, params: SearchContentByTagAndTypeParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
+export function searchContentByTagAndType(http: HttpClient, params: SearchContentByTagAndTypeParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
   const strParams: Record<string, string> = {};
   if (params.currentpage !== undefined) { strParams.currentpage = params.currentpage.toString(); }
   if (params.head !== undefined) { strParams.head = params.head.toString(); }
@@ -120,7 +120,7 @@ export interface SearchHelpArticlesParams {
 }
 
 /** Search for Help Articles. */
-export function searchHelpArticles(http: HttpClient<ServerResponse<object>>, params: SearchHelpArticlesParams): Promise<ServerResponse<object>> {
+export function searchHelpArticles(http: HttpClient, params: SearchHelpArticlesParams): Promise<ServerResponse<object>> {
   return get(http, `${API_BASE}SearchHelpArticles/${params.searchtext}/${params.size}/`);
 }
 
@@ -134,7 +134,7 @@ export interface RssNewsArticlesParams {
 }
 
 /** Returns a JSON string response that is the RSS feed for news articles. */
-export function rssNewsArticles(http: HttpClient<ServerResponse<NewsArticleRssResponse>>, params: RssNewsArticlesParams): Promise<ServerResponse<NewsArticleRssResponse>> {
+export function rssNewsArticles(http: HttpClient, params: RssNewsArticlesParams): Promise<ServerResponse<NewsArticleRssResponse>> {
   const strParams: Record<string, string> = {};
   if (params.categoryfilter !== undefined) { strParams.categoryfilter = params.categoryfilter; }
   if (params.includebody !== undefined) { strParams.includebody = params.includebody.toString(); }
