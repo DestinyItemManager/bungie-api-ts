@@ -21,7 +21,6 @@ import {
   DestinyRaceDefinition,
   DestinyTalentGridDefinition,
   DestinyUnlockDefinition,
-  DestinySandboxPerkDefinition,
   DestinyStatGroupDefinition,
   DestinyProgressionMappingDefinition,
   DestinyFactionDefinition,
@@ -48,6 +47,7 @@ import {
   DestinyMaterialRequirementSetDefinition,
   DestinyMetricDefinition,
   DestinyObjectiveDefinition,
+  DestinySandboxPerkDefinition,
   DestinyPlugSetDefinition,
   DestinyPowerCapDefinition,
   DestinyPresentationNodeDefinition,
@@ -107,9 +107,6 @@ export interface AllDestinyManifestComponents {
   };
   DestinyUnlockDefinition: {
     [key: number]: DestinyUnlockDefinition;
-  };
-  DestinySandboxPerkDefinition: {
-    [key: number]: DestinySandboxPerkDefinition;
   };
   DestinyStatGroupDefinition: {
     [key: number]: DestinyStatGroupDefinition;
@@ -188,6 +185,9 @@ export interface AllDestinyManifestComponents {
   };
   DestinyObjectiveDefinition: {
     [key: number]: DestinyObjectiveDefinition;
+  };
+  DestinySandboxPerkDefinition: {
+    [key: number]: DestinySandboxPerkDefinition;
   };
   DestinyPlugSetDefinition: {
     [key: number]: DestinyPlugSetDefinition;
@@ -303,7 +303,7 @@ export interface GetAllDestinyManifestComponentsParams {
 }
 /** fetches the enormous combined JSON manifest file */
 export declare function getAllDestinyManifestComponents(
-  http: HttpClient,
+  http: HttpClient<AllDestinyManifestComponents>,
   params: GetAllDestinyManifestComponentsParams
 ): Promise<AllDestinyManifestComponents>;
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
@@ -327,7 +327,7 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
  * but make sure it's not a `let x =` or a dynamically set string.
  */
 export declare function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
-  http: HttpClient,
+  http: HttpClient<AllDestinyManifestComponents[T]>,
   params: GetDestinyManifestComponentParams<T>
 ): Promise<AllDestinyManifestComponents[T]>;
 export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponentName[]> {
@@ -356,6 +356,6 @@ export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponen
  * `function(['DestinyInventoryItemDefinition'])`
  */
 export declare function getDestinyManifestSlice<T extends DestinyManifestComponentName[]>(
-  http: HttpClient,
+  http: HttpClient<AllDestinyManifestComponents[keyof AllDestinyManifestComponents]>,
   params: GetDestinyManifestSliceParams<T>
 ): Promise<DestinyManifestSlice<T>>;

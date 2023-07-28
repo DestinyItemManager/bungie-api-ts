@@ -37,14 +37,14 @@ export interface GetApplicationApiUsageParams {
  * You must be authenticated with at least the ReadUserData permission to access
  * this endpoint.
  */
-export function getApplicationApiUsage(http: HttpClient, params: GetApplicationApiUsageParams): Promise<ServerResponse<ApiUsage>> {
-  return get(http, `${API_BASE}ApiUsage/${params.applicationId}/`, {
-    end: params.end,
-    start: params.start
-  });
+export function getApplicationApiUsage(http: HttpClient<ServerResponse<ApiUsage>>, params: GetApplicationApiUsageParams): Promise<ServerResponse<ApiUsage>> {
+  const strParams: Record<string, string> = {};
+  if (params.end !== undefined) { strParams.end = params.end; }
+  if (params.start !== undefined) { strParams.start = params.start; }
+  return get(http, `${API_BASE}ApiUsage/${params.applicationId}/`, strParams);
 }
 
 /** Get list of applications created by Bungie. */
-export function getBungieApplications(http: HttpClient): Promise<ServerResponse<Application[]>> {
+export function getBungieApplications(http: HttpClient<ServerResponse<Application[]>>): Promise<ServerResponse<Application[]>> {
   return get(http, `${API_BASE}FirstParty/`);
 }

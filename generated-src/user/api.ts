@@ -35,7 +35,7 @@ export interface GetBungieNetUserByIdParams {
 }
 
 /** Loads a bungienet user by membership id. */
-export function getBungieNetUserById(http: HttpClient, params: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>> {
+export function getBungieNetUserById(http: HttpClient<ServerResponse<GeneralUser>>, params: GetBungieNetUserByIdParams): Promise<ServerResponse<GeneralUser>> {
   return get(http, `${API_BASE}GetBungieNetUserById/${params.id}/`);
 }
 
@@ -49,7 +49,7 @@ export interface GetSanitizedPlatformDisplayNamesParams {
  * profanity filtered). Obeys all visibility rules of calling user and is heavily
  * cached.
  */
-export function getSanitizedPlatformDisplayNames(http: HttpClient, params: GetSanitizedPlatformDisplayNamesParams): Promise<ServerResponse<{ [key in BungieCredentialType]: string }>> {
+export function getSanitizedPlatformDisplayNames(http: HttpClient<ServerResponse<{ [key in BungieCredentialType]: string }>>, params: GetSanitizedPlatformDisplayNamesParams): Promise<ServerResponse<{ [key in BungieCredentialType]: string }>> {
   return get(http, `${API_BASE}GetSanitizedPlatformDisplayNames/${params.membershipId}/`);
 }
 
@@ -59,12 +59,12 @@ export interface GetCredentialTypesForTargetAccountParams {
 }
 
 /** Returns a list of credential types attached to the requested account */
-export function getCredentialTypesForTargetAccount(http: HttpClient, params: GetCredentialTypesForTargetAccountParams): Promise<ServerResponse<GetCredentialTypesForAccountResponse[]>> {
+export function getCredentialTypesForTargetAccount(http: HttpClient<ServerResponse<GetCredentialTypesForAccountResponse[]>>, params: GetCredentialTypesForTargetAccountParams): Promise<ServerResponse<GetCredentialTypesForAccountResponse[]>> {
   return get(http, `${API_BASE}GetCredentialTypesForTargetAccount/${params.membershipId}/`);
 }
 
 /** Returns a list of all available user themes. */
-export function getAvailableThemes(http: HttpClient): Promise<ServerResponse<UserTheme[]>> {
+export function getAvailableThemes(http: HttpClient<ServerResponse<UserTheme[]>>): Promise<ServerResponse<UserTheme[]>> {
   return get(http, `${API_BASE}GetAvailableThemes/`);
 }
 
@@ -80,7 +80,7 @@ export interface GetMembershipDataByIdParams {
  * membership type. This will include all linked accounts (even when hidden) if
  * supplied credentials permit it.
  */
-export function getMembershipDataById(http: HttpClient, params: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>> {
+export function getMembershipDataById(http: HttpClient<ServerResponse<UserMembershipData>>, params: GetMembershipDataByIdParams): Promise<ServerResponse<UserMembershipData>> {
   return get(http, `${API_BASE}GetMembershipsById/${params.membershipId}/${params.membershipType}/`);
 }
 
@@ -88,7 +88,7 @@ export function getMembershipDataById(http: HttpClient, params: GetMembershipDat
  * Returns a list of accounts associated with signed in user. This is useful for
  * OAuth implementations that do not give you access to the token response.
  */
-export function getMembershipDataForCurrentUser(http: HttpClient): Promise<ServerResponse<UserMembershipData>> {
+export function getMembershipDataForCurrentUser(http: HttpClient<ServerResponse<UserMembershipData>>): Promise<ServerResponse<UserMembershipData>> {
   return get(http, `${API_BASE}GetMembershipsForCurrentUser/`);
 }
 
@@ -103,7 +103,7 @@ export interface GetMembershipFromHardLinkedCredentialParams {
  * Gets any hard linked membership given a credential. Only works for credentials
  * that are public (just SteamID64 right now). Cross Save aware.
  */
-export function getMembershipFromHardLinkedCredential(http: HttpClient, params: GetMembershipFromHardLinkedCredentialParams): Promise<ServerResponse<HardLinkedUserMembership>> {
+export function getMembershipFromHardLinkedCredential(http: HttpClient<ServerResponse<HardLinkedUserMembership>>, params: GetMembershipFromHardLinkedCredentialParams): Promise<ServerResponse<HardLinkedUserMembership>> {
   return get(http, `${API_BASE}GetMembershipFromHardLinkedCredential/${params.crType}/${params.credential}/`);
 }
 
@@ -115,7 +115,7 @@ export interface SearchByGlobalNamePrefixParams {
 }
 
 /** [OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead. */
-export function searchByGlobalNamePrefix(http: HttpClient, params: SearchByGlobalNamePrefixParams): Promise<ServerResponse<UserSearchResponse>> {
+export function searchByGlobalNamePrefix(http: HttpClient<ServerResponse<UserSearchResponse>>, params: SearchByGlobalNamePrefixParams): Promise<ServerResponse<UserSearchResponse>> {
   return get(http, `${API_BASE}Search/Prefix/${params.displayNamePrefix}/${params.page}/`);
 }
 
@@ -125,6 +125,6 @@ export interface SearchByGlobalNamePostParams {
 }
 
 /** Given the prefix of a global display name, returns all users who share that name. */
-export function searchByGlobalNamePost(http: HttpClient, params: SearchByGlobalNamePostParams, body: UserSearchPrefixRequest): Promise<ServerResponse<UserSearchResponse>> {
-  return post(http, `${API_BASE}Search/GlobalName/${params.page}/`, body);
+export function searchByGlobalNamePost(http: HttpClient<ServerResponse<UserSearchResponse>>, params: SearchByGlobalNamePostParams, body: UserSearchPrefixRequest): Promise<ServerResponse<UserSearchResponse>> {
+    return post(http, `${API_BASE}Search/GlobalName/${params.page}/`, body);
 }

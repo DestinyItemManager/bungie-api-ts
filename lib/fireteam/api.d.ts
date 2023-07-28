@@ -29,7 +29,7 @@ export interface GetActivePrivateClanFireteamCountParams {
  * value returned is 25.
  */
 export declare function getActivePrivateClanFireteamCount(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<number>>,
   params: GetActivePrivateClanFireteamCountParams
 ): Promise<ServerResponse<number>>;
 export interface GetAvailableClanFireteamsParams {
@@ -60,7 +60,7 @@ export interface GetAvailableClanFireteamsParams {
  * Caller is not checked for join criteria so caching is maximized.
  */
 export declare function getAvailableClanFireteams(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<SearchResultOfFireteamSummary>>,
   params: GetAvailableClanFireteamsParams
 ): Promise<ServerResponse<SearchResultOfFireteamSummary>>;
 export interface SearchPublicAvailableClanFireteamsParams {
@@ -87,7 +87,7 @@ export interface SearchPublicAvailableClanFireteamsParams {
  * not checked for join criteria so caching is maximized.
  */
 export declare function searchPublicAvailableClanFireteams(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<SearchResultOfFireteamSummary>>,
   params: SearchPublicAvailableClanFireteamsParams
 ): Promise<ServerResponse<SearchResultOfFireteamSummary>>;
 export interface GetMyClanFireteamsParams {
@@ -115,7 +115,7 @@ export interface GetMyClanFireteamsParams {
  * alternate of.
  */
 export declare function getMyClanFireteams(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<SearchResultOfFireteamResponse>>,
   params: GetMyClanFireteamsParams
 ): Promise<ServerResponse<SearchResultOfFireteamResponse>>;
 export interface GetClanFireteamParams {
@@ -126,6 +126,6 @@ export interface GetClanFireteamParams {
 }
 /** Gets a specific fireteam. */
 export declare function getClanFireteam(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<FireteamResponse>>,
   params: GetClanFireteamParams
 ): Promise<ServerResponse<FireteamResponse>>;

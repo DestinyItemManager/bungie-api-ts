@@ -24,12 +24,12 @@ import {
 const API_BASE = "https://www.bungie.net/Platform/";
 
 /** List of available localization cultures */
-export function getAvailableLocales(http: HttpClient): Promise<ServerResponse<{ [key: string]: string }>> {
+export function getAvailableLocales(http: HttpClient<ServerResponse<{ [key: string]: string }>>): Promise<ServerResponse<{ [key: string]: string }>> {
   return get(http, `${API_BASE}GetAvailableLocales/`);
 }
 
 /** Get the common settings used by the Bungie.Net environment. */
-export function getCommonSettings(http: HttpClient): Promise<ServerResponse<CoreSettingsConfiguration>> {
+export function getCommonSettings(http: HttpClient<ServerResponse<CoreSettingsConfiguration>>): Promise<ServerResponse<CoreSettingsConfiguration>> {
   return get(http, `${API_BASE}Settings/`);
 }
 
@@ -37,7 +37,7 @@ export function getCommonSettings(http: HttpClient): Promise<ServerResponse<Core
  * Get the user-specific system overrides that should be respected alongside common
  * systems.
  */
-export function getUserSystemOverrides(http: HttpClient): Promise<ServerResponse<{ [key: string]: CoreSystem }>> {
+export function getUserSystemOverrides(http: HttpClient<ServerResponse<{ [key: string]: CoreSystem }>>): Promise<ServerResponse<{ [key: string]: CoreSystem }>> {
   return get(http, `${API_BASE}UserSystemOverrides/`);
 }
 
@@ -50,8 +50,8 @@ export interface GetGlobalAlertsParams {
  * Gets any active global alert for display in the forum banners, help pages, etc.
  * Usually used for DOC alerts.
  */
-export function getGlobalAlerts(http: HttpClient, params: GetGlobalAlertsParams): Promise<ServerResponse<GlobalAlert[]>> {
-  return get(http, `${API_BASE}GlobalAlerts/`, {
-    includestreaming: params.includestreaming
-  });
+export function getGlobalAlerts(http: HttpClient<ServerResponse<GlobalAlert[]>>, params: GetGlobalAlertsParams): Promise<ServerResponse<GlobalAlert[]>> {
+  const strParams: Record<string, string> = {};
+  if (params.includestreaming !== undefined) { strParams.includestreaming = params.includestreaming.toString(); }
+  return get(http, `${API_BASE}GlobalAlerts/`, strParams);
 }

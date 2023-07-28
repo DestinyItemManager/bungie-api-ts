@@ -13,20 +13,32 @@ import { HttpClient } from '../http.js';
 import { CoreSettingsConfiguration, CoreSystem, GlobalAlert } from './interfaces.js';
 import { ServerResponse } from '../common.js';
 /** List of available localization cultures */
-export declare function getAvailableLocales(http: HttpClient): Promise<
+export declare function getAvailableLocales(
+  http: HttpClient<
+    ServerResponse<{
+      [key: string]: string;
+    }>
+  >
+): Promise<
   ServerResponse<{
     [key: string]: string;
   }>
 >;
 /** Get the common settings used by the Bungie.Net environment. */
 export declare function getCommonSettings(
-  http: HttpClient
+  http: HttpClient<ServerResponse<CoreSettingsConfiguration>>
 ): Promise<ServerResponse<CoreSettingsConfiguration>>;
 /**
  * Get the user-specific system overrides that should be respected alongside common
  * systems.
  */
-export declare function getUserSystemOverrides(http: HttpClient): Promise<
+export declare function getUserSystemOverrides(
+  http: HttpClient<
+    ServerResponse<{
+      [key: string]: CoreSystem;
+    }>
+  >
+): Promise<
   ServerResponse<{
     [key: string]: CoreSystem;
   }>
@@ -40,6 +52,6 @@ export interface GetGlobalAlertsParams {
  * Usually used for DOC alerts.
  */
 export declare function getGlobalAlerts(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<GlobalAlert[]>>,
   params: GetGlobalAlertsParams
 ): Promise<ServerResponse<GlobalAlert[]>>;

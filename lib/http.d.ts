@@ -1,8 +1,9 @@
+export type HttpQueryParams = Record<string, string>;
 export interface HttpClientConfig {
     method: 'GET' | 'POST';
     url: string;
     /** Query string params */
-    params?: any;
+    params?: HttpQueryParams;
     /** Request body */
     body?: any;
 }
@@ -12,6 +13,6 @@ export interface HttpClientConfig {
  * should produce a promise for the parsed JSON as a result. The API
  * helper functions will use this to return the right type.
  */
-export type HttpClient = (config: HttpClientConfig) => Promise<any>;
-export declare function get(http: HttpClient, url: string, params?: any): Promise<any>;
-export declare function post(http: HttpClient, url: string, body?: any): Promise<any>;
+export type HttpClient<Return> = (config: HttpClientConfig) => Promise<Return>;
+export declare function get<Return>(http: HttpClient<Return>, url: string, params?: HttpQueryParams): Promise<Return>;
+export declare function post<Return>(http: HttpClient<Return>, url: string, body?: any): Promise<Return>;

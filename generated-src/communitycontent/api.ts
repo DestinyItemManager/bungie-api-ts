@@ -31,6 +31,6 @@ export interface GetCommunityContentParams {
 }
 
 /** Returns community content. */
-export function getCommunityContent(http: HttpClient, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getCommunityContent(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetCommunityContentParams): Promise<ServerResponse<PostSearchResponse>> {
   return get(http, `https://www.bungie.net/Platform/CommunityContent/Get/${params.sort}/${params.mediaFilter}/${params.page}/`);
 }

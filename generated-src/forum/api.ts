@@ -52,11 +52,11 @@ export interface GetTopicsPagedParams {
 }
 
 /** Get topics from any forum. */
-export function getTopicsPaged(http: HttpClient, params: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}GetTopicsPaged/${params.page}/${params.pageSize}/${params.group}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`, {
-    locales: params.locales,
-    tagstring: params.tagstring
-  });
+export function getTopicsPaged(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.locales !== undefined) { strParams.locales = params.locales; }
+  if (params.tagstring !== undefined) { strParams.tagstring = params.tagstring; }
+  return get(http, `${API_BASE}GetTopicsPaged/${params.page}/${params.pageSize}/${params.group}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`, strParams);
 }
 
 export interface GetCoreTopicsPagedParams {
@@ -76,10 +76,10 @@ export interface GetCoreTopicsPagedParams {
 }
 
 /** Gets a listing of all topics marked as part of the core group. */
-export function getCoreTopicsPaged(http: HttpClient, params: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}GetCoreTopicsPaged/${params.page}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`, {
-    locales: params.locales
-  });
+export function getCoreTopicsPaged(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetCoreTopicsPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.locales !== undefined) { strParams.locales = params.locales; }
+  return get(http, `${API_BASE}GetCoreTopicsPaged/${params.page}/${params.sort}/${params.quickDate}/${params.categoryFilter}/`, strParams);
 }
 
 export interface GetPostsThreadedPagedParams {
@@ -98,10 +98,10 @@ export interface GetPostsThreadedPagedParams {
  * Returns a thread of posts at the given parent, optionally returning replies to
  * those posts as well as the original parent.
  */
-export function getPostsThreadedPaged(http: HttpClient, params: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}GetPostsThreadedPaged/${params.parentPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.getParentPost}/${params.rootThreadMode}/${params.sortMode}/`, {
-    showbanned: params.showbanned
-  });
+export function getPostsThreadedPaged(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetPostsThreadedPagedParams): Promise<ServerResponse<PostSearchResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.showbanned !== undefined) { strParams.showbanned = params.showbanned; }
+  return get(http, `${API_BASE}GetPostsThreadedPaged/${params.parentPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.getParentPost}/${params.rootThreadMode}/${params.sortMode}/`, strParams);
 }
 
 export interface GetPostsThreadedPagedFromChildParams {
@@ -119,10 +119,10 @@ export interface GetPostsThreadedPagedFromChildParams {
  * Returns a thread of posts starting at the topicId of the input childPostId,
  * optionally returning replies to those posts as well as the original parent.
  */
-export function getPostsThreadedPagedFromChild(http: HttpClient, params: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}GetPostsThreadedPagedFromChild/${params.childPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.rootThreadMode}/${params.sortMode}/`, {
-    showbanned: params.showbanned
-  });
+export function getPostsThreadedPagedFromChild(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetPostsThreadedPagedFromChildParams): Promise<ServerResponse<PostSearchResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.showbanned !== undefined) { strParams.showbanned = params.showbanned; }
+  return get(http, `${API_BASE}GetPostsThreadedPagedFromChild/${params.childPostId}/${params.page}/${params.pageSize}/${params.replySize}/${params.rootThreadMode}/${params.sortMode}/`, strParams);
 }
 
 export interface GetPostAndParentParams {
@@ -132,10 +132,10 @@ export interface GetPostAndParentParams {
 }
 
 /** Returns the post specified and its immediate parent. */
-export function getPostAndParent(http: HttpClient, params: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}GetPostAndParent/${params.childPostId}/`, {
-    showbanned: params.showbanned
-  });
+export function getPostAndParent(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetPostAndParentParams): Promise<ServerResponse<PostSearchResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.showbanned !== undefined) { strParams.showbanned = params.showbanned; }
+  return get(http, `${API_BASE}GetPostAndParent/${params.childPostId}/`, strParams);
 }
 
 export interface GetPostAndParentAwaitingApprovalParams {
@@ -148,10 +148,10 @@ export interface GetPostAndParentAwaitingApprovalParams {
  * Returns the post specified and its immediate parent of posts that are awaiting
  * approval.
  */
-export function getPostAndParentAwaitingApproval(http: HttpClient, params: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>> {
-  return get(http, `${API_BASE}GetPostAndParentAwaitingApproval/${params.childPostId}/`, {
-    showbanned: params.showbanned
-  });
+export function getPostAndParentAwaitingApproval(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetPostAndParentAwaitingApprovalParams): Promise<ServerResponse<PostSearchResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.showbanned !== undefined) { strParams.showbanned = params.showbanned; }
+  return get(http, `${API_BASE}GetPostAndParentAwaitingApproval/${params.childPostId}/`, strParams);
 }
 
 export interface GetTopicForContentParams {
@@ -159,7 +159,7 @@ export interface GetTopicForContentParams {
 }
 
 /** Gets the post Id for the given content item's comments, if it exists. */
-export function getTopicForContent(http: HttpClient, params: GetTopicForContentParams): Promise<ServerResponse<string>> {
+export function getTopicForContent(http: HttpClient<ServerResponse<string>>, params: GetTopicForContentParams): Promise<ServerResponse<string>> {
   return get(http, `${API_BASE}GetTopicForContent/${params.contentId}/`);
 }
 
@@ -172,10 +172,10 @@ export interface GetForumTagSuggestionsParams {
  * Gets tag suggestions based on partial text entry, matching them with other tags
  * previously used in the forums.
  */
-export function getForumTagSuggestions(http: HttpClient, params: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>> {
-  return get(http, `${API_BASE}GetForumTagSuggestions/`, {
-    partialtag: params.partialtag
-  });
+export function getForumTagSuggestions(http: HttpClient<ServerResponse<TagResponse[]>>, params: GetForumTagSuggestionsParams): Promise<ServerResponse<TagResponse[]>> {
+  const strParams: Record<string, string> = {};
+  if (params.partialtag !== undefined) { strParams.partialtag = params.partialtag; }
+  return get(http, `${API_BASE}GetForumTagSuggestions/`, strParams);
 }
 
 export interface GetPollParams {
@@ -184,7 +184,7 @@ export interface GetPollParams {
 }
 
 /** Gets the specified forum poll. */
-export function getPoll(http: HttpClient, params: GetPollParams): Promise<ServerResponse<PostSearchResponse>> {
+export function getPoll(http: HttpClient<ServerResponse<PostSearchResponse>>, params: GetPollParams): Promise<ServerResponse<PostSearchResponse>> {
   return get(http, `${API_BASE}Poll/${params.topicId}/`);
 }
 
@@ -192,6 +192,6 @@ export function getPoll(http: HttpClient, params: GetPollParams): Promise<Server
  * Allows the caller to get a list of to 25 recruitment thread summary information
  * objects.
  */
-export function getRecruitmentThreadSummaries(http: HttpClient, body: string[]): Promise<ServerResponse<ForumRecruitmentDetail[]>> {
-  return post(http, `${API_BASE}Recruit/Summaries/`, body);
+export function getRecruitmentThreadSummaries(http: HttpClient<ServerResponse<ForumRecruitmentDetail[]>>, body: string[]): Promise<ServerResponse<ForumRecruitmentDetail[]>> {
+    return post(http, `${API_BASE}Recruit/Summaries/`, body);
 }

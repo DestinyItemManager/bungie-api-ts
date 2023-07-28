@@ -36,7 +36,7 @@ export interface GetActivePrivateClanFireteamCountParams {
  * Gets a count of all active non-public fireteams for the specified clan. Maximum
  * value returned is 25.
  */
-export function getActivePrivateClanFireteamCount(http: HttpClient, params: GetActivePrivateClanFireteamCountParams): Promise<ServerResponse<number>> {
+export function getActivePrivateClanFireteamCount(http: HttpClient<ServerResponse<number>>, params: GetActivePrivateClanFireteamCountParams): Promise<ServerResponse<number>> {
   return get(http, `${API_BASE}Clan/${params.groupId}/ActiveCount/`);
 }
 
@@ -68,11 +68,11 @@ export interface GetAvailableClanFireteamsParams {
  * Gets a listing of all of this clan's fireteams that are have available slots.
  * Caller is not checked for join criteria so caching is maximized.
  */
-export function getAvailableClanFireteams(http: HttpClient, params: GetAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
-  return get(http, `${API_BASE}Clan/${params.groupId}/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.publicOnly}/${params.page}/`, {
-    excludeImmediate: params.excludeImmediate,
-    langFilter: params.langFilter
-  });
+export function getAvailableClanFireteams(http: HttpClient<ServerResponse<SearchResultOfFireteamSummary>>, params: GetAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
+  const strParams: Record<string, string> = {};
+  if (params.excludeImmediate !== undefined) { strParams.excludeImmediate = params.excludeImmediate.toString(); }
+  if (params.langFilter !== undefined) { strParams.langFilter = params.langFilter; }
+  return get(http, `${API_BASE}Clan/${params.groupId}/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.publicOnly}/${params.page}/`, strParams);
 }
 
 export interface SearchPublicAvailableClanFireteamsParams {
@@ -99,11 +99,11 @@ export interface SearchPublicAvailableClanFireteamsParams {
  * Gets a listing of all public fireteams starting now with open slots. Caller is
  * not checked for join criteria so caching is maximized.
  */
-export function searchPublicAvailableClanFireteams(http: HttpClient, params: SearchPublicAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
-  return get(http, `${API_BASE}Search/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.page}/`, {
-    excludeImmediate: params.excludeImmediate,
-    langFilter: params.langFilter
-  });
+export function searchPublicAvailableClanFireteams(http: HttpClient<ServerResponse<SearchResultOfFireteamSummary>>, params: SearchPublicAvailableClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamSummary>> {
+  const strParams: Record<string, string> = {};
+  if (params.excludeImmediate !== undefined) { strParams.excludeImmediate = params.excludeImmediate.toString(); }
+  if (params.langFilter !== undefined) { strParams.langFilter = params.langFilter; }
+  return get(http, `${API_BASE}Search/Available/${params.platform}/${params.activityType}/${params.dateRange}/${params.slotFilter}/${params.page}/`, strParams);
 }
 
 export interface GetMyClanFireteamsParams {
@@ -131,11 +131,11 @@ export interface GetMyClanFireteamsParams {
  * Gets a listing of all fireteams that caller is an applicant, a member, or an
  * alternate of.
  */
-export function getMyClanFireteams(http: HttpClient, params: GetMyClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamResponse>> {
-  return get(http, `${API_BASE}Clan/${params.groupId}/My/${params.platform}/${params.includeClosed}/${params.page}/`, {
-    groupFilter: params.groupFilter,
-    langFilter: params.langFilter
-  });
+export function getMyClanFireteams(http: HttpClient<ServerResponse<SearchResultOfFireteamResponse>>, params: GetMyClanFireteamsParams): Promise<ServerResponse<SearchResultOfFireteamResponse>> {
+  const strParams: Record<string, string> = {};
+  if (params.groupFilter !== undefined) { strParams.groupFilter = params.groupFilter.toString(); }
+  if (params.langFilter !== undefined) { strParams.langFilter = params.langFilter; }
+  return get(http, `${API_BASE}Clan/${params.groupId}/My/${params.platform}/${params.includeClosed}/${params.page}/`, strParams);
 }
 
 export interface GetClanFireteamParams {
@@ -146,6 +146,6 @@ export interface GetClanFireteamParams {
 }
 
 /** Gets a specific fireteam. */
-export function getClanFireteam(http: HttpClient, params: GetClanFireteamParams): Promise<ServerResponse<FireteamResponse>> {
+export function getClanFireteam(http: HttpClient<ServerResponse<FireteamResponse>>, params: GetClanFireteamParams): Promise<ServerResponse<FireteamResponse>> {
   return get(http, `${API_BASE}Clan/${params.groupId}/Summary/${params.fireteamId}/`);
 }

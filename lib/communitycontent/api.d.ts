@@ -26,6 +26,6 @@ export interface GetCommunityContentParams {
 }
 /** Returns community content. */
 export declare function getCommunityContent(
-  http: HttpClient,
+  http: HttpClient<ServerResponse<PostSearchResponse>>,
   params: GetCommunityContentParams
 ): Promise<ServerResponse<PostSearchResponse>>;

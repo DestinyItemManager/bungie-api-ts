@@ -11,7 +11,7 @@
  * Do not edit these files manually.
  */
 
-import { HttpClient } from '../http.js';
+import { HttpClient, get } from '../http.js';
 
 import {
   DestinyPlaceDefinition,
@@ -23,7 +23,6 @@ import {
   DestinyRaceDefinition,
   DestinyTalentGridDefinition,
   DestinyUnlockDefinition,
-  DestinySandboxPerkDefinition,
   DestinyStatGroupDefinition,
   DestinyProgressionMappingDefinition,
   DestinyFactionDefinition,
@@ -50,6 +49,7 @@ import {
   DestinyMaterialRequirementSetDefinition,
   DestinyMetricDefinition,
   DestinyObjectiveDefinition,
+  DestinySandboxPerkDefinition,
   DestinyPlugSetDefinition,
   DestinyPowerCapDefinition,
   DestinyPresentationNodeDefinition,
@@ -93,7 +93,6 @@ export interface AllDestinyManifestComponents {
   DestinyRaceDefinition: { [key: number]: DestinyRaceDefinition };
   DestinyTalentGridDefinition: { [key: number]: DestinyTalentGridDefinition };
   DestinyUnlockDefinition: { [key: number]: DestinyUnlockDefinition };
-  DestinySandboxPerkDefinition: { [key: number]: DestinySandboxPerkDefinition };
   DestinyStatGroupDefinition: { [key: number]: DestinyStatGroupDefinition };
   DestinyProgressionMappingDefinition: { [key: number]: DestinyProgressionMappingDefinition };
   DestinyFactionDefinition: { [key: number]: DestinyFactionDefinition };
@@ -120,6 +119,7 @@ export interface AllDestinyManifestComponents {
   DestinyMaterialRequirementSetDefinition: { [key: number]: DestinyMaterialRequirementSetDefinition };
   DestinyMetricDefinition: { [key: number]: DestinyMetricDefinition };
   DestinyObjectiveDefinition: { [key: number]: DestinyObjectiveDefinition };
+  DestinySandboxPerkDefinition: { [key: number]: DestinySandboxPerkDefinition };
   DestinyPlugSetDefinition: { [key: number]: DestinyPlugSetDefinition };
   DestinyPowerCapDefinition: { [key: number]: DestinyPowerCapDefinition };
   DestinyPresentationNodeDefinition: { [key: number]: DestinyPresentationNodeDefinition };
@@ -202,13 +202,10 @@ export interface GetAllDestinyManifestComponentsParams {
 }
 /** fetches the enormous combined JSON manifest file */
 export function getAllDestinyManifestComponents(
-  http: HttpClient,
+  http: HttpClient<AllDestinyManifestComponents>,
   params: GetAllDestinyManifestComponentsParams
 ): Promise<AllDestinyManifestComponents> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net'+params.destinyManifest.jsonWorldContentPaths[params.language],
-  });
+  return get(http, 'https://www.bungie.net'+params.destinyManifest.jsonWorldContentPaths[params.language]);
 }
 
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
@@ -232,21 +229,16 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
  * but make sure it's not a `let x =` or a dynamically set string.
  */
  export async function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
-  http: HttpClient,
+  http: HttpClient<AllDestinyManifestComponents[T]>,
   params: GetDestinyManifestComponentParams<T>
 ): Promise<AllDestinyManifestComponents[T]> {
-  const r = {
-    method: 'GET' as const,
-    url:
-      'https://www.bungie.net' +
-      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName],
-  };
+  const url = 'https://www.bungie.net' +
+      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName];
   try {
-    return await http(r);
+    return await get(http, url);
   } catch (e) {
-    r.url += '?retry';
     try {
-      return await http(r);
+      return await get(http, `${url}?retry`);
     } catch {
       throw e;
     }
@@ -279,7 +271,7 @@ export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponen
  * `function(['DestinyInventoryItemDefinition'])`
  */
 export async function getDestinyManifestSlice<T extends DestinyManifestComponentName[]>(
-  http: HttpClient,
+  http: HttpClient<AllDestinyManifestComponents[keyof AllDestinyManifestComponents]>,
   params: GetDestinyManifestSliceParams<T>
 ): Promise<DestinyManifestSlice<T>> {
   const downloadedTables = await Promise.all(

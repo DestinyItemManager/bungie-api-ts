@@ -43,7 +43,7 @@ import { DestinyComponentType } from '../generated-src/destiny2/interfaces';
 // instead of actually performing a fetch,
 // this fake HttpClient returns the HttpConfig it would have used to make the fetch
 // so we can check of the HttpConfig was built right
-const h = ((httpConfig?: any) => Promise.resolve(httpConfig)) as HttpClient;
+const h = ((httpConfig?: any) => Promise.resolve(httpConfig)) as HttpClient<any>;
 
 // sample values for the "body" argument
 const b = {} as any;
