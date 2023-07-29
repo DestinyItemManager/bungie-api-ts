@@ -303,7 +303,7 @@ export interface GetAllDestinyManifestComponentsParams {
 }
 /** fetches the enormous combined JSON manifest file */
 export declare function getAllDestinyManifestComponents(
-  http: HttpClient<AllDestinyManifestComponents>,
+  http: HttpClient,
   params: GetAllDestinyManifestComponentsParams
 ): Promise<AllDestinyManifestComponents>;
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
@@ -327,7 +327,7 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
  * but make sure it's not a `let x =` or a dynamically set string.
  */
 export declare function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
-  http: HttpClient<AllDestinyManifestComponents[T]>,
+  http: HttpClient,
   params: GetDestinyManifestComponentParams<T>
 ): Promise<AllDestinyManifestComponents[T]>;
 export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponentName[]> {
@@ -356,6 +356,6 @@ export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponen
  * `function(['DestinyInventoryItemDefinition'])`
  */
 export declare function getDestinyManifestSlice<T extends DestinyManifestComponentName[]>(
-  http: HttpClient<AllDestinyManifestComponents[keyof AllDestinyManifestComponents]>,
+  http: HttpClient,
   params: GetDestinyManifestSliceParams<T>
 ): Promise<DestinyManifestSlice<T>>;

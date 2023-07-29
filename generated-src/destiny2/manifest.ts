@@ -202,7 +202,7 @@ export interface GetAllDestinyManifestComponentsParams {
 }
 /** fetches the enormous combined JSON manifest file */
 export function getAllDestinyManifestComponents(
-  http: HttpClient<AllDestinyManifestComponents>,
+  http: HttpClient,
   params: GetAllDestinyManifestComponentsParams
 ): Promise<AllDestinyManifestComponents> {
   return get(http, 'https://www.bungie.net'+params.destinyManifest.jsonWorldContentPaths[params.language]);
@@ -229,7 +229,7 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
  * but make sure it's not a `let x =` or a dynamically set string.
  */
  export async function getDestinyManifestComponent<T extends DestinyManifestComponentName>(
-  http: HttpClient<AllDestinyManifestComponents[T]>,
+  http: HttpClient,
   params: GetDestinyManifestComponentParams<T>
 ): Promise<AllDestinyManifestComponents[T]> {
   const url = 'https://www.bungie.net' +
@@ -271,7 +271,7 @@ export interface GetDestinyManifestSliceParams<T extends DestinyManifestComponen
  * `function(['DestinyInventoryItemDefinition'])`
  */
 export async function getDestinyManifestSlice<T extends DestinyManifestComponentName[]>(
-  http: HttpClient<AllDestinyManifestComponents[keyof AllDestinyManifestComponents]>,
+  http: HttpClient,
   params: GetDestinyManifestSliceParams<T>
 ): Promise<DestinyManifestSlice<T>> {
   const downloadedTables = await Promise.all(
