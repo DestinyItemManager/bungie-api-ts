@@ -3,7 +3,7 @@ import { OpenAPIObject } from 'openapi3-ts';
 import fetch from 'node-fetch';
 import { writeOutFile } from './generate-common.js';
 
-const httpClientType = `import { HttpClient } from '../http.js';`;
+const httpClientType = `import { HttpClient, get } from '../http.js';`;
 
 const manifestMetadataPromise = (async () => {
   try {
@@ -120,10 +120,7 @@ export function getAllDestinyManifestComponents(
   http: HttpClient,
   params: GetAllDestinyManifestComponentsParams
 ): Promise<AllDestinyManifestComponents> {
-  return http({
-    method: 'GET',
-    url: 'https://www.bungie.net'+params.destinyManifest.jsonWorldContentPaths[params.language],
-  });
+  return get(http, 'https://www.bungie.net'+params.destinyManifest.jsonWorldContentPaths[params.language]);
 }
 
 export interface GetDestinyManifestComponentParams<T extends DestinyManifestComponentName> {
@@ -150,18 +147,13 @@ export interface GetDestinyManifestComponentParams<T extends DestinyManifestComp
   http: HttpClient,
   params: GetDestinyManifestComponentParams<T>
 ): Promise<AllDestinyManifestComponents[T]> {
-  const r = {
-    method: 'GET' as const,
-    url:
-      'https://www.bungie.net' +
-      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName],
-  };
+  const url = 'https://www.bungie.net' +
+      params.destinyManifest.jsonWorldComponentContentPaths[params.language][params.tableName];
   try {
-    return await http(r);
+    return await get(http, url);
   } catch (e) {
-    r.url += '?retry';
     try {
-      return await http(r);
+      return await get(http, \`\${url}?retry\`);
     } catch {
       throw e;
     }

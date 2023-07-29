@@ -113,7 +113,8 @@ function generatePathDefinition(
     .filter((param) => param.in === 'query')
     .map((param) => param.name);
 
-  const parameterArgs = ['http: HttpClient'];
+  const parameterArgs: string[] = [`http: HttpClient`];
+
   let interfaceDefinition = '';
   if (params.length) {
     interfaceDefinition =
@@ -152,17 +153,21 @@ function generatePathDefinition(
 
       if (paramType.endsWith('[]')) {
         if (!param.required) {
-          return `${p}: params.${p} ? params.${p}.join(',') : undefined`;
+          return `if (params.${p}?.length) { strParams.${p} = params.${p}.join(','); }`;
         }
-        return `${p}: params.${p}.join(',')`;
+        return `strParams.${p} = params.${p}.join(',');`;
       }
 
-      return `${p}: params.${p}`;
+      return param.required
+        ? `strParams.${p} = params.${p}.toString();`
+        : `if (params.${p} !== undefined) { strParams.${p} = params.${p}${
+            paramType === 'string' ? '' : '.toString()'
+          }; }`;
     });
 
-    paramsObject = `, {
-${indent(paramInitializers.join(',\n'), 2)}
-  }`;
+    paramsObject = `const strParams: Record<string, string> = {};
+${indent(paramInitializers.join('\n'), 1)}
+  `;
   }
 
   let requestBodyParam = '';
@@ -179,14 +184,16 @@ ${indent(paramInitializers.join(',\n'), 2)}
 
   const fnBody =
     method == 'GET'
-      ? `get(http, ${templatizedPath}${paramsObject})`
-      : `post(http, ${templatizedPath}${requestBodyParam})`;
+      ? `${paramsObject}return get(http, ${templatizedPath}${
+          paramsObject.length ? ', strParams' : ''
+        })`
+      : `  return post(http, ${templatizedPath}${requestBodyParam})`;
 
   return `${interfaceDefinition}${docComment(
     methodDef.description! + (rateDoc ? '\n' + rateDoc : '')
   )}
 export function ${functionName}(${parameterArgs.join(', ')}): Promise<${returnValue}> {
-  return ${fnBody};
+  ${fnBody};
 }`;
 }
 

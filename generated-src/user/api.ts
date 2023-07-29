@@ -126,5 +126,5 @@ export interface SearchByGlobalNamePostParams {
 
 /** Given the prefix of a global display name, returns all users who share that name. */
 export function searchByGlobalNamePost(http: HttpClient, params: SearchByGlobalNamePostParams, body: UserSearchPrefixRequest): Promise<ServerResponse<UserSearchResponse>> {
-  return post(http, `${API_BASE}Search/GlobalName/${params.page}/`, body);
+    return post(http, `${API_BASE}Search/GlobalName/${params.page}/`, body);
 }

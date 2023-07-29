@@ -42,9 +42,9 @@ export interface GetContentByIdParams {
 
 /** Returns a content item referenced by id */
 export function getContentById(http: HttpClient, params: GetContentByIdParams): Promise<ServerResponse<ContentItemPublicContract>> {
-  return get(http, `${API_BASE}GetContentById/${params.id}/${params.locale}/`, {
-    head: params.head
-  });
+  const strParams: Record<string, string> = {};
+  if (params.head !== undefined) { strParams.head = params.head.toString(); }
+  return get(http, `${API_BASE}GetContentById/${params.id}/${params.locale}/`, strParams);
 }
 
 export interface GetContentByTagAndTypeParams {
@@ -57,9 +57,9 @@ export interface GetContentByTagAndTypeParams {
 
 /** Returns the newest item that matches a given tag and Content Type. */
 export function getContentByTagAndType(http: HttpClient, params: GetContentByTagAndTypeParams): Promise<ServerResponse<ContentItemPublicContract>> {
-  return get(http, `${API_BASE}GetContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`, {
-    head: params.head
-  });
+  const strParams: Record<string, string> = {};
+  if (params.head !== undefined) { strParams.head = params.head.toString(); }
+  return get(http, `${API_BASE}GetContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`, strParams);
 }
 
 export interface SearchContentWithTextParams {
@@ -83,14 +83,14 @@ export interface SearchContentWithTextParams {
  * and text search capabilities.
  */
 export function searchContentWithText(http: HttpClient, params: SearchContentWithTextParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
-  return get(http, `${API_BASE}Search/${params.locale}/`, {
-    ctype: params.ctype,
-    currentpage: params.currentpage,
-    head: params.head,
-    searchtext: params.searchtext,
-    source: params.source,
-    tag: params.tag
-  });
+  const strParams: Record<string, string> = {};
+  if (params.ctype !== undefined) { strParams.ctype = params.ctype; }
+  if (params.currentpage !== undefined) { strParams.currentpage = params.currentpage.toString(); }
+  if (params.head !== undefined) { strParams.head = params.head.toString(); }
+  if (params.searchtext !== undefined) { strParams.searchtext = params.searchtext; }
+  if (params.source !== undefined) { strParams.source = params.source; }
+  if (params.tag !== undefined) { strParams.tag = params.tag; }
+  return get(http, `${API_BASE}Search/${params.locale}/`, strParams);
 }
 
 export interface SearchContentByTagAndTypeParams {
@@ -107,11 +107,11 @@ export interface SearchContentByTagAndTypeParams {
 
 /** Searches for Content Items that match the given Tag and Content Type. */
 export function searchContentByTagAndType(http: HttpClient, params: SearchContentByTagAndTypeParams): Promise<ServerResponse<SearchResultOfContentItemPublicContract>> {
-  return get(http, `${API_BASE}SearchContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`, {
-    currentpage: params.currentpage,
-    head: params.head,
-    itemsperpage: params.itemsperpage
-  });
+  const strParams: Record<string, string> = {};
+  if (params.currentpage !== undefined) { strParams.currentpage = params.currentpage.toString(); }
+  if (params.head !== undefined) { strParams.head = params.head.toString(); }
+  if (params.itemsperpage !== undefined) { strParams.itemsperpage = params.itemsperpage.toString(); }
+  return get(http, `${API_BASE}SearchContentByTagAndType/${params.tag}/${params.type}/${params.locale}/`, strParams);
 }
 
 export interface SearchHelpArticlesParams {
@@ -135,8 +135,8 @@ export interface RssNewsArticlesParams {
 
 /** Returns a JSON string response that is the RSS feed for news articles. */
 export function rssNewsArticles(http: HttpClient, params: RssNewsArticlesParams): Promise<ServerResponse<NewsArticleRssResponse>> {
-  return get(http, `${API_BASE}Rss/NewsArticles/${params.pageToken}/`, {
-    categoryfilter: params.categoryfilter,
-    includebody: params.includebody
-  });
+  const strParams: Record<string, string> = {};
+  if (params.categoryfilter !== undefined) { strParams.categoryfilter = params.categoryfilter; }
+  if (params.includebody !== undefined) { strParams.includebody = params.includebody.toString(); }
+  return get(http, `${API_BASE}Rss/NewsArticles/${params.pageToken}/`, strParams);
 }

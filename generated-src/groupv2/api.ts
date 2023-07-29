@@ -85,12 +85,12 @@ export interface GetRecommendedGroupsParams {
  * belong.
  */
 export function getRecommendedGroups(http: HttpClient, params: GetRecommendedGroupsParams): Promise<ServerResponse<GroupV2Card[]>> {
-  return post(http, `${API_BASE}Recommended/${params.groupType}/${params.createDateRange}/`);
+    return post(http, `${API_BASE}Recommended/${params.groupType}/${params.createDateRange}/`);
 }
 
 /** Search for Groups. */
 export function groupSearch(http: HttpClient, body: GroupQuery): Promise<ServerResponse<GroupSearchResponse>> {
-  return post(http, `${API_BASE}Search/`, body);
+    return post(http, `${API_BASE}Search/`, body);
 }
 
 export interface GetGroupParams {
@@ -120,7 +120,7 @@ export function getGroupByName(http: HttpClient, params: GetGroupByNameParams): 
  * version.
  */
 export function getGroupByNameV2(http: HttpClient, body: GroupNameSearchRequest): Promise<ServerResponse<GroupResponse>> {
-  return post(http, `${API_BASE}NameV2/`, body);
+    return post(http, `${API_BASE}NameV2/`, body);
 }
 
 export interface GetGroupOptionalConversationsParams {
@@ -144,7 +144,7 @@ export interface EditGroupParams {
  * in - pass null for properties you want to leave unaltered.
  */
 export function editGroup(http: HttpClient, params: EditGroupParams, body: GroupEditAction): Promise<ServerResponse<number>> {
-  return post(http, `${API_BASE}${params.groupId}/Edit/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Edit/`, body);
 }
 
 export interface EditClanBannerParams {
@@ -157,7 +157,7 @@ export interface EditClanBannerParams {
  * group to perform this operation. All fields are required.
  */
 export function editClanBanner(http: HttpClient, params: EditClanBannerParams, body: ClanBanner): Promise<ServerResponse<number>> {
-  return post(http, `${API_BASE}${params.groupId}/EditClanBanner/`, body);
+    return post(http, `${API_BASE}${params.groupId}/EditClanBanner/`, body);
 }
 
 export interface EditFounderOptionsParams {
@@ -170,7 +170,7 @@ export interface EditFounderOptionsParams {
  * permissions in the group to perform this operation.
  */
 export function editFounderOptions(http: HttpClient, params: EditFounderOptionsParams, body: GroupOptionsEditAction): Promise<ServerResponse<number>> {
-  return post(http, `${API_BASE}${params.groupId}/EditFounderOptions/`, body);
+    return post(http, `${API_BASE}${params.groupId}/EditFounderOptions/`, body);
 }
 
 export interface AddOptionalConversationParams {
@@ -183,7 +183,7 @@ export interface AddOptionalConversationParams {
  * group.
  */
 export function addOptionalConversation(http: HttpClient, params: AddOptionalConversationParams, body: GroupOptionalConversationAddRequest): Promise<ServerResponse<string>> {
-  return post(http, `${API_BASE}${params.groupId}/OptionalConversations/Add/`, body);
+    return post(http, `${API_BASE}${params.groupId}/OptionalConversations/Add/`, body);
 }
 
 export interface EditOptionalConversationParams {
@@ -198,7 +198,7 @@ export interface EditOptionalConversationParams {
  * permissions to the group.
  */
 export function editOptionalConversation(http: HttpClient, params: EditOptionalConversationParams, body: GroupOptionalConversationEditRequest): Promise<ServerResponse<string>> {
-  return post(http, `${API_BASE}${params.groupId}/OptionalConversations/Edit/${params.conversationId}/`, body);
+    return post(http, `${API_BASE}${params.groupId}/OptionalConversations/Edit/${params.conversationId}/`, body);
 }
 
 export interface GetMembersOfGroupParams {
@@ -217,10 +217,10 @@ export interface GetMembersOfGroupParams {
 
 /** Get the list of members in a given group. */
 export function getMembersOfGroup(http: HttpClient, params: GetMembersOfGroupParams): Promise<ServerResponse<SearchResultOfGroupMember>> {
-  return get(http, `${API_BASE}${params.groupId}/Members/`, {
-    memberType: params.memberType,
-    nameSearch: params.nameSearch
-  });
+  const strParams: Record<string, string> = {};
+  if (params.memberType !== undefined) { strParams.memberType = params.memberType.toString(); }
+  if (params.nameSearch !== undefined) { strParams.nameSearch = params.nameSearch; }
+  return get(http, `${API_BASE}${params.groupId}/Members/`, strParams);
 }
 
 export interface GetAdminsAndFounderOfGroupParams {
@@ -251,7 +251,7 @@ export interface EditGroupMembershipParams {
  * in the group to perform this operation.
  */
 export function editGroupMembership(http: HttpClient, params: EditGroupMembershipParams): Promise<ServerResponse<number>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/SetMembershipType/${params.memberType}/`);
+    return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/SetMembershipType/${params.memberType}/`);
 }
 
 export interface KickMemberParams {
@@ -269,7 +269,7 @@ export interface KickMemberParams {
  * operation.
  */
 export function kickMember(http: HttpClient, params: KickMemberParams): Promise<ServerResponse<GroupMemberLeaveResult>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Kick/`);
+    return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Kick/`);
 }
 
 export interface BanMemberParams {
@@ -286,7 +286,7 @@ export interface BanMemberParams {
  * time.
  */
 export function banMember(http: HttpClient, params: BanMemberParams, body: GroupBanRequest): Promise<ServerResponse<number>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Ban/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Ban/`, body);
 }
 
 export interface UnbanMemberParams {
@@ -299,7 +299,7 @@ export interface UnbanMemberParams {
 
 /** Unbans the requested member, allowing them to re-apply for membership. */
 export function unbanMember(http: HttpClient, params: UnbanMemberParams): Promise<ServerResponse<number>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Unban/`);
+    return post(http, `${API_BASE}${params.groupId}/Members/${params.membershipType}/${params.membershipId}/Unban/`);
 }
 
 export interface GetBannedMembersOfGroupParams {
@@ -331,7 +331,7 @@ export interface AbdicateFoundershipParams {
  * their position to another admin permanently.
  */
 export function abdicateFoundership(http: HttpClient, params: AbdicateFoundershipParams): Promise<ServerResponse<boolean>> {
-  return post(http, `${API_BASE}${params.groupId}/Admin/AbdicateFoundership/${params.membershipType}/${params.founderIdNew}/`);
+    return post(http, `${API_BASE}${params.groupId}/Admin/AbdicateFoundership/${params.membershipType}/${params.founderIdNew}/`);
 }
 
 export interface GetPendingMembershipsParams {
@@ -368,7 +368,7 @@ export interface ApproveAllPendingParams {
 
 /** Approve all of the pending users for the given group. */
 export function approveAllPending(http: HttpClient, params: ApproveAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/ApproveAll/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/ApproveAll/`, body);
 }
 
 export interface DenyAllPendingParams {
@@ -378,7 +378,7 @@ export interface DenyAllPendingParams {
 
 /** Deny all of the pending users for the given group. */
 export function denyAllPending(http: HttpClient, params: DenyAllPendingParams, body: GroupApplicationRequest): Promise<ServerResponse<EntityActionResult[]>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/DenyAll/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/DenyAll/`, body);
 }
 
 export interface ApprovePendingForListParams {
@@ -388,7 +388,7 @@ export interface ApprovePendingForListParams {
 
 /** Approve all of the pending users for the given group. */
 export function approvePendingForList(http: HttpClient, params: ApprovePendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/ApproveList/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/ApproveList/`, body);
 }
 
 export interface ApprovePendingParams {
@@ -405,7 +405,7 @@ export interface ApprovePendingParams {
  * applied.
  */
 export function approvePending(http: HttpClient, params: ApprovePendingParams, body: GroupApplicationRequest): Promise<ServerResponse<boolean>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/Approve/${params.membershipType}/${params.membershipId}/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/Approve/${params.membershipType}/${params.membershipId}/`, body);
 }
 
 export interface DenyPendingForListParams {
@@ -415,7 +415,7 @@ export interface DenyPendingForListParams {
 
 /** Deny all of the pending users for the given group that match the passed-in . */
 export function denyPendingForList(http: HttpClient, params: DenyPendingForListParams, body: GroupApplicationListRequest): Promise<ServerResponse<EntityActionResult[]>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/DenyList/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/DenyList/`, body);
 }
 
 export interface GetGroupsForMemberParams {
@@ -481,7 +481,7 @@ export interface IndividualGroupInviteParams {
 
 /** Invite a user to join this group. */
 export function individualGroupInvite(http: HttpClient, params: IndividualGroupInviteParams, body: GroupApplicationRequest): Promise<ServerResponse<GroupApplicationResponse>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/IndividualInvite/${params.membershipType}/${params.membershipId}/`, body);
+    return post(http, `${API_BASE}${params.groupId}/Members/IndividualInvite/${params.membershipType}/${params.membershipId}/`, body);
 }
 
 export interface IndividualGroupInviteCancelParams {
@@ -495,5 +495,5 @@ export interface IndividualGroupInviteCancelParams {
 
 /** Cancels a pending invitation to join a group. */
 export function individualGroupInviteCancel(http: HttpClient, params: IndividualGroupInviteCancelParams): Promise<ServerResponse<GroupApplicationResponse>> {
-  return post(http, `${API_BASE}${params.groupId}/Members/IndividualInviteCancel/${params.membershipType}/${params.membershipId}/`);
+    return post(http, `${API_BASE}${params.groupId}/Members/IndividualInviteCancel/${params.membershipType}/${params.membershipId}/`);
 }

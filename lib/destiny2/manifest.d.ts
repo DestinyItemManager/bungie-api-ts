@@ -21,7 +21,6 @@ import {
   DestinyRaceDefinition,
   DestinyTalentGridDefinition,
   DestinyUnlockDefinition,
-  DestinySandboxPerkDefinition,
   DestinyStatGroupDefinition,
   DestinyProgressionMappingDefinition,
   DestinyFactionDefinition,
@@ -48,6 +47,7 @@ import {
   DestinyMaterialRequirementSetDefinition,
   DestinyMetricDefinition,
   DestinyObjectiveDefinition,
+  DestinySandboxPerkDefinition,
   DestinyPlugSetDefinition,
   DestinyPowerCapDefinition,
   DestinyPresentationNodeDefinition,
@@ -107,9 +107,6 @@ export interface AllDestinyManifestComponents {
   };
   DestinyUnlockDefinition: {
     [key: number]: DestinyUnlockDefinition;
-  };
-  DestinySandboxPerkDefinition: {
-    [key: number]: DestinySandboxPerkDefinition;
   };
   DestinyStatGroupDefinition: {
     [key: number]: DestinyStatGroupDefinition;
@@ -188,6 +185,9 @@ export interface AllDestinyManifestComponents {
   };
   DestinyObjectiveDefinition: {
     [key: number]: DestinyObjectiveDefinition;
+  };
+  DestinySandboxPerkDefinition: {
+    [key: number]: DestinySandboxPerkDefinition;
   };
   DestinyPlugSetDefinition: {
     [key: number]: DestinyPlugSetDefinition;

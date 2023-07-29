@@ -1,8 +1,10 @@
+export type HttpQueryParams = Record<string, string>;
+
 export interface HttpClientConfig {
   method: 'GET' | 'POST';
   url: string;
   /** Query string params */
-  params?: any;
+  params?: HttpQueryParams;
   /** Request body */
   body?: any;
 }
@@ -13,9 +15,13 @@ export interface HttpClientConfig {
  * should produce a promise for the parsed JSON as a result. The API
  * helper functions will use this to return the right type.
  */
-export type HttpClient = (config: HttpClientConfig) => Promise<any>;
+export type HttpClient = <Return>(config: HttpClientConfig) => Promise<Return>;
 
-export function get(http: HttpClient, url: string, params?: any) {
+export function get<Return>(
+  http: HttpClient,
+  url: string,
+  params?: HttpQueryParams
+): Promise<Return> {
   return http(
     params
       ? {
@@ -30,7 +36,7 @@ export function get(http: HttpClient, url: string, params?: any) {
   );
 }
 
-export function post(http: HttpClient, url: string, body?: any) {
+export function post<Return>(http: HttpClient, url: string, body?: any): Promise<Return> {
   return http(
     body
       ? {

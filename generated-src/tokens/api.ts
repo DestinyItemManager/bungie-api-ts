@@ -30,12 +30,12 @@ const API_BASE = "https://www.bungie.net/Platform/Tokens/";
  * fulfilled and resyncs them.
  */
 export function forceDropsRepair(http: HttpClient): Promise<ServerResponse<boolean>> {
-  return post(http, `${API_BASE}Partner/ForceDropsRepair/`);
+    return post(http, `${API_BASE}Partner/ForceDropsRepair/`);
 }
 
 /** Claim a partner offer as the authenticated user. */
 export function claimPartnerOffer(http: HttpClient, body: PartnerOfferClaimRequest): Promise<ServerResponse<boolean>> {
-  return post(http, `${API_BASE}Partner/ClaimOffer/`, body);
+    return post(http, `${API_BASE}Partner/ClaimOffer/`, body);
 }
 
 export interface ApplyMissingPartnerOffersWithoutClaimParams {
@@ -53,7 +53,7 @@ export interface ApplyMissingPartnerOffersWithoutClaimParams {
  * offer, but any already claimed offers will be applied to the game if not already.
  */
 export function applyMissingPartnerOffersWithoutClaim(http: HttpClient, params: ApplyMissingPartnerOffersWithoutClaimParams): Promise<ServerResponse<boolean>> {
-  return post(http, `${API_BASE}Partner/ApplyMissingOffers/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`);
+    return post(http, `${API_BASE}Partner/ApplyMissingOffers/${params.partnerApplicationId}/${params.targetBnetMembershipId}/`);
 }
 
 export interface GetPartnerOfferSkuHistoryParams {

@@ -43,9 +43,9 @@ exports[`check config builder for [Function getActivityHistory] 1`] = `
 {
   "method": "GET",
   "params": {
-    "count": 10,
-    "mode": 5,
-    "page": 2,
+    "count": "10",
+    "mode": "5",
+    "page": "2",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Account/123456/Character/1234658790/Stats/Activities/",
 }
@@ -78,7 +78,7 @@ exports[`check config builder for [Function getClanLeaderboards] 1`] = `
 {
   "method": "GET",
   "params": {
-    "maxtop": 6,
+    "maxtop": "6",
     "modes": [
       5,
       7,
@@ -172,7 +172,7 @@ exports[`check config builder for [Function getLeaderboards] 1`] = `
 {
   "method": "GET",
   "params": {
-    "maxtop": 6,
+    "maxtop": "6",
     "modes": [
       5,
       7,
@@ -187,7 +187,7 @@ exports[`check config builder for [Function getLeaderboardsForCharacter] 1`] = `
 {
   "method": "GET",
   "params": {
-    "maxtop": 6,
+    "maxtop": "6",
     "modes": [
       5,
       7,
@@ -202,7 +202,7 @@ exports[`check config builder for [Function getLinkedProfiles] 1`] = `
 {
   "method": "GET",
   "params": {
-    "getAllMemberships": true,
+    "getAllMemberships": "true",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/LinkedProfiles/",
 }
@@ -271,7 +271,7 @@ exports[`check config builder for [Function getVendors] 1`] = `
   "method": "GET",
   "params": {
     "components": "400,402,300,301,304,305,306,307,600,308,310,309",
-    "filter": 0,
+    "filter": "0",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/3/Profile/123456/Character/1234658790/Vendors/",
 }
@@ -305,7 +305,7 @@ exports[`check config builder for [Function searchDestinyEntities] 1`] = `
 {
   "method": "GET",
   "params": {
-    "page": 2,
+    "page": "2",
   },
   "url": "https://www.bungie.net/Platform/Destiny2/Armory/Search/DestinyInventoryItemDefinition/something/",
 }
