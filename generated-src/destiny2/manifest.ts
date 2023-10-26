@@ -147,6 +147,16 @@ export interface AllDestinyManifestComponents {
   DestinyLoadoutConstantsDefinition: { [key: number]: DestinyLoadoutConstantsDefinition };
 }
 
+export type DestinyInventoryItemLiteDefinition = Omit<
+  DestinyInventoryItemDefinition,
+  | "iconWatermarkShelved" | "screenshot" | "flavorText" | "tooltipStyle"
+  | "action" | "stats" | "statsEnabledUnlockExpression" | "translationBlock"
+  | "preview" | "sourceData" | "objectives" | "metrics" | "plug"
+  | "gearset" | "sack" | "sockets" | "investmentStats" | "traitIds"
+  | "traitHashes" | "boundToRelease" | "hash" | "index" | "contentIdentifier"
+  | "redacted" | "blacklisted"
+>;
+
 /**
  * languages the manifest comes in, as their required keys to download them
  */
