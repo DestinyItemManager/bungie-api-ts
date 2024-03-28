@@ -1,4 +1,3 @@
-import { fetch } from 'node-fetch';
 import { getDestinyManifest } from '../lib/destiny2/index.js';
 import { getDestinyManifestSlice } from '../lib/destiny2/manifest.js';
 async function httpClient(config) {

@@ -2,8 +2,6 @@ import { getDestinyManifest } from '../generated-src/destiny2/api';
 import { getDestinyManifestSlice } from '../generated-src/destiny2/manifest';
 import { HttpClientConfig } from '../generated-src/http';
 
-import fetch from 'node-fetch';
-
 async function httpClient(config: HttpClientConfig) {
   return (fetch as any)(config.url, config)
     .then((res: Response) => res.json())
