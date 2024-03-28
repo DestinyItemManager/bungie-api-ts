@@ -14,21 +14,10 @@
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-babel-esm",
-    "extensionsToTreatAsEsm": [
-      ".ts"
-    ],
+    "testEnvironment": "node",
     "moduleNameMapper": {
       "^(\\.{1,2}/.*)\\.js$": "$1"
-    },
-    "transform": {
-      "^.+\\.[tj]sx?$": [
-        "ts-jest",
-        {
-          "useESM": true
-        }
-      ]
-    },
-    "transformIgnorePatterns": []
+    }
   },
   "engines": {
     "node": ">=13.2.0"
