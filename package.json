@@ -10,7 +10,7 @@
     "start": "sh ./build.sh",
     "submodule": "git submodule init && git submodule update",
     "updatespec": "git submodule update --remote --merge",
-    "test": "yarn jest"
+    "test": "jest"
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-babel-esm",
