@@ -8428,7 +8428,7 @@ export interface DestinyItemComponent {
    * If available, a list that describes which item values (rewards) should be shown (
    * true) or hidden (false).
    */
-  readonly itemValueVisibility: boolean[];
+  readonly itemValueVisibility?: boolean[];
 }
 export declare const enum ItemBindStatus {
   NotBound = 0,
@@ -12735,7 +12735,7 @@ export interface DestinyVendorSaleItemComponent {
    * If available, a list that describes which item values (rewards) should be shown (
    * true) or hidden (false).
    */
-  readonly itemValueVisibility: boolean[];
+  readonly itemValueVisibility?: boolean[];
   /**
    * The index into the DestinyVendorDefinition.itemList property. Note that this
    * means Vendor data *is* Content Version dependent: make sure you have the latest
