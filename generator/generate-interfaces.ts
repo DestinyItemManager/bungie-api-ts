@@ -15,7 +15,7 @@ import { missingPropsByInterfaceName } from './missing-props.js';
  * Some properties aren't marked as nullable in the openapi docs, but they are frequently null in practice and cause trouble.
  * Adding a property to this list forces it to be emitted as nullable.
  */
-const frequentlyNullProperties = ['itemCategoryHashes'];
+const frequentlyNullProperties = ['itemCategoryHashes', 'itemValueVisibility'];
 
 export function generateInterfaceDefinitions(
   file: string,
