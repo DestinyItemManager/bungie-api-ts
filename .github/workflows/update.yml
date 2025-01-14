@@ -30,24 +30,24 @@ jobs:
         if: steps.filter.outputs.changed == 'true'
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-          cache: yarn
+          node-version-file: '.nvmrc'
+          cache: pnpm
 
       - name: Install
         if: steps.filter.outputs.changed == 'true'
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Bump version
         if: steps.filter.outputs.changed == 'true'
-        run: yarn version --minor
+        run: pnpm version --minor
 
       - name: Build
         if: steps.filter.outputs.changed == 'true'
-        run: yarn start
+        run: pnpm start
 
       - name: Create Pull Request
         if: steps.filter.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          title: "Updated api-src"
-          commit-message: "Updated api-src"
+          title: 'Updated api-src'
+          commit-message: 'Updated api-src'

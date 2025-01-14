@@ -20,14 +20,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-          cache: yarn
+          node-version-file: '.nvmrc'
+          cache: pnpm
 
       - name: Install
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build
-        run: yarn start
+        run: pnpm start
 
       - name: porcelain check
         uses: dorny/paths-filter@v2
@@ -41,8 +41,8 @@ jobs:
       - name: Fail if modified files
         if: steps.filter.outputs.changed == 'true'
         run: |
-          echo "::error title=Built files not checked in::Make sure to run yarn start and check in modified files"
+          echo "::error title=Built files not checked in::Make sure to run pnpm start and check in modified files"
           exit 1
 
       - name: Test
-        run: yarn test
+        run: pnpm test
