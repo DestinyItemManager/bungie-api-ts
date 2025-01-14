@@ -10,7 +10,7 @@ cp generator/http.ts generated-src
 
 # Compile and run the generator
 pnpm tsc -p tsconfig.json
-node --experimental-json-modules ./build/generate.js
+node ./build/generate.js
 
 # Build the package from the generated sources
 rm -rf ./lib
