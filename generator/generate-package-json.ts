@@ -1,4 +1,4 @@
-import packageJson from './package.json' assert {type: "json"};
+import packageJson from './package.json' assert { type: 'json' };
 import { writeOutFile } from './generate-common.js';
 
 /**
@@ -7,13 +7,17 @@ import { writeOutFile } from './generate-common.js';
  */
 export function generatePackageJson(modules: string[]) {
   console.log('Generate package.json??');
-  const moduleExports: { [key: string]: string } = {
+  const moduleExports: { [key: string]: any } = {
     '.': './index.js',
     './http': './http.js',
+    './package.json': './package.json',
   };
 
   for (const module of modules) {
-    moduleExports[`./${module.toLowerCase()}`] = `./${module.toLowerCase()}/index.js`;
+    moduleExports[`./${module.toLowerCase()}`] = {
+      types: `./${module.toLowerCase()}/index.d.ts`,
+      default: `./${module.toLowerCase()}/index.js`,
+    };
   }
 
   // clear out dependencies
