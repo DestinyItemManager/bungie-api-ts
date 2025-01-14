@@ -21,6 +21,8 @@ jobs:
           file-url: https://unpkg.com/bungie-api-ts@latest/package.json
           static-checking: localIsNew
 
+      - uses: pnpm/action-setup@v4
+
       - name: Setup Node
         if: steps.check.outputs.changed == 'true'
         uses: actions/setup-node@v3
