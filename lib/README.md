@@ -11,7 +11,7 @@ Feel free to fork this and use it to generate for your favorite language!
 # Install
 
 ```
-yarn add bungie-api-ts
+pnpm add bungie-api-ts
 ```
 
 # Interfaces and Enums
@@ -83,9 +83,9 @@ const manifestTables = getDestinyManifestSlice($http, {
 
 ```
 # setup
-yarn && yarn submodule
+pnpm i && pnpm submodule
 # run
-yarn start
+pnpm start
 ```
 
 # Updating API sources
@@ -94,4 +94,4 @@ Run the [update API sources](https://github.com/DestinyItemManager/bungie-api-ts
 
 # Publishing
 
-Update the version in `package.json`, and when the PR merges to `master`, a GitHub workflow will automatically publish to NPM. Don't forget to run `yarn start` and commit all changed files!
+Update the version in `package.json`, and when the PR merges to `master`, a GitHub workflow will automatically publish to NPM. Don't forget to run `pnpm start` and commit all changed files!

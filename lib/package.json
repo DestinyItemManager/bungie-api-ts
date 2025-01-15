@@ -1,6 +1,6 @@
 {
   "name": "bungie-api-ts",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "TypeScript mappings for the Bungie.net API",
   "type": "module",
   "sideEffects": false,
@@ -32,24 +32,72 @@
   ],
   "homepage": "https://github.com/DestinyItemManager/bungie-api-ts",
   "devDependencies": {},
-  "dependencies": {},
+  "packageManager": "pnpm@8.15.9+sha512.499434c9d8fdd1a2794ebf4552b3b25c0a633abcee5bb15e7b5de90f32f47b513aca98cd5cfd001c31f0db454bc3804edccd578501e4ca293a6816166bbd9f81",
   "main": "./index.js",
   "types": "./index.d.ts",
   "module": "./index.js",
   "exports": {
-    ".": "./index.js",
-    "./http": "./http.js",
-    "./app": "./app/index.js",
-    "./user": "./user/index.js",
-    "./content": "./content/index.js",
-    "./forum": "./forum/index.js",
-    "./groupv2": "./groupv2/index.js",
-    "./tokens": "./tokens/index.js",
-    "./destiny2": "./destiny2/index.js",
-    "./communitycontent": "./communitycontent/index.js",
-    "./trending": "./trending/index.js",
-    "./fireteam": "./fireteam/index.js",
-    "./social": "./social/index.js",
-    "./core": "./core/index.js"
-  }
+    ".": {
+      "default": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./http": {
+      "default": "./http.js",
+      "types": "./http.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./app": {
+      "default": "./app/index.js",
+      "types": "./app/index.d.ts"
+    },
+    "./user": {
+      "default": "./user/index.js",
+      "types": "./user/index.d.ts"
+    },
+    "./content": {
+      "default": "./content/index.js",
+      "types": "./content/index.d.ts"
+    },
+    "./forum": {
+      "default": "./forum/index.js",
+      "types": "./forum/index.d.ts"
+    },
+    "./groupv2": {
+      "default": "./groupv2/index.js",
+      "types": "./groupv2/index.d.ts"
+    },
+    "./tokens": {
+      "default": "./tokens/index.js",
+      "types": "./tokens/index.d.ts"
+    },
+    "./destiny2": {
+      "default": "./destiny2/index.js",
+      "types": "./destiny2/index.d.ts"
+    },
+    "./communitycontent": {
+      "default": "./communitycontent/index.js",
+      "types": "./communitycontent/index.d.ts"
+    },
+    "./trending": {
+      "default": "./trending/index.js",
+      "types": "./trending/index.d.ts"
+    },
+    "./fireteam": {
+      "default": "./fireteam/index.js",
+      "types": "./fireteam/index.d.ts"
+    },
+    "./fireteamfinder": {
+      "default": "./fireteamfinder/index.js",
+      "types": "./fireteamfinder/index.d.ts"
+    },
+    "./social": {
+      "default": "./social/index.js",
+      "types": "./social/index.d.ts"
+    },
+    "./core": {
+      "default": "./core/index.js",
+      "types": "./core/index.d.ts"
+    }
+  },
+  "dependencies": {}
 }

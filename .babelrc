@@ -1,8 +1,4 @@
 {
   "comments": false,
-  "presets": [["@babel/preset-typescript", { "optimizeConstEnums": true }]],
-  "plugins": [
-    "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread"
-  ]
+  "presets": [["@babel/preset-typescript", { "optimizeConstEnums": true }]]
 }
