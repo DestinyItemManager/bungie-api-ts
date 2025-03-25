@@ -69,7 +69,7 @@ async function $http(config: HttpClientConfig) {
   return fetch(config.url, ...);
 }
 
-const destinyManifest = await getDestinyManifest($http).Response;
+const destinyManifest = await getDestinyManifest($http);
 const manifestTables = getDestinyManifestSlice($http, {
   destinyManifest: destinyManifest.Response,
   tableNames: ['DestinyInventoryItemDefinition', 'DestinySocketDefinition'],
