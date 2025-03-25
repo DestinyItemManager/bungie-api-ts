@@ -62,16 +62,16 @@ Destiny2.getProfile(...);
 The `destiny2` import also contains helpers for typing and downloading the Destiny manifest:
 
 ```typescript
-import { getDestinyManifestSlice } from 'bungie-api-ts/destiny2';
+import { getDestinyManifestSlice, getDestinyManifest, type HttpClientConfig } from 'bungie-api-ts/destiny2';
 
 async function $http(config: HttpClientConfig) {
   // fill in the API key, handle OAuth, etc., then make an HTTP request using the config.
   return fetch(config.url, ...);
 }
 
-const destinyManifest = await getDestinyManifest($http);
+const destinyManifest = await getDestinyManifest($http).Response;
 const manifestTables = getDestinyManifestSlice($http, {
-  destinyManifest,
+  destinyManifest: destinyManifest.Response,
   tableNames: ['DestinyInventoryItemDefinition', 'DestinySocketDefinition'],
   language: 'en',
 });
