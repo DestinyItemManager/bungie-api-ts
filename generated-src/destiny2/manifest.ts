@@ -32,10 +32,18 @@ import {
   DestinyDamageTypeDefinition,
   DestinyActivityModeDefinition,
   DestinyMedalTierDefinition,
+  DestinyActivityDifficultyTierCollectionDefinition,
+  DestinyActivityFamilyDefinition,
   DestinyActivityGraphDefinition,
   DestinyActivityInteractableDefinition,
+  DestinyActivityLoadoutRestrictionDefinition,
+  DestinyActivitySelectableSkullCollectionDefinition,
+  DestinyActivitySelectableSkullExclusionGroupDefinition,
+  DestinyActivitySkullCategoryDefinition,
+  DestinyActivitySkullSubcategoryDefinition,
   DestinyCollectibleDefinition,
   DestinyDestinationDefinition,
+  DestinyEquipableItemSetDefinition,
   DestinyEquipmentSlotDefinition,
   DestinyEventCardDefinition,
   DestinyFireteamFinderActivityGraphDefinition,
@@ -46,6 +54,7 @@ import {
   DestinyFireteamFinderOptionGroupDefinition,
   DestinyStatDefinition,
   DestinyInventoryItemDefinition,
+  DestinyItemFilterDefinition,
   DestinyItemTierTypeDefinition,
   DestinyLoadoutColorDefinition,
   DestinyLoadoutIconDefinition,
@@ -82,6 +91,7 @@ import {
   DestinyGuardianRankConstantsDefinition,
   DestinyLoadoutConstantsDefinition,
   DestinyFireteamFinderConstantsDefinition,
+  DestinyInventoryItemConstantsDefinition,
   DestinyManifest
 } from './interfaces.js';
 
@@ -109,10 +119,18 @@ export interface AllDestinyManifestComponents {
   DestinyDamageTypeDefinition: { [key: number]: DestinyDamageTypeDefinition };
   DestinyActivityModeDefinition: { [key: number]: DestinyActivityModeDefinition };
   DestinyMedalTierDefinition: { [key: number]: DestinyMedalTierDefinition };
+  DestinyActivityDifficultyTierCollectionDefinition: { [key: number]: DestinyActivityDifficultyTierCollectionDefinition };
+  DestinyActivityFamilyDefinition: { [key: number]: DestinyActivityFamilyDefinition };
   DestinyActivityGraphDefinition: { [key: number]: DestinyActivityGraphDefinition };
   DestinyActivityInteractableDefinition: { [key: number]: DestinyActivityInteractableDefinition };
+  DestinyActivityLoadoutRestrictionDefinition: { [key: number]: DestinyActivityLoadoutRestrictionDefinition };
+  DestinyActivitySelectableSkullCollectionDefinition: { [key: number]: DestinyActivitySelectableSkullCollectionDefinition };
+  DestinyActivitySelectableSkullExclusionGroupDefinition: { [key: number]: DestinyActivitySelectableSkullExclusionGroupDefinition };
+  DestinyActivitySkullCategoryDefinition: { [key: number]: DestinyActivitySkullCategoryDefinition };
+  DestinyActivitySkullSubcategoryDefinition: { [key: number]: DestinyActivitySkullSubcategoryDefinition };
   DestinyCollectibleDefinition: { [key: number]: DestinyCollectibleDefinition };
   DestinyDestinationDefinition: { [key: number]: DestinyDestinationDefinition };
+  DestinyEquipableItemSetDefinition: { [key: number]: DestinyEquipableItemSetDefinition };
   DestinyEquipmentSlotDefinition: { [key: number]: DestinyEquipmentSlotDefinition };
   DestinyEventCardDefinition: { [key: number]: DestinyEventCardDefinition };
   DestinyFireteamFinderActivityGraphDefinition: { [key: number]: DestinyFireteamFinderActivityGraphDefinition };
@@ -123,6 +141,7 @@ export interface AllDestinyManifestComponents {
   DestinyFireteamFinderOptionGroupDefinition: { [key: number]: DestinyFireteamFinderOptionGroupDefinition };
   DestinyStatDefinition: { [key: number]: DestinyStatDefinition };
   DestinyInventoryItemDefinition: { [key: number]: DestinyInventoryItemDefinition };
+  DestinyItemFilterDefinition: { [key: number]: DestinyItemFilterDefinition };
   DestinyItemTierTypeDefinition: { [key: number]: DestinyItemTierTypeDefinition };
   DestinyLoadoutColorDefinition: { [key: number]: DestinyLoadoutColorDefinition };
   DestinyLoadoutIconDefinition: { [key: number]: DestinyLoadoutIconDefinition };
@@ -159,6 +178,7 @@ export interface AllDestinyManifestComponents {
   DestinyGuardianRankConstantsDefinition: { [key: number]: DestinyGuardianRankConstantsDefinition };
   DestinyLoadoutConstantsDefinition: { [key: number]: DestinyLoadoutConstantsDefinition };
   DestinyFireteamFinderConstantsDefinition: { [key: number]: DestinyFireteamFinderConstantsDefinition };
+  DestinyInventoryItemConstantsDefinition: { [key: number]: DestinyInventoryItemConstantsDefinition };
 }
 
 export type DestinyInventoryItemLiteDefinition = Omit<
