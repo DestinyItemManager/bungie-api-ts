@@ -86,10 +86,6 @@
       "default": "./fireteam/index.js",
       "types": "./fireteam/index.d.ts"
     },
-    "./fireteamfinder": {
-      "default": "./fireteamfinder/index.js",
-      "types": "./fireteamfinder/index.d.ts"
-    },
     "./social": {
       "default": "./social/index.js",
       "types": "./social/index.d.ts"
