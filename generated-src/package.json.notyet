@@ -1,6 +1,6 @@
 {
   "name": "bungie-api-ts",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "description": "TypeScript mappings for the Bungie.net API",
   "type": "module",
   "sideEffects": false,
@@ -85,10 +85,6 @@
     "./fireteam": {
       "default": "./fireteam/index.js",
       "types": "./fireteam/index.d.ts"
-    },
-    "./fireteamfinder": {
-      "default": "./fireteamfinder/index.js",
-      "types": "./fireteamfinder/index.d.ts"
     },
     "./social": {
       "default": "./social/index.js",
