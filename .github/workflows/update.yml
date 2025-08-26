@@ -41,7 +41,7 @@ jobs:
 
       - name: Bump version
         if: steps.filter.outputs.changed == 'true'
-        run: pnpm version --minor
+        run: npm version minor --no-git-tag-version
 
       - name: Build
         if: steps.filter.outputs.changed == 'true'
