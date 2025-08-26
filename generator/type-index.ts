@@ -22,10 +22,25 @@ export function computeTypeMaps(
   const allDefsEverywhere = new Set<string>();
   const defsByTag: { [tag: string]: Set<string> } = {};
   _.each(pathPairsByTag, (paths, tag) => {
-    const defs = findReachableComponents(tag, paths, doc);
+    const defs = findReachableComponents(paths, doc);
     addAll(allDefsEverywhere, defs);
     defsByTag[tag] = defs;
   });
+
+  // Add manifest tables that aren't referenced by any API endpoint.
+  for (const [defName, def] of Object.entries(doc.components!.schemas!)) {
+    const typePath = `#/components/schemas/${defName}`;
+    if (
+      !allDefsEverywhere.has(typePath) &&
+      'type' in def &&
+      def.type === 'object' &&
+      def['x-mobile-manifest-name']
+    ) {
+      console.log(`Found unreferenced manifest table ${typePath}`);
+      allDefsEverywhere.add(typePath);
+      addReachableComponentsFromComponent(allDefsEverywhere, typePath, doc);
+    }
+  }
 
   const allTags = Object.keys(pathPairsByTag);
 
@@ -78,14 +93,9 @@ function chooseFile(def: string, tags: string[], allTags: string[]) {
   }
 }
 
-function findReachableComponents(
-  tag: string,
-  paths: [string, PathItemObject][],
-  doc: OpenAPIObject
-) {
+function findReachableComponents(paths: [string, PathItemObject][], doc: OpenAPIObject) {
   const pathDefinitions = paths.reduce(
-    (memo: Set<string>, [_, pathDef]) =>
-      addAll(memo, findReachableComponentsFromPath(pathDef, doc)),
+    (memo: Set<string>, [_, pathDef]) => addAll(memo, findReachableComponentsFromPath(pathDef)),
     new Set<string>()
   );
 
@@ -103,7 +113,7 @@ function addAll<T>(first: Set<T>, second: Set<T>): Set<T> {
   return first;
 }
 
-function findReachableComponentsFromPath(pathDef: PathItemObject, doc: OpenAPIObject): Set<string> {
+function findReachableComponentsFromPath(pathDef: PathItemObject): Set<string> {
   const methodDef = pathDef.get || pathDef.post!;
   const params = (methodDef.parameters || []) as ParameterObject[];
   const paramTypes = new Set(

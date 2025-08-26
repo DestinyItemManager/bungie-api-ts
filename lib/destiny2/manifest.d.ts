@@ -90,6 +90,7 @@ import {
   DestinyGuardianRankConstantsDefinition,
   DestinyLoadoutConstantsDefinition,
   DestinyFireteamFinderConstantsDefinition,
+  DestinyGlobalConstantsDefinition,
   DestinyInventoryItemConstantsDefinition,
   DestinyManifest,
 } from './interfaces.js';
@@ -332,6 +333,9 @@ export interface AllDestinyManifestComponents {
   };
   DestinyFireteamFinderConstantsDefinition: {
     [key: number]: DestinyFireteamFinderConstantsDefinition;
+  };
+  DestinyGlobalConstantsDefinition: {
+    [key: number]: DestinyGlobalConstantsDefinition;
   };
   DestinyInventoryItemConstantsDefinition: {
     [key: number]: DestinyInventoryItemConstantsDefinition;
