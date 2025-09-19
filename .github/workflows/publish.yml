@@ -6,10 +6,14 @@ on:
       - master
 
 jobs:
-  build:
+  publish:
+    environment: publish
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           submodules: recursive
 
@@ -25,13 +29,11 @@ jobs:
 
       - name: Setup Node
         if: steps.check.outputs.changed == 'true'
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           registry-url: https://registry.npmjs.org/
 
       - name: Publish the package to NPM
         if: steps.check.outputs.changed == 'true'
-        run: cd lib && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # NPM will automatically authenticate with this
+        run: cd lib && npm publish --provenance
