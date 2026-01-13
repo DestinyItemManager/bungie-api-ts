@@ -43,6 +43,63 @@ const profileInfo: ServerResponse<DestinyProfileResponse> = await getProfile($ht
 });
 ```
 
+<details>
+  <summary>DIM example</summary>
+
+  [Link](https://github.com/DestinyItemManager/DIM/blob/master/src/app/bungie-api/http-client.ts)
+
+```typescript
+export function createHttpClient(fetchFunction: typeof fetch, apiKey: string): HttpClient {
+  return async <T>(config: HttpClientConfig) => {
+    let url = config.url;
+    if (config.params) {
+      url = `${url}?${new URLSearchParams(config.params).toString()}`;
+    }
+
+    const fetchOptions = new Request(url, {
+      method: config.method,
+      body: config.body ? JSON.stringify(config.body) : undefined,
+      headers: {
+        'X-API-Key': apiKey,
+        ...(config.body ? { 'Content-Type': 'application/json' } : undefined),
+      },
+      credentials: 'omit',
+    });
+
+    if ($featureFlags.simulateBungieMaintenance) {
+      throw new BungieError(
+        {
+          ErrorCode: PlatformErrorCodes.SystemDisabled,
+          ErrorStatus: 'SystemDisabled',
+          Message: 'This system is temporarily disabled for maintenance.',
+        },
+        fetchOptions,
+      );
+    }
+
+    const response = await fetchFunction(fetchOptions);
+    let data: T | undefined;
+    let parseError: Error | undefined;
+    try {
+      data = (await response.json()) as T;
+    } catch (e) {
+      parseError = convertToError(e);
+    }
+
+    // try throwing bungie errors, which have more information, first
+    throwBungieError(data, fetchOptions);
+    // then throw errors on generic http error codes
+    await throwHttpError(response);
+    if (parseError) {
+      throw parseError;
+    }
+    return data!; // At this point it's not undefined, there would've been a parse error
+  };
+}
+```
+
+</details>
+
 # Imports
 
 It is possible to import all services from `bungie-api-ts` directly, but it's better to import the specific service and pick out what you want:
